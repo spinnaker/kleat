@@ -1,0 +1,8 @@
+persistentStorage:
+  gcs:
+    jsonPath: /my/file
+    project: spinnaker
+    bucket: my-bucket
+    rootFolder: front50
+    bucketLocation: us
+
