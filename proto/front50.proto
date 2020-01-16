@@ -3,10 +3,10 @@ package proto;
 
 import "persistentstorage.proto";
 
-message HalConfig {
-  PersistentStorage persistentStorage = 1;
+message Front50Config {
+  Spinnaker spinnaker = 1;
 
-  message PersistentStorage {
+  message Spinnaker {
     string persistentStoreType = 1;
     GCS gcs = 2;
   }

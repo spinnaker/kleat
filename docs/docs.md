@@ -3,16 +3,77 @@
 
 ## Table of Contents
 
+- [front50.proto](#front50.proto)
+    - [Front50Config](#proto.Front50Config)
+    - [Front50Config.Spinnaker](#proto.Front50Config.Spinnaker)
+  
+  
+  
+  
+
 - [halconfig.proto](#halconfig.proto)
     - [HalConfig](#proto.HalConfig)
     - [HalConfig.PersistentStorage](#proto.HalConfig.PersistentStorage)
-    - [HalConfig.PersistentStorage.GCS](#proto.HalConfig.PersistentStorage.GCS)
+  
+  
+  
+  
+
+- [persistentstorage.proto](#persistentstorage.proto)
+    - [GCS](#proto.GCS)
   
   
   
   
 
 - [Scalar Value Types](#scalar-value-types)
+
+
+
+<a name="front50.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## front50.proto
+
+
+
+<a name="proto.Front50Config"></a>
+
+### Front50Config
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| spinnaker | [Front50Config.Spinnaker](#proto.Front50Config.Spinnaker) |  |  |
+
+
+
+
+
+
+<a name="proto.Front50Config.Spinnaker"></a>
+
+### Front50Config.Spinnaker
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| persistentStoreType | [string](#string) |  |  |
+| gcs | [GCS](#proto.GCS) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
 
 
 
@@ -47,16 +108,32 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | persistentStoreType | [string](#string) |  |  |
-| gcs | [HalConfig.PersistentStorage.GCS](#proto.HalConfig.PersistentStorage.GCS) |  |  |
+| gcs | [GCS](#proto.GCS) |  |  |
 
 
 
 
 
+ 
 
-<a name="proto.HalConfig.PersistentStorage.GCS"></a>
+ 
 
-### HalConfig.PersistentStorage.GCS
+ 
+
+ 
+
+
+
+<a name="persistentstorage.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## persistentstorage.proto
+
+
+
+<a name="proto.GCS"></a>
+
+### GCS
 
 
 
