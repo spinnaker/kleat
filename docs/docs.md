@@ -4,9 +4,9 @@
 ## Table of Contents
 
 - [halconfig.proto](#halconfig.proto)
-    - [HalConfig](#main.HalConfig)
-    - [HalConfig.PersistentStorage](#main.HalConfig.PersistentStorage)
-    - [HalConfig.PersistentStorage.GCS](#main.HalConfig.PersistentStorage.GCS)
+    - [HalConfig](#proto.HalConfig)
+    - [HalConfig.PersistentStorage](#proto.HalConfig.PersistentStorage)
+    - [HalConfig.PersistentStorage.GCS](#proto.HalConfig.PersistentStorage.GCS)
   
   
   
@@ -23,7 +23,7 @@
 
 
 
-<a name="main.HalConfig"></a>
+<a name="proto.HalConfig"></a>
 
 ### HalConfig
 
@@ -31,14 +31,14 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| persistentStorage | [HalConfig.PersistentStorage](#main.HalConfig.PersistentStorage) |  |  |
+| persistentStorage | [HalConfig.PersistentStorage](#proto.HalConfig.PersistentStorage) |  |  |
 
 
 
 
 
 
-<a name="main.HalConfig.PersistentStorage"></a>
+<a name="proto.HalConfig.PersistentStorage"></a>
 
 ### HalConfig.PersistentStorage
 
@@ -47,14 +47,14 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | persistentStoreType | [string](#string) |  |  |
-| gcs | [HalConfig.PersistentStorage.GCS](#main.HalConfig.PersistentStorage.GCS) |  |  |
+| gcs | [HalConfig.PersistentStorage.GCS](#proto.HalConfig.PersistentStorage.GCS) |  |  |
 
 
 
 
 
 
-<a name="main.HalConfig.PersistentStorage.GCS"></a>
+<a name="proto.HalConfig.PersistentStorage.GCS"></a>
 
 ### HalConfig.PersistentStorage.GCS
 

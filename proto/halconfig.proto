@@ -1,5 +1,5 @@
 syntax = "proto3";
-package main;
+package proto;
 
 message HalConfig {
   PersistentStorage persistentStorage = 1;

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/ezimanyi/kleat/proto"
 	"io/ioutil"
 	"log"
 	"os"
@@ -9,7 +10,7 @@ import (
 )
 
 func main() {
-	h := HalConfig{}
+	h := proto.HalConfig{}
 	fn := os.Args[1]
 
 	dat, err := ioutil.ReadFile(fn)
