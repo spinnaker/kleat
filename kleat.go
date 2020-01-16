@@ -2,13 +2,26 @@ package main
 
 import (
 	"encoding/json"
+	"log"
 	"os"
+
+	"github.com/ghodss/yaml"
 )
 
-func main() {
-	p := HalConfig{}
+var data = `
+persistentStorage:
+  gcs:
+    jsonPath: hello
+`
 
-	bytes, err := json.Marshal(p)
+func main() {
+	h := HalConfig{}
+
+	err := yaml.Unmarshal([]byte(data), &h)
+	if err != nil {
+		log.Fatalf("error: %v", err)
+	}
+	bytes, err := json.Marshal(h)
 	if err != nil {
 		panic(err)
 	}
