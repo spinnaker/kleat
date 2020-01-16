@@ -1,0 +1,22 @@
+syntax = "proto3";
+package main;
+
+message HalConfig {
+  PersistentStorage persistentStorage = 1;
+
+  message PersistentStorage {
+    string persistentStoreType = 1;
+    GCS gcs = 2;
+
+    message GCS {
+      string jsonPath = 1; // A path to a JSON service account with permission to read and write to the bucket to be used as a backing store.
+      string project = 2; // The Google Cloud Platform project you are using to host the GCS bucket as a backing store.
+      // The name of a storage bucket that your specified account has access to. If not specified, a
+      // random name will be chosen. If you specify a globally unique bucket name that doesn’t exist
+      // yet, Halyard will create that bucket for you.
+      string bucket = 3;
+      string rootFolder = 4; // The root folder in the chosen bucket to place all of Spinnaker’s persistent data in.
+      string bucketLocation = 5; // This is only required if the bucket you specify doesn’t exist yet.
+    }
+  }
+}
