@@ -23,6 +23,11 @@ func main() {
 	// Test converting halconfig to front50config
 	f, err := halToFront50(h)
 	printObject(f)
+
+	c, err := halToClouddriver(h)
+	printObject(c)
+
+	//todo: test whether enum providerVersion marshals correctly
 }
 
 func printObject(i interface{}) {
@@ -44,4 +49,11 @@ func halToFront50(h proto.HalConfig) (proto.Front50Config, error) {
 		},
 	}
 	return f, nil
+}
+
+func halToClouddriver(h proto.HalConfig) (proto.ClouddriverConfg, error) {
+	c := proto.ClouddriverConfg{
+		Kubernetes:           h.Providers.Kubernetes,
+	}
+	return c, nil
 }

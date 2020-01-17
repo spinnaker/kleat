@@ -3,6 +3,13 @@
 
 ## Table of Contents
 
+- [clouddriver.proto](#clouddriver.proto)
+    - [ClouddriverConfg](#proto.ClouddriverConfg)
+  
+  
+  
+  
+
 - [front50.proto](#front50.proto)
     - [Front50Config](#proto.Front50Config)
     - [Front50Config.Spinnaker](#proto.Front50Config.Spinnaker)
@@ -14,6 +21,7 @@
 - [halconfig.proto](#halconfig.proto)
     - [HalConfig](#proto.HalConfig)
     - [HalConfig.PersistentStorage](#proto.HalConfig.PersistentStorage)
+    - [HalConfig.Providers](#proto.HalConfig.Providers)
   
   
   
@@ -26,7 +34,47 @@
   
   
 
+- [providers.proto](#providers.proto)
+    - [Kubernetes](#proto.Kubernetes)
+    - [Kubernetes.Account](#proto.Kubernetes.Account)
+  
+    - [Kubernetes.ProviderVersion](#proto.Kubernetes.ProviderVersion)
+  
+  
+  
+
 - [Scalar Value Types](#scalar-value-types)
+
+
+
+<a name="clouddriver.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## clouddriver.proto
+
+
+
+<a name="proto.ClouddriverConfg"></a>
+
+### ClouddriverConfg
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| kubernetes | [Kubernetes](#proto.Kubernetes) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
 
 
 
@@ -93,6 +141,7 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | persistentStorage | [HalConfig.PersistentStorage](#proto.HalConfig.PersistentStorage) |  |  |
+| providers | [HalConfig.Providers](#proto.HalConfig.Providers) |  |  |
 
 
 
@@ -109,6 +158,21 @@
 | ----- | ---- | ----- | ----------- |
 | persistentStoreType | [string](#string) |  |  |
 | gcs | [GCS](#proto.GCS) |  |  |
+
+
+
+
+
+
+<a name="proto.HalConfig.Providers"></a>
+
+### HalConfig.Providers
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| kubernetes | [Kubernetes](#proto.Kubernetes) |  |  |
 
 
 
@@ -150,6 +214,68 @@
 
 
  
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="providers.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## providers.proto
+
+
+
+<a name="proto.Kubernetes"></a>
+
+### Kubernetes
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [string](#string) |  |  |
+| accounts | [Kubernetes.Account](#proto.Kubernetes.Account) | repeated |  |
+
+
+
+
+
+
+<a name="proto.Kubernetes.Account"></a>
+
+### Kubernetes.Account
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| providerVersion | [Kubernetes.ProviderVersion](#proto.Kubernetes.ProviderVersion) |  |  |
+| kinds | [string](#string) | repeated |  |
+| omitKinds | [string](#string) | repeated |  |
+
+
+
+
+
+ 
+
+
+<a name="proto.Kubernetes.ProviderVersion"></a>
+
+### Kubernetes.ProviderVersion
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| V1 | 0 |  |
+| V2 | 1 |  |
+
 
  
 

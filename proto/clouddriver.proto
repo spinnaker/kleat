@@ -1,0 +1,8 @@
+syntax = "proto3";
+package proto;
+
+import "providers.proto";
+
+message ClouddriverConfg {
+    Kubernetes kubernetes = 1;
+}

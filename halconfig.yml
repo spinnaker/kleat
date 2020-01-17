@@ -20,8 +20,11 @@ providers:
       cacheThreads: 1
       namespaces: []
       omitNamespaces: []
-      kinds: []
-      omitKinds: []
+      kinds:
+        - replicaSet
+        - deployment
+      omitKinds:
+        - cronTab
       customResources: []
       cachingPolicies: []
       kubeconfigFile: /my/kube/config

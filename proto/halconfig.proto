@@ -2,12 +2,18 @@ syntax = "proto3";
 package proto;
 
 import "persistentstorage.proto";
+import "providers.proto";
 
 message HalConfig {
   PersistentStorage persistentStorage = 1;
+  Providers providers = 2;
 
   message PersistentStorage {
     string persistentStoreType = 1;
     GCS gcs = 2;
+  }
+
+  message Providers {
+    Kubernetes kubernetes = 1;
   }
 }
