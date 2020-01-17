@@ -6,4 +6,23 @@ persistentStorage:
     bucket: my-bucket
     rootFolder: front50
     bucketLocation: us
-
+providers:
+  kubernetes:
+    enabled: true
+    accounts:
+    - name: prod-demo-1
+      requiredGroupMembership: []
+      providerVersion: V2
+      permissions: {}
+      dockerRegistries: []
+      context: my-context
+      configureImagePullSecrets: true
+      cacheThreads: 1
+      namespaces: []
+      omitNamespaces: []
+      kinds: []
+      omitKinds: []
+      customResources: []
+      cachingPolicies: []
+      kubeconfigFile: /my/kube/config
+      oauthScopes: []
