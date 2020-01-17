@@ -1,4 +1,5 @@
 persistentStorage:
+  persistentStoreType: gcs
   gcs:
     jsonPath: /my/file
     project: spinnaker
