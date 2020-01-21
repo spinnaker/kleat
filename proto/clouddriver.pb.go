@@ -20,39 +20,39 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
-type ClouddriverConfg struct {
+type ClouddriverConfig struct {
 	Kubernetes           *Kubernetes `protobuf:"bytes,1,opt,name=kubernetes,proto3" json:"kubernetes,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
 	XXX_unrecognized     []byte      `json:"-"`
 	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *ClouddriverConfg) Reset()         { *m = ClouddriverConfg{} }
-func (m *ClouddriverConfg) String() string { return proto.CompactTextString(m) }
-func (*ClouddriverConfg) ProtoMessage()    {}
-func (*ClouddriverConfg) Descriptor() ([]byte, []int) {
+func (m *ClouddriverConfig) Reset()         { *m = ClouddriverConfig{} }
+func (m *ClouddriverConfig) String() string { return proto.CompactTextString(m) }
+func (*ClouddriverConfig) ProtoMessage()    {}
+func (*ClouddriverConfig) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0260082fb56e518f, []int{0}
 }
 
-func (m *ClouddriverConfg) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ClouddriverConfg.Unmarshal(m, b)
+func (m *ClouddriverConfig) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ClouddriverConfig.Unmarshal(m, b)
 }
-func (m *ClouddriverConfg) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ClouddriverConfg.Marshal(b, m, deterministic)
+func (m *ClouddriverConfig) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ClouddriverConfig.Marshal(b, m, deterministic)
 }
-func (m *ClouddriverConfg) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ClouddriverConfg.Merge(m, src)
+func (m *ClouddriverConfig) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ClouddriverConfig.Merge(m, src)
 }
-func (m *ClouddriverConfg) XXX_Size() int {
-	return xxx_messageInfo_ClouddriverConfg.Size(m)
+func (m *ClouddriverConfig) XXX_Size() int {
+	return xxx_messageInfo_ClouddriverConfig.Size(m)
 }
-func (m *ClouddriverConfg) XXX_DiscardUnknown() {
-	xxx_messageInfo_ClouddriverConfg.DiscardUnknown(m)
+func (m *ClouddriverConfig) XXX_DiscardUnknown() {
+	xxx_messageInfo_ClouddriverConfig.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_ClouddriverConfg proto.InternalMessageInfo
+var xxx_messageInfo_ClouddriverConfig proto.InternalMessageInfo
 
-func (m *ClouddriverConfg) GetKubernetes() *Kubernetes {
+func (m *ClouddriverConfig) GetKubernetes() *Kubernetes {
 	if m != nil {
 		return m.Kubernetes
 	}
@@ -60,18 +60,18 @@ func (m *ClouddriverConfg) GetKubernetes() *Kubernetes {
 }
 
 func init() {
-	proto.RegisterType((*ClouddriverConfg)(nil), "proto.ClouddriverConfg")
+	proto.RegisterType((*ClouddriverConfig)(nil), "proto.ClouddriverConfig")
 }
 
 func init() { proto.RegisterFile("clouddriver.proto", fileDescriptor_0260082fb56e518f) }
 
 var fileDescriptor_0260082fb56e518f = []byte{
-	// 107 bytes of a gzipped FileDescriptorProto
+	// 108 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x4c, 0xce, 0xc9, 0x2f,
 	0x4d, 0x49, 0x29, 0xca, 0x2c, 0x4b, 0x2d, 0xd2, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x05,
-	0x53, 0x52, 0xfc, 0x05, 0x45, 0xf9, 0x65, 0x99, 0x29, 0xa9, 0x45, 0xc5, 0x10, 0x71, 0x25, 0x57,
-	0x2e, 0x01, 0x67, 0x84, 0x62, 0xe7, 0xfc, 0xbc, 0xb4, 0x74, 0x21, 0x43, 0x2e, 0xae, 0xec, 0xd2,
-	0xa4, 0xd4, 0xa2, 0xbc, 0xd4, 0x92, 0xd4, 0x62, 0x09, 0x46, 0x05, 0x46, 0x0d, 0x6e, 0x23, 0x41,
-	0x88, 0x7a, 0x3d, 0x6f, 0xb8, 0x44, 0x10, 0x92, 0xa2, 0x24, 0x36, 0xb0, 0xac, 0x31, 0x20, 0x00,
-	0x00, 0xff, 0xff, 0xa8, 0x75, 0xe6, 0x09, 0x7a, 0x00, 0x00, 0x00,
+	0x53, 0x52, 0xfc, 0x05, 0x45, 0xf9, 0x65, 0x99, 0x29, 0xa9, 0x45, 0xc5, 0x10, 0x71, 0x25, 0x37,
+	0x2e, 0x41, 0x67, 0x84, 0x62, 0xe7, 0xfc, 0xbc, 0xb4, 0xcc, 0x74, 0x21, 0x43, 0x2e, 0xae, 0xec,
+	0xd2, 0xa4, 0xd4, 0xa2, 0xbc, 0xd4, 0x92, 0xd4, 0x62, 0x09, 0x46, 0x05, 0x46, 0x0d, 0x6e, 0x23,
+	0x41, 0x88, 0x06, 0x3d, 0x6f, 0xb8, 0x44, 0x10, 0x92, 0xa2, 0x24, 0x36, 0xb0, 0xac, 0x31, 0x20,
+	0x00, 0x00, 0xff, 0xff, 0xba, 0xf0, 0xdb, 0xe7, 0x7b, 0x00, 0x00, 0x00,
 }

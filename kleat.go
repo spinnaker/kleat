@@ -51,8 +51,8 @@ func halToFront50(h proto.HalConfig) (proto.Front50Config, error) {
 	return f, nil
 }
 
-func halToClouddriver(h proto.HalConfig) (proto.ClouddriverConfg, error) {
-	c := proto.ClouddriverConfg{
+func halToClouddriver(h proto.HalConfig) (proto.ClouddriverConfig, error) {
+	c := proto.ClouddriverConfig{
 		Kubernetes:           h.Providers.Kubernetes,
 	}
 	return c, nil

@@ -4,7 +4,7 @@
 ## Table of Contents
 
 - [clouddriver.proto](#clouddriver.proto)
-    - [ClouddriverConfg](#proto.ClouddriverConfg)
+    - [ClouddriverConfig](#proto.ClouddriverConfig)
   
   
   
@@ -54,9 +54,9 @@
 
 
 
-<a name="proto.ClouddriverConfg"></a>
+<a name="proto.ClouddriverConfig"></a>
 
-### ClouddriverConfg
+### ClouddriverConfig
 
 
 
@@ -238,7 +238,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [string](#string) |  |  |
+| enabled | [bool](#bool) |  |  |
 | accounts | [Kubernetes.Account](#proto.Kubernetes.Account) | repeated |  |
 
 

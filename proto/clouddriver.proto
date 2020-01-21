@@ -3,6 +3,6 @@ package proto;
 
 import "providers.proto";
 
-message ClouddriverConfg {
+message ClouddriverConfig {
     Kubernetes kubernetes = 1;
 }
