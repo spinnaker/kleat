@@ -10,6 +10,11 @@ import (
 )
 
 func main() {
+	h := parseHalConfig()
+	printHalConfig(h)
+}
+
+func parseHalConfig() *proto.HalConfig {
 	fn := os.Args[1]
 
 	dat, err := ioutil.ReadFile(fn)
@@ -20,11 +25,15 @@ func main() {
 		log.Fatalf("error: %v", err)
 	}
 
+	return &h
+}
+
+func printHalConfig(h *proto.HalConfig) {
 	// Test converting halconfig to front50config
-	f, err := halToFront50(h)
+	f, _ := halToFront50(*h)
 	printObject(f)
 
-	c, err := halToClouddriver(h)
+	c, _ := halToClouddriver(*h)
 	printObject(c)
 
 	//todo: test whether enum providerVersion marshals correctly
