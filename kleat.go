@@ -45,7 +45,7 @@ func halToFront50(h proto.HalConfig) (proto.Front50Config, error) {
 	f := proto.Front50Config{
 		Spinnaker: &proto.Front50Config_Spinnaker{
 			PersistentStoreType: h.PersistentStorage.PersistentStoreType,
-			Gcs: h.PersistentStorage.Gcs,
+			Gcs:                 h.PersistentStorage.Gcs,
 		},
 	}
 	return f, nil
@@ -53,7 +53,7 @@ func halToFront50(h proto.HalConfig) (proto.Front50Config, error) {
 
 func halToClouddriver(h proto.HalConfig) (proto.ClouddriverConfig, error) {
 	c := proto.ClouddriverConfig{
-		Kubernetes:           h.Providers.Kubernetes,
+		Kubernetes: h.Providers.Kubernetes,
 	}
 	return c, nil
 }
