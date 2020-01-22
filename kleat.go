@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	h := parseHalConfig()
+	h := getTestHalConfig()
 	printHalConfig(h)
 }
 
@@ -28,12 +28,12 @@ func parseHalConfig() *proto.HalConfig {
 	return &h
 }
 
-func printHalConfig(h *proto.HalConfig) {
+func printHalConfig(h proto.HalConfig) {
 	// Test converting halconfig to front50config
-	f, _ := halToFront50(*h)
+	f, _ := halToFront50(h)
 	printObject(f)
 
-	c, _ := halToClouddriver(*h)
+	c, _ := halToClouddriver(h)
 	printObject(c)
 
 	//todo: test whether enum providerVersion marshals correctly
@@ -50,6 +50,23 @@ func printObject(i interface{}) {
 	}
 }
 
+func getTestHalConfig() proto.HalConfig {
+	h := proto.HalConfig{
+		Providers: &proto.HalConfig_Providers{
+			Kubernetes: &proto.Kubernetes{
+				Enabled:              false,
+				Accounts:             []*proto.Kubernetes_Account{
+					&proto.Kubernetes_Account{
+						Name:                 "hal",
+						ProviderVersion:      proto.Kubernetes_V2,
+					},
+				},
+			},
+		},
+	}
+	return h
+}
+
 func halToFront50(h proto.HalConfig) (proto.Front50Config, error) {
 	f := proto.Front50Config{
 		Spinnaker: &proto.Front50Config_Spinnaker{
@@ -58,6 +75,13 @@ func halToFront50(h proto.HalConfig) (proto.Front50Config, error) {
 		},
 	}
 	return f, nil
+}
+
+func extractPersistentStoreType(h proto.HalConfig) *string {
+	if h.PersistentStorage == nil {
+		return nil
+	}
+	return &h.PersistentStorage.PersistentStoreType
 }
 
 func halToClouddriver(h proto.HalConfig) (proto.ClouddriverConfig, error) {

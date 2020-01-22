@@ -1,0 +1,12 @@
+.halconfig
+
+#persistentStorage
+
+
+front50
+
+spinnaker:
+  persistentStoreType: ""
+  gcs: {}
+
+spinnaker: {}
