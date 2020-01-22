@@ -12,21 +12,34 @@ import (
 
 func main() {
 	h := parseHalConfig()
-	err := validateHalConfig(h)
+	err := validateHalConfig(h, getValidators())
 	if err != nil {
 		panic(err)
 	}
 	printHalConfig(*h)
 }
 
-func validateHalConfig(h *proto.HalConfig) error {
-	err := validateKindsAndOmitKinds(h)
-	return err
+type HalConfigValidator func(*proto.HalConfig) error
+
+func getValidators() []HalConfigValidator {
+	return []HalConfigValidator {
+		validateKindsAndOmitKinds,
+	}
+}
+
+func validateHalConfig(h *proto.HalConfig, fa []HalConfigValidator) error {
+	for _, f := range fa {
+		err := f(h)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 func validateKindsAndOmitKinds(h *proto.HalConfig) error {
 	for _, a := range h.Providers.Kubernetes.Accounts {
-		if (!(len(a.Kinds) == 0) && !(len(a.OmitKinds) == 0)) {
+		if !(len(a.Kinds) == 0) && !(len(a.OmitKinds) == 0) {
 			return errors.New("Cannot specify both kinds and omitKinds.")
 		}
 	}
