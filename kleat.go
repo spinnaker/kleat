@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"github.com/ezimanyi/kleat/proto"
 	"io/ioutil"
 	"log"
@@ -10,8 +11,26 @@ import (
 )
 
 func main() {
-	h := getTestHalConfig()
-	printHalConfig(h)
+	h := parseHalConfig()
+	err := validateHalConfig(h)
+	if err != nil {
+		panic(err)
+	}
+	printHalConfig(*h)
+}
+
+func validateHalConfig(h *proto.HalConfig) error {
+	err := validateKindsAndOmitKinds(h)
+	return err
+}
+
+func validateKindsAndOmitKinds(h *proto.HalConfig) error {
+	for _, a := range h.Providers.Kubernetes.Accounts {
+		if (!(len(a.Kinds) == 0) && !(len(a.OmitKinds) == 0)) {
+			return errors.New("Cannot specify both kinds and omitKinds.")
+		}
+	}
+	return nil
 }
 
 func parseHalConfig() *proto.HalConfig {
@@ -29,7 +48,7 @@ func parseHalConfig() *proto.HalConfig {
 }
 
 func printHalConfig(h proto.HalConfig) {
-	// Test converting halconfig to front50config
+	//Test converting halconfig to front50config
 	f, _ := halToFront50(h)
 	printObject(f)
 
