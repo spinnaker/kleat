@@ -30,7 +30,7 @@ func getValidators() []HalConfigValidator {
 }
 
 func validateHalConfig(h *proto.HalConfig, fa []HalConfigValidator) []string {
-	messages := make([]string, 0)
+	var messages []string
 	for _, f := range fa {
 		valid, msg := f(h)
 		if !valid {
