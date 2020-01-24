@@ -1,49 +1,52 @@
 package main
 
 import (
-	"errors"
 	"github.com/ezimanyi/kleat/proto"
 	"io/ioutil"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/ghodss/yaml"
 )
 
 func main() {
 	h := parseHalConfig()
-	err := validateHalConfig(h, getValidators())
-	if err != nil {
-		panic(err)
+	messages := validateHalConfig(h, getValidators())
+	if len(messages) > 0 {
+		msg := strings.Join(messages, "\n")
+		panic(msg)
 	}
 	printHalConfig(*h)
 }
 
-type HalConfigValidator func(*proto.HalConfig) error
+type HalConfigValidator func(*proto.HalConfig) (bool, string)
 
 func getValidators() []HalConfigValidator {
 	return []HalConfigValidator {
 		validateKindsAndOmitKinds,
+		validateKindsAndOmitKinds,
 	}
 }
 
-func validateHalConfig(h *proto.HalConfig, fa []HalConfigValidator) error {
+func validateHalConfig(h *proto.HalConfig, fa []HalConfigValidator) []string {
+	messages := make([]string, 0)
 	for _, f := range fa {
-		err := f(h)
-		if err != nil {
-			return err
+		valid, msg := f(h)
+		if !valid {
+			messages = append(messages, msg)
 		}
 	}
-	return nil
+	return messages
 }
 
-func validateKindsAndOmitKinds(h *proto.HalConfig) error {
+func validateKindsAndOmitKinds(h *proto.HalConfig) (bool, string) {
 	for _, a := range h.Providers.Kubernetes.Accounts {
 		if !(len(a.Kinds) == 0) && !(len(a.OmitKinds) == 0) {
-			return errors.New("Cannot specify both kinds and omitKinds.")
+			return false, "Cannot specify both kinds and omitKinds."
 		}
 	}
-	return nil
+	return true, ""
 }
 
 func parseHalConfig() *proto.HalConfig {
