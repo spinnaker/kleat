@@ -23,8 +23,7 @@ providers:
       kinds:
         - replicaSet
         - deployment
-      omitKinds:
-        - cronTab
+      omitKinds: []
       customResources: []
       cachingPolicies: []
       kubeconfigFile: /my/kube/config

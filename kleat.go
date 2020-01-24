@@ -25,7 +25,6 @@ type HalConfigValidator func(*proto.HalConfig) ValidationResult
 func getValidators() []HalConfigValidator {
 	return []HalConfigValidator {
 		validateKindsAndOmitKinds,
-		validateKindsAndOmitKinds,
 	}
 }
 
