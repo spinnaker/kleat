@@ -43,21 +43,29 @@ func validateHalConfig(h *proto.HalConfig, fa []HalConfigValidator) []string {
 func validateKindsAndOmitKinds(h *proto.HalConfig) ValidationResult {
 	for _, a := range h.Providers.Kubernetes.Accounts {
 		if !(len(a.Kinds) == 0) && !(len(a.OmitKinds) == 0) {
-			return ValidationResult{
-				valid: false,
-				msg:   "Cannot specify both kinds and omitKinds.",
-			}
+			return invalidResult("Cannot specify both kinds and omitKinds.")
 		}
 	}
+	return validResult()
+}
+
+type ValidationResult struct {
+	valid bool
+	msg string
+}
+
+func validResult() ValidationResult {
 	return ValidationResult{
 		valid: true,
 		msg:   "",
 	}
 }
 
-type ValidationResult struct {
-	valid bool
-	msg string
+func invalidResult(msg string) ValidationResult {
+	return ValidationResult{
+		valid: false,
+		msg:   msg,
+	}
 }
 
 func parseHalConfig() *proto.HalConfig {
