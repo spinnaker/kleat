@@ -4,16 +4,104 @@ package proto;
 message Kubernetes {
     bool enabled = 1;
     repeated Account accounts = 2;
+    string primaryAccount = 3;
 
     message Account {
         string name = 1;
         ProviderVersion providerVersion = 2;
         repeated string kinds = 3;
         repeated string omitKinds = 4;
+        string context = 5;
+        bool configureImagePullSecrets = 6;
+        int32 cacheThreads = 7;
+        repeated string namespaces = 8;
+        repeated string omitNamespaces = 9;
+        repeated CustomResource customResources = 10;
+        repeated CachingPolicy cachingPolicies = 11;
+        repeated DockerRegistry dockerRegistries = 12;
+        repeated string oAuthScopes = 13;
+        string kubeconfigFile = 14;
+        Permissions permissions = 15;
+        repeated string requiredGroupMemberships = 16;
+    }
+
+    message CustomResource {
+        string kubernetesKind = 1;
+        string spinnakerKind = 2;
+        string deployPriority = 3;
+        bool versioned = 4;
+        bool namespaced = 5;
+    }
+
+    message CachingPolicy {
+        string kubernetesKind = 1;
+        int32 maxEntriesPerAgent = 2;
+    }
+
+    message DockerRegistry {
+        string accountName = 1;
+        repeated string namespaces = 2;
     }
 
     enum ProviderVersion {
         V1 = 0;
         V2 = 1;
     }
+}
+
+message Google {
+    bool enabled = 1;
+    repeated Account accounts = 2;
+    string primaryAccount = 3;
+    BakeryDefaults bakeryDefaults = 4;
+    repeated string requiredGroupMemberships = 5;
+    Permissions permissions = 6;
+    string project = 7;
+    string jsonPath = 8;
+    bool alphaListed = 9;
+    repeated string imageProjects = 10;
+    Consul consul = 11;
+
+    message Account {
+        string name = 1;
+
+    }
+
+    message BakeryDefaults {
+        string templateFile = 1;
+        repeated BaseImageSettings baseImages = 2;
+        string zone = 3;
+        string network = 4;
+        bool useInternalIp = 5;
+
+        message BaseImageSettings {
+            BaseImage baseImages = 1;
+            VirtualizationSettings virtualizationSettings = 2;
+
+            message BaseImage {
+                string id = 1;
+                string shortDescription = 2;
+                string detailedDescription = 3;
+                string packageType = 4;
+                bool imageFamily = 5;
+            }
+
+            message VirtualizationSettings {
+                string sourceImageFamily = 1;
+            }
+        }
+    }
+
+    message Consul {
+        bool enabled = 1;
+        string agentEndpoint = 2;
+        int32 agentPort = 3;
+        repeated string datacenters = 4;
+    }
+}
+
+message Permissions {
+    repeated string READ = 1;
+    repeated string WRITE = 2;
+    repeated string EXECUTE = 3;
 }

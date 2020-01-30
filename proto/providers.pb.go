@@ -48,6 +48,7 @@ func (Kubernetes_ProviderVersion) EnumDescriptor() ([]byte, []int) {
 type Kubernetes struct {
 	Enabled              bool                  `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	Accounts             []*Kubernetes_Account `protobuf:"bytes,2,rep,name=accounts,proto3" json:"accounts,omitempty"`
+	PrimaryAccount       string                `protobuf:"bytes,3,opt,name=primaryAccount,proto3" json:"primaryAccount,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
 	XXX_unrecognized     []byte                `json:"-"`
 	XXX_sizecache        int32                 `json:"-"`
@@ -92,14 +93,33 @@ func (m *Kubernetes) GetAccounts() []*Kubernetes_Account {
 	return nil
 }
 
+func (m *Kubernetes) GetPrimaryAccount() string {
+	if m != nil {
+		return m.PrimaryAccount
+	}
+	return ""
+}
+
 type Kubernetes_Account struct {
-	Name                 string                     `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	ProviderVersion      Kubernetes_ProviderVersion `protobuf:"varint,2,opt,name=providerVersion,proto3,enum=proto.Kubernetes_ProviderVersion" json:"providerVersion,omitempty"`
-	Kinds                []string                   `protobuf:"bytes,3,rep,name=kinds,proto3" json:"kinds,omitempty"`
-	OmitKinds            []string                   `protobuf:"bytes,4,rep,name=omitKinds,proto3" json:"omitKinds,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                   `json:"-"`
-	XXX_unrecognized     []byte                     `json:"-"`
-	XXX_sizecache        int32                      `json:"-"`
+	Name                      string                       `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	ProviderVersion           Kubernetes_ProviderVersion   `protobuf:"varint,2,opt,name=providerVersion,proto3,enum=proto.Kubernetes_ProviderVersion" json:"providerVersion,omitempty"`
+	Kinds                     []string                     `protobuf:"bytes,3,rep,name=kinds,proto3" json:"kinds,omitempty"`
+	OmitKinds                 []string                     `protobuf:"bytes,4,rep,name=omitKinds,proto3" json:"omitKinds,omitempty"`
+	Context                   string                       `protobuf:"bytes,5,opt,name=context,proto3" json:"context,omitempty"`
+	ConfigureImagePullSecrets bool                         `protobuf:"varint,6,opt,name=configureImagePullSecrets,proto3" json:"configureImagePullSecrets,omitempty"`
+	CacheThreads              int32                        `protobuf:"varint,7,opt,name=cacheThreads,proto3" json:"cacheThreads,omitempty"`
+	Namespaces                []string                     `protobuf:"bytes,8,rep,name=namespaces,proto3" json:"namespaces,omitempty"`
+	OmitNamespaces            []string                     `protobuf:"bytes,9,rep,name=omitNamespaces,proto3" json:"omitNamespaces,omitempty"`
+	CustomResources           []*Kubernetes_CustomResource `protobuf:"bytes,10,rep,name=customResources,proto3" json:"customResources,omitempty"`
+	CachingPolicies           []*Kubernetes_CachingPolicy  `protobuf:"bytes,11,rep,name=cachingPolicies,proto3" json:"cachingPolicies,omitempty"`
+	DockerRegistries          []*Kubernetes_DockerRegistry `protobuf:"bytes,12,rep,name=dockerRegistries,proto3" json:"dockerRegistries,omitempty"`
+	OAuthScopes               []string                     `protobuf:"bytes,13,rep,name=oAuthScopes,proto3" json:"oAuthScopes,omitempty"`
+	KubeconfigFile            string                       `protobuf:"bytes,14,opt,name=kubeconfigFile,proto3" json:"kubeconfigFile,omitempty"`
+	Permissions               *Permissions                 `protobuf:"bytes,15,opt,name=permissions,proto3" json:"permissions,omitempty"`
+	RequiredGroupMemberships  []string                     `protobuf:"bytes,16,rep,name=requiredGroupMemberships,proto3" json:"requiredGroupMemberships,omitempty"`
+	XXX_NoUnkeyedLiteral      struct{}                     `json:"-"`
+	XXX_unrecognized          []byte                       `json:"-"`
+	XXX_sizecache             int32                        `json:"-"`
 }
 
 func (m *Kubernetes_Account) Reset()         { *m = Kubernetes_Account{} }
@@ -155,28 +175,856 @@ func (m *Kubernetes_Account) GetOmitKinds() []string {
 	return nil
 }
 
+func (m *Kubernetes_Account) GetContext() string {
+	if m != nil {
+		return m.Context
+	}
+	return ""
+}
+
+func (m *Kubernetes_Account) GetConfigureImagePullSecrets() bool {
+	if m != nil {
+		return m.ConfigureImagePullSecrets
+	}
+	return false
+}
+
+func (m *Kubernetes_Account) GetCacheThreads() int32 {
+	if m != nil {
+		return m.CacheThreads
+	}
+	return 0
+}
+
+func (m *Kubernetes_Account) GetNamespaces() []string {
+	if m != nil {
+		return m.Namespaces
+	}
+	return nil
+}
+
+func (m *Kubernetes_Account) GetOmitNamespaces() []string {
+	if m != nil {
+		return m.OmitNamespaces
+	}
+	return nil
+}
+
+func (m *Kubernetes_Account) GetCustomResources() []*Kubernetes_CustomResource {
+	if m != nil {
+		return m.CustomResources
+	}
+	return nil
+}
+
+func (m *Kubernetes_Account) GetCachingPolicies() []*Kubernetes_CachingPolicy {
+	if m != nil {
+		return m.CachingPolicies
+	}
+	return nil
+}
+
+func (m *Kubernetes_Account) GetDockerRegistries() []*Kubernetes_DockerRegistry {
+	if m != nil {
+		return m.DockerRegistries
+	}
+	return nil
+}
+
+func (m *Kubernetes_Account) GetOAuthScopes() []string {
+	if m != nil {
+		return m.OAuthScopes
+	}
+	return nil
+}
+
+func (m *Kubernetes_Account) GetKubeconfigFile() string {
+	if m != nil {
+		return m.KubeconfigFile
+	}
+	return ""
+}
+
+func (m *Kubernetes_Account) GetPermissions() *Permissions {
+	if m != nil {
+		return m.Permissions
+	}
+	return nil
+}
+
+func (m *Kubernetes_Account) GetRequiredGroupMemberships() []string {
+	if m != nil {
+		return m.RequiredGroupMemberships
+	}
+	return nil
+}
+
+type Kubernetes_CustomResource struct {
+	KubernetesKind       string   `protobuf:"bytes,1,opt,name=kubernetesKind,proto3" json:"kubernetesKind,omitempty"`
+	SpinnakerKind        string   `protobuf:"bytes,2,opt,name=spinnakerKind,proto3" json:"spinnakerKind,omitempty"`
+	DeployPriority       string   `protobuf:"bytes,3,opt,name=deployPriority,proto3" json:"deployPriority,omitempty"`
+	Versioned            bool     `protobuf:"varint,4,opt,name=versioned,proto3" json:"versioned,omitempty"`
+	Namespaced           bool     `protobuf:"varint,5,opt,name=namespaced,proto3" json:"namespaced,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Kubernetes_CustomResource) Reset()         { *m = Kubernetes_CustomResource{} }
+func (m *Kubernetes_CustomResource) String() string { return proto.CompactTextString(m) }
+func (*Kubernetes_CustomResource) ProtoMessage()    {}
+func (*Kubernetes_CustomResource) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f9f7cb8e43f784d4, []int{0, 1}
+}
+
+func (m *Kubernetes_CustomResource) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Kubernetes_CustomResource.Unmarshal(m, b)
+}
+func (m *Kubernetes_CustomResource) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Kubernetes_CustomResource.Marshal(b, m, deterministic)
+}
+func (m *Kubernetes_CustomResource) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Kubernetes_CustomResource.Merge(m, src)
+}
+func (m *Kubernetes_CustomResource) XXX_Size() int {
+	return xxx_messageInfo_Kubernetes_CustomResource.Size(m)
+}
+func (m *Kubernetes_CustomResource) XXX_DiscardUnknown() {
+	xxx_messageInfo_Kubernetes_CustomResource.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Kubernetes_CustomResource proto.InternalMessageInfo
+
+func (m *Kubernetes_CustomResource) GetKubernetesKind() string {
+	if m != nil {
+		return m.KubernetesKind
+	}
+	return ""
+}
+
+func (m *Kubernetes_CustomResource) GetSpinnakerKind() string {
+	if m != nil {
+		return m.SpinnakerKind
+	}
+	return ""
+}
+
+func (m *Kubernetes_CustomResource) GetDeployPriority() string {
+	if m != nil {
+		return m.DeployPriority
+	}
+	return ""
+}
+
+func (m *Kubernetes_CustomResource) GetVersioned() bool {
+	if m != nil {
+		return m.Versioned
+	}
+	return false
+}
+
+func (m *Kubernetes_CustomResource) GetNamespaced() bool {
+	if m != nil {
+		return m.Namespaced
+	}
+	return false
+}
+
+type Kubernetes_CachingPolicy struct {
+	KubernetesKind       string   `protobuf:"bytes,1,opt,name=kubernetesKind,proto3" json:"kubernetesKind,omitempty"`
+	MaxEntriesPerAgent   int32    `protobuf:"varint,2,opt,name=maxEntriesPerAgent,proto3" json:"maxEntriesPerAgent,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Kubernetes_CachingPolicy) Reset()         { *m = Kubernetes_CachingPolicy{} }
+func (m *Kubernetes_CachingPolicy) String() string { return proto.CompactTextString(m) }
+func (*Kubernetes_CachingPolicy) ProtoMessage()    {}
+func (*Kubernetes_CachingPolicy) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f9f7cb8e43f784d4, []int{0, 2}
+}
+
+func (m *Kubernetes_CachingPolicy) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Kubernetes_CachingPolicy.Unmarshal(m, b)
+}
+func (m *Kubernetes_CachingPolicy) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Kubernetes_CachingPolicy.Marshal(b, m, deterministic)
+}
+func (m *Kubernetes_CachingPolicy) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Kubernetes_CachingPolicy.Merge(m, src)
+}
+func (m *Kubernetes_CachingPolicy) XXX_Size() int {
+	return xxx_messageInfo_Kubernetes_CachingPolicy.Size(m)
+}
+func (m *Kubernetes_CachingPolicy) XXX_DiscardUnknown() {
+	xxx_messageInfo_Kubernetes_CachingPolicy.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Kubernetes_CachingPolicy proto.InternalMessageInfo
+
+func (m *Kubernetes_CachingPolicy) GetKubernetesKind() string {
+	if m != nil {
+		return m.KubernetesKind
+	}
+	return ""
+}
+
+func (m *Kubernetes_CachingPolicy) GetMaxEntriesPerAgent() int32 {
+	if m != nil {
+		return m.MaxEntriesPerAgent
+	}
+	return 0
+}
+
+type Kubernetes_DockerRegistry struct {
+	AccountName          string   `protobuf:"bytes,1,opt,name=accountName,proto3" json:"accountName,omitempty"`
+	Namespaces           []string `protobuf:"bytes,2,rep,name=namespaces,proto3" json:"namespaces,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Kubernetes_DockerRegistry) Reset()         { *m = Kubernetes_DockerRegistry{} }
+func (m *Kubernetes_DockerRegistry) String() string { return proto.CompactTextString(m) }
+func (*Kubernetes_DockerRegistry) ProtoMessage()    {}
+func (*Kubernetes_DockerRegistry) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f9f7cb8e43f784d4, []int{0, 3}
+}
+
+func (m *Kubernetes_DockerRegistry) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Kubernetes_DockerRegistry.Unmarshal(m, b)
+}
+func (m *Kubernetes_DockerRegistry) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Kubernetes_DockerRegistry.Marshal(b, m, deterministic)
+}
+func (m *Kubernetes_DockerRegistry) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Kubernetes_DockerRegistry.Merge(m, src)
+}
+func (m *Kubernetes_DockerRegistry) XXX_Size() int {
+	return xxx_messageInfo_Kubernetes_DockerRegistry.Size(m)
+}
+func (m *Kubernetes_DockerRegistry) XXX_DiscardUnknown() {
+	xxx_messageInfo_Kubernetes_DockerRegistry.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Kubernetes_DockerRegistry proto.InternalMessageInfo
+
+func (m *Kubernetes_DockerRegistry) GetAccountName() string {
+	if m != nil {
+		return m.AccountName
+	}
+	return ""
+}
+
+func (m *Kubernetes_DockerRegistry) GetNamespaces() []string {
+	if m != nil {
+		return m.Namespaces
+	}
+	return nil
+}
+
+type Google struct {
+	Enabled                  bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Accounts                 []*Google_Account      `protobuf:"bytes,2,rep,name=accounts,proto3" json:"accounts,omitempty"`
+	PrimaryAccount           string                 `protobuf:"bytes,3,opt,name=primaryAccount,proto3" json:"primaryAccount,omitempty"`
+	BakeryDefaults           *Google_BakeryDefaults `protobuf:"bytes,4,opt,name=bakeryDefaults,proto3" json:"bakeryDefaults,omitempty"`
+	RequiredGroupMemberships []string               `protobuf:"bytes,5,rep,name=requiredGroupMemberships,proto3" json:"requiredGroupMemberships,omitempty"`
+	Permissions              *Permissions           `protobuf:"bytes,6,opt,name=permissions,proto3" json:"permissions,omitempty"`
+	Project                  string                 `protobuf:"bytes,7,opt,name=project,proto3" json:"project,omitempty"`
+	JsonPath                 string                 `protobuf:"bytes,8,opt,name=jsonPath,proto3" json:"jsonPath,omitempty"`
+	AlphaListed              bool                   `protobuf:"varint,9,opt,name=alphaListed,proto3" json:"alphaListed,omitempty"`
+	ImageProjects            []string               `protobuf:"bytes,10,rep,name=imageProjects,proto3" json:"imageProjects,omitempty"`
+	Consul                   *Google_Consul         `protobuf:"bytes,11,opt,name=consul,proto3" json:"consul,omitempty"`
+	XXX_NoUnkeyedLiteral     struct{}               `json:"-"`
+	XXX_unrecognized         []byte                 `json:"-"`
+	XXX_sizecache            int32                  `json:"-"`
+}
+
+func (m *Google) Reset()         { *m = Google{} }
+func (m *Google) String() string { return proto.CompactTextString(m) }
+func (*Google) ProtoMessage()    {}
+func (*Google) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f9f7cb8e43f784d4, []int{1}
+}
+
+func (m *Google) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Google.Unmarshal(m, b)
+}
+func (m *Google) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Google.Marshal(b, m, deterministic)
+}
+func (m *Google) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Google.Merge(m, src)
+}
+func (m *Google) XXX_Size() int {
+	return xxx_messageInfo_Google.Size(m)
+}
+func (m *Google) XXX_DiscardUnknown() {
+	xxx_messageInfo_Google.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Google proto.InternalMessageInfo
+
+func (m *Google) GetEnabled() bool {
+	if m != nil {
+		return m.Enabled
+	}
+	return false
+}
+
+func (m *Google) GetAccounts() []*Google_Account {
+	if m != nil {
+		return m.Accounts
+	}
+	return nil
+}
+
+func (m *Google) GetPrimaryAccount() string {
+	if m != nil {
+		return m.PrimaryAccount
+	}
+	return ""
+}
+
+func (m *Google) GetBakeryDefaults() *Google_BakeryDefaults {
+	if m != nil {
+		return m.BakeryDefaults
+	}
+	return nil
+}
+
+func (m *Google) GetRequiredGroupMemberships() []string {
+	if m != nil {
+		return m.RequiredGroupMemberships
+	}
+	return nil
+}
+
+func (m *Google) GetPermissions() *Permissions {
+	if m != nil {
+		return m.Permissions
+	}
+	return nil
+}
+
+func (m *Google) GetProject() string {
+	if m != nil {
+		return m.Project
+	}
+	return ""
+}
+
+func (m *Google) GetJsonPath() string {
+	if m != nil {
+		return m.JsonPath
+	}
+	return ""
+}
+
+func (m *Google) GetAlphaListed() bool {
+	if m != nil {
+		return m.AlphaListed
+	}
+	return false
+}
+
+func (m *Google) GetImageProjects() []string {
+	if m != nil {
+		return m.ImageProjects
+	}
+	return nil
+}
+
+func (m *Google) GetConsul() *Google_Consul {
+	if m != nil {
+		return m.Consul
+	}
+	return nil
+}
+
+type Google_Account struct {
+	Name                 string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Google_Account) Reset()         { *m = Google_Account{} }
+func (m *Google_Account) String() string { return proto.CompactTextString(m) }
+func (*Google_Account) ProtoMessage()    {}
+func (*Google_Account) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f9f7cb8e43f784d4, []int{1, 0}
+}
+
+func (m *Google_Account) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Google_Account.Unmarshal(m, b)
+}
+func (m *Google_Account) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Google_Account.Marshal(b, m, deterministic)
+}
+func (m *Google_Account) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Google_Account.Merge(m, src)
+}
+func (m *Google_Account) XXX_Size() int {
+	return xxx_messageInfo_Google_Account.Size(m)
+}
+func (m *Google_Account) XXX_DiscardUnknown() {
+	xxx_messageInfo_Google_Account.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Google_Account proto.InternalMessageInfo
+
+func (m *Google_Account) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+type Google_BakeryDefaults struct {
+	TemplateFile         string                                     `protobuf:"bytes,1,opt,name=templateFile,proto3" json:"templateFile,omitempty"`
+	BaseImages           []*Google_BakeryDefaults_BaseImageSettings `protobuf:"bytes,2,rep,name=baseImages,proto3" json:"baseImages,omitempty"`
+	Zone                 string                                     `protobuf:"bytes,3,opt,name=zone,proto3" json:"zone,omitempty"`
+	Network              string                                     `protobuf:"bytes,4,opt,name=network,proto3" json:"network,omitempty"`
+	UseInternalIp        bool                                       `protobuf:"varint,5,opt,name=useInternalIp,proto3" json:"useInternalIp,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                   `json:"-"`
+	XXX_unrecognized     []byte                                     `json:"-"`
+	XXX_sizecache        int32                                      `json:"-"`
+}
+
+func (m *Google_BakeryDefaults) Reset()         { *m = Google_BakeryDefaults{} }
+func (m *Google_BakeryDefaults) String() string { return proto.CompactTextString(m) }
+func (*Google_BakeryDefaults) ProtoMessage()    {}
+func (*Google_BakeryDefaults) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f9f7cb8e43f784d4, []int{1, 1}
+}
+
+func (m *Google_BakeryDefaults) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Google_BakeryDefaults.Unmarshal(m, b)
+}
+func (m *Google_BakeryDefaults) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Google_BakeryDefaults.Marshal(b, m, deterministic)
+}
+func (m *Google_BakeryDefaults) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Google_BakeryDefaults.Merge(m, src)
+}
+func (m *Google_BakeryDefaults) XXX_Size() int {
+	return xxx_messageInfo_Google_BakeryDefaults.Size(m)
+}
+func (m *Google_BakeryDefaults) XXX_DiscardUnknown() {
+	xxx_messageInfo_Google_BakeryDefaults.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Google_BakeryDefaults proto.InternalMessageInfo
+
+func (m *Google_BakeryDefaults) GetTemplateFile() string {
+	if m != nil {
+		return m.TemplateFile
+	}
+	return ""
+}
+
+func (m *Google_BakeryDefaults) GetBaseImages() []*Google_BakeryDefaults_BaseImageSettings {
+	if m != nil {
+		return m.BaseImages
+	}
+	return nil
+}
+
+func (m *Google_BakeryDefaults) GetZone() string {
+	if m != nil {
+		return m.Zone
+	}
+	return ""
+}
+
+func (m *Google_BakeryDefaults) GetNetwork() string {
+	if m != nil {
+		return m.Network
+	}
+	return ""
+}
+
+func (m *Google_BakeryDefaults) GetUseInternalIp() bool {
+	if m != nil {
+		return m.UseInternalIp
+	}
+	return false
+}
+
+type Google_BakeryDefaults_BaseImageSettings struct {
+	BaseImages             *Google_BakeryDefaults_BaseImageSettings_BaseImage              `protobuf:"bytes,1,opt,name=baseImages,proto3" json:"baseImages,omitempty"`
+	VirtualizationSettings *Google_BakeryDefaults_BaseImageSettings_VirtualizationSettings `protobuf:"bytes,2,opt,name=virtualizationSettings,proto3" json:"virtualizationSettings,omitempty"`
+	XXX_NoUnkeyedLiteral   struct{}                                                        `json:"-"`
+	XXX_unrecognized       []byte                                                          `json:"-"`
+	XXX_sizecache          int32                                                           `json:"-"`
+}
+
+func (m *Google_BakeryDefaults_BaseImageSettings) Reset() {
+	*m = Google_BakeryDefaults_BaseImageSettings{}
+}
+func (m *Google_BakeryDefaults_BaseImageSettings) String() string { return proto.CompactTextString(m) }
+func (*Google_BakeryDefaults_BaseImageSettings) ProtoMessage()    {}
+func (*Google_BakeryDefaults_BaseImageSettings) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f9f7cb8e43f784d4, []int{1, 1, 0}
+}
+
+func (m *Google_BakeryDefaults_BaseImageSettings) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Google_BakeryDefaults_BaseImageSettings.Unmarshal(m, b)
+}
+func (m *Google_BakeryDefaults_BaseImageSettings) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Google_BakeryDefaults_BaseImageSettings.Marshal(b, m, deterministic)
+}
+func (m *Google_BakeryDefaults_BaseImageSettings) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Google_BakeryDefaults_BaseImageSettings.Merge(m, src)
+}
+func (m *Google_BakeryDefaults_BaseImageSettings) XXX_Size() int {
+	return xxx_messageInfo_Google_BakeryDefaults_BaseImageSettings.Size(m)
+}
+func (m *Google_BakeryDefaults_BaseImageSettings) XXX_DiscardUnknown() {
+	xxx_messageInfo_Google_BakeryDefaults_BaseImageSettings.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Google_BakeryDefaults_BaseImageSettings proto.InternalMessageInfo
+
+func (m *Google_BakeryDefaults_BaseImageSettings) GetBaseImages() *Google_BakeryDefaults_BaseImageSettings_BaseImage {
+	if m != nil {
+		return m.BaseImages
+	}
+	return nil
+}
+
+func (m *Google_BakeryDefaults_BaseImageSettings) GetVirtualizationSettings() *Google_BakeryDefaults_BaseImageSettings_VirtualizationSettings {
+	if m != nil {
+		return m.VirtualizationSettings
+	}
+	return nil
+}
+
+type Google_BakeryDefaults_BaseImageSettings_BaseImage struct {
+	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	ShortDescription     string   `protobuf:"bytes,2,opt,name=shortDescription,proto3" json:"shortDescription,omitempty"`
+	DetailedDescription  string   `protobuf:"bytes,3,opt,name=detailedDescription,proto3" json:"detailedDescription,omitempty"`
+	PackageType          string   `protobuf:"bytes,4,opt,name=packageType,proto3" json:"packageType,omitempty"`
+	ImageFamily          bool     `protobuf:"varint,5,opt,name=imageFamily,proto3" json:"imageFamily,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Google_BakeryDefaults_BaseImageSettings_BaseImage) Reset() {
+	*m = Google_BakeryDefaults_BaseImageSettings_BaseImage{}
+}
+func (m *Google_BakeryDefaults_BaseImageSettings_BaseImage) String() string {
+	return proto.CompactTextString(m)
+}
+func (*Google_BakeryDefaults_BaseImageSettings_BaseImage) ProtoMessage() {}
+func (*Google_BakeryDefaults_BaseImageSettings_BaseImage) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f9f7cb8e43f784d4, []int{1, 1, 0, 0}
+}
+
+func (m *Google_BakeryDefaults_BaseImageSettings_BaseImage) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Google_BakeryDefaults_BaseImageSettings_BaseImage.Unmarshal(m, b)
+}
+func (m *Google_BakeryDefaults_BaseImageSettings_BaseImage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Google_BakeryDefaults_BaseImageSettings_BaseImage.Marshal(b, m, deterministic)
+}
+func (m *Google_BakeryDefaults_BaseImageSettings_BaseImage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Google_BakeryDefaults_BaseImageSettings_BaseImage.Merge(m, src)
+}
+func (m *Google_BakeryDefaults_BaseImageSettings_BaseImage) XXX_Size() int {
+	return xxx_messageInfo_Google_BakeryDefaults_BaseImageSettings_BaseImage.Size(m)
+}
+func (m *Google_BakeryDefaults_BaseImageSettings_BaseImage) XXX_DiscardUnknown() {
+	xxx_messageInfo_Google_BakeryDefaults_BaseImageSettings_BaseImage.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Google_BakeryDefaults_BaseImageSettings_BaseImage proto.InternalMessageInfo
+
+func (m *Google_BakeryDefaults_BaseImageSettings_BaseImage) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *Google_BakeryDefaults_BaseImageSettings_BaseImage) GetShortDescription() string {
+	if m != nil {
+		return m.ShortDescription
+	}
+	return ""
+}
+
+func (m *Google_BakeryDefaults_BaseImageSettings_BaseImage) GetDetailedDescription() string {
+	if m != nil {
+		return m.DetailedDescription
+	}
+	return ""
+}
+
+func (m *Google_BakeryDefaults_BaseImageSettings_BaseImage) GetPackageType() string {
+	if m != nil {
+		return m.PackageType
+	}
+	return ""
+}
+
+func (m *Google_BakeryDefaults_BaseImageSettings_BaseImage) GetImageFamily() bool {
+	if m != nil {
+		return m.ImageFamily
+	}
+	return false
+}
+
+type Google_BakeryDefaults_BaseImageSettings_VirtualizationSettings struct {
+	SourceImageFamily    string   `protobuf:"bytes,1,opt,name=sourceImageFamily,proto3" json:"sourceImageFamily,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Google_BakeryDefaults_BaseImageSettings_VirtualizationSettings) Reset() {
+	*m = Google_BakeryDefaults_BaseImageSettings_VirtualizationSettings{}
+}
+func (m *Google_BakeryDefaults_BaseImageSettings_VirtualizationSettings) String() string {
+	return proto.CompactTextString(m)
+}
+func (*Google_BakeryDefaults_BaseImageSettings_VirtualizationSettings) ProtoMessage() {}
+func (*Google_BakeryDefaults_BaseImageSettings_VirtualizationSettings) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f9f7cb8e43f784d4, []int{1, 1, 0, 1}
+}
+
+func (m *Google_BakeryDefaults_BaseImageSettings_VirtualizationSettings) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Google_BakeryDefaults_BaseImageSettings_VirtualizationSettings.Unmarshal(m, b)
+}
+func (m *Google_BakeryDefaults_BaseImageSettings_VirtualizationSettings) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Google_BakeryDefaults_BaseImageSettings_VirtualizationSettings.Marshal(b, m, deterministic)
+}
+func (m *Google_BakeryDefaults_BaseImageSettings_VirtualizationSettings) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Google_BakeryDefaults_BaseImageSettings_VirtualizationSettings.Merge(m, src)
+}
+func (m *Google_BakeryDefaults_BaseImageSettings_VirtualizationSettings) XXX_Size() int {
+	return xxx_messageInfo_Google_BakeryDefaults_BaseImageSettings_VirtualizationSettings.Size(m)
+}
+func (m *Google_BakeryDefaults_BaseImageSettings_VirtualizationSettings) XXX_DiscardUnknown() {
+	xxx_messageInfo_Google_BakeryDefaults_BaseImageSettings_VirtualizationSettings.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Google_BakeryDefaults_BaseImageSettings_VirtualizationSettings proto.InternalMessageInfo
+
+func (m *Google_BakeryDefaults_BaseImageSettings_VirtualizationSettings) GetSourceImageFamily() string {
+	if m != nil {
+		return m.SourceImageFamily
+	}
+	return ""
+}
+
+type Google_Consul struct {
+	Enabled              bool     `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	AgentEndpoint        string   `protobuf:"bytes,2,opt,name=agentEndpoint,proto3" json:"agentEndpoint,omitempty"`
+	AgentPort            int32    `protobuf:"varint,3,opt,name=agentPort,proto3" json:"agentPort,omitempty"`
+	Datacenters          []string `protobuf:"bytes,4,rep,name=datacenters,proto3" json:"datacenters,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Google_Consul) Reset()         { *m = Google_Consul{} }
+func (m *Google_Consul) String() string { return proto.CompactTextString(m) }
+func (*Google_Consul) ProtoMessage()    {}
+func (*Google_Consul) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f9f7cb8e43f784d4, []int{1, 2}
+}
+
+func (m *Google_Consul) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Google_Consul.Unmarshal(m, b)
+}
+func (m *Google_Consul) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Google_Consul.Marshal(b, m, deterministic)
+}
+func (m *Google_Consul) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Google_Consul.Merge(m, src)
+}
+func (m *Google_Consul) XXX_Size() int {
+	return xxx_messageInfo_Google_Consul.Size(m)
+}
+func (m *Google_Consul) XXX_DiscardUnknown() {
+	xxx_messageInfo_Google_Consul.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Google_Consul proto.InternalMessageInfo
+
+func (m *Google_Consul) GetEnabled() bool {
+	if m != nil {
+		return m.Enabled
+	}
+	return false
+}
+
+func (m *Google_Consul) GetAgentEndpoint() string {
+	if m != nil {
+		return m.AgentEndpoint
+	}
+	return ""
+}
+
+func (m *Google_Consul) GetAgentPort() int32 {
+	if m != nil {
+		return m.AgentPort
+	}
+	return 0
+}
+
+func (m *Google_Consul) GetDatacenters() []string {
+	if m != nil {
+		return m.Datacenters
+	}
+	return nil
+}
+
+type Permissions struct {
+	READ                 []string `protobuf:"bytes,1,rep,name=READ,proto3" json:"READ,omitempty"`
+	WRITE                []string `protobuf:"bytes,2,rep,name=WRITE,proto3" json:"WRITE,omitempty"`
+	EXECUTE              []string `protobuf:"bytes,3,rep,name=EXECUTE,proto3" json:"EXECUTE,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Permissions) Reset()         { *m = Permissions{} }
+func (m *Permissions) String() string { return proto.CompactTextString(m) }
+func (*Permissions) ProtoMessage()    {}
+func (*Permissions) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f9f7cb8e43f784d4, []int{2}
+}
+
+func (m *Permissions) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Permissions.Unmarshal(m, b)
+}
+func (m *Permissions) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Permissions.Marshal(b, m, deterministic)
+}
+func (m *Permissions) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Permissions.Merge(m, src)
+}
+func (m *Permissions) XXX_Size() int {
+	return xxx_messageInfo_Permissions.Size(m)
+}
+func (m *Permissions) XXX_DiscardUnknown() {
+	xxx_messageInfo_Permissions.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Permissions proto.InternalMessageInfo
+
+func (m *Permissions) GetREAD() []string {
+	if m != nil {
+		return m.READ
+	}
+	return nil
+}
+
+func (m *Permissions) GetWRITE() []string {
+	if m != nil {
+		return m.WRITE
+	}
+	return nil
+}
+
+func (m *Permissions) GetEXECUTE() []string {
+	if m != nil {
+		return m.EXECUTE
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterEnum("proto.Kubernetes_ProviderVersion", Kubernetes_ProviderVersion_name, Kubernetes_ProviderVersion_value)
 	proto.RegisterType((*Kubernetes)(nil), "proto.Kubernetes")
 	proto.RegisterType((*Kubernetes_Account)(nil), "proto.Kubernetes.Account")
+	proto.RegisterType((*Kubernetes_CustomResource)(nil), "proto.Kubernetes.CustomResource")
+	proto.RegisterType((*Kubernetes_CachingPolicy)(nil), "proto.Kubernetes.CachingPolicy")
+	proto.RegisterType((*Kubernetes_DockerRegistry)(nil), "proto.Kubernetes.DockerRegistry")
+	proto.RegisterType((*Google)(nil), "proto.Google")
+	proto.RegisterType((*Google_Account)(nil), "proto.Google.Account")
+	proto.RegisterType((*Google_BakeryDefaults)(nil), "proto.Google.BakeryDefaults")
+	proto.RegisterType((*Google_BakeryDefaults_BaseImageSettings)(nil), "proto.Google.BakeryDefaults.BaseImageSettings")
+	proto.RegisterType((*Google_BakeryDefaults_BaseImageSettings_BaseImage)(nil), "proto.Google.BakeryDefaults.BaseImageSettings.BaseImage")
+	proto.RegisterType((*Google_BakeryDefaults_BaseImageSettings_VirtualizationSettings)(nil), "proto.Google.BakeryDefaults.BaseImageSettings.VirtualizationSettings")
+	proto.RegisterType((*Google_Consul)(nil), "proto.Google.Consul")
+	proto.RegisterType((*Permissions)(nil), "proto.Permissions")
 }
 
 func init() { proto.RegisterFile("providers.proto", fileDescriptor_f9f7cb8e43f784d4) }
 
 var fileDescriptor_f9f7cb8e43f784d4 = []byte{
-	// 217 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x64, 0x8e, 0xbd, 0x4e, 0xc4, 0x30,
-	0x10, 0x84, 0xb1, 0x73, 0x7f, 0x59, 0x24, 0xee, 0xb4, 0xa2, 0x30, 0x88, 0xc2, 0x77, 0x95, 0xab,
-	0x48, 0x04, 0xf1, 0x00, 0xd4, 0x69, 0x90, 0x8b, 0xeb, 0xf3, 0xb3, 0x85, 0x05, 0xb1, 0x23, 0xdb,
-	0xe1, 0x71, 0x90, 0x78, 0x53, 0x24, 0x07, 0x88, 0xc8, 0x55, 0xfb, 0x33, 0x33, 0x9f, 0x06, 0xf6,
-	0x83, 0x77, 0x1f, 0xa6, 0x23, 0x1f, 0x8a, 0xc1, 0xbb, 0xe8, 0x70, 0x9d, 0xc6, 0xe9, 0x8b, 0x03,
-	0x54, 0x63, 0x43, 0xde, 0x52, 0xa4, 0x80, 0x02, 0xb6, 0x64, 0xeb, 0xe6, 0x9d, 0x3a, 0xc1, 0x24,
-	0x53, 0x3b, 0xfd, 0x7b, 0xe2, 0x33, 0xec, 0xea, 0xb6, 0x75, 0xa3, 0x8d, 0x41, 0x70, 0x99, 0xa9,
-	0xeb, 0xf2, 0x6e, 0x22, 0x15, 0x73, 0xbc, 0x78, 0x99, 0x1c, 0xfa, 0xcf, 0x7a, 0xff, 0xc9, 0x60,
-	0xfb, 0xf3, 0x45, 0x84, 0x95, 0xad, 0x7b, 0x4a, 0xe4, 0x5c, 0xa7, 0x1d, 0xab, 0xb9, 0xd9, 0x99,
-	0x7c, 0x30, 0xce, 0x0a, 0x2e, 0x99, 0xba, 0x29, 0x8f, 0x97, 0xf4, 0xd7, 0xff, 0x46, 0xbd, 0x4c,
-	0xe2, 0x2d, 0xac, 0xdf, 0x8c, 0xed, 0x82, 0xc8, 0x64, 0xa6, 0x72, 0x3d, 0x1d, 0xf8, 0x00, 0xb9,
-	0xeb, 0x4d, 0xac, 0x92, 0xb2, 0x4a, 0xca, 0xfc, 0x38, 0x1d, 0x61, 0xbf, 0xe0, 0xe2, 0x06, 0xf8,
-	0xf9, 0xf1, 0x70, 0x95, 0x66, 0x79, 0x60, 0xcd, 0x26, 0x35, 0x79, 0xfa, 0x0e, 0x00, 0x00, 0xff,
-	0xff, 0x2c, 0x9d, 0xd0, 0x1b, 0x44, 0x01, 0x00, 0x00,
+	// 1085 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x56, 0xc1, 0x6e, 0xdb, 0x46,
+	0x13, 0xfe, 0x29, 0x5b, 0xb2, 0x38, 0x8a, 0x65, 0x67, 0xff, 0x34, 0x60, 0x84, 0xb4, 0x55, 0x8c,
+	0xa0, 0x10, 0x8a, 0x40, 0x68, 0xd4, 0x16, 0x28, 0x8a, 0x5e, 0x1c, 0x5b, 0x0e, 0x54, 0xa7, 0x86,
+	0xba, 0x76, 0xdd, 0x5c, 0x57, 0xe4, 0x44, 0xda, 0x88, 0xe2, 0xb2, 0xbb, 0x4b, 0x37, 0x0a, 0xd0,
+	0x53, 0x2f, 0x7d, 0x9e, 0xde, 0x7b, 0xeb, 0xbd, 0x4f, 0xd0, 0xb7, 0xe8, 0x03, 0x14, 0xbb, 0x24,
+	0x2d, 0x92, 0xb2, 0x85, 0xa4, 0x27, 0x72, 0xbf, 0xf9, 0x76, 0x38, 0x3b, 0xf3, 0xcd, 0x70, 0x61,
+	0x2f, 0x96, 0xe2, 0x8a, 0x07, 0x28, 0x55, 0x3f, 0x96, 0x42, 0x0b, 0x52, 0xb7, 0x8f, 0x83, 0xdf,
+	0x01, 0xe0, 0x34, 0x99, 0xa0, 0x8c, 0x50, 0xa3, 0x22, 0x1e, 0xec, 0x60, 0xc4, 0x26, 0x21, 0x06,
+	0x9e, 0xd3, 0x75, 0x7a, 0x4d, 0x9a, 0x2f, 0xc9, 0x97, 0xd0, 0x64, 0xbe, 0x2f, 0x92, 0x48, 0x2b,
+	0xaf, 0xd6, 0xdd, 0xea, 0xb5, 0x06, 0x0f, 0x52, 0x4f, 0xfd, 0xd5, 0xf6, 0xfe, 0x61, 0xca, 0xa0,
+	0xd7, 0x54, 0xf2, 0x09, 0xb4, 0x63, 0xc9, 0x17, 0x4c, 0x2e, 0x33, 0x9b, 0xb7, 0xd5, 0x75, 0x7a,
+	0x2e, 0xad, 0xa0, 0x9d, 0x5f, 0x1b, 0xb0, 0x93, 0xbd, 0x13, 0x02, 0xdb, 0x11, 0x5b, 0xa0, 0x8d,
+	0xc0, 0xa5, 0xf6, 0x9d, 0x9c, 0xae, 0x4e, 0x70, 0x89, 0x52, 0x71, 0x11, 0x79, 0xb5, 0xae, 0xd3,
+	0x6b, 0x0f, 0x1e, 0xad, 0x47, 0x31, 0x2e, 0x13, 0x69, 0x75, 0x27, 0xb9, 0x07, 0xf5, 0x39, 0x8f,
+	0x02, 0xe5, 0x6d, 0x75, 0xb7, 0x7a, 0x2e, 0x4d, 0x17, 0xe4, 0x21, 0xb8, 0x62, 0xc1, 0xf5, 0xa9,
+	0xb5, 0x6c, 0x5b, 0xcb, 0x0a, 0x30, 0x99, 0xf1, 0x45, 0xa4, 0xf1, 0x8d, 0xf6, 0xea, 0x36, 0xae,
+	0x7c, 0x49, 0xbe, 0x81, 0x07, 0xbe, 0x88, 0x5e, 0xf1, 0x69, 0x22, 0x71, 0xb4, 0x60, 0x53, 0x1c,
+	0x27, 0x61, 0x78, 0x8e, 0xbe, 0x44, 0xad, 0xbc, 0x86, 0xcd, 0xe2, 0xed, 0x04, 0x72, 0x00, 0x77,
+	0x7c, 0xe6, 0xcf, 0xf0, 0x62, 0x26, 0x91, 0x05, 0xca, 0xdb, 0xe9, 0x3a, 0xbd, 0x3a, 0x2d, 0x61,
+	0xe4, 0x23, 0x00, 0x93, 0x04, 0x15, 0x33, 0x1f, 0x95, 0xd7, 0xb4, 0xa1, 0x15, 0x10, 0x93, 0x64,
+	0x13, 0xe8, 0xd9, 0x8a, 0xe3, 0x5a, 0x4e, 0x05, 0x25, 0xdf, 0xc2, 0x9e, 0x9f, 0x28, 0x2d, 0x16,
+	0x14, 0x95, 0x48, 0xa4, 0x21, 0x82, 0x2d, 0x65, 0x77, 0x3d, 0x89, 0x47, 0x25, 0x22, 0xad, 0x6e,
+	0x24, 0x23, 0xd8, 0x33, 0x31, 0xf2, 0x68, 0x3a, 0x16, 0x21, 0xf7, 0x39, 0x2a, 0xaf, 0x65, 0x7d,
+	0x7d, 0x7c, 0x83, 0xaf, 0x02, 0x71, 0x49, 0xab, 0xfb, 0xc8, 0x0b, 0xd8, 0x0f, 0x84, 0x3f, 0x47,
+	0x49, 0x71, 0xca, 0x95, 0x96, 0xc6, 0xd7, 0x9d, 0xdb, 0xe2, 0x3a, 0x2e, 0x32, 0x97, 0x74, 0x6d,
+	0x27, 0xe9, 0x42, 0x4b, 0x1c, 0x26, 0x7a, 0x76, 0xee, 0x8b, 0x18, 0x95, 0xb7, 0x6b, 0x33, 0x51,
+	0x84, 0x4c, 0xba, 0xe6, 0xc9, 0x04, 0xd3, 0x9a, 0x9c, 0xf0, 0x10, 0xbd, 0x76, 0xaa, 0xc9, 0x32,
+	0x4a, 0xbe, 0x80, 0x56, 0x8c, 0x72, 0xc1, 0x95, 0x11, 0x8d, 0xf2, 0xf6, 0xba, 0x4e, 0xaf, 0x35,
+	0x20, 0x59, 0x48, 0xe3, 0x95, 0x85, 0x16, 0x69, 0xe4, 0x6b, 0xf0, 0x24, 0xfe, 0x94, 0x70, 0x89,
+	0xc1, 0x73, 0x29, 0x92, 0xf8, 0x3b, 0x5c, 0x4c, 0x50, 0xaa, 0x19, 0x8f, 0x95, 0xb7, 0x6f, 0x83,
+	0xb9, 0xd5, 0xde, 0xf9, 0xd3, 0x81, 0x76, 0x39, 0xf1, 0x79, 0xb0, 0xe9, 0xe9, 0x8d, 0x14, 0xb3,
+	0xb6, 0xa8, 0xa0, 0xe4, 0x31, 0xec, 0xaa, 0x98, 0x47, 0x11, 0x9b, 0xa3, 0xb4, 0xb4, 0x9a, 0xa5,
+	0x95, 0x41, 0xe3, 0x2d, 0xc0, 0x38, 0x14, 0xcb, 0xb1, 0xe4, 0x42, 0x72, 0xbd, 0xcc, 0xdb, 0xb1,
+	0x8c, 0x9a, 0x5e, 0xb8, 0x4a, 0x9b, 0x05, 0x03, 0x6f, 0xdb, 0x6a, 0x78, 0x05, 0x94, 0xf4, 0x18,
+	0xd8, 0x76, 0x68, 0x16, 0xf4, 0x18, 0x74, 0xa6, 0xb0, 0x5b, 0x2a, 0xf9, 0x3b, 0x1f, 0xa2, 0x0f,
+	0x64, 0xc1, 0xde, 0x0c, 0x23, 0x5b, 0xc9, 0x31, 0xca, 0xc3, 0x29, 0x46, 0xda, 0x9e, 0xa4, 0x4e,
+	0x6f, 0xb0, 0x74, 0x28, 0xb4, 0xcb, 0x7a, 0x30, 0xd5, 0xcf, 0x66, 0xcf, 0xd9, 0x6a, 0x84, 0x14,
+	0xa1, 0x4a, 0x33, 0xd5, 0xaa, 0xcd, 0x74, 0xf0, 0x08, 0xf6, 0x2a, 0x03, 0x84, 0x34, 0xa0, 0x76,
+	0xf9, 0x74, 0xff, 0x7f, 0xf6, 0x39, 0xd8, 0x77, 0x0e, 0xfe, 0x06, 0x68, 0x3c, 0x17, 0x62, 0x1a,
+	0xe2, 0x86, 0x81, 0xf9, 0x74, 0x6d, 0x60, 0x7e, 0x90, 0x49, 0x27, 0xdd, 0xfa, 0xdf, 0x87, 0x25,
+	0x39, 0x86, 0xf6, 0xc4, 0x94, 0x74, 0x79, 0x8c, 0xaf, 0x58, 0x12, 0x6a, 0x65, 0x4b, 0xd4, 0x1a,
+	0x3c, 0x2c, 0x7f, 0xe0, 0x59, 0x89, 0x43, 0x2b, 0x7b, 0x36, 0x0a, 0xb5, 0xbe, 0x59, 0xa8, 0xd5,
+	0xd6, 0x68, 0xbc, 0x5b, 0x6b, 0x78, 0xb0, 0x13, 0x4b, 0xf1, 0x1a, 0x7d, 0x6d, 0xc7, 0x9c, 0x4b,
+	0xf3, 0x25, 0xe9, 0x40, 0xf3, 0xb5, 0x12, 0xd1, 0x98, 0xe9, 0x99, 0xd7, 0xb4, 0xa6, 0xeb, 0xb5,
+	0x2d, 0x69, 0x18, 0xcf, 0xd8, 0x0b, 0xae, 0x34, 0x06, 0x9e, 0x6b, 0xd3, 0x5c, 0x84, 0x8c, 0xf6,
+	0xb9, 0x9d, 0xab, 0xa9, 0xb7, 0x74, 0xaa, 0xb9, 0xb4, 0x0c, 0x92, 0x27, 0xd0, 0xf0, 0x45, 0xa4,
+	0x92, 0xd0, 0x6b, 0xd9, 0x70, 0xef, 0x95, 0xb3, 0x75, 0x64, 0x6d, 0x34, 0xe3, 0x74, 0x3e, 0xdc,
+	0xf8, 0x3f, 0xea, 0xfc, 0x55, 0x87, 0x76, 0x39, 0xbf, 0x66, 0x92, 0x6b, 0x5c, 0xc4, 0x21, 0xd3,
+	0x68, 0x87, 0x4a, 0x4a, 0x2f, 0x61, 0xe4, 0x0c, 0x60, 0xc2, 0x54, 0xfa, 0x17, 0xc8, 0x65, 0xd1,
+	0xdf, 0x54, 0xb5, 0xfe, 0xb3, 0x9c, 0x7e, 0x8e, 0x5a, 0xf3, 0x68, 0xaa, 0x68, 0xc1, 0x83, 0x09,
+	0xed, 0xad, 0x88, 0x30, 0xd3, 0x89, 0x7d, 0x37, 0x59, 0x8e, 0x50, 0xff, 0x2c, 0xe4, 0xdc, 0xca,
+	0xc2, 0xa5, 0xf9, 0xd2, 0xe4, 0x29, 0x51, 0x38, 0x8a, 0x34, 0xca, 0x88, 0x85, 0xa3, 0x38, 0x6b,
+	0xdd, 0x32, 0xd8, 0xf9, 0x67, 0x0b, 0xee, 0xae, 0x7d, 0x95, 0xbc, 0x2c, 0x45, 0xee, 0xd8, 0x0c,
+	0x7e, 0xf5, 0x7e, 0x91, 0xaf, 0x90, 0xd2, 0x19, 0x7e, 0x81, 0xfb, 0x57, 0x5c, 0xea, 0x84, 0x85,
+	0xfc, 0x2d, 0xd3, 0x5c, 0x44, 0x39, 0xdf, 0x36, 0x7e, 0x6b, 0x30, 0x7c, 0xcf, 0xaf, 0x5c, 0xde,
+	0xe8, 0x8c, 0xde, 0xf2, 0x91, 0xce, 0x1f, 0x0e, 0xb8, 0xd7, 0x4e, 0x48, 0x1b, 0x6a, 0x3c, 0x9f,
+	0x4e, 0x35, 0x1e, 0x90, 0x4f, 0x61, 0x5f, 0xcd, 0x84, 0xd4, 0xc7, 0xa8, 0x7c, 0xc9, 0x63, 0x9d,
+	0x5f, 0x3c, 0x5c, 0xba, 0x86, 0x93, 0xcf, 0xe0, 0xff, 0x01, 0x6a, 0xc6, 0x43, 0x0c, 0x8a, 0xf4,
+	0xb4, 0x36, 0x37, 0x99, 0x8c, 0xb4, 0x63, 0xe6, 0xcf, 0xd9, 0x14, 0x2f, 0x96, 0x31, 0x66, 0xe5,
+	0x2a, 0x42, 0x86, 0x61, 0x55, 0x7c, 0xc2, 0x16, 0x3c, 0x5c, 0x66, 0x05, 0x2b, 0x42, 0x9d, 0x13,
+	0xb8, 0x7f, 0xf3, 0x89, 0xc9, 0x13, 0xb8, 0x9b, 0xfe, 0x44, 0x46, 0x05, 0x0f, 0xe9, 0xd1, 0xd6,
+	0x0d, 0x9d, 0xdf, 0x1c, 0x68, 0xa4, 0x3d, 0xb0, 0x61, 0xa8, 0x3d, 0x86, 0x5d, 0x66, 0x26, 0xef,
+	0x30, 0x0a, 0x62, 0xc1, 0xb3, 0xd9, 0xec, 0xd2, 0x32, 0x68, 0xfe, 0x1e, 0x16, 0x18, 0x0b, 0x99,
+	0x8e, 0xb0, 0x3a, 0x5d, 0x01, 0xe6, 0x48, 0x01, 0xd3, 0xcc, 0x47, 0x23, 0xb9, 0xfc, 0xa6, 0x55,
+	0x84, 0x0e, 0xbe, 0x87, 0x56, 0x61, 0x86, 0x18, 0x91, 0xd3, 0xe1, 0xe1, 0xb1, 0xe7, 0x58, 0xa6,
+	0x7d, 0x37, 0x57, 0xb8, 0x1f, 0xe9, 0xe8, 0x62, 0x98, 0x0d, 0xf0, 0x74, 0x61, 0x02, 0x1f, 0xbe,
+	0x1c, 0x1e, 0xfd, 0x70, 0x31, 0xcc, 0xae, 0x76, 0xf9, 0x72, 0xd2, 0xb0, 0x1a, 0xfa, 0xfc, 0xdf,
+	0x00, 0x00, 0x00, 0xff, 0xff, 0xae, 0x1f, 0xef, 0x45, 0x08, 0x0b, 0x00, 0x00,
 }

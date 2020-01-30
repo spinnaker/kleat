@@ -35,8 +35,19 @@
   
 
 - [providers.proto](#providers.proto)
+    - [Google](#proto.Google)
+    - [Google.Account](#proto.Google.Account)
+    - [Google.BakeryDefaults](#proto.Google.BakeryDefaults)
+    - [Google.BakeryDefaults.BaseImageSettings](#proto.Google.BakeryDefaults.BaseImageSettings)
+    - [Google.BakeryDefaults.BaseImageSettings.BaseImage](#proto.Google.BakeryDefaults.BaseImageSettings.BaseImage)
+    - [Google.BakeryDefaults.BaseImageSettings.VirtualizationSettings](#proto.Google.BakeryDefaults.BaseImageSettings.VirtualizationSettings)
+    - [Google.Consul](#proto.Google.Consul)
     - [Kubernetes](#proto.Kubernetes)
     - [Kubernetes.Account](#proto.Kubernetes.Account)
+    - [Kubernetes.CachingPolicy](#proto.Kubernetes.CachingPolicy)
+    - [Kubernetes.CustomResource](#proto.Kubernetes.CustomResource)
+    - [Kubernetes.DockerRegistry](#proto.Kubernetes.DockerRegistry)
+    - [Permissions](#proto.Permissions)
   
     - [Kubernetes.ProviderVersion](#proto.Kubernetes.ProviderVersion)
   
@@ -63,6 +74,7 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | kubernetes | [Kubernetes](#proto.Kubernetes) |  |  |
+| google | [Google](#proto.Google) |  |  |
 
 
 
@@ -230,6 +242,133 @@
 
 
 
+<a name="proto.Google"></a>
+
+### Google
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  |  |
+| accounts | [Google.Account](#proto.Google.Account) | repeated |  |
+| primaryAccount | [string](#string) |  |  |
+| bakeryDefaults | [Google.BakeryDefaults](#proto.Google.BakeryDefaults) |  |  |
+| requiredGroupMemberships | [string](#string) | repeated |  |
+| permissions | [Permissions](#proto.Permissions) |  |  |
+| project | [string](#string) |  |  |
+| jsonPath | [string](#string) |  |  |
+| alphaListed | [bool](#bool) |  |  |
+| imageProjects | [string](#string) | repeated |  |
+| consul | [Google.Consul](#proto.Google.Consul) |  |  |
+
+
+
+
+
+
+<a name="proto.Google.Account"></a>
+
+### Google.Account
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="proto.Google.BakeryDefaults"></a>
+
+### Google.BakeryDefaults
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| templateFile | [string](#string) |  |  |
+| baseImages | [Google.BakeryDefaults.BaseImageSettings](#proto.Google.BakeryDefaults.BaseImageSettings) | repeated |  |
+| zone | [string](#string) |  |  |
+| network | [string](#string) |  |  |
+| useInternalIp | [bool](#bool) |  |  |
+
+
+
+
+
+
+<a name="proto.Google.BakeryDefaults.BaseImageSettings"></a>
+
+### Google.BakeryDefaults.BaseImageSettings
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| baseImages | [Google.BakeryDefaults.BaseImageSettings.BaseImage](#proto.Google.BakeryDefaults.BaseImageSettings.BaseImage) |  |  |
+| virtualizationSettings | [Google.BakeryDefaults.BaseImageSettings.VirtualizationSettings](#proto.Google.BakeryDefaults.BaseImageSettings.VirtualizationSettings) |  |  |
+
+
+
+
+
+
+<a name="proto.Google.BakeryDefaults.BaseImageSettings.BaseImage"></a>
+
+### Google.BakeryDefaults.BaseImageSettings.BaseImage
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  |  |
+| shortDescription | [string](#string) |  |  |
+| detailedDescription | [string](#string) |  |  |
+| packageType | [string](#string) |  |  |
+| imageFamily | [bool](#bool) |  |  |
+
+
+
+
+
+
+<a name="proto.Google.BakeryDefaults.BaseImageSettings.VirtualizationSettings"></a>
+
+### Google.BakeryDefaults.BaseImageSettings.VirtualizationSettings
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| sourceImageFamily | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="proto.Google.Consul"></a>
+
+### Google.Consul
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  |  |
+| agentEndpoint | [string](#string) |  |  |
+| agentPort | [int32](#int32) |  |  |
+| datacenters | [string](#string) | repeated |  |
+
+
+
+
+
+
 <a name="proto.Kubernetes"></a>
 
 ### Kubernetes
@@ -240,6 +379,7 @@
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  |  |
 | accounts | [Kubernetes.Account](#proto.Kubernetes.Account) | repeated |  |
+| primaryAccount | [string](#string) |  |  |
 
 
 
@@ -258,6 +398,86 @@
 | providerVersion | [Kubernetes.ProviderVersion](#proto.Kubernetes.ProviderVersion) |  |  |
 | kinds | [string](#string) | repeated |  |
 | omitKinds | [string](#string) | repeated |  |
+| context | [string](#string) |  |  |
+| configureImagePullSecrets | [bool](#bool) |  |  |
+| cacheThreads | [int32](#int32) |  |  |
+| namespaces | [string](#string) | repeated |  |
+| omitNamespaces | [string](#string) | repeated |  |
+| customResources | [Kubernetes.CustomResource](#proto.Kubernetes.CustomResource) | repeated |  |
+| cachingPolicies | [Kubernetes.CachingPolicy](#proto.Kubernetes.CachingPolicy) | repeated |  |
+| dockerRegistries | [Kubernetes.DockerRegistry](#proto.Kubernetes.DockerRegistry) | repeated |  |
+| oAuthScopes | [string](#string) | repeated |  |
+| kubeconfigFile | [string](#string) |  |  |
+| permissions | [Permissions](#proto.Permissions) |  |  |
+| requiredGroupMemberships | [string](#string) | repeated |  |
+
+
+
+
+
+
+<a name="proto.Kubernetes.CachingPolicy"></a>
+
+### Kubernetes.CachingPolicy
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| kubernetesKind | [string](#string) |  |  |
+| maxEntriesPerAgent | [int32](#int32) |  |  |
+
+
+
+
+
+
+<a name="proto.Kubernetes.CustomResource"></a>
+
+### Kubernetes.CustomResource
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| kubernetesKind | [string](#string) |  |  |
+| spinnakerKind | [string](#string) |  |  |
+| deployPriority | [string](#string) |  |  |
+| versioned | [bool](#bool) |  |  |
+| namespaced | [bool](#bool) |  |  |
+
+
+
+
+
+
+<a name="proto.Kubernetes.DockerRegistry"></a>
+
+### Kubernetes.DockerRegistry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| accountName | [string](#string) |  |  |
+| namespaces | [string](#string) | repeated |  |
+
+
+
+
+
+
+<a name="proto.Permissions"></a>
+
+### Permissions
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| READ | [string](#string) | repeated |  |
+| WRITE | [string](#string) | repeated |  |
+| EXECUTE | [string](#string) | repeated |  |
 
 
 

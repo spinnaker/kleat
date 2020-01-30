@@ -12,7 +12,6 @@ providers:
     accounts:
     - name: prod-demo-1
       requiredGroupMembership: []
-      providerVersion: 1
       permissions: {}
       dockerRegistries: []
       context: my-context
