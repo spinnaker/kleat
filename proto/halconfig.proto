@@ -15,5 +15,6 @@ message HalConfig {
 
   message Providers {
     Kubernetes kubernetes = 1;
+    Google google = 2;
   }
 }
