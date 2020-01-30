@@ -11,7 +11,8 @@ import (
 )
 
 func main() {
-	h := parseHalConfig()
+	fn := os.Args[1]
+	h := parseHalConfig(fn)
 	messages := validateHalConfig(h, getValidators())
 	if len(messages) > 0 {
 		msg := strings.Join(messages, "\n")
@@ -67,9 +68,7 @@ func invalidResult(msg string) ValidationResult {
 	}
 }
 
-func parseHalConfig() *proto.HalConfig {
-	fn := os.Args[1]
-
+func parseHalConfig(fn string) *proto.HalConfig {
 	dat, err := ioutil.ReadFile(fn)
 
 	h := proto.HalConfig{}
