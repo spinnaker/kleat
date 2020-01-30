@@ -21,10 +21,10 @@ func main() {
 	printHalConfig(*h)
 }
 
-type HalConfigValidator func(*proto.HalConfig) ValidationResult
+type HalConfigValidator func(*proto.HalConfig) []ValidationResult
 
 func getValidators() []HalConfigValidator {
-	return []HalConfigValidator {
+	return []HalConfigValidator{
 		validateKindsAndOmitKinds,
 	}
 }
@@ -32,26 +32,29 @@ func getValidators() []HalConfigValidator {
 func validateHalConfig(h *proto.HalConfig, fa []HalConfigValidator) []string {
 	var messages []string
 	for _, f := range fa {
-		r := f(h)
-		if !r.valid {
-			messages = append(messages, r.msg)
+		rs := f(h)
+		for _, r := range rs {
+			if !r.valid {
+				messages = append(messages, r.msg)
+			}
 		}
 	}
 	return messages
 }
 
-func validateKindsAndOmitKinds(h *proto.HalConfig) ValidationResult {
+func validateKindsAndOmitKinds(h *proto.HalConfig) []ValidationResult {
+	var messages []ValidationResult
 	for _, a := range h.Providers.Kubernetes.Accounts {
 		if !(len(a.Kinds) == 0) && !(len(a.OmitKinds) == 0) {
-			return invalidResult("Cannot specify both kinds and omitKinds.")
+			messages = append(messages, invalidResult("Cannot specify both kinds and omitKinds."))
 		}
 	}
-	return validResult()
+	return messages
 }
 
 type ValidationResult struct {
 	valid bool
-	msg string
+	msg   string
 }
 
 func validResult() ValidationResult {
@@ -106,11 +109,11 @@ func getTestHalConfig() proto.HalConfig {
 	h := proto.HalConfig{
 		Providers: &proto.HalConfig_Providers{
 			Kubernetes: &proto.Kubernetes{
-				Enabled:              false,
-				Accounts:             []*proto.Kubernetes_Account{
-					&proto.Kubernetes_Account{
-						Name:                 "hal",
-						ProviderVersion:      proto.Kubernetes_V2,
+				Enabled: false,
+				Accounts: []*proto.Kubernetes_Account{
+					{
+						Name:            "hal",
+						ProviderVersion: proto.Kubernetes_V2,
 					},
 				},
 			},
