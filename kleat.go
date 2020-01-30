@@ -131,6 +131,7 @@ func extractPersistentStoreType(h proto.HalConfig) *string {
 func halToClouddriver(h proto.HalConfig) (proto.ClouddriverConfig, error) {
 	c := proto.ClouddriverConfig{
 		Kubernetes: h.Providers.Kubernetes,
+		Google: h.Providers.Google,
 	}
 	return c, nil
 }
