@@ -1,0 +1,41 @@
+spinnaker:
+  gcs:
+    bucket: ezimanyi-spinnaker-dev-pipelines
+    bucketLocation: us
+    project: ezimanyi-spinnaker-dev
+    rootFolder: front50
+  persistentStoreType: gcs
+kubernetes:
+  accounts:
+  - cacheThreads: 1
+    configureImagePullSecrets: true
+    context: spinnaker
+    kubeconfigFile: /home/ezimanyi/.kube/config
+    name: k8s
+    omitNamespaces:
+    - default
+    - kube-public
+    - kube-system
+    - docs-site-v1
+    permissions:
+      READ:
+      - my-read-perm
+      WRITE:
+      - my-write-perm
+    providerVersion: 2
+  - cacheThreads: 1
+    configureImagePullSecrets: true
+    context: spinnaker
+    dockerRegistries:
+    - accountName: gcr-account
+    kubeconfigFile: /home/ezimanyi/.kube/config
+    name: k8s-v1
+    omitNamespaces:
+    - default
+    - kube-public
+    - kube-system
+    - docs-site-v1
+    permissions: {}
+    providerVersion: 1
+  enabled: true
+  primaryAccount: k8s

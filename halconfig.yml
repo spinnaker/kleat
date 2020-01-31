@@ -1,29 +1,31 @@
-persistentStorage:
-  persistentStoreType: gcs
-  gcs:
-    jsonPath: /my/file
-    project: spinnaker
-    bucket: my-bucket
-    rootFolder: front50
-    bucketLocation: us
+name: default
+version: master-latest-unvalidated
 providers:
   kubernetes:
     enabled: true
     accounts:
-    - name: prod-demo-1
-      requiredGroupMembership: []
-      permissions: {}
-      dockerRegistries: []
-      context: my-context
+    - name: k8s
+      providerVersion: 2
+      context: spinnaker
       configureImagePullSecrets: true
       cacheThreads: 1
-      namespaces: []
-      omitNamespaces: []
-      kinds:
-        - replicaSet
-        - deployment
-      omitKinds: []
-      customResources: []
-      cachingPolicies: []
-      kubeconfigFile: /my/kube/config
-      oauthScopes: []
+      omitNamespaces:
+      - default
+      - kube-public
+      - kube-system
+      - docs-site-v1
+      kubeconfigFile: /var/secrets/k8s-kubeconfig
+      checkPermissionsOnStartup: true
+    primaryAccount: k8s
+persistentStorage:
+  persistentStoreType: gcs
+  azs: {}
+  gcs:
+    project: ezimanyi-spinnaker-dev
+    bucket: ezimanyi-spinnaker-dev-pipelines
+    rootFolder: front50
+    bucketLocation: us
+  redis: {}
+  s3:
+    rootFolder: front50
+  oracle: {}
