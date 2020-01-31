@@ -74,8 +74,8 @@ func parseHalConfig(fn string) *proto.HalConfig {
 
 func printHalConfig(h proto.HalConfig) {
 	//Test converting halconfig to front50config
-	f, _ := halToFront50(h)
-	printObject(f)
+	//f, _ := halToFront50(h)
+	//printObject(f)
 
 	c, _ := halToClouddriver(h)
 	printObject(c)
