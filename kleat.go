@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"github.com/ezimanyi/kleat/proto"
 	"io/ioutil"
 	"log"
@@ -13,10 +14,8 @@ import (
 func main() {
 	fn := os.Args[1]
 	h := parseHalConfig(fn)
-	messages := validateHalConfig(h, getValidators())
-	if len(messages) > 0 {
-		msg := strings.Join(messages, "\n")
-		panic(msg)
+	if err := validateHalConfig(h); err != nil {
+		panic(err)
 	}
 	printHalConfig(*h)
 }
@@ -29,7 +28,16 @@ func getValidators() []HalConfigValidator {
 	}
 }
 
-func validateHalConfig(h *proto.HalConfig, fa []HalConfigValidator) []string {
+func validateHalConfig(h *proto.HalConfig) error {
+	messages := getValidationMessages(h, getValidators())
+	if len(messages) > 0 {
+		msg := strings.Join(messages, "\n")
+		return errors.New(msg)
+	}
+	return nil
+}
+
+func getValidationMessages(h *proto.HalConfig, fa []HalConfigValidator) []string {
 	var messages []string
 	for _, f := range fa {
 		rs := f(h)
