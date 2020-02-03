@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"github.com/ezimanyi/kleat/proto"
+	"io"
 	"io/ioutil"
 	"log"
 	"os"
@@ -17,7 +18,9 @@ func main() {
 	if err := validateHalConfig(h); err != nil {
 		panic(err)
 	}
-	printHalConfig(*h)
+	if err := printHalConfig(*h); err != nil {
+		panic(err)
+	}
 }
 
 type HalConfigValidator func(*proto.HalConfig) []ValidationFailure
@@ -80,26 +83,24 @@ func parseHalConfig(fn string) *proto.HalConfig {
 	return &h
 }
 
-func printHalConfig(h proto.HalConfig) {
-	//Test converting halconfig to front50config
-	//f, _ := halToFront50(h)
-	//printObject(f)
-
+func printHalConfig(h proto.HalConfig) error {
 	c, _ := halToClouddriver(h)
-	printObject(c)
-
+	if err := printObject(c, os.Stdout); err != nil {
+		return err
+	}
+	return nil
 	//todo: test whether enum providerVersion marshals correctly
 }
 
-func printObject(i interface{}) {
+func printObject(i interface{}, w io.Writer) error {
 	bytes, err := yaml.Marshal(i)
 	if err != nil {
-		panic(err)
+		return err
 	}
-	_, err = os.Stdout.Write(bytes)
-	if err != nil {
-		panic(err)
+	if _, err = w.Write(bytes); err != nil {
+		return err
 	}
+	return nil
 }
 
 func getTestHalConfig() proto.HalConfig {
