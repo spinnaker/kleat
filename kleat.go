@@ -152,7 +152,7 @@ func getTestHalConfig() proto.HalConfig {
 				Accounts: []*proto.Kubernetes_Account{
 					{
 						Name:            "hal",
-						ProviderVersion: proto.Kubernetes_V2,
+						ProviderVersion: "V2",
 					},
 				},
 			},
