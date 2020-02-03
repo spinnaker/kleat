@@ -2,17 +2,19 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"github.com/ezimanyi/kleat/proto"
 	"io"
 	"io/ioutil"
 	"log"
 	"os"
 	"strings"
+	"path/filepath"
 
 	"github.com/ghodss/yaml"
 )
 
-func main() {
+func printConfig() {
 	fn := os.Args[1]
 	h := parseHalConfig(fn)
 	if err := validateHalConfig(h); err != nil {
@@ -21,6 +23,45 @@ func main() {
 	if err := printHalConfig(*h); err != nil {
 		panic(err)
 	}
+}
+
+func main() {
+	hal := os.Args[1]
+	dir := os.Args[2]
+	if err := printConfigs(hal, dir); err != nil {
+		panic(err)
+	}
+}
+
+func printConfigs(hal string, d string) error {
+	h := parseHalConfig(hal)
+	if err := validateHalConfig(h); err != nil {
+		panic(err)
+	}
+	if err := ensureDirectory(d); err != nil {
+		return err
+	}
+
+	c, _ := halToClouddriver(*h)
+	f, err := os.Create(filepath.Join(d, "clouddriver.yml"))
+	if err != nil {
+		return err
+	}
+	if err = printObject(c, f); err != nil {
+		return err
+	}
+	return nil
+}
+
+func ensureDirectory(d string) error {
+	stat, err := os.Stat(d)
+	if err != nil {
+		return err
+	}
+	if !stat.IsDir() {
+		return errors.New(fmt.Sprintf("%s is not a directory", d))
+	}
+	return nil
 }
 
 type HalConfigValidator func(*proto.HalConfig) []ValidationFailure
