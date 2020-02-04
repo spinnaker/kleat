@@ -34,6 +34,9 @@ func main() {
 }
 
 func printConfigs(hal string, d string) error {
+	if err := ensureFile(hal); err != nil {
+		return err
+	}
 	h := parseHalConfig(hal)
 	if err := validateHalConfig(h); err != nil {
 		panic(err)
@@ -60,6 +63,17 @@ func ensureDirectory(d string) error {
 	}
 	if !stat.IsDir() {
 		return errors.New(fmt.Sprintf("%s is not a directory", d))
+	}
+	return nil
+}
+
+func ensureFile(f string) error {
+	stat, err := os.Stat(f)
+	if err != nil {
+		return err
+	}
+	if stat.IsDir() {
+		return errors.New(fmt.Sprintf("%s is a directory, not a file", f))
 	}
 	return nil
 }
