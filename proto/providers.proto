@@ -102,7 +102,7 @@ message Kubernetes {
         // Whether Spinnaker should manage versioning this resource.
         bool versioned = 4;
 
-        // Whether the CRD is namespaced.
+        // Whether the resource is namespaced.
         bool namespaced = 5;
     }
 
