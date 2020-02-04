@@ -49,7 +49,6 @@
     - [Kubernetes.DockerRegistry](#proto.Kubernetes.DockerRegistry)
     - [Permissions](#proto.Permissions)
   
-    - [Kubernetes.ProviderVersion](#proto.Kubernetes.ProviderVersion)
   
   
   
@@ -396,7 +395,7 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  |  |
-| providerVersion | [Kubernetes.ProviderVersion](#proto.Kubernetes.ProviderVersion) |  |  |
+| providerVersion | [string](#string) |  |  |
 | kinds | [string](#string) | repeated |  |
 | omitKinds | [string](#string) | repeated |  |
 | context | [string](#string) |  |  |
@@ -485,18 +484,6 @@
 
 
  
-
-
-<a name="proto.Kubernetes.ProviderVersion"></a>
-
-### Kubernetes.ProviderVersion
-
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| V1 | 0 |  |
-| V2 | 1 |  |
-
 
  
 

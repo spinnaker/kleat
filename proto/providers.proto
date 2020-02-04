@@ -8,7 +8,7 @@ message Kubernetes {
 
     message Account {
         string name = 1;
-        ProviderVersion providerVersion = 2;
+        string providerVersion = 2;
         repeated string kinds = 3;
         repeated string omitKinds = 4;
         string context = 5;
@@ -41,11 +41,6 @@ message Kubernetes {
     message DockerRegistry {
         string accountName = 1;
         repeated string namespaces = 2;
-    }
-
-    enum ProviderVersion {
-        V1 = 0;
-        V2 = 1;
     }
 }
 

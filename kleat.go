@@ -1,24 +1,67 @@
 package main
 
 import (
+	"errors"
+	"fmt"
 	"github.com/ezimanyi/kleat/proto"
+	"io"
 	"io/ioutil"
 	"log"
 	"os"
 	"strings"
+	"path/filepath"
 
 	"github.com/ghodss/yaml"
 )
 
-func main() {
+func printConfig() {
 	fn := os.Args[1]
 	h := parseHalConfig(fn)
-	messages := validateHalConfig(h, getValidators())
-	if len(messages) > 0 {
-		msg := strings.Join(messages, "\n")
-		panic(msg)
+	if err := validateHalConfig(h); err != nil {
+		panic(err)
 	}
-	printHalConfig(*h)
+	if err := printHalConfig(*h); err != nil {
+		panic(err)
+	}
+}
+
+func main() {
+	hal := os.Args[1]
+	dir := os.Args[2]
+	if err := printConfigs(hal, dir); err != nil {
+		panic(err)
+	}
+}
+
+func printConfigs(hal string, d string) error {
+	h := parseHalConfig(hal)
+	if err := validateHalConfig(h); err != nil {
+		panic(err)
+	}
+	if err := ensureDirectory(d); err != nil {
+		return err
+	}
+
+	c, _ := halToClouddriver(*h)
+	f, err := os.Create(filepath.Join(d, "clouddriver.yml"))
+	if err != nil {
+		return err
+	}
+	if err = printObject(c, f); err != nil {
+		return err
+	}
+	return nil
+}
+
+func ensureDirectory(d string) error {
+	stat, err := os.Stat(d)
+	if err != nil {
+		return err
+	}
+	if !stat.IsDir() {
+		return errors.New(fmt.Sprintf("%s is not a directory", d))
+	}
+	return nil
 }
 
 type HalConfigValidator func(*proto.HalConfig) []ValidationFailure
@@ -29,7 +72,16 @@ func getValidators() []HalConfigValidator {
 	}
 }
 
-func validateHalConfig(h *proto.HalConfig, fa []HalConfigValidator) []string {
+func validateHalConfig(h *proto.HalConfig) error {
+	messages := getValidationMessages(h, getValidators())
+	if len(messages) > 0 {
+		msg := strings.Join(messages, "\n")
+		return errors.New(msg)
+	}
+	return nil
+}
+
+func getValidationMessages(h *proto.HalConfig, fa []HalConfigValidator) []string {
 	var messages []string
 	for _, f := range fa {
 		rs := f(h)
@@ -51,12 +103,12 @@ func validateKindsAndOmitKinds(h *proto.HalConfig) []ValidationFailure {
 }
 
 type ValidationFailure struct {
-	msg   string
+	msg string
 }
 
 func fatalResult(msg string) ValidationFailure {
 	return ValidationFailure{
-		msg:   msg,
+		msg: msg,
 	}
 }
 
@@ -72,26 +124,24 @@ func parseHalConfig(fn string) *proto.HalConfig {
 	return &h
 }
 
-func printHalConfig(h proto.HalConfig) {
-	//Test converting halconfig to front50config
-	//f, _ := halToFront50(h)
-	//printObject(f)
-
+func printHalConfig(h proto.HalConfig) error {
 	c, _ := halToClouddriver(h)
-	printObject(c)
-
+	if err := printObject(c, os.Stdout); err != nil {
+		return err
+	}
+	return nil
 	//todo: test whether enum providerVersion marshals correctly
 }
 
-func printObject(i interface{}) {
+func printObject(i interface{}, w io.Writer) error {
 	bytes, err := yaml.Marshal(i)
 	if err != nil {
-		panic(err)
+		return err
 	}
-	_, err = os.Stdout.Write(bytes)
-	if err != nil {
-		panic(err)
+	if _, err = w.Write(bytes); err != nil {
+		return err
 	}
+	return nil
 }
 
 func getTestHalConfig() proto.HalConfig {
@@ -102,7 +152,7 @@ func getTestHalConfig() proto.HalConfig {
 				Accounts: []*proto.Kubernetes_Account{
 					{
 						Name:            "hal",
-						ProviderVersion: proto.Kubernetes_V2,
+						ProviderVersion: "V2",
 					},
 				},
 			},
@@ -131,7 +181,7 @@ func extractPersistentStoreType(h proto.HalConfig) *string {
 func halToClouddriver(h proto.HalConfig) (proto.ClouddriverConfig, error) {
 	c := proto.ClouddriverConfig{
 		Kubernetes: h.Providers.Kubernetes,
-		Google: h.Providers.Google,
+		Google:     h.Providers.Google,
 	}
 	return c, nil
 }
