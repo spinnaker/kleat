@@ -51,7 +51,7 @@ message Kubernetes {
         repeated string namespaces = 7;
 
         // A list of namespaces this Spinnaker account cannot deploy to or
-        // cache. This can only be set when –namespaces is empty or not set.
+        // cache. This can only be set when namespaces is empty or not set.
         repeated string omitNamespaces = 8;
 
         // The list of custom resources Clouddriver will manage and make
