@@ -23,7 +23,7 @@ message Kubernetes {
         // resources it manages) to run within Spinnaker.
         string providerVersion = 2;
 
-        // A list of resource kinds this Spinnaker account can deploy to and
+        // A list of resource kinds this Spinnaker account can deploy and
         // will cache. When no kinds are configured, this defaults to all kinds
         // described [here](https://spinnaker.io/reference/providers/kubernetes-v2/).
         // This can only be set when omitKinds is empty or not set.
@@ -46,8 +46,8 @@ message Kubernetes {
         int32 cacheThreads = 6;
 
         // A list of namespaces this Spinnaker account can deploy to and will
-        // cache. When no namespaces are configured, this defaults to ‘all
-        // namespaces’.
+        // cache. When no namespaces are configured, this defaults to all
+        // namespaces.
         repeated string namespaces = 7;
 
         // A list of namespaces this Spinnaker account cannot deploy to or
