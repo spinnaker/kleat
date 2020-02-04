@@ -84,7 +84,7 @@ message Kubernetes {
     }
 
     // Configuration for a CRD to be managed by Spinnaker. If Spinnaker does not
-    // have permission to list a CRD but you need Spinnaker to manage it, you
+    // have permission to list CRDs but you need Spinnaker to manage CRDs, you
     // need to explicitly register each CRD.
     message CustomResource {
         // The Kubernetes kind of the custom resource.
