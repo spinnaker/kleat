@@ -3,14 +3,16 @@ package main
 import (
 	"errors"
 	"fmt"
-	"github.com/ezimanyi/kleat/proto"
 	"io"
 	"io/ioutil"
 	"log"
 	"os"
-	"strings"
 	"path/filepath"
+	"reflect"
+	"strings"
 
+	"github.com/ezimanyi/kleat/proto"
+	"github.com/getlantern/deepcopy"
 	"github.com/ghodss/yaml"
 )
 
@@ -87,7 +89,16 @@ func getValidators() []HalConfigValidator {
 }
 
 func validateHalConfig(h *proto.HalConfig) error {
+	// Run validations on a deep copy of the halconfig so that we can determine
+	// if validation mutates the halconfig.
+	hCopy := new(proto.HalConfig)
+	if err := deepcopy.Copy(hCopy, h); err != nil {
+		return err
+	}
 	messages := getValidationMessages(h, getValidators())
+	if !reflect.DeepEqual(h, hCopy) {
+		return errors.New("validators illegally mutated the halconfig")
+	}
 	if len(messages) > 0 {
 		msg := strings.Join(messages, "\n")
 		return errors.New(msg)
