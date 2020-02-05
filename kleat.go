@@ -85,6 +85,9 @@ type HalConfigValidator func(*proto.HalConfig) []ValidationFailure
 func getValidators() []HalConfigValidator {
 	return []HalConfigValidator{
 		validateKindsAndOmitKinds,
+		validateCacheThreads,
+		validateCustomResourceNames,
+		validateCustomResourceKinds,
 	}
 }
 
@@ -121,10 +124,61 @@ func validateKindsAndOmitKinds(h *proto.HalConfig) []ValidationFailure {
 	var messages []ValidationFailure
 	for _, a := range h.Providers.Kubernetes.Accounts {
 		if !(len(a.Kinds) == 0) && !(len(a.OmitKinds) == 0) {
-			messages = append(messages, fatalResult("Cannot specify both kinds and omitKinds."))
+			messages = append(messages, fatalResult(
+				fmt.Sprintf("Cannot specify both kinds and omitKinds; remove one from Kubernetes account %s", a.Name)))
 		}
 	}
 	return messages
+}
+
+func validateCacheThreads(h *proto.HalConfig) []ValidationFailure {
+	var messages []ValidationFailure
+	for _, a := range h.Providers.Kubernetes.Accounts {
+		if a.CacheThreads < 1 {
+			messages = append(messages, fatalResult(
+				fmt.Sprintf("cacheThreads must be greater than or equal to one; please update in Kubernetes account %s", a.Name)))
+		}
+	}
+	return messages
+}
+
+func validateCustomResourceNames(h *proto.HalConfig) []ValidationFailure {
+	var messages []ValidationFailure
+	for _, a := range h.Providers.Kubernetes.Accounts {
+		for _, c := range a.CustomResources {
+			if len(c.KubernetesKind) == 0 {
+				messages = append(messages, fatalResult(
+					fmt.Sprintf("One of Kubernetes account %s's customResources is missing required field kubernetesKind", a.Name)))
+			}
+		}
+	}
+	return messages
+}
+
+func validateCustomResourceKinds(h *proto.HalConfig) []ValidationFailure {
+	var messages []ValidationFailure
+	for _, a := range h.Providers.Kubernetes.Accounts {
+		for _, c := range a.CustomResources {
+			if len(a.Kinds) > 0 && !contains(a.Kinds, c.KubernetesKind) {
+				messages = append(messages, fatalResult(
+					fmt.Sprintf("Custom resource %s configured for account %s must be included in kinds for Clouddriver to cache it", a.Name, c.KubernetesKind)))
+			}
+			if len(a.OmitKinds) > 0 && contains(a.OmitKinds, c.KubernetesKind) {
+				messages = append(messages, fatalResult(
+					fmt.Sprintf("Custom resource %s configured for account %s must be removed from omitKinds for Clouddriver to cache it", a.Name, c.KubernetesKind)))
+			}
+		}
+	}
+	return messages
+}
+
+func contains(s []string, e string) bool {
+	for _, a := range s {
+		if a == e {
+			return true
+		}
+	}
+	return false
 }
 
 type ValidationFailure struct {
