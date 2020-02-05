@@ -25,7 +25,8 @@ message Kubernetes {
 
         // A list of resource kinds this Spinnaker account can deploy and
         // will cache. When no kinds are configured, this defaults to all kinds
-        // described [here](https://spinnaker.io/reference/providers/kubernetes-v2/).
+        // described here:
+        // https://spinnaker.io/reference/providers/kubernetes-v2/.
         // This can only be set when omitKinds is empty or not set.
         repeated string kinds = 3;
 
