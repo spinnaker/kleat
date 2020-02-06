@@ -88,9 +88,10 @@ type Kubernetes_Account struct {
 	// This allows you to pick the version of the provider (not the
 	// resources it manages) to run within Spinnaker.
 	ProviderVersion string `protobuf:"bytes,2,opt,name=providerVersion,proto3" json:"providerVersion,omitempty"`
-	// A list of resource kinds this Spinnaker account can deploy to and
+	// A list of resource kinds this Spinnaker account can deploy and
 	// will cache. When no kinds are configured, this defaults to all kinds
-	// described [here](https://spinnaker.io/reference/providers/kubernetes-v2/).
+	// described here:
+	// https://spinnaker.io/reference/providers/kubernetes-v2/.
 	// This can only be set when omitKinds is empty or not set.
 	Kinds []string `protobuf:"bytes,3,rep,name=kinds,proto3" json:"kinds,omitempty"`
 	// A list of resource kinds this Spinnaker account cannot deploy to or
@@ -107,11 +108,11 @@ type Kubernetes_Account struct {
 	// account.
 	CacheThreads int32 `protobuf:"varint,6,opt,name=cacheThreads,proto3" json:"cacheThreads,omitempty"`
 	// A list of namespaces this Spinnaker account can deploy to and will
-	// cache. When no namespaces are configured, this defaults to ‘all
-	// namespaces’.
+	// cache. When no namespaces are configured, this defaults to all
+	// namespaces.
 	Namespaces []string `protobuf:"bytes,7,rep,name=namespaces,proto3" json:"namespaces,omitempty"`
 	// A list of namespaces this Spinnaker account cannot deploy to or
-	// cache. This can only be set when –namespaces is empty or not set.
+	// cache. This can only be set when namespaces is empty or not set.
 	OmitNamespaces []string `protobuf:"bytes,8,rep,name=omitNamespaces,proto3" json:"omitNamespaces,omitempty"`
 	// The list of custom resources Clouddriver will manage and make
 	// available for use in Patch and Delete (Manifest) stages.
@@ -270,8 +271,8 @@ func (m *Kubernetes_Account) GetRequiredGroupMemberships() []string {
 }
 
 // Configuration for a CRD to be managed by Spinnaker. If Spinnaker does not
-// have permission to list a CRD but you need Spinnaker to manage it, you
-// need to explicitly register it.
+// have permission to list CRDs but you need Spinnaker to manage CRDs, you
+// need to explicitly register each CRD.
 type Kubernetes_CustomResource struct {
 	// The Kubernetes kind of the custom resource.
 	KubernetesKind string `protobuf:"bytes,1,opt,name=kubernetesKind,proto3" json:"kubernetesKind,omitempty"`
@@ -284,7 +285,7 @@ type Kubernetes_CustomResource struct {
 	DeployPriority string `protobuf:"bytes,3,opt,name=deployPriority,proto3" json:"deployPriority,omitempty"`
 	// Whether Spinnaker should manage versioning this resource.
 	Versioned bool `protobuf:"varint,4,opt,name=versioned,proto3" json:"versioned,omitempty"`
-	// Whether the CRD is namespaced.
+	// Whether the resource is namespaced.
 	Namespaced           bool     `protobuf:"varint,5,opt,name=namespaced,proto3" json:"namespaced,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`

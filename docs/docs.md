@@ -397,12 +397,12 @@ credential that can authenticate against your Kubernetes cluster.
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The name of the account. |
 | providerVersion | [string](#string) |  | Some providers support multiple versions/release tracks. This allows you to pick the version of the provider (not the resources it manages) to run within Spinnaker. |
-| kinds | [string](#string) | repeated | A list of resource kinds this Spinnaker account can deploy to and will cache. When no kinds are configured, this defaults to all kinds described [here](https://spinnaker.io/reference/providers/kubernetes-v2/). This can only be set when omitKinds is empty or not set. |
+| kinds | [string](#string) | repeated | A list of resource kinds this Spinnaker account can deploy and will cache. When no kinds are configured, this defaults to all kinds described here: https://spinnaker.io/reference/providers/kubernetes-v2/. This can only be set when omitKinds is empty or not set. |
 | omitKinds | [string](#string) | repeated | A list of resource kinds this Spinnaker account cannot deploy to or cache. This can only be set when kinds is empty or not set. |
 | context | [string](#string) |  | The kubernetes context to be managed by Spinnaker. See http://kubernetes.io/docs/user-guide/kubeconfig-file/#context for more information. When no context is configured for an account the ‘current-context’ in your kubeconfig is assumed. |
 | cacheThreads | [int32](#int32) |  | Number of caching agents for this kubernetes account. Each agent handles a subset of the namespaces available to this account. By default, only 1 agent caches all kinds for all namespaces in the account. |
-| namespaces | [string](#string) | repeated | A list of namespaces this Spinnaker account can deploy to and will cache. When no namespaces are configured, this defaults to ‘all namespaces’. |
-| omitNamespaces | [string](#string) | repeated | A list of namespaces this Spinnaker account cannot deploy to or cache. This can only be set when –namespaces is empty or not set. |
+| namespaces | [string](#string) | repeated | A list of namespaces this Spinnaker account can deploy to and will cache. When no namespaces are configured, this defaults to all namespaces. |
+| omitNamespaces | [string](#string) | repeated | A list of namespaces this Spinnaker account cannot deploy to or cache. This can only be set when namespaces is empty or not set. |
 | customResources | [Kubernetes.CustomResource](#proto.Kubernetes.CustomResource) | repeated | The list of custom resources Clouddriver will manage and make available for use in Patch and Delete (Manifest) stages. |
 | cachingPolicies | [Kubernetes.CachingPolicy](#proto.Kubernetes.CachingPolicy) | repeated | The list of kind-specific caching policies. |
 | dockerRegistries | [Kubernetes.DockerRegistry](#proto.Kubernetes.DockerRegistry) | repeated | The list of the Spinnaker docker registry account names this Spinnaker account can use as image sources. These docker registry accounts must be registered in your halconfig before you can add them here. |
@@ -436,8 +436,8 @@ Configuration for a kind-specific caching policy.
 
 ### Kubernetes.CustomResource
 Configuration for a CRD to be managed by Spinnaker. If Spinnaker does not
-have permission to list a CRD but you need Spinnaker to manage it, you
-need to explicitly register it.
+have permission to list CRDs but you need Spinnaker to manage CRDs, you
+need to explicitly register each CRD.
 
 
 | Field | Type | Label | Description |
@@ -446,7 +446,7 @@ need to explicitly register it.
 | spinnakerKind | [string](#string) |  | The Spinnaker kind to which you would like the custom resource to map. |
 | deployPriority | [string](#string) |  | An integer representing the deployment priority of this resource. Resources with lower values are deployed before resources with higher values. |
 | versioned | [bool](#bool) |  | Whether Spinnaker should manage versioning this resource. |
-| namespaced | [bool](#bool) |  | Whether the CRD is namespaced. |
+| namespaced | [bool](#bool) |  | Whether the resource is namespaced. |
 
 
 
