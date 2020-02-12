@@ -245,22 +245,15 @@
 <a name="proto.Google"></a>
 
 ### Google
-
+Configuration for the Google Compute Engine (GCE) provider.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  |  |
-| accounts | [Google.Account](#proto.Google.Account) | repeated |  |
-| primaryAccount | [string](#string) |  |  |
-| bakeryDefaults | [Google.BakeryDefaults](#proto.Google.BakeryDefaults) |  |  |
-| requiredGroupMemberships | [string](#string) | repeated |  |
-| permissions | [Permissions](#proto.Permissions) |  |  |
-| project | [string](#string) |  |  |
-| jsonPath | [string](#string) |  |  |
-| alphaListed | [bool](#bool) |  |  |
-| imageProjects | [string](#string) | repeated |  |
-| consul | [Google.Consul](#proto.Google.Consul) |  |  |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [Google.Account](#proto.Google.Account) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+| bakeryDefaults | [Google.BakeryDefaults](#proto.Google.BakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
 
 
 
@@ -270,12 +263,22 @@
 <a name="proto.Google.Account"></a>
 
 ### Google.Account
-
+Configuration for a Spinnaker Google account. An account maps to a
+credential that can authenticate against a GCP project.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  |  |
+| name | [string](#string) |  | The name of the account. |
+| requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
+| permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
+| project | [string](#string) |  | The GCP project this Spinnaker account will manage. |
+| jsonPath | [string](#string) |  | The path to a JSON service account that Spinnaker will use as credentials. This is only needed if Spinnaker is not deployed on a Google Compute Engine VM, or needs permissions not afforded to the VM it is running on. See https://cloud.google.com/compute/docs/access/service-accounts for more information. |
+| alphaListed | [bool](#bool) |  | Enable this flag if your GCP project has access to alpha features and you want Spinnaker to take advantage of them. |
+| imageProjects | [string](#string) | repeated | A list of GCP projects from which Spinnaker will be able to cache and deploy images. When this is omitted, it defaults to the current project. Each project must have granted the IAM role compute.imageUser to the service account associated with the JSON key used by this account, as well as to the Google APIs service account automatically created for the project being managed (should look similar to 12345678912@cloudservices.gserviceaccount.com). See https://cloud.google.com/compute/docs/images/sharing-images-across-projects for more information about sharing images across GCP projects. |
+| consul | [Google.Consul](#proto.Google.Consul) |  | Configuration for Consul. |
+| regions | [string](#string) | repeated | A list of regions for caching and mutating calls. This overwrites any default regions set on the provider. |
+| userDataFile | [string](#string) |  | The path to user data template file. Spinnaker has the ability to inject userdata into generated instance templates. The mechanism is via a template file that is token replaced to provide some specifics about the deployment. See https://github.com/spinnaker/clouddriver/blob/master/clouddriver-aws/UserData.md for more information. |
 
 
 
@@ -285,16 +288,17 @@
 <a name="proto.Google.BakeryDefaults"></a>
 
 ### Google.BakeryDefaults
-
+Configuration for Spinnaker&#39;s image bakery.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| templateFile | [string](#string) |  |  |
-| baseImages | [Google.BakeryDefaults.BaseImageSettings](#proto.Google.BakeryDefaults.BaseImageSettings) | repeated |  |
-| zone | [string](#string) |  |  |
-| network | [string](#string) |  |  |
-| useInternalIp | [bool](#bool) |  |  |
+| templateFile | [string](#string) |  | The name of the Packer template that will be used to bake images from this base image. The template file must be found in this list: https://github.com/spinnaker/rosco/tree/master/rosco-web/config/packer, or supplied as described here: https://spinnaker.io/setup/bakery/. |
+| baseImages | [Google.BakeryDefaults.BaseImageSettings](#proto.Google.BakeryDefaults.BaseImageSettings) | repeated | List of configured base images. |
+| zone | [string](#string) |  | The default zone in which to bake an image. |
+| network | [string](#string) |  | The Google Compute network ID or URL to use for the launched instance. Defaults to default. |
+| useInternalIp | [bool](#bool) |  | If true, use the instance&#39;s internal IP instead of its external IP during baking. |
+| networkProjectId | [string](#string) |  | The default project ID for the network and subnet to use for the VM baking your image. |
 
 
 
@@ -304,13 +308,13 @@
 <a name="proto.Google.BakeryDefaults.BaseImageSettings"></a>
 
 ### Google.BakeryDefaults.BaseImageSettings
-
+Configuration for a base image for the Google provider&#39;s bakery.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| baseImages | [Google.BakeryDefaults.BaseImageSettings.BaseImage](#proto.Google.BakeryDefaults.BaseImageSettings.BaseImage) |  |  |
-| virtualizationSettings | [Google.BakeryDefaults.BaseImageSettings.VirtualizationSettings](#proto.Google.BakeryDefaults.BaseImageSettings.VirtualizationSettings) |  |  |
+| baseImage | [Google.BakeryDefaults.BaseImageSettings.BaseImage](#proto.Google.BakeryDefaults.BaseImageSettings.BaseImage) |  | Base image configuration. |
+| virtualizationSettings | [Google.BakeryDefaults.BaseImageSettings.VirtualizationSettings](#proto.Google.BakeryDefaults.BaseImageSettings.VirtualizationSettings) |  | Image source configuration. |
 
 
 
@@ -320,16 +324,16 @@
 <a name="proto.Google.BakeryDefaults.BaseImageSettings.BaseImage"></a>
 
 ### Google.BakeryDefaults.BaseImageSettings.BaseImage
-
+Base image configuration.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [string](#string) |  |  |
-| shortDescription | [string](#string) |  |  |
-| detailedDescription | [string](#string) |  |  |
-| packageType | [string](#string) |  |  |
-| imageFamily | [bool](#bool) |  |  |
+| id | [string](#string) |  | This is the identifier used by GCP to find this base image. |
+| shortDescription | [string](#string) |  | A short description to help human operators identify the image. |
+| detailedDescription | [string](#string) |  | A long description to help human operators identify the image. |
+| packageType | [string](#string) |  | This is used to help Spinnaker’s bakery download the build artifacts you supply it with. For example, specifying deb indicates that your artifacts will need to be fetched from a debian repository. |
+| imageFamily | [bool](#bool) |  | If set to true, Deck will annotate the popup tooltip to indicate that the selected option represents an image family. |
 
 
 
@@ -339,12 +343,13 @@
 <a name="proto.Google.BakeryDefaults.BaseImageSettings.VirtualizationSettings"></a>
 
 ### Google.BakeryDefaults.BaseImageSettings.VirtualizationSettings
-
+Image source configuration.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| sourceImageFamily | [string](#string) |  |  |
+| sourceImage | [string](#string) |  | The source image. If both sourceImage and sourceImageFamily are set, sourceImage will take precedence. |
+| sourceImageFamily | [string](#string) |  | The source image family to create the image from. The newest, non-deprecated image is used. If both sourceImage and sourceImageFamily are set, sourceImage will take precedence. |
 
 
 
@@ -354,15 +359,15 @@
 <a name="proto.Google.Consul"></a>
 
 ### Google.Consul
-
+Configuration for Consul.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  |  |
-| agentEndpoint | [string](#string) |  |  |
-| agentPort | [int32](#int32) |  |  |
-| datacenters | [string](#string) | repeated |  |
+| enabled | [bool](#bool) |  | Whether Consul is enabled. |
+| agentEndpoint | [string](#string) |  | Reachable Consul node endpoint connected to the Consul cluster. Defaults to localhost. |
+| agentPort | [int32](#int32) |  | Port consul is running on for every agent. Defaults to 8500. |
+| datacenters | [string](#string) | repeated | List of data centers to cache and keep updated. Defaults to all. |
 
 
 
