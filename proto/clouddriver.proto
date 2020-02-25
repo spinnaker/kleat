@@ -6,4 +6,5 @@ import "providers.proto";
 message ClouddriverConfig {
     Kubernetes kubernetes = 1;
     Google google = 2;
+    Appengine appengine = 3;
 }

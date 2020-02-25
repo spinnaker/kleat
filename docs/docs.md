@@ -35,6 +35,8 @@
   
 
 - [providers.proto](#providers.proto)
+    - [Appengine](#proto.Appengine)
+    - [Appengine.Account](#proto.Appengine.Account)
     - [Google](#proto.Google)
     - [Google.Account](#proto.Google.Account)
     - [Google.BakeryDefaults](#proto.Google.BakeryDefaults)
@@ -74,6 +76,7 @@
 | ----- | ---- | ----- | ----------- |
 | kubernetes | [Kubernetes](#proto.Kubernetes) |  |  |
 | google | [Google](#proto.Google) |  |  |
+| appengine | [Appengine](#proto.Appengine) |  |  |
 
 
 
@@ -185,6 +188,7 @@
 | ----- | ---- | ----- | ----------- |
 | kubernetes | [Kubernetes](#proto.Kubernetes) |  |  |
 | google | [Google](#proto.Google) |  |  |
+| appengine | [Appengine](#proto.Appengine) |  |  |
 
 
 
@@ -239,6 +243,56 @@
 <p align="right"><a href="#top">Top</a></p>
 
 ## providers.proto
+
+
+
+<a name="proto.Appengine"></a>
+
+### Appengine
+Configuration for the Google App Engine (GAE) provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [Appengine.Account](#proto.Appengine.Account) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+
+
+
+
+
+
+<a name="proto.Appengine.Account"></a>
+
+### Appengine.Account
+Configuration for an App Engine account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| cachingIntervalSeconds | [int32](#int32) |  | The interval in seconds at which Spinnaker will poll for updates in your App Engine clusters. |
+| environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
+| gcloudReleaseTrack | [string](#string) |  | The gcloud release track (`ALPHA`, `BETA`, or `STABLE`) that Spinnaker will use when deploying to App Engine. |
+| gitHttpsUsername | [string](#string) |  | A username to be used when connecting to a remote git repository server over HTTPS. If set, `gitHttpsPassword` must also be set. |
+| gitHttpsPassword | [string](#string) |  | A password to be used when connecting to a remote git repository server over HTTPS. If set, `gitHttpsUsername` must also be set. |
+| githubOAuthAccessToken | [string](#string) |  | An OAuth token provided by Github for connecting to a git repository over HTTPS. See https://help.github.com/articles/creating-an-access-token-for-command-line-use for more information. |
+| jsonPath | [string](#string) |  | The path to a JSON service account that Spinnaker will use as credentials. This is only needed if Spinnaker is not deployed on a Google Compute Engine VM, or needs permissions not afforded to the VM it is running on. See https://cloud.google.com/compute/docs/access/service-accounts for more information. |
+| localRepositoryDirectory | [string](#string) |  | A local directory to be used to stage source files for App Engine deployments within Clouddriver. Defaults to `/var/tmp/clouddriver`. |
+| omitServices | [string](#string) | repeated | A list of regular expressions. Any service matching one of these regexes will be ignored by Spinnaker. |
+| omitVersions | [string](#string) | repeated | A list of regular expressions. Any version matching one of these regexes will be ignored by Spinnaker. |
+| project | [string](#string) |  | The Google Cloud Platform project this Spinnaker account will manage. |
+| permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
+| requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
+| services | [string](#string) | repeated | A list of regular expressions. Any service matching one of these regexes will be indexed by Spinnaker (unless the service also matches a regex in `omitServices`). |
+| sshKnownHostsFilePath | [string](#string) |  | The path to a `known_hosts` file to be used when connecting with a remote git repository over SSH. |
+| sshPrivateKeyFilePath | [string](#string) |  | The path to an SSH private key to be used when connecting with a remote git repository over SSH. If set, `sshPrivateKeyPassphrase` must also be set. |
+| sshPrivateKeyPassphrase | [string](#string) |  | The passphrase to an SSH private key to be used when connecting with a remote git repository over SSH. If set, `sshPrivateKeyFilePath` must also be set. |
+| sshTrustUnknownHosts | [bool](#bool) |  | Enabling this flag will allow Spinnaker to connect with a remote git repository over SSH without verifying the server’s IP address against a `known_hosts` file. Defaults to false. |
+| versions | [string](#string) | repeated | A list of regular expressions. Any version matching one of these regexes will be indexed by Spinnaker (unless the version also matches a regex in `omitVersions`). |
+
+
+
 
 
 
