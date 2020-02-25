@@ -196,6 +196,7 @@ func halToClouddriver(h proto.HalConfig) (proto.ClouddriverConfig, error) {
 	c := proto.ClouddriverConfig{
 		Kubernetes: h.Providers.Kubernetes,
 		Google:     h.Providers.Google,
+		Appengine:  h.Providers.Appengine,
 	}
 	return c, nil
 }
