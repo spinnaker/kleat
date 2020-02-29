@@ -55,6 +55,46 @@ providers:
       network: default
       networkProjectId: my-network-project-id
       useInternalIp: true
+  aws:
+    enabled: true
+    accounts:
+      - name: my-aws-account
+        environment: env
+        defaultKeyPair: keyPair
+        edda: edda
+        discovery: discovery
+        accountId: id
+        regions:
+          - name: myregion
+        assumeRole: role
+        lifecycleHooks:
+          - defaultResult: ABANDON
+            heartbeatTimeout: 12
+            lifecycleTransition: autoscaling:EC2_INSTANCE_TERMINATING
+            notificationTargetARN: arn:aws:sns:{{region}}:{{accountId}}:term-targ
+            roleARN: arn:aws:iam::{{accountId}}:role-arn
+    primaryAccount: my-aws-account
+    bakeryDefaults:
+      templateFile: file
+      baseImages:
+      - baseImage:
+          id: my-image-id
+          shortDescription: my short description
+          detailedDescription: my detailed description
+        virtualizationSettings:
+          sourceAmi: my-source-ami
+          virtualizationType: pv
+      awsAccessKey: key
+      awsSecretKey: keysecret
+      awsSubnetId: subnetid
+      awsVpcId: vpcid
+      awsAssociatePublicIpAddress: true
+      defaultVirtualizationType: pv
+    defaultKeyPairTemplate: '{{name}}-keypair'
+    defaultRegions:
+      - name: us-west-2
+    defaults:
+      iamRole: BaseIAMRole
 persistentStorage:
   persistentStoreType: gcs
   azs: {}
