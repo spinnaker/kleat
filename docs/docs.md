@@ -11,6 +11,23 @@
   
   
 
+- [aws.proto](#aws.proto)
+    - [Aws](#proto.Aws)
+    - [AwsAccount](#proto.AwsAccount)
+    - [AwsBakeryDefaults](#proto.AwsBakeryDefaults)
+    - [AwsBaseImage](#proto.AwsBaseImage)
+    - [AwsBaseImageSettings](#proto.AwsBaseImageSettings)
+    - [AwsDefaults](#proto.AwsDefaults)
+    - [AwsFeatures](#proto.AwsFeatures)
+    - [AwsFeatures.CloudFormation](#proto.AwsFeatures.CloudFormation)
+    - [AwsLifecycleHook](#proto.AwsLifecycleHook)
+    - [AwsRegion](#proto.AwsRegion)
+    - [AwsVirtualizationSettings](#proto.AwsVirtualizationSettings)
+  
+  
+  
+  
+
 - [clouddriver.proto](#clouddriver.proto)
     - [ClouddriverConfig](#proto.ClouddriverConfig)
   
@@ -144,6 +161,230 @@ Configuration for an App Engine account.
 
 
 
+<a name="aws.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## aws.proto
+
+
+
+<a name="proto.Aws"></a>
+
+### Aws
+Configuration for the AWS provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [AwsAccount](#proto.AwsAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+| accessKeyId | [string](#string) |  | Your AWS Access Key ID. Note that if you are baking AMIs with Rosco, you may also need to set `AwsBakeryDefaults.awsAccessKey`. |
+| secretAccessKey | [string](#string) |  | Your AWS Secret Key. Note that if you are baking AMIs with Rosco, you may also need to set `AwsBakeryDefaults.awsSecretKey`. |
+| defaultKeyPairTemplate | [string](#string) |  | Halyard does not expose a command to edit this field, but defaults it to `{{name}}-keypair`. TODO(mneterval): Can we move to Clouddriver? |
+| defaultRegions | [AwsRegion](#proto.AwsRegion) | repeated | List of default regions. |
+| defaults | [AwsDefaults](#proto.AwsDefaults) |  | Defaults relevant to the AWS provider. TODO(mneterval): Can we move to Clouddriver? |
+| features | [AwsFeatures](#proto.AwsFeatures) |  | Configuration for AWS-specific features. |
+| bakeryDefaults | [AwsBakeryDefaults](#proto.AwsBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
+
+
+
+
+
+
+<a name="proto.AwsAccount"></a>
+
+### AwsAccount
+Configuration for an AWS account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| accountId | [string](#string) |  | Your AWS account ID to manage. See http://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html for more information. |
+| assumeRole | [string](#string) |  | If set, Spinnaker will configure a credentials provider that uses AWS Security Token Service to assume the specified role. Examples: `user/spinnaker`, `role/spinnakerManaged`. |
+| defaultKeyPair | [string](#string) |  | The name of the AWS key-pair to use. See http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html for more information. |
+| discovery | [string](#string) |  | The endpoint at which your Eureka discovery system is reachable. See https://github.com/Netflix/eureka for more information. Example: `http://.eureka.url.to.use:8080/eureka-server/v2`. Using will make Spinnaker use AWS regions in the hostname to access discovery so that you can have discovery for multiple regions. |
+| edda | [string](#string) |  | The endpoint at which Edda is reachable. Edda is not a hard dependency of Spinnaker, but is helpful for reducing the request volume against AWS. See https://github.com/Netflix/edda for more information. |
+| environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
+| permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
+| requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
+| lifecycleHooks | [AwsLifecycleHook](#proto.AwsLifecycleHook) | repeated | List of configured AWS lifecycle hooks. |
+| regions | [AwsRegion](#proto.AwsRegion) | repeated | List of configured AWS regions. |
+| name | [string](#string) |  | The name of the account. |
+
+
+
+
+
+
+<a name="proto.AwsBakeryDefaults"></a>
+
+### AwsBakeryDefaults
+Configuration for Spinnaker&#39;s image bakery.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| awsAccessKey | [string](#string) |  | The default access key used to communicate with AWS. |
+| awsSecretKey | [string](#string) |  | The secret key used to communicate with AWS. |
+| awsSubnetId | [string](#string) |  | If using VPC, the default ID of the subnet, such as `subnet-12345def`, where Packer will launch the EC2 instance. This field is required if you are using a non-default VPC. |
+| awsVpcId | [string](#string) |  | If launching into a VPC subnet, Packer needs the VPC ID in order to create a temporary security group within the VPC. Requires `subnet_id` to be set. If this default value is left blank, Packer will try to get the VPC ID from `awsSubnetId`. |
+| awsAssociatePublicIpAddress | [bool](#bool) |  | If using a non-default VPC, public IP addresses are not provided by default. If this is enabled, your new instance will get a Public IP. |
+| defaultVirtualizationType | [string](#string) |  | The default type of virtualization for the AMI you are building. This option must match the supported virtualization type of `AwsVirtualizationSettings.sourceAmi`. Acceptable values: `pv`, `hvm`. |
+| baseImages | [AwsBaseImageSettings](#proto.AwsBaseImageSettings) | repeated | List of configured base images. |
+| templateFile | [string](#string) |  | This is the name of the packer template that will be used to bake images from this base image. The template file must be found in this list https://github.com/spinnaker/rosco/tree/master/rosco-web/config/packer, or supplied as described here: https://spinnaker.io/setup/bakery/. |
+
+
+
+
+
+
+<a name="proto.AwsBaseImage"></a>
+
+### AwsBaseImage
+Base image configuration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | This is the identifier used by AWS to find this base image. |
+| shortDescription | [string](#string) |  | A short description to help human operators identify the image. |
+| detailedDescription | [string](#string) |  | A long description to help human operators identify the image. |
+| packageType | [string](#string) |  | This is used to help Spinnaker’s bakery download the build artifacts you supply it with. For example, specifying deb indicates that your artifacts will need to be fetched from a debian repository. |
+| templateFile | [string](#string) |  | The name of the Packer template that will be used to bake images from this base image. The template file must be found in this list: https://github.com/spinnaker/rosco/tree/master/rosco-web/config/packer, or supplied as described here: https://spinnaker.io/setup/bakery/. |
+
+
+
+
+
+
+<a name="proto.AwsBaseImageSettings"></a>
+
+### AwsBaseImageSettings
+Configuration for a base image for the AWS provider&#39;s bakery.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| baseImage | [AwsBaseImage](#proto.AwsBaseImage) |  | Base image configuration. |
+| virtualizationSettings | [AwsVirtualizationSettings](#proto.AwsVirtualizationSettings) |  | Base image virtualization settings. |
+
+
+
+
+
+
+<a name="proto.AwsDefaults"></a>
+
+### AwsDefaults
+Defaults relevant to the AWS provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| iamRole | [string](#string) |  | Halyard does not expose a command to edit this field, but defaults it to `BaseIAMRole`. TODO(mneterval): Can we move to Clouddriver? |
+
+
+
+
+
+
+<a name="proto.AwsFeatures"></a>
+
+### AwsFeatures
+Configuration for AWS-specific features.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| cloudFormation | [AwsFeatures.CloudFormation](#proto.AwsFeatures.CloudFormation) |  | Configuration for AWS CloudFormation. |
+
+
+
+
+
+
+<a name="proto.AwsFeatures.CloudFormation"></a>
+
+### AwsFeatures.CloudFormation
+Configuration for AWS CloudFormation.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether AWS CloudFormation is enabled. |
+
+
+
+
+
+
+<a name="proto.AwsLifecycleHook"></a>
+
+### AwsLifecycleHook
+Configuration for AWS Auto Scaling Lifecycle Hooks. For more information, see:
+https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| defaultResult | [string](#string) |  | Defines the action the Auto Scaling group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. This parameter can be either CONTINUE or ABANDON. The default value is ABANDON. |
+| heartbeatTimeout | [int32](#int32) |  | Set the heartbeat timeout in seconds for the lifecycle hook. Instances can remain in a wait state for a finite period of time. Must be greater than or equal to 30 and less than or equal to 7200. The default is 3600 (one hour). |
+| lifecycleTransition | [string](#string) |  | Type of lifecycle transition. Acceptable values: `autoscaling:EC2_INSTANCE_LAUNCHING`, `autoscaling:EC2_INSTANCE_TERMINATING` |
+| notificationTargetARN | [string](#string) |  | The ARN of the notification target that Amazon EC2 Auto Scaling uses to notify you when an instance is in the transition state for the lifecycle hook. This target can be either an SQS queue or an SNS topic. |
+| roleARN | [string](#string) |  | The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target, for example, an Amazon SNS topic or an Amazon SQS queue. |
+
+
+
+
+
+
+<a name="proto.AwsRegion"></a>
+
+### AwsRegion
+An AWS region.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the region. |
+
+
+
+
+
+
+<a name="proto.AwsVirtualizationSettings"></a>
+
+### AwsVirtualizationSettings
+Base image virtualization settings.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| region | [string](#string) |  | The name of the region in which to launch the EC2 instance to create the AMI. |
+| virtualizationType | [string](#string) |  | The type of virtualization for the AMI you are building. This option must match the supported virtualization type of `sourceAmi`. Acceptable values: `pv`, `hvm`. |
+| instanceType | [string](#string) |  | The EC2 instance type to use while building the AMI, such as `t2.small`. |
+| sourceAmi | [string](#string) |  | The source AMI whose root volume will be copied and provisioned on the currently running instance. This must be an EBS-backed AMI with a root volume snapshot that you have access to. |
+| sshUserName | [string](#string) |  | The username to connect to SSH with. Required if using SSH. |
+| winRmUserName | [string](#string) |  | The username to use to connect to WinRM. |
+| spotPrice | [string](#string) |  | The maximum hourly price to pay for a spot instance to create the AMI. Spot instances are a type of instance that EC2 starts when the current spot price is less than the maximum price you specify. Spot price will be updated based on available spot instance capacity and current spot instance requests. It may save you some costs. You can set this to `auto` for Packer to automatically discover the best spot price or to &#34;0&#34; to use an on demand instance (default). |
+| spotPriceAutoProduct | [string](#string) |  | Required if `spotPrice` is set to `auto`. This tells Packer what sort of AMI you are launching to find the best spot price. This must be one of: `Linux/UNIX`, `SUSE Linux`, `Windows`, `Linux/UNIX (Amazon VPC)`, `SUSE Linux (Amazon VPC)`, `Windows (Amazon VPC)`. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
 <a name="clouddriver.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -162,6 +403,7 @@ Configuration for an App Engine account.
 | kubernetes | [Kubernetes](#proto.Kubernetes) |  |  |
 | google | [Google](#proto.Google) |  |  |
 | appengine | [Appengine](#proto.Appengine) |  |  |
+| aws | [Aws](#proto.Aws) |  |  |
 
 
 
@@ -422,6 +664,7 @@ Image source configuration.
 | kubernetes | [Kubernetes](#proto.Kubernetes) |  |  |
 | google | [Google](#proto.Google) |  |  |
 | appengine | [Appengine](#proto.Appengine) |  |  |
+| aws | [Aws](#proto.Aws) |  |  |
 
 
 
