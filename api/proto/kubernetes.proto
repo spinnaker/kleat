@@ -1,0 +1,131 @@
+syntax = "proto3";
+package proto;
+
+import "permissions.proto";
+
+// Configuration for the Kubernetes provider.
+message Kubernetes {
+    // Whether the provider is enabled.
+    bool enabled = 1;
+
+    // The list of configured accounts.
+    repeated KubernetesAccount accounts = 2;
+
+    // The name of the primary account.
+    string primaryAccount = 3;
+
+}
+
+// Configuration for a Spinnaker Kubernetes account. An account maps to a
+// credential that can authenticate against your Kubernetes cluster.
+message KubernetesAccount {
+    // The name of the account.
+    string name = 1;
+
+    // Some providers support multiple versions/release tracks.
+    // This allows you to pick the version of the provider (not the
+    // resources it manages) to run within Spinnaker.
+    string providerVersion = 2;
+
+    // A list of resource kinds this Spinnaker account can deploy and
+    // will cache. When no kinds are configured, this defaults to all kinds
+    // described here:
+    // https://spinnaker.io/reference/providers/kubernetes-v2/.
+    // This can only be set when omitKinds is empty or not set.
+    repeated string kinds = 3;
+
+    // A list of resource kinds this Spinnaker account cannot deploy to or
+    // cache. This can only be set when kinds is empty or not set.
+    repeated string omitKinds = 4;
+
+    // The kubernetes context to be managed by Spinnaker. See
+    // http://kubernetes.io/docs/user-guide/kubeconfig-file/#context for
+    // more information. When no context is configured for an account the
+    // ‘current-context’ in your kubeconfig is assumed.
+    string context = 5;
+
+    // Number of caching agents for this kubernetes account.
+    // Each agent handles a subset of the namespaces available to this account.
+    // By default, only 1 agent caches all kinds for all namespaces in the
+    // account.
+    int32 cacheThreads = 6;
+
+    // A list of namespaces this Spinnaker account can deploy to and will
+    // cache. When no namespaces are configured, this defaults to all
+    // namespaces.
+    repeated string namespaces = 7;
+
+    // A list of namespaces this Spinnaker account cannot deploy to or
+    // cache. This can only be set when namespaces is empty or not set.
+    repeated string omitNamespaces = 8;
+
+    // The list of custom resources Clouddriver will manage and make
+    // available for use in Patch and Delete (Manifest) stages.
+    repeated KubernetesCustomResource customResources = 9;
+
+    // The list of kind-specific caching policies.
+    repeated KubernetesCachingPolicy cachingPolicies = 10;
+
+    // The list of the Spinnaker docker registry account names this
+    // Spinnaker account can use as image sources. These docker registry
+    // accounts must be registered in your halconfig before you can add them
+    // here.
+    repeated DockerRegistry dockerRegistries = 11;
+
+    // The list of OAuth scopes used by kubectl to fetch an OAuth token.
+    repeated string oAuthScopes = 12;
+
+    // The path to your kubeconfig file. By default, it will be under the
+    // Spinnaker user’s home directory in the typical .kube/config location.
+    // todo: document new var/secrets convention.
+    string kubeconfigFile = 13;
+
+    // Fiat permissions configuration.
+    Permissions permissions = 14;
+
+    // (Deprecated): List of required Fiat permission groups. Configure
+    // `permissions` instead.
+    repeated string requiredGroupMemberships = 15;
+}
+
+// Configuration for a CRD to be managed by Spinnaker. If Spinnaker does not
+// have permission to list CRDs but you need Spinnaker to manage CRDs, you
+// need to explicitly register each CRD.
+message KubernetesCustomResource {
+    // The Kubernetes kind of the custom resource.
+    string kubernetesKind = 1;
+
+    // The Spinnaker kind to which you would like the custom resource to
+    // map.
+    string spinnakerKind = 2;
+
+    // An integer representing the deployment priority of this resource.
+    // Resources with lower values are deployed before resources with higher
+    // values.
+    string deployPriority = 3;
+
+    // Whether Spinnaker should manage versioning this resource.
+    bool versioned = 4;
+
+    // Whether the resource is namespaced.
+    bool namespaced = 5;
+}
+
+// Configuration for a kind-specific caching policy.
+message KubernetesCachingPolicy {
+    // The Kubernetes kind to which the policy applies.
+    string kubernetesKind = 1;
+
+    // The maximum number of resources an agent will cache of the specified
+    // Kubernetes kind.
+    int32 maxEntriesPerAgent = 2;
+}
+
+// Configuration for a Docker registry.
+message DockerRegistry {
+    // The configured name of the Docker registry.
+    string accountName = 1;
+
+    // The list of Docker registry namespaces usable as image sources.
+    repeated string namespaces = 2;
+}

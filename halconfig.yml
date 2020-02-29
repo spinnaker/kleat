@@ -17,6 +17,44 @@ providers:
       kubeconfigFile: /var/secrets/k8s-kubeconfig
       checkPermissionsOnStartup: true
     primaryAccount: k8s
+  appengine:
+    enabled: true
+    accounts:
+      - name: my-appengine-account
+        project: spinnaker-maggie
+        jsonPath: var/secrets/appengine-account.json
+        sshTrustUnknownHosts: true
+    primaryAccount: my-appengine-account
+  google:
+    enabled: true
+    accounts:
+      - name: my-gce-account
+        project: spinnaker-maggie
+        jsonPath: /var/secrets/gce-account.json
+        alphaListed: true
+        consul:
+          enabled: true
+          agentEndpoint: localhost
+          agentPort: 8500
+          datacenters: []
+        regions:
+          - us-east1-b
+    primaryAccount: my-gce-account
+    bakeryDefaults:
+      templateFile: gce.json
+      baseImages:
+        - baseImage:
+            id: my-image-id
+            shortDescription: my short description
+            detailedDescription: my detailed description
+            imageFamily: true
+          virtualizationSettings:
+            sourceImage: my-source-image
+            sourceImageFamily: my-source-image-family
+      zone: us-central1-f
+      network: default
+      networkProjectId: my-network-project-id
+      useInternalIp: true
 persistentStorage:
   persistentStoreType: gcs
   azs: {}

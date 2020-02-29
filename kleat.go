@@ -3,7 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
-	"github.com/ezimanyi/kleat/proto"
+	"github.com/ezimanyi/kleat/api/client"
 	"io"
 	"io/ioutil"
 	"log"
@@ -163,7 +163,7 @@ func getTestHalConfig() proto.HalConfig {
 		Providers: &proto.HalConfig_Providers{
 			Kubernetes: &proto.Kubernetes{
 				Enabled: false,
-				Accounts: []*proto.Kubernetes_Account{
+				Accounts: []*proto.KubernetesAccount{
 					{
 						Name:            "hal",
 						ProviderVersion: "V2",

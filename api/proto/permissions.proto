@@ -1,0 +1,17 @@
+syntax = "proto3";
+package proto;
+
+// A Fiat permissions configuration object.
+message Permissions {
+    // A user must have at least one of these roles in order to view this
+    // account’s cloud resources.
+    repeated string READ = 1;
+
+    // A user must have at least one of these roles in order to make changes to
+    // this account’s cloud resources.
+    repeated string WRITE = 2;
+
+    // A user must have at least one of these roles in order to execute
+    // pipelines.
+    repeated string EXECUTE = 3;
+}
