@@ -1,7 +1,9 @@
 syntax = "proto3";
 package proto;
 
-import "providers.proto";
+import "kubernetes.proto";
+import "google.proto";
+import "appengine.proto";
 
 message ClouddriverConfig {
     Kubernetes kubernetes = 1;

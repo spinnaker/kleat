@@ -21,13 +21,17 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type GCS struct {
+	// A path to a JSON service account with permission to read and write to the bucket to be used as a backing store.
 	JsonPath string `protobuf:"bytes,1,opt,name=jsonPath,proto3" json:"jsonPath,omitempty"`
-	Project  string `protobuf:"bytes,2,opt,name=project,proto3" json:"project,omitempty"`
+	// The Google Cloud Platform project you are using to host the GCS bucket as a backing store.
+	Project string `protobuf:"bytes,2,opt,name=project,proto3" json:"project,omitempty"`
 	// The name of a storage bucket that your specified account has access to. If not specified, a
 	// random name will be chosen. If you specify a globally unique bucket name that doesn’t exist
 	// yet, Halyard will create that bucket for you.
-	Bucket               string   `protobuf:"bytes,3,opt,name=bucket,proto3" json:"bucket,omitempty"`
-	RootFolder           string   `protobuf:"bytes,4,opt,name=rootFolder,proto3" json:"rootFolder,omitempty"`
+	Bucket string `protobuf:"bytes,3,opt,name=bucket,proto3" json:"bucket,omitempty"`
+	// The root folder in the chosen bucket to place all of Spinnaker’s persistent data in.
+	RootFolder string `protobuf:"bytes,4,opt,name=rootFolder,proto3" json:"rootFolder,omitempty"`
+	// This is only required if the bucket you specify doesn’t exist yet.
 	BucketLocation       string   `protobuf:"bytes,5,opt,name=bucketLocation,proto3" json:"bucketLocation,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
