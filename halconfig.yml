@@ -22,7 +22,7 @@ providers:
     accounts:
       - name: my-appengine-account
         project: spinnaker-maggie
-        jsonPath: var/secrets/appengine-account.json
+        jsonPath: /var/secrets/appengine-account.json
         sshTrustUnknownHosts: true
     primaryAccount: my-appengine-account
   google:
