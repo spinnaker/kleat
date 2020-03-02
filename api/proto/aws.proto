@@ -43,7 +43,7 @@ message Aws {
 
 // Configuration for an AWS account.
 message AwsAccount {
-    // Your AWS account ID to manage. See
+    // The AWS account ID to manage. See
     // http://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html
     // for more information.
     string accountId = 1;
