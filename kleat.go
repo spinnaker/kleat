@@ -198,6 +198,7 @@ func halToClouddriver(h proto.HalConfig) (proto.ClouddriverConfig, error) {
 		Google:     h.Providers.Google,
 		Appengine:  h.Providers.Appengine,
 		Aws:        h.Providers.Aws,
+		Azure:      h.Providers.Azure,
 	}
 	return c, nil
 }

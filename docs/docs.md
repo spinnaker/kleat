@@ -28,6 +28,17 @@
   
   
 
+- [azure.proto](#azure.proto)
+    - [Azure](#proto.Azure)
+    - [AzureAccount](#proto.AzureAccount)
+    - [AzureBakeryDefaults](#proto.AzureBakeryDefaults)
+    - [AzureBaseImage](#proto.AzureBaseImage)
+    - [AzureBaseImageSettings](#proto.AzureBaseImageSettings)
+  
+  
+  
+  
+
 - [clouddriver.proto](#clouddriver.proto)
     - [ClouddriverConfig](#proto.ClouddriverConfig)
   
@@ -385,6 +396,121 @@ Base image virtualization settings.
 
 
 
+<a name="azure.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## azure.proto
+
+
+
+<a name="proto.Azure"></a>
+
+### Azure
+Configuration for the Azure provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [AzureAccount](#proto.AzureAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+| bakeryDefaults | [AzureBakeryDefaults](#proto.AzureBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
+
+
+
+
+
+
+<a name="proto.AzureAccount"></a>
+
+### AzureAccount
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| appKey | [string](#string) |  | (Required) The `appKey` (password) of your service principal. |
+| clientId | [string](#string) |  | (Required) The `clientId` (also called `appId`) of your service principal. |
+| defaultKeyVault | [string](#string) |  | (Required) The name of a KeyVault that contains the user name, password, and ssh public key used to create VMs |
+| defaultResourceGroup | [string](#string) |  | (Required) The default resource group to contain any non-application specific resources. |
+| environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
+| objectId | [string](#string) |  | The `objectId` of your service principal. This is only required if using Packer to bake Windows images. |
+| packerResourceGroup | [string](#string) |  | The resource group to use if baking images with Packer. |
+| packerStorageAccount | [string](#string) |  | The storage account to use if baking images with Packer. |
+| permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
+| requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
+| regions | [string](#string) | repeated | The Azure regions this Spinnaker account will manage. TODO(mneterval): Halyard defaults to `[westus, eastus]`. Move to Clouddriver. |
+| subscriptionId | [string](#string) |  | (Required) The `subscriptionId` to which your service principal is assigned. |
+| tenantId | [string](#string) |  | (Required) The `tenantId` to which your service principal is assigned. |
+| useSshPublicKey | [bool](#bool) |  | If true, the SSH public key is used to provision the linux VM. If false, the password is used instead. TODO(mneterval): Halyard defaults to `true`. Move to Clouddriver. |
+
+
+
+
+
+
+<a name="proto.AzureBakeryDefaults"></a>
+
+### AzureBakeryDefaults
+Configuration for Spinnaker&#39;s image bakery.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| baseImages | [AzureBaseImageSettings](#proto.AzureBaseImageSettings) | repeated | List of configured base images. |
+
+
+
+
+
+
+<a name="proto.AzureBaseImage"></a>
+
+### AzureBaseImage
+Base image configuration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| shortDescription | [string](#string) |  | A short description to help human operators identify the image. |
+| detailedDescription | [string](#string) |  | A long description to help human operators identify the image. |
+| publisher | [string](#string) |  | (Required) The Publisher name for your base image. See https://aka.ms/azspinimage to get a list of images. |
+| offer | [string](#string) |  | (Required) The offer for your base image. See https://aka.ms/azspinimage to get a list of images. |
+| sku | [string](#string) |  | (Required) The SKU for your base image. See https://aka.ms/azspinimage to get a list of images. |
+| version | [string](#string) |  | The version of your base image. This defaults to ‘latest’ if not specified. |
+| packageType | [string](#string) |  | This is used to help Spinnaker’s bakery download the build artifacts you supply it with. For example, specifying `deb` indicates that your artifacts will need to be fetched from a debian repository. |
+| templateFile | [string](#string) |  | This is the name of the packer template that will be used to bake images from this base image. The template file must be found in this list: https://github.com/spinnaker/rosco/tree/master/rosco-web/config/packer, or supplied as described here: https://spinnaker.io/setup/bakery/. |
+
+
+
+
+
+
+<a name="proto.AzureBaseImageSettings"></a>
+
+### AzureBaseImageSettings
+Configuration for a base image for the Azure provider&#39;s bakery.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| baseImage | [AzureBaseImage](#proto.AzureBaseImage) |  | Base image configuration. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
 <a name="clouddriver.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -404,6 +530,7 @@ Base image virtualization settings.
 | google | [Google](#proto.Google) |  |  |
 | appengine | [Appengine](#proto.Appengine) |  |  |
 | aws | [Aws](#proto.Aws) |  |  |
+| azure | [Azure](#proto.Azure) |  |  |
 
 
 
@@ -665,6 +792,7 @@ Image source configuration.
 | google | [Google](#proto.Google) |  |  |
 | appengine | [Appengine](#proto.Appengine) |  |  |
 | aws | [Aws](#proto.Aws) |  |  |
+| azure | [Azure](#proto.Azure) |  |  |
 
 
 
