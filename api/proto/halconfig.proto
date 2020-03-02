@@ -6,6 +6,7 @@ import "kubernetes.proto";
 import "google.proto";
 import "appengine.proto";
 import "aws.proto";
+import "azure.proto";
 
 message HalConfig {
   PersistentStorage persistentStorage = 1;
@@ -21,5 +22,6 @@ message HalConfig {
     Google google = 2;
     Appengine appengine = 3;
     Aws aws = 4;
+    Azure azure = 5;
   }
 }
