@@ -23,10 +23,10 @@ const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 // A Fiat permissions configuration object.
 type Permissions struct {
 	// A user must have at least one of these roles in order to view this
-	// account’s cloud resources.
+	// account's cloud resources.
 	READ []string `protobuf:"bytes,1,rep,name=READ,proto3" json:"READ,omitempty"`
 	// A user must have at least one of these roles in order to make changes to
-	// this account’s cloud resources.
+	// this account's cloud resources.
 	WRITE []string `protobuf:"bytes,2,rep,name=WRITE,proto3" json:"WRITE,omitempty"`
 	// A user must have at least one of these roles in order to execute
 	// pipelines.

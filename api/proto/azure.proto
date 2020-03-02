@@ -109,11 +109,11 @@ message AzureBaseImage {
     // get a list of images.
     string sku = 5;
 
-    // The version of your base image. This defaults to ‘latest’ if not
+    // The version of your base image. This defaults to `latest` if not
     // specified.
     string version = 6;
 
-    // This is used to help Spinnaker’s bakery download the build artifacts you
+    // This is used to help Spinnaker's bakery download the build artifacts you
     // supply it with. For example, specifying `deb` indicates that your
     // artifacts will need to be fetched from a debian repository.
     string packageType = 7;

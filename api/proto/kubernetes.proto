@@ -41,7 +41,7 @@ message KubernetesAccount {
     // The kubernetes context to be managed by Spinnaker. See
     // http://kubernetes.io/docs/user-guide/kubeconfig-file/#context for
     // more information. When no context is configured for an account the
-    // ‘current-context’ in your kubeconfig is assumed.
+    // `current-context` in your kubeconfig is assumed.
     string context = 5;
 
     // Number of caching agents for this kubernetes account.
@@ -76,7 +76,7 @@ message KubernetesAccount {
     repeated string oAuthScopes = 12;
 
     // The path to your kubeconfig file. By default, it will be under the
-    // Spinnaker user’s home directory in the typical .kube/config location.
+    // Spinnaker user's home directory in the typical .kube/config location.
     // todo: document new var/secrets convention.
     string kubeconfigFile = 13;
 

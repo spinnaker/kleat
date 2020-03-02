@@ -385,7 +385,7 @@ type GoogleBaseImage struct {
 	// A long description to help human operators identify the
 	// image.
 	DetailedDescription string `protobuf:"bytes,3,opt,name=detailedDescription,proto3" json:"detailedDescription,omitempty"`
-	//  This is used to help Spinnaker’s bakery download the build
+	//  This is used to help Spinnaker's bakery download the build
 	//  artifacts you supply it with. For example, specifying deb
 	//  indicates that your artifacts will need to be fetched from a
 	//  debian repository.

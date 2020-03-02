@@ -123,7 +123,7 @@ message GoogleBaseImage {
     // image.
     string detailedDescription = 3;
 
-    //  This is used to help Spinnaker’s bakery download the build
+    //  This is used to help Spinnaker's bakery download the build
     //  artifacts you supply it with. For example, specifying deb
     //  indicates that your artifacts will need to be fetched from a
     //  debian repository.

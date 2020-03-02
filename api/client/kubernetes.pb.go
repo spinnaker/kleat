@@ -100,7 +100,7 @@ type KubernetesAccount struct {
 	// The kubernetes context to be managed by Spinnaker. See
 	// http://kubernetes.io/docs/user-guide/kubeconfig-file/#context for
 	// more information. When no context is configured for an account the
-	// ‘current-context’ in your kubeconfig is assumed.
+	// `current-context` in your kubeconfig is assumed.
 	Context string `protobuf:"bytes,5,opt,name=context,proto3" json:"context,omitempty"`
 	// Number of caching agents for this kubernetes account.
 	// Each agent handles a subset of the namespaces available to this account.
@@ -127,7 +127,7 @@ type KubernetesAccount struct {
 	// The list of OAuth scopes used by kubectl to fetch an OAuth token.
 	OAuthScopes []string `protobuf:"bytes,12,rep,name=oAuthScopes,proto3" json:"oAuthScopes,omitempty"`
 	// The path to your kubeconfig file. By default, it will be under the
-	// Spinnaker user’s home directory in the typical .kube/config location.
+	// Spinnaker user's home directory in the typical .kube/config location.
 	// todo: document new var/secrets convention.
 	KubeconfigFile string `protobuf:"bytes,13,opt,name=kubeconfigFile,proto3" json:"kubeconfigFile,omitempty"`
 	// Fiat permissions configuration.

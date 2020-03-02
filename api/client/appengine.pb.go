@@ -141,7 +141,7 @@ type AppengineAccount struct {
 	// also be set.
 	SshPrivateKeyPassphrase string `protobuf:"bytes,17,opt,name=sshPrivateKeyPassphrase,proto3" json:"sshPrivateKeyPassphrase,omitempty"`
 	// Enabling this flag will allow Spinnaker to connect with a remote git
-	// repository over SSH without verifying the server’s IP address against
+	// repository over SSH without verifying the server's IP address against
 	// a `known_hosts` file. Defaults to false.
 	SshTrustUnknownHosts bool `protobuf:"varint,18,opt,name=sshTrustUnknownHosts,proto3" json:"sshTrustUnknownHosts,omitempty"`
 	// A list of regular expressions. Any version matching one of these

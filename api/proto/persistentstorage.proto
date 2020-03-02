@@ -9,13 +9,13 @@ message GCS {
     string project = 2;
 
     // The name of a storage bucket that your specified account has access to. If not specified, a
-    // random name will be chosen. If you specify a globally unique bucket name that doesn’t exist
+    // random name will be chosen. If you specify a globally unique bucket name that does not exist
     // yet, Halyard will create that bucket for you.
     string bucket = 3;
 
-    // The root folder in the chosen bucket to place all of Spinnaker’s persistent data in.
+    // The root folder in the chosen bucket to place all of Spinnaker's persistent data in.
     string rootFolder = 4;
 
-    // This is only required if the bucket you specify doesn’t exist yet.
+    // This is only required if the bucket you specify does not exist yet.
     string bucketLocation = 5;
 }

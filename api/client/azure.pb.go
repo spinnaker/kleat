@@ -363,10 +363,10 @@ type AzureBaseImage struct {
 	// (Required) The SKU for your base image. See https://aka.ms/azspinimage to
 	// get a list of images.
 	Sku string `protobuf:"bytes,5,opt,name=sku,proto3" json:"sku,omitempty"`
-	// The version of your base image. This defaults to ‘latest’ if not
+	// The version of your base image. This defaults to `latest` if not
 	// specified.
 	Version string `protobuf:"bytes,6,opt,name=version,proto3" json:"version,omitempty"`
-	// This is used to help Spinnaker’s bakery download the build artifacts you
+	// This is used to help Spinnaker's bakery download the build artifacts you
 	// supply it with. For example, specifying `deb` indicates that your
 	// artifacts will need to be fetched from a debian repository.
 	PackageType string `protobuf:"bytes,7,opt,name=packageType,proto3" json:"packageType,omitempty"`
