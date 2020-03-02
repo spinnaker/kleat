@@ -1,0 +1,16 @@
+syntax = "proto3";
+package proto;
+
+import "kubernetes.proto";
+import "google.proto";
+import "appengine.proto";
+import "aws.proto";
+import "azure.proto";
+
+message ClouddriverConfig {
+    Kubernetes kubernetes = 1;
+    Google google = 2;
+    Appengine appengine = 3;
+    Aws aws = 4;
+    Azure azure = 5;
+}

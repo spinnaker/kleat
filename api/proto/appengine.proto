@@ -1,0 +1,108 @@
+syntax = "proto3";
+package proto;
+
+import "permissions.proto";
+
+// Configuration for the Google App Engine (GAE) provider.
+message Appengine {
+    // Whether the provider is enabled.
+    bool enabled = 1;
+
+    // The list of configured accounts.
+    repeated AppengineAccount accounts = 2;
+
+    // The name of the primary account.
+    string primaryAccount = 3;
+}
+
+// Configuration for an App Engine account.
+message AppengineAccount {
+    // The interval in seconds at which Spinnaker will poll for updates in
+    // your App Engine clusters.
+    int32 cachingIntervalSeconds = 1;
+
+    // The environment name for the account. Many accounts can share the
+    // same environment (e.g., dev, test, prod).
+    string environment = 2;
+
+    // The gcloud release track (`ALPHA`, `BETA`, or `STABLE`) that Spinnaker
+    // will use when deploying to App Engine.
+    string gcloudReleaseTrack = 3;
+
+    // A username to be used when connecting to a remote git repository
+    // server over HTTPS. If set, `gitHttpsPassword` must also be set.
+    string gitHttpsUsername = 4;
+
+    //  A password to be used when connecting to a remote git repository
+    //  server over HTTPS. If set, `gitHttpsUsername` must also be set.
+    string gitHttpsPassword = 5;
+
+    // An OAuth token provided by Github for connecting to a git repository
+    // over HTTPS. See
+    // https://help.github.com/articles/creating-an-access-token-for-command-line-use
+    // for more information.
+    string githubOAuthAccessToken = 6;
+
+    // The path to a JSON service account that Spinnaker will use as
+    // credentials. This is only needed if Spinnaker is not deployed on a
+    // Google Compute Engine VM, or needs permissions not afforded to the VM
+    // it is running on. See
+    // https://cloud.google.com/compute/docs/access/service-accounts for
+    // more information.
+    string jsonPath = 7;
+
+    // A local directory to be used to stage source files for App Engine
+    // deployments within Clouddriver.
+    // Defaults to `/var/tmp/clouddriver`.
+    string localRepositoryDirectory = 8;
+
+    // A list of regular expressions. Any service matching one of these
+    // regexes will be ignored by Spinnaker.
+    repeated string omitServices = 9;
+
+    //  A list of regular expressions. Any version matching one of these
+    //  regexes will be ignored by Spinnaker.
+    repeated string omitVersions = 10;
+
+    // The Google Cloud Platform project this Spinnaker account will manage.
+    string project = 11;
+
+    // Fiat permissions configuration.
+    Permissions permissions = 12;
+
+    // (Deprecated): List of required Fiat permission groups. Configure
+    // `permissions` instead.
+    repeated string requiredGroupMemberships = 13;
+
+    // A list of regular expressions. Any service matching one of these
+    // regexes will be indexed by Spinnaker (unless the service also
+    // matches a regex in `omitServices`).
+    repeated string services = 14;
+
+    // The path to a `known_hosts` file to be used when connecting with a
+    // remote git repository over SSH.
+    string sshKnownHostsFilePath = 15;
+
+    // The path to an SSH private key to be used when connecting with a
+    // remote git repository over SSH. If set, `sshPrivateKeyPassphrase` must
+    // also be set.
+    string sshPrivateKeyFilePath = 16;
+
+    // The passphrase to an SSH private key to be used when connecting with
+    // a remote git repository over SSH. If set, `sshPrivateKeyFilePath` must
+    // also be set.
+    string sshPrivateKeyPassphrase = 17;
+
+    // Enabling this flag will allow Spinnaker to connect with a remote git
+    // repository over SSH without verifying the server's IP address against
+    // a `known_hosts` file. Defaults to false.
+    bool sshTrustUnknownHosts = 18;
+
+    // A list of regular expressions. Any version matching one of these
+    // regexes will be indexed by Spinnaker (unless the version also matches
+    // a regex in `omitVersions`).
+    repeated string versions = 19;
+
+    // The name of the account.
+    string name = 20;
+}

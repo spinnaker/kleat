@@ -1,0 +1,262 @@
+syntax = "proto3";
+package proto;
+
+import "permissions.proto";
+
+// Configuration for the AWS provider.
+message Aws {
+    // Whether the provider is enabled.
+    bool enabled = 1;
+
+    // The list of configured accounts.
+    repeated AwsAccount accounts = 2;
+
+    // The name of the primary account.
+    string primaryAccount = 3;
+
+    // Your AWS Access Key ID. Note that if you are baking AMIs with Rosco, you
+    // may also need to set `AwsBakeryDefaults.awsAccessKey`.
+    string accessKeyId = 4;
+
+    // Your AWS Secret Key. Note that if you are baking AMIs with Rosco, you
+    // may also need to set `AwsBakeryDefaults.awsSecretKey`.
+    string secretAccessKey = 5;
+
+    // Halyard does not expose a command to edit this field, but defaults it to
+    // `{{name}}-keypair`.
+    // TODO(mneterval): Can we move to Clouddriver?
+    string defaultKeyPairTemplate = 6;
+
+    // List of default regions.
+    repeated AwsRegion defaultRegions = 7;
+
+    // Defaults relevant to the AWS provider.
+    // TODO(mneterval): Can we move to Clouddriver?
+    AwsDefaults defaults = 8;
+
+    // Configuration for AWS-specific features.
+    AwsFeatures features = 9;
+
+    // Configuration for Spinnaker's image bakery.
+    AwsBakeryDefaults bakeryDefaults = 11;
+}
+
+// Configuration for an AWS account.
+message AwsAccount {
+    // The AWS account ID to manage. See
+    // http://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html
+    // for more information.
+    string accountId = 1;
+
+    // If set, Spinnaker will configure a credentials provider that uses AWS
+    // Security Token Service to assume the specified role.
+    // Examples: `user/spinnaker`, `role/spinnakerManaged`.
+    string assumeRole = 2;
+
+    // The name of the AWS key-pair to use. See
+    // http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
+    // for more information.
+    string defaultKeyPair = 3;
+
+    // The endpoint at which your Eureka discovery system is reachable. See
+    // https://github.com/Netflix/eureka for more information. Example:
+    // `http://.eureka.url.to.use:8080/eureka-server/v2`.
+    // Using will make Spinnaker use AWS regions in the hostname to access
+    // discovery so that you can have discovery for multiple regions.
+    string discovery = 4;
+
+    // The endpoint at which Edda is reachable. Edda is not a hard dependency of
+    // Spinnaker, but is helpful for reducing the request volume against AWS.
+    // See https://github.com/Netflix/edda for more information.
+    string edda = 5;
+
+    // The environment name for the account. Many accounts can share the
+    // same environment (e.g., dev, test, prod).
+    string environment = 6;
+
+    // Fiat permissions configuration.
+    Permissions permissions = 7;
+
+    // (Deprecated): List of required Fiat permission groups. Configure
+    // `permissions` instead.
+    repeated string requiredGroupMemberships = 8;
+
+    // List of configured AWS lifecycle hooks.
+    repeated AwsLifecycleHook lifecycleHooks = 9;
+
+    // List of configured AWS regions.
+    repeated AwsRegion regions = 12;
+
+    // The name of the account.
+    string name = 13;
+}
+
+// An AWS region.
+message AwsRegion {
+    // The name of the region.
+    string name = 1;
+}
+
+// Configuration for Spinnaker's image bakery.
+message AwsBakeryDefaults {
+    // The default access key used to communicate with AWS.
+    string awsAccessKey = 1;
+
+    // The secret key used to communicate with AWS.
+    string awsSecretKey = 2;
+
+    // If using VPC, the default ID of the subnet, such as `subnet-12345def`,
+    // where Packer will launch the EC2 instance. This field is required if you
+    // are using a non-default VPC.
+    string awsSubnetId = 3;
+
+    // If launching into a VPC subnet, Packer needs the VPC ID in order to
+    // create a temporary security group within the VPC. Requires `subnet_id` to
+    // be set. If this default value is left blank, Packer will try to get the
+    // VPC ID from `awsSubnetId`.
+    string awsVpcId = 4;
+
+    // If using a non-default VPC, public IP addresses are not provided by
+    // default. If this is enabled, your new instance will get a Public IP.
+    bool awsAssociatePublicIpAddress = 5;
+
+    // The default type of virtualization for the AMI you are building. This
+    // option must match the supported virtualization type of
+    // `AwsVirtualizationSettings.sourceAmi`.
+    // Acceptable values: `pv`, `hvm`.
+    string defaultVirtualizationType = 6;
+
+
+    // List of configured base images.
+    repeated AwsBaseImageSettings baseImages = 7;
+
+    // This is the name of the packer template that will be used to bake images
+    // from this base image. The template file must be found in this list
+    // https://github.com/spinnaker/rosco/tree/master/rosco-web/config/packer,
+    // or supplied as described here: https://spinnaker.io/setup/bakery/.
+    string templateFile = 8;
+
+}
+
+// Configuration for a base image for the AWS provider's bakery.
+message AwsBaseImageSettings {
+    // Base image configuration.
+    AwsBaseImage baseImage = 1;
+
+    // Base image virtualization settings.
+    AwsVirtualizationSettings virtualizationSettings = 2;
+}
+
+// Base image configuration.
+message AwsBaseImage {
+    // This is the identifier used by AWS to find this base image.
+    string id = 1;
+
+    // A short description to help human operators identify the
+    // image.
+    string shortDescription = 2;
+
+    // A long description to help human operators identify the
+    // image.
+    string detailedDescription = 3;
+
+    // This is used to help Spinnaker's bakery download the build
+    // artifacts you supply it with. For example, specifying deb
+    // indicates that your artifacts will need to be fetched from a
+    // debian repository.
+    string packageType = 4;
+
+    // The name of the Packer template that will be used to bake images from
+    // this base image. The template file must be found in this list:
+    // https://github.com/spinnaker/rosco/tree/master/rosco-web/config/packer,
+    // or supplied as described here: https://spinnaker.io/setup/bakery/.
+    string templateFile = 5;
+}
+
+// Base image virtualization settings.
+message AwsVirtualizationSettings {
+    // The name of the region in which to launch the EC2 instance to create the
+    // AMI.
+    string region = 1;
+
+    // The type of virtualization for the AMI you are building. This
+    // option must match the supported virtualization type of `sourceAmi`.
+    // Acceptable values: `pv`, `hvm`.
+    string virtualizationType = 2;
+
+    // The EC2 instance type to use while building the AMI, such as `t2.small`.
+    string instanceType = 3;
+
+    // The source AMI whose root volume will be copied and provisioned on the
+    // currently running instance. This must be an EBS-backed AMI with a root
+    // volume snapshot that you have access to.
+    string sourceAmi = 4;
+
+    // The username to connect to SSH with. Required if using SSH.
+    string sshUserName = 5;
+
+    // The username to use to connect to WinRM.
+    string winRmUserName = 6;
+
+    // The maximum hourly price to pay for a spot instance to create the AMI.
+    // Spot instances are a type of instance that EC2 starts when the current
+    // spot price is less than the maximum price you specify. Spot price will be
+    // updated based on available spot instance capacity and current spot
+    // instance requests. It may save you some costs. You can set this to `auto`
+    // for Packer to automatically discover the best spot price or to "0" to use
+    // an on demand instance (default).
+    string spotPrice = 7;
+
+    // Required if `spotPrice` is set to `auto`. This tells Packer what sort of
+    // AMI you are launching to find the best spot price. This must be one of:
+    // `Linux/UNIX`, `SUSE Linux`, `Windows`, `Linux/UNIX (Amazon VPC)`,
+    // `SUSE Linux (Amazon VPC)`, `Windows (Amazon VPC)`.
+    string spotPriceAutoProduct = 8;
+}
+
+// Configuration for AWS Auto Scaling Lifecycle Hooks. For more information, see:
+// https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html
+message AwsLifecycleHook {
+    // Defines the action the Auto Scaling group should take when the lifecycle hook timeout elapses or if an
+    // unexpected failure occurs. This parameter can be either CONTINUE or ABANDON. The default value is
+    // ABANDON.
+    string defaultResult = 1;
+
+    // Set the heartbeat timeout in seconds for the lifecycle hook. Instances can remain in a wait
+    // state for a finite period of time. Must be greater than or equal to 30 and less than or equal to 7200.
+    // The default is 3600 (one hour).
+    int32 heartbeatTimeout = 2;
+
+    // Type of lifecycle transition. Acceptable values: `autoscaling:EC2_INSTANCE_LAUNCHING`,
+    // `autoscaling:EC2_INSTANCE_TERMINATING`
+    string lifecycleTransition = 3;
+
+    // The ARN of the notification target that Amazon EC2 Auto Scaling uses to notify you when an instance is in
+    // the transition state for the lifecycle hook. This target can be either an SQS queue or an SNS topic.
+    string notificationTargetARN = 4;
+
+    // The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification
+    // target, for example, an Amazon SNS topic or an Amazon SQS queue.
+    string roleARN = 5;
+}
+
+// Defaults relevant to the AWS provider.
+message AwsDefaults {
+    // Halyard does not expose a command to edit this field, but defaults it to
+    // `BaseIAMRole`.
+    // TODO(mneterval): Can we move to Clouddriver?
+    string iamRole = 1;
+}
+
+// Configuration for AWS-specific features.
+message AwsFeatures {
+    // Configuration for AWS CloudFormation.
+    CloudFormation cloudFormation = 1;
+
+    // Configuration for AWS CloudFormation.
+    message CloudFormation {
+
+        // Whether AWS CloudFormation is enabled.
+        bool enabled = 1;
+    }
+}
