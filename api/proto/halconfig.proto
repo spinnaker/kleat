@@ -22,6 +22,7 @@ import "google.proto";
 import "appengine.proto";
 import "aws.proto";
 import "azure.proto";
+import "cloudfoundry.proto";
 
 message HalConfig {
   PersistentStorage persistentStorage = 1;
@@ -38,5 +39,6 @@ message HalConfig {
     Appengine appengine = 3;
     Aws aws = 4;
     Azure azure = 5;
+    CloudFoundry cloudfoundry = 6;
   }
 }

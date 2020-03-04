@@ -95,6 +95,21 @@ providers:
       - name: us-west-2
     defaults:
       iamRole: BaseIAMRole
+  cloudfoundry:
+    enabled: true
+    accounts:
+      - name: my-cf-account
+        environment: dev
+        requiredGroupMembership: []
+        permissions: {}
+        password: pw
+        user: username
+        skipSslValidation: true
+        api: api.sys.somesystem.com
+        appsManagerUri: https://apps.sys.somesystem.com
+        metricsUri: https://metrics.sys.somesystem.com
+    primaryAccount: my-cf-account
+
 persistentStorage:
   persistentStoreType: gcs
   azs: {}

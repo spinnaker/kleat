@@ -46,6 +46,14 @@
   
   
 
+- [cloudfoundry.proto](#cloudfoundry.proto)
+    - [CloudFoundry](#proto.CloudFoundry)
+    - [CloudFoundryAccount](#proto.CloudFoundryAccount)
+  
+  
+  
+  
+
 - [front50.proto](#front50.proto)
     - [Front50Config](#proto.Front50Config)
     - [Front50Config.Spinnaker](#proto.Front50Config.Spinnaker)
@@ -109,7 +117,19 @@
 <p align="right"><a href="#top">Top</a></p>
 
 ## appengine.proto
+Copyright The Spinnaker Authors
 
+Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 
 <a name="proto.Appengine"></a>
@@ -176,7 +196,19 @@ Configuration for an App Engine account.
 <p align="right"><a href="#top">Top</a></p>
 
 ## aws.proto
+Copyright The Spinnaker Authors
 
+Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 
 <a name="proto.Aws"></a>
@@ -400,7 +432,19 @@ Base image virtualization settings.
 <p align="right"><a href="#top">Top</a></p>
 
 ## azure.proto
+Copyright The Spinnaker Authors
 
+Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 
 <a name="proto.Azure"></a>
@@ -515,7 +559,19 @@ Configuration for a base image for the Azure provider&#39;s bakery.
 <p align="right"><a href="#top">Top</a></p>
 
 ## clouddriver.proto
+Copyright The Spinnaker Authors
 
+Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 
 <a name="proto.ClouddriverConfig"></a>
@@ -531,6 +587,76 @@ Configuration for a base image for the Azure provider&#39;s bakery.
 | appengine | [Appengine](#proto.Appengine) |  |  |
 | aws | [Aws](#proto.Aws) |  |  |
 | azure | [Azure](#proto.Azure) |  |  |
+| cloudfoundry | [CloudFoundry](#proto.CloudFoundry) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="cloudfoundry.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## cloudfoundry.proto
+Copyright The Spinnaker Authors
+
+Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+
+<a name="proto.CloudFoundry"></a>
+
+### CloudFoundry
+Configuration for the Cloud Foundry provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [CloudFoundryAccount](#proto.CloudFoundryAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+
+
+
+
+
+
+<a name="proto.CloudFoundryAccount"></a>
+
+### CloudFoundryAccount
+Configuration for a Spinnaker Cloud Foundry account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| api | [string](#string) |  | (Required) Host of the Cloud Foundry Foundation API endpoint (e.g., `api.sys.somesystem.com`). |
+| appsManagerUri | [string](#string) |  | HTTP(S) URL of the Apps Manager application for the CloudFoundry Foundation (e.g., `https://apps.sys.somesystem.com`). |
+| environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
+| metricsUri | [string](#string) |  | HTTP(S) URL of the metrics application for the CloudFoundry Foundation (e.g., `https://metrics.sys.somesystem.com`). |
+| password | [string](#string) |  | (Required) Password for the account to use for this Cloud Foundry Foundation. |
+| skipSslValidation | [bool](#bool) |  | (Default: `false`) Skip SSL server certificate validation of the API endpoint. |
+| user | [string](#string) |  | (Required) User name for the account to use for this Cloud Foundry Foundation. |
+| permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
+| requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
 
 
 
@@ -550,7 +676,19 @@ Configuration for a base image for the Azure provider&#39;s bakery.
 <p align="right"><a href="#top">Top</a></p>
 
 ## front50.proto
+Copyright The Spinnaker Authors
 
+Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 
 <a name="proto.Front50Config"></a>
@@ -597,7 +735,19 @@ Configuration for a base image for the Azure provider&#39;s bakery.
 <p align="right"><a href="#top">Top</a></p>
 
 ## google.proto
+Copyright The Spinnaker Authors
 
+Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 
 <a name="proto.Consul"></a>
@@ -745,7 +895,19 @@ Image source configuration.
 <p align="right"><a href="#top">Top</a></p>
 
 ## halconfig.proto
+Copyright The Spinnaker Authors
 
+Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 
 <a name="proto.HalConfig"></a>
@@ -793,6 +955,7 @@ Image source configuration.
 | appengine | [Appengine](#proto.Appengine) |  |  |
 | aws | [Aws](#proto.Aws) |  |  |
 | azure | [Azure](#proto.Azure) |  |  |
+| cloudfoundry | [CloudFoundry](#proto.CloudFoundry) |  |  |
 
 
 
@@ -812,7 +975,19 @@ Image source configuration.
 <p align="right"><a href="#top">Top</a></p>
 
 ## kubernetes.proto
+Copyright The Spinnaker Authors
 
+Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 
 <a name="proto.DockerRegistry"></a>
@@ -928,7 +1103,19 @@ need to explicitly register each CRD.
 <p align="right"><a href="#top">Top</a></p>
 
 ## permissions.proto
+Copyright The Spinnaker Authors
 
+Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 
 <a name="proto.Permissions"></a>
@@ -961,7 +1148,19 @@ A Fiat permissions configuration object.
 <p align="right"><a href="#top">Top</a></p>
 
 ## persistentstorage.proto
+Copyright The Spinnaker Authors
 
+Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 
 <a name="proto.GCS"></a>

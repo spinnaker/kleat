@@ -1,0 +1,72 @@
+/*
+ * Copyright The Spinnaker Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+syntax = "proto3";
+package proto;
+
+import "permissions.proto";
+
+// Configuration for the Cloud Foundry provider.
+message CloudFoundry {
+    // Whether the provider is enabled.
+    bool enabled = 1;
+
+    // The list of configured accounts.
+    repeated CloudFoundryAccount accounts = 2;
+
+    // The name of the primary account.
+    string primaryAccount = 3;
+}
+
+// Configuration for a Spinnaker Cloud Foundry account.
+message CloudFoundryAccount {
+    // The name of the account.
+    string name = 1;
+
+    // (Required) Host of the Cloud Foundry Foundation API endpoint
+    // (e.g., `api.sys.somesystem.com`).
+    string api = 2;
+
+    // HTTP(S) URL of the Apps Manager application for the CloudFoundry
+    // Foundation (e.g., `https://apps.sys.somesystem.com`).
+    string appsManagerUri = 3;
+
+    // The environment name for the account. Many accounts can share the
+    // same environment (e.g., dev, test, prod).
+    string environment = 4;
+
+    // HTTP(S) URL of the metrics application for the CloudFoundry Foundation
+    // (e.g., `https://metrics.sys.somesystem.com`).
+    string metricsUri = 5;
+
+    // (Required) Password for the account to use for this Cloud Foundry
+    // Foundation.
+    string password = 6;
+
+    // (Default: `false`) Skip SSL server certificate validation of the API
+    // endpoint.
+    bool skipSslValidation = 7;
+
+    // (Required) User name for the account to use for this Cloud Foundry
+    // Foundation.
+    string user = 8;
+
+    // Fiat permissions configuration.
+    Permissions permissions = 9;
+
+    // (Deprecated): List of required Fiat permission groups. Configure
+    // `permissions` instead.
+    repeated string requiredGroupMemberships = 10;
+}
