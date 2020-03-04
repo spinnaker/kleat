@@ -589,9 +589,9 @@ Configuration for a Spinnaker Cloud Foundry account.
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The name of the account. |
 | api | [string](#string) |  | (Required) Host of the Cloud Foundry Foundation API endpoint (e.g., `api.sys.somesystem.com`). |
-| appsManagerUri | [string](#string) |  | HTTP(S) URL of the Apps Manager application for the CloudFoundry Foundation (e.g., `https://apps.sys.somesystem.com`). |
+| appsManagerUri | [string](#string) |  | HTTP(S) URL of the Apps Manager application for the Cloud Foundry Foundation (e.g., `https://apps.sys.somesystem.com`). |
 | environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
-| metricsUri | [string](#string) |  | HTTP(S) URL of the metrics application for the CloudFoundry Foundation (e.g., `https://metrics.sys.somesystem.com`). |
+| metricsUri | [string](#string) |  | HTTP(S) URL of the metrics application for the Cloud Foundry Foundation (e.g., `https://metrics.sys.somesystem.com`). |
 | password | [string](#string) |  | (Required) Password for the account to use for this Cloud Foundry Foundation. |
 | skipSslValidation | [bool](#bool) |  | (Default: `false`) Skip SSL server certificate validation of the API endpoint. |
 | user | [string](#string) |  | (Required) User name for the account to use for this Cloud Foundry Foundation. |

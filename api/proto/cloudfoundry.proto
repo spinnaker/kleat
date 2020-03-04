@@ -24,7 +24,7 @@ message CloudFoundryAccount {
     // (e.g., `api.sys.somesystem.com`).
     string api = 2;
 
-    // HTTP(S) URL of the Apps Manager application for the CloudFoundry
+    // HTTP(S) URL of the Apps Manager application for the Cloud Foundry
     // Foundation (e.g., `https://apps.sys.somesystem.com`).
     string appsManagerUri = 3;
 
@@ -32,7 +32,7 @@ message CloudFoundryAccount {
     // same environment (e.g., dev, test, prod).
     string environment = 4;
 
-    // HTTP(S) URL of the metrics application for the CloudFoundry Foundation
+    // HTTP(S) URL of the metrics application for the Cloud Foundry Foundation
     // (e.g., `https://metrics.sys.somesystem.com`).
     string metricsUri = 5;
 

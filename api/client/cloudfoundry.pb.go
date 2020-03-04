@@ -86,13 +86,13 @@ type CloudFoundryAccount struct {
 	// (Required) Host of the Cloud Foundry Foundation API endpoint
 	// (e.g., `api.sys.somesystem.com`).
 	Api string `protobuf:"bytes,2,opt,name=api,proto3" json:"api,omitempty"`
-	// HTTP(S) URL of the Apps Manager application for the CloudFoundry
+	// HTTP(S) URL of the Apps Manager application for the Cloud Foundry
 	// Foundation (e.g., `https://apps.sys.somesystem.com`).
 	AppsManagerUri string `protobuf:"bytes,3,opt,name=appsManagerUri,proto3" json:"appsManagerUri,omitempty"`
 	// The environment name for the account. Many accounts can share the
 	// same environment (e.g., dev, test, prod).
 	Environment string `protobuf:"bytes,4,opt,name=environment,proto3" json:"environment,omitempty"`
-	// HTTP(S) URL of the metrics application for the CloudFoundry Foundation
+	// HTTP(S) URL of the metrics application for the Cloud Foundry Foundation
 	// (e.g., `https://metrics.sys.somesystem.com`).
 	MetricsUri string `protobuf:"bytes,5,opt,name=metricsUri,proto3" json:"metricsUri,omitempty"`
 	// (Required) Password for the account to use for this Cloud Foundry
