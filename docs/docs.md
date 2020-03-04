@@ -117,19 +117,7 @@
 <p align="right"><a href="#top">Top</a></p>
 
 ## appengine.proto
-Copyright The Spinnaker Authors
 
-Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-  http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
 
 
 <a name="proto.Appengine"></a>
@@ -196,19 +184,7 @@ Configuration for an App Engine account.
 <p align="right"><a href="#top">Top</a></p>
 
 ## aws.proto
-Copyright The Spinnaker Authors
 
-Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-  http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
 
 
 <a name="proto.Aws"></a>
@@ -432,19 +408,7 @@ Base image virtualization settings.
 <p align="right"><a href="#top">Top</a></p>
 
 ## azure.proto
-Copyright The Spinnaker Authors
 
-Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-  http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
 
 
 <a name="proto.Azure"></a>
@@ -559,19 +523,7 @@ Configuration for a base image for the Azure provider&#39;s bakery.
 <p align="right"><a href="#top">Top</a></p>
 
 ## clouddriver.proto
-Copyright The Spinnaker Authors
 
-Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-  http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
 
 
 <a name="proto.ClouddriverConfig"></a>
@@ -607,19 +559,7 @@ limitations under the License.
 <p align="right"><a href="#top">Top</a></p>
 
 ## cloudfoundry.proto
-Copyright The Spinnaker Authors
 
-Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-  http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
 
 
 <a name="proto.CloudFoundry"></a>
@@ -676,19 +616,7 @@ Configuration for a Spinnaker Cloud Foundry account.
 <p align="right"><a href="#top">Top</a></p>
 
 ## front50.proto
-Copyright The Spinnaker Authors
 
-Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-  http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
 
 
 <a name="proto.Front50Config"></a>
@@ -735,19 +663,7 @@ limitations under the License.
 <p align="right"><a href="#top">Top</a></p>
 
 ## google.proto
-Copyright The Spinnaker Authors
 
-Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-  http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
 
 
 <a name="proto.Consul"></a>
@@ -895,19 +811,7 @@ Image source configuration.
 <p align="right"><a href="#top">Top</a></p>
 
 ## halconfig.proto
-Copyright The Spinnaker Authors
 
-Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-  http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
 
 
 <a name="proto.HalConfig"></a>
@@ -975,19 +879,7 @@ limitations under the License.
 <p align="right"><a href="#top">Top</a></p>
 
 ## kubernetes.proto
-Copyright The Spinnaker Authors
 
-Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-  http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
 
 
 <a name="proto.DockerRegistry"></a>
@@ -1103,19 +995,7 @@ need to explicitly register each CRD.
 <p align="right"><a href="#top">Top</a></p>
 
 ## permissions.proto
-Copyright The Spinnaker Authors
 
-Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-  http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
 
 
 <a name="proto.Permissions"></a>
@@ -1148,19 +1028,7 @@ A Fiat permissions configuration object.
 <p align="right"><a href="#top">Top</a></p>
 
 ## persistentstorage.proto
-Copyright The Spinnaker Authors
 
-Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-  http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
 
 
 <a name="proto.GCS"></a>
