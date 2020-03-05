@@ -46,6 +46,14 @@
   
   
 
+- [cloudfoundry.proto](#cloudfoundry.proto)
+    - [CloudFoundry](#proto.CloudFoundry)
+    - [CloudFoundryAccount](#proto.CloudFoundryAccount)
+  
+  
+  
+  
+
 - [front50.proto](#front50.proto)
     - [Front50Config](#proto.Front50Config)
     - [Front50Config.Spinnaker](#proto.Front50Config.Spinnaker)
@@ -531,6 +539,64 @@ Configuration for a base image for the Azure provider&#39;s bakery.
 | appengine | [Appengine](#proto.Appengine) |  |  |
 | aws | [Aws](#proto.Aws) |  |  |
 | azure | [Azure](#proto.Azure) |  |  |
+| cloudfoundry | [CloudFoundry](#proto.CloudFoundry) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="cloudfoundry.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## cloudfoundry.proto
+
+
+
+<a name="proto.CloudFoundry"></a>
+
+### CloudFoundry
+Configuration for the Cloud Foundry provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [CloudFoundryAccount](#proto.CloudFoundryAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+
+
+
+
+
+
+<a name="proto.CloudFoundryAccount"></a>
+
+### CloudFoundryAccount
+Configuration for a Spinnaker Cloud Foundry account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| api | [string](#string) |  | (Required) Host of the Cloud Foundry Foundation API endpoint (e.g., `api.sys.somesystem.com`). |
+| appsManagerUri | [string](#string) |  | HTTP(S) URL of the Apps Manager application for the Cloud Foundry Foundation (e.g., `https://apps.sys.somesystem.com`). |
+| environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
+| metricsUri | [string](#string) |  | HTTP(S) URL of the metrics application for the Cloud Foundry Foundation (e.g., `https://metrics.sys.somesystem.com`). |
+| password | [string](#string) |  | (Required) Password for the account to use for this Cloud Foundry Foundation. |
+| skipSslValidation | [bool](#bool) |  | (Default: `false`) Skip SSL server certificate validation of the API endpoint. |
+| user | [string](#string) |  | (Required) User name for the account to use for this Cloud Foundry Foundation. |
+| permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
+| requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
 
 
 
@@ -793,6 +859,7 @@ Image source configuration.
 | appengine | [Appengine](#proto.Appengine) |  |  |
 | aws | [Aws](#proto.Aws) |  |  |
 | azure | [Azure](#proto.Azure) |  |  |
+| cloudfoundry | [CloudFoundry](#proto.CloudFoundry) |  |  |
 
 
 
