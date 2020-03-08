@@ -109,7 +109,26 @@ providers:
         appsManagerUri: https://apps.sys.somesystem.com
         metricsUri: https://metrics.sys.somesystem.com
     primaryAccount: my-cf-account
-
+  dcos:
+    enabled: true
+    accounts:
+      - name: my-dcos-account
+        environment: dev
+        dockerRegistries:
+          - accountName: my-gcr-registry
+        clusters:
+          - name: my-dcos-cluster
+            uid: my-id
+            serviceKeyFile: /var/secrets/my-dcos-service-key
+    primaryAccount: my-dcos-account
+    clusters:
+      - name: my-dcos-cluster
+        dcosUrl: my-url
+        caCertFile: /var/secrets/my-ca-cert-file
+        insecureSkipTlsVerify: true
+        loadBalancer:
+          image: image
+          serviceAccountSecret: secret
 persistentStorage:
   persistentStoreType: gcs
   azs: {}

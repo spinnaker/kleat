@@ -215,6 +215,7 @@ func halToClouddriver(h proto.HalConfig) (proto.ClouddriverConfig, error) {
 		Aws:          h.Providers.Aws,
 		Azure:        h.Providers.Azure,
 		Cloudfoundry: h.Providers.Cloudfoundry,
+		Dcos:         h.Providers.Dcos,
 	}
 	return c, nil
 }

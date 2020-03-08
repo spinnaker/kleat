@@ -54,6 +54,18 @@
   
   
 
+- [dcos.proto](#dcos.proto)
+    - [Dcos](#proto.Dcos)
+    - [DcosAccount](#proto.DcosAccount)
+    - [DcosAccountCluster](#proto.DcosAccountCluster)
+    - [DcosAccountDockerRegistry](#proto.DcosAccountDockerRegistry)
+    - [DcosCluster](#proto.DcosCluster)
+    - [DcosClusterLoadBalancer](#proto.DcosClusterLoadBalancer)
+  
+  
+  
+  
+
 - [front50.proto](#front50.proto)
     - [Front50Config](#proto.Front50Config)
     - [Front50Config.Spinnaker](#proto.Front50Config.Spinnaker)
@@ -540,6 +552,7 @@ Configuration for a base image for the Azure provider&#39;s bakery.
 | aws | [Aws](#proto.Aws) |  |  |
 | azure | [Azure](#proto.Azure) |  |  |
 | cloudfoundry | [CloudFoundry](#proto.CloudFoundry) |  |  |
+| dcos | [Dcos](#proto.Dcos) |  |  |
 
 
 
@@ -597,6 +610,128 @@ Configuration for a Spinnaker Cloud Foundry account.
 | user | [string](#string) |  | (Required) User name for the account to use for this Cloud Foundry Foundation. |
 | permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
 | requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="dcos.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## dcos.proto
+
+
+
+<a name="proto.Dcos"></a>
+
+### Dcos
+Configuration for the DC/OS (Distributed Cloud Operating System) provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [DcosAccount](#proto.DcosAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+| clusters | [DcosCluster](#proto.DcosCluster) | repeated | The list of configured clusters. |
+
+
+
+
+
+
+<a name="proto.DcosAccount"></a>
+
+### DcosAccount
+Credentials to authenticate against one or more DC/OS clusters.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | (Required) The name of the account. |
+| clusters | [DcosAccountCluster](#proto.DcosAccountCluster) | repeated | (Required) The clusters against which this account will authenticate. |
+| environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
+| dockerRegistries | [DcosAccountDockerRegistry](#proto.DcosAccountDockerRegistry) | repeated | (Required) The list of Docker registries to use with this DC/OS account. |
+| permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
+| requiredGroupMemberships | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
+
+
+
+
+
+
+<a name="proto.DcosAccountCluster"></a>
+
+### DcosAccountCluster
+Configuration for a DC/OS cluster associated with a `DcosAccount`.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | (Required) The name of the cluster. Must match the name of a `DcosCluster` defined for this provider. |
+| uid | [string](#string) |  | (Required) User or service account identifier. |
+| serviceKeyFile | [string](#string) |  | Path to a file containing the secret key for service account authentication. If set, `password` should not be set. |
+| password | [string](#string) |  | Password for a user account. If set, `serviceKeyFile` should not be set. |
+
+
+
+
+
+
+<a name="proto.DcosAccountDockerRegistry"></a>
+
+### DcosAccountDockerRegistry
+Configuration for a Docker registry associated with a `DcosAccount`.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| accountName | [string](#string) |  | The name of the Docker registry. Must be the name of an account configured with the Docker registry provider. |
+
+
+
+
+
+
+<a name="proto.DcosCluster"></a>
+
+### DcosCluster
+Configuration for a DC/OS cluster.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | (Required) The name of the cluster. |
+| caCertFile | [string](#string) |  | Root certificate file to trust for connections to the cluster. |
+| dcosUrl | [string](#string) |  | (Required) URL of the endpoint for the DC/OS cluster&#39;s admin router. |
+| loadBalancer | [DcosClusterLoadBalancer](#proto.DcosClusterLoadBalancer) |  | Configuration for a DC/OS load balancer. |
+| insecureSkipTlsVerify | [bool](#bool) |  | If `true`, disables verification of certificates from the cluster (insecure). |
+
+
+
+
+
+
+<a name="proto.DcosClusterLoadBalancer"></a>
+
+### DcosClusterLoadBalancer
+Configuration for a DC/OS load balancer.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| image | [string](#string) |  | Marathon-lb image to use when creating a load balancer with Spinnaker. |
+| serviceAccountSecret | [string](#string) |  | Name of the secret to use for allowing marathon-lb to authenticate with the cluster. Only necessary for clusters with strict or permissive security. |
 
 
 
@@ -860,6 +995,7 @@ Image source configuration.
 | aws | [Aws](#proto.Aws) |  |  |
 | azure | [Azure](#proto.Azure) |  |  |
 | cloudfoundry | [CloudFoundry](#proto.CloudFoundry) |  |  |
+| dcos | [Dcos](#proto.Dcos) |  |  |
 
 
 

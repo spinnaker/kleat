@@ -8,6 +8,7 @@ import "appengine.proto";
 import "aws.proto";
 import "azure.proto";
 import "cloudfoundry.proto";
+import "dcos.proto";
 
 message HalConfig {
   PersistentStorage persistentStorage = 1;
@@ -25,5 +26,6 @@ message HalConfig {
     Aws aws = 4;
     Azure azure = 5;
     CloudFoundry cloudfoundry = 6;
+    Dcos dcos = 7;
   }
 }
