@@ -4,7 +4,7 @@ package proto;
 import "permissions.proto";
 
 // Configuration for the Oracle provider.
-message Oracle {
+message OracleProvider {
   // Whether the provider is enabled.
   bool enabled = 1;
 

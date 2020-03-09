@@ -24,16 +24,16 @@ message HalConfig {
   }
 
   message Providers {
-    Kubernetes kubernetes = 1;
-    Google google = 2;
-    Appengine appengine = 3;
-    Aws aws = 4;
-    Azure azure = 5;
-    CloudFoundry cloudfoundry = 6;
-    Dcos dcos = 7;
-    DockerRegistry dockerRegistry = 8;
-    Ecs ecs = 9;
-    HuaweiCloud huaweicloud = 10;
-    Oracle oracle = 11;
+    KubernetesProvider kubernetes = 1;
+    GoogleProvider google = 2;
+    AppengineProvider appengine = 3;
+    AwsProvider aws = 4;
+    AzureProvider azure = 5;
+    CloudFoundryProvider cloudfoundry = 6;
+    DcosProvider dcos = 7;
+    DockerRegistryProvider dockerRegistry = 8;
+    EcsProvider ecs = 9;
+    HuaweiCloudProvider huaweicloud = 10;
+    OracleProvider oracle = 11;
   }
 }

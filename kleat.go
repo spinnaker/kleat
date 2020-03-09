@@ -173,23 +173,6 @@ func printObject(i interface{}, w io.Writer) error {
 	return nil
 }
 
-func getTestHalConfig() proto.HalConfig {
-	h := proto.HalConfig{
-		Providers: &proto.HalConfig_Providers{
-			Kubernetes: &proto.Kubernetes{
-				Enabled: false,
-				Accounts: []*proto.KubernetesAccount{
-					{
-						Name:            "hal",
-						ProviderVersion: "V2",
-					},
-				},
-			},
-		},
-	}
-	return h
-}
-
 func halToFront50(h proto.HalConfig) (proto.Front50Config, error) {
 	f := proto.Front50Config{
 		Spinnaker: &proto.Front50Config_Spinnaker{

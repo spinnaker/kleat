@@ -4,7 +4,7 @@ package proto;
 import "permissions.proto";
 
 // Configuration for the Google Compute Engine (GCE) provider.
-message Google {
+message GoogleProvider {
     // Whether the provider is enabled.
     bool enabled = 1;
 

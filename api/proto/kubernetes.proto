@@ -4,7 +4,7 @@ package proto;
 import "permissions.proto";
 
 // Configuration for the Kubernetes provider.
-message Kubernetes {
+message KubernetesProvider {
     // Whether the provider is enabled.
     bool enabled = 1;
 

@@ -4,7 +4,7 @@ package proto;
 import "permissions.proto";
 
 // Configuration for the ECS provider.
-message Ecs {
+message EcsProvider {
   // Whether the provider is enabled.
   bool enabled = 1;
 
