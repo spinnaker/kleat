@@ -154,7 +154,7 @@
   
   
 
-- [persistentstorage.proto](#persistentstorage.proto)
+- [persistent_storage.proto](#persistent_storage.proto)
     - [GCS](#proto.GCS)
   
   
@@ -1595,10 +1595,10 @@ A Fiat permissions configuration object.
 
 
 
-<a name="persistentstorage.proto"></a>
+<a name="persistent_storage.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## persistentstorage.proto
+## persistent_storage.proto
 
 
 

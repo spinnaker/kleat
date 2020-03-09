@@ -1,7 +1,7 @@
 syntax = "proto3";
 package proto;
 
-import "persistentstorage.proto";
+import "persistent_storage.proto";
 
 message Front50Config {
   Spinnaker spinnaker = 1;
