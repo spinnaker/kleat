@@ -8,6 +8,7 @@ import "aws.proto";
 import "azure.proto";
 import "cloudfoundry.proto";
 import "dcos.proto";
+import "docker_registry.proto";
 
 message ClouddriverConfig {
     Kubernetes kubernetes = 1;
@@ -17,4 +18,5 @@ message ClouddriverConfig {
     Azure azure = 5;
     CloudFoundry cloudfoundry = 6;
     Dcos dcos = 7;
+    DockerRegistry dockerRegistry = 8;
 }

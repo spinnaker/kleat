@@ -129,6 +129,24 @@ providers:
         loadBalancer:
           image: image
           serviceAccountSecret: secret
+  dockerRegistry:
+    enabled: true
+    accounts:
+    - name: my-gcr-registry
+      address: https://gcr.io
+      username: _json_key
+      email: fake.email@spinnaker.io
+      cacheIntervalSeconds: 30
+      clientTimeoutMillis: 60000
+      cacheThreads: 1
+      paginateSize: 100
+      sortTagsByDate: false
+      trackDigests: false
+      insecureRegistry: false
+      repositories:
+      - my-repo
+      passwordFile: /var/secrets/gcr-account.json
+    primaryAccount: my-gcr-registry
 persistentStorage:
   persistentStoreType: gcs
   azs: {}

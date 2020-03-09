@@ -69,7 +69,7 @@ message KubernetesAccount {
     // Spinnaker account can use as image sources. These docker registry
     // accounts must be registered in your halconfig before you can add them
     // here.
-    repeated DockerRegistry dockerRegistries = 11;
+    repeated KubernetesAccountDockerRegistry dockerRegistries = 11;
 
     // The list of OAuth scopes used by kubectl to fetch an OAuth token.
     repeated string oAuthScopes = 12;
@@ -121,7 +121,7 @@ message KubernetesCachingPolicy {
 }
 
 // Configuration for a Docker registry.
-message DockerRegistry {
+message KubernetesAccountDockerRegistry {
     // The configured name of the Docker registry.
     string accountName = 1;
 

@@ -66,6 +66,14 @@
   
   
 
+- [docker_registry.proto](#docker_registry.proto)
+    - [DockerRegistry](#proto.DockerRegistry)
+    - [DockerRegistryAccount](#proto.DockerRegistryAccount)
+  
+  
+  
+  
+
 - [front50.proto](#front50.proto)
     - [Front50Config](#proto.Front50Config)
     - [Front50Config.Spinnaker](#proto.Front50Config.Spinnaker)
@@ -97,9 +105,9 @@
   
 
 - [kubernetes.proto](#kubernetes.proto)
-    - [DockerRegistry](#proto.DockerRegistry)
     - [Kubernetes](#proto.Kubernetes)
     - [KubernetesAccount](#proto.KubernetesAccount)
+    - [KubernetesAccountDockerRegistry](#proto.KubernetesAccountDockerRegistry)
     - [KubernetesCachingPolicy](#proto.KubernetesCachingPolicy)
     - [KubernetesCustomResource](#proto.KubernetesCustomResource)
   
@@ -553,6 +561,7 @@ Configuration for a base image for the Azure provider&#39;s bakery.
 | azure | [Azure](#proto.Azure) |  |  |
 | cloudfoundry | [CloudFoundry](#proto.CloudFoundry) |  |  |
 | dcos | [Dcos](#proto.Dcos) |  |  |
+| dockerRegistry | [DockerRegistry](#proto.DockerRegistry) |  |  |
 
 
 
@@ -732,6 +741,71 @@ Configuration for a DC/OS load balancer.
 | ----- | ---- | ----- | ----------- |
 | image | [string](#string) |  | Marathon-lb image to use when creating a load balancer with Spinnaker. |
 | serviceAccountSecret | [string](#string) |  | Name of the secret to use for allowing marathon-lb to authenticate with the cluster. Only necessary for clusters with strict or permissive security. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="docker_registry.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## docker_registry.proto
+
+
+
+<a name="proto.DockerRegistry"></a>
+
+### DockerRegistry
+Configuration for the Docker Registry provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [DockerRegistryAccount](#proto.DockerRegistryAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+
+
+
+
+
+
+<a name="proto.DockerRegistryAccount"></a>
+
+### DockerRegistryAccount
+A credential able to authenticate against a set of Docker repositories.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| address | [string](#string) |  | (Required) The registry address from which to pull and deploy images (e.g., `index.docker.io`). |
+| cacheIntervalSeconds | [int32](#int32) |  | The number of seconds between polling the Docker registry. Certain registries are sensitive to over-polling, and larger intervals (e.g., 10 minutes = 600 seconds) are desirable if you experience rate limiting. Defaults to `30`. |
+| cacheThreads | [int32](#int32) |  | The number of threads on which to cache all provided repositories. Really only useful if you have a ton of repos. Defaults to 1. |
+| clientTimeoutMillis | [int32](#int32) |  | Timeout in milliseconds for provided repositories. Defaults to `60,000`. |
+| email | [string](#string) |  | The email associated with your Docker registry. Often this only needs to be well-formed, rather than be a real address. |
+| environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
+| insecureRegistry | [bool](#bool) |  | If `true`, Spinnaker will treat the Docker registry as insecure and not validate the SSL certificate. Defaults to `false`. |
+| paginateSize | [int32](#int32) |  | Pagination size for the Docker `repository _catalog` endpoint. Defaults to `100`. |
+| password | [string](#string) |  | The Docker registry password. Only one of `password`, `passwordCommand`, and `passwordFile` should be specified. |
+| passwordCommand | [string](#string) |  | Command to retrieve Docker token/password. The command must be available in the environment. Only one of `password`, `passwordCommand`, and `passwordFile` should be specified. |
+| passwordFile | [string](#string) |  | The path to a file containing your Docker password in plaintext (not a Docker `config.json` file). Only one of `password`, `passwordCommand`, and `passwordFile` should be specified. |
+| permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
+| requiredGroupMemberships | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
+| repositories | [string](#string) | repeated | An optional list of repositories from which to cache images. If not provided, Spinnaker will attempt to read accessible repositories from the `registries _catalog` endpoint. |
+| sortTagsByDate | [bool](#bool) |  | If `true`, Spinnaker will sort tags by creation date. Defaults to `false`. |
+| trackDigests | [bool](#bool) |  | If `true`, Spinnaker will track digest changes. This is not recommended because it consumes a high QPM, and most registries are flaky. Defaults to `false`. |
+| username | [string](#string) |  | The username associated with this Docker registry. |
 
 
 
@@ -996,6 +1070,7 @@ Image source configuration.
 | azure | [Azure](#proto.Azure) |  |  |
 | cloudfoundry | [CloudFoundry](#proto.CloudFoundry) |  |  |
 | dcos | [Dcos](#proto.Dcos) |  |  |
+| dockerRegistry | [DockerRegistry](#proto.DockerRegistry) |  |  |
 
 
 
@@ -1015,22 +1090,6 @@ Image source configuration.
 <p align="right"><a href="#top">Top</a></p>
 
 ## kubernetes.proto
-
-
-
-<a name="proto.DockerRegistry"></a>
-
-### DockerRegistry
-Configuration for a Docker registry.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| accountName | [string](#string) |  | The configured name of the Docker registry. |
-| namespaces | [string](#string) | repeated | The list of Docker registry namespaces usable as image sources. |
-
-
-
 
 
 
@@ -1070,11 +1129,27 @@ credential that can authenticate against your Kubernetes cluster.
 | omitNamespaces | [string](#string) | repeated | A list of namespaces this Spinnaker account cannot deploy to or cache. This can only be set when namespaces is empty or not set. |
 | customResources | [KubernetesCustomResource](#proto.KubernetesCustomResource) | repeated | The list of custom resources Clouddriver will manage and make available for use in Patch and Delete (Manifest) stages. |
 | cachingPolicies | [KubernetesCachingPolicy](#proto.KubernetesCachingPolicy) | repeated | The list of kind-specific caching policies. |
-| dockerRegistries | [DockerRegistry](#proto.DockerRegistry) | repeated | The list of the Spinnaker docker registry account names this Spinnaker account can use as image sources. These docker registry accounts must be registered in your halconfig before you can add them here. |
+| dockerRegistries | [KubernetesAccountDockerRegistry](#proto.KubernetesAccountDockerRegistry) | repeated | The list of the Spinnaker docker registry account names this Spinnaker account can use as image sources. These docker registry accounts must be registered in your halconfig before you can add them here. |
 | oAuthScopes | [string](#string) | repeated | The list of OAuth scopes used by kubectl to fetch an OAuth token. |
 | kubeconfigFile | [string](#string) |  | The path to your kubeconfig file. By default, it will be under the Spinnaker user&#39;s home directory in the typical .kube/config location. todo: document new var/secrets convention. |
 | permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
 | requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
+
+
+
+
+
+
+<a name="proto.KubernetesAccountDockerRegistry"></a>
+
+### KubernetesAccountDockerRegistry
+Configuration for a Docker registry.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| accountName | [string](#string) |  | The configured name of the Docker registry. |
+| namespaces | [string](#string) | repeated | The list of Docker registry namespaces usable as image sources. |
 
 
 

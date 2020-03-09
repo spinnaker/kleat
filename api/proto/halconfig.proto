@@ -9,6 +9,7 @@ import "aws.proto";
 import "azure.proto";
 import "cloudfoundry.proto";
 import "dcos.proto";
+import "docker_registry.proto";
 
 message HalConfig {
   PersistentStorage persistentStorage = 1;
@@ -27,5 +28,6 @@ message HalConfig {
     Azure azure = 5;
     CloudFoundry cloudfoundry = 6;
     Dcos dcos = 7;
+    DockerRegistry dockerRegistry = 8;
   }
 }
