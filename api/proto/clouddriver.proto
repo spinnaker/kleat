@@ -10,6 +10,7 @@ import "cloudfoundry.proto";
 import "dcos.proto";
 import "docker_registry.proto";
 import "ecs.proto";
+import "huaweicloud.proto";
 
 message ClouddriverConfig {
     Kubernetes kubernetes = 1;
@@ -21,4 +22,5 @@ message ClouddriverConfig {
     Dcos dcos = 7;
     DockerRegistry dockerRegistry = 8;
     Ecs ecs = 9;
+    HuaweiCloud huaweicloud = 10;
 }

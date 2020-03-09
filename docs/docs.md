@@ -112,6 +112,18 @@
   
   
 
+- [huaweicloud.proto](#huaweicloud.proto)
+    - [HuaweiCloud](#proto.HuaweiCloud)
+    - [HuaweiCloudAccount](#proto.HuaweiCloudAccount)
+    - [HuaweiCloudBakeryDefaults](#proto.HuaweiCloudBakeryDefaults)
+    - [HuaweiCloudBaseImage](#proto.HuaweiCloudBaseImage)
+    - [HuaweiCloudBaseImageSettings](#proto.HuaweiCloudBaseImageSettings)
+    - [HuaweiCloudVirtualizationSettings](#proto.HuaweiCloudVirtualizationSettings)
+  
+  
+  
+  
+
 - [kubernetes.proto](#kubernetes.proto)
     - [Kubernetes](#proto.Kubernetes)
     - [KubernetesAccount](#proto.KubernetesAccount)
@@ -571,6 +583,7 @@ Configuration for a base image for the Azure provider&#39;s bakery.
 | dcos | [Dcos](#proto.Dcos) |  |  |
 | dockerRegistry | [DockerRegistry](#proto.DockerRegistry) |  |  |
 | ecs | [Ecs](#proto.Ecs) |  |  |
+| huaweicloud | [HuaweiCloud](#proto.HuaweiCloud) |  |  |
 
 
 
@@ -1133,6 +1146,147 @@ Image source configuration.
 | dcos | [Dcos](#proto.Dcos) |  |  |
 | dockerRegistry | [DockerRegistry](#proto.DockerRegistry) |  |  |
 | ecs | [Ecs](#proto.Ecs) |  |  |
+| huaweicloud | [HuaweiCloud](#proto.HuaweiCloud) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="huaweicloud.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## huaweicloud.proto
+
+
+
+<a name="proto.HuaweiCloud"></a>
+
+### HuaweiCloud
+Configuration for the Huawei Cloud provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [HuaweiCloudAccount](#proto.HuaweiCloudAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+| bakeryDefaults | [HuaweiCloudBakeryDefaults](#proto.HuaweiCloudBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
+
+
+
+
+
+
+<a name="proto.HuaweiCloudAccount"></a>
+
+### HuaweiCloudAccount
+Configuration for a Huawei Cloud account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| accountType | [string](#string) |  | The type of account. |
+| requiredGroupMemberships | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
+| permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
+| authUrl | [string](#string) |  | (Required) The auth URL of the cloud. |
+| domainName | [string](#string) |  | (Required) The domain name of the cloud. |
+| environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
+| insecure | [bool](#bool) |  | If `true`, disables certificate validation on SSL connections. Needed if certificates are self-signed. Defaults to `false`. |
+| password | [string](#string) |  | (Required) The password used to access the cloud. |
+| projectName | [string](#string) |  | (Required) The name of the project within the cloud. |
+| regions | [string](#string) | repeated | (Required) The region(s) of the cloud. |
+| username | [string](#string) |  | (Required) The username used to access the cloud. |
+
+
+
+
+
+
+<a name="proto.HuaweiCloudBakeryDefaults"></a>
+
+### HuaweiCloudBakeryDefaults
+Configuration for Spinnaker&#39;s image bakery.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| baseImages | [HuaweiCloudBaseImageSettings](#proto.HuaweiCloudBaseImageSettings) | repeated | List of configured base images. |
+| templateFile | [string](#string) |  | This is the name of the packer template that will be used to bake images from this base image. The template file must be found in this list: https://github.com/spinnaker/rosco/tree/master/rosco-web/config/packer, or supplied as described here: https://spinnaker.io/setup/bakery/. |
+| authUrl | [string](#string) |  | (Required) The default auth URL in which images will be baked. |
+| username | [string](#string) |  | (Required) The default username with which images will be baked. |
+| password | [string](#string) |  | (Required) The default password with which images will be baked. |
+| projectName | [string](#string) |  | The name of the default project in which images will be baked. |
+| domainName | [string](#string) |  | (Required) The default domain name in which images will be baked. |
+| insecure | [bool](#bool) |  | The security setting for connecting to the Huawei Cloud account. Defaults to `false`. |
+| vpcId | [string](#string) |  | (Required) The VPC in which images will be baked. |
+| subnetId | [string](#string) |  | (Required) The subnet in which images will be baked. |
+| securityGroup | [string](#string) |  | (Required) The default security group in which images will be baked. |
+| eipBandwidthSize | [int32](#int32) |  | (Required) The bandwidth size of EIP in which images will be baked. |
+
+
+
+
+
+
+<a name="proto.HuaweiCloudBaseImage"></a>
+
+### HuaweiCloudBaseImage
+Huawei Cloud base image settings.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | The name of the base image. |
+| packageType | [string](#string) |  | This is used to help Spinnaker&#39;s bakery download the build artifacts you supply it with. For example, specifying `deb` indicates that your artifacts will need to be fetched from a debian repository. |
+| templateFile | [string](#string) |  | This is the name of the packer template that will be used to bake images from this base image. The template file must be found in this list: https://github.com/spinnaker/rosco/tree/master/rosco-web/config/packer, or supplied as described here: https://spinnaker.io/setup/bakery/. |
+| shortDescription | [string](#string) |  | A short description to help human operators identify the image. |
+| detailedDescription | [string](#string) |  | A long description to help human operators identify the image. |
+
+
+
+
+
+
+<a name="proto.HuaweiCloudBaseImageSettings"></a>
+
+### HuaweiCloudBaseImageSettings
+Configuration for a base image for the Google provider&#39;s bakery.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| baseImage | [HuaweiCloudBaseImage](#proto.HuaweiCloudBaseImage) |  | Base image configuration. |
+| virtualizationSettings | [HuaweiCloudVirtualizationSettings](#proto.HuaweiCloudVirtualizationSettings) | repeated | Image source configuration. |
+
+
+
+
+
+
+<a name="proto.HuaweiCloudVirtualizationSettings"></a>
+
+### HuaweiCloudVirtualizationSettings
+Huawei Cloud virtualization settings.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| region | [string](#string) |  | (Required) The region for the baking configuration. |
+| instanceType | [string](#string) |  | (Required) The instance type for the baking configuration. |
+| sourceImageId | [string](#string) |  | (Required) The source image ID for the baking configuration. |
+| sshUserName | [string](#string) |  | (Required) The SSH username for the baking configuration. |
+| eipType | [string](#string) |  | (Required) The EIP type for the baking configuration. See the API doc to get its value. |
 
 
 

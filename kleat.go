@@ -218,6 +218,7 @@ func halToClouddriver(h proto.HalConfig) (proto.ClouddriverConfig, error) {
 		Dcos:           h.Providers.Dcos,
 		DockerRegistry: h.Providers.DockerRegistry,
 		Ecs:            h.Providers.Ecs,
+		Huaweicloud:    h.Providers.Huaweicloud,
 	}
 	return c, nil
 }
