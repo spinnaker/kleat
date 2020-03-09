@@ -135,6 +135,18 @@
   
   
 
+- [oracle.proto](#oracle.proto)
+    - [Oracle](#proto.Oracle)
+    - [OracleAccount](#proto.OracleAccount)
+    - [OracleBakeryDefaults](#proto.OracleBakeryDefaults)
+    - [OracleBaseImage](#proto.OracleBaseImage)
+    - [OracleBaseImageSettings](#proto.OracleBaseImageSettings)
+    - [OracleVirtualizationSettings](#proto.OracleVirtualizationSettings)
+  
+  
+  
+  
+
 - [permissions.proto](#permissions.proto)
     - [Permissions](#proto.Permissions)
   
@@ -584,6 +596,7 @@ Configuration for a base image for the Azure provider&#39;s bakery.
 | dockerRegistry | [DockerRegistry](#proto.DockerRegistry) |  |  |
 | ecs | [Ecs](#proto.Ecs) |  |  |
 | huaweicloud | [HuaweiCloud](#proto.HuaweiCloud) |  |  |
+| oracle | [Oracle](#proto.Oracle) |  |  |
 
 
 
@@ -1147,6 +1160,7 @@ Image source configuration.
 | dockerRegistry | [DockerRegistry](#proto.DockerRegistry) |  |  |
 | ecs | [Ecs](#proto.Ecs) |  |  |
 | huaweicloud | [HuaweiCloud](#proto.HuaweiCloud) |  |  |
+| oracle | [Oracle](#proto.Oracle) |  |  |
 
 
 
@@ -1403,6 +1417,136 @@ need to explicitly register each CRD.
 | deployPriority | [string](#string) |  | An integer representing the deployment priority of this resource. Resources with lower values are deployed before resources with higher values. |
 | versioned | [bool](#bool) |  | Whether Spinnaker should manage versioning this resource. |
 | namespaced | [bool](#bool) |  | Whether the resource is namespaced. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="oracle.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## oracle.proto
+
+
+
+<a name="proto.Oracle"></a>
+
+### Oracle
+Configuration for the Oracle provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [OracleAccount](#proto.OracleAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+| bakeryDefaults | [OracleBakeryDefaults](#proto.OracleBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
+
+
+
+
+
+
+<a name="proto.OracleAccount"></a>
+
+### OracleAccount
+Configuration for an Oracle account. An account maps to an Oracle Cloud
+Infrastructure (OCI) user.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| requiredGroupMemberships | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
+| permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
+| compartmentId | [string](#string) |  | (Required) The OCID of the Oracle Compartment to use. |
+| environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
+| fingerprint | [string](#string) |  | (Required) Fingerprint of the public key. |
+| privateKeyPassphrase | [string](#string) |  | Passphrase used for the private key, if it is encrypted. |
+| region | [string](#string) |  | (Required) An Oracle region (e.g., `us-phoenix-1`). |
+| sshPrivateKeyFilePath | [string](#string) |  | (Required) Path to the private key in PEM format. |
+| tenancyId | [string](#string) |  | (Required) The OCID of the Oracle Tenancy to use. |
+| userId | [string](#string) |  | (Required) The OCID of the Oracle User with which to authenticate. |
+
+
+
+
+
+
+<a name="proto.OracleBakeryDefaults"></a>
+
+### OracleBakeryDefaults
+Configuration for Spinnaker&#39;s image bakery.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| templateFile | [string](#string) |  | The name of the Packer template that will be used to bake images from this base image. The template file must be found in this list: https://github.com/spinnaker/rosco/tree/master/rosco-web/config/packer, or supplied as described here: https://spinnaker.io/setup/bakery/. |
+| baseImages | [OracleBaseImageSettings](#proto.OracleBaseImageSettings) | repeated | List of configured base images. |
+| availabilityDomain | [string](#string) |  | (Required) The name of the Availability Domain within which a new instance is launched and provisioned. |
+| instanceShape | [string](#string) |  | (Required) The shape for a newly created instance. |
+| subnetId | [string](#string) |  | (Required) The name of the subnet within which a new instance is launched and provisioned. |
+
+
+
+
+
+
+<a name="proto.OracleBaseImage"></a>
+
+### OracleBaseImage
+Oracle base image configuration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | The name of the base image. |
+| shortDescription | [string](#string) |  | A short description to help human operators identify the image. |
+| detailedDescription | [string](#string) |  | A long description to help human operators identify the image. |
+| packageType | [string](#string) |  | This is used to help Spinnaker&#39;s bakery download the build artifacts you supply it with. For example, specifying deb indicates that your artifacts will need to be fetched from a debian repository. |
+| templateFile | [string](#string) |  | The name of the Packer template that will be used to bake images from this base image. The template file must be found in this list: https://github.com/spinnaker/rosco/tree/master/rosco-web/config/packer, or supplied as described here: https://spinnaker.io/setup/bakery/. |
+
+
+
+
+
+
+<a name="proto.OracleBaseImageSettings"></a>
+
+### OracleBaseImageSettings
+Configuration for a base image for the Oracle provider&#39;s bakery.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| baseImage | [OracleBaseImage](#proto.OracleBaseImage) |  | Oracle base image configuration. |
+| virtualizationSettings | [OracleVirtualizationSettings](#proto.OracleVirtualizationSettings) |  | Oracle virtualization settings. |
+
+
+
+
+
+
+<a name="proto.OracleVirtualizationSettings"></a>
+
+### OracleVirtualizationSettings
+Oracle virtualization settings.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| baseImageId | [string](#string) |  | (Required) The OCID of the base image ID for the baking configuration. |
+| sshUserName | [string](#string) |  | (Required) The ssh username for the baking configuration. |
 
 
 

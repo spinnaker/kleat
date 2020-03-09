@@ -193,6 +193,34 @@ providers:
       subnetId: id
       securityGroup: group
       eipBandwidthSize: 10
+  oracle:
+    enabled: true
+    accounts:
+    - name: my-oracle-account
+      environment: dev
+      compartmentId: compartment-id
+      userId: user-id
+      fingerprint: fingerprint
+      sshPrivateKeyFilePath: /var/secrets/oracle_ssh_key_file
+      privateKeyPassphrase: pw
+      tenancyId: tenancy-id
+      region: us-east1
+    primaryAccount: my-oracle-account
+    bakeryDefaults:
+      templateFile: /var/secrets/oracle_template_file
+      baseImages:
+      - baseImage:
+          id: my-base-image
+          shortDescription: blah
+          detailedDescription: blahblahblah
+          packageType: deb
+          templateFile: /var/secrets/oracle_template_file
+        virtualizationSettings:
+          baseImageId: base-image-id
+          sshUserName: username
+      availabilityDomain: domain
+      subnetId: id
+      instanceShape: shape
 persistentStorage:
   persistentStoreType: gcs
   azs: {}

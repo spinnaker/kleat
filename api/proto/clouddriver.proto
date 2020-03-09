@@ -11,6 +11,7 @@ import "dcos.proto";
 import "docker_registry.proto";
 import "ecs.proto";
 import "huaweicloud.proto";
+import "oracle.proto";
 
 message ClouddriverConfig {
     Kubernetes kubernetes = 1;
@@ -23,4 +24,5 @@ message ClouddriverConfig {
     DockerRegistry dockerRegistry = 8;
     Ecs ecs = 9;
     HuaweiCloud huaweicloud = 10;
+    Oracle oracle = 11;
 }

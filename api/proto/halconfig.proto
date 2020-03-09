@@ -12,6 +12,7 @@ import "dcos.proto";
 import "docker_registry.proto";
 import "ecs.proto";
 import "huaweicloud.proto";
+import "oracle.proto";
 
 message HalConfig {
   PersistentStorage persistentStorage = 1;
@@ -33,5 +34,6 @@ message HalConfig {
     DockerRegistry dockerRegistry = 8;
     Ecs ecs = 9;
     HuaweiCloud huaweicloud = 10;
+    Oracle oracle = 11;
   }
 }
