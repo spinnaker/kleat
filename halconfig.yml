@@ -147,6 +147,13 @@ providers:
       - my-repo
       passwordFile: /var/secrets/gcr-account.json
     primaryAccount: my-gcr-registry
+  ecs:
+    enabled: true
+    accounts:
+    - name: my-ecs-account
+      environment: dev
+      awsAccount: my-aws-account
+    primaryAccount: my-ecs-account
 persistentStorage:
   persistentStoreType: gcs
   azs: {}

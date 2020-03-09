@@ -74,6 +74,14 @@
   
   
 
+- [ecs.proto](#ecs.proto)
+    - [Ecs](#proto.Ecs)
+    - [EcsAccount](#proto.EcsAccount)
+  
+  
+  
+  
+
 - [front50.proto](#front50.proto)
     - [Front50Config](#proto.Front50Config)
     - [Front50Config.Spinnaker](#proto.Front50Config.Spinnaker)
@@ -562,6 +570,7 @@ Configuration for a base image for the Azure provider&#39;s bakery.
 | cloudfoundry | [CloudFoundry](#proto.CloudFoundry) |  |  |
 | dcos | [Dcos](#proto.Dcos) |  |  |
 | dockerRegistry | [DockerRegistry](#proto.DockerRegistry) |  |  |
+| ecs | [Ecs](#proto.Ecs) |  |  |
 
 
 
@@ -806,6 +815,58 @@ A credential able to authenticate against a set of Docker repositories.
 | sortTagsByDate | [bool](#bool) |  | If `true`, Spinnaker will sort tags by creation date. Defaults to `false`. |
 | trackDigests | [bool](#bool) |  | If `true`, Spinnaker will track digest changes. This is not recommended because it consumes a high QPM, and most registries are flaky. Defaults to `false`. |
 | username | [string](#string) |  | The username associated with this Docker registry. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="ecs.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## ecs.proto
+
+
+
+<a name="proto.Ecs"></a>
+
+### Ecs
+Configuration for the ECS provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [EcsAccount](#proto.EcsAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+
+
+
+
+
+
+<a name="proto.EcsAccount"></a>
+
+### EcsAccount
+Configuration for an ECS account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
+| awsAccount | [string](#string) |  | (Required) Provide the name of the AWS account associated with this ECS account. See https://github.com/spinnaker/clouddriver/blob/master/clouddriver-ecs/README.md for more information. |
+| permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
+| requiredGroupMemberships | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
 
 
 
@@ -1071,6 +1132,7 @@ Image source configuration.
 | cloudfoundry | [CloudFoundry](#proto.CloudFoundry) |  |  |
 | dcos | [Dcos](#proto.Dcos) |  |  |
 | dockerRegistry | [DockerRegistry](#proto.DockerRegistry) |  |  |
+| ecs | [Ecs](#proto.Ecs) |  |  |
 
 
 
