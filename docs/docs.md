@@ -689,7 +689,7 @@ Credentials to authenticate against one or more DC/OS clusters.
 | environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
 | dockerRegistries | [DcosAccountDockerRegistry](#proto.DcosAccountDockerRegistry) | repeated | (Required) The list of Docker registries to use with this DC/OS account. |
 | permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
-| requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
+| requiredGroupMemberships | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
 
 
 
@@ -807,7 +807,7 @@ A credential able to authenticate against a set of Docker repositories.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The name of the account. |
-| address | [string](#string) |  | (Required) The registry address from which to pull and deploy images (e.g., `index.docker.io`). |
+| address | [string](#string) |  | (Required) The registry address from which to pull and deploy images (e.g., `https://index.docker.io`). |
 | cacheIntervalSeconds | [int32](#int32) |  | The number of seconds between polling the Docker registry. Certain registries are sensitive to over-polling, and larger intervals (e.g., 10 minutes = 600 seconds) are desirable if you experience rate limiting. Defaults to `30`. |
 | cacheThreads | [int32](#int32) |  | The number of threads on which to cache all provided repositories. Really only useful if you have a ton of repos. Defaults to 1. |
 | clientTimeoutMillis | [int32](#int32) |  | Timeout in milliseconds for provided repositories. Defaults to `60,000`. |
@@ -822,7 +822,7 @@ A credential able to authenticate against a set of Docker repositories.
 | requiredGroupMemberships | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
 | repositories | [string](#string) | repeated | An optional list of repositories from which to cache images. If not provided, Spinnaker will attempt to read accessible repositories from the `registries _catalog` endpoint. |
 | sortTagsByDate | [bool](#bool) |  | If `true`, Spinnaker will sort tags by creation date. Defaults to `false`. |
-| trackDigests | [bool](#bool) |  | If `true`, Spinnaker will track digest changes. This is not recommended because it consumes a high QPM, and most registries are flaky. Defaults to `false`. |
+| trackDigests | [bool](#bool) |  | If `true`, Spinnaker will track digest changes. This is not recommended because it greatly increases queries to the registry, and most registries are flaky. Defaults to `false`. |
 | username | [string](#string) |  | The username associated with this Docker registry. |
 
 
@@ -875,7 +875,7 @@ Configuration for an ECS account.
 | environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
 | awsAccount | [string](#string) |  | (Required) Provide the name of the AWS account associated with this ECS account. See https://github.com/spinnaker/clouddriver/blob/master/clouddriver-ecs/README.md for more information. |
 | permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
-| requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
+| requiredGroupMemberships | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
 
 
 
@@ -1193,7 +1193,7 @@ Configuration for a Huawei Cloud account.
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The name of the account. |
 | accountType | [string](#string) |  | The type of account. |
-| requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
+| requiredGroupMemberships | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
 | permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
 | authUrl | [string](#string) |  | (Required) The auth URL of the cloud. |
 | domainName | [string](#string) |  | (Required) The domain name of the cloud. |
@@ -1257,7 +1257,7 @@ Huawei Cloud base image settings.
 <a name="proto.HuaweiCloudBaseImageSettings"></a>
 
 ### HuaweiCloudBaseImageSettings
-Configuration for a base image for the Google provider&#39;s bakery.
+Configuration for a base image for the Huawei Cloud provider&#39;s bakery.
 
 
 | Field | Type | Label | Description |

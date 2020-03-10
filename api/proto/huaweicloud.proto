@@ -103,7 +103,7 @@ message HuaweiCloudBakeryDefaults {
   int32 eipBandwidthSize = 12;
 }
 
-// Configuration for a base image for the Google provider's bakery.
+// Configuration for a base image for the Huawei Cloud provider's bakery.
 message HuaweiCloudBaseImageSettings {
   // Base image configuration.
   HuaweiCloudBaseImage baseImage = 1;

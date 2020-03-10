@@ -21,7 +21,7 @@ message DockerRegistryAccount {
     string name = 1;
 
     // (Required) The registry address from which to pull and deploy images
-    // (e.g., `index.docker.io`).
+    // (e.g., `https://index.docker.io`).
     string address = 2;
 
     // The number of seconds between polling the Docker registry. Certain
@@ -85,8 +85,8 @@ message DockerRegistryAccount {
     bool sortTagsByDate = 16;
 
     // If `true`, Spinnaker will track digest changes. This is not recommended
-    // because it consumes a high QPM, and most registries are flaky.
-    //  Defaults to `false`.
+    // because it greatly increases queries to the registry, and most
+    // registries are flaky. Defaults to `false`.
     bool trackDigests = 17;
 
     // The username associated with this Docker registry.

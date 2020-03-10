@@ -84,7 +84,7 @@ type DockerRegistryAccount struct {
 	// The name of the account.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// (Required) The registry address from which to pull and deploy images
-	// (e.g., `index.docker.io`).
+	// (e.g., `https://index.docker.io`).
 	Address string `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
 	// The number of seconds between polling the Docker registry. Certain
 	// registries are sensitive to over-polling, and larger intervals
@@ -133,8 +133,8 @@ type DockerRegistryAccount struct {
 	// `false`.
 	SortTagsByDate bool `protobuf:"varint,16,opt,name=sortTagsByDate,proto3" json:"sortTagsByDate,omitempty"`
 	// If `true`, Spinnaker will track digest changes. This is not recommended
-	// because it consumes a high QPM, and most registries are flaky.
-	//  Defaults to `false`.
+	// because it greatly increases queries to the registry, and most
+	// registries are flaky. Defaults to `false`.
 	TrackDigests bool `protobuf:"varint,17,opt,name=trackDigests,proto3" json:"trackDigests,omitempty"`
 	// The username associated with this Docker registry.
 	Username             string   `protobuf:"bytes,18,opt,name=username,proto3" json:"username,omitempty"`

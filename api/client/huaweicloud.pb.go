@@ -375,7 +375,7 @@ func (m *HuaweiCloudBakeryDefaults) GetEipBandwidthSize() int32 {
 	return 0
 }
 
-// Configuration for a base image for the Google provider's bakery.
+// Configuration for a base image for the Huawei Cloud provider's bakery.
 type HuaweiCloudBaseImageSettings struct {
 	// Base image configuration.
 	BaseImage *HuaweiCloudBaseImage `protobuf:"bytes,1,opt,name=baseImage,proto3" json:"baseImage,omitempty"`
