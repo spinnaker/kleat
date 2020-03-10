@@ -16,7 +16,6 @@
     - [AwsBakeryDefaults](#proto.AwsBakeryDefaults)
     - [AwsBaseImage](#proto.AwsBaseImage)
     - [AwsBaseImageSettings](#proto.AwsBaseImageSettings)
-    - [AwsDefaults](#proto.AwsDefaults)
     - [AwsFeatures](#proto.AwsFeatures)
     - [AwsFeatures.CloudFormation](#proto.AwsFeatures.CloudFormation)
     - [AwsLifecycleHook](#proto.AwsLifecycleHook)
@@ -321,21 +320,6 @@ Configuration for a base image for the AWS provider&#39;s bakery.
 
 
 
-<a name="proto.AwsDefaults"></a>
-
-### AwsDefaults
-Defaults relevant to the AWS provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| iamRole | [string](#string) |  | Halyard does not expose a command to edit this field, but defaults it to `BaseIAMRole`. TODO(mneterval): Can we move to Clouddriver? |
-
-
-
-
-
-
 <a name="proto.AwsFeatures"></a>
 
 ### AwsFeatures
@@ -375,7 +359,7 @@ https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| defaultResult | [string](#string) |  | Defines the action the Auto Scaling group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. This parameter can be either CONTINUE or ABANDON. The default value is ABANDON. |
+| defaultResult | [string](#string) |  | Defines the action the Auto Scaling group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Acceptable values: `CONTINUE`, `ABANDON`. |
 | heartbeatTimeout | [int32](#int32) |  | Set the heartbeat timeout in seconds for the lifecycle hook. Instances can remain in a wait state for a finite period of time. Must be greater than or equal to 30 and less than or equal to 7200. The default is 3600 (one hour). |
 | lifecycleTransition | [string](#string) |  | Type of lifecycle transition. Acceptable values: `autoscaling:EC2_INSTANCE_LAUNCHING`, `autoscaling:EC2_INSTANCE_TERMINATING` |
 | notificationTargetARN | [string](#string) |  | The ARN of the notification target that Amazon EC2 Auto Scaling uses to notify you when an instance is in the transition state for the lifecycle hook. This target can be either an SQS queue or an SNS topic. |
@@ -399,9 +383,7 @@ Configuration for the AWS provider.
 | primaryAccount | [string](#string) |  | The name of the primary account. |
 | accessKeyId | [string](#string) |  | Your AWS Access Key ID. Note that if you are baking AMIs with Rosco, you may also need to set `AwsBakeryDefaults.awsAccessKey`. |
 | secretAccessKey | [string](#string) |  | Your AWS Secret Key. Note that if you are baking AMIs with Rosco, you may also need to set `AwsBakeryDefaults.awsSecretKey`. |
-| defaultKeyPairTemplate | [string](#string) |  | Halyard does not expose a command to edit this field, but defaults it to `{{name}}-keypair`. TODO(mneterval): Can we move to Clouddriver? |
 | defaultRegions | [AwsRegion](#proto.AwsRegion) | repeated | List of default regions. |
-| defaults | [AwsDefaults](#proto.AwsDefaults) |  | Defaults relevant to the AWS provider. TODO(mneterval): Can we move to Clouddriver? |
 | features | [AwsFeatures](#proto.AwsFeatures) |  | Configuration for AWS-specific features. |
 | bakeryDefaults | [AwsBakeryDefaults](#proto.AwsBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
 
@@ -482,10 +464,10 @@ Base image virtualization settings.
 | packerStorageAccount | [string](#string) |  | The storage account to use if baking images with Packer. |
 | permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
 | requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
-| regions | [string](#string) | repeated | The Azure regions this Spinnaker account will manage. TODO(mneterval): Halyard defaults to `[westus, eastus]`. Move to Clouddriver. |
+| regions | [string](#string) | repeated | The Azure regions this Spinnaker account will manage. |
 | subscriptionId | [string](#string) |  | (Required) The `subscriptionId` to which your service principal is assigned. |
 | tenantId | [string](#string) |  | (Required) The `tenantId` to which your service principal is assigned. |
-| useSshPublicKey | [bool](#bool) |  | If true, the SSH public key is used to provision the linux VM. If false, the password is used instead. TODO(mneterval): Halyard defaults to `true`. Move to Clouddriver. |
+| useSshPublicKey | [bool](#bool) |  | If true, the SSH public key is used to provision the linux VM. If false, the password is used instead. |
 
 
 

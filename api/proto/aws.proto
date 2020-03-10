@@ -22,23 +22,14 @@ message AwsProvider {
     // may also need to set `AwsBakeryDefaults.awsSecretKey`.
     string secretAccessKey = 5;
 
-    // Halyard does not expose a command to edit this field, but defaults it to
-    // `{{name}}-keypair`.
-    // TODO(mneterval): Can we move to Clouddriver?
-    string defaultKeyPairTemplate = 6;
-
     // List of default regions.
-    repeated AwsRegion defaultRegions = 7;
-
-    // Defaults relevant to the AWS provider.
-    // TODO(mneterval): Can we move to Clouddriver?
-    AwsDefaults defaults = 8;
+    repeated AwsRegion defaultRegions = 6;
 
     // Configuration for AWS-specific features.
-    AwsFeatures features = 9;
+    AwsFeatures features = 7;
 
     // Configuration for Spinnaker's image bakery.
-    AwsBakeryDefaults bakeryDefaults = 11;
+    AwsBakeryDefaults bakeryDefaults = 8;
 }
 
 // Configuration for an AWS account.
@@ -218,8 +209,7 @@ message AwsVirtualizationSettings {
 // https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html
 message AwsLifecycleHook {
     // Defines the action the Auto Scaling group should take when the lifecycle hook timeout elapses or if an
-    // unexpected failure occurs. This parameter can be either CONTINUE or ABANDON. The default value is
-    // ABANDON.
+    // unexpected failure occurs. Acceptable values: `CONTINUE`, `ABANDON`.
     string defaultResult = 1;
 
     // Set the heartbeat timeout in seconds for the lifecycle hook. Instances can remain in a wait
@@ -238,14 +228,6 @@ message AwsLifecycleHook {
     // The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification
     // target, for example, an Amazon SNS topic or an Amazon SQS queue.
     string roleARN = 5;
-}
-
-// Defaults relevant to the AWS provider.
-message AwsDefaults {
-    // Halyard does not expose a command to edit this field, but defaults it to
-    // `BaseIAMRole`.
-    // TODO(mneterval): Can we move to Clouddriver?
-    string iamRole = 1;
 }
 
 // Configuration for AWS-specific features.
