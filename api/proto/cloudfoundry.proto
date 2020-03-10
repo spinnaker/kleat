@@ -4,7 +4,7 @@ package proto;
 import "permissions.proto";
 
 // Configuration for the Cloud Foundry provider.
-message CloudFoundry {
+message CloudFoundryProvider {
     // Whether the provider is enabled.
     bool enabled = 1;
 

@@ -1,0 +1,39 @@
+syntax = "proto3";
+package proto;
+
+import "permissions.proto";
+
+// Configuration for the ECS provider.
+message EcsProvider {
+  // Whether the provider is enabled.
+  bool enabled = 1;
+
+  // The list of configured accounts.
+  repeated EcsAccount accounts = 2;
+
+  // The name of the primary account.
+  string primaryAccount = 3;
+}
+
+// Configuration for an ECS account.
+message EcsAccount {
+  // The name of the account.
+  string name = 1;
+
+  // The environment name for the account. Many accounts can share the
+  // same environment (e.g., dev, test, prod).
+  string environment = 2;
+
+  // (Required) Provide the name of the AWS account associated with this ECS
+  // account. See
+  // https://github.com/spinnaker/clouddriver/blob/master/clouddriver-ecs/README.md
+  // for more information.
+  string awsAccount = 3;
+
+  // Fiat permissions configuration.
+  Permissions permissions = 4;
+
+  // (Deprecated) List of required Fiat permission groups. Configure
+  // `permissions` instead.
+  repeated string requiredGroupMemberships = 5;
+}

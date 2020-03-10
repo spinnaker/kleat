@@ -173,23 +173,6 @@ func printObject(i interface{}, w io.Writer) error {
 	return nil
 }
 
-func getTestHalConfig() proto.HalConfig {
-	h := proto.HalConfig{
-		Providers: &proto.HalConfig_Providers{
-			Kubernetes: &proto.Kubernetes{
-				Enabled: false,
-				Accounts: []*proto.KubernetesAccount{
-					{
-						Name:            "hal",
-						ProviderVersion: "V2",
-					},
-				},
-			},
-		},
-	}
-	return h
-}
-
 func halToFront50(h proto.HalConfig) (proto.Front50Config, error) {
 	f := proto.Front50Config{
 		Spinnaker: &proto.Front50Config_Spinnaker{
@@ -209,12 +192,17 @@ func extractPersistentStoreType(h proto.HalConfig) *string {
 
 func halToClouddriver(h proto.HalConfig) (proto.ClouddriverConfig, error) {
 	c := proto.ClouddriverConfig{
-		Kubernetes:   h.Providers.Kubernetes,
-		Google:       h.Providers.Google,
-		Appengine:    h.Providers.Appengine,
-		Aws:          h.Providers.Aws,
-		Azure:        h.Providers.Azure,
-		Cloudfoundry: h.Providers.Cloudfoundry,
+		Kubernetes:     h.Providers.Kubernetes,
+		Google:         h.Providers.Google,
+		Appengine:      h.Providers.Appengine,
+		Aws:            h.Providers.Aws,
+		Azure:          h.Providers.Azure,
+		Cloudfoundry:   h.Providers.Cloudfoundry,
+		Dcos:           h.Providers.Dcos,
+		DockerRegistry: h.Providers.DockerRegistry,
+		Ecs:            h.Providers.Ecs,
+		Huaweicloud:    h.Providers.Huaweicloud,
+		Oracle:         h.Providers.Oracle,
 	}
 	return c, nil
 }

@@ -4,15 +4,14 @@
 ## Table of Contents
 
 - [appengine.proto](#appengine.proto)
-    - [Appengine](#proto.Appengine)
     - [AppengineAccount](#proto.AppengineAccount)
+    - [AppengineProvider](#proto.AppengineProvider)
   
   
   
   
 
 - [aws.proto](#aws.proto)
-    - [Aws](#proto.Aws)
     - [AwsAccount](#proto.AwsAccount)
     - [AwsBakeryDefaults](#proto.AwsBakeryDefaults)
     - [AwsBaseImage](#proto.AwsBaseImage)
@@ -21,6 +20,7 @@
     - [AwsFeatures](#proto.AwsFeatures)
     - [AwsFeatures.CloudFormation](#proto.AwsFeatures.CloudFormation)
     - [AwsLifecycleHook](#proto.AwsLifecycleHook)
+    - [AwsProvider](#proto.AwsProvider)
     - [AwsRegion](#proto.AwsRegion)
     - [AwsVirtualizationSettings](#proto.AwsVirtualizationSettings)
   
@@ -29,11 +29,11 @@
   
 
 - [azure.proto](#azure.proto)
-    - [Azure](#proto.Azure)
     - [AzureAccount](#proto.AzureAccount)
     - [AzureBakeryDefaults](#proto.AzureBakeryDefaults)
     - [AzureBaseImage](#proto.AzureBaseImage)
     - [AzureBaseImageSettings](#proto.AzureBaseImageSettings)
+    - [AzureProvider](#proto.AzureProvider)
   
   
   
@@ -47,8 +47,36 @@
   
 
 - [cloudfoundry.proto](#cloudfoundry.proto)
-    - [CloudFoundry](#proto.CloudFoundry)
     - [CloudFoundryAccount](#proto.CloudFoundryAccount)
+    - [CloudFoundryProvider](#proto.CloudFoundryProvider)
+  
+  
+  
+  
+
+- [dcos.proto](#dcos.proto)
+    - [DcosAccount](#proto.DcosAccount)
+    - [DcosAccountCluster](#proto.DcosAccountCluster)
+    - [DcosAccountDockerRegistry](#proto.DcosAccountDockerRegistry)
+    - [DcosCluster](#proto.DcosCluster)
+    - [DcosClusterLoadBalancer](#proto.DcosClusterLoadBalancer)
+    - [DcosProvider](#proto.DcosProvider)
+  
+  
+  
+  
+
+- [docker_registry.proto](#docker_registry.proto)
+    - [DockerRegistryAccount](#proto.DockerRegistryAccount)
+    - [DockerRegistryProvider](#proto.DockerRegistryProvider)
+  
+  
+  
+  
+
+- [ecs.proto](#ecs.proto)
+    - [EcsAccount](#proto.EcsAccount)
+    - [EcsProvider](#proto.EcsProvider)
   
   
   
@@ -64,11 +92,11 @@
 
 - [google.proto](#google.proto)
     - [Consul](#proto.Consul)
-    - [Google](#proto.Google)
     - [GoogleAccount](#proto.GoogleAccount)
     - [GoogleBakeryDefaults](#proto.GoogleBakeryDefaults)
     - [GoogleBaseImage](#proto.GoogleBaseImage)
     - [GoogleBaseImageSettings](#proto.GoogleBaseImageSettings)
+    - [GoogleProvider](#proto.GoogleProvider)
     - [VirtualizationSettings](#proto.VirtualizationSettings)
   
   
@@ -84,12 +112,36 @@
   
   
 
+- [huaweicloud.proto](#huaweicloud.proto)
+    - [HuaweiCloudAccount](#proto.HuaweiCloudAccount)
+    - [HuaweiCloudBakeryDefaults](#proto.HuaweiCloudBakeryDefaults)
+    - [HuaweiCloudBaseImage](#proto.HuaweiCloudBaseImage)
+    - [HuaweiCloudBaseImageSettings](#proto.HuaweiCloudBaseImageSettings)
+    - [HuaweiCloudProvider](#proto.HuaweiCloudProvider)
+    - [HuaweiCloudVirtualizationSettings](#proto.HuaweiCloudVirtualizationSettings)
+  
+  
+  
+  
+
 - [kubernetes.proto](#kubernetes.proto)
-    - [DockerRegistry](#proto.DockerRegistry)
-    - [Kubernetes](#proto.Kubernetes)
     - [KubernetesAccount](#proto.KubernetesAccount)
+    - [KubernetesAccountDockerRegistry](#proto.KubernetesAccountDockerRegistry)
     - [KubernetesCachingPolicy](#proto.KubernetesCachingPolicy)
     - [KubernetesCustomResource](#proto.KubernetesCustomResource)
+    - [KubernetesProvider](#proto.KubernetesProvider)
+  
+  
+  
+  
+
+- [oracle.proto](#oracle.proto)
+    - [OracleAccount](#proto.OracleAccount)
+    - [OracleBakeryDefaults](#proto.OracleBakeryDefaults)
+    - [OracleBaseImage](#proto.OracleBaseImage)
+    - [OracleBaseImageSettings](#proto.OracleBaseImageSettings)
+    - [OracleProvider](#proto.OracleProvider)
+    - [OracleVirtualizationSettings](#proto.OracleVirtualizationSettings)
   
   
   
@@ -102,7 +154,7 @@
   
   
 
-- [persistentstorage.proto](#persistentstorage.proto)
+- [persistent_storage.proto](#persistent_storage.proto)
     - [GCS](#proto.GCS)
   
   
@@ -117,23 +169,6 @@
 <p align="right"><a href="#top">Top</a></p>
 
 ## appengine.proto
-
-
-
-<a name="proto.Appengine"></a>
-
-### Appengine
-Configuration for the Google App Engine (GAE) provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
-| accounts | [AppengineAccount](#proto.AppengineAccount) | repeated | The list of configured accounts. |
-| primaryAccount | [string](#string) |  | The name of the primary account. |
-
-
-
 
 
 
@@ -170,6 +205,23 @@ Configuration for an App Engine account.
 
 
 
+
+<a name="proto.AppengineProvider"></a>
+
+### AppengineProvider
+Configuration for the Google App Engine (GAE) provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [AppengineAccount](#proto.AppengineAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+
+
+
+
+
  
 
  
@@ -184,30 +236,6 @@ Configuration for an App Engine account.
 <p align="right"><a href="#top">Top</a></p>
 
 ## aws.proto
-
-
-
-<a name="proto.Aws"></a>
-
-### Aws
-Configuration for the AWS provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
-| accounts | [AwsAccount](#proto.AwsAccount) | repeated | The list of configured accounts. |
-| primaryAccount | [string](#string) |  | The name of the primary account. |
-| accessKeyId | [string](#string) |  | Your AWS Access Key ID. Note that if you are baking AMIs with Rosco, you may also need to set `AwsBakeryDefaults.awsAccessKey`. |
-| secretAccessKey | [string](#string) |  | Your AWS Secret Key. Note that if you are baking AMIs with Rosco, you may also need to set `AwsBakeryDefaults.awsSecretKey`. |
-| defaultKeyPairTemplate | [string](#string) |  | Halyard does not expose a command to edit this field, but defaults it to `{{name}}-keypair`. TODO(mneterval): Can we move to Clouddriver? |
-| defaultRegions | [AwsRegion](#proto.AwsRegion) | repeated | List of default regions. |
-| defaults | [AwsDefaults](#proto.AwsDefaults) |  | Defaults relevant to the AWS provider. TODO(mneterval): Can we move to Clouddriver? |
-| features | [AwsFeatures](#proto.AwsFeatures) |  | Configuration for AWS-specific features. |
-| bakeryDefaults | [AwsBakeryDefaults](#proto.AwsBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
-
-
-
 
 
 
@@ -358,6 +386,30 @@ https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html
 
 
 
+<a name="proto.AwsProvider"></a>
+
+### AwsProvider
+Configuration for the AWS provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [AwsAccount](#proto.AwsAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+| accessKeyId | [string](#string) |  | Your AWS Access Key ID. Note that if you are baking AMIs with Rosco, you may also need to set `AwsBakeryDefaults.awsAccessKey`. |
+| secretAccessKey | [string](#string) |  | Your AWS Secret Key. Note that if you are baking AMIs with Rosco, you may also need to set `AwsBakeryDefaults.awsSecretKey`. |
+| defaultKeyPairTemplate | [string](#string) |  | Halyard does not expose a command to edit this field, but defaults it to `{{name}}-keypair`. TODO(mneterval): Can we move to Clouddriver? |
+| defaultRegions | [AwsRegion](#proto.AwsRegion) | repeated | List of default regions. |
+| defaults | [AwsDefaults](#proto.AwsDefaults) |  | Defaults relevant to the AWS provider. TODO(mneterval): Can we move to Clouddriver? |
+| features | [AwsFeatures](#proto.AwsFeatures) |  | Configuration for AWS-specific features. |
+| bakeryDefaults | [AwsBakeryDefaults](#proto.AwsBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
+
+
+
+
+
+
 <a name="proto.AwsRegion"></a>
 
 ### AwsRegion
@@ -408,24 +460,6 @@ Base image virtualization settings.
 <p align="right"><a href="#top">Top</a></p>
 
 ## azure.proto
-
-
-
-<a name="proto.Azure"></a>
-
-### Azure
-Configuration for the Azure provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
-| accounts | [AzureAccount](#proto.AzureAccount) | repeated | The list of configured accounts. |
-| primaryAccount | [string](#string) |  | The name of the primary account. |
-| bakeryDefaults | [AzureBakeryDefaults](#proto.AzureBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
-
-
-
 
 
 
@@ -509,6 +543,24 @@ Configuration for a base image for the Azure provider&#39;s bakery.
 
 
 
+
+<a name="proto.AzureProvider"></a>
+
+### AzureProvider
+Configuration for the Azure provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [AzureAccount](#proto.AzureAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+| bakeryDefaults | [AzureBakeryDefaults](#proto.AzureBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
+
+
+
+
+
  
 
  
@@ -534,12 +586,17 @@ Configuration for a base image for the Azure provider&#39;s bakery.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| kubernetes | [Kubernetes](#proto.Kubernetes) |  |  |
-| google | [Google](#proto.Google) |  |  |
-| appengine | [Appengine](#proto.Appengine) |  |  |
-| aws | [Aws](#proto.Aws) |  |  |
-| azure | [Azure](#proto.Azure) |  |  |
-| cloudfoundry | [CloudFoundry](#proto.CloudFoundry) |  |  |
+| kubernetes | [KubernetesProvider](#proto.KubernetesProvider) |  |  |
+| google | [GoogleProvider](#proto.GoogleProvider) |  |  |
+| appengine | [AppengineProvider](#proto.AppengineProvider) |  |  |
+| aws | [AwsProvider](#proto.AwsProvider) |  |  |
+| azure | [AzureProvider](#proto.AzureProvider) |  |  |
+| cloudfoundry | [CloudFoundryProvider](#proto.CloudFoundryProvider) |  |  |
+| dcos | [DcosProvider](#proto.DcosProvider) |  |  |
+| dockerRegistry | [DockerRegistryProvider](#proto.DockerRegistryProvider) |  |  |
+| ecs | [EcsProvider](#proto.EcsProvider) |  |  |
+| huaweicloud | [HuaweiCloudProvider](#proto.HuaweiCloudProvider) |  |  |
+| oracle | [OracleProvider](#proto.OracleProvider) |  |  |
 
 
 
@@ -562,23 +619,6 @@ Configuration for a base image for the Azure provider&#39;s bakery.
 
 
 
-<a name="proto.CloudFoundry"></a>
-
-### CloudFoundry
-Configuration for the Cloud Foundry provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
-| accounts | [CloudFoundryAccount](#proto.CloudFoundryAccount) | repeated | The list of configured accounts. |
-| primaryAccount | [string](#string) |  | The name of the primary account. |
-
-
-
-
-
-
 <a name="proto.CloudFoundryAccount"></a>
 
 ### CloudFoundryAccount
@@ -597,6 +637,262 @@ Configuration for a Spinnaker Cloud Foundry account.
 | user | [string](#string) |  | (Required) User name for the account to use for this Cloud Foundry Foundation. |
 | permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
 | requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
+
+
+
+
+
+
+<a name="proto.CloudFoundryProvider"></a>
+
+### CloudFoundryProvider
+Configuration for the Cloud Foundry provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [CloudFoundryAccount](#proto.CloudFoundryAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="dcos.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## dcos.proto
+
+
+
+<a name="proto.DcosAccount"></a>
+
+### DcosAccount
+Credentials to authenticate against one or more DC/OS clusters.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | (Required) The name of the account. |
+| clusters | [DcosAccountCluster](#proto.DcosAccountCluster) | repeated | (Required) The clusters against which this account will authenticate. |
+| environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
+| dockerRegistries | [DcosAccountDockerRegistry](#proto.DcosAccountDockerRegistry) | repeated | (Required) The list of Docker registries to use with this DC/OS account. |
+| permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
+| requiredGroupMemberships | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
+
+
+
+
+
+
+<a name="proto.DcosAccountCluster"></a>
+
+### DcosAccountCluster
+Configuration for a DC/OS cluster associated with a `DcosAccount`.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | (Required) The name of the cluster. Must match the name of a `DcosCluster` defined for this provider. |
+| uid | [string](#string) |  | (Required) User or service account identifier. |
+| serviceKeyFile | [string](#string) |  | Path to a file containing the secret key for service account authentication. If set, `password` should not be set. |
+| password | [string](#string) |  | Password for a user account. If set, `serviceKeyFile` should not be set. |
+
+
+
+
+
+
+<a name="proto.DcosAccountDockerRegistry"></a>
+
+### DcosAccountDockerRegistry
+Configuration for a Docker registry associated with a `DcosAccount`.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| accountName | [string](#string) |  | The name of the Docker registry. Must be the name of an account configured with the Docker registry provider. |
+
+
+
+
+
+
+<a name="proto.DcosCluster"></a>
+
+### DcosCluster
+Configuration for a DC/OS cluster.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | (Required) The name of the cluster. |
+| caCertFile | [string](#string) |  | Root certificate file to trust for connections to the cluster. |
+| dcosUrl | [string](#string) |  | (Required) URL of the endpoint for the DC/OS cluster&#39;s admin router. |
+| loadBalancer | [DcosClusterLoadBalancer](#proto.DcosClusterLoadBalancer) |  | Configuration for a DC/OS load balancer. |
+| insecureSkipTlsVerify | [bool](#bool) |  | If `true`, disables verification of certificates from the cluster (insecure). |
+
+
+
+
+
+
+<a name="proto.DcosClusterLoadBalancer"></a>
+
+### DcosClusterLoadBalancer
+Configuration for a DC/OS load balancer.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| image | [string](#string) |  | Marathon-lb image to use when creating a load balancer with Spinnaker. |
+| serviceAccountSecret | [string](#string) |  | Name of the secret to use for allowing marathon-lb to authenticate with the cluster. Only necessary for clusters with strict or permissive security. |
+
+
+
+
+
+
+<a name="proto.DcosProvider"></a>
+
+### DcosProvider
+Configuration for the DC/OS (Distributed Cloud Operating System) provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [DcosAccount](#proto.DcosAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+| clusters | [DcosCluster](#proto.DcosCluster) | repeated | The list of configured clusters. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="docker_registry.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## docker_registry.proto
+
+
+
+<a name="proto.DockerRegistryAccount"></a>
+
+### DockerRegistryAccount
+A credential able to authenticate against a set of Docker repositories.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| address | [string](#string) |  | (Required) The registry address from which to pull and deploy images (e.g., `https://index.docker.io`). |
+| cacheIntervalSeconds | [int32](#int32) |  | The number of seconds between polling the Docker registry. Certain registries are sensitive to over-polling, and larger intervals (e.g., 10 minutes = 600 seconds) are desirable if you experience rate limiting. Defaults to `30`. |
+| cacheThreads | [int32](#int32) |  | The number of threads on which to cache all provided repositories. Really only useful if you have a ton of repos. Defaults to 1. |
+| clientTimeoutMillis | [int32](#int32) |  | Timeout in milliseconds for provided repositories. Defaults to `60,000`. |
+| email | [string](#string) |  | The email associated with your Docker registry. Often this only needs to be well-formed, rather than be a real address. |
+| environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
+| insecureRegistry | [bool](#bool) |  | If `true`, Spinnaker will treat the Docker registry as insecure and not validate the SSL certificate. Defaults to `false`. |
+| paginateSize | [int32](#int32) |  | Pagination size for the Docker `repository _catalog` endpoint. Defaults to `100`. |
+| password | [string](#string) |  | The Docker registry password. Only one of `password`, `passwordCommand`, and `passwordFile` should be specified. |
+| passwordCommand | [string](#string) |  | Command to retrieve Docker token/password. The command must be available in the environment. Only one of `password`, `passwordCommand`, and `passwordFile` should be specified. |
+| passwordFile | [string](#string) |  | The path to a file containing your Docker password in plaintext (not a Docker `config.json` file). Only one of `password`, `passwordCommand`, and `passwordFile` should be specified. |
+| permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
+| requiredGroupMemberships | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
+| repositories | [string](#string) | repeated | An optional list of repositories from which to cache images. If not provided, Spinnaker will attempt to read accessible repositories from the `registries _catalog` endpoint. |
+| sortTagsByDate | [bool](#bool) |  | If `true`, Spinnaker will sort tags by creation date. Defaults to `false`. |
+| trackDigests | [bool](#bool) |  | If `true`, Spinnaker will track digest changes. This is not recommended because it greatly increases queries to the registry, and most registries are flaky. Defaults to `false`. |
+| username | [string](#string) |  | The username associated with this Docker registry. |
+
+
+
+
+
+
+<a name="proto.DockerRegistryProvider"></a>
+
+### DockerRegistryProvider
+Configuration for the Docker Registry provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [DockerRegistryAccount](#proto.DockerRegistryAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="ecs.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## ecs.proto
+
+
+
+<a name="proto.EcsAccount"></a>
+
+### EcsAccount
+Configuration for an ECS account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
+| awsAccount | [string](#string) |  | (Required) Provide the name of the AWS account associated with this ECS account. See https://github.com/spinnaker/clouddriver/blob/master/clouddriver-ecs/README.md for more information. |
+| permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
+| requiredGroupMemberships | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
+
+
+
+
+
+
+<a name="proto.EcsProvider"></a>
+
+### EcsProvider
+Configuration for the ECS provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [EcsAccount](#proto.EcsAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
 
 
 
@@ -684,24 +980,6 @@ Configuration for Consul.
 
 
 
-<a name="proto.Google"></a>
-
-### Google
-Configuration for the Google Compute Engine (GCE) provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
-| accounts | [GoogleAccount](#proto.GoogleAccount) | repeated | The list of configured accounts. |
-| primaryAccount | [string](#string) |  | The name of the primary account. |
-| bakeryDefaults | [GoogleBakeryDefaults](#proto.GoogleBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
-
-
-
-
-
-
 <a name="proto.GoogleAccount"></a>
 
 ### GoogleAccount
@@ -782,6 +1060,24 @@ Configuration for a base image for the Google provider&#39;s bakery.
 
 
 
+<a name="proto.GoogleProvider"></a>
+
+### GoogleProvider
+Configuration for the Google Compute Engine (GCE) provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [GoogleAccount](#proto.GoogleAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+| bakeryDefaults | [GoogleBakeryDefaults](#proto.GoogleBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
+
+
+
+
+
+
 <a name="proto.VirtualizationSettings"></a>
 
 ### VirtualizationSettings
@@ -854,12 +1150,157 @@ Image source configuration.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| kubernetes | [Kubernetes](#proto.Kubernetes) |  |  |
-| google | [Google](#proto.Google) |  |  |
-| appengine | [Appengine](#proto.Appengine) |  |  |
-| aws | [Aws](#proto.Aws) |  |  |
-| azure | [Azure](#proto.Azure) |  |  |
-| cloudfoundry | [CloudFoundry](#proto.CloudFoundry) |  |  |
+| kubernetes | [KubernetesProvider](#proto.KubernetesProvider) |  |  |
+| google | [GoogleProvider](#proto.GoogleProvider) |  |  |
+| appengine | [AppengineProvider](#proto.AppengineProvider) |  |  |
+| aws | [AwsProvider](#proto.AwsProvider) |  |  |
+| azure | [AzureProvider](#proto.AzureProvider) |  |  |
+| cloudfoundry | [CloudFoundryProvider](#proto.CloudFoundryProvider) |  |  |
+| dcos | [DcosProvider](#proto.DcosProvider) |  |  |
+| dockerRegistry | [DockerRegistryProvider](#proto.DockerRegistryProvider) |  |  |
+| ecs | [EcsProvider](#proto.EcsProvider) |  |  |
+| huaweicloud | [HuaweiCloudProvider](#proto.HuaweiCloudProvider) |  |  |
+| oracle | [OracleProvider](#proto.OracleProvider) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="huaweicloud.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## huaweicloud.proto
+
+
+
+<a name="proto.HuaweiCloudAccount"></a>
+
+### HuaweiCloudAccount
+Configuration for a Huawei Cloud account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| accountType | [string](#string) |  | The type of account. |
+| requiredGroupMemberships | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
+| permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
+| authUrl | [string](#string) |  | (Required) The auth URL of the cloud. |
+| domainName | [string](#string) |  | (Required) The domain name of the cloud. |
+| environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
+| insecure | [bool](#bool) |  | If `true`, disables certificate validation on SSL connections. Needed if certificates are self-signed. Defaults to `false`. |
+| password | [string](#string) |  | (Required) The password used to access the cloud. |
+| projectName | [string](#string) |  | (Required) The name of the project within the cloud. |
+| regions | [string](#string) | repeated | (Required) The region(s) of the cloud. |
+| username | [string](#string) |  | (Required) The username used to access the cloud. |
+
+
+
+
+
+
+<a name="proto.HuaweiCloudBakeryDefaults"></a>
+
+### HuaweiCloudBakeryDefaults
+Configuration for Spinnaker&#39;s image bakery.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| baseImages | [HuaweiCloudBaseImageSettings](#proto.HuaweiCloudBaseImageSettings) | repeated | List of configured base images. |
+| templateFile | [string](#string) |  | This is the name of the packer template that will be used to bake images from this base image. The template file must be found in this list: https://github.com/spinnaker/rosco/tree/master/rosco-web/config/packer, or supplied as described here: https://spinnaker.io/setup/bakery/. |
+| authUrl | [string](#string) |  | (Required) The default auth URL in which images will be baked. |
+| username | [string](#string) |  | (Required) The default username with which images will be baked. |
+| password | [string](#string) |  | (Required) The default password with which images will be baked. |
+| projectName | [string](#string) |  | The name of the default project in which images will be baked. |
+| domainName | [string](#string) |  | (Required) The default domain name in which images will be baked. |
+| insecure | [bool](#bool) |  | The security setting for connecting to the Huawei Cloud account. Defaults to `false`. |
+| vpcId | [string](#string) |  | (Required) The VPC in which images will be baked. |
+| subnetId | [string](#string) |  | (Required) The subnet in which images will be baked. |
+| securityGroup | [string](#string) |  | (Required) The default security group in which images will be baked. |
+| eipBandwidthSize | [int32](#int32) |  | (Required) The bandwidth size of EIP in which images will be baked. |
+
+
+
+
+
+
+<a name="proto.HuaweiCloudBaseImage"></a>
+
+### HuaweiCloudBaseImage
+Huawei Cloud base image settings.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | The name of the base image. |
+| packageType | [string](#string) |  | This is used to help Spinnaker&#39;s bakery download the build artifacts you supply it with. For example, specifying `deb` indicates that your artifacts will need to be fetched from a debian repository. |
+| templateFile | [string](#string) |  | This is the name of the packer template that will be used to bake images from this base image. The template file must be found in this list: https://github.com/spinnaker/rosco/tree/master/rosco-web/config/packer, or supplied as described here: https://spinnaker.io/setup/bakery/. |
+| shortDescription | [string](#string) |  | A short description to help human operators identify the image. |
+| detailedDescription | [string](#string) |  | A long description to help human operators identify the image. |
+
+
+
+
+
+
+<a name="proto.HuaweiCloudBaseImageSettings"></a>
+
+### HuaweiCloudBaseImageSettings
+Configuration for a base image for the Huawei Cloud provider&#39;s bakery.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| baseImage | [HuaweiCloudBaseImage](#proto.HuaweiCloudBaseImage) |  | Base image configuration. |
+| virtualizationSettings | [HuaweiCloudVirtualizationSettings](#proto.HuaweiCloudVirtualizationSettings) | repeated | Image source configuration. |
+
+
+
+
+
+
+<a name="proto.HuaweiCloudProvider"></a>
+
+### HuaweiCloudProvider
+Configuration for the Huawei Cloud provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [HuaweiCloudAccount](#proto.HuaweiCloudAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+| bakeryDefaults | [HuaweiCloudBakeryDefaults](#proto.HuaweiCloudBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
+
+
+
+
+
+
+<a name="proto.HuaweiCloudVirtualizationSettings"></a>
+
+### HuaweiCloudVirtualizationSettings
+Huawei Cloud virtualization settings.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| region | [string](#string) |  | (Required) The region for the baking configuration. |
+| instanceType | [string](#string) |  | (Required) The instance type for the baking configuration. |
+| sourceImageId | [string](#string) |  | (Required) The source image ID for the baking configuration. |
+| sshUserName | [string](#string) |  | (Required) The SSH username for the baking configuration. |
+| eipType | [string](#string) |  | (Required) The EIP type for the baking configuration. See the API doc to get its value. |
 
 
 
@@ -882,39 +1323,6 @@ Image source configuration.
 
 
 
-<a name="proto.DockerRegistry"></a>
-
-### DockerRegistry
-Configuration for a Docker registry.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| accountName | [string](#string) |  | The configured name of the Docker registry. |
-| namespaces | [string](#string) | repeated | The list of Docker registry namespaces usable as image sources. |
-
-
-
-
-
-
-<a name="proto.Kubernetes"></a>
-
-### Kubernetes
-Configuration for the Kubernetes provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
-| accounts | [KubernetesAccount](#proto.KubernetesAccount) | repeated | The list of configured accounts. |
-| primaryAccount | [string](#string) |  | The name of the primary account. |
-
-
-
-
-
-
 <a name="proto.KubernetesAccount"></a>
 
 ### KubernetesAccount
@@ -934,11 +1342,27 @@ credential that can authenticate against your Kubernetes cluster.
 | omitNamespaces | [string](#string) | repeated | A list of namespaces this Spinnaker account cannot deploy to or cache. This can only be set when namespaces is empty or not set. |
 | customResources | [KubernetesCustomResource](#proto.KubernetesCustomResource) | repeated | The list of custom resources Clouddriver will manage and make available for use in Patch and Delete (Manifest) stages. |
 | cachingPolicies | [KubernetesCachingPolicy](#proto.KubernetesCachingPolicy) | repeated | The list of kind-specific caching policies. |
-| dockerRegistries | [DockerRegistry](#proto.DockerRegistry) | repeated | The list of the Spinnaker docker registry account names this Spinnaker account can use as image sources. These docker registry accounts must be registered in your halconfig before you can add them here. |
+| dockerRegistries | [KubernetesAccountDockerRegistry](#proto.KubernetesAccountDockerRegistry) | repeated | The list of the Spinnaker docker registry account names this Spinnaker account can use as image sources. These docker registry accounts must be registered in your halconfig before you can add them here. |
 | oAuthScopes | [string](#string) | repeated | The list of OAuth scopes used by kubectl to fetch an OAuth token. |
 | kubeconfigFile | [string](#string) |  | The path to your kubeconfig file. By default, it will be under the Spinnaker user&#39;s home directory in the typical .kube/config location. todo: document new var/secrets convention. |
 | permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
 | requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
+
+
+
+
+
+
+<a name="proto.KubernetesAccountDockerRegistry"></a>
+
+### KubernetesAccountDockerRegistry
+Configuration for a Docker registry.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| accountName | [string](#string) |  | The configured name of the Docker registry. |
+| namespaces | [string](#string) | repeated | The list of Docker registry namespaces usable as image sources. |
 
 
 
@@ -976,6 +1400,153 @@ need to explicitly register each CRD.
 | deployPriority | [string](#string) |  | An integer representing the deployment priority of this resource. Resources with lower values are deployed before resources with higher values. |
 | versioned | [bool](#bool) |  | Whether Spinnaker should manage versioning this resource. |
 | namespaced | [bool](#bool) |  | Whether the resource is namespaced. |
+
+
+
+
+
+
+<a name="proto.KubernetesProvider"></a>
+
+### KubernetesProvider
+Configuration for the Kubernetes provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [KubernetesAccount](#proto.KubernetesAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="oracle.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## oracle.proto
+
+
+
+<a name="proto.OracleAccount"></a>
+
+### OracleAccount
+Configuration for an Oracle account. An account maps to an Oracle Cloud
+Infrastructure (OCI) user.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| requiredGroupMemberships | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
+| permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
+| compartmentId | [string](#string) |  | (Required) The OCID of the Oracle Compartment to use. |
+| environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
+| fingerprint | [string](#string) |  | (Required) Fingerprint of the public key. |
+| privateKeyPassphrase | [string](#string) |  | Passphrase used for the private key, if it is encrypted. |
+| region | [string](#string) |  | (Required) An Oracle region (e.g., `us-phoenix-1`). |
+| sshPrivateKeyFilePath | [string](#string) |  | (Required) Path to the private key in PEM format. |
+| tenancyId | [string](#string) |  | (Required) The OCID of the Oracle Tenancy to use. |
+| userId | [string](#string) |  | (Required) The OCID of the Oracle User with which to authenticate. |
+
+
+
+
+
+
+<a name="proto.OracleBakeryDefaults"></a>
+
+### OracleBakeryDefaults
+Configuration for Spinnaker&#39;s image bakery.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| templateFile | [string](#string) |  | The name of the Packer template that will be used to bake images from this base image. The template file must be found in this list: https://github.com/spinnaker/rosco/tree/master/rosco-web/config/packer, or supplied as described here: https://spinnaker.io/setup/bakery/. |
+| baseImages | [OracleBaseImageSettings](#proto.OracleBaseImageSettings) | repeated | List of configured base images. |
+| availabilityDomain | [string](#string) |  | (Required) The name of the Availability Domain within which a new instance is launched and provisioned. |
+| instanceShape | [string](#string) |  | (Required) The shape for a newly created instance. |
+| subnetId | [string](#string) |  | (Required) The name of the subnet within which a new instance is launched and provisioned. |
+
+
+
+
+
+
+<a name="proto.OracleBaseImage"></a>
+
+### OracleBaseImage
+Oracle base image configuration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | The name of the base image. |
+| shortDescription | [string](#string) |  | A short description to help human operators identify the image. |
+| detailedDescription | [string](#string) |  | A long description to help human operators identify the image. |
+| packageType | [string](#string) |  | This is used to help Spinnaker&#39;s bakery download the build artifacts you supply it with. For example, specifying deb indicates that your artifacts will need to be fetched from a debian repository. |
+| templateFile | [string](#string) |  | The name of the Packer template that will be used to bake images from this base image. The template file must be found in this list: https://github.com/spinnaker/rosco/tree/master/rosco-web/config/packer, or supplied as described here: https://spinnaker.io/setup/bakery/. |
+
+
+
+
+
+
+<a name="proto.OracleBaseImageSettings"></a>
+
+### OracleBaseImageSettings
+Configuration for a base image for the Oracle provider&#39;s bakery.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| baseImage | [OracleBaseImage](#proto.OracleBaseImage) |  | Oracle base image configuration. |
+| virtualizationSettings | [OracleVirtualizationSettings](#proto.OracleVirtualizationSettings) |  | Oracle virtualization settings. |
+
+
+
+
+
+
+<a name="proto.OracleProvider"></a>
+
+### OracleProvider
+Configuration for the Oracle provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [OracleAccount](#proto.OracleAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+| bakeryDefaults | [OracleBakeryDefaults](#proto.OracleBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
+
+
+
+
+
+
+<a name="proto.OracleVirtualizationSettings"></a>
+
+### OracleVirtualizationSettings
+Oracle virtualization settings.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| baseImageId | [string](#string) |  | (Required) The OCID of the base image ID for the baking configuration. |
+| sshUserName | [string](#string) |  | (Required) The ssh username for the baking configuration. |
 
 
 
@@ -1024,10 +1595,10 @@ A Fiat permissions configuration object.
 
 
 
-<a name="persistentstorage.proto"></a>
+<a name="persistent_storage.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## persistentstorage.proto
+## persistent_storage.proto
 
 
 

@@ -1,0 +1,96 @@
+syntax = "proto3";
+package proto;
+
+import "permissions.proto";
+
+// Configuration for the DC/OS (Distributed Cloud Operating System) provider.
+message DcosProvider {
+    // Whether the provider is enabled.
+    bool enabled = 1;
+
+    // The list of configured accounts.
+    repeated DcosAccount accounts = 2;
+
+    // The name of the primary account.
+    string primaryAccount = 3;
+
+    // The list of configured clusters.
+    repeated DcosCluster clusters = 4;
+}
+
+// Credentials to authenticate against one or more DC/OS clusters.
+message DcosAccount {
+    // (Required) The name of the account.
+    string name = 1;
+
+    // (Required) The clusters against which this account will authenticate.
+    repeated DcosAccountCluster clusters = 2;
+
+    // The environment name for the account. Many accounts can share the
+    // same environment (e.g., dev, test, prod).
+    string environment = 3;
+
+    // (Required) The list of Docker registries to use with this DC/OS account.
+    repeated DcosAccountDockerRegistry dockerRegistries = 4;
+
+    // Fiat permissions configuration.
+    Permissions permissions = 5;
+
+    // (Deprecated) List of required Fiat permission groups. Configure
+    // `permissions` instead.
+    repeated string requiredGroupMemberships = 6;
+}
+
+// Configuration for a DC/OS cluster associated with a `DcosAccount`.
+message DcosAccountCluster {
+    // (Required) The name of the cluster. Must match the name of a
+    // `DcosCluster` defined for this provider.
+    string name = 1;
+
+    // (Required) User or service account identifier.
+    string uid = 2;
+
+    // Path to a file containing the secret key for service account
+    // authentication. If set, `password` should not be set.
+    string serviceKeyFile = 3;
+
+    // Password for a user account. If set, `serviceKeyFile` should not be set.
+    string password = 4;
+}
+
+// Configuration for a DC/OS cluster.
+message DcosCluster {
+    // (Required) The name of the cluster.
+    string name = 1;
+
+    // Root certificate file to trust for connections to the cluster.
+    string caCertFile = 2;
+
+    // (Required) URL of the endpoint for the DC/OS cluster's admin router.
+    string dcosUrl = 3;
+
+    // Configuration for a DC/OS load balancer.
+    DcosClusterLoadBalancer loadBalancer = 4;
+
+    // If `true`, disables verification of certificates from the cluster
+    // (insecure).
+    bool insecureSkipTlsVerify = 5;
+}
+
+// Configuration for a DC/OS load balancer.
+message DcosClusterLoadBalancer {
+    // Marathon-lb image to use when creating a load balancer with Spinnaker.
+    string image = 1;
+
+    // Name of the secret to use for allowing marathon-lb to authenticate with
+    // the cluster. Only necessary for clusters with strict or permissive
+    // security.
+    string serviceAccountSecret = 2;
+}
+
+// Configuration for a Docker registry associated with a `DcosAccount`.
+message DcosAccountDockerRegistry {
+    // The name of the Docker registry. Must be the name of an account
+    // configured with the Docker registry provider.
+    string accountName = 1;
+}

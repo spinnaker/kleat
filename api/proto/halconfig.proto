@@ -1,13 +1,18 @@
 syntax = "proto3";
 package proto;
 
-import "persistentstorage.proto";
+import "persistent_storage.proto";
 import "kubernetes.proto";
 import "google.proto";
 import "appengine.proto";
 import "aws.proto";
 import "azure.proto";
 import "cloudfoundry.proto";
+import "dcos.proto";
+import "docker_registry.proto";
+import "ecs.proto";
+import "huaweicloud.proto";
+import "oracle.proto";
 
 message HalConfig {
   PersistentStorage persistentStorage = 1;
@@ -19,11 +24,16 @@ message HalConfig {
   }
 
   message Providers {
-    Kubernetes kubernetes = 1;
-    Google google = 2;
-    Appengine appengine = 3;
-    Aws aws = 4;
-    Azure azure = 5;
-    CloudFoundry cloudfoundry = 6;
+    KubernetesProvider kubernetes = 1;
+    GoogleProvider google = 2;
+    AppengineProvider appengine = 3;
+    AwsProvider aws = 4;
+    AzureProvider azure = 5;
+    CloudFoundryProvider cloudfoundry = 6;
+    DcosProvider dcos = 7;
+    DockerRegistryProvider dockerRegistry = 8;
+    EcsProvider ecs = 9;
+    HuaweiCloudProvider huaweicloud = 10;
+    OracleProvider oracle = 11;
   }
 }

@@ -4,7 +4,7 @@ package proto;
 import "permissions.proto";
 
 // Configuration for the AWS provider.
-message Aws {
+message AwsProvider {
     // Whether the provider is enabled.
     bool enabled = 1;
 

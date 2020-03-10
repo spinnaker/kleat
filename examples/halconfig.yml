@@ -109,7 +109,118 @@ providers:
         appsManagerUri: https://apps.sys.somesystem.com
         metricsUri: https://metrics.sys.somesystem.com
     primaryAccount: my-cf-account
-
+  dcos:
+    enabled: true
+    accounts:
+      - name: my-dcos-account
+        environment: dev
+        dockerRegistries:
+          - accountName: my-gcr-registry
+        clusters:
+          - name: my-dcos-cluster
+            uid: my-id
+            serviceKeyFile: /var/secrets/my-dcos-service-key
+    primaryAccount: my-dcos-account
+    clusters:
+      - name: my-dcos-cluster
+        dcosUrl: my-url
+        caCertFile: /var/secrets/my-ca-cert-file
+        insecureSkipTlsVerify: true
+        loadBalancer:
+          image: image
+          serviceAccountSecret: secret
+  dockerRegistry:
+    enabled: true
+    accounts:
+    - name: my-gcr-registry
+      address: https://gcr.io
+      username: _json_key
+      email: fake.email@spinnaker.io
+      cacheIntervalSeconds: 30
+      clientTimeoutMillis: 60000
+      cacheThreads: 1
+      paginateSize: 100
+      sortTagsByDate: false
+      trackDigests: false
+      insecureRegistry: false
+      repositories:
+      - my-repo
+      passwordFile: /var/secrets/gcr-account.json
+    primaryAccount: my-gcr-registry
+  ecs:
+    enabled: true
+    accounts:
+    - name: my-ecs-account
+      environment: dev
+      awsAccount: my-aws-account
+    primaryAccount: my-ecs-account
+  huaweicloud:
+    enabled: true
+    accounts:
+    - name: my-huawei-account
+      environment: dev
+      accountType: dev
+      authUrl: myurl
+      username: username
+      password: pw
+      projectName: project
+      domainName: my-domain-name
+      insecure: true
+      regions:
+      - us-east1
+    primaryAccount: my-huawei-account
+    bakeryDefaults:
+      templateFile: file
+      baseImages:
+      - baseImage:
+          id: myimage
+          shortDescription: short
+          packageType: deb
+          templateFile: file
+        virtualizationSettings:
+        - region: us-east1
+          instanceType: instancetype
+          sourceImageId: id
+          sshUserName: username
+          eipType: eiptype
+      authUrl: url
+      username: username
+      password: pw
+      projectName: project
+      domainName: domain-name
+      insecure: true
+      vpcId: vpcid
+      subnetId: id
+      securityGroup: group
+      eipBandwidthSize: 10
+  oracle:
+    enabled: true
+    accounts:
+    - name: my-oracle-account
+      environment: dev
+      compartmentId: compartment-id
+      userId: user-id
+      fingerprint: fingerprint
+      sshPrivateKeyFilePath: /var/secrets/oracle_ssh_key_file
+      privateKeyPassphrase: pw
+      tenancyId: tenancy-id
+      region: us-east1
+    primaryAccount: my-oracle-account
+    bakeryDefaults:
+      templateFile: /var/secrets/oracle_template_file
+      baseImages:
+      - baseImage:
+          id: my-base-image
+          shortDescription: blah
+          detailedDescription: blahblahblah
+          packageType: deb
+          templateFile: /var/secrets/oracle_template_file
+        virtualizationSettings:
+          baseImageId: base-image-id
+          sshUserName: username
+      availabilityDomain: domain
+      subnetId: id
+      instanceShape: shape
 persistentStorage:
   persistentStoreType: gcs
   azs: {}
