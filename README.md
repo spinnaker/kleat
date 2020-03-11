@@ -29,7 +29,6 @@ be specified as a `bool`.
 
 - Halyard provided a default value for every possible member of the halconfig.
 Kleat neither requires nor supplies any default values, which means it is
-acceptable to remove all values for which the behavior of an unspecified
-field is acceptable. For example, if you do not use the Google App Engine
-provider, you can remove the `Providers.AppengineProvider` block from your
-halconfig.
+acceptable to remove all values for which the microservice's deafult value is
+acceptable. For example, if you do not use the Google App Engine provider, you
+can remove the `Providers.AppengineProvider` block from your halconfig.
