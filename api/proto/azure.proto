@@ -58,8 +58,6 @@ message AzureAccount {
     repeated string requiredGroupMemberships = 11;
 
     // The Azure regions this Spinnaker account will manage.
-    // TODO(mneterval): Halyard defaults to `[westus, eastus]`. Move to
-    // Clouddriver.
     repeated string regions = 12;
 
     // (Required) The `subscriptionId` to which your service principal is
@@ -71,7 +69,6 @@ message AzureAccount {
 
     // If true, the  SSH public key is used to provision the linux VM.
     // If false, the password is used instead.
-    // TODO(mneterval): Halyard defaults to `true`. Move to Clouddriver.
     bool useSshPublicKey = 15;
 }
 

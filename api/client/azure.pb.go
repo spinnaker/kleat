@@ -117,8 +117,6 @@ type AzureAccount struct {
 	// `permissions` instead.
 	RequiredGroupMemberships []string `protobuf:"bytes,11,rep,name=requiredGroupMemberships,proto3" json:"requiredGroupMemberships,omitempty"`
 	// The Azure regions this Spinnaker account will manage.
-	// TODO(mneterval): Halyard defaults to `[westus, eastus]`. Move to
-	// Clouddriver.
 	Regions []string `protobuf:"bytes,12,rep,name=regions,proto3" json:"regions,omitempty"`
 	// (Required) The `subscriptionId` to which your service principal is
 	// assigned.
@@ -127,7 +125,6 @@ type AzureAccount struct {
 	TenantId string `protobuf:"bytes,14,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
 	// If true, the  SSH public key is used to provision the linux VM.
 	// If false, the password is used instead.
-	// TODO(mneterval): Halyard defaults to `true`. Move to Clouddriver.
 	UseSshPublicKey      bool     `protobuf:"varint,15,opt,name=useSshPublicKey,proto3" json:"useSshPublicKey,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
