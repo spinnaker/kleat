@@ -241,3 +241,8 @@ artifacts:
         username: my-bitbucket-username
         password: my-bitbucket-password
         usernamePasswordFile: /var/secrets/bitbucket
+  gcs:
+    enabled: true
+    accounts:
+      - name: my-gcs-account
+        jsonPath: /var/secrets/gcs

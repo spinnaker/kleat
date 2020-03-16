@@ -104,6 +104,14 @@
   
   
 
+- [gcs.proto](#gcs.proto)
+    - [GcsAccount](#proto.GcsAccount)
+    - [GcsProvider](#proto.GcsProvider)
+  
+  
+  
+  
+
 - [google.proto](#google.proto)
     - [Consul](#proto.Consul)
     - [GoogleAccount](#proto.GoogleAccount)
@@ -262,6 +270,7 @@ Configuration for the Google App Engine (GAE) provider.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | bitbucket | [BitbucketProvider](#proto.BitbucketProvider) |  |  |
+| gcs | [GcsProvider](#proto.GcsProvider) |  |  |
 
 
 
@@ -1019,6 +1028,54 @@ Configuration for the ECS provider.
 | ----- | ---- | ----- | ----------- |
 | persistentStoreType | [string](#string) |  |  |
 | gcs | [GCS](#proto.GCS) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="gcs.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## gcs.proto
+
+
+
+<a name="proto.GcsAccount"></a>
+
+### GcsAccount
+Configuration for a GCS artifact account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| jsonPath | [string](#string) |  | The path to a JSON key for a GCP service account with which to authenticate. The service account must have the `roles/storage.admin` role enabled. |
+
+
+
+
+
+
+<a name="proto.GcsProvider"></a>
+
+### GcsProvider
+Configuration for the Google Cloud Storage (GCS) artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the GCS artifact provider is enabled. |
+| accounts | [GcsAccount](#proto.GcsAccount) | repeated | The list of configured GCS accounts. |
 
 
 
