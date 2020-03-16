@@ -128,6 +128,14 @@
   
   
 
+- [gitrepo.proto](#gitrepo.proto)
+    - [GitRepoAccount](#proto.GitRepoAccount)
+    - [GitRepoProvider](#proto.GitRepoProvider)
+  
+  
+  
+  
+
 - [google.proto](#google.proto)
     - [Consul](#proto.Consul)
     - [GoogleAccount](#proto.GoogleAccount)
@@ -289,6 +297,7 @@ Configuration for the Google App Engine (GAE) provider.
 | gcs | [GcsProvider](#proto.GcsProvider) |  |  |
 | github | [GitHubProvider](#proto.GitHubProvider) |  |  |
 | gitlab | [GitLabProvider](#proto.GitLabProvider) |  |  |
+| gitrepo | [GitRepoProvider](#proto.GitRepoProvider) |  |  |
 
 
 
@@ -1198,6 +1207,66 @@ Configuration for the GitLab artifact provider.
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether the GitLab artifact provider is enabled. |
 | accounts | [GitLabAccount](#proto.GitLabAccount) | repeated | The list of configured GitLab accounts. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="gitrepo.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## gitrepo.proto
+
+
+
+<a name="proto.GitRepoAccount"></a>
+
+### GitRepoAccount
+Configuration for a Git repo artifact account. An account maps to a
+credential that is able to authenticate against a Git repository hosted by a
+Git hosting service. Either `username` and `password`,
+`usernamePasswordFile`, `token`, `tokenFile`, or `sshPrivateKeyFilePath` and
+`sshPrivateKeyPassphrase` must be set.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| username | [string](#string) |  | The username of the account. |
+| password | [string](#string) |  | The password of the account. |
+| usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password of the account in the format `${username}:${password}`. |
+| token | [string](#string) |  | The Git repo access token. |
+| tokenFile | [string](#string) |  | The path to a file containing the Git repo access token. |
+| sshPrivateKeyFilePath | [string](#string) |  | The path to an SSH private key to be used when connecting with the Git repo over SSH. |
+| sshPrivateKeyPassphrase | [string](#string) |  | The passphrase to an SSH private key to be used when connecting with the Git repo over SSH. |
+| sshKnownHostsFilePath | [string](#string) |  | The path to a `known_hosts` file to be used when connecting with a Git repository over SSH. |
+| sshTrustUnknownHosts | [bool](#bool) |  | If `true`, Spinnaker can connect with a Git repository over SSH without verifying the server&#39;s IP address against a `known_hosts` file. |
+
+
+
+
+
+
+<a name="proto.GitRepoProvider"></a>
+
+### GitRepoProvider
+Configuration for the Git repo artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the Git repo artifact provider is enabled. |
+| accounts | [GitRepoAccount](#proto.GitRepoAccount) | repeated | The list of configured Git Repo accounts. |
 
 
 

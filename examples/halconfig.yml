@@ -259,3 +259,10 @@ artifacts:
     accounts:
       - name: my-gitlab-artifact-account
         tokenFile: /var/secrets/gitlab
+  gitrepo:
+    enabled: true
+    accounts:
+      - name: my-git-repo-account
+        sshPrivateKeyFilePath: /var/secrets/git_repo_private_key
+        sshPrivateKeyPassphrase: my-passphrase
+        sshKnownHostsFilePath: /var/secrets/known_hosts
