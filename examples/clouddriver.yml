@@ -66,6 +66,15 @@ artifacts:
       tenancyId: my-tenancy-id
       userId: my-user-id
     enabled: true
+  s3:
+    accounts:
+    - apiEndpoint: my-s3-endpoint
+      apiRegion: my-s3-region
+      awsAccessKeyId: my-key-id
+      awsSecretAccessKey: my-key
+      name: my-s3-account
+      region: my-region
+    enabled: true
 aws:
   accounts:
   - accountId: id

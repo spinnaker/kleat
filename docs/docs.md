@@ -239,6 +239,14 @@
   
   
 
+- [s3_artifact_provider.proto](#s3_artifact_provider.proto)
+    - [S3ArtifactAccount](#proto.S3ArtifactAccount)
+    - [S3ArtifactProvider](#proto.S3ArtifactProvider)
+  
+  
+  
+  
+
 - [Scalar Value Types](#scalar-value-types)
 
 
@@ -334,6 +342,7 @@ Configuration for the Google App Engine (GAE) provider.
 | http | [HttpArtifactProvider](#proto.HttpArtifactProvider) |  |  |
 | maven | [MavenArtifactProvider](#proto.MavenArtifactProvider) |  |  |
 | oracle | [OracleArtifactProvider](#proto.OracleArtifactProvider) |  |  |
+| s3 | [S3ArtifactProvider](#proto.S3ArtifactProvider) |  |  |
 
 
 
@@ -2184,6 +2193,58 @@ A Fiat permissions configuration object.
 | bucket | [string](#string) |  | The name of a storage bucket that your specified account has access to. If not specified, a random name will be chosen. If you specify a globally unique bucket name that does not exist yet, Halyard will create that bucket for you. |
 | rootFolder | [string](#string) |  | The root folder in the chosen bucket to place all of Spinnaker&#39;s persistent data in. |
 | bucketLocation | [string](#string) |  | This is only required if the bucket you specify does not exist yet. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="s3_artifact_provider.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## s3_artifact_provider.proto
+
+
+
+<a name="proto.S3ArtifactAccount"></a>
+
+### S3ArtifactAccount
+Configuration for an S3 artifact account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| apiEndpoint | [string](#string) |  | The S3 API endpoint. Only required when using an S3 clone such as Minio. |
+| apiRegion | [string](#string) |  | The S3 API region. Only required when using an S3 clone such as Minio. |
+| awsAccessKeyId | [string](#string) |  | The AWS Access Key ID. If not provided, Spinnaker will try to find AWS credentials as described at http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default. |
+| awsSecretAccessKey | [string](#string) |  | The AWS Secret Key. |
+| region | [string](#string) |  | The S3 region. |
+
+
+
+
+
+
+<a name="proto.S3ArtifactProvider"></a>
+
+### S3ArtifactProvider
+Configuration for the S3 artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the S3 artifact provider is enabled. |
+| accounts | [S3ArtifactAccount](#proto.S3ArtifactAccount) | repeated | The list of configured S3 artifact accounts. |
 
 
 
