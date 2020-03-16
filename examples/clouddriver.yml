@@ -55,6 +55,17 @@ artifacts:
     - name: my-maven-account
       repositoryUrl: http://some.host.com/repository/path
     enabled: true
+  oracle:
+    accounts:
+    - fingerprint: my-fingerprint
+      name: my-oracle-artifact-account
+      namespace: my-namespace
+      privateKeyPassphrase: my-passphrase
+      region: my-region
+      sshPrivateKeyFilePath: /var/secrets/oracle
+      tenancyId: my-tenancy-id
+      userId: my-user-id
+    enabled: true
 aws:
   accounts:
   - accountId: id

@@ -9,6 +9,7 @@ import "gitrepo.proto";
 import "helm.proto";
 import "http.proto";
 import "maven.proto";
+import "oracle_artifact.proto";
 
 message ArtifactProviders {
     BitbucketProvider bitbucket = 1;
@@ -19,4 +20,5 @@ message ArtifactProviders {
     HelmProvider helm = 6;
     HttpProvider http = 7;
     MavenProvider maven = 8;
+    OracleArtifactProvider oracle = 9;
 }

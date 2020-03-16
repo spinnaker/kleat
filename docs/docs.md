@@ -217,6 +217,14 @@
   
   
 
+- [oracle_artifact.proto](#oracle_artifact.proto)
+    - [OracleArtifactAccount](#proto.OracleArtifactAccount)
+    - [OracleArtifactProvider](#proto.OracleArtifactProvider)
+  
+  
+  
+  
+
 - [permissions.proto](#permissions.proto)
     - [Permissions](#proto.Permissions)
   
@@ -325,6 +333,7 @@ Configuration for the Google App Engine (GAE) provider.
 | helm | [HelmProvider](#proto.HelmProvider) |  |  |
 | http | [HttpProvider](#proto.HttpProvider) |  |  |
 | maven | [MavenProvider](#proto.MavenProvider) |  |  |
+| oracle | [OracleArtifactProvider](#proto.OracleArtifactProvider) |  |  |
 
 
 
@@ -2053,6 +2062,60 @@ Oracle virtualization settings.
 | ----- | ---- | ----- | ----------- |
 | baseImageId | [string](#string) |  | (Required) The OCID of the base image ID for the baking configuration. |
 | sshUserName | [string](#string) |  | (Required) The ssh username for the baking configuration. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="oracle_artifact.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## oracle_artifact.proto
+
+
+
+<a name="proto.OracleArtifactAccount"></a>
+
+### OracleArtifactAccount
+Configuration for an Oracle artifact account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| fingerprint | [string](#string) |  | The fingerprint of the public key. |
+| namespace | [string](#string) |  | The namespace in which the bucket and objects should be created. |
+| privateKeyPassphrase | [string](#string) |  | The passphrase used for the private key, if it is encrypted. |
+| region | [string](#string) |  | An Oracle region (e.g., `us-phoenix-1`). |
+| sshPrivateKeyFilePath | [string](#string) |  | Path to the private key in PEM format. |
+| tenancyId | [string](#string) |  | The OCID of the Oracle Tenancy to use. |
+| userId | [string](#string) |  | The OCID of the Oracle User with which to authenticate. |
+
+
+
+
+
+
+<a name="proto.OracleArtifactProvider"></a>
+
+### OracleArtifactProvider
+Configuration for the Oracle artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the Oracle artifact provider is enabled. |
+| accounts | [OracleArtifactAccount](#proto.OracleArtifactAccount) | repeated | The list of configured Oracle artifact accounts. |
 
 
 

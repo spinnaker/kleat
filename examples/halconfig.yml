@@ -282,3 +282,14 @@ artifacts:
     accounts:
       - name: my-maven-account
         repositoryUrl: http://some.host.com/repository/path
+  oracle:
+    enabled: true
+    accounts:
+      - name: my-oracle-artifact-account
+        namespace: my-namespace
+        region: my-region
+        userId: my-user-id
+        fingerprint: my-fingerprint
+        sshPrivateKeyFilePath: /var/secrets/oracle
+        privateKeyPassphrase: my-passphrase
+        tenancyId: my-tenancy-id
