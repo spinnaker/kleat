@@ -1,0 +1,22 @@
+syntax = "proto3";
+package proto;
+
+// Configuration for the Google Cloud Storage (GCS) artifact provider.
+message GcsProvider {
+    // Whether the GCS artifact provider is enabled.
+    bool enabled = 1;
+
+    // The list of configured GCS accounts.
+    repeated GcsAccount accounts = 2;
+}
+
+// Configuration for a GCS artifact account.
+message GcsAccount {
+    // The name of the account.
+    string name = 1;
+
+    // The path to a JSON key for a GCP service account with which to
+    // authenticate. The service account must have the `roles/storage.admin`
+    // role enabled.
+    string jsonPath = 2;
+}

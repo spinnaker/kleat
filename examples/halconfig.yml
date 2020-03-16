@@ -241,3 +241,28 @@ artifacts:
         username: my-bitbucket-username
         password: my-bitbucket-password
         usernamePasswordFile: /var/secrets/bitbucket
+  gcs:
+    enabled: true
+    accounts:
+      - name: my-gcs-account
+        jsonPath: /var/secrets/gcs
+  github:
+    enabled: true
+    accounts:
+      - name: my-github-artifact-account
+        tokenFile: /var/secrets/github
+      - name: my-github-artifact-account-2
+        username: my-username
+        password: my-password
+  gitlab:
+    enabled: true
+    accounts:
+      - name: my-gitlab-artifact-account
+        tokenFile: /var/secrets/gitlab
+  gitrepo:
+    enabled: true
+    accounts:
+      - name: my-git-repo-account
+        sshPrivateKeyFilePath: /var/secrets/git_repo_private_key
+        sshPrivateKeyPassphrase: my-passphrase
+        sshKnownHostsFilePath: /var/secrets/known_hosts

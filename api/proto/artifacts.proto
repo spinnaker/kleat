@@ -2,7 +2,15 @@ syntax = "proto3";
 package proto;
 
 import "bitbucket.proto";
+import "gcs.proto";
+import "github.proto";
+import "gitlab.proto";
+import "gitrepo.proto";
 
 message ArtifactProviders {
     BitbucketProvider bitbucket = 1;
+    GcsProvider gcs = 2;
+    GitHubProvider github = 3;
+    GitLabProvider gitlab = 4;
+    GitRepoProvider gitrepo = 5;
 }
