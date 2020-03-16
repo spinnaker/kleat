@@ -1,0 +1,31 @@
+syntax = "proto3";
+package proto;
+
+// Configuration for the Helm artifact provider.
+message HelmProvider {
+    // Whether the Helm artifact provider is enabled.
+    bool enabled = 1;
+
+    // The list of configured Helm accounts.
+    repeated HelmAccount accounts = 2;
+}
+
+// Configuration for a Helm artifact account. Either `username` and `password`
+// or `usernamePasswordFile` should be specified as means of authentication.
+message HelmAccount {
+    // The name of the account.
+    string name = 1;
+
+    // The Helm chart repository URL.
+    string repository = 2;
+
+    // A username for Helm chart repository basic auth.
+    string username = 3;
+
+    // A password for Helm chart repository basic auth.
+    string password = 4;
+
+    // The path to a file containing the username and password for Helm chart
+    // repository basic auth. Must be in the format `${username}:${password}`.
+    string usernamePasswordFile = 5;
+}

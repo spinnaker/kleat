@@ -6,6 +6,7 @@ import "gcs.proto";
 import "github.proto";
 import "gitlab.proto";
 import "gitrepo.proto";
+import "helm.proto";
 
 message ArtifactProviders {
     BitbucketProvider bitbucket = 1;
@@ -13,4 +14,5 @@ message ArtifactProviders {
     GitHubProvider github = 3;
     GitLabProvider gitlab = 4;
     GitRepoProvider gitrepo = 5;
+    HelmProvider helm = 6;
 }

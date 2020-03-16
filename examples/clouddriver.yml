@@ -39,6 +39,12 @@ artifacts:
       sshPrivateKeyFilePath: /var/secrets/git_repo_private_key
       sshPrivateKeyPassphrase: my-passphrase
     enabled: true
+  helm:
+    accounts:
+    - name: my-helm-account
+      repository: http://my-repository.com
+      usernamePasswordFile: /var/secrets/helm
+    enabled: true
 aws:
   accounts:
   - accountId: id

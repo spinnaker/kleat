@@ -158,6 +158,14 @@
   
   
 
+- [helm.proto](#helm.proto)
+    - [HelmAccount](#proto.HelmAccount)
+    - [HelmProvider](#proto.HelmProvider)
+  
+  
+  
+  
+
 - [huaweicloud.proto](#huaweicloud.proto)
     - [HuaweiCloudAccount](#proto.HuaweiCloudAccount)
     - [HuaweiCloudBakeryDefaults](#proto.HuaweiCloudBakeryDefaults)
@@ -298,6 +306,7 @@ Configuration for the Google App Engine (GAE) provider.
 | github | [GitHubProvider](#proto.GitHubProvider) |  |  |
 | gitlab | [GitLabProvider](#proto.GitLabProvider) |  |  |
 | gitrepo | [GitRepoProvider](#proto.GitRepoProvider) |  |  |
+| helm | [HelmProvider](#proto.HelmProvider) |  |  |
 
 
 
@@ -1489,6 +1498,58 @@ Image source configuration.
 | ecs | [EcsProvider](#proto.EcsProvider) |  |  |
 | huaweicloud | [HuaweiCloudProvider](#proto.HuaweiCloudProvider) |  |  |
 | oracle | [OracleProvider](#proto.OracleProvider) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="helm.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## helm.proto
+
+
+
+<a name="proto.HelmAccount"></a>
+
+### HelmAccount
+Configuration for a Helm artifact account. Either `username` and `password`
+or `usernamePasswordFile` should be specified as means of authentication.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| repository | [string](#string) |  | The Helm chart repository URL. |
+| username | [string](#string) |  | A username for Helm chart repository basic auth. |
+| password | [string](#string) |  | A password for Helm chart repository basic auth. |
+| usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password for Helm chart repository basic auth. Must be in the format `${username}:${password}`. |
+
+
+
+
+
+
+<a name="proto.HelmProvider"></a>
+
+### HelmProvider
+Configuration for the Helm artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the Helm artifact provider is enabled. |
+| accounts | [HelmAccount](#proto.HelmAccount) | repeated | The list of configured Helm accounts. |
 
 
 
