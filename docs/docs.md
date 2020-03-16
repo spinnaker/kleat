@@ -112,6 +112,14 @@
   
   
 
+- [github.proto](#github.proto)
+    - [GitHubAccount](#proto.GitHubAccount)
+    - [GitHubProvider](#proto.GitHubProvider)
+  
+  
+  
+  
+
 - [google.proto](#google.proto)
     - [Consul](#proto.Consul)
     - [GoogleAccount](#proto.GoogleAccount)
@@ -271,6 +279,7 @@ Configuration for the Google App Engine (GAE) provider.
 | ----- | ---- | ----- | ----------- |
 | bitbucket | [BitbucketProvider](#proto.BitbucketProvider) |  |  |
 | gcs | [GcsProvider](#proto.GcsProvider) |  |  |
+| github | [GitHubProvider](#proto.GitHubProvider) |  |  |
 
 
 
@@ -1076,6 +1085,60 @@ Configuration for the Google Cloud Storage (GCS) artifact provider.
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether the GCS artifact provider is enabled. |
 | accounts | [GcsAccount](#proto.GcsAccount) | repeated | The list of configured GCS accounts. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="github.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## github.proto
+
+
+
+<a name="proto.GitHubAccount"></a>
+
+### GitHubAccount
+Configuration for a GitHub artifact account. Either `username` and
+`password`, `usernamePasswordFile`, `token`, or `tokenFile` should be
+specified as means of authentication.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| username | [string](#string) |  | The GitHub account username. |
+| password | [string](#string) |  | The GitHub account password. |
+| usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password of the account in the format `${username}:${password}`. |
+| token | [string](#string) |  | The GitHub access token. |
+| tokenFile | [string](#string) |  | The path to a file containing the GitHub access token. |
+
+
+
+
+
+
+<a name="proto.GitHubProvider"></a>
+
+### GitHubProvider
+Configuration for the GitHub artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the GitHub artifact provider is enabled. |
+| accounts | [GitHubAccount](#proto.GitHubAccount) | repeated | The list of configured GitHub accounts. |
 
 
 

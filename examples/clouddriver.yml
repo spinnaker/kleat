@@ -19,6 +19,14 @@ artifacts:
     - jsonPath: /var/secrets/gcs
       name: my-gcs-account
     enabled: true
+  github:
+    accounts:
+    - name: my-github-artifact-account
+      tokenFile: /var/secrets/github
+    - name: my-github-artifact-account-2
+      password: my-password
+      username: my-username
+    enabled: true
 aws:
   accounts:
   - accountId: id

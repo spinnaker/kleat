@@ -3,8 +3,10 @@ package proto;
 
 import "bitbucket.proto";
 import "gcs.proto";
+import "github.proto";
 
 message ArtifactProviders {
     BitbucketProvider bitbucket = 1;
     GcsProvider gcs = 2;
+    GitHubProvider github = 3;
 }
