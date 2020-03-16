@@ -254,3 +254,8 @@ artifacts:
       - name: my-github-artifact-account-2
         username: my-username
         password: my-password
+  gitlab:
+    enabled: true
+    accounts:
+      - name: my-gitlab-artifact-account
+        tokenFile: /var/secrets/gitlab

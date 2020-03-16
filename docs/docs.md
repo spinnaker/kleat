@@ -120,6 +120,14 @@
   
   
 
+- [gitlab.proto](#gitlab.proto)
+    - [GitLabAccount](#proto.GitLabAccount)
+    - [GitLabProvider](#proto.GitLabProvider)
+  
+  
+  
+  
+
 - [google.proto](#google.proto)
     - [Consul](#proto.Consul)
     - [GoogleAccount](#proto.GoogleAccount)
@@ -280,6 +288,7 @@ Configuration for the Google App Engine (GAE) provider.
 | bitbucket | [BitbucketProvider](#proto.BitbucketProvider) |  |  |
 | gcs | [GcsProvider](#proto.GcsProvider) |  |  |
 | github | [GitHubProvider](#proto.GitHubProvider) |  |  |
+| gitlab | [GitLabProvider](#proto.GitLabProvider) |  |  |
 
 
 
@@ -1139,6 +1148,56 @@ Configuration for the GitHub artifact provider.
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether the GitHub artifact provider is enabled. |
 | accounts | [GitHubAccount](#proto.GitHubAccount) | repeated | The list of configured GitHub accounts. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="gitlab.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## gitlab.proto
+
+
+
+<a name="proto.GitLabAccount"></a>
+
+### GitLabAccount
+Configuration for a GitLab artifact account. Either `token` or
+`tokenFile` should be specified as means of authentication.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| token | [string](#string) |  | The GitLab access token. |
+| tokenFile | [string](#string) |  | The path to a file containing the GitLab access token. |
+
+
+
+
+
+
+<a name="proto.GitLabProvider"></a>
+
+### GitLabProvider
+Configuration for the GitLab artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the GitLab artifact provider is enabled. |
+| accounts | [GitLabAccount](#proto.GitLabAccount) | repeated | The list of configured GitLab accounts. |
 
 
 

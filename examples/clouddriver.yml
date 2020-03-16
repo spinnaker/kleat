@@ -27,6 +27,11 @@ artifacts:
       password: my-password
       username: my-username
     enabled: true
+  gitlab:
+    accounts:
+    - name: my-gitlab-artifact-account
+      tokenFile: /var/secrets/gitlab
+    enabled: true
 aws:
   accounts:
   - accountId: id
