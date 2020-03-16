@@ -166,6 +166,14 @@
   
   
 
+- [http.proto](#http.proto)
+    - [HttpAccount](#proto.HttpAccount)
+    - [HttpProvider](#proto.HttpProvider)
+  
+  
+  
+  
+
 - [huaweicloud.proto](#huaweicloud.proto)
     - [HuaweiCloudAccount](#proto.HuaweiCloudAccount)
     - [HuaweiCloudBakeryDefaults](#proto.HuaweiCloudBakeryDefaults)
@@ -307,6 +315,7 @@ Configuration for the Google App Engine (GAE) provider.
 | gitlab | [GitLabProvider](#proto.GitLabProvider) |  |  |
 | gitrepo | [GitRepoProvider](#proto.GitRepoProvider) |  |  |
 | helm | [HelmProvider](#proto.HelmProvider) |  |  |
+| http | [HttpProvider](#proto.HttpProvider) |  |  |
 
 
 
@@ -1550,6 +1559,57 @@ Configuration for the Helm artifact provider.
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether the Helm artifact provider is enabled. |
 | accounts | [HelmAccount](#proto.HelmAccount) | repeated | The list of configured Helm accounts. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="http.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## http.proto
+
+
+
+<a name="proto.HttpAccount"></a>
+
+### HttpAccount
+Configuration for an HTTP artifact account. Either `username` and `password`
+or `usernamePasswordFile` should be specified as means of authentication.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| username | [string](#string) |  | A username for HTTP basic auth. |
+| password | [string](#string) |  | A password for HTTP basic auth. |
+| usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password for HTTP basic auth. Must be in the format `${username}:${password}`. |
+
+
+
+
+
+
+<a name="proto.HttpProvider"></a>
+
+### HttpProvider
+Configuration for the HTTP artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the HTTP artifact provider is enabled. |
+| accounts | [HttpAccount](#proto.HttpAccount) | repeated | The list of configured HTTP accounts. |
 
 
 

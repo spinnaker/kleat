@@ -272,3 +272,8 @@ artifacts:
       - name: my-helm-account
         repository: http://my-repository.com
         usernamePasswordFile: /var/secrets/helm
+  http:
+    enabled: true
+    accounts:
+      - name: my-http-account
+        usernamePasswordFile: /var/secrets/http

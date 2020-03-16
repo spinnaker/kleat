@@ -1,0 +1,28 @@
+syntax = "proto3";
+package proto;
+
+// Configuration for the HTTP artifact provider.
+message HttpProvider {
+    // Whether the HTTP artifact provider is enabled.
+    bool enabled = 1;
+
+    // The list of configured HTTP accounts.
+    repeated HttpAccount accounts = 2;
+}
+
+// Configuration for an HTTP artifact account. Either `username` and `password`
+// or `usernamePasswordFile` should be specified as means of authentication.
+message HttpAccount {
+    // The name of the account.
+    string name = 1;
+
+    // A username for HTTP basic auth.
+    string username = 2;
+
+    // A password for HTTP basic auth.
+    string password = 3;
+
+    // The path to a file containing the username and password for HTTP basic
+    // auth. Must be in the format `${username}:${password}`.
+    string usernamePasswordFile = 4;
+}

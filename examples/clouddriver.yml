@@ -45,6 +45,11 @@ artifacts:
       repository: http://my-repository.com
       usernamePasswordFile: /var/secrets/helm
     enabled: true
+  http:
+    accounts:
+    - name: my-http-account
+      usernamePasswordFile: /var/secrets/http
+    enabled: true
 aws:
   accounts:
   - accountId: id
