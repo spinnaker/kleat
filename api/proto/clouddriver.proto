@@ -12,6 +12,7 @@ import "docker_registry.proto";
 import "ecs.proto";
 import "huaweicloud.proto";
 import "oracle.proto";
+import "artifacts.proto";
 
 message ClouddriverConfig {
     KubernetesProvider kubernetes = 1;
@@ -25,4 +26,5 @@ message ClouddriverConfig {
     EcsProvider ecs = 9;
     HuaweiCloudProvider huaweicloud = 10;
     OracleProvider oracle = 11;
+    ArtifactProviders artifacts = 12;
 }

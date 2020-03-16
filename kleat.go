@@ -203,6 +203,7 @@ func halToClouddriver(h proto.HalConfig) (proto.ClouddriverConfig, error) {
 		Ecs:            h.Providers.Ecs,
 		Huaweicloud:    h.Providers.Huaweicloud,
 		Oracle:         h.Providers.Oracle,
+		Artifacts:      h.Artifacts,
 	}
 	return c, nil
 }

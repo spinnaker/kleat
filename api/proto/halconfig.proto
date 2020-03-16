@@ -13,10 +13,12 @@ import "docker_registry.proto";
 import "ecs.proto";
 import "huaweicloud.proto";
 import "oracle.proto";
+import "artifacts.proto";
 
 message HalConfig {
   PersistentStorage persistentStorage = 1;
   Providers providers = 2;
+  ArtifactProviders artifacts = 3;
 
   message PersistentStorage {
     string persistentStoreType = 1;

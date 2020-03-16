@@ -6,6 +6,14 @@ appengine:
     sshTrustUnknownHosts: true
   enabled: true
   primaryAccount: my-appengine-account
+artifacts:
+  bitbucket:
+    accounts:
+    - name: my-bitbucket-account
+      password: my-bitbucket-password
+      username: my-bitbucket-username
+      usernamePasswordFile: /var/secrets/bitbucket
+    enabled: true
 aws:
   accounts:
   - accountId: id

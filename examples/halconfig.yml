@@ -233,3 +233,11 @@ persistentStorage:
   s3:
     rootFolder: front50
   oracle: {}
+artifacts:
+  bitbucket:
+    enabled: true
+    accounts:
+      - name: my-bitbucket-account
+        username: my-bitbucket-username
+        password: my-bitbucket-password
+        usernamePasswordFile: /var/secrets/bitbucket
