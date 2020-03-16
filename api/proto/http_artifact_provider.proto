@@ -2,17 +2,17 @@ syntax = "proto3";
 package proto;
 
 // Configuration for the HTTP artifact provider.
-message HttpProvider {
+message HttpArtifactProvider {
     // Whether the HTTP artifact provider is enabled.
     bool enabled = 1;
 
     // The list of configured HTTP accounts.
-    repeated HttpAccount accounts = 2;
+    repeated HttpArtifactAccount accounts = 2;
 }
 
 // Configuration for an HTTP artifact account. Either `username` and `password`
 // or `usernamePasswordFile` should be specified as means of authentication.
-message HttpAccount {
+message HttpArtifactAccount {
     // The name of the account.
     string name = 1;
 

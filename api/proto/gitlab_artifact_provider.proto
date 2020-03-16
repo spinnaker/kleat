@@ -2,17 +2,17 @@ syntax = "proto3";
 package proto;
 
 // Configuration for the GitLab artifact provider.
-message GitLabProvider {
+message GitLabArtifactProvider {
     // Whether the GitLab artifact provider is enabled.
     bool enabled = 1;
 
     // The list of configured GitLab accounts.
-    repeated GitLabAccount accounts = 2;
+    repeated GitLabArtifactAccount accounts = 2;
 }
 
 // Configuration for a GitLab artifact account. Either `token` or
 // `tokenFile` should be specified as means of authentication.
-message GitLabAccount {
+message GitLabArtifactAccount {
     // The name of the account.
     string name = 1;
 

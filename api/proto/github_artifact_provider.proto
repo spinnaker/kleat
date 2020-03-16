@@ -2,18 +2,18 @@ syntax = "proto3";
 package proto;
 
 // Configuration for the GitHub artifact provider.
-message GitHubProvider {
+message GitHubArtifactProvider {
     // Whether the GitHub artifact provider is enabled.
     bool enabled = 1;
 
     // The list of configured GitHub accounts.
-    repeated GitHubAccount accounts = 2;
+    repeated GitHubArtifactAccount accounts = 2;
 }
 
 // Configuration for a GitHub artifact account. Either `username` and
 // `password`, `usernamePasswordFile`, `token`, or `tokenFile` should be
 // specified as means of authentication.
-message GitHubAccount {
+message GitHubArtifactAccount {
     // The name of the account.
     string name = 1;
 

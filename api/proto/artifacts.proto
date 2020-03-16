@@ -1,24 +1,24 @@
 syntax = "proto3";
 package proto;
 
-import "bitbucket.proto";
-import "gcs.proto";
-import "github.proto";
-import "gitlab.proto";
-import "gitrepo.proto";
-import "helm.proto";
-import "http.proto";
-import "maven.proto";
-import "oracle_artifact.proto";
+import "bitbucket_artifact_provider.proto";
+import "gcs_artifact_provider.proto";
+import "github_artifact_provider.proto";
+import "gitlab_artifact_provider.proto";
+import "gitrepo_artifact_provider.proto";
+import "helm_artifact_provider.proto";
+import "http_artifact_provider.proto";
+import "maven_artifact_provider.proto";
+import "oracle_artifact_provider.proto";
 
 message ArtifactProviders {
-    BitbucketProvider bitbucket = 1;
-    GcsProvider gcs = 2;
-    GitHubProvider github = 3;
-    GitLabProvider gitlab = 4;
-    GitRepoProvider gitrepo = 5;
-    HelmProvider helm = 6;
-    HttpProvider http = 7;
-    MavenProvider maven = 8;
+    BitbucketArtifactProvider bitbucket = 1;
+    GcsArtifactProvider gcs = 2;
+    GitHubArtifactProvider github = 3;
+    GitLabArtifactProvider gitlab = 4;
+    GitRepoArtifactProvider gitrepo = 5;
+    HelmArtifactProvider helm = 6;
+    HttpArtifactProvider http = 7;
+    MavenArtifactProvider maven = 8;
     OracleArtifactProvider oracle = 9;
 }

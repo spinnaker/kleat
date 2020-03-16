@@ -3,7 +3,7 @@
 
 ## Table of Contents
 
-- [appengine.proto](#appengine.proto)
+- [appengine_provider.proto](#appengine_provider.proto)
     - [AppengineAccount](#proto.AppengineAccount)
     - [AppengineProvider](#proto.AppengineProvider)
   
@@ -18,7 +18,7 @@
   
   
 
-- [aws.proto](#aws.proto)
+- [aws_provider.proto](#aws_provider.proto)
     - [AwsAccount](#proto.AwsAccount)
     - [AwsBakeryDefaults](#proto.AwsBakeryDefaults)
     - [AwsBaseImage](#proto.AwsBaseImage)
@@ -34,7 +34,7 @@
   
   
 
-- [azure.proto](#azure.proto)
+- [azure_provider.proto](#azure_provider.proto)
     - [AzureAccount](#proto.AzureAccount)
     - [AzureBakeryDefaults](#proto.AzureBakeryDefaults)
     - [AzureBaseImage](#proto.AzureBaseImage)
@@ -45,9 +45,9 @@
   
   
 
-- [bitbucket.proto](#bitbucket.proto)
-    - [BitbucketAccount](#proto.BitbucketAccount)
-    - [BitbucketProvider](#proto.BitbucketProvider)
+- [bitbucket_artifact_provider.proto](#bitbucket_artifact_provider.proto)
+    - [BitbucketArtifactAccount](#proto.BitbucketArtifactAccount)
+    - [BitbucketArtifactProvider](#proto.BitbucketArtifactProvider)
   
   
   
@@ -60,7 +60,7 @@
   
   
 
-- [cloudfoundry.proto](#cloudfoundry.proto)
+- [cloudfoundry_provider.proto](#cloudfoundry_provider.proto)
     - [CloudFoundryAccount](#proto.CloudFoundryAccount)
     - [CloudFoundryProvider](#proto.CloudFoundryProvider)
   
@@ -68,7 +68,7 @@
   
   
 
-- [dcos.proto](#dcos.proto)
+- [dcos_provider.proto](#dcos_provider.proto)
     - [DcosAccount](#proto.DcosAccount)
     - [DcosAccountCluster](#proto.DcosAccountCluster)
     - [DcosAccountDockerRegistry](#proto.DcosAccountDockerRegistry)
@@ -80,7 +80,7 @@
   
   
 
-- [docker_registry.proto](#docker_registry.proto)
+- [docker_registry_provider.proto](#docker_registry_provider.proto)
     - [DockerRegistryAccount](#proto.DockerRegistryAccount)
     - [DockerRegistryProvider](#proto.DockerRegistryProvider)
   
@@ -88,7 +88,7 @@
   
   
 
-- [ecs.proto](#ecs.proto)
+- [ecs_provider.proto](#ecs_provider.proto)
     - [EcsAccount](#proto.EcsAccount)
     - [EcsProvider](#proto.EcsProvider)
   
@@ -104,39 +104,39 @@
   
   
 
-- [gcs.proto](#gcs.proto)
-    - [GcsAccount](#proto.GcsAccount)
-    - [GcsProvider](#proto.GcsProvider)
+- [gcs_artifact_provider.proto](#gcs_artifact_provider.proto)
+    - [GcsArtifactAccount](#proto.GcsArtifactAccount)
+    - [GcsArtifactProvider](#proto.GcsArtifactProvider)
   
   
   
   
 
-- [github.proto](#github.proto)
-    - [GitHubAccount](#proto.GitHubAccount)
-    - [GitHubProvider](#proto.GitHubProvider)
+- [github_artifact_provider.proto](#github_artifact_provider.proto)
+    - [GitHubArtifactAccount](#proto.GitHubArtifactAccount)
+    - [GitHubArtifactProvider](#proto.GitHubArtifactProvider)
   
   
   
   
 
-- [gitlab.proto](#gitlab.proto)
-    - [GitLabAccount](#proto.GitLabAccount)
-    - [GitLabProvider](#proto.GitLabProvider)
+- [gitlab_artifact_provider.proto](#gitlab_artifact_provider.proto)
+    - [GitLabArtifactAccount](#proto.GitLabArtifactAccount)
+    - [GitLabArtifactProvider](#proto.GitLabArtifactProvider)
   
   
   
   
 
-- [gitrepo.proto](#gitrepo.proto)
-    - [GitRepoAccount](#proto.GitRepoAccount)
-    - [GitRepoProvider](#proto.GitRepoProvider)
+- [gitrepo_artifact_provider.proto](#gitrepo_artifact_provider.proto)
+    - [GitRepoArtifactAccount](#proto.GitRepoArtifactAccount)
+    - [GitRepoArtifactProvider](#proto.GitRepoArtifactProvider)
   
   
   
   
 
-- [google.proto](#google.proto)
+- [google_provider.proto](#google_provider.proto)
     - [Consul](#proto.Consul)
     - [GoogleAccount](#proto.GoogleAccount)
     - [GoogleBakeryDefaults](#proto.GoogleBakeryDefaults)
@@ -158,23 +158,23 @@
   
   
 
-- [helm.proto](#helm.proto)
-    - [HelmAccount](#proto.HelmAccount)
-    - [HelmProvider](#proto.HelmProvider)
+- [helm_artifact_provider.proto](#helm_artifact_provider.proto)
+    - [HelmArtifactAccount](#proto.HelmArtifactAccount)
+    - [HelmArtifactProvider](#proto.HelmArtifactProvider)
   
   
   
   
 
-- [http.proto](#http.proto)
-    - [HttpAccount](#proto.HttpAccount)
-    - [HttpProvider](#proto.HttpProvider)
+- [http_artifact_provider.proto](#http_artifact_provider.proto)
+    - [HttpArtifactAccount](#proto.HttpArtifactAccount)
+    - [HttpArtifactProvider](#proto.HttpArtifactProvider)
   
   
   
   
 
-- [huaweicloud.proto](#huaweicloud.proto)
+- [huaweicloud_provider.proto](#huaweicloud_provider.proto)
     - [HuaweiCloudAccount](#proto.HuaweiCloudAccount)
     - [HuaweiCloudBakeryDefaults](#proto.HuaweiCloudBakeryDefaults)
     - [HuaweiCloudBaseImage](#proto.HuaweiCloudBaseImage)
@@ -186,7 +186,7 @@
   
   
 
-- [kubernetes.proto](#kubernetes.proto)
+- [kubernetes_provider.proto](#kubernetes_provider.proto)
     - [KubernetesAccount](#proto.KubernetesAccount)
     - [KubernetesAccountDockerRegistry](#proto.KubernetesAccountDockerRegistry)
     - [KubernetesCachingPolicy](#proto.KubernetesCachingPolicy)
@@ -197,29 +197,29 @@
   
   
 
-- [maven.proto](#maven.proto)
-    - [MavenAccount](#proto.MavenAccount)
-    - [MavenProvider](#proto.MavenProvider)
+- [maven_artifact_provider.proto](#maven_artifact_provider.proto)
+    - [MavenArtifactAccount](#proto.MavenArtifactAccount)
+    - [MavenArtifactProvider](#proto.MavenArtifactProvider)
   
   
   
   
 
-- [oracle.proto](#oracle.proto)
+- [oracle_artifact_provider.proto](#oracle_artifact_provider.proto)
+    - [OracleArtifactAccount](#proto.OracleArtifactAccount)
+    - [OracleArtifactProvider](#proto.OracleArtifactProvider)
+  
+  
+  
+  
+
+- [oracle_provider.proto](#oracle_provider.proto)
     - [OracleAccount](#proto.OracleAccount)
     - [OracleBakeryDefaults](#proto.OracleBakeryDefaults)
     - [OracleBaseImage](#proto.OracleBaseImage)
     - [OracleBaseImageSettings](#proto.OracleBaseImageSettings)
     - [OracleProvider](#proto.OracleProvider)
     - [OracleVirtualizationSettings](#proto.OracleVirtualizationSettings)
-  
-  
-  
-  
-
-- [oracle_artifact.proto](#oracle_artifact.proto)
-    - [OracleArtifactAccount](#proto.OracleArtifactAccount)
-    - [OracleArtifactProvider](#proto.OracleArtifactProvider)
   
   
   
@@ -243,10 +243,10 @@
 
 
 
-<a name="appengine.proto"></a>
+<a name="appengine_provider.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## appengine.proto
+## appengine_provider.proto
 
 
 
@@ -325,14 +325,14 @@ Configuration for the Google App Engine (GAE) provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| bitbucket | [BitbucketProvider](#proto.BitbucketProvider) |  |  |
-| gcs | [GcsProvider](#proto.GcsProvider) |  |  |
-| github | [GitHubProvider](#proto.GitHubProvider) |  |  |
-| gitlab | [GitLabProvider](#proto.GitLabProvider) |  |  |
-| gitrepo | [GitRepoProvider](#proto.GitRepoProvider) |  |  |
-| helm | [HelmProvider](#proto.HelmProvider) |  |  |
-| http | [HttpProvider](#proto.HttpProvider) |  |  |
-| maven | [MavenProvider](#proto.MavenProvider) |  |  |
+| bitbucket | [BitbucketArtifactProvider](#proto.BitbucketArtifactProvider) |  |  |
+| gcs | [GcsArtifactProvider](#proto.GcsArtifactProvider) |  |  |
+| github | [GitHubArtifactProvider](#proto.GitHubArtifactProvider) |  |  |
+| gitlab | [GitLabArtifactProvider](#proto.GitLabArtifactProvider) |  |  |
+| gitrepo | [GitRepoArtifactProvider](#proto.GitRepoArtifactProvider) |  |  |
+| helm | [HelmArtifactProvider](#proto.HelmArtifactProvider) |  |  |
+| http | [HttpArtifactProvider](#proto.HttpArtifactProvider) |  |  |
+| maven | [MavenArtifactProvider](#proto.MavenArtifactProvider) |  |  |
 | oracle | [OracleArtifactProvider](#proto.OracleArtifactProvider) |  |  |
 
 
@@ -349,10 +349,10 @@ Configuration for the Google App Engine (GAE) provider.
 
 
 
-<a name="aws.proto"></a>
+<a name="aws_provider.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## aws.proto
+## aws_provider.proto
 
 
 
@@ -556,10 +556,10 @@ Base image virtualization settings.
 
 
 
-<a name="azure.proto"></a>
+<a name="azure_provider.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## azure.proto
+## azure_provider.proto
 
 
 
@@ -671,16 +671,16 @@ Configuration for the Azure provider.
 
 
 
-<a name="bitbucket.proto"></a>
+<a name="bitbucket_artifact_provider.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## bitbucket.proto
+## bitbucket_artifact_provider.proto
 
 
 
-<a name="proto.BitbucketAccount"></a>
+<a name="proto.BitbucketArtifactAccount"></a>
 
-### BitbucketAccount
+### BitbucketArtifactAccount
 Configuration for a Bitbucket artifact account.
 
 
@@ -696,16 +696,16 @@ Configuration for a Bitbucket artifact account.
 
 
 
-<a name="proto.BitbucketProvider"></a>
+<a name="proto.BitbucketArtifactProvider"></a>
 
-### BitbucketProvider
+### BitbucketArtifactProvider
 Configuration for the Bitbucket artifact provider.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether the Bitbucket artifact provider is enabled. |
-| accounts | [BitbucketAccount](#proto.BitbucketAccount) | repeated | The list of configured Bitbucket accounts. |
+| accounts | [BitbucketArtifactAccount](#proto.BitbucketArtifactAccount) | repeated | The list of configured Bitbucket accounts. |
 
 
 
@@ -763,10 +763,10 @@ Configuration for the Bitbucket artifact provider.
 
 
 
-<a name="cloudfoundry.proto"></a>
+<a name="cloudfoundry_provider.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## cloudfoundry.proto
+## cloudfoundry_provider.proto
 
 
 
@@ -820,10 +820,10 @@ Configuration for the Cloud Foundry provider.
 
 
 
-<a name="dcos.proto"></a>
+<a name="dcos_provider.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## dcos.proto
+## dcos_provider.proto
 
 
 
@@ -942,10 +942,10 @@ Configuration for the DC/OS (Distributed Cloud Operating System) provider.
 
 
 
-<a name="docker_registry.proto"></a>
+<a name="docker_registry_provider.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## docker_registry.proto
+## docker_registry_provider.proto
 
 
 
@@ -1007,10 +1007,10 @@ Configuration for the Docker Registry provider.
 
 
 
-<a name="ecs.proto"></a>
+<a name="ecs_provider.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## ecs.proto
+## ecs_provider.proto
 
 
 
@@ -1106,16 +1106,16 @@ Configuration for the ECS provider.
 
 
 
-<a name="gcs.proto"></a>
+<a name="gcs_artifact_provider.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## gcs.proto
+## gcs_artifact_provider.proto
 
 
 
-<a name="proto.GcsAccount"></a>
+<a name="proto.GcsArtifactAccount"></a>
 
-### GcsAccount
+### GcsArtifactAccount
 Configuration for a GCS artifact account.
 
 
@@ -1129,16 +1129,16 @@ Configuration for a GCS artifact account.
 
 
 
-<a name="proto.GcsProvider"></a>
+<a name="proto.GcsArtifactProvider"></a>
 
-### GcsProvider
+### GcsArtifactProvider
 Configuration for the Google Cloud Storage (GCS) artifact provider.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether the GCS artifact provider is enabled. |
-| accounts | [GcsAccount](#proto.GcsAccount) | repeated | The list of configured GCS accounts. |
+| accounts | [GcsArtifactAccount](#proto.GcsArtifactAccount) | repeated | The list of configured GCS accounts. |
 
 
 
@@ -1154,16 +1154,16 @@ Configuration for the Google Cloud Storage (GCS) artifact provider.
 
 
 
-<a name="github.proto"></a>
+<a name="github_artifact_provider.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## github.proto
+## github_artifact_provider.proto
 
 
 
-<a name="proto.GitHubAccount"></a>
+<a name="proto.GitHubArtifactAccount"></a>
 
-### GitHubAccount
+### GitHubArtifactAccount
 Configuration for a GitHub artifact account. Either `username` and
 `password`, `usernamePasswordFile`, `token`, or `tokenFile` should be
 specified as means of authentication.
@@ -1183,16 +1183,16 @@ specified as means of authentication.
 
 
 
-<a name="proto.GitHubProvider"></a>
+<a name="proto.GitHubArtifactProvider"></a>
 
-### GitHubProvider
+### GitHubArtifactProvider
 Configuration for the GitHub artifact provider.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether the GitHub artifact provider is enabled. |
-| accounts | [GitHubAccount](#proto.GitHubAccount) | repeated | The list of configured GitHub accounts. |
+| accounts | [GitHubArtifactAccount](#proto.GitHubArtifactAccount) | repeated | The list of configured GitHub accounts. |
 
 
 
@@ -1208,16 +1208,16 @@ Configuration for the GitHub artifact provider.
 
 
 
-<a name="gitlab.proto"></a>
+<a name="gitlab_artifact_provider.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## gitlab.proto
+## gitlab_artifact_provider.proto
 
 
 
-<a name="proto.GitLabAccount"></a>
+<a name="proto.GitLabArtifactAccount"></a>
 
-### GitLabAccount
+### GitLabArtifactAccount
 Configuration for a GitLab artifact account. Either `token` or
 `tokenFile` should be specified as means of authentication.
 
@@ -1233,16 +1233,16 @@ Configuration for a GitLab artifact account. Either `token` or
 
 
 
-<a name="proto.GitLabProvider"></a>
+<a name="proto.GitLabArtifactProvider"></a>
 
-### GitLabProvider
+### GitLabArtifactProvider
 Configuration for the GitLab artifact provider.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether the GitLab artifact provider is enabled. |
-| accounts | [GitLabAccount](#proto.GitLabAccount) | repeated | The list of configured GitLab accounts. |
+| accounts | [GitLabArtifactAccount](#proto.GitLabArtifactAccount) | repeated | The list of configured GitLab accounts. |
 
 
 
@@ -1258,16 +1258,16 @@ Configuration for the GitLab artifact provider.
 
 
 
-<a name="gitrepo.proto"></a>
+<a name="gitrepo_artifact_provider.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## gitrepo.proto
+## gitrepo_artifact_provider.proto
 
 
 
-<a name="proto.GitRepoAccount"></a>
+<a name="proto.GitRepoArtifactAccount"></a>
 
-### GitRepoAccount
+### GitRepoArtifactAccount
 Configuration for a Git repo artifact account. An account maps to a
 credential that is able to authenticate against a Git repository hosted by a
 Git hosting service. Either `username` and `password`,
@@ -1293,16 +1293,16 @@ Git hosting service. Either `username` and `password`,
 
 
 
-<a name="proto.GitRepoProvider"></a>
+<a name="proto.GitRepoArtifactProvider"></a>
 
-### GitRepoProvider
+### GitRepoArtifactProvider
 Configuration for the Git repo artifact provider.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether the Git repo artifact provider is enabled. |
-| accounts | [GitRepoAccount](#proto.GitRepoAccount) | repeated | The list of configured Git Repo accounts. |
+| accounts | [GitRepoArtifactAccount](#proto.GitRepoArtifactAccount) | repeated | The list of configured Git Repo accounts. |
 
 
 
@@ -1318,10 +1318,10 @@ Configuration for the Git repo artifact provider.
 
 
 
-<a name="google.proto"></a>
+<a name="google_provider.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## google.proto
+## google_provider.proto
 
 
 
@@ -1540,16 +1540,16 @@ Image source configuration.
 
 
 
-<a name="helm.proto"></a>
+<a name="helm_artifact_provider.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## helm.proto
+## helm_artifact_provider.proto
 
 
 
-<a name="proto.HelmAccount"></a>
+<a name="proto.HelmArtifactAccount"></a>
 
-### HelmAccount
+### HelmArtifactAccount
 Configuration for a Helm artifact account. Either `username` and `password`
 or `usernamePasswordFile` should be specified as means of authentication.
 
@@ -1567,16 +1567,16 @@ or `usernamePasswordFile` should be specified as means of authentication.
 
 
 
-<a name="proto.HelmProvider"></a>
+<a name="proto.HelmArtifactProvider"></a>
 
-### HelmProvider
+### HelmArtifactProvider
 Configuration for the Helm artifact provider.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether the Helm artifact provider is enabled. |
-| accounts | [HelmAccount](#proto.HelmAccount) | repeated | The list of configured Helm accounts. |
+| accounts | [HelmArtifactAccount](#proto.HelmArtifactAccount) | repeated | The list of configured Helm accounts. |
 
 
 
@@ -1592,16 +1592,16 @@ Configuration for the Helm artifact provider.
 
 
 
-<a name="http.proto"></a>
+<a name="http_artifact_provider.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## http.proto
+## http_artifact_provider.proto
 
 
 
-<a name="proto.HttpAccount"></a>
+<a name="proto.HttpArtifactAccount"></a>
 
-### HttpAccount
+### HttpArtifactAccount
 Configuration for an HTTP artifact account. Either `username` and `password`
 or `usernamePasswordFile` should be specified as means of authentication.
 
@@ -1618,16 +1618,16 @@ or `usernamePasswordFile` should be specified as means of authentication.
 
 
 
-<a name="proto.HttpProvider"></a>
+<a name="proto.HttpArtifactProvider"></a>
 
-### HttpProvider
+### HttpArtifactProvider
 Configuration for the HTTP artifact provider.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether the HTTP artifact provider is enabled. |
-| accounts | [HttpAccount](#proto.HttpAccount) | repeated | The list of configured HTTP accounts. |
+| accounts | [HttpArtifactAccount](#proto.HttpArtifactAccount) | repeated | The list of configured HTTP accounts. |
 
 
 
@@ -1643,10 +1643,10 @@ Configuration for the HTTP artifact provider.
 
 
 
-<a name="huaweicloud.proto"></a>
+<a name="huaweicloud_provider.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## huaweicloud.proto
+## huaweicloud_provider.proto
 
 
 
@@ -1783,10 +1783,10 @@ Huawei Cloud virtualization settings.
 
 
 
-<a name="kubernetes.proto"></a>
+<a name="kubernetes_provider.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kubernetes.proto
+## kubernetes_provider.proto
 
 
 
@@ -1899,16 +1899,16 @@ Configuration for the Kubernetes provider.
 
 
 
-<a name="maven.proto"></a>
+<a name="maven_artifact_provider.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## maven.proto
+## maven_artifact_provider.proto
 
 
 
-<a name="proto.MavenAccount"></a>
+<a name="proto.MavenArtifactAccount"></a>
 
-### MavenAccount
+### MavenArtifactAccount
 Configuration for a Maven artifact account.
 
 
@@ -1922,16 +1922,16 @@ Configuration for a Maven artifact account.
 
 
 
-<a name="proto.MavenProvider"></a>
+<a name="proto.MavenArtifactProvider"></a>
 
-### MavenProvider
+### MavenArtifactProvider
 Configuration for the Maven artifact provider.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether the Maven artifact provider is enabled. |
-| accounts | [MavenAccount](#proto.MavenAccount) | repeated | The list of configured Maven accounts. |
+| accounts | [MavenArtifactAccount](#proto.MavenArtifactAccount) | repeated | The list of configured Maven accounts. |
 
 
 
@@ -1947,10 +1947,64 @@ Configuration for the Maven artifact provider.
 
 
 
-<a name="oracle.proto"></a>
+<a name="oracle_artifact_provider.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## oracle.proto
+## oracle_artifact_provider.proto
+
+
+
+<a name="proto.OracleArtifactAccount"></a>
+
+### OracleArtifactAccount
+Configuration for an Oracle artifact account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| fingerprint | [string](#string) |  | The fingerprint of the public key. |
+| namespace | [string](#string) |  | The namespace in which the bucket and objects should be created. |
+| privateKeyPassphrase | [string](#string) |  | The passphrase used for the private key, if it is encrypted. |
+| region | [string](#string) |  | An Oracle region (e.g., `us-phoenix-1`). |
+| sshPrivateKeyFilePath | [string](#string) |  | Path to the private key in PEM format. |
+| tenancyId | [string](#string) |  | The OCID of the Oracle Tenancy to use. |
+| userId | [string](#string) |  | The OCID of the Oracle User with which to authenticate. |
+
+
+
+
+
+
+<a name="proto.OracleArtifactProvider"></a>
+
+### OracleArtifactProvider
+Configuration for the Oracle artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the Oracle artifact provider is enabled. |
+| accounts | [OracleArtifactAccount](#proto.OracleArtifactAccount) | repeated | The list of configured Oracle artifact accounts. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="oracle_provider.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## oracle_provider.proto
 
 
 
@@ -2062,60 +2116,6 @@ Oracle virtualization settings.
 | ----- | ---- | ----- | ----------- |
 | baseImageId | [string](#string) |  | (Required) The OCID of the base image ID for the baking configuration. |
 | sshUserName | [string](#string) |  | (Required) The ssh username for the baking configuration. |
-
-
-
-
-
- 
-
- 
-
- 
-
- 
-
-
-
-<a name="oracle_artifact.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## oracle_artifact.proto
-
-
-
-<a name="proto.OracleArtifactAccount"></a>
-
-### OracleArtifactAccount
-Configuration for an Oracle artifact account.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The name of the account. |
-| fingerprint | [string](#string) |  | The fingerprint of the public key. |
-| namespace | [string](#string) |  | The namespace in which the bucket and objects should be created. |
-| privateKeyPassphrase | [string](#string) |  | The passphrase used for the private key, if it is encrypted. |
-| region | [string](#string) |  | An Oracle region (e.g., `us-phoenix-1`). |
-| sshPrivateKeyFilePath | [string](#string) |  | Path to the private key in PEM format. |
-| tenancyId | [string](#string) |  | The OCID of the Oracle Tenancy to use. |
-| userId | [string](#string) |  | The OCID of the Oracle User with which to authenticate. |
-
-
-
-
-
-
-<a name="proto.OracleArtifactProvider"></a>
-
-### OracleArtifactProvider
-Configuration for the Oracle artifact provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the Oracle artifact provider is enabled. |
-| accounts | [OracleArtifactAccount](#proto.OracleArtifactAccount) | repeated | The list of configured Oracle artifact accounts. |
 
 
 

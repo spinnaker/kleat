@@ -2,12 +2,12 @@ syntax = "proto3";
 package proto;
 
 // Configuration for the Git repo artifact provider.
-message GitRepoProvider {
+message GitRepoArtifactProvider {
     // Whether the Git repo artifact provider is enabled.
     bool enabled = 1;
 
     // The list of configured Git Repo accounts.
-    repeated GitRepoAccount accounts = 2;
+    repeated GitRepoArtifactAccount accounts = 2;
 }
 
 // Configuration for a Git repo artifact account. An account maps to a
@@ -15,7 +15,7 @@ message GitRepoProvider {
 // Git hosting service. Either `username` and `password`,
 // `usernamePasswordFile`, `token`, `tokenFile`, or `sshPrivateKeyFilePath` and
 // `sshPrivateKeyPassphrase` must be set.
-message GitRepoAccount {
+message GitRepoArtifactAccount {
     // The name of the account.
     string name = 1;
 

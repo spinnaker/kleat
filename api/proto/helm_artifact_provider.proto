@@ -2,17 +2,17 @@ syntax = "proto3";
 package proto;
 
 // Configuration for the Helm artifact provider.
-message HelmProvider {
+message HelmArtifactProvider {
     // Whether the Helm artifact provider is enabled.
     bool enabled = 1;
 
     // The list of configured Helm accounts.
-    repeated HelmAccount accounts = 2;
+    repeated HelmArtifactAccount accounts = 2;
 }
 
 // Configuration for a Helm artifact account. Either `username` and `password`
 // or `usernamePasswordFile` should be specified as means of authentication.
-message HelmAccount {
+message HelmArtifactAccount {
     // The name of the account.
     string name = 1;
 
