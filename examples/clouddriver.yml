@@ -50,6 +50,11 @@ artifacts:
     - name: my-http-account
       usernamePasswordFile: /var/secrets/http
     enabled: true
+  maven:
+    accounts:
+    - name: my-maven-account
+      repositoryUrl: http://some.host.com/repository/path
+    enabled: true
 aws:
   accounts:
   - accountId: id

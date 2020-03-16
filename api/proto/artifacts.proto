@@ -8,6 +8,7 @@ import "gitlab.proto";
 import "gitrepo.proto";
 import "helm.proto";
 import "http.proto";
+import "maven.proto";
 
 message ArtifactProviders {
     BitbucketProvider bitbucket = 1;
@@ -17,4 +18,5 @@ message ArtifactProviders {
     GitRepoProvider gitrepo = 5;
     HelmProvider helm = 6;
     HttpProvider http = 7;
+    MavenProvider maven = 8;
 }

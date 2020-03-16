@@ -197,6 +197,14 @@
   
   
 
+- [maven.proto](#maven.proto)
+    - [MavenAccount](#proto.MavenAccount)
+    - [MavenProvider](#proto.MavenProvider)
+  
+  
+  
+  
+
 - [oracle.proto](#oracle.proto)
     - [OracleAccount](#proto.OracleAccount)
     - [OracleBakeryDefaults](#proto.OracleBakeryDefaults)
@@ -316,6 +324,7 @@ Configuration for the Google App Engine (GAE) provider.
 | gitrepo | [GitRepoProvider](#proto.GitRepoProvider) |  |  |
 | helm | [HelmProvider](#proto.HelmProvider) |  |  |
 | http | [HttpProvider](#proto.HttpProvider) |  |  |
+| maven | [MavenProvider](#proto.MavenProvider) |  |  |
 
 
 
@@ -1866,6 +1875,54 @@ Configuration for the Kubernetes provider.
 | enabled | [bool](#bool) |  | Whether the provider is enabled. |
 | accounts | [KubernetesAccount](#proto.KubernetesAccount) | repeated | The list of configured accounts. |
 | primaryAccount | [string](#string) |  | The name of the primary account. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="maven.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## maven.proto
+
+
+
+<a name="proto.MavenAccount"></a>
+
+### MavenAccount
+Configuration for a Maven artifact account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| repositoryUrl | [string](#string) |  | (Required) Full URI for the Maven repository (e.g., `http://some.host.com/repository/path`). |
+
+
+
+
+
+
+<a name="proto.MavenProvider"></a>
+
+### MavenProvider
+Configuration for the Maven artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the Maven artifact provider is enabled. |
+| accounts | [MavenAccount](#proto.MavenAccount) | repeated | The list of configured Maven accounts. |
 
 
 
