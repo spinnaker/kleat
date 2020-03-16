@@ -11,6 +11,13 @@
   
   
 
+- [artifacts.proto](#artifacts.proto)
+    - [ArtifactProviders](#proto.ArtifactProviders)
+  
+  
+  
+  
+
 - [aws.proto](#aws.proto)
     - [AwsAccount](#proto.AwsAccount)
     - [AwsBakeryDefaults](#proto.AwsBakeryDefaults)
@@ -33,6 +40,14 @@
     - [AzureBaseImage](#proto.AzureBaseImage)
     - [AzureBaseImageSettings](#proto.AzureBaseImageSettings)
     - [AzureProvider](#proto.AzureProvider)
+  
+  
+  
+  
+
+- [bitbucket.proto](#bitbucket.proto)
+    - [BitbucketAccount](#proto.BitbucketAccount)
+    - [BitbucketProvider](#proto.BitbucketProvider)
   
   
   
@@ -216,6 +231,37 @@ Configuration for the Google App Engine (GAE) provider.
 | enabled | [bool](#bool) |  | Whether the provider is enabled. |
 | accounts | [AppengineAccount](#proto.AppengineAccount) | repeated | The list of configured accounts. |
 | primaryAccount | [string](#string) |  | The name of the primary account. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="artifacts.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## artifacts.proto
+
+
+
+<a name="proto.ArtifactProviders"></a>
+
+### ArtifactProviders
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| bitbucket | [BitbucketProvider](#proto.BitbucketProvider) |  |  |
 
 
 
@@ -553,6 +599,56 @@ Configuration for the Azure provider.
 
 
 
+<a name="bitbucket.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## bitbucket.proto
+
+
+
+<a name="proto.BitbucketAccount"></a>
+
+### BitbucketAccount
+Configuration for a Bitbucket artifact account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| username | [string](#string) |  | The username of the account. Either `username` and `password` should be set, or `usernamePasswordFile` should be set. |
+| password | [string](#string) |  | The password of the account. Either `username` and `password` should be set, or `usernamePasswordFile` should be set. |
+| usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password of the account in the format `${username}:${password}`. Either `username` and `password` should be set, or `usernamePasswordFile` should be set. |
+
+
+
+
+
+
+<a name="proto.BitbucketProvider"></a>
+
+### BitbucketProvider
+Configuration for the Bitbucket artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the Bitbucket artifact provider is enabled. |
+| accounts | [BitbucketAccount](#proto.BitbucketAccount) | repeated | The list of configured Bitbucket accounts. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
 <a name="clouddriver.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -579,6 +675,7 @@ Configuration for the Azure provider.
 | ecs | [EcsProvider](#proto.EcsProvider) |  |  |
 | huaweicloud | [HuaweiCloudProvider](#proto.HuaweiCloudProvider) |  |  |
 | oracle | [OracleProvider](#proto.OracleProvider) |  |  |
+| artifacts | [ArtifactProviders](#proto.ArtifactProviders) |  |  |
 
 
 
@@ -1102,6 +1199,7 @@ Image source configuration.
 | ----- | ---- | ----- | ----------- |
 | persistentStorage | [HalConfig.PersistentStorage](#proto.HalConfig.PersistentStorage) |  |  |
 | providers | [HalConfig.Providers](#proto.HalConfig.Providers) |  |  |
+| artifacts | [ArtifactProviders](#proto.ArtifactProviders) |  |  |
 
 
 
