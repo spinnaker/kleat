@@ -2,16 +2,16 @@ syntax = "proto3";
 package proto;
 
 // Configuration for the Bitbucket artifact provider.
-message BitbucketProvider {
+message BitbucketArtifactProvider {
     // Whether the Bitbucket artifact provider is enabled.
     bool enabled = 1;
 
     // The list of configured Bitbucket accounts.
-    repeated BitbucketAccount accounts = 2;
+    repeated BitbucketArtifactAccount accounts = 2;
 }
 
 // Configuration for a Bitbucket artifact account.
-message BitbucketAccount {
+message BitbucketArtifactAccount {
     // The name of the account.
     string name = 1;
 

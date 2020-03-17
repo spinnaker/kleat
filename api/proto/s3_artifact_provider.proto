@@ -1,0 +1,34 @@
+syntax = "proto3";
+package proto;
+
+// Configuration for the S3 artifact provider.
+message S3ArtifactProvider {
+    // Whether the S3 artifact provider is enabled.
+    bool enabled = 1;
+
+    // The list of configured S3 artifact accounts.
+    repeated S3ArtifactAccount accounts = 2;
+}
+
+// Configuration for an S3 artifact account.
+message S3ArtifactAccount {
+    // The name of the account.
+    string name = 1;
+
+    // The S3 API endpoint. Only required when using an S3 clone such as Minio.
+    string apiEndpoint = 2;
+
+    // The S3 API region. Only required when using an S3 clone such as Minio.
+    string apiRegion = 3;
+
+    // The AWS Access Key ID. If not provided, Spinnaker will try to find AWS
+    // credentials as described at
+    // http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default.
+    string awsAccessKeyId = 4;
+
+    // The AWS Secret Key.
+    string awsSecretAccessKey = 5;
+
+    // The S3 region.
+    string region = 6;
+}

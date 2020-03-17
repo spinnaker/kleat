@@ -2,17 +2,17 @@ syntax = "proto3";
 package proto;
 
 import "persistent_storage.proto";
-import "kubernetes.proto";
-import "google.proto";
-import "appengine.proto";
-import "aws.proto";
-import "azure.proto";
-import "cloudfoundry.proto";
-import "dcos.proto";
-import "docker_registry.proto";
-import "ecs.proto";
-import "huaweicloud.proto";
-import "oracle.proto";
+import "kubernetes_provider.proto";
+import "google_provider.proto";
+import "appengine_provider.proto";
+import "aws_provider.proto";
+import "azure_provider.proto";
+import "cloudfoundry_provider.proto";
+import "dcos_provider.proto";
+import "docker_registry_provider.proto";
+import "ecs_provider.proto";
+import "huaweicloud_provider.proto";
+import "oracle_provider.proto";
 import "artifacts.proto";
 
 message HalConfig {

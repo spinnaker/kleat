@@ -2,16 +2,16 @@ syntax = "proto3";
 package proto;
 
 // Configuration for the Google Cloud Storage (GCS) artifact provider.
-message GcsProvider {
+message GcsArtifactProvider {
     // Whether the GCS artifact provider is enabled.
     bool enabled = 1;
 
     // The list of configured GCS accounts.
-    repeated GcsAccount accounts = 2;
+    repeated GcsArtifactAccount accounts = 2;
 }
 
 // Configuration for a GCS artifact account.
-message GcsAccount {
+message GcsArtifactAccount {
     // The name of the account.
     string name = 1;
 

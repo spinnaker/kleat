@@ -266,3 +266,42 @@ artifacts:
         sshPrivateKeyFilePath: /var/secrets/git_repo_private_key
         sshPrivateKeyPassphrase: my-passphrase
         sshKnownHostsFilePath: /var/secrets/known_hosts
+  helm:
+    enabled: true
+    accounts:
+      - name: my-helm-account
+        repository: http://my-repository.com
+        usernamePasswordFile: /var/secrets/helm
+  http:
+    enabled: true
+    accounts:
+      - name: my-http-account
+        usernamePasswordFile: /var/secrets/http
+  maven:
+    enabled: true
+    accounts:
+      - name: my-maven-account
+        repositoryUrl: http://some.host.com/repository/path
+  oracle:
+    enabled: true
+    accounts:
+      - name: my-oracle-artifact-account
+        namespace: my-namespace
+        region: my-region
+        userId: my-user-id
+        fingerprint: my-fingerprint
+        sshPrivateKeyFilePath: /var/secrets/oracle
+        privateKeyPassphrase: my-passphrase
+        tenancyId: my-tenancy-id
+  s3:
+    enabled: true
+    accounts:
+      - name: my-s3-account
+        apiEndpoint: my-s3-endpoint
+        apiRegion: my-s3-region
+        region: my-region
+        awsAccessKeyId: my-key-id
+        awsSecretAccessKey: my-key
+  templates:
+    - name: my-template
+      templatePath: /path/to/my/template
