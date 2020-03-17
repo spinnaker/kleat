@@ -75,6 +75,9 @@ artifacts:
       name: my-s3-account
       region: my-region
     enabled: true
+  templates:
+  - name: my-template
+    templatePath: /path/to/my/template
 aws:
   accounts:
   - accountId: id

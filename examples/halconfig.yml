@@ -302,3 +302,6 @@ artifacts:
         region: my-region
         awsAccessKeyId: my-key-id
         awsSecretAccessKey: my-key
+  templates:
+    - name: my-template
+      templatePath: /path/to/my/template

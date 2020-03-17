@@ -11,6 +11,7 @@ import "http_artifact_provider.proto";
 import "maven_artifact_provider.proto";
 import "oracle_artifact_provider.proto";
 import "s3_artifact_provider.proto";
+import "artifact_template.proto";
 
 message ArtifactProviders {
     BitbucketArtifactProvider bitbucket = 1;
@@ -23,4 +24,5 @@ message ArtifactProviders {
     MavenArtifactProvider maven = 8;
     OracleArtifactProvider oracle = 9;
     S3ArtifactProvider s3 = 10;
+    repeated ArtifactTemplate templates = 11;
 }

@@ -11,6 +11,13 @@
   
   
 
+- [artifact_template.proto](#artifact_template.proto)
+    - [ArtifactTemplate](#proto.ArtifactTemplate)
+  
+  
+  
+  
+
 - [artifacts.proto](#artifacts.proto)
     - [ArtifactProviders](#proto.ArtifactProviders)
   
@@ -318,6 +325,40 @@ Configuration for the Google App Engine (GAE) provider.
 
 
 
+<a name="artifact_template.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## artifact_template.proto
+
+
+
+<a name="proto.ArtifactTemplate"></a>
+
+### ArtifactTemplate
+Configuration for a Jinja template for Spinnaker to use for artifact
+extraction. For more details, please read the documentation:
+https://www.spinnaker.io/reference/artifacts/from-build-triggers/#artifacts-from-build-triggers
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the artifact template. |
+| templatePath | [string](#string) |  | The path to the artifact template. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
 <a name="artifacts.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -343,6 +384,7 @@ Configuration for the Google App Engine (GAE) provider.
 | maven | [MavenArtifactProvider](#proto.MavenArtifactProvider) |  |  |
 | oracle | [OracleArtifactProvider](#proto.OracleArtifactProvider) |  |  |
 | s3 | [S3ArtifactProvider](#proto.S3ArtifactProvider) |  |  |
+| templates | [ArtifactTemplate](#proto.ArtifactTemplate) | repeated |  |
 
 
 
