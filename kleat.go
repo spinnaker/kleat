@@ -18,7 +18,7 @@ package main
 import (
 	"errors"
 	"fmt"
-	"github.com/ezimanyi/kleat/api/client"
+	"github.com/spinnaker/kleat/api/client"
 	"io"
 	"io/ioutil"
 	"log"
