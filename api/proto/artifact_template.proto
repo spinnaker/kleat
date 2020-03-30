@@ -1,6 +1,8 @@
 syntax = "proto3";
 package proto;
 
+option go_package = "github.com/spinnaker/kleat/api/client";
+
 // Configuration for a Jinja template for Spinnaker to use for artifact
 // extraction. For more details, please read the documentation:
 // https://www.spinnaker.io/reference/artifacts/from-build-triggers/#artifacts-from-build-triggers

@@ -1,6 +1,8 @@
 syntax = "proto3";
 package proto;
 
+option go_package = "github.com/spinnaker/kleat/api/client";
+
 import "kubernetes_provider.proto";
 import "google_provider.proto";
 import "appengine_provider.proto";

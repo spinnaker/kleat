@@ -93,7 +93,7 @@ func ensureFile(f string) error {
 	return nil
 }
 
-type HalConfigValidator func(*proto.HalConfig) []ValidationFailure
+type HalConfigValidator func(*client.HalConfig) []ValidationFailure
 
 func getValidators() []HalConfigValidator {
 	return []HalConfigValidator{
@@ -101,7 +101,7 @@ func getValidators() []HalConfigValidator {
 	}
 }
 
-func validateHalConfig(h *proto.HalConfig) error {
+func validateHalConfig(h *client.HalConfig) error {
 	messages := getValidationMessages(h, getValidators())
 	if len(messages) > 0 {
 		msg := strings.Join(messages, "\n")
@@ -110,7 +110,7 @@ func validateHalConfig(h *proto.HalConfig) error {
 	return nil
 }
 
-func getValidationMessages(h *proto.HalConfig, fa []HalConfigValidator) []string {
+func getValidationMessages(h *client.HalConfig, fa []HalConfigValidator) []string {
 	var messages []string
 	for _, f := range fa {
 		rs := f(h)
@@ -121,7 +121,7 @@ func getValidationMessages(h *proto.HalConfig, fa []HalConfigValidator) []string
 	return messages
 }
 
-func validateKindsAndOmitKinds(h *proto.HalConfig) []ValidationFailure {
+func validateKindsAndOmitKinds(h *client.HalConfig) []ValidationFailure {
 	var messages []ValidationFailure
 	for _, a := range h.Providers.Kubernetes.Accounts {
 		if !(len(a.Kinds) == 0) && !(len(a.OmitKinds) == 0) {
@@ -141,10 +141,10 @@ func fatalResult(msg string) ValidationFailure {
 	}
 }
 
-func parseHalConfig(fn string) *proto.HalConfig {
+func parseHalConfig(fn string) *client.HalConfig {
 	dat, err := ioutil.ReadFile(fn)
 
-	h := proto.HalConfig{}
+	h := client.HalConfig{}
 	err = yaml.Unmarshal([]byte(dat), &h)
 	if err != nil {
 		log.Fatalf("error: %v", err)
@@ -153,7 +153,7 @@ func parseHalConfig(fn string) *proto.HalConfig {
 	return &h
 }
 
-func printHalConfig(h proto.HalConfig) error {
+func printHalConfig(h client.HalConfig) error {
 	c, _ := halToClouddriver(h)
 	if err := printObject(c, os.Stdout); err != nil {
 		return err
@@ -173,9 +173,9 @@ func printObject(i interface{}, w io.Writer) error {
 	return nil
 }
 
-func halToFront50(h proto.HalConfig) (proto.Front50Config, error) {
-	f := proto.Front50Config{
-		Spinnaker: &proto.Front50Config_Spinnaker{
+func halToFront50(h client.HalConfig) (client.Front50Config, error) {
+	f := client.Front50Config{
+		Spinnaker: &client.Front50Config_Spinnaker{
 			PersistentStoreType: h.PersistentStorage.PersistentStoreType,
 			Gcs:                 h.PersistentStorage.Gcs,
 		},
@@ -183,15 +183,15 @@ func halToFront50(h proto.HalConfig) (proto.Front50Config, error) {
 	return f, nil
 }
 
-func extractPersistentStoreType(h proto.HalConfig) *string {
+func extractPersistentStoreType(h client.HalConfig) *string {
 	if h.PersistentStorage == nil {
 		return nil
 	}
 	return &h.PersistentStorage.PersistentStoreType
 }
 
-func halToClouddriver(h proto.HalConfig) (proto.ClouddriverConfig, error) {
-	c := proto.ClouddriverConfig{
+func halToClouddriver(h client.HalConfig) (client.ClouddriverConfig, error) {
+	c := client.ClouddriverConfig{
 		Kubernetes:     h.Providers.Kubernetes,
 		Google:         h.Providers.Google,
 		Appengine:      h.Providers.Appengine,
