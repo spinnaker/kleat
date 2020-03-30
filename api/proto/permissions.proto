@@ -1,6 +1,8 @@
 syntax = "proto3";
 package proto;
 
+option go_package = "github.com/spinnaker/kleat/api/client";
+
 // A Fiat permissions configuration object.
 message Permissions {
     // A user must have at least one of these roles in order to view this

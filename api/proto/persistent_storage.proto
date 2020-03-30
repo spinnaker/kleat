@@ -1,6 +1,8 @@
 syntax = "proto3";
 package proto;
 
+option go_package = "github.com/spinnaker/kleat/api/client";
+
 message GCS {
     // A path to a JSON service account with permission to read and write to the bucket to be used as a backing store.
     string jsonPath = 1;
