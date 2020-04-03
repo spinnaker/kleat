@@ -1,4 +1,4 @@
-# kleat
+# Kleat
 
 ![Kleat CI](https://github.com/spinnaker/kleat/workflows/Kleat%20CI/badge.svg)
 
