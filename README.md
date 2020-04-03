@@ -1,5 +1,7 @@
 # kleat
 
+![Kleat CI](https://github.com/spinnaker/kleat/workflows/Kleat%20CI/badge.svg)
+
 Kleat is tool for managing Spinnaker configuration files that is intended to
 replace Halyard. Please see the
 [RFC](https://github.com/spinnaker/governance/blob/master/rfc/halyard-lite.md)
