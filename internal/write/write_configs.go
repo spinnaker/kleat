@@ -17,31 +17,32 @@ package write
 
 import (
 	"github.com/ghodss/yaml"
-	"github.com/spinnaker/kleat/internal/parse"
-	"github.com/spinnaker/kleat/internal/validate"
+	"github.com/spinnaker/kleat/internal/validate_paths"
+	"github.com/spinnaker/kleat/pkg/parse_hal"
+	"github.com/spinnaker/kleat/pkg/validate_hal"
 	"io"
 	"os"
 	"path/filepath"
 )
 
 func WriteConfigs(hal string, d string) error {
-	if err := validate.EnsureFile(hal); err != nil {
+	if err := validate_paths.EnsureFile(hal); err != nil {
 		return err
 	}
-	if err := validate.EnsureDirectory(d); err != nil {
+	if err := validate_paths.EnsureDirectory(d); err != nil {
 		return err
 	}
 
-	h, err := parse.ParseHalConfig(hal)
+	h, err := parse_hal.ParseHalConfig(hal)
 	if err != nil {
 		return err
 	}
 
-	if err := validate.ValidateHalConfig(h); err != nil {
+	if err := validate_hal.ValidateHalConfig(h); err != nil {
 		return err
 	}
 
-	c, err := parse.HalToClouddriver(*h)
+	c, err := parse_hal.HalToClouddriver(*h)
 	if err != nil {
 		return err
 	}
