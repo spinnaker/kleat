@@ -19,18 +19,18 @@ import (
 	"bytes"
 	"github.com/ghodss/yaml"
 	"github.com/spinnaker/kleat/api/client"
-	"github.com/spinnaker/kleat/internal/parse"
+	"github.com/spinnaker/kleat/pkg/parse_hal"
 	"io/ioutil"
 	"testing"
 )
 
 func TestHalToClouddriver(t *testing.T) {
-	h, err := parse.ParseHalConfig("./data/halconfig.yml")
+	h, err := parse_hal.ParseHalConfig("./data/halconfig.yml")
 	if err != nil {
 		t.Errorf(err.Error())
 	}
 
-	gotC, err := parse.HalToClouddriver(*h)
+	gotC, err := parse_hal.HalToClouddriver(*h)
 	if err != nil {
 		t.Errorf(err.Error())
 	}
