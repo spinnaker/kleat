@@ -2,7 +2,7 @@ FROM golang:1.14.1-alpine as builder
 RUN apk add --no-cache git
 
 FROM builder as protoc-gen-go
-ARG PROTOC_GEN_GO_TAG=v1.20.1
+ARG PROTOC_GEN_GO_TAG=v1.21.0
 RUN go get -d google.golang.org/protobuf/cmd/protoc-gen-go \
  && git -C "$(go env GOPATH)"/src/google.golang.org/protobuf checkout $PROTOC_GEN_GO_TAG \
  && go install google.golang.org/protobuf/cmd/protoc-gen-go
