@@ -147,7 +147,8 @@ type DockerRegistryAccount struct {
 	// `registries _catalog` endpoint.
 	Repositories []string `protobuf:"bytes,15,rep,name=repositories,proto3" json:"repositories,omitempty"`
 	// If `true`, Spinnaker will sort tags by creation date. Defaults to
-	// `false`.
+	// `false`. Not recommended for use with large registries; sorting
+	// performance scales poorly due to limitations of the Docker V2 API.
 	SortTagsByDate bool `protobuf:"varint,16,opt,name=sortTagsByDate,proto3" json:"sortTagsByDate,omitempty"`
 	// If `true`, Spinnaker will track digest changes. This is not recommended
 	// because it greatly increases queries to the registry, and most

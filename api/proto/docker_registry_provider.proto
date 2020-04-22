@@ -83,7 +83,8 @@ message DockerRegistryAccount {
     repeated string repositories = 15;
 
     // If `true`, Spinnaker will sort tags by creation date. Defaults to
-    // `false`.
+    // `false`. Not recommended for use with large registries; sorting
+    // performance scales poorly due to limitations of the Docker V2 API.
     bool sortTagsByDate = 16;
 
     // If `true`, Spinnaker will track digest changes. This is not recommended
