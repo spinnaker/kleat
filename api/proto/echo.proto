@@ -1,0 +1,8 @@
+syntax = "proto3";
+package proto;
+
+option go_package = "github.com/spinnaker/kleat/api/client";
+
+message EchoConfig {
+
+}

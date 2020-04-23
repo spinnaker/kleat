@@ -60,3 +60,8 @@ func HalToClouddriver(h client.HalConfig) (client.ClouddriverConfig, error) {
 	}
 	return c, nil
 }
+
+func HalToEcho(h client.HalConfig) (client.EchoConfig, error) {
+	c := client.EchoConfig{}
+	return c, nil
+}
