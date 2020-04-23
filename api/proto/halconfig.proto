@@ -18,6 +18,7 @@ import "oracle_provider.proto";
 import "artifacts.proto";
 import "notifications.proto";
 import "pubsub.proto";
+import "gcb_ci_provider.proto";
 
 message HalConfig {
   PersistentStorage persistentStorage = 1;
@@ -25,6 +26,7 @@ message HalConfig {
   ArtifactProviders artifacts = 3;
   Notifications notifications = 4;
   PubsubProviders pubsub = 5;
+  CiProviders ci = 6;
 
   message PersistentStorage {
     string persistentStoreType = 1;
@@ -49,5 +51,9 @@ message HalConfig {
     SlackNotification slack = 1;
     TwilioNotification twilio = 2;
     GithubStatusNotification githubStatus = 3;
+  }
+
+  message CiProviders {
+    GoogleCloudBuildProvider gcb = 1;
   }
 }

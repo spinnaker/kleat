@@ -118,6 +118,14 @@
   
   
 
+- [gcb_ci_provider.proto](#gcb_ci_provider.proto)
+    - [GoogleCloudBuildAccount](#proto.GoogleCloudBuildAccount)
+    - [GoogleCloudBuildProvider](#proto.GoogleCloudBuildProvider)
+  
+  
+  
+  
+
 - [gcs_artifact_provider.proto](#gcs_artifact_provider.proto)
     - [GcsArtifactAccount](#proto.GcsArtifactAccount)
     - [GcsArtifactProvider](#proto.GcsArtifactProvider)
@@ -165,6 +173,7 @@
 
 - [halconfig.proto](#halconfig.proto)
     - [HalConfig](#proto.HalConfig)
+    - [HalConfig.CiProviders](#proto.HalConfig.CiProviders)
     - [HalConfig.Notifications](#proto.HalConfig.Notifications)
     - [HalConfig.PersistentStorage](#proto.HalConfig.PersistentStorage)
     - [HalConfig.Providers](#proto.HalConfig.Providers)
@@ -1105,6 +1114,7 @@ Configuration for the Docker Registry provider.
 | githubStatus | [GithubStatusNotification](#proto.GithubStatusNotification) |  |  |
 | artifacts | [ArtifactProviders](#proto.ArtifactProviders) |  |  |
 | pubsub | [PubsubProviders](#proto.PubsubProviders) |  |  |
+| gcb | [GoogleCloudBuildProvider](#proto.GoogleCloudBuildProvider) |  |  |
 
 
 
@@ -1204,6 +1214,57 @@ Configuration for the ECS provider.
 | ----- | ---- | ----- | ----------- |
 | persistentStoreType | [string](#string) |  |  |
 | gcs | [GCS](#proto.GCS) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="gcb_ci_provider.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## gcb_ci_provider.proto
+
+
+
+<a name="proto.GoogleCloudBuildAccount"></a>
+
+### GoogleCloudBuildAccount
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| project | [string](#string) |  | The name of the Google Cloud Platform project in which to trigger and monitor builds. |
+| subscriptionName | [string](#string) |  | The name of the Pub/Sub subscription on which to listen for build changes. |
+| jsonKey | [string](#string) |  | The path to a JSON service account that Spinnaker will use as credentials. This is only needed if Spinnaker is not deployed on a Google Compute Engine VM, or needs permissions not afforded to the VM it is running on. |
+| permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
+
+
+
+
+
+
+<a name="proto.GoogleCloudBuildProvider"></a>
+
+### GoogleCloudBuildProvider
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  |  |
+| accounts | [GoogleCloudBuildAccount](#proto.GoogleCloudBuildAccount) | repeated |  |
 
 
 
@@ -1599,6 +1660,22 @@ Image source configuration.
 | artifacts | [ArtifactProviders](#proto.ArtifactProviders) |  |  |
 | notifications | [HalConfig.Notifications](#proto.HalConfig.Notifications) |  |  |
 | pubsub | [PubsubProviders](#proto.PubsubProviders) |  |  |
+| ci | [HalConfig.CiProviders](#proto.HalConfig.CiProviders) |  |  |
+
+
+
+
+
+
+<a name="proto.HalConfig.CiProviders"></a>
+
+### HalConfig.CiProviders
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| gcb | [GoogleCloudBuildProvider](#proto.GoogleCloudBuildProvider) |  |  |
 
 
 

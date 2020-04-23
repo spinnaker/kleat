@@ -277,3 +277,66 @@ func TestGooglePubsubToEchoConfig(t *testing.T) {
 		t.Errorf("Expected Google pubsub config to be passed through to echo config, got %v", gotE)
 	}
 }
+
+func TestEmptyCiConfigToEcho(t *testing.T) {
+	h := &client.HalConfig{
+		Ci: &client.HalConfig_CiProviders{},
+	}
+	gotE, err := HalToEcho(h)
+	if err != nil {
+		t.Errorf("Error writing echo config %s", err)
+	}
+	wantE := &client.EchoConfig{}
+	if !reflect.DeepEqual(gotE, wantE) {
+		t.Errorf("Expected empty CI config to lead to empty echo config, got %v", gotE)
+	}
+}
+
+func TestEmptyGcbConfigAccountToEcho(t *testing.T) {
+	gcb := &client.GoogleCloudBuildProvider{}
+	cis := &client.HalConfig_CiProviders{
+		Gcb: gcb,
+	}
+	h := &client.HalConfig{
+		Ci: cis,
+	}
+	gotE, err := HalToEcho(h)
+	if err != nil {
+		t.Errorf("Error writing echo config %s", err)
+	}
+	wantE := &client.EchoConfig{
+		Gcb: gcb,
+	}
+	if !reflect.DeepEqual(gotE, wantE) {
+		t.Errorf("Expected empty Google pubsub config to be passed through to echo config, got %v", gotE)
+	}
+}
+
+func TestGcbAccountToEcho(t *testing.T) {
+	gcb := &client.GoogleCloudBuildProvider{
+		Enabled: true,
+		Accounts: []*client.GoogleCloudBuildAccount{
+			{
+				Name:             "my-account",
+				Project:          "my-project",
+				SubscriptionName: "my-subscription",
+			},
+		},
+	}
+	cis := &client.HalConfig_CiProviders{
+		Gcb: gcb,
+	}
+	h := &client.HalConfig{
+		Ci: cis,
+	}
+	gotE, err := HalToEcho(h)
+	if err != nil {
+		t.Errorf("Error writing echo config %s", err)
+	}
+	wantE := &client.EchoConfig{
+		Gcb: gcb,
+	}
+	if !reflect.DeepEqual(gotE, wantE) {
+		t.Errorf("Expected Google Cloud Build account to be passed through to echo config, got %v", gotE)
+	}
+}

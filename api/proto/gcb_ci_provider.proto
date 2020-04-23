@@ -1,0 +1,31 @@
+syntax = "proto3";
+package proto;
+
+option go_package = "github.com/spinnaker/kleat/api/client";
+
+import "permissions.proto";
+
+message GoogleCloudBuildProvider {
+  bool enabled = 1;
+  repeated GoogleCloudBuildAccount accounts = 2;
+}
+
+message GoogleCloudBuildAccount {
+  // The name of the account.
+  string name = 1;
+
+  // The name of the Google Cloud Platform project in which to trigger and monitor builds.
+  string project = 2;
+
+  // The name of the Pub/Sub subscription on which to listen for build changes.
+  string subscriptionName = 3;
+
+  // The path to a JSON service account that Spinnaker will use as
+  // credentials. This is only needed if Spinnaker is not deployed on a
+  // Google Compute Engine VM, or needs permissions not afforded to the VM
+  // it is running on.
+  string jsonKey = 4;
+
+  // Fiat permissions configuration.
+  Permissions permissions = 5;
+}

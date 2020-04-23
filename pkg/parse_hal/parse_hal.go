@@ -68,6 +68,7 @@ func HalToEcho(h *client.HalConfig) (*client.EchoConfig, error) {
 		GithubStatus: h.GetNotifications().GetGithubStatus(),
 		Artifacts:    h.GetArtifacts(),
 		Pubsub:       h.GetPubsub(),
+		Gcb:          h.GetCi().GetGcb(),
 	}
 	return c, nil
 }
