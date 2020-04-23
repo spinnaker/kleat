@@ -263,6 +263,16 @@
   
   
 
+- [pubsub.proto](#pubsub.proto)
+    - [GooglePubsub](#proto.GooglePubsub)
+    - [GooglePubsubPublisher](#proto.GooglePubsubPublisher)
+    - [GooglePubsubSubscriber](#proto.GooglePubsubSubscriber)
+    - [PubsubProviders](#proto.PubsubProviders)
+  
+  
+  
+  
+
 - [s3_artifact_provider.proto](#s3_artifact_provider.proto)
     - [S3ArtifactAccount](#proto.S3ArtifactAccount)
     - [S3ArtifactProvider](#proto.S3ArtifactProvider)
@@ -1094,6 +1104,7 @@ Configuration for the Docker Registry provider.
 | twilio | [TwilioNotification](#proto.TwilioNotification) |  |  |
 | githubStatus | [GithubStatusNotification](#proto.GithubStatusNotification) |  |  |
 | artifacts | [ArtifactProviders](#proto.ArtifactProviders) |  |  |
+| pubsub | [PubsubProviders](#proto.PubsubProviders) |  |  |
 
 
 
@@ -1587,6 +1598,7 @@ Image source configuration.
 | providers | [HalConfig.Providers](#proto.HalConfig.Providers) |  |  |
 | artifacts | [ArtifactProviders](#proto.ArtifactProviders) |  |  |
 | notifications | [HalConfig.Notifications](#proto.HalConfig.Notifications) |  |  |
+| pubsub | [PubsubProviders](#proto.PubsubProviders) |  |  |
 
 
 
@@ -2374,6 +2386,95 @@ A Fiat permissions configuration object.
 | bucket | [string](#string) |  | The name of a storage bucket that your specified account has access to. If not specified, a random name will be chosen. If you specify a globally unique bucket name that does not exist yet, Halyard will create that bucket for you. |
 | rootFolder | [string](#string) |  | The root folder in the chosen bucket to place all of Spinnaker&#39;s persistent data in. |
 | bucketLocation | [string](#string) |  | This is only required if the bucket you specify does not exist yet. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="pubsub.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## pubsub.proto
+
+
+
+<a name="proto.GooglePubsub"></a>
+
+### GooglePubsub
+Configuration for Google Cloud Pub/Sub integration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether Google Cloud Pub/Sub is enabled. |
+| subscriptions | [GooglePubsubSubscriber](#proto.GooglePubsubSubscriber) | repeated | The list of configured subscriptions. |
+| publishers | [GooglePubsubPublisher](#proto.GooglePubsubPublisher) | repeated | The list of configured publishers. |
+
+
+
+
+
+
+<a name="proto.GooglePubsubPublisher"></a>
+
+### GooglePubsubPublisher
+Configuration for a Google Cloud Pub/Sub publisher.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the publisher account. |
+| project | [string](#string) |  | The name of the GCP project your topic lives in. |
+| topicName | [string](#string) |  | The name of the topic to publish to. This identifier does not include the name of the project, and must already be configured. |
+| jsonPath | [string](#string) |  | The path to a JSON service account that Spinnaker will use as credentials. This is only needed if Spinnaker is not deployed on a Google Compute Engine VM, or needs permissions not afforded to the VM it is running on. See https://cloud.google.com/compute/docs/access/service-accounts for more information. |
+| content | [string](#string) |  | The content to publish to the topic. Must be one of ALL or NOTIFICATIONS. |
+
+
+
+
+
+
+<a name="proto.GooglePubsubSubscriber"></a>
+
+### GooglePubsubSubscriber
+Configuration for a Google Cloud Pub/Sub subscriber.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the subscriber account. |
+| project | [string](#string) |  | The name of the GCP project your subscription lives in. |
+| subscriptionName | [string](#string) |  | The name of the subscription to listen to. This identifier does not include the name of the project, and must already be configured. |
+| jsonPath | [string](#string) |  | The path to a JSON service account that Spinnaker will use as credentials. This is only needed if Spinnaker is not deployed on a Google Compute Engine VM, or needs permissions not afforded to the VM it is running on. See https://cloud.google.com/compute/docs/access/service-accounts for more information. |
+| ackDeadlineSeconds | [int32](#int32) |  | The acknowledgement deadline as configured on the on the Pub/Sub subscription. |
+| messageFormat | [string](#string) |  | The format of the incoming message. Must be one of one of GCB, GCS, GCR, or CUSTOM. Used to translate the incoming message into Spinnaker artifacts. |
+| templatePath | [string](#string) |  | A path to a jinja template that specifies how artifacts from this pubsub system are interpreted and transformed into Spinnaker artifacts. Only used if messageFormat is set to CUSTOM. |
+
+
+
+
+
+
+<a name="proto.PubsubProviders"></a>
+
+### PubsubProviders
+Configuration for Pub/Sub integration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether Pub/Sub is enabled. |
+| google | [GooglePubsub](#proto.GooglePubsub) |  | Configuration for the Google Cloud Pub/Sub integration. |
 
 
 
