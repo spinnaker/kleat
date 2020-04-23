@@ -305,3 +305,19 @@ artifacts:
   templates:
     - name: my-template
       templatePath: /path/to/my/template
+notifications:
+  slack:
+    enabled: true
+    botName: my-bot
+    token: my-secret-token
+    baseUrl: https://slack.test/
+    forceUseIncomingWebhook: true
+  twilio:
+    enabled: true
+    account: my-twilio-account
+    baseUrl: https://api.twilio.com/
+    from: +1212-555-0100
+    token: my-twilio-token
+  githubStatus:
+    enabled: true
+    token: my-github-token

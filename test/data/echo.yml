@@ -1,0 +1,87 @@
+slack:
+  enabled: true
+  botName: my-bot
+  token: my-secret-token
+  baseUrl: https://slack.test/
+  forceUseIncomingWebhook: true
+twilio:
+  enabled: true
+  account: my-twilio-account
+  baseUrl: https://api.twilio.com/
+  from: +1212-555-0100
+  token: my-twilio-token
+githubStatus:
+  enabled: true
+  token: my-github-token
+artifacts:
+  bitbucket:
+    accounts:
+    - name: my-bitbucket-account
+      password: my-bitbucket-password
+      username: my-bitbucket-username
+      usernamePasswordFile: /var/secrets/bitbucket
+    enabled: true
+  gcs:
+    accounts:
+    - jsonPath: /var/secrets/gcs
+      name: my-gcs-account
+    enabled: true
+  github:
+    accounts:
+    - name: my-github-artifact-account
+      tokenFile: /var/secrets/github
+    - name: my-github-artifact-account-2
+      password: my-password
+      username: my-username
+    enabled: true
+  gitlab:
+    accounts:
+    - name: my-gitlab-artifact-account
+      tokenFile: /var/secrets/gitlab
+    enabled: true
+  gitrepo:
+    accounts:
+    - name: my-git-repo-account
+      sshKnownHostsFilePath: /var/secrets/known_hosts
+      sshPrivateKeyFilePath: /var/secrets/git_repo_private_key
+      sshPrivateKeyPassphrase: my-passphrase
+    enabled: true
+  helm:
+    accounts:
+    - name: my-helm-account
+      repository: http://my-repository.com
+      usernamePasswordFile: /var/secrets/helm
+    enabled: true
+  http:
+    accounts:
+    - name: my-http-account
+      usernamePasswordFile: /var/secrets/http
+    enabled: true
+  maven:
+    accounts:
+    - name: my-maven-account
+      repositoryUrl: http://some.host.com/repository/path
+    enabled: true
+  oracle:
+    accounts:
+    - fingerprint: my-fingerprint
+      name: my-oracle-artifact-account
+      namespace: my-namespace
+      privateKeyPassphrase: my-passphrase
+      region: my-region
+      sshPrivateKeyFilePath: /var/secrets/oracle
+      tenancyId: my-tenancy-id
+      userId: my-user-id
+    enabled: true
+  s3:
+    accounts:
+    - apiEndpoint: my-s3-endpoint
+      apiRegion: my-s3-region
+      awsAccessKeyId: my-key-id
+      awsSecretAccessKey: my-key
+      name: my-s3-account
+      region: my-region
+    enabled: true
+  templates:
+  - name: my-template
+    templatePath: /path/to/my/template

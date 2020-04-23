@@ -16,13 +16,14 @@
 package write
 
 import (
-	"github.com/ghodss/yaml"
+	"github.com/spinnaker/kleat/api/client"
 	"github.com/spinnaker/kleat/internal/validate_paths"
 	"github.com/spinnaker/kleat/pkg/parse_hal"
 	"github.com/spinnaker/kleat/pkg/validate_hal"
 	"io"
 	"os"
 	"path/filepath"
+	"sigs.k8s.io/yaml"
 )
 
 func WriteConfigs(hal string, d string) error {
@@ -42,7 +43,19 @@ func WriteConfigs(hal string, d string) error {
 		return err
 	}
 
-	c, err := parse_hal.HalToClouddriver(*h)
+	if err := writeClouddriver(*h, d); err != nil {
+		return err
+	}
+
+	if err := writeEcho(*h, d); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func writeClouddriver(h client.HalConfig, d string) error {
+	c, err := parse_hal.HalToClouddriver(h)
 	if err != nil {
 		return err
 	}
@@ -55,7 +68,23 @@ func WriteConfigs(hal string, d string) error {
 	if err = write(c, f); err != nil {
 		return err
 	}
+	return nil
+}
 
+func writeEcho(h client.HalConfig, d string) error {
+	c, err := parse_hal.HalToEcho(h)
+	if err != nil {
+		return err
+	}
+
+	f, err := os.Create(filepath.Join(d, "echo.yml"))
+	if err != nil {
+		return err
+	}
+
+	if err = write(c, f); err != nil {
+		return err
+	}
 	return nil
 }
 

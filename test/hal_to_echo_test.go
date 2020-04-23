@@ -24,43 +24,42 @@ import (
 	"testing"
 )
 
-func TestHalToClouddriver(t *testing.T) {
+func TestHalToEcho(t *testing.T) {
 	h, err := parse_hal.ParseHalConfig("./data/halconfig.yml")
 	if err != nil {
 		t.Errorf(err.Error())
 	}
 
-	gotC, err := parse_hal.HalToClouddriver(*h)
+	gotE, err := parse_hal.HalToEcho(*h)
 	if err != nil {
 		t.Errorf(err.Error())
 	}
 
-	wantC, err := parseClouddriverConfig("./data/clouddriver.yml")
+	wantE, err := parseEchoConfig("./data/echo.yml")
 	if err != nil {
 		t.Errorf(err.Error())
 	}
 
-	want, err := yaml.Marshal(wantC)
+	want, err := yaml.Marshal(wantE)
 	if err != nil {
 		t.Errorf(err.Error())
 	}
 
-	got, err := yaml.Marshal(gotC)
+	got, err := yaml.Marshal(gotE)
 	if err != nil {
 		t.Errorf(err.Error())
 	}
 
 	res := bytes.Compare(want, got)
 	if res != 0 {
-		t.Errorf("Expected generated Clouddriver config to match contents of ./data/clouddriver.yml, but got:\n" + string(got))
+		t.Errorf("Expected generated Echo config to match contents of ./data/echo.yml, but got:\n" + string(got))
 	}
-
 }
 
-func parseClouddriverConfig(fn string) (*client.ClouddriverConfig, error) {
+func parseEchoConfig(fn string) (*client.EchoConfig, error) {
 	dat, err := ioutil.ReadFile(fn)
 
-	h := client.ClouddriverConfig{}
+	h := client.EchoConfig{}
 	err = yaml.UnmarshalStrict([]byte(dat), &h)
 	if err != nil {
 		return nil, err

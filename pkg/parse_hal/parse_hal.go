@@ -16,9 +16,9 @@
 package parse_hal
 
 import (
-	"github.com/ghodss/yaml"
 	"github.com/spinnaker/kleat/api/client"
 	"io/ioutil"
+	"sigs.k8s.io/yaml"
 )
 
 func ParseHalConfig(fn string) (*client.HalConfig, error) {
@@ -57,6 +57,16 @@ func HalToClouddriver(h client.HalConfig) (client.ClouddriverConfig, error) {
 		Huaweicloud:    h.Providers.Huaweicloud,
 		Oracle:         h.Providers.Oracle,
 		Artifacts:      h.Artifacts,
+	}
+	return c, nil
+}
+
+func HalToEcho(h client.HalConfig) (client.EchoConfig, error) {
+	c := client.EchoConfig{
+		Slack:        h.Notifications.Slack,
+		Twilio:       h.Notifications.Twilio,
+		GithubStatus: h.Notifications.GithubStatus,
+		Artifacts:    h.Artifacts,
 	}
 	return c, nil
 }
