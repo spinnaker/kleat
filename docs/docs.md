@@ -2456,7 +2456,7 @@ Configuration for a Google Cloud Pub/Sub subscriber.
 | project | [string](#string) |  | The name of the GCP project your subscription lives in. |
 | subscriptionName | [string](#string) |  | The name of the subscription to listen to. This identifier does not include the name of the project, and must already be configured. |
 | jsonPath | [string](#string) |  | The path to a JSON service account that Spinnaker will use as credentials. This is only needed if Spinnaker is not deployed on a Google Compute Engine VM, or needs permissions not afforded to the VM it is running on. See https://cloud.google.com/compute/docs/access/service-accounts for more information. |
-| ackDeadlineSeconds | [int32](#int32) |  | The acknowledgement deadline as configured on the on the Pub/Sub subscription. |
+| ackDeadlineSeconds | [int32](#int32) |  | The acknowledgement deadline as configured on the Pub/Sub subscription. |
 | messageFormat | [string](#string) |  | The format of the incoming message. Must be one of one of GCB, GCS, GCR, or CUSTOM. Used to translate the incoming message into Spinnaker artifacts. |
 | templatePath | [string](#string) |  | A path to a jinja template that specifies how artifacts from this pubsub system are interpreted and transformed into Spinnaker artifacts. Only used if messageFormat is set to CUSTOM. |
 

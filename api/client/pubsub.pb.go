@@ -168,7 +168,7 @@ type GooglePubsubSubscriber struct {
 	// VM, or needs permissions not afforded to the VM it is running on.
 	// See https://cloud.google.com/compute/docs/access/service-accounts for more information.
 	JsonPath string `protobuf:"bytes,4,opt,name=jsonPath,proto3" json:"jsonPath,omitempty"`
-	// The acknowledgement deadline as configured on the on the Pub/Sub subscription.
+	// The acknowledgement deadline as configured on the Pub/Sub subscription.
 	AckDeadlineSeconds int32 `protobuf:"varint,5,opt,name=ackDeadlineSeconds,proto3" json:"ackDeadlineSeconds,omitempty"`
 	// The format of the incoming message. Must be one of one of GCB, GCS, GCR,
 	// or CUSTOM. Used to translate the incoming message into Spinnaker artifacts.

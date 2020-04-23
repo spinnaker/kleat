@@ -41,7 +41,7 @@ message GooglePubsubSubscriber {
   // See https://cloud.google.com/compute/docs/access/service-accounts for more information.
   string jsonPath = 4;
 
-  // The acknowledgement deadline as configured on the on the Pub/Sub subscription.
+  // The acknowledgement deadline as configured on the Pub/Sub subscription.
   int32 ackDeadlineSeconds = 5;
 
   // The format of the incoming message. Must be one of one of GCB, GCS, GCR,
