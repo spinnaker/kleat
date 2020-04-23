@@ -17,7 +17,7 @@ message SlackNotification {
   // Slack endpoint. Optional, can only be set if using a compatible API.
   string baseUrl = 4;
 
-  // Force usage of incoming webhooks endpoint for slack. Optional, only set if
+  // Force usage of incoming webhooks endpoint for Slack. Optional, only set if
   // using a compatible API.
   bool forceUseIncomingWebhook = 5;
 }
@@ -36,15 +36,15 @@ message TwilioNotification {
   // The endpoint of the Twilio API. Optional, only set if overriding the default.
   string baseUrl = 4;
 
-  // The phone number from which the SMS will be sent (i.e. +1234-567-8910).
+  // The phone number from which the SMS will be sent (e.g., +1234-567-8910).
   string from = 5;
 }
 
 // Configuration for Github status notifications.
 message GithubStatusNotification {
-  // Whether Github status notifications are enabled.
+  // Whether GitHub status notifications are enabled.
   bool enabled = 1;
 
-  // Your github account token.
+  // Your GitHub account token.
   string token = 2;
 }

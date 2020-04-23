@@ -2082,8 +2082,8 @@ Configuration for Github status notifications.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether Github status notifications are enabled. |
-| token | [string](#string) |  | Your github account token. |
+| enabled | [bool](#bool) |  | Whether GitHub status notifications are enabled. |
+| token | [string](#string) |  | Your GitHub account token. |
 
 
 
@@ -2102,7 +2102,7 @@ Configuration for Slack notifications.
 | botName | [string](#string) |  | The name of your Slack bot. |
 | token | [string](#string) |  | Your Slack bot token. |
 | baseUrl | [string](#string) |  | Slack endpoint. Optional, can only be set if using a compatible API. |
-| forceUseIncomingWebhook | [bool](#bool) |  | Force usage of incoming webhooks endpoint for slack. Optional, only set if using a compatible API. |
+| forceUseIncomingWebhook | [bool](#bool) |  | Force usage of incoming webhooks endpoint for Slack. Optional, only set if using a compatible API. |
 
 
 
@@ -2121,7 +2121,7 @@ Configuration for Twilio notifications.
 | account | [string](#string) |  | Your Twilio account SID. |
 | token | [string](#string) |  | Your Twilio auth token. |
 | baseUrl | [string](#string) |  | The endpoint of the Twilio API. Optional, only set if overriding the default. |
-| from | [string](#string) |  | The phone number from which the SMS will be sent (i.e. &#43;1234-567-8910). |
+| from | [string](#string) |  | The phone number from which the SMS will be sent (e.g., &#43;1234-567-8910). |
 
 
 

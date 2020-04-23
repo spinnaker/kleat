@@ -39,7 +39,7 @@ type SlackNotification struct {
 	Token string `protobuf:"bytes,3,opt,name=token,proto3" json:"token,omitempty"`
 	// Slack endpoint. Optional, can only be set if using a compatible API.
 	BaseUrl string `protobuf:"bytes,4,opt,name=baseUrl,proto3" json:"baseUrl,omitempty"`
-	// Force usage of incoming webhooks endpoint for slack. Optional, only set if
+	// Force usage of incoming webhooks endpoint for Slack. Optional, only set if
 	// using a compatible API.
 	ForceUseIncomingWebhook bool `protobuf:"varint,5,opt,name=forceUseIncomingWebhook,proto3" json:"forceUseIncomingWebhook,omitempty"`
 }
@@ -125,7 +125,7 @@ type TwilioNotification struct {
 	Token string `protobuf:"bytes,3,opt,name=token,proto3" json:"token,omitempty"`
 	// The endpoint of the Twilio API. Optional, only set if overriding the default.
 	BaseUrl string `protobuf:"bytes,4,opt,name=baseUrl,proto3" json:"baseUrl,omitempty"`
-	// The phone number from which the SMS will be sent (i.e. +1234-567-8910).
+	// The phone number from which the SMS will be sent (e.g., +1234-567-8910).
 	From string `protobuf:"bytes,5,opt,name=from,proto3" json:"from,omitempty"`
 }
 
@@ -202,9 +202,9 @@ type GithubStatusNotification struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Whether Github status notifications are enabled.
+	// Whether GitHub status notifications are enabled.
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	// Your github account token.
+	// Your GitHub account token.
 	Token string `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
 }
 
