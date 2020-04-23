@@ -16,11 +16,13 @@ import "ecs_provider.proto";
 import "huaweicloud_provider.proto";
 import "oracle_provider.proto";
 import "artifacts.proto";
+import "notifications.proto";
 
 message HalConfig {
   PersistentStorage persistentStorage = 1;
   Providers providers = 2;
   ArtifactProviders artifacts = 3;
+  Notifications notifications = 4;
 
   message PersistentStorage {
     string persistentStoreType = 1;
@@ -39,5 +41,11 @@ message HalConfig {
     EcsProvider ecs = 9;
     HuaweiCloudProvider huaweicloud = 10;
     OracleProvider oracle = 11;
+  }
+
+  message Notifications {
+    SlackNotification slack = 1;
+    TwilioNotification twilio = 2;
+    GithubStatusNotification githubStatus = 3;
   }
 }

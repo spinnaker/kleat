@@ -165,6 +165,7 @@
 
 - [halconfig.proto](#halconfig.proto)
     - [HalConfig](#proto.HalConfig)
+    - [HalConfig.Notifications](#proto.HalConfig.Notifications)
     - [HalConfig.PersistentStorage](#proto.HalConfig.PersistentStorage)
     - [HalConfig.Providers](#proto.HalConfig.Providers)
   
@@ -214,6 +215,15 @@
 - [maven_artifact_provider.proto](#maven_artifact_provider.proto)
     - [MavenArtifactAccount](#proto.MavenArtifactAccount)
     - [MavenArtifactProvider](#proto.MavenArtifactProvider)
+  
+  
+  
+  
+
+- [notifications.proto](#notifications.proto)
+    - [GithubStatusNotification](#proto.GithubStatusNotification)
+    - [SlackNotification](#proto.SlackNotification)
+    - [TwilioNotification](#proto.TwilioNotification)
   
   
   
@@ -1078,6 +1088,14 @@ Configuration for the Docker Registry provider.
 
 
 
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| slack | [SlackNotification](#proto.SlackNotification) |  |  |
+| twilio | [TwilioNotification](#proto.TwilioNotification) |  |  |
+| githubStatus | [GithubStatusNotification](#proto.GithubStatusNotification) |  |  |
+| artifacts | [ArtifactProviders](#proto.ArtifactProviders) |  |  |
+
+
 
 
 
@@ -1568,6 +1586,24 @@ Image source configuration.
 | persistentStorage | [HalConfig.PersistentStorage](#proto.HalConfig.PersistentStorage) |  |  |
 | providers | [HalConfig.Providers](#proto.HalConfig.Providers) |  |  |
 | artifacts | [ArtifactProviders](#proto.ArtifactProviders) |  |  |
+| notifications | [HalConfig.Notifications](#proto.HalConfig.Notifications) |  |  |
+
+
+
+
+
+
+<a name="proto.HalConfig.Notifications"></a>
+
+### HalConfig.Notifications
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| slack | [SlackNotification](#proto.SlackNotification) |  |  |
+| twilio | [TwilioNotification](#proto.TwilioNotification) |  |  |
+| githubStatus | [GithubStatusNotification](#proto.GithubStatusNotification) |  |  |
 
 
 
@@ -2016,6 +2052,76 @@ Configuration for the Maven artifact provider.
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether the Maven artifact provider is enabled. |
 | accounts | [MavenArtifactAccount](#proto.MavenArtifactAccount) | repeated | The list of configured Maven accounts. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="notifications.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## notifications.proto
+
+
+
+<a name="proto.GithubStatusNotification"></a>
+
+### GithubStatusNotification
+Configuration for Github status notifications.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether Github status notifications are enabled. |
+| token | [string](#string) |  | Your github account token. |
+
+
+
+
+
+
+<a name="proto.SlackNotification"></a>
+
+### SlackNotification
+Configuration for Slack notifications.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether Slack notifications are enabled. |
+| botName | [string](#string) |  | The name of your Slack bot. |
+| token | [string](#string) |  | Your Slack bot token. |
+| baseUrl | [string](#string) |  | Slack endpoint. Optional, can only be set if using a compatible API. |
+| forceUseIncomingWebhook | [bool](#bool) |  | Force usage of incoming webhooks endpoint for slack. Optional, only set if using a compatible API. |
+
+
+
+
+
+
+<a name="proto.TwilioNotification"></a>
+
+### TwilioNotification
+Configuration for Twilio notifications.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether Twilio notifications are enabled. |
+| account | [string](#string) |  | Your Twilio account SID. |
+| token | [string](#string) |  | Your Twilio auth token. |
+| baseUrl | [string](#string) |  | The endpoint of the Twilio API. Optional, only set if overriding the default. |
+| from | [string](#string) |  | The phone number from which the SMS will be sent (i.e. &#43;1234-567-8910). |
 
 
 

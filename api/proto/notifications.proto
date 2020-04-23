@@ -1,0 +1,50 @@
+syntax = "proto3";
+package proto;
+
+option go_package = "github.com/spinnaker/kleat/api/client";
+
+// Configuration for Slack notifications.
+message SlackNotification {
+  // Whether Slack notifications are enabled.
+  bool enabled = 1;
+
+  // The name of your Slack bot.
+  string botName = 2;
+
+  // Your Slack bot token.
+  string token = 3;
+
+  // Slack endpoint. Optional, can only be set if using a compatible API.
+  string baseUrl = 4;
+
+  // Force usage of incoming webhooks endpoint for slack. Optional, only set if
+  // using a compatible API.
+  bool forceUseIncomingWebhook = 5;
+}
+
+// Configuration for Twilio notifications.
+message TwilioNotification {
+  // Whether Twilio notifications are enabled.
+  bool enabled = 1;
+
+  // Your Twilio account SID.
+  string account = 2;
+
+  // Your Twilio auth token.
+  string token = 3;
+
+  // The endpoint of the Twilio API. Optional, only set if overriding the default.
+  string baseUrl = 4;
+
+  // The phone number from which the SMS will be sent (i.e. +1234-567-8910).
+  string from = 5;
+}
+
+// Configuration for Github status notifications.
+message GithubStatusNotification {
+  // Whether Github status notifications are enabled.
+  bool enabled = 1;
+
+  // Your github account token.
+  string token = 2;
+}

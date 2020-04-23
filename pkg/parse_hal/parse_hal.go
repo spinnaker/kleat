@@ -62,6 +62,11 @@ func HalToClouddriver(h client.HalConfig) (client.ClouddriverConfig, error) {
 }
 
 func HalToEcho(h client.HalConfig) (client.EchoConfig, error) {
-	c := client.EchoConfig{}
+	c := client.EchoConfig{
+		Slack:        h.Notifications.Slack,
+		Twilio:       h.Notifications.Twilio,
+		GithubStatus: h.Notifications.GithubStatus,
+		Artifacts:    h.Artifacts,
+	}
 	return c, nil
 }
