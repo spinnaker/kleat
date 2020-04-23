@@ -5,6 +5,7 @@ option go_package = "github.com/spinnaker/kleat/api/client";
 
 import "notifications.proto";
 import "artifacts.proto";
+import "pubsub.proto";
 
 message EchoConfig {
     SlackNotification slack = 1;
@@ -12,4 +13,5 @@ message EchoConfig {
     GithubStatusNotification githubStatus = 3;
 
     ArtifactProviders artifacts = 4;
+    PubsubProviders pubsub = 5;
 }

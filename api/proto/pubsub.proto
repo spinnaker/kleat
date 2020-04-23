@@ -1,0 +1,78 @@
+syntax = "proto3";
+package proto;
+
+option go_package = "github.com/spinnaker/kleat/api/client";
+
+// Configuration for Pub/Sub integration.
+message PubsubProviders {
+  // Whether Pub/Sub is enabled.
+  bool enabled = 1;
+  // Configuration for the Google Cloud Pub/Sub integration.
+  GooglePubsub google = 2;
+}
+
+// Configuration for Google Cloud Pub/Sub integration.
+message GooglePubsub {
+  // Whether Google Cloud Pub/Sub is enabled.
+  bool enabled = 1;
+
+  // The list of configured subscriptions.
+  repeated GooglePubsubSubscriber subscriptions = 2;
+
+  // The list of configured publishers.
+  repeated GooglePubsubPublisher publishers = 3;
+}
+
+// Configuration for a Google Cloud Pub/Sub subscriber.
+message GooglePubsubSubscriber {
+  // The name of the subscriber account.
+  string name = 1;
+
+  // The name of the GCP project your subscription lives in.
+  string project = 2;
+
+  // The name of the subscription to listen to. This identifier does not include
+  // the name of the project, and must already be configured.
+  string subscriptionName = 3;
+
+  // The path to a JSON service account that Spinnaker will use as credentials.
+  // This is only needed if Spinnaker is not deployed on a Google Compute Engine
+  // VM, or needs permissions not afforded to the VM it is running on.
+  // See https://cloud.google.com/compute/docs/access/service-accounts for more information.
+  string jsonPath = 4;
+
+  // The acknowledgement deadline as configured on the Pub/Sub subscription.
+  int32 ackDeadlineSeconds = 5;
+
+  // The format of the incoming message. Must be one of one of GCB, GCS, GCR,
+  // or CUSTOM. Used to translate the incoming message into Spinnaker artifacts.
+  string messageFormat = 6;
+
+  // A path to a jinja template that specifies how artifacts from this pubsub system
+  // are interpreted and transformed into Spinnaker artifacts. Only used if
+  // messageFormat is set to CUSTOM.
+  string templatePath = 7;
+}
+
+// Configuration for a Google Cloud Pub/Sub publisher.
+message GooglePubsubPublisher {
+  // The name of the publisher account.
+  string name = 1;
+
+  // The name of the GCP project your topic lives in.
+  string project = 2;
+
+  // The name of the topic to publish to. This identifier does not include the
+  // name of the project, and must already be configured.
+  string topicName = 3;
+
+  // The path to a JSON service account that Spinnaker will use as credentials.
+  // This is only needed if Spinnaker is not deployed on a Google Compute Engine
+  // VM, or needs permissions not afforded to the VM it is running on.
+  // See https://cloud.google.com/compute/docs/access/service-accounts for more information.
+  string jsonPath = 4;
+
+  // The content to publish to the topic. Must be one of ALL or NOTIFICATIONS.
+  string content = 5;
+}
+

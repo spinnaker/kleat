@@ -321,3 +321,20 @@ notifications:
   githubStatus:
     enabled: true
     token: my-github-token
+pubsub:
+  enabled: true
+  google:
+    enabled: true
+    subscriptions:
+    - name: subscription-test
+      project: my-project
+      subscriptionName: my-subscription
+      jsonPath: /var/secrets/my-subscriber-token
+      ackDeadlineSeconds: 10
+      messageFormat: GCR
+    publishers:
+    - name: publish-test
+      project: my-project
+      topicName: my-topic
+      jsonPath: /var/secrets/my-publisher-token
+      content: NOTIFICATIONS

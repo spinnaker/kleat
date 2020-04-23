@@ -67,6 +67,7 @@ func HalToEcho(h client.HalConfig) (client.EchoConfig, error) {
 		Twilio:       h.Notifications.Twilio,
 		GithubStatus: h.Notifications.GithubStatus,
 		Artifacts:    h.Artifacts,
+		Pubsub:       h.Pubsub,
 	}
 	return c, nil
 }

@@ -17,12 +17,14 @@ import "huaweicloud_provider.proto";
 import "oracle_provider.proto";
 import "artifacts.proto";
 import "notifications.proto";
+import "pubsub.proto";
 
 message HalConfig {
   PersistentStorage persistentStorage = 1;
   Providers providers = 2;
   ArtifactProviders artifacts = 3;
   Notifications notifications = 4;
+  PubsubProviders pubsub = 5;
 
   message PersistentStorage {
     string persistentStoreType = 1;
