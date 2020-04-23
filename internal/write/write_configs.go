@@ -16,13 +16,13 @@
 package write
 
 import (
-	"github.com/ghodss/yaml"
 	"github.com/spinnaker/kleat/internal/validate_paths"
 	"github.com/spinnaker/kleat/pkg/parse_hal"
 	"github.com/spinnaker/kleat/pkg/validate_hal"
 	"io"
 	"os"
 	"path/filepath"
+	"sigs.k8s.io/yaml"
 )
 
 func WriteConfigs(hal string, d string) error {

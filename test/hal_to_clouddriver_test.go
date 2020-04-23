@@ -17,10 +17,10 @@ package test
 
 import (
 	"bytes"
-	"github.com/ghodss/yaml"
 	"github.com/spinnaker/kleat/api/client"
 	"github.com/spinnaker/kleat/pkg/parse_hal"
 	"io/ioutil"
+	"sigs.k8s.io/yaml"
 	"testing"
 )
 
@@ -61,7 +61,7 @@ func parseClouddriverConfig(fn string) (*client.ClouddriverConfig, error) {
 	dat, err := ioutil.ReadFile(fn)
 
 	h := client.ClouddriverConfig{}
-	err = yaml.Unmarshal([]byte(dat), &h)
+	err = yaml.UnmarshalStrict([]byte(dat), &h)
 	if err != nil {
 		return nil, err
 	}

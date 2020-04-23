@@ -16,9 +16,9 @@
 package parse_hal
 
 import (
-	"github.com/ghodss/yaml"
 	"github.com/spinnaker/kleat/api/client"
 	"io/ioutil"
+	"sigs.k8s.io/yaml"
 )
 
 func ParseHalConfig(fn string) (*client.HalConfig, error) {
