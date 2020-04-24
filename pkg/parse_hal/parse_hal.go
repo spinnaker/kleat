@@ -75,3 +75,26 @@ func HalToEcho(h *client.HalConfig) (*client.EchoConfig, error) {
 	}
 	return c, nil
 }
+
+func HalToServiceConfigs(h *client.HalConfig) (*client.ServiceConfigs, error) {
+	c, err := HalToClouddriver(h)
+	if err != nil {
+		return nil, err
+	}
+
+	e, err := HalToEcho(h)
+	if err != nil {
+		return nil, err
+	}
+
+	f, err := HalToFront50(h)
+	if err != nil {
+		return nil, err
+	}
+
+	return &client.ServiceConfigs{
+		Clouddriver: c,
+		Echo:        e,
+		Front50:     f,
+	}, nil
+}

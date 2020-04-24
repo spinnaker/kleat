@@ -292,6 +292,13 @@
   
   
 
+- [services.proto](#services.proto)
+    - [ServiceConfigs](#proto.ServiceConfigs)
+  
+  
+  
+  
+
 - [stats.proto](#stats.proto)
     - [Stats](#proto.Stats)
   
@@ -2659,6 +2666,39 @@ Configuration for the S3 artifact provider.
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether the S3 artifact provider is enabled. |
 | accounts | [S3ArtifactAccount](#proto.S3ArtifactAccount) | repeated | The list of configured S3 artifact accounts. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="services.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## services.proto
+
+
+
+<a name="proto.ServiceConfigs"></a>
+
+### ServiceConfigs
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| clouddriver | [ClouddriverConfig](#proto.ClouddriverConfig) |  |  |
+| echo | [EchoConfig](#proto.EchoConfig) |  |  |
+| front50 | [Front50Config](#proto.Front50Config) |  |  |
 
 
 
