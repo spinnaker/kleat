@@ -43,18 +43,18 @@ func WriteConfigs(hal string, d string) error {
 		return err
 	}
 
-	if err := writeClouddriver(*h, d); err != nil {
+	if err := writeClouddriver(h, d); err != nil {
 		return err
 	}
 
-	if err := writeEcho(*h, d); err != nil {
+	if err := writeEcho(h, d); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func writeClouddriver(h client.HalConfig, d string) error {
+func writeClouddriver(h *client.HalConfig, d string) error {
 	c, err := parse_hal.HalToClouddriver(h)
 	if err != nil {
 		return err
@@ -71,7 +71,7 @@ func writeClouddriver(h client.HalConfig, d string) error {
 	return nil
 }
 
-func writeEcho(h client.HalConfig, d string) error {
+func writeEcho(h *client.HalConfig, d string) error {
 	c, err := parse_hal.HalToEcho(h)
 	if err != nil {
 		return err

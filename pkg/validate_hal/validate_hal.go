@@ -55,8 +55,8 @@ func getValidationMessages(h *client.HalConfig, fa []HalConfigValidator) []strin
 
 func validateKindsAndOmitKinds(h *client.HalConfig) []ValidationFailure {
 	var messages []ValidationFailure
-	for _, a := range h.Providers.Kubernetes.Accounts {
-		if !(len(a.Kinds) == 0) && !(len(a.OmitKinds) == 0) {
+	for _, a := range h.GetProviders().GetKubernetes().GetAccounts() {
+		if !(len(a.GetKinds()) == 0) && !(len(a.GetOmitKinds()) == 0) {
 			messages = append(messages, fatalResult("Cannot specify both kinds and omitKinds."))
 		}
 	}

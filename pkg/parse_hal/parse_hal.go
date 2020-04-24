@@ -33,8 +33,8 @@ func ParseHalConfig(fn string) (*client.HalConfig, error) {
 	return &h, nil
 }
 
-func HalToFront50(h client.HalConfig) (client.Front50Config, error) {
-	f := client.Front50Config{
+func HalToFront50(h *client.HalConfig) (*client.Front50Config, error) {
+	f := &client.Front50Config{
 		Spinnaker: &client.Front50Config_Spinnaker{
 			PersistentStoreType: h.PersistentStorage.PersistentStoreType,
 			Gcs:                 h.PersistentStorage.Gcs,
@@ -43,31 +43,31 @@ func HalToFront50(h client.HalConfig) (client.Front50Config, error) {
 	return f, nil
 }
 
-func HalToClouddriver(h client.HalConfig) (client.ClouddriverConfig, error) {
-	c := client.ClouddriverConfig{
-		Kubernetes:     h.Providers.Kubernetes,
-		Google:         h.Providers.Google,
-		Appengine:      h.Providers.Appengine,
-		Aws:            h.Providers.Aws,
-		Azure:          h.Providers.Azure,
-		Cloudfoundry:   h.Providers.Cloudfoundry,
-		Dcos:           h.Providers.Dcos,
-		DockerRegistry: h.Providers.DockerRegistry,
-		Ecs:            h.Providers.Ecs,
-		Huaweicloud:    h.Providers.Huaweicloud,
-		Oracle:         h.Providers.Oracle,
-		Artifacts:      h.Artifacts,
+func HalToClouddriver(h *client.HalConfig) (*client.ClouddriverConfig, error) {
+	c := &client.ClouddriverConfig{
+		Kubernetes:     h.GetProviders().GetKubernetes(),
+		Google:         h.GetProviders().GetGoogle(),
+		Appengine:      h.GetProviders().GetAppengine(),
+		Aws:            h.GetProviders().GetAws(),
+		Azure:          h.GetProviders().GetAzure(),
+		Cloudfoundry:   h.GetProviders().GetCloudfoundry(),
+		Dcos:           h.GetProviders().GetDcos(),
+		DockerRegistry: h.GetProviders().GetDockerRegistry(),
+		Ecs:            h.GetProviders().GetEcs(),
+		Huaweicloud:    h.GetProviders().GetHuaweicloud(),
+		Oracle:         h.GetProviders().GetOracle(),
+		Artifacts:      h.GetArtifacts(),
 	}
 	return c, nil
 }
 
-func HalToEcho(h client.HalConfig) (client.EchoConfig, error) {
-	c := client.EchoConfig{
-		Slack:        h.Notifications.Slack,
-		Twilio:       h.Notifications.Twilio,
-		GithubStatus: h.Notifications.GithubStatus,
-		Artifacts:    h.Artifacts,
-		Pubsub:       h.Pubsub,
+func HalToEcho(h *client.HalConfig) (*client.EchoConfig, error) {
+	c := &client.EchoConfig{
+		Slack:        h.GetNotifications().GetSlack(),
+		Twilio:       h.GetNotifications().GetTwilio(),
+		GithubStatus: h.GetNotifications().GetGithubStatus(),
+		Artifacts:    h.GetArtifacts(),
+		Pubsub:       h.GetPubsub(),
 	}
 	return c, nil
 }
