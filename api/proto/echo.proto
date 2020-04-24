@@ -6,6 +6,8 @@ option go_package = "github.com/spinnaker/kleat/api/client";
 import "notifications.proto";
 import "artifacts.proto";
 import "pubsub.proto";
+import "gcb_ci_provider.proto";
+import "stats.proto";
 
 message EchoConfig {
     SlackNotification slack = 1;
@@ -14,4 +16,6 @@ message EchoConfig {
 
     ArtifactProviders artifacts = 4;
     PubsubProviders pubsub = 5;
+    GoogleCloudBuildProvider gcb = 6;
+    Stats stats = 7;
 }
