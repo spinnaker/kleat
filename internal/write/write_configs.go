@@ -16,11 +16,9 @@
 package write
 
 import (
-	"io"
 	"os"
 	"path/filepath"
 
-	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/validate_paths"
 	"github.com/spinnaker/kleat/pkg/parse_hal"
 	"github.com/spinnaker/kleat/pkg/validate_hal"
@@ -44,46 +42,25 @@ func WriteConfigs(hal string, d string) error {
 		return err
 	}
 
-	if err := writeClouddriver(h, d); err != nil {
-		return err
-	}
-
-	if err := writeEcho(h, d); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func writeClouddriver(h *config.Hal, d string) error {
 	c := parse_hal.HalToClouddriver(h)
+	if err := write(c, d, "clouddriver.yml"); err != nil {
+		return err
+	}
 
-	f, err := os.Create(filepath.Join(d, "clouddriver.yml"))
+	e := parse_hal.HalToEcho(h)
+	if err := write(e, d, "echo.yml"); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func write(i interface{}, d string, f string) error {
+	w, err := os.Create(filepath.Join(d, f))
 	if err != nil {
 		return err
 	}
 
-	if err = write(c, f); err != nil {
-		return err
-	}
-	return nil
-}
-
-func writeEcho(h *config.Hal, d string) error {
-	c := parse_hal.HalToEcho(h)
-
-	f, err := os.Create(filepath.Join(d, "echo.yml"))
-	if err != nil {
-		return err
-	}
-
-	if err = write(c, f); err != nil {
-		return err
-	}
-	return nil
-}
-
-func write(i interface{}, w io.Writer) error {
 	bytes, err := yaml.Marshal(i)
 	if err != nil {
 		return err
