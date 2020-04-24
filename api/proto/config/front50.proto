@@ -8,11 +8,11 @@ import "storage/gcs.proto";
 import "storage/oracle.proto";
 
 message Front50 {
-  Spinnaker spinnaker = 1;
+  Front50Spinnaker spinnaker = 1;
+}
 
-  message Spinnaker {
-    GcsPersistentStore gcs = 1;
-    AzsPersistentStore azs = 2;
-    OraclePersistentStore oracle = 3;
-  }
+message Front50Spinnaker {
+  GcsPersistentStore gcs = 1;
+  AzsPersistentStore azs = 2;
+  OraclePersistentStore oracle = 3;
 }
