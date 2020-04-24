@@ -240,7 +240,7 @@
 
 - [config/front50.proto](#config/front50.proto)
     - [Front50](#proto.Front50)
-    - [Front50.Spinnaker](#proto.Front50.Spinnaker)
+    - [Front50Spinnaker](#proto.Front50Spinnaker)
   
   
   
@@ -249,7 +249,6 @@
 - [config/halconfig.proto](#config/halconfig.proto)
     - [Hal](#proto.Hal)
     - [Hal.CiProviders](#proto.Hal.CiProviders)
-    - [Hal.Notifications](#proto.Hal.Notifications)
     - [Hal.Providers](#proto.Hal.Providers)
   
   
@@ -263,10 +262,29 @@
   
   
 
-- [notifications.proto](#notifications.proto)
-    - [GithubStatusNotification](#proto.GithubStatusNotification)
-    - [SlackNotification](#proto.SlackNotification)
-    - [TwilioNotification](#proto.TwilioNotification)
+- [notification/github_status.proto](#notification/github_status.proto)
+    - [GithubStatus](#proto.GithubStatus)
+  
+  
+  
+  
+
+- [notification/notifications.proto](#notification/notifications.proto)
+    - [Notifications](#proto.Notifications)
+  
+  
+  
+  
+
+- [notification/slack.proto](#notification/slack.proto)
+    - [Slack](#proto.Slack)
+  
+  
+  
+  
+
+- [notification/twilio.proto](#notification/twilio.proto)
+    - [Twilio](#proto.Twilio)
   
   
   
@@ -2249,9 +2267,9 @@ Oracle virtualization settings.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| slack | [SlackNotification](#proto.SlackNotification) |  |  |
-| twilio | [TwilioNotification](#proto.TwilioNotification) |  |  |
-| githubStatus | [GithubStatusNotification](#proto.GithubStatusNotification) |  |  |
+| slack | [Slack](#proto.Slack) |  |  |
+| twilio | [Twilio](#proto.Twilio) |  |  |
+| githubStatus | [GithubStatus](#proto.GithubStatus) |  |  |
 | artifacts | [ArtifactProviders](#proto.ArtifactProviders) |  |  |
 | pubsub | [PubsubProviders](#proto.PubsubProviders) |  |  |
 | gcb | [GoogleCloudBuildProvider](#proto.GoogleCloudBuildProvider) |  |  |
@@ -2286,16 +2304,16 @@ Oracle virtualization settings.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| spinnaker | [Front50.Spinnaker](#proto.Front50.Spinnaker) |  |  |
+| spinnaker | [Front50Spinnaker](#proto.Front50Spinnaker) |  |  |
 
 
 
 
 
 
-<a name="proto.Front50.Spinnaker"></a>
+<a name="proto.Front50Spinnaker"></a>
 
-### Front50.Spinnaker
+### Front50Spinnaker
 
 
 
@@ -2337,7 +2355,7 @@ Oracle virtualization settings.
 | persistentStorage | [PersistentStorage](#proto.PersistentStorage) |  |  |
 | providers | [Hal.Providers](#proto.Hal.Providers) |  |  |
 | artifacts | [ArtifactProviders](#proto.ArtifactProviders) |  |  |
-| notifications | [Hal.Notifications](#proto.Hal.Notifications) |  |  |
+| notifications | [Notifications](#proto.Notifications) |  |  |
 | pubsub | [PubsubProviders](#proto.PubsubProviders) |  |  |
 | ci | [Hal.CiProviders](#proto.Hal.CiProviders) |  |  |
 | stats | [Stats](#proto.Stats) |  |  |
@@ -2356,23 +2374,6 @@ Oracle virtualization settings.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | gcb | [GoogleCloudBuildProvider](#proto.GoogleCloudBuildProvider) |  |  |
-
-
-
-
-
-
-<a name="proto.Hal.Notifications"></a>
-
-### Hal.Notifications
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| slack | [SlackNotification](#proto.SlackNotification) |  |  |
-| twilio | [TwilioNotification](#proto.TwilioNotification) |  |  |
-| githubStatus | [GithubStatusNotification](#proto.GithubStatusNotification) |  |  |
 
 
 
@@ -2446,16 +2447,16 @@ Oracle virtualization settings.
 
 
 
-<a name="notifications.proto"></a>
+<a name="notification/github_status.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## notifications.proto
+## notification/github_status.proto
 
 
 
-<a name="proto.GithubStatusNotification"></a>
+<a name="proto.GithubStatus"></a>
 
-### GithubStatusNotification
+### GithubStatus
 Configuration for Github status notifications.
 
 
@@ -2468,10 +2469,59 @@ Configuration for Github status notifications.
 
 
 
+ 
 
-<a name="proto.SlackNotification"></a>
+ 
 
-### SlackNotification
+ 
+
+ 
+
+
+
+<a name="notification/notifications.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## notification/notifications.proto
+
+
+
+<a name="proto.Notifications"></a>
+
+### Notifications
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| slack | [Slack](#proto.Slack) |  |  |
+| twilio | [Twilio](#proto.Twilio) |  |  |
+| githubStatus | [GithubStatus](#proto.GithubStatus) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="notification/slack.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## notification/slack.proto
+
+
+
+<a name="proto.Slack"></a>
+
+### Slack
 Configuration for Slack notifications.
 
 
@@ -2487,10 +2537,26 @@ Configuration for Slack notifications.
 
 
 
+ 
 
-<a name="proto.TwilioNotification"></a>
+ 
 
-### TwilioNotification
+ 
+
+ 
+
+
+
+<a name="notification/twilio.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## notification/twilio.proto
+
+
+
+<a name="proto.Twilio"></a>
+
+### Twilio
 Configuration for Twilio notifications.
 
 

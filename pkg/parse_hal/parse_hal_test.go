@@ -24,6 +24,7 @@ import (
 	"github.com/spinnaker/kleat/api/client/ci"
 	"github.com/spinnaker/kleat/api/client/cloudprovider"
 	"github.com/spinnaker/kleat/api/client/config"
+	"github.com/spinnaker/kleat/api/client/notification"
 	"github.com/spinnaker/kleat/api/client/pubsub"
 )
 
@@ -152,7 +153,7 @@ func TestEmptyHalConfigToEcho(t *testing.T) {
 
 func TestEmptyNotificationsToEchoConfig(t *testing.T) {
 	h := &config.Hal{
-		Notifications: &config.Hal_Notifications{},
+		Notifications: &notification.Notifications{},
 	}
 	gotE := HalToEcho(h)
 	wantE := &config.Echo{}
@@ -162,14 +163,14 @@ func TestEmptyNotificationsToEchoConfig(t *testing.T) {
 }
 
 func TestSlackNotificationToEchoConfig(t *testing.T) {
-	slack := &client.SlackNotification{
+	slack := &notification.Slack{
 		Enabled: true,
 		BotName: "my-bot",
 		Token:   "my-token",
 		BaseUrl: "https://slack.test/",
 	}
 	h := &config.Hal{
-		Notifications: &config.Hal_Notifications{
+		Notifications: &notification.Notifications{
 			Slack: slack,
 		},
 	}

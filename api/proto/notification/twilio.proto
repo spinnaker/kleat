@@ -1,0 +1,22 @@
+syntax = "proto3";
+package proto;
+
+option go_package = "github.com/spinnaker/kleat/api/client/notification";
+
+// Configuration for Twilio notifications.
+message Twilio {
+  // Whether Twilio notifications are enabled.
+  bool enabled = 1;
+
+  // Your Twilio account SID.
+  string account = 2;
+
+  // Your Twilio auth token.
+  string token = 3;
+
+  // The endpoint of the Twilio API. Optional, only set if overriding the default.
+  string baseUrl = 4;
+
+  // The phone number from which the SMS will be sent (e.g., +1234-567-8910).
+  string from = 5;
+}

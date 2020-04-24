@@ -16,7 +16,7 @@ import "cloudprovider/ecs.proto";
 import "cloudprovider/huaweicloud.proto";
 import "cloudprovider/oracle.proto";
 import "artifact/artifacts.proto";
-import "notifications.proto";
+import "notification/notifications.proto";
 import "pubsub/pubsub.proto";
 import "ci/gcb.proto";
 import "stats.proto";
@@ -30,7 +30,6 @@ message Hal {
   CiProviders ci = 6;
   Stats stats = 7;
 
-
   message Providers {
     KubernetesProvider kubernetes = 1;
     GoogleProvider google = 2;
@@ -43,12 +42,6 @@ message Hal {
     EcsProvider ecs = 9;
     HuaweiCloudProvider huaweicloud = 10;
     OracleProvider oracle = 11;
-  }
-
-  message Notifications {
-    SlackNotification slack = 1;
-    TwilioNotification twilio = 2;
-    GithubStatusNotification githubStatus = 3;
   }
 
   message CiProviders {

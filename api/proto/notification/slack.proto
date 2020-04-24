@@ -1,0 +1,23 @@
+syntax = "proto3";
+package proto;
+
+option go_package = "github.com/spinnaker/kleat/api/client/notification";
+
+// Configuration for Slack notifications.
+message Slack {
+  // Whether Slack notifications are enabled.
+  bool enabled = 1;
+
+  // The name of your Slack bot.
+  string botName = 2;
+
+  // Your Slack bot token.
+  string token = 3;
+
+  // Slack endpoint. Optional, can only be set if using a compatible API.
+  string baseUrl = 4;
+
+  // Force usage of incoming webhooks endpoint for Slack. Optional, only set if
+  // using a compatible API.
+  bool forceUseIncomingWebhook = 5;
+}

@@ -36,7 +36,7 @@ func ParseHalConfig(fn string) (*config.Hal, error) {
 
 func HalToFront50(h *config.Hal) *config.Front50 {
 	return &config.Front50{
-		Spinnaker: &config.Front50_Spinnaker{
+		Spinnaker: &config.Front50Spinnaker{
 			Gcs:    h.GetPersistentStorage().GetGcs(),
 			Azs:    h.GetPersistentStorage().GetAzs(),
 			Oracle: h.GetPersistentStorage().GetOracle(),
