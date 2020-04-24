@@ -5,7 +5,7 @@
 ### Overview
 
 Kleat's data model is expressed as [protocol buffers](https://developers.google.com/protocol-buffers)
-in the [/api/proto](api/proto) directory. For example, the [hal config proto](/api/proto/halconfig.proto)
+in the [/api/proto](api/proto) directory. For example, the [hal config proto](/api/proto/config/halconfig.proto)
 represents the source of truth for what fields are valid in a hal config.
 
 These protocol buffers are then transformed to generate:

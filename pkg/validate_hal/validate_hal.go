@@ -17,15 +17,16 @@ package validate_hal
 
 import (
 	"errors"
-	"github.com/spinnaker/kleat/api/client"
 	"strings"
+
+	"github.com/spinnaker/kleat/api/client/config"
 )
 
 type ValidationFailure struct {
 	msg string
 }
 
-type HalConfigValidator func(*client.HalConfig) []ValidationFailure
+type HalConfigValidator func(*config.Hal) []ValidationFailure
 
 func getValidators() []HalConfigValidator {
 	return []HalConfigValidator{
@@ -33,7 +34,7 @@ func getValidators() []HalConfigValidator {
 	}
 }
 
-func ValidateHalConfig(h *client.HalConfig) error {
+func ValidateHalConfig(h *config.Hal) error {
 	messages := getValidationMessages(h, getValidators())
 	if len(messages) > 0 {
 		msg := strings.Join(messages, "\n")
@@ -42,7 +43,7 @@ func ValidateHalConfig(h *client.HalConfig) error {
 	return nil
 }
 
-func getValidationMessages(h *client.HalConfig, fa []HalConfigValidator) []string {
+func getValidationMessages(h *config.Hal, fa []HalConfigValidator) []string {
 	var messages []string
 	for _, f := range fa {
 		rs := f(h)
@@ -53,7 +54,7 @@ func getValidationMessages(h *client.HalConfig, fa []HalConfigValidator) []strin
 	return messages
 }
 
-func validateKindsAndOmitKinds(h *client.HalConfig) []ValidationFailure {
+func validateKindsAndOmitKinds(h *config.Hal) []ValidationFailure {
 	var messages []ValidationFailure
 	for _, a := range h.GetProviders().GetKubernetes().GetAccounts() {
 		if !(len(a.GetKinds()) == 0) && !(len(a.GetOmitKinds()) == 0) {

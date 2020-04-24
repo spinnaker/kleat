@@ -17,11 +17,12 @@ package test
 
 import (
 	"bytes"
-	"github.com/spinnaker/kleat/api/client"
-	"github.com/spinnaker/kleat/pkg/parse_hal"
 	"io/ioutil"
-	"sigs.k8s.io/yaml"
 	"testing"
+
+	"github.com/spinnaker/kleat/api/client/config"
+	"github.com/spinnaker/kleat/pkg/parse_hal"
+	"sigs.k8s.io/yaml"
 )
 
 func TestHalToClouddriver(t *testing.T) {
@@ -57,10 +58,10 @@ func TestHalToClouddriver(t *testing.T) {
 
 }
 
-func parseClouddriverConfig(fn string) (*client.ClouddriverConfig, error) {
+func parseClouddriverConfig(fn string) (*config.Clouddriver, error) {
 	dat, err := ioutil.ReadFile(fn)
 
-	h := client.ClouddriverConfig{}
+	h := config.Clouddriver{}
 	err = yaml.UnmarshalStrict([]byte(dat), &h)
 	if err != nil {
 		return nil, err

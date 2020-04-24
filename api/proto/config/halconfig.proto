@@ -1,0 +1,57 @@
+syntax = "proto3";
+package proto;
+
+option go_package = "github.com/spinnaker/kleat/api/client/config";
+
+import "storage/persistent_storage.proto";
+import "cloudprovider/kubernetes.proto";
+import "cloudprovider/google.proto";
+import "cloudprovider/appengine.proto";
+import "cloudprovider/aws.proto";
+import "cloudprovider/azure.proto";
+import "cloudprovider/cloudfoundry.proto";
+import "cloudprovider/dcos.proto";
+import "cloudprovider/docker_registry.proto";
+import "cloudprovider/ecs.proto";
+import "cloudprovider/huaweicloud.proto";
+import "cloudprovider/oracle.proto";
+import "artifact/artifacts.proto";
+import "notifications.proto";
+import "pubsub/pubsub.proto";
+import "ci/gcb.proto";
+import "stats.proto";
+
+message Hal {
+  PersistentStorage persistentStorage = 1;
+  Providers providers = 2;
+  ArtifactProviders artifacts = 3;
+  Notifications notifications = 4;
+  PubsubProviders pubsub = 5;
+  CiProviders ci = 6;
+  Stats stats = 7;
+
+
+  message Providers {
+    KubernetesProvider kubernetes = 1;
+    GoogleProvider google = 2;
+    AppengineProvider appengine = 3;
+    AwsProvider aws = 4;
+    AzureProvider azure = 5;
+    CloudFoundryProvider cloudfoundry = 6;
+    DcosProvider dcos = 7;
+    DockerRegistryProvider dockerRegistry = 8;
+    EcsProvider ecs = 9;
+    HuaweiCloudProvider huaweicloud = 10;
+    OracleProvider oracle = 11;
+  }
+
+  message Notifications {
+    SlackNotification slack = 1;
+    TwilioNotification twilio = 2;
+    GithubStatusNotification githubStatus = 3;
+  }
+
+  message CiProviders {
+    GoogleCloudBuildProvider gcb = 1;
+  }
+}

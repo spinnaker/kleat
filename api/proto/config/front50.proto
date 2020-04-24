@@ -1,0 +1,18 @@
+syntax = "proto3";
+package proto;
+
+option go_package = "github.com/spinnaker/kleat/api/client/config";
+
+import "storage/azs.proto";
+import "storage/gcs.proto";
+import "storage/oracle.proto";
+
+message Front50 {
+  Spinnaker spinnaker = 1;
+
+  message Spinnaker {
+    GcsPersistentStore gcs = 1;
+    AzsPersistentStore azs = 2;
+    OraclePersistentStore oracle = 3;
+  }
+}

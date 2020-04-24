@@ -16,13 +16,14 @@
 package write
 
 import (
-	"github.com/spinnaker/kleat/api/client"
-	"github.com/spinnaker/kleat/internal/validate_paths"
-	"github.com/spinnaker/kleat/pkg/parse_hal"
-	"github.com/spinnaker/kleat/pkg/validate_hal"
 	"io"
 	"os"
 	"path/filepath"
+
+	"github.com/spinnaker/kleat/api/client/config"
+	"github.com/spinnaker/kleat/internal/validate_paths"
+	"github.com/spinnaker/kleat/pkg/parse_hal"
+	"github.com/spinnaker/kleat/pkg/validate_hal"
 	"sigs.k8s.io/yaml"
 )
 
@@ -54,7 +55,7 @@ func WriteConfigs(hal string, d string) error {
 	return nil
 }
 
-func writeClouddriver(h *client.HalConfig, d string) error {
+func writeClouddriver(h *config.Hal, d string) error {
 	c, err := parse_hal.HalToClouddriver(h)
 	if err != nil {
 		return err
@@ -71,7 +72,7 @@ func writeClouddriver(h *client.HalConfig, d string) error {
 	return nil
 }
 
-func writeEcho(h *client.HalConfig, d string) error {
+func writeEcho(h *config.Hal, d string) error {
 	c, err := parse_hal.HalToEcho(h)
 	if err != nil {
 		return err

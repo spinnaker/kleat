@@ -1,0 +1,159 @@
+syntax = "proto3";
+package proto;
+
+option go_package = "github.com/spinnaker/kleat/api/client/cloudprovider";
+
+import "permissions.proto";
+
+// Configuration for the Huawei Cloud provider.
+message HuaweiCloudProvider {
+  // Whether the provider is enabled.
+  bool enabled = 1;
+
+  // The list of configured accounts.
+  repeated HuaweiCloudAccount accounts = 2;
+
+  // The name of the primary account.
+  string primaryAccount = 3;
+
+  // Configuration for Spinnaker's image bakery.
+  HuaweiCloudBakeryDefaults bakeryDefaults = 4;
+}
+
+// Configuration for a Huawei Cloud account.
+message HuaweiCloudAccount {
+  // The name of the account.
+  string name = 1;
+
+  // The type of account.
+  string accountType = 2;
+
+  // (Deprecated) List of required Fiat permission groups. Configure
+  // `permissions` instead.
+  repeated string requiredGroupMemberships = 3;
+
+  // Fiat permissions configuration.
+  Permissions permissions = 4;
+
+  // (Required) The auth URL of the cloud.
+  string authUrl = 5;
+
+  // (Required) The domain name of the cloud.
+  string domainName = 6;
+
+  // The environment name for the account. Many accounts can share the
+  // same environment (e.g., dev, test, prod).
+  string environment = 7;
+
+  // If `true`, disables certificate validation on SSL connections. Needed if
+  // certificates are self-signed. Defaults to `false`.
+  bool insecure = 8;
+
+  // (Required) The password used to access the cloud.
+  string password = 9;
+
+  // (Required) The name of the project within the cloud.
+  string projectName = 10;
+
+  // (Required) The region(s) of the cloud.
+  repeated string regions = 11;
+
+  // (Required) The username used to access the cloud.
+  string username = 12;
+}
+
+// Configuration for Spinnaker's image bakery.
+message HuaweiCloudBakeryDefaults {
+  // List of configured base images.
+  repeated HuaweiCloudBaseImageSettings baseImages = 1;
+
+  // This is the name of the packer template that will be used to bake images
+  // from this base image. The template file must be found in this list:
+  // https://github.com/spinnaker/rosco/tree/master/rosco-web/config/packer, or
+  // supplied as described here: https://spinnaker.io/setup/bakery/.
+  string templateFile = 2;
+
+  // (Required) The default auth URL in which images will be baked.
+  string authUrl = 3;
+
+  // (Required) The default username with which images will be baked.
+  string username = 4;
+
+  // (Required) The default password with which images will be baked.
+  string password = 5;
+
+  // The name of the default project in which images will be baked.
+  string projectName = 6;
+
+  // (Required) The default domain name in which images will be baked.
+  string domainName = 7;
+
+  // The security setting for connecting to the Huawei Cloud account. Defaults
+  // to `false`.
+  bool insecure = 8;
+
+  // (Required) The VPC in which images will be baked.
+  string vpcId = 9;
+
+  //  (Required) The subnet in which images will be baked.
+  string subnetId = 10;
+
+  // (Required) The default security group in which images will be baked.
+  string securityGroup = 11;
+
+  // (Required) The bandwidth size of EIP in which images will be baked.
+  int32 eipBandwidthSize = 12;
+}
+
+// Configuration for a base image for the Huawei Cloud provider's bakery.
+message HuaweiCloudBaseImageSettings {
+  // Base image configuration.
+  HuaweiCloudBaseImage baseImage = 1;
+
+  // Image source configuration.
+  repeated HuaweiCloudVirtualizationSettings virtualizationSettings = 2;
+}
+
+// Huawei Cloud base image settings.
+message HuaweiCloudBaseImage {
+  // The name of the base image.
+  string id = 1;
+
+  // This is used to help Spinnaker's bakery download the build artifacts you
+  // supply it with. For example, specifying `deb` indicates that your
+  // artifacts will need to be fetched from a debian repository.
+  string packageType = 2;
+
+  // This is the name of the packer template that will be used to bake images
+  // from this base image. The template file must be found in this list:
+  // https://github.com/spinnaker/rosco/tree/master/rosco-web/config/packer, or
+  // supplied as described here: https://spinnaker.io/setup/bakery/.
+  string templateFile = 3;
+
+  // A short description to help human operators identify the
+  // image.
+  string shortDescription = 4;
+
+  // A long description to help human operators identify the
+  // image.
+  string detailedDescription = 5;
+}
+
+// Huawei Cloud virtualization settings.
+message HuaweiCloudVirtualizationSettings {
+  // (Required) The region for the baking configuration.
+  string region = 1;
+
+  // (Required) The instance type for the baking configuration.
+  string instanceType = 2;
+
+  // (Required) The source image ID for the baking configuration.
+  string sourceImageId = 3;
+
+  // (Required) The SSH username for the baking configuration.
+  string sshUserName = 4;
+
+  // (Required) The EIP type for the baking configuration. See the API doc to
+  // get its value.
+  string eipType = 5;
+}

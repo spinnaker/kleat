@@ -19,7 +19,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/spinnaker/kleat/api/client"
+	"github.com/spinnaker/kleat/api/client/config"
 
 	"github.com/spinnaker/kleat/pkg/parse_hal"
 )
@@ -48,7 +48,7 @@ func TestHalToServiceConfigs(t *testing.T) {
 		t.Errorf(err.Error())
 	}
 
-	wantS := &client.ServiceConfigs{
+	wantS := &config.Services{
 		Clouddriver: c,
 		Echo:        e,
 		Front50:     f,

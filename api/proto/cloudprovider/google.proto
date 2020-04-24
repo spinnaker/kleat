@@ -1,0 +1,165 @@
+syntax = "proto3";
+package proto;
+
+option go_package = "github.com/spinnaker/kleat/api/client/cloudprovider";
+
+import "permissions.proto";
+
+// Configuration for the Google Compute Engine (GCE) provider.
+message GoogleProvider {
+    // Whether the provider is enabled.
+    bool enabled = 1;
+
+    // The list of configured accounts.
+    repeated GoogleAccount accounts = 2;
+
+    // The name of the primary account.
+    string primaryAccount = 3;
+
+    // Configuration for Spinnaker's image bakery.
+    GoogleBakeryDefaults bakeryDefaults = 4;
+}
+
+// Configuration for a Spinnaker Google account. An account maps to a
+// credential that can authenticate against a GCP project.
+message GoogleAccount {
+    // The name of the account.
+    string name = 1;
+
+    // (Deprecated): List of required Fiat permission groups. Configure
+    // `permissions` instead.
+    repeated string requiredGroupMemberships = 3;
+
+    // Fiat permissions configuration.
+    Permissions permissions = 4;
+
+    // The GCP project this Spinnaker account will manage.
+    string project = 5;
+
+    // The path to a JSON service account that Spinnaker will use as
+    // credentials. This is only needed if Spinnaker is not deployed on a
+    // Google Compute Engine VM, or needs permissions not afforded to the VM
+    // it is running on. See
+    // https://cloud.google.com/compute/docs/access/service-accounts for
+    // more information.
+    string jsonPath = 6;
+
+    // Enable this flag if your GCP project has access to alpha features and
+    // you want Spinnaker to take advantage of them.
+    bool alphaListed = 7;
+
+    // A list of GCP projects from which Spinnaker will be able to cache and
+    // deploy images. When this is omitted, it defaults to the current
+    // project. Each project must have granted the IAM role
+    // compute.imageUser to the service account associated with the JSON key
+    // used by this account, as well as to the Google APIs service account
+    // automatically created for the project being managed (should look
+    // similar to 12345678912@cloudservices.gserviceaccount.com). See
+    // https://cloud.google.com/compute/docs/images/sharing-images-across-projects
+    // for more information about sharing images across GCP projects.
+    repeated string imageProjects = 8;
+
+    // Configuration for Consul.
+    Consul consul = 9;
+
+    // A list of regions for caching and mutating calls. This overwrites
+    // any default regions set on the provider.
+    repeated string regions = 10;
+
+    //  The path to user data template file. Spinnaker has the ability to
+    //  inject userdata into generated instance templates. The mechanism is
+    //  via a template file that is token replaced to provide some specifics
+    //  about the deployment. See
+    //  https://github.com/spinnaker/clouddriver/blob/master/clouddriver-aws/UserData.md
+    //  for more information.
+    string userDataFile = 11;
+}
+
+// Configuration for Spinnaker's image bakery.
+message GoogleBakeryDefaults {
+    // The name of the Packer template that will be used to bake images from
+    // this base image. The template file must be found in this list:
+    // https://github.com/spinnaker/rosco/tree/master/rosco-web/config/packer,
+    // or supplied as described here: https://spinnaker.io/setup/bakery/.
+    string templateFile = 1;
+
+    // List of configured base images.
+    repeated GoogleBaseImageSettings baseImages = 2;
+
+    // The default zone in which to bake an image.
+    string zone = 3;
+
+    // The Google Compute network ID or URL to use for the launched
+    // instance. Defaults to default.
+    string network = 4;
+
+    // If true, use the instance's internal IP instead of its external IP
+    // during baking.
+    bool useInternalIp = 5;
+
+    // The default project ID for the network and subnet to use for the VM
+    // baking your image.
+    string networkProjectId = 6;
+}
+
+// Configuration for a base image for the Google provider's bakery.
+message GoogleBaseImageSettings {
+    // Base image configuration.
+    GoogleBaseImage baseImage = 1;
+
+    // Image source configuration.
+    VirtualizationSettings virtualizationSettings = 2;
+}
+
+// Base image configuration.
+message GoogleBaseImage {
+    // This is the identifier used by GCP to find this base
+    // image.
+    string id = 1;
+
+    // A short description to help human operators identify the
+    // image.
+    string shortDescription = 2;
+
+    // A long description to help human operators identify the
+    // image.
+    string detailedDescription = 3;
+
+    //  This is used to help Spinnaker's bakery download the build
+    //  artifacts you supply it with. For example, specifying deb
+    //  indicates that your artifacts will need to be fetched from a
+    //  debian repository.
+    string packageType = 4;
+
+    // If set to true, Deck will annotate the popup tooltip to
+    // indicate that the selected option represents an image family.
+    bool imageFamily = 5;
+}
+
+// Image source configuration.
+message VirtualizationSettings {
+    //  The source image. If both sourceImage and sourceImageFamily
+    //  are set, sourceImage will take precedence.
+    string sourceImage = 1;
+
+    // The source image family to create the image from. The newest,
+    // non-deprecated image is used. If both sourceImage and
+    // sourceImageFamily are set, sourceImage will take precedence.
+    string sourceImageFamily = 2;
+}
+
+// Configuration for Consul.
+message Consul {
+    // Whether Consul is enabled.
+    bool enabled = 1;
+
+    // Reachable Consul node endpoint connected to the Consul cluster.
+    // Defaults to localhost.
+    string agentEndpoint = 2;
+
+    // Port consul is running on for every agent. Defaults to 8500.
+    int32 agentPort = 3;
+
+    // List of data centers to cache and keep updated. Defaults to all.
+    repeated string datacenters = 4;
+}

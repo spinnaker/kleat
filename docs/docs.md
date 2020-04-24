@@ -3,7 +3,109 @@
 
 ## Table of Contents
 
-- [appengine_provider.proto](#appengine_provider.proto)
+- [artifact/artifact_template.proto](#artifact/artifact_template.proto)
+    - [ArtifactTemplate](#proto.ArtifactTemplate)
+  
+  
+  
+  
+
+- [artifact/artifacts.proto](#artifact/artifacts.proto)
+    - [ArtifactProviders](#proto.ArtifactProviders)
+  
+  
+  
+  
+
+- [artifact/bitbucket.proto](#artifact/bitbucket.proto)
+    - [BitbucketArtifactAccount](#proto.BitbucketArtifactAccount)
+    - [BitbucketArtifactProvider](#proto.BitbucketArtifactProvider)
+  
+  
+  
+  
+
+- [artifact/gcs.proto](#artifact/gcs.proto)
+    - [GcsArtifactAccount](#proto.GcsArtifactAccount)
+    - [GcsArtifactProvider](#proto.GcsArtifactProvider)
+  
+  
+  
+  
+
+- [artifact/github.proto](#artifact/github.proto)
+    - [GitHubArtifactAccount](#proto.GitHubArtifactAccount)
+    - [GitHubArtifactProvider](#proto.GitHubArtifactProvider)
+  
+  
+  
+  
+
+- [artifact/gitlab.proto](#artifact/gitlab.proto)
+    - [GitLabArtifactAccount](#proto.GitLabArtifactAccount)
+    - [GitLabArtifactProvider](#proto.GitLabArtifactProvider)
+  
+  
+  
+  
+
+- [artifact/gitrepo.proto](#artifact/gitrepo.proto)
+    - [GitRepoArtifactAccount](#proto.GitRepoArtifactAccount)
+    - [GitRepoArtifactProvider](#proto.GitRepoArtifactProvider)
+  
+  
+  
+  
+
+- [artifact/helm.proto](#artifact/helm.proto)
+    - [HelmArtifactAccount](#proto.HelmArtifactAccount)
+    - [HelmArtifactProvider](#proto.HelmArtifactProvider)
+  
+  
+  
+  
+
+- [artifact/http.proto](#artifact/http.proto)
+    - [HttpArtifactAccount](#proto.HttpArtifactAccount)
+    - [HttpArtifactProvider](#proto.HttpArtifactProvider)
+  
+  
+  
+  
+
+- [artifact/maven.proto](#artifact/maven.proto)
+    - [MavenArtifactAccount](#proto.MavenArtifactAccount)
+    - [MavenArtifactProvider](#proto.MavenArtifactProvider)
+  
+  
+  
+  
+
+- [artifact/oracle.proto](#artifact/oracle.proto)
+    - [OracleArtifactAccount](#proto.OracleArtifactAccount)
+    - [OracleArtifactProvider](#proto.OracleArtifactProvider)
+  
+  
+  
+  
+
+- [artifact/s3.proto](#artifact/s3.proto)
+    - [S3ArtifactAccount](#proto.S3ArtifactAccount)
+    - [S3ArtifactProvider](#proto.S3ArtifactProvider)
+  
+  
+  
+  
+
+- [ci/gcb.proto](#ci/gcb.proto)
+    - [GoogleCloudBuildAccount](#proto.GoogleCloudBuildAccount)
+    - [GoogleCloudBuildProvider](#proto.GoogleCloudBuildProvider)
+  
+  
+  
+  
+
+- [cloudprovider/appengine.proto](#cloudprovider/appengine.proto)
     - [AppengineAccount](#proto.AppengineAccount)
     - [AppengineProvider](#proto.AppengineProvider)
   
@@ -11,21 +113,7 @@
   
   
 
-- [artifact_template.proto](#artifact_template.proto)
-    - [ArtifactTemplate](#proto.ArtifactTemplate)
-  
-  
-  
-  
-
-- [artifacts.proto](#artifacts.proto)
-    - [ArtifactProviders](#proto.ArtifactProviders)
-  
-  
-  
-  
-
-- [aws_provider.proto](#aws_provider.proto)
+- [cloudprovider/aws.proto](#cloudprovider/aws.proto)
     - [AwsAccount](#proto.AwsAccount)
     - [AwsBakeryDefaults](#proto.AwsBakeryDefaults)
     - [AwsBaseImage](#proto.AwsBaseImage)
@@ -41,7 +129,7 @@
   
   
 
-- [azure_provider.proto](#azure_provider.proto)
+- [cloudprovider/azure.proto](#cloudprovider/azure.proto)
     - [AzureAccount](#proto.AzureAccount)
     - [AzureBakeryDefaults](#proto.AzureBakeryDefaults)
     - [AzureBaseImage](#proto.AzureBaseImage)
@@ -52,22 +140,7 @@
   
   
 
-- [bitbucket_artifact_provider.proto](#bitbucket_artifact_provider.proto)
-    - [BitbucketArtifactAccount](#proto.BitbucketArtifactAccount)
-    - [BitbucketArtifactProvider](#proto.BitbucketArtifactProvider)
-  
-  
-  
-  
-
-- [clouddriver.proto](#clouddriver.proto)
-    - [ClouddriverConfig](#proto.ClouddriverConfig)
-  
-  
-  
-  
-
-- [cloudfoundry_provider.proto](#cloudfoundry_provider.proto)
+- [cloudprovider/cloudfoundry.proto](#cloudprovider/cloudfoundry.proto)
     - [CloudFoundryAccount](#proto.CloudFoundryAccount)
     - [CloudFoundryProvider](#proto.CloudFoundryProvider)
   
@@ -75,7 +148,7 @@
   
   
 
-- [dcos_provider.proto](#dcos_provider.proto)
+- [cloudprovider/dcos.proto](#cloudprovider/dcos.proto)
     - [DcosAccount](#proto.DcosAccount)
     - [DcosAccountCluster](#proto.DcosAccountCluster)
     - [DcosAccountDockerRegistry](#proto.DcosAccountDockerRegistry)
@@ -87,7 +160,7 @@
   
   
 
-- [docker_registry_provider.proto](#docker_registry_provider.proto)
+- [cloudprovider/docker_registry.proto](#cloudprovider/docker_registry.proto)
     - [DockerRegistryAccount](#proto.DockerRegistryAccount)
     - [DockerRegistryProvider](#proto.DockerRegistryProvider)
   
@@ -95,14 +168,7 @@
   
   
 
-- [echo.proto](#echo.proto)
-    - [EchoConfig](#proto.EchoConfig)
-  
-  
-  
-  
-
-- [ecs_provider.proto](#ecs_provider.proto)
+- [cloudprovider/ecs.proto](#cloudprovider/ecs.proto)
     - [EcsAccount](#proto.EcsAccount)
     - [EcsProvider](#proto.EcsProvider)
   
@@ -110,55 +176,7 @@
   
   
 
-- [front50.proto](#front50.proto)
-    - [Front50Config](#proto.Front50Config)
-    - [Front50Config.Spinnaker](#proto.Front50Config.Spinnaker)
-  
-  
-  
-  
-
-- [gcb_ci_provider.proto](#gcb_ci_provider.proto)
-    - [GoogleCloudBuildAccount](#proto.GoogleCloudBuildAccount)
-    - [GoogleCloudBuildProvider](#proto.GoogleCloudBuildProvider)
-  
-  
-  
-  
-
-- [gcs_artifact_provider.proto](#gcs_artifact_provider.proto)
-    - [GcsArtifactAccount](#proto.GcsArtifactAccount)
-    - [GcsArtifactProvider](#proto.GcsArtifactProvider)
-  
-  
-  
-  
-
-- [github_artifact_provider.proto](#github_artifact_provider.proto)
-    - [GitHubArtifactAccount](#proto.GitHubArtifactAccount)
-    - [GitHubArtifactProvider](#proto.GitHubArtifactProvider)
-  
-  
-  
-  
-
-- [gitlab_artifact_provider.proto](#gitlab_artifact_provider.proto)
-    - [GitLabArtifactAccount](#proto.GitLabArtifactAccount)
-    - [GitLabArtifactProvider](#proto.GitLabArtifactProvider)
-  
-  
-  
-  
-
-- [gitrepo_artifact_provider.proto](#gitrepo_artifact_provider.proto)
-    - [GitRepoArtifactAccount](#proto.GitRepoArtifactAccount)
-    - [GitRepoArtifactProvider](#proto.GitRepoArtifactProvider)
-  
-  
-  
-  
-
-- [google_provider.proto](#google_provider.proto)
+- [cloudprovider/google.proto](#cloudprovider/google.proto)
     - [Consul](#proto.Consul)
     - [GoogleAccount](#proto.GoogleAccount)
     - [GoogleBakeryDefaults](#proto.GoogleBakeryDefaults)
@@ -171,34 +189,7 @@
   
   
 
-- [halconfig.proto](#halconfig.proto)
-    - [HalConfig](#proto.HalConfig)
-    - [HalConfig.CiProviders](#proto.HalConfig.CiProviders)
-    - [HalConfig.Notifications](#proto.HalConfig.Notifications)
-    - [HalConfig.PersistentStorage](#proto.HalConfig.PersistentStorage)
-    - [HalConfig.Providers](#proto.HalConfig.Providers)
-  
-  
-  
-  
-
-- [helm_artifact_provider.proto](#helm_artifact_provider.proto)
-    - [HelmArtifactAccount](#proto.HelmArtifactAccount)
-    - [HelmArtifactProvider](#proto.HelmArtifactProvider)
-  
-  
-  
-  
-
-- [http_artifact_provider.proto](#http_artifact_provider.proto)
-    - [HttpArtifactAccount](#proto.HttpArtifactAccount)
-    - [HttpArtifactProvider](#proto.HttpArtifactProvider)
-  
-  
-  
-  
-
-- [huaweicloud_provider.proto](#huaweicloud_provider.proto)
+- [cloudprovider/huaweicloud.proto](#cloudprovider/huaweicloud.proto)
     - [HuaweiCloudAccount](#proto.HuaweiCloudAccount)
     - [HuaweiCloudBakeryDefaults](#proto.HuaweiCloudBakeryDefaults)
     - [HuaweiCloudBaseImage](#proto.HuaweiCloudBaseImage)
@@ -210,7 +201,7 @@
   
   
 
-- [kubernetes_provider.proto](#kubernetes_provider.proto)
+- [cloudprovider/kubernetes.proto](#cloudprovider/kubernetes.proto)
     - [KubernetesAccount](#proto.KubernetesAccount)
     - [KubernetesAccountDockerRegistry](#proto.KubernetesAccountDockerRegistry)
     - [KubernetesCachingPolicy](#proto.KubernetesCachingPolicy)
@@ -221,9 +212,52 @@
   
   
 
-- [maven_artifact_provider.proto](#maven_artifact_provider.proto)
-    - [MavenArtifactAccount](#proto.MavenArtifactAccount)
-    - [MavenArtifactProvider](#proto.MavenArtifactProvider)
+- [cloudprovider/oracle.proto](#cloudprovider/oracle.proto)
+    - [OracleAccount](#proto.OracleAccount)
+    - [OracleBakeryDefaults](#proto.OracleBakeryDefaults)
+    - [OracleBaseImage](#proto.OracleBaseImage)
+    - [OracleBaseImageSettings](#proto.OracleBaseImageSettings)
+    - [OracleProvider](#proto.OracleProvider)
+    - [OracleVirtualizationSettings](#proto.OracleVirtualizationSettings)
+  
+  
+  
+  
+
+- [config/clouddriver.proto](#config/clouddriver.proto)
+    - [Clouddriver](#proto.Clouddriver)
+  
+  
+  
+  
+
+- [config/echo.proto](#config/echo.proto)
+    - [Echo](#proto.Echo)
+  
+  
+  
+  
+
+- [config/front50.proto](#config/front50.proto)
+    - [Front50](#proto.Front50)
+    - [Front50.Spinnaker](#proto.Front50.Spinnaker)
+  
+  
+  
+  
+
+- [config/halconfig.proto](#config/halconfig.proto)
+    - [Hal](#proto.Hal)
+    - [Hal.CiProviders](#proto.Hal.CiProviders)
+    - [Hal.Notifications](#proto.Hal.Notifications)
+    - [Hal.Providers](#proto.Hal.Providers)
+  
+  
+  
+  
+
+- [config/services.proto](#config/services.proto)
+    - [Services](#proto.Services)
   
   
   
@@ -238,26 +272,6 @@
   
   
 
-- [oracle_artifact_provider.proto](#oracle_artifact_provider.proto)
-    - [OracleArtifactAccount](#proto.OracleArtifactAccount)
-    - [OracleArtifactProvider](#proto.OracleArtifactProvider)
-  
-  
-  
-  
-
-- [oracle_provider.proto](#oracle_provider.proto)
-    - [OracleAccount](#proto.OracleAccount)
-    - [OracleBakeryDefaults](#proto.OracleBakeryDefaults)
-    - [OracleBaseImage](#proto.OracleBaseImage)
-    - [OracleBaseImageSettings](#proto.OracleBaseImageSettings)
-    - [OracleProvider](#proto.OracleProvider)
-    - [OracleVirtualizationSettings](#proto.OracleVirtualizationSettings)
-  
-  
-  
-  
-
 - [permissions.proto](#permissions.proto)
     - [Permissions](#proto.Permissions)
   
@@ -265,35 +279,11 @@
   
   
 
-- [persistent_storage.proto](#persistent_storage.proto)
-    - [AzsPersistentStore](#proto.AzsPersistentStore)
-    - [GcsPersistentStore](#proto.GcsPersistentStore)
-    - [OraclePersistentStore](#proto.OraclePersistentStore)
-  
-  
-  
-  
-
-- [pubsub.proto](#pubsub.proto)
+- [pubsub/pubsub.proto](#pubsub/pubsub.proto)
     - [GooglePubsub](#proto.GooglePubsub)
     - [GooglePubsubPublisher](#proto.GooglePubsubPublisher)
     - [GooglePubsubSubscriber](#proto.GooglePubsubSubscriber)
     - [PubsubProviders](#proto.PubsubProviders)
-  
-  
-  
-  
-
-- [s3_artifact_provider.proto](#s3_artifact_provider.proto)
-    - [S3ArtifactAccount](#proto.S3ArtifactAccount)
-    - [S3ArtifactProvider](#proto.S3ArtifactProvider)
-  
-  
-  
-  
-
-- [services.proto](#services.proto)
-    - [ServiceConfigs](#proto.ServiceConfigs)
   
   
   
@@ -306,14 +296,687 @@
   
   
 
+- [storage/azs.proto](#storage/azs.proto)
+    - [AzsPersistentStore](#proto.AzsPersistentStore)
+  
+  
+  
+  
+
+- [storage/gcs.proto](#storage/gcs.proto)
+    - [GcsPersistentStore](#proto.GcsPersistentStore)
+  
+  
+  
+  
+
+- [storage/oracle.proto](#storage/oracle.proto)
+    - [OraclePersistentStore](#proto.OraclePersistentStore)
+  
+  
+  
+  
+
+- [storage/persistent_storage.proto](#storage/persistent_storage.proto)
+    - [PersistentStorage](#proto.PersistentStorage)
+  
+  
+  
+  
+
 - [Scalar Value Types](#scalar-value-types)
 
 
 
-<a name="appengine_provider.proto"></a>
+<a name="artifact/artifact_template.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## appengine_provider.proto
+## artifact/artifact_template.proto
+
+
+
+<a name="proto.ArtifactTemplate"></a>
+
+### ArtifactTemplate
+Configuration for a Jinja template for Spinnaker to use for artifact
+extraction. For more details, please read the documentation:
+https://www.spinnaker.io/reference/artifacts/from-build-triggers/#artifacts-from-build-triggers
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the artifact template. |
+| templatePath | [string](#string) |  | The path to the artifact template. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="artifact/artifacts.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## artifact/artifacts.proto
+
+
+
+<a name="proto.ArtifactProviders"></a>
+
+### ArtifactProviders
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| bitbucket | [BitbucketArtifactProvider](#proto.BitbucketArtifactProvider) |  |  |
+| gcs | [GcsArtifactProvider](#proto.GcsArtifactProvider) |  |  |
+| github | [GitHubArtifactProvider](#proto.GitHubArtifactProvider) |  |  |
+| gitlab | [GitLabArtifactProvider](#proto.GitLabArtifactProvider) |  |  |
+| gitrepo | [GitRepoArtifactProvider](#proto.GitRepoArtifactProvider) |  |  |
+| helm | [HelmArtifactProvider](#proto.HelmArtifactProvider) |  |  |
+| http | [HttpArtifactProvider](#proto.HttpArtifactProvider) |  |  |
+| maven | [MavenArtifactProvider](#proto.MavenArtifactProvider) |  |  |
+| oracle | [OracleArtifactProvider](#proto.OracleArtifactProvider) |  |  |
+| s3 | [S3ArtifactProvider](#proto.S3ArtifactProvider) |  |  |
+| templates | [ArtifactTemplate](#proto.ArtifactTemplate) | repeated |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="artifact/bitbucket.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## artifact/bitbucket.proto
+
+
+
+<a name="proto.BitbucketArtifactAccount"></a>
+
+### BitbucketArtifactAccount
+Configuration for a Bitbucket artifact account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| username | [string](#string) |  | The username of the account. Either `username` and `password` should be set, or `usernamePasswordFile` should be set. |
+| password | [string](#string) |  | The password of the account. Either `username` and `password` should be set, or `usernamePasswordFile` should be set. |
+| usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password of the account in the format `${username}:${password}`. Either `username` and `password` should be set, or `usernamePasswordFile` should be set. |
+
+
+
+
+
+
+<a name="proto.BitbucketArtifactProvider"></a>
+
+### BitbucketArtifactProvider
+Configuration for the Bitbucket artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the Bitbucket artifact provider is enabled. |
+| accounts | [BitbucketArtifactAccount](#proto.BitbucketArtifactAccount) | repeated | The list of configured Bitbucket accounts. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="artifact/gcs.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## artifact/gcs.proto
+
+
+
+<a name="proto.GcsArtifactAccount"></a>
+
+### GcsArtifactAccount
+Configuration for a GCS artifact account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| jsonPath | [string](#string) |  | The path to a JSON key for a GCP service account with which to authenticate. The service account must have the `roles/storage.admin` role enabled. |
+
+
+
+
+
+
+<a name="proto.GcsArtifactProvider"></a>
+
+### GcsArtifactProvider
+Configuration for the Google Cloud Storage (GCS) artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the GCS artifact provider is enabled. |
+| accounts | [GcsArtifactAccount](#proto.GcsArtifactAccount) | repeated | The list of configured GCS accounts. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="artifact/github.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## artifact/github.proto
+
+
+
+<a name="proto.GitHubArtifactAccount"></a>
+
+### GitHubArtifactAccount
+Configuration for a GitHub artifact account. Either `username` and
+`password`, `usernamePasswordFile`, `token`, or `tokenFile` should be
+specified as means of authentication.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| username | [string](#string) |  | The GitHub account username. |
+| password | [string](#string) |  | The GitHub account password. |
+| usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password of the account in the format `${username}:${password}`. |
+| token | [string](#string) |  | The GitHub access token. |
+| tokenFile | [string](#string) |  | The path to a file containing the GitHub access token. |
+
+
+
+
+
+
+<a name="proto.GitHubArtifactProvider"></a>
+
+### GitHubArtifactProvider
+Configuration for the GitHub artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the GitHub artifact provider is enabled. |
+| accounts | [GitHubArtifactAccount](#proto.GitHubArtifactAccount) | repeated | The list of configured GitHub accounts. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="artifact/gitlab.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## artifact/gitlab.proto
+
+
+
+<a name="proto.GitLabArtifactAccount"></a>
+
+### GitLabArtifactAccount
+Configuration for a GitLab artifact account. Either `token` or
+`tokenFile` should be specified as means of authentication.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| token | [string](#string) |  | The GitLab access token. |
+| tokenFile | [string](#string) |  | The path to a file containing the GitLab access token. |
+
+
+
+
+
+
+<a name="proto.GitLabArtifactProvider"></a>
+
+### GitLabArtifactProvider
+Configuration for the GitLab artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the GitLab artifact provider is enabled. |
+| accounts | [GitLabArtifactAccount](#proto.GitLabArtifactAccount) | repeated | The list of configured GitLab accounts. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="artifact/gitrepo.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## artifact/gitrepo.proto
+
+
+
+<a name="proto.GitRepoArtifactAccount"></a>
+
+### GitRepoArtifactAccount
+Configuration for a Git repo artifact account. An account maps to a
+credential that is able to authenticate against a Git repository hosted by a
+Git hosting service. Either `username` and `password`,
+`usernamePasswordFile`, `token`, `tokenFile`, or `sshPrivateKeyFilePath` and
+`sshPrivateKeyPassphrase` must be set.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| username | [string](#string) |  | The username of the account. |
+| password | [string](#string) |  | The password of the account. |
+| usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password of the account in the format `${username}:${password}`. |
+| token | [string](#string) |  | The Git repo access token. |
+| tokenFile | [string](#string) |  | The path to a file containing the Git repo access token. |
+| sshPrivateKeyFilePath | [string](#string) |  | The path to an SSH private key to be used when connecting with the Git repo over SSH. |
+| sshPrivateKeyPassphrase | [string](#string) |  | The passphrase to an SSH private key to be used when connecting with the Git repo over SSH. |
+| sshKnownHostsFilePath | [string](#string) |  | The path to a `known_hosts` file to be used when connecting with a Git repository over SSH. |
+| sshTrustUnknownHosts | [bool](#bool) |  | If `true`, Spinnaker can connect with a Git repository over SSH without verifying the server&#39;s IP address against a `known_hosts` file. |
+
+
+
+
+
+
+<a name="proto.GitRepoArtifactProvider"></a>
+
+### GitRepoArtifactProvider
+Configuration for the Git repo artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the Git repo artifact provider is enabled. |
+| accounts | [GitRepoArtifactAccount](#proto.GitRepoArtifactAccount) | repeated | The list of configured Git Repo accounts. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="artifact/helm.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## artifact/helm.proto
+
+
+
+<a name="proto.HelmArtifactAccount"></a>
+
+### HelmArtifactAccount
+Configuration for a Helm artifact account. Either `username` and `password`
+or `usernamePasswordFile` should be specified as means of authentication.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| repository | [string](#string) |  | The Helm chart repository URL. |
+| username | [string](#string) |  | A username for Helm chart repository basic auth. |
+| password | [string](#string) |  | A password for Helm chart repository basic auth. |
+| usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password for Helm chart repository basic auth. Must be in the format `${username}:${password}`. |
+
+
+
+
+
+
+<a name="proto.HelmArtifactProvider"></a>
+
+### HelmArtifactProvider
+Configuration for the Helm artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the Helm artifact provider is enabled. |
+| accounts | [HelmArtifactAccount](#proto.HelmArtifactAccount) | repeated | The list of configured Helm accounts. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="artifact/http.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## artifact/http.proto
+
+
+
+<a name="proto.HttpArtifactAccount"></a>
+
+### HttpArtifactAccount
+Configuration for an HTTP artifact account. Either `username` and `password`
+or `usernamePasswordFile` should be specified as means of authentication.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| username | [string](#string) |  | A username for HTTP basic auth. |
+| password | [string](#string) |  | A password for HTTP basic auth. |
+| usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password for HTTP basic auth. Must be in the format `${username}:${password}`. |
+
+
+
+
+
+
+<a name="proto.HttpArtifactProvider"></a>
+
+### HttpArtifactProvider
+Configuration for the HTTP artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the HTTP artifact provider is enabled. |
+| accounts | [HttpArtifactAccount](#proto.HttpArtifactAccount) | repeated | The list of configured HTTP accounts. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="artifact/maven.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## artifact/maven.proto
+
+
+
+<a name="proto.MavenArtifactAccount"></a>
+
+### MavenArtifactAccount
+Configuration for a Maven artifact account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| repositoryUrl | [string](#string) |  | (Required) Full URI for the Maven repository (e.g., `http://some.host.com/repository/path`). |
+
+
+
+
+
+
+<a name="proto.MavenArtifactProvider"></a>
+
+### MavenArtifactProvider
+Configuration for the Maven artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the Maven artifact provider is enabled. |
+| accounts | [MavenArtifactAccount](#proto.MavenArtifactAccount) | repeated | The list of configured Maven accounts. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="artifact/oracle.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## artifact/oracle.proto
+
+
+
+<a name="proto.OracleArtifactAccount"></a>
+
+### OracleArtifactAccount
+Configuration for an Oracle artifact account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| fingerprint | [string](#string) |  | The fingerprint of the public key. |
+| namespace | [string](#string) |  | The namespace in which the bucket and objects should be created. |
+| privateKeyPassphrase | [string](#string) |  | The passphrase used for the private key, if it is encrypted. |
+| region | [string](#string) |  | An Oracle region (e.g., `us-phoenix-1`). |
+| sshPrivateKeyFilePath | [string](#string) |  | Path to the private key in PEM format. |
+| tenancyId | [string](#string) |  | The OCID of the Oracle Tenancy to use. |
+| userId | [string](#string) |  | The OCID of the Oracle User with which to authenticate. |
+
+
+
+
+
+
+<a name="proto.OracleArtifactProvider"></a>
+
+### OracleArtifactProvider
+Configuration for the Oracle artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the Oracle artifact provider is enabled. |
+| accounts | [OracleArtifactAccount](#proto.OracleArtifactAccount) | repeated | The list of configured Oracle artifact accounts. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="artifact/s3.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## artifact/s3.proto
+
+
+
+<a name="proto.S3ArtifactAccount"></a>
+
+### S3ArtifactAccount
+Configuration for an S3 artifact account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| apiEndpoint | [string](#string) |  | The S3 API endpoint. Only required when using an S3 clone such as Minio. |
+| apiRegion | [string](#string) |  | The S3 API region. Only required when using an S3 clone such as Minio. |
+| awsAccessKeyId | [string](#string) |  | The AWS Access Key ID. If not provided, Spinnaker will try to find AWS credentials as described at http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default. |
+| awsSecretAccessKey | [string](#string) |  | The AWS Secret Key. |
+| region | [string](#string) |  | The S3 region. |
+
+
+
+
+
+
+<a name="proto.S3ArtifactProvider"></a>
+
+### S3ArtifactProvider
+Configuration for the S3 artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the S3 artifact provider is enabled. |
+| accounts | [S3ArtifactAccount](#proto.S3ArtifactAccount) | repeated | The list of configured S3 artifact accounts. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="ci/gcb.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## ci/gcb.proto
+
+
+
+<a name="proto.GoogleCloudBuildAccount"></a>
+
+### GoogleCloudBuildAccount
+Configuration for a Google Cloud Build account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| project | [string](#string) |  | The name of the Google Cloud Platform project in which to trigger and monitor builds. |
+| subscriptionName | [string](#string) |  | The name of the Pub/Sub subscription on which to listen for build changes. |
+| jsonKey | [string](#string) |  | The path to a JSON service account that Spinnaker will use as credentials. This is only needed if Spinnaker is not deployed on a Google Compute Engine VM, or needs permissions not afforded to the VM it is running on. |
+| permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
+
+
+
+
+
+
+<a name="proto.GoogleCloudBuildProvider"></a>
+
+### GoogleCloudBuildProvider
+Configuration for the Google Cloud Build Provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  |  |
+| accounts | [GoogleCloudBuildAccount](#proto.GoogleCloudBuildAccount) | repeated |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="cloudprovider/appengine.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## cloudprovider/appengine.proto
 
 
 
@@ -377,85 +1040,10 @@ Configuration for the Google App Engine (GAE) provider.
 
 
 
-<a name="artifact_template.proto"></a>
+<a name="cloudprovider/aws.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## artifact_template.proto
-
-
-
-<a name="proto.ArtifactTemplate"></a>
-
-### ArtifactTemplate
-Configuration for a Jinja template for Spinnaker to use for artifact
-extraction. For more details, please read the documentation:
-https://www.spinnaker.io/reference/artifacts/from-build-triggers/#artifacts-from-build-triggers
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The name of the artifact template. |
-| templatePath | [string](#string) |  | The path to the artifact template. |
-
-
-
-
-
- 
-
- 
-
- 
-
- 
-
-
-
-<a name="artifacts.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## artifacts.proto
-
-
-
-<a name="proto.ArtifactProviders"></a>
-
-### ArtifactProviders
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| bitbucket | [BitbucketArtifactProvider](#proto.BitbucketArtifactProvider) |  |  |
-| gcs | [GcsArtifactProvider](#proto.GcsArtifactProvider) |  |  |
-| github | [GitHubArtifactProvider](#proto.GitHubArtifactProvider) |  |  |
-| gitlab | [GitLabArtifactProvider](#proto.GitLabArtifactProvider) |  |  |
-| gitrepo | [GitRepoArtifactProvider](#proto.GitRepoArtifactProvider) |  |  |
-| helm | [HelmArtifactProvider](#proto.HelmArtifactProvider) |  |  |
-| http | [HttpArtifactProvider](#proto.HttpArtifactProvider) |  |  |
-| maven | [MavenArtifactProvider](#proto.MavenArtifactProvider) |  |  |
-| oracle | [OracleArtifactProvider](#proto.OracleArtifactProvider) |  |  |
-| s3 | [S3ArtifactProvider](#proto.S3ArtifactProvider) |  |  |
-| templates | [ArtifactTemplate](#proto.ArtifactTemplate) | repeated |  |
-
-
-
-
-
- 
-
- 
-
- 
-
- 
-
-
-
-<a name="aws_provider.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## aws_provider.proto
+## cloudprovider/aws.proto
 
 
 
@@ -659,10 +1247,10 @@ Base image virtualization settings.
 
 
 
-<a name="azure_provider.proto"></a>
+<a name="cloudprovider/azure.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## azure_provider.proto
+## cloudprovider/azure.proto
 
 
 
@@ -774,102 +1362,10 @@ Configuration for the Azure provider.
 
 
 
-<a name="bitbucket_artifact_provider.proto"></a>
+<a name="cloudprovider/cloudfoundry.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## bitbucket_artifact_provider.proto
-
-
-
-<a name="proto.BitbucketArtifactAccount"></a>
-
-### BitbucketArtifactAccount
-Configuration for a Bitbucket artifact account.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The name of the account. |
-| username | [string](#string) |  | The username of the account. Either `username` and `password` should be set, or `usernamePasswordFile` should be set. |
-| password | [string](#string) |  | The password of the account. Either `username` and `password` should be set, or `usernamePasswordFile` should be set. |
-| usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password of the account in the format `${username}:${password}`. Either `username` and `password` should be set, or `usernamePasswordFile` should be set. |
-
-
-
-
-
-
-<a name="proto.BitbucketArtifactProvider"></a>
-
-### BitbucketArtifactProvider
-Configuration for the Bitbucket artifact provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the Bitbucket artifact provider is enabled. |
-| accounts | [BitbucketArtifactAccount](#proto.BitbucketArtifactAccount) | repeated | The list of configured Bitbucket accounts. |
-
-
-
-
-
- 
-
- 
-
- 
-
- 
-
-
-
-<a name="clouddriver.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## clouddriver.proto
-
-
-
-<a name="proto.ClouddriverConfig"></a>
-
-### ClouddriverConfig
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| kubernetes | [KubernetesProvider](#proto.KubernetesProvider) |  |  |
-| google | [GoogleProvider](#proto.GoogleProvider) |  |  |
-| appengine | [AppengineProvider](#proto.AppengineProvider) |  |  |
-| aws | [AwsProvider](#proto.AwsProvider) |  |  |
-| azure | [AzureProvider](#proto.AzureProvider) |  |  |
-| cloudfoundry | [CloudFoundryProvider](#proto.CloudFoundryProvider) |  |  |
-| dcos | [DcosProvider](#proto.DcosProvider) |  |  |
-| dockerRegistry | [DockerRegistryProvider](#proto.DockerRegistryProvider) |  |  |
-| ecs | [EcsProvider](#proto.EcsProvider) |  |  |
-| huaweicloud | [HuaweiCloudProvider](#proto.HuaweiCloudProvider) |  |  |
-| oracle | [OracleProvider](#proto.OracleProvider) |  |  |
-| artifacts | [ArtifactProviders](#proto.ArtifactProviders) |  |  |
-
-
-
-
-
- 
-
- 
-
- 
-
- 
-
-
-
-<a name="cloudfoundry_provider.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## cloudfoundry_provider.proto
+## cloudprovider/cloudfoundry.proto
 
 
 
@@ -923,10 +1419,10 @@ Configuration for the Cloud Foundry provider.
 
 
 
-<a name="dcos_provider.proto"></a>
+<a name="cloudprovider/dcos.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## dcos_provider.proto
+## cloudprovider/dcos.proto
 
 
 
@@ -1045,10 +1541,10 @@ Configuration for the DC/OS (Distributed Cloud Operating System) provider.
 
 
 
-<a name="docker_registry_provider.proto"></a>
+<a name="cloudprovider/docker_registry.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## docker_registry_provider.proto
+## cloudprovider/docker_registry.proto
 
 
 
@@ -1110,47 +1606,10 @@ Configuration for the Docker Registry provider.
 
 
 
-<a name="echo.proto"></a>
+<a name="cloudprovider/ecs.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## echo.proto
-
-
-
-<a name="proto.EchoConfig"></a>
-
-### EchoConfig
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| slack | [SlackNotification](#proto.SlackNotification) |  |  |
-| twilio | [TwilioNotification](#proto.TwilioNotification) |  |  |
-| githubStatus | [GithubStatusNotification](#proto.GithubStatusNotification) |  |  |
-| artifacts | [ArtifactProviders](#proto.ArtifactProviders) |  |  |
-| pubsub | [PubsubProviders](#proto.PubsubProviders) |  |  |
-| gcb | [GoogleCloudBuildProvider](#proto.GoogleCloudBuildProvider) |  |  |
-| stats | [Stats](#proto.Stats) |  |  |
-
-
-
-
-
- 
-
- 
-
- 
-
- 
-
-
-
-<a name="ecs_provider.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## ecs_provider.proto
+## cloudprovider/ecs.proto
 
 
 
@@ -1199,321 +1658,10 @@ Configuration for the ECS provider.
 
 
 
-<a name="front50.proto"></a>
+<a name="cloudprovider/google.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## front50.proto
-
-
-
-<a name="proto.Front50Config"></a>
-
-### Front50Config
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| spinnaker | [Front50Config.Spinnaker](#proto.Front50Config.Spinnaker) |  |  |
-
-
-
-
-
-
-<a name="proto.Front50Config.Spinnaker"></a>
-
-### Front50Config.Spinnaker
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| gcs | [GcsPersistentStore](#proto.GcsPersistentStore) |  |  |
-| azs | [AzsPersistentStore](#proto.AzsPersistentStore) |  |  |
-| oracle | [OraclePersistentStore](#proto.OraclePersistentStore) |  |  |
-
-
-
-
-
- 
-
- 
-
- 
-
- 
-
-
-
-<a name="gcb_ci_provider.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## gcb_ci_provider.proto
-
-
-
-<a name="proto.GoogleCloudBuildAccount"></a>
-
-### GoogleCloudBuildAccount
-Configuration for a Google Cloud Build account.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The name of the account. |
-| project | [string](#string) |  | The name of the Google Cloud Platform project in which to trigger and monitor builds. |
-| subscriptionName | [string](#string) |  | The name of the Pub/Sub subscription on which to listen for build changes. |
-| jsonKey | [string](#string) |  | The path to a JSON service account that Spinnaker will use as credentials. This is only needed if Spinnaker is not deployed on a Google Compute Engine VM, or needs permissions not afforded to the VM it is running on. |
-| permissions | [Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
-
-
-
-
-
-
-<a name="proto.GoogleCloudBuildProvider"></a>
-
-### GoogleCloudBuildProvider
-Configuration for the Google Cloud Build Provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  |  |
-| accounts | [GoogleCloudBuildAccount](#proto.GoogleCloudBuildAccount) | repeated |  |
-
-
-
-
-
- 
-
- 
-
- 
-
- 
-
-
-
-<a name="gcs_artifact_provider.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## gcs_artifact_provider.proto
-
-
-
-<a name="proto.GcsArtifactAccount"></a>
-
-### GcsArtifactAccount
-Configuration for a GCS artifact account.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The name of the account. |
-| jsonPath | [string](#string) |  | The path to a JSON key for a GCP service account with which to authenticate. The service account must have the `roles/storage.admin` role enabled. |
-
-
-
-
-
-
-<a name="proto.GcsArtifactProvider"></a>
-
-### GcsArtifactProvider
-Configuration for the Google Cloud Storage (GCS) artifact provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the GCS artifact provider is enabled. |
-| accounts | [GcsArtifactAccount](#proto.GcsArtifactAccount) | repeated | The list of configured GCS accounts. |
-
-
-
-
-
- 
-
- 
-
- 
-
- 
-
-
-
-<a name="github_artifact_provider.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## github_artifact_provider.proto
-
-
-
-<a name="proto.GitHubArtifactAccount"></a>
-
-### GitHubArtifactAccount
-Configuration for a GitHub artifact account. Either `username` and
-`password`, `usernamePasswordFile`, `token`, or `tokenFile` should be
-specified as means of authentication.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The name of the account. |
-| username | [string](#string) |  | The GitHub account username. |
-| password | [string](#string) |  | The GitHub account password. |
-| usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password of the account in the format `${username}:${password}`. |
-| token | [string](#string) |  | The GitHub access token. |
-| tokenFile | [string](#string) |  | The path to a file containing the GitHub access token. |
-
-
-
-
-
-
-<a name="proto.GitHubArtifactProvider"></a>
-
-### GitHubArtifactProvider
-Configuration for the GitHub artifact provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the GitHub artifact provider is enabled. |
-| accounts | [GitHubArtifactAccount](#proto.GitHubArtifactAccount) | repeated | The list of configured GitHub accounts. |
-
-
-
-
-
- 
-
- 
-
- 
-
- 
-
-
-
-<a name="gitlab_artifact_provider.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## gitlab_artifact_provider.proto
-
-
-
-<a name="proto.GitLabArtifactAccount"></a>
-
-### GitLabArtifactAccount
-Configuration for a GitLab artifact account. Either `token` or
-`tokenFile` should be specified as means of authentication.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The name of the account. |
-| token | [string](#string) |  | The GitLab access token. |
-| tokenFile | [string](#string) |  | The path to a file containing the GitLab access token. |
-
-
-
-
-
-
-<a name="proto.GitLabArtifactProvider"></a>
-
-### GitLabArtifactProvider
-Configuration for the GitLab artifact provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the GitLab artifact provider is enabled. |
-| accounts | [GitLabArtifactAccount](#proto.GitLabArtifactAccount) | repeated | The list of configured GitLab accounts. |
-
-
-
-
-
- 
-
- 
-
- 
-
- 
-
-
-
-<a name="gitrepo_artifact_provider.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## gitrepo_artifact_provider.proto
-
-
-
-<a name="proto.GitRepoArtifactAccount"></a>
-
-### GitRepoArtifactAccount
-Configuration for a Git repo artifact account. An account maps to a
-credential that is able to authenticate against a Git repository hosted by a
-Git hosting service. Either `username` and `password`,
-`usernamePasswordFile`, `token`, `tokenFile`, or `sshPrivateKeyFilePath` and
-`sshPrivateKeyPassphrase` must be set.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The name of the account. |
-| username | [string](#string) |  | The username of the account. |
-| password | [string](#string) |  | The password of the account. |
-| usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password of the account in the format `${username}:${password}`. |
-| token | [string](#string) |  | The Git repo access token. |
-| tokenFile | [string](#string) |  | The path to a file containing the Git repo access token. |
-| sshPrivateKeyFilePath | [string](#string) |  | The path to an SSH private key to be used when connecting with the Git repo over SSH. |
-| sshPrivateKeyPassphrase | [string](#string) |  | The passphrase to an SSH private key to be used when connecting with the Git repo over SSH. |
-| sshKnownHostsFilePath | [string](#string) |  | The path to a `known_hosts` file to be used when connecting with a Git repository over SSH. |
-| sshTrustUnknownHosts | [bool](#bool) |  | If `true`, Spinnaker can connect with a Git repository over SSH without verifying the server&#39;s IP address against a `known_hosts` file. |
-
-
-
-
-
-
-<a name="proto.GitRepoArtifactProvider"></a>
-
-### GitRepoArtifactProvider
-Configuration for the Git repo artifact provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the Git repo artifact provider is enabled. |
-| accounts | [GitRepoArtifactAccount](#proto.GitRepoArtifactAccount) | repeated | The list of configured Git Repo accounts. |
-
-
-
-
-
- 
-
- 
-
- 
-
- 
-
-
-
-<a name="google_provider.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## google_provider.proto
+## cloudprovider/google.proto
 
 
 
@@ -1658,224 +1806,10 @@ Image source configuration.
 
 
 
-<a name="halconfig.proto"></a>
+<a name="cloudprovider/huaweicloud.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## halconfig.proto
-
-
-
-<a name="proto.HalConfig"></a>
-
-### HalConfig
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| persistentStorage | [HalConfig.PersistentStorage](#proto.HalConfig.PersistentStorage) |  |  |
-| providers | [HalConfig.Providers](#proto.HalConfig.Providers) |  |  |
-| artifacts | [ArtifactProviders](#proto.ArtifactProviders) |  |  |
-| notifications | [HalConfig.Notifications](#proto.HalConfig.Notifications) |  |  |
-| pubsub | [PubsubProviders](#proto.PubsubProviders) |  |  |
-| ci | [HalConfig.CiProviders](#proto.HalConfig.CiProviders) |  |  |
-| stats | [Stats](#proto.Stats) |  |  |
-
-
-
-
-
-
-<a name="proto.HalConfig.CiProviders"></a>
-
-### HalConfig.CiProviders
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| gcb | [GoogleCloudBuildProvider](#proto.GoogleCloudBuildProvider) |  |  |
-
-
-
-
-
-
-<a name="proto.HalConfig.Notifications"></a>
-
-### HalConfig.Notifications
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| slack | [SlackNotification](#proto.SlackNotification) |  |  |
-| twilio | [TwilioNotification](#proto.TwilioNotification) |  |  |
-| githubStatus | [GithubStatusNotification](#proto.GithubStatusNotification) |  |  |
-
-
-
-
-
-
-<a name="proto.HalConfig.PersistentStorage"></a>
-
-### HalConfig.PersistentStorage
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| gcs | [GcsPersistentStore](#proto.GcsPersistentStore) |  |  |
-| azs | [AzsPersistentStore](#proto.AzsPersistentStore) |  |  |
-| oracle | [OraclePersistentStore](#proto.OraclePersistentStore) |  |  |
-
-
-
-
-
-
-<a name="proto.HalConfig.Providers"></a>
-
-### HalConfig.Providers
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| kubernetes | [KubernetesProvider](#proto.KubernetesProvider) |  |  |
-| google | [GoogleProvider](#proto.GoogleProvider) |  |  |
-| appengine | [AppengineProvider](#proto.AppengineProvider) |  |  |
-| aws | [AwsProvider](#proto.AwsProvider) |  |  |
-| azure | [AzureProvider](#proto.AzureProvider) |  |  |
-| cloudfoundry | [CloudFoundryProvider](#proto.CloudFoundryProvider) |  |  |
-| dcos | [DcosProvider](#proto.DcosProvider) |  |  |
-| dockerRegistry | [DockerRegistryProvider](#proto.DockerRegistryProvider) |  |  |
-| ecs | [EcsProvider](#proto.EcsProvider) |  |  |
-| huaweicloud | [HuaweiCloudProvider](#proto.HuaweiCloudProvider) |  |  |
-| oracle | [OracleProvider](#proto.OracleProvider) |  |  |
-
-
-
-
-
- 
-
- 
-
- 
-
- 
-
-
-
-<a name="helm_artifact_provider.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## helm_artifact_provider.proto
-
-
-
-<a name="proto.HelmArtifactAccount"></a>
-
-### HelmArtifactAccount
-Configuration for a Helm artifact account. Either `username` and `password`
-or `usernamePasswordFile` should be specified as means of authentication.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The name of the account. |
-| repository | [string](#string) |  | The Helm chart repository URL. |
-| username | [string](#string) |  | A username for Helm chart repository basic auth. |
-| password | [string](#string) |  | A password for Helm chart repository basic auth. |
-| usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password for Helm chart repository basic auth. Must be in the format `${username}:${password}`. |
-
-
-
-
-
-
-<a name="proto.HelmArtifactProvider"></a>
-
-### HelmArtifactProvider
-Configuration for the Helm artifact provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the Helm artifact provider is enabled. |
-| accounts | [HelmArtifactAccount](#proto.HelmArtifactAccount) | repeated | The list of configured Helm accounts. |
-
-
-
-
-
- 
-
- 
-
- 
-
- 
-
-
-
-<a name="http_artifact_provider.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## http_artifact_provider.proto
-
-
-
-<a name="proto.HttpArtifactAccount"></a>
-
-### HttpArtifactAccount
-Configuration for an HTTP artifact account. Either `username` and `password`
-or `usernamePasswordFile` should be specified as means of authentication.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The name of the account. |
-| username | [string](#string) |  | A username for HTTP basic auth. |
-| password | [string](#string) |  | A password for HTTP basic auth. |
-| usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password for HTTP basic auth. Must be in the format `${username}:${password}`. |
-
-
-
-
-
-
-<a name="proto.HttpArtifactProvider"></a>
-
-### HttpArtifactProvider
-Configuration for the HTTP artifact provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the HTTP artifact provider is enabled. |
-| accounts | [HttpArtifactAccount](#proto.HttpArtifactAccount) | repeated | The list of configured HTTP accounts. |
-
-
-
-
-
- 
-
- 
-
- 
-
- 
-
-
-
-<a name="huaweicloud_provider.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## huaweicloud_provider.proto
+## cloudprovider/huaweicloud.proto
 
 
 
@@ -2012,10 +1946,10 @@ Huawei Cloud virtualization settings.
 
 
 
-<a name="kubernetes_provider.proto"></a>
+<a name="cloudprovider/kubernetes.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kubernetes_provider.proto
+## cloudprovider/kubernetes.proto
 
 
 
@@ -2128,182 +2062,10 @@ Configuration for the Kubernetes provider.
 
 
 
-<a name="maven_artifact_provider.proto"></a>
+<a name="cloudprovider/oracle.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## maven_artifact_provider.proto
-
-
-
-<a name="proto.MavenArtifactAccount"></a>
-
-### MavenArtifactAccount
-Configuration for a Maven artifact account.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The name of the account. |
-| repositoryUrl | [string](#string) |  | (Required) Full URI for the Maven repository (e.g., `http://some.host.com/repository/path`). |
-
-
-
-
-
-
-<a name="proto.MavenArtifactProvider"></a>
-
-### MavenArtifactProvider
-Configuration for the Maven artifact provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the Maven artifact provider is enabled. |
-| accounts | [MavenArtifactAccount](#proto.MavenArtifactAccount) | repeated | The list of configured Maven accounts. |
-
-
-
-
-
- 
-
- 
-
- 
-
- 
-
-
-
-<a name="notifications.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## notifications.proto
-
-
-
-<a name="proto.GithubStatusNotification"></a>
-
-### GithubStatusNotification
-Configuration for Github status notifications.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether GitHub status notifications are enabled. |
-| token | [string](#string) |  | Your GitHub account token. |
-
-
-
-
-
-
-<a name="proto.SlackNotification"></a>
-
-### SlackNotification
-Configuration for Slack notifications.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether Slack notifications are enabled. |
-| botName | [string](#string) |  | The name of your Slack bot. |
-| token | [string](#string) |  | Your Slack bot token. |
-| baseUrl | [string](#string) |  | Slack endpoint. Optional, can only be set if using a compatible API. |
-| forceUseIncomingWebhook | [bool](#bool) |  | Force usage of incoming webhooks endpoint for Slack. Optional, only set if using a compatible API. |
-
-
-
-
-
-
-<a name="proto.TwilioNotification"></a>
-
-### TwilioNotification
-Configuration for Twilio notifications.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether Twilio notifications are enabled. |
-| account | [string](#string) |  | Your Twilio account SID. |
-| token | [string](#string) |  | Your Twilio auth token. |
-| baseUrl | [string](#string) |  | The endpoint of the Twilio API. Optional, only set if overriding the default. |
-| from | [string](#string) |  | The phone number from which the SMS will be sent (e.g., &#43;1234-567-8910). |
-
-
-
-
-
- 
-
- 
-
- 
-
- 
-
-
-
-<a name="oracle_artifact_provider.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## oracle_artifact_provider.proto
-
-
-
-<a name="proto.OracleArtifactAccount"></a>
-
-### OracleArtifactAccount
-Configuration for an Oracle artifact account.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The name of the account. |
-| fingerprint | [string](#string) |  | The fingerprint of the public key. |
-| namespace | [string](#string) |  | The namespace in which the bucket and objects should be created. |
-| privateKeyPassphrase | [string](#string) |  | The passphrase used for the private key, if it is encrypted. |
-| region | [string](#string) |  | An Oracle region (e.g., `us-phoenix-1`). |
-| sshPrivateKeyFilePath | [string](#string) |  | Path to the private key in PEM format. |
-| tenancyId | [string](#string) |  | The OCID of the Oracle Tenancy to use. |
-| userId | [string](#string) |  | The OCID of the Oracle User with which to authenticate. |
-
-
-
-
-
-
-<a name="proto.OracleArtifactProvider"></a>
-
-### OracleArtifactProvider
-Configuration for the Oracle artifact provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the Oracle artifact provider is enabled. |
-| accounts | [OracleArtifactAccount](#proto.OracleArtifactAccount) | repeated | The list of configured Oracle artifact accounts. |
-
-
-
-
-
- 
-
- 
-
- 
-
- 
-
-
-
-<a name="oracle_provider.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## oracle_provider.proto
+## cloudprovider/oracle.proto
 
 
 
@@ -2430,6 +2192,330 @@ Oracle virtualization settings.
 
 
 
+<a name="config/clouddriver.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## config/clouddriver.proto
+
+
+
+<a name="proto.Clouddriver"></a>
+
+### Clouddriver
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| kubernetes | [KubernetesProvider](#proto.KubernetesProvider) |  |  |
+| google | [GoogleProvider](#proto.GoogleProvider) |  |  |
+| appengine | [AppengineProvider](#proto.AppengineProvider) |  |  |
+| aws | [AwsProvider](#proto.AwsProvider) |  |  |
+| azure | [AzureProvider](#proto.AzureProvider) |  |  |
+| cloudfoundry | [CloudFoundryProvider](#proto.CloudFoundryProvider) |  |  |
+| dcos | [DcosProvider](#proto.DcosProvider) |  |  |
+| dockerRegistry | [DockerRegistryProvider](#proto.DockerRegistryProvider) |  |  |
+| ecs | [EcsProvider](#proto.EcsProvider) |  |  |
+| huaweicloud | [HuaweiCloudProvider](#proto.HuaweiCloudProvider) |  |  |
+| oracle | [OracleProvider](#proto.OracleProvider) |  |  |
+| artifacts | [ArtifactProviders](#proto.ArtifactProviders) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="config/echo.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## config/echo.proto
+
+
+
+<a name="proto.Echo"></a>
+
+### Echo
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| slack | [SlackNotification](#proto.SlackNotification) |  |  |
+| twilio | [TwilioNotification](#proto.TwilioNotification) |  |  |
+| githubStatus | [GithubStatusNotification](#proto.GithubStatusNotification) |  |  |
+| artifacts | [ArtifactProviders](#proto.ArtifactProviders) |  |  |
+| pubsub | [PubsubProviders](#proto.PubsubProviders) |  |  |
+| gcb | [GoogleCloudBuildProvider](#proto.GoogleCloudBuildProvider) |  |  |
+| stats | [Stats](#proto.Stats) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="config/front50.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## config/front50.proto
+
+
+
+<a name="proto.Front50"></a>
+
+### Front50
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| spinnaker | [Front50.Spinnaker](#proto.Front50.Spinnaker) |  |  |
+
+
+
+
+
+
+<a name="proto.Front50.Spinnaker"></a>
+
+### Front50.Spinnaker
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| gcs | [GcsPersistentStore](#proto.GcsPersistentStore) |  |  |
+| azs | [AzsPersistentStore](#proto.AzsPersistentStore) |  |  |
+| oracle | [OraclePersistentStore](#proto.OraclePersistentStore) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="config/halconfig.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## config/halconfig.proto
+
+
+
+<a name="proto.Hal"></a>
+
+### Hal
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| persistentStorage | [PersistentStorage](#proto.PersistentStorage) |  |  |
+| providers | [Hal.Providers](#proto.Hal.Providers) |  |  |
+| artifacts | [ArtifactProviders](#proto.ArtifactProviders) |  |  |
+| notifications | [Hal.Notifications](#proto.Hal.Notifications) |  |  |
+| pubsub | [PubsubProviders](#proto.PubsubProviders) |  |  |
+| ci | [Hal.CiProviders](#proto.Hal.CiProviders) |  |  |
+| stats | [Stats](#proto.Stats) |  |  |
+
+
+
+
+
+
+<a name="proto.Hal.CiProviders"></a>
+
+### Hal.CiProviders
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| gcb | [GoogleCloudBuildProvider](#proto.GoogleCloudBuildProvider) |  |  |
+
+
+
+
+
+
+<a name="proto.Hal.Notifications"></a>
+
+### Hal.Notifications
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| slack | [SlackNotification](#proto.SlackNotification) |  |  |
+| twilio | [TwilioNotification](#proto.TwilioNotification) |  |  |
+| githubStatus | [GithubStatusNotification](#proto.GithubStatusNotification) |  |  |
+
+
+
+
+
+
+<a name="proto.Hal.Providers"></a>
+
+### Hal.Providers
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| kubernetes | [KubernetesProvider](#proto.KubernetesProvider) |  |  |
+| google | [GoogleProvider](#proto.GoogleProvider) |  |  |
+| appengine | [AppengineProvider](#proto.AppengineProvider) |  |  |
+| aws | [AwsProvider](#proto.AwsProvider) |  |  |
+| azure | [AzureProvider](#proto.AzureProvider) |  |  |
+| cloudfoundry | [CloudFoundryProvider](#proto.CloudFoundryProvider) |  |  |
+| dcos | [DcosProvider](#proto.DcosProvider) |  |  |
+| dockerRegistry | [DockerRegistryProvider](#proto.DockerRegistryProvider) |  |  |
+| ecs | [EcsProvider](#proto.EcsProvider) |  |  |
+| huaweicloud | [HuaweiCloudProvider](#proto.HuaweiCloudProvider) |  |  |
+| oracle | [OracleProvider](#proto.OracleProvider) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="config/services.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## config/services.proto
+
+
+
+<a name="proto.Services"></a>
+
+### Services
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| clouddriver | [Clouddriver](#proto.Clouddriver) |  |  |
+| echo | [Echo](#proto.Echo) |  |  |
+| front50 | [Front50](#proto.Front50) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="notifications.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## notifications.proto
+
+
+
+<a name="proto.GithubStatusNotification"></a>
+
+### GithubStatusNotification
+Configuration for Github status notifications.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether GitHub status notifications are enabled. |
+| token | [string](#string) |  | Your GitHub account token. |
+
+
+
+
+
+
+<a name="proto.SlackNotification"></a>
+
+### SlackNotification
+Configuration for Slack notifications.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether Slack notifications are enabled. |
+| botName | [string](#string) |  | The name of your Slack bot. |
+| token | [string](#string) |  | Your Slack bot token. |
+| baseUrl | [string](#string) |  | Slack endpoint. Optional, can only be set if using a compatible API. |
+| forceUseIncomingWebhook | [bool](#bool) |  | Force usage of incoming webhooks endpoint for Slack. Optional, only set if using a compatible API. |
+
+
+
+
+
+
+<a name="proto.TwilioNotification"></a>
+
+### TwilioNotification
+Configuration for Twilio notifications.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether Twilio notifications are enabled. |
+| account | [string](#string) |  | Your Twilio account SID. |
+| token | [string](#string) |  | Your Twilio auth token. |
+| baseUrl | [string](#string) |  | The endpoint of the Twilio API. Optional, only set if overriding the default. |
+| from | [string](#string) |  | The phone number from which the SMS will be sent (e.g., &#43;1234-567-8910). |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
 <a name="permissions.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -2463,87 +2549,10 @@ A Fiat permissions configuration object.
 
 
 
-<a name="persistent_storage.proto"></a>
+<a name="pubsub/pubsub.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## persistent_storage.proto
-
-
-
-<a name="proto.AzsPersistentStore"></a>
-
-### AzsPersistentStore
-Configuration for an Azure Storage persistent store.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [string](#string) |  | Whether this persistent store is enabled. |
-| storageAccountName | [string](#string) |  | The name of an Azure Storage Account. |
-| storageAccountKey | [string](#string) |  | The key to access the Azure Storage Account. |
-| storageContainerName | [string](#string) |  | The container name in the chosen storage account to place Spinnaker’s persistent data. Defaults to &#39;spinnaker&#39; if unspecified. |
-
-
-
-
-
-
-<a name="proto.GcsPersistentStore"></a>
-
-### GcsPersistentStore
-Configuration for a Google Cloud Storage persistent store
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [string](#string) |  | Whether this persistent store is enabled. |
-| jsonPath | [string](#string) |  | A path to a JSON service account with permission to read and write to the bucket to be used as a backing store. |
-| project | [string](#string) |  | The Google Cloud Platform project you are using to host the GCS bucket as a backing store. |
-| bucket | [string](#string) |  | The name of a storage bucket that your specified account has access to. If not specified, a random name will be chosen. If you specify a globally unique bucket name that does not exist yet, Halyard will create that bucket for you. |
-| rootFolder | [string](#string) |  | The root folder in the chosen bucket to place all of Spinnaker&#39;s persistent data in. |
-| bucketLocation | [string](#string) |  | This is only required if the bucket you specify does not exist yet. |
-
-
-
-
-
-
-<a name="proto.OraclePersistentStore"></a>
-
-### OraclePersistentStore
-Configuration for an Oracle persistent store.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [string](#string) |  | Whether this persistent store is enabled. |
-| bucketName | [string](#string) |  | The bucket name to store persistent state object in. |
-| namespace | [string](#string) |  | The namespace the bucket and objects should be created in. |
-| region | [string](#string) |  | An Oracle region (e.g., us-phoenix-1). |
-| userId | [string](#string) |  | The OCID of the Oracle User you’re authenticating as. |
-| fingerprint | [string](#string) |  | Fingerprint of the public key. |
-| sshPrivateKeyFilePath | [string](#string) |  | Path to the private key in PEM format. |
-| privateKeyPassphrase | [string](#string) |  | Passphrase used for the private key, if it is encrypted. |
-| tenancyId | [string](#string) |  | The OCID of the Oracle Tenancy to use. |
-
-
-
-
-
- 
-
- 
-
- 
-
- 
-
-
-
-<a name="pubsub.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## pubsub.proto
+## pubsub/pubsub.proto
 
 
 
@@ -2629,91 +2638,6 @@ Configuration for Pub/Sub integration.
 
 
 
-<a name="s3_artifact_provider.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## s3_artifact_provider.proto
-
-
-
-<a name="proto.S3ArtifactAccount"></a>
-
-### S3ArtifactAccount
-Configuration for an S3 artifact account.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The name of the account. |
-| apiEndpoint | [string](#string) |  | The S3 API endpoint. Only required when using an S3 clone such as Minio. |
-| apiRegion | [string](#string) |  | The S3 API region. Only required when using an S3 clone such as Minio. |
-| awsAccessKeyId | [string](#string) |  | The AWS Access Key ID. If not provided, Spinnaker will try to find AWS credentials as described at http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default. |
-| awsSecretAccessKey | [string](#string) |  | The AWS Secret Key. |
-| region | [string](#string) |  | The S3 region. |
-
-
-
-
-
-
-<a name="proto.S3ArtifactProvider"></a>
-
-### S3ArtifactProvider
-Configuration for the S3 artifact provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the S3 artifact provider is enabled. |
-| accounts | [S3ArtifactAccount](#proto.S3ArtifactAccount) | repeated | The list of configured S3 artifact accounts. |
-
-
-
-
-
- 
-
- 
-
- 
-
- 
-
-
-
-<a name="services.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## services.proto
-
-
-
-<a name="proto.ServiceConfigs"></a>
-
-### ServiceConfigs
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| clouddriver | [ClouddriverConfig](#proto.ClouddriverConfig) |  |  |
-| echo | [EchoConfig](#proto.EchoConfig) |  |  |
-| front50 | [Front50Config](#proto.Front50Config) |  |  |
-
-
-
-
-
- 
-
- 
-
- 
-
- 
-
-
-
 <a name="stats.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -2730,6 +2654,148 @@ Configuration for optional collection of usage metrics.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether to send usage metrics. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="storage/azs.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## storage/azs.proto
+
+
+
+<a name="proto.AzsPersistentStore"></a>
+
+### AzsPersistentStore
+Configuration for an Azure Storage persistent store.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [string](#string) |  | Whether this persistent store is enabled. |
+| storageAccountName | [string](#string) |  | The name of an Azure Storage Account. |
+| storageAccountKey | [string](#string) |  | The key to access the Azure Storage Account. |
+| storageContainerName | [string](#string) |  | The container name in the chosen storage account to place Spinnaker’s persistent data. Defaults to &#39;spinnaker&#39; if unspecified. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="storage/gcs.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## storage/gcs.proto
+
+
+
+<a name="proto.GcsPersistentStore"></a>
+
+### GcsPersistentStore
+Configuration for a Google Cloud Storage persistent store
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [string](#string) |  | Whether this persistent store is enabled. |
+| jsonPath | [string](#string) |  | A path to a JSON service account with permission to read and write to the bucket to be used as a backing store. |
+| project | [string](#string) |  | The Google Cloud Platform project you are using to host the GCS bucket as a backing store. |
+| bucket | [string](#string) |  | The name of a storage bucket that your specified account has access to. If not specified, a random name will be chosen. If you specify a globally unique bucket name that does not exist yet, Halyard will create that bucket for you. |
+| rootFolder | [string](#string) |  | The root folder in the chosen bucket to place all of Spinnaker&#39;s persistent data in. |
+| bucketLocation | [string](#string) |  | This is only required if the bucket you specify does not exist yet. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="storage/oracle.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## storage/oracle.proto
+
+
+
+<a name="proto.OraclePersistentStore"></a>
+
+### OraclePersistentStore
+Configuration for an Oracle persistent store.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [string](#string) |  | Whether this persistent store is enabled. |
+| bucketName | [string](#string) |  | The bucket name to store persistent state object in. |
+| namespace | [string](#string) |  | The namespace the bucket and objects should be created in. |
+| region | [string](#string) |  | An Oracle region (e.g., us-phoenix-1). |
+| userId | [string](#string) |  | The OCID of the Oracle User you’re authenticating as. |
+| fingerprint | [string](#string) |  | Fingerprint of the public key. |
+| sshPrivateKeyFilePath | [string](#string) |  | Path to the private key in PEM format. |
+| privateKeyPassphrase | [string](#string) |  | Passphrase used for the private key, if it is encrypted. |
+| tenancyId | [string](#string) |  | The OCID of the Oracle Tenancy to use. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="storage/persistent_storage.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## storage/persistent_storage.proto
+
+
+
+<a name="proto.PersistentStorage"></a>
+
+### PersistentStorage
+Configuration of Spinnaker&#39;s persistent storage.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| gcs | [GcsPersistentStore](#proto.GcsPersistentStore) |  |  |
+| azs | [AzsPersistentStore](#proto.AzsPersistentStore) |  |  |
+| oracle | [OraclePersistentStore](#proto.OraclePersistentStore) |  |  |
 
 
 
