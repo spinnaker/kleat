@@ -266,7 +266,9 @@
   
 
 - [persistent_storage.proto](#persistent_storage.proto)
-    - [GCS](#proto.GCS)
+    - [AzsPersistentStore](#proto.AzsPersistentStore)
+    - [GcsPersistentStore](#proto.GcsPersistentStore)
+    - [OraclePersistentStore](#proto.OraclePersistentStore)
   
   
   
@@ -1220,8 +1222,9 @@ Configuration for the ECS provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| persistentStoreType | [string](#string) |  |  |
-| gcs | [GCS](#proto.GCS) |  |  |
+| gcs | [GcsPersistentStore](#proto.GcsPersistentStore) |  |  |
+| azs | [AzsPersistentStore](#proto.AzsPersistentStore) |  |  |
+| oracle | [OraclePersistentStore](#proto.OraclePersistentStore) |  |  |
 
 
 
@@ -1716,8 +1719,9 @@ Image source configuration.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| persistentStoreType | [string](#string) |  |  |
-| gcs | [GCS](#proto.GCS) |  |  |
+| gcs | [GcsPersistentStore](#proto.GcsPersistentStore) |  |  |
+| azs | [AzsPersistentStore](#proto.AzsPersistentStore) |  |  |
+| oracle | [OraclePersistentStore](#proto.OraclePersistentStore) |  |  |
 
 
 
@@ -2459,19 +2463,61 @@ A Fiat permissions configuration object.
 
 
 
-<a name="proto.GCS"></a>
+<a name="proto.AzsPersistentStore"></a>
 
-### GCS
-
+### AzsPersistentStore
+Configuration for an Azure Storage persistent store.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| enabled | [string](#string) |  | Whether this persistent store is enabled. |
+| storageAccountName | [string](#string) |  | The name of an Azure Storage Account. |
+| storageAccountKey | [string](#string) |  | The key to access the Azure Storage Account. |
+| storageContainerName | [string](#string) |  | The container name in the chosen storage account to place Spinnaker’s persistent data. Defaults to &#39;spinnaker&#39; if unspecified. |
+
+
+
+
+
+
+<a name="proto.GcsPersistentStore"></a>
+
+### GcsPersistentStore
+Configuration for a Google Cloud Storage persistent store
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [string](#string) |  | Whether this persistent store is enabled. |
 | jsonPath | [string](#string) |  | A path to a JSON service account with permission to read and write to the bucket to be used as a backing store. |
 | project | [string](#string) |  | The Google Cloud Platform project you are using to host the GCS bucket as a backing store. |
 | bucket | [string](#string) |  | The name of a storage bucket that your specified account has access to. If not specified, a random name will be chosen. If you specify a globally unique bucket name that does not exist yet, Halyard will create that bucket for you. |
 | rootFolder | [string](#string) |  | The root folder in the chosen bucket to place all of Spinnaker&#39;s persistent data in. |
 | bucketLocation | [string](#string) |  | This is only required if the bucket you specify does not exist yet. |
+
+
+
+
+
+
+<a name="proto.OraclePersistentStore"></a>
+
+### OraclePersistentStore
+Configuration for an Oracle persistent store.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [string](#string) |  | Whether this persistent store is enabled. |
+| bucketName | [string](#string) |  | The bucket name to store persistent state object in. |
+| namespace | [string](#string) |  | The namespace the bucket and objects should be created in. |
+| region | [string](#string) |  | An Oracle region (e.g., us-phoenix-1). |
+| userId | [string](#string) |  | The OCID of the Oracle User you’re authenticating as. |
+| fingerprint | [string](#string) |  | Fingerprint of the public key. |
+| sshPrivateKeyFilePath | [string](#string) |  | Path to the private key in PEM format. |
+| privateKeyPassphrase | [string](#string) |  | Passphrase used for the private key, if it is encrypted. |
+| tenancyId | [string](#string) |  | The OCID of the Oracle Tenancy to use. |
 
 
 

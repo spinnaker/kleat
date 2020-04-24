@@ -9,7 +9,8 @@ message Front50Config {
   Spinnaker spinnaker = 1;
 
   message Spinnaker {
-    string persistentStoreType = 1;
-    GCS gcs = 2;
+    GcsPersistentStore gcs = 1;
+    AzsPersistentStore azs = 2;
+    OraclePersistentStore oracle = 3;
   }
 }

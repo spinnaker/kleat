@@ -37,8 +37,9 @@ func ParseHalConfig(fn string) (*client.HalConfig, error) {
 func HalToFront50(h *client.HalConfig) (*client.Front50Config, error) {
 	f := &client.Front50Config{
 		Spinnaker: &client.Front50Config_Spinnaker{
-			PersistentStoreType: h.PersistentStorage.PersistentStoreType,
-			Gcs:                 h.PersistentStorage.Gcs,
+			Gcs:    h.GetPersistentStorage().GetGcs(),
+			Azs:    h.GetPersistentStorage().GetAzs(),
+			Oracle: h.GetPersistentStorage().GetOracle(),
 		},
 	}
 	return f, nil

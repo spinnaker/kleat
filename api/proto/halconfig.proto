@@ -31,8 +31,9 @@ message HalConfig {
   Stats stats = 7;
 
   message PersistentStorage {
-    string persistentStoreType = 1;
-    GCS gcs = 2;
+    GcsPersistentStore gcs = 1;
+    AzsPersistentStore azs = 2;
+    OraclePersistentStore oracle = 3;
   }
 
   message Providers {
