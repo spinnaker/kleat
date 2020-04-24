@@ -1,0 +1,32 @@
+syntax = "proto3";
+package proto;
+
+option go_package = "github.com/spinnaker/kleat/api/client/artifact";
+
+// Configuration for the Bitbucket artifact provider.
+message BitbucketArtifactProvider {
+    // Whether the Bitbucket artifact provider is enabled.
+    bool enabled = 1;
+
+    // The list of configured Bitbucket accounts.
+    repeated BitbucketArtifactAccount accounts = 2;
+}
+
+// Configuration for a Bitbucket artifact account.
+message BitbucketArtifactAccount {
+    // The name of the account.
+    string name = 1;
+
+    // The username of the account. Either `username` and `password` should be
+    // set, or `usernamePasswordFile` should be set.
+    string username = 2;
+
+    // The password of the account. Either `username` and `password` should be
+    // set, or `usernamePasswordFile` should be set.
+    string password = 3;
+
+    // The path to a file containing the username and password of the account
+    // in the format `${username}:${password}`. Either `username` and
+    // `password` should be set, or `usernamePasswordFile` should be set.
+    string usernamePasswordFile = 4;
+}

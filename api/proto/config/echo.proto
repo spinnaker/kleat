@@ -1,0 +1,21 @@
+syntax = "proto3";
+package proto;
+
+option go_package = "github.com/spinnaker/kleat/api/client/config";
+
+import "notifications.proto";
+import "artifact/artifacts.proto";
+import "pubsub/pubsub.proto";
+import "ci/gcb.proto";
+import "stats.proto";
+
+message Echo {
+    SlackNotification slack = 1;
+    TwilioNotification twilio = 2;
+    GithubStatusNotification githubStatus = 3;
+
+    ArtifactProviders artifacts = 4;
+    PubsubProviders pubsub = 5;
+    GoogleCloudBuildProvider gcb = 6;
+    Stats stats = 7;
+}

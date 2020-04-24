@@ -20,46 +20,51 @@ import (
 	"testing"
 
 	"github.com/spinnaker/kleat/api/client"
+	"github.com/spinnaker/kleat/api/client/artifact"
+	"github.com/spinnaker/kleat/api/client/ci"
+	"github.com/spinnaker/kleat/api/client/cloudprovider"
+	"github.com/spinnaker/kleat/api/client/config"
+	"github.com/spinnaker/kleat/api/client/pubsub"
 )
 
 func TestEmptyHalConfigToClouddriver(t *testing.T) {
-	h := &client.HalConfig{}
+	h := &config.Hal{}
 	gotC, err := HalToClouddriver(h)
 	if err != nil {
 		t.Errorf("Error writing clouddriver config %s", err)
 	}
-	wantC := &client.ClouddriverConfig{}
+	wantC := &config.Clouddriver{}
 	if !reflect.DeepEqual(gotC, wantC) {
 		t.Errorf("Expected empty hal config to generate empty clouddriver config, got %v", gotC)
 	}
 }
 
 func TestEmptyProvidersToClouddriver(t *testing.T) {
-	h := &client.HalConfig{
-		Providers: &client.HalConfig_Providers{},
+	h := &config.Hal{
+		Providers: &config.Hal_Providers{},
 	}
 	gotC, err := HalToClouddriver(h)
 	if err != nil {
 		t.Errorf("Error writing clouddriver config %s", err)
 	}
-	wantC := &client.ClouddriverConfig{}
+	wantC := &config.Clouddriver{}
 	if !reflect.DeepEqual(gotC, wantC) {
 		t.Errorf("Expected empty hal config to generate empty clouddriver config, got %v", gotC)
 	}
 }
 
 func TestEmptyKubernetesProviderToClouddriverConfig(t *testing.T) {
-	h := &client.HalConfig{
-		Providers: &client.HalConfig_Providers{
-			Kubernetes: &client.KubernetesProvider{},
+	h := &config.Hal{
+		Providers: &config.Hal_Providers{
+			Kubernetes: &cloudprovider.KubernetesProvider{},
 		},
 	}
 	gotC, err := HalToClouddriver(h)
 	if err != nil {
 		t.Errorf("Error writing clouddriver config %s", err)
 	}
-	wantC := &client.ClouddriverConfig{
-		Kubernetes: &client.KubernetesProvider{},
+	wantC := &config.Clouddriver{
+		Kubernetes: &cloudprovider.KubernetesProvider{},
 	}
 	if !reflect.DeepEqual(gotC, wantC) {
 		t.Errorf("Expected empty Kubernetes config in hal config to pass through to clouddriver config, got %+v", gotC)
@@ -67,9 +72,9 @@ func TestEmptyKubernetesProviderToClouddriverConfig(t *testing.T) {
 }
 
 func TestKubernetesAccountToClouddriver(t *testing.T) {
-	k := &client.KubernetesProvider{
+	k := &cloudprovider.KubernetesProvider{
 		Enabled: true,
-		Accounts: []*client.KubernetesAccount{
+		Accounts: []*cloudprovider.KubernetesAccount{
 			{
 				Name:           "my-account",
 				Kinds:          []string{"deployment"},
@@ -78,8 +83,8 @@ func TestKubernetesAccountToClouddriver(t *testing.T) {
 		},
 		PrimaryAccount: "my-account",
 	}
-	h := &client.HalConfig{
-		Providers: &client.HalConfig_Providers{
+	h := &config.Hal{
+		Providers: &config.Hal_Providers{
 			Kubernetes: k,
 		},
 	}
@@ -87,7 +92,7 @@ func TestKubernetesAccountToClouddriver(t *testing.T) {
 	if err != nil {
 		t.Errorf("Error writing clouddriver config %s", err)
 	}
-	wantC := &client.ClouddriverConfig{
+	wantC := &config.Clouddriver{
 		Kubernetes: k,
 	}
 	if !reflect.DeepEqual(gotC, wantC) {
@@ -96,15 +101,15 @@ func TestKubernetesAccountToClouddriver(t *testing.T) {
 }
 
 func TestEmptyArtifactsToHalConfig(t *testing.T) {
-	h := &client.HalConfig{
-		Artifacts: &client.ArtifactProviders{},
+	h := &config.Hal{
+		Artifacts: &artifact.ArtifactProviders{},
 	}
 	gotC, err := HalToClouddriver(h)
 	if err != nil {
 		t.Errorf("Error writing clouddriver config %s", err)
 	}
-	wantC := &client.ClouddriverConfig{
-		Artifacts: &client.ArtifactProviders{},
+	wantC := &config.Clouddriver{
+		Artifacts: &artifact.ArtifactProviders{},
 	}
 	if !reflect.DeepEqual(gotC, wantC) {
 		t.Errorf("Expected empty artifact providers to be passed to clouddriver config, got %+v", gotC)
@@ -112,17 +117,17 @@ func TestEmptyArtifactsToHalConfig(t *testing.T) {
 }
 
 func TestEmptyGcsArtifactConfigToHalConfig(t *testing.T) {
-	a := &client.ArtifactProviders{
-		Gcs: &client.GcsArtifactProvider{},
+	a := &artifact.ArtifactProviders{
+		Gcs: &artifact.GcsArtifactProvider{},
 	}
-	h := &client.HalConfig{
+	h := &config.Hal{
 		Artifacts: a,
 	}
 	gotC, err := HalToClouddriver(h)
 	if err != nil {
 		t.Errorf("Error writing clouddriver config %s", err)
 	}
-	wantC := &client.ClouddriverConfig{
+	wantC := &config.Clouddriver{
 		Artifacts: a,
 	}
 	if !reflect.DeepEqual(gotC, wantC) {
@@ -131,10 +136,10 @@ func TestEmptyGcsArtifactConfigToHalConfig(t *testing.T) {
 }
 
 func TestGcsArtifactAccountToHalConfig(t *testing.T) {
-	a := &client.ArtifactProviders{
-		Gcs: &client.GcsArtifactProvider{
+	a := &artifact.ArtifactProviders{
+		Gcs: &artifact.GcsArtifactProvider{
 			Enabled: true,
-			Accounts: []*client.GcsArtifactAccount{
+			Accounts: []*artifact.GcsArtifactAccount{
 				{
 					Name:     "my-account",
 					JsonPath: "/var/secrets/my-key.json",
@@ -142,14 +147,14 @@ func TestGcsArtifactAccountToHalConfig(t *testing.T) {
 			},
 		},
 	}
-	h := &client.HalConfig{
+	h := &config.Hal{
 		Artifacts: a,
 	}
 	gotC, err := HalToClouddriver(h)
 	if err != nil {
 		t.Errorf("Error writing clouddriver config %s", err)
 	}
-	wantC := &client.ClouddriverConfig{
+	wantC := &config.Clouddriver{
 		Artifacts: a,
 	}
 	if !reflect.DeepEqual(gotC, wantC) {
@@ -158,26 +163,26 @@ func TestGcsArtifactAccountToHalConfig(t *testing.T) {
 }
 
 func TestEmptyHalConfigToEcho(t *testing.T) {
-	h := &client.HalConfig{}
+	h := &config.Hal{}
 	gotE, err := HalToEcho(h)
 	if err != nil {
 		t.Errorf("Error writing echo config %s", err)
 	}
-	wantE := &client.EchoConfig{}
+	wantE := &config.Echo{}
 	if !reflect.DeepEqual(gotE, wantE) {
 		t.Errorf("Expected empty hal config to generate empty echo config, got %v", gotE)
 	}
 }
 
 func TestEmptyNotificationsToEchoConfig(t *testing.T) {
-	h := &client.HalConfig{
-		Notifications: &client.HalConfig_Notifications{},
+	h := &config.Hal{
+		Notifications: &config.Hal_Notifications{},
 	}
 	gotE, err := HalToEcho(h)
 	if err != nil {
 		t.Errorf("Error writing echo config %s", err)
 	}
-	wantE := &client.EchoConfig{}
+	wantE := &config.Echo{}
 	if !reflect.DeepEqual(gotE, wantE) {
 		t.Errorf("Expected empty hal config to generate empty echo config, got %v", gotE)
 	}
@@ -190,8 +195,8 @@ func TestSlackNotificationToEchoConfig(t *testing.T) {
 		Token:   "my-token",
 		BaseUrl: "https://slack.test/",
 	}
-	h := &client.HalConfig{
-		Notifications: &client.HalConfig_Notifications{
+	h := &config.Hal{
+		Notifications: &config.Hal_Notifications{
 			Slack: slack,
 		},
 	}
@@ -199,7 +204,7 @@ func TestSlackNotificationToEchoConfig(t *testing.T) {
 	if err != nil {
 		t.Errorf("Error writing echo config %s", err)
 	}
-	wantE := &client.EchoConfig{
+	wantE := &config.Echo{
 		Slack: slack,
 	}
 	if !reflect.DeepEqual(gotE, wantE) {
@@ -208,15 +213,15 @@ func TestSlackNotificationToEchoConfig(t *testing.T) {
 }
 
 func TestEmptyPubsubsToEchoConfig(t *testing.T) {
-	h := &client.HalConfig{
-		Pubsub: &client.PubsubProviders{},
+	h := &config.Hal{
+		Pubsub: &pubsub.PubsubProviders{},
 	}
 	gotE, err := HalToEcho(h)
 	if err != nil {
 		t.Errorf("Error writing echo config %s", err)
 	}
-	wantE := &client.EchoConfig{
-		Pubsub: &client.PubsubProviders{},
+	wantE := &config.Echo{
+		Pubsub: &pubsub.PubsubProviders{},
 	}
 	if !reflect.DeepEqual(gotE, wantE) {
 		t.Errorf("Expected empty pubsubs to be passed through to echo config, got %v", gotE)
@@ -224,17 +229,17 @@ func TestEmptyPubsubsToEchoConfig(t *testing.T) {
 }
 
 func TestEmptyGooglePubsubToEchoConfig(t *testing.T) {
-	pubsub := &client.PubsubProviders{
-		Google: &client.GooglePubsub{},
+	pubsub := &pubsub.PubsubProviders{
+		Google: &pubsub.GooglePubsub{},
 	}
-	h := &client.HalConfig{
+	h := &config.Hal{
 		Pubsub: pubsub,
 	}
 	gotE, err := HalToEcho(h)
 	if err != nil {
 		t.Errorf("Error writing echo config %s", err)
 	}
-	wantE := &client.EchoConfig{
+	wantE := &config.Echo{
 		Pubsub: pubsub,
 	}
 	if !reflect.DeepEqual(gotE, wantE) {
@@ -243,9 +248,9 @@ func TestEmptyGooglePubsubToEchoConfig(t *testing.T) {
 }
 
 func TestGooglePubsubToEchoConfig(t *testing.T) {
-	pubsub := &client.PubsubProviders{
-		Google: &client.GooglePubsub{
-			Subscriptions: []*client.GooglePubsubSubscriber{
+	pubsub := &pubsub.PubsubProviders{
+		Google: &pubsub.GooglePubsub{
+			Subscriptions: []*pubsub.GooglePubsubSubscriber{
 				{
 					Name:             "my-account",
 					Project:          "my-project",
@@ -254,7 +259,7 @@ func TestGooglePubsubToEchoConfig(t *testing.T) {
 					MessageFormat:    "GCS",
 				},
 			},
-			Publishers: []*client.GooglePubsubPublisher{
+			Publishers: []*pubsub.GooglePubsubPublisher{
 				{
 					Name:      "my-account",
 					Project:   "my-project",
@@ -263,14 +268,14 @@ func TestGooglePubsubToEchoConfig(t *testing.T) {
 			},
 		},
 	}
-	h := &client.HalConfig{
+	h := &config.Hal{
 		Pubsub: pubsub,
 	}
 	gotE, err := HalToEcho(h)
 	if err != nil {
 		t.Errorf("Error writing echo config %s", err)
 	}
-	wantE := &client.EchoConfig{
+	wantE := &config.Echo{
 		Pubsub: pubsub,
 	}
 	if !reflect.DeepEqual(gotE, wantE) {
@@ -279,32 +284,32 @@ func TestGooglePubsubToEchoConfig(t *testing.T) {
 }
 
 func TestEmptyCiConfigToEcho(t *testing.T) {
-	h := &client.HalConfig{
-		Ci: &client.HalConfig_CiProviders{},
+	h := &config.Hal{
+		Ci: &config.Hal_CiProviders{},
 	}
 	gotE, err := HalToEcho(h)
 	if err != nil {
 		t.Errorf("Error writing echo config %s", err)
 	}
-	wantE := &client.EchoConfig{}
+	wantE := &config.Echo{}
 	if !reflect.DeepEqual(gotE, wantE) {
 		t.Errorf("Expected empty CI config to lead to empty echo config, got %v", gotE)
 	}
 }
 
 func TestEmptyGcbConfigAccountToEcho(t *testing.T) {
-	gcb := &client.GoogleCloudBuildProvider{}
-	cis := &client.HalConfig_CiProviders{
+	gcb := &ci.GoogleCloudBuildProvider{}
+	cis := &config.Hal_CiProviders{
 		Gcb: gcb,
 	}
-	h := &client.HalConfig{
+	h := &config.Hal{
 		Ci: cis,
 	}
 	gotE, err := HalToEcho(h)
 	if err != nil {
 		t.Errorf("Error writing echo config %s", err)
 	}
-	wantE := &client.EchoConfig{
+	wantE := &config.Echo{
 		Gcb: gcb,
 	}
 	if !reflect.DeepEqual(gotE, wantE) {
@@ -313,9 +318,9 @@ func TestEmptyGcbConfigAccountToEcho(t *testing.T) {
 }
 
 func TestGcbAccountToEcho(t *testing.T) {
-	gcb := &client.GoogleCloudBuildProvider{
+	gcb := &ci.GoogleCloudBuildProvider{
 		Enabled: true,
-		Accounts: []*client.GoogleCloudBuildAccount{
+		Accounts: []*ci.GoogleCloudBuildAccount{
 			{
 				Name:             "my-account",
 				Project:          "my-project",
@@ -323,17 +328,17 @@ func TestGcbAccountToEcho(t *testing.T) {
 			},
 		},
 	}
-	cis := &client.HalConfig_CiProviders{
+	cis := &config.Hal_CiProviders{
 		Gcb: gcb,
 	}
-	h := &client.HalConfig{
+	h := &config.Hal{
 		Ci: cis,
 	}
 	gotE, err := HalToEcho(h)
 	if err != nil {
 		t.Errorf("Error writing echo config %s", err)
 	}
-	wantE := &client.EchoConfig{
+	wantE := &config.Echo{
 		Gcb: gcb,
 	}
 	if !reflect.DeepEqual(gotE, wantE) {
@@ -342,14 +347,14 @@ func TestGcbAccountToEcho(t *testing.T) {
 }
 
 func TestEmptyStatsToEcho(t *testing.T) {
-	h := &client.HalConfig{
+	h := &config.Hal{
 		Stats: &client.Stats{},
 	}
 	gotE, err := HalToEcho(h)
 	if err != nil {
 		t.Errorf("Error writing echo config %s", err)
 	}
-	wantE := &client.EchoConfig{
+	wantE := &config.Echo{
 		Stats: &client.Stats{},
 	}
 	if !reflect.DeepEqual(gotE, wantE) {
@@ -359,14 +364,14 @@ func TestEmptyStatsToEcho(t *testing.T) {
 
 func TestStatsEnabledToEcho(t *testing.T) {
 	stats := &client.Stats{Enabled: true}
-	h := &client.HalConfig{
+	h := &config.Hal{
 		Stats: stats,
 	}
 	gotE, err := HalToEcho(h)
 	if err != nil {
 		t.Errorf("Error writing echo config %s", err)
 	}
-	wantE := &client.EchoConfig{
+	wantE := &config.Echo{
 		Stats: stats,
 	}
 	if !reflect.DeepEqual(gotE, wantE) {
@@ -376,14 +381,14 @@ func TestStatsEnabledToEcho(t *testing.T) {
 
 func TestStatsDisabledToEcho(t *testing.T) {
 	stats := &client.Stats{Enabled: false}
-	h := &client.HalConfig{
+	h := &config.Hal{
 		Stats: stats,
 	}
 	gotE, err := HalToEcho(h)
 	if err != nil {
 		t.Errorf("Error writing echo config %s", err)
 	}
-	wantE := &client.EchoConfig{
+	wantE := &config.Echo{
 		Stats: stats,
 	}
 	if !reflect.DeepEqual(gotE, wantE) {

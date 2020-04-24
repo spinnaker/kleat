@@ -18,14 +18,14 @@ package parse_hal
 import (
 	"io/ioutil"
 
-	"github.com/spinnaker/kleat/api/client"
+	"github.com/spinnaker/kleat/api/client/config"
 	"sigs.k8s.io/yaml"
 )
 
-func ParseHalConfig(fn string) (*client.HalConfig, error) {
+func ParseHalConfig(fn string) (*config.Hal, error) {
 	dat, err := ioutil.ReadFile(fn)
 
-	h := client.HalConfig{}
+	h := config.Hal{}
 	err = yaml.Unmarshal([]byte(dat), &h)
 	if err != nil {
 		return nil, err
@@ -34,9 +34,9 @@ func ParseHalConfig(fn string) (*client.HalConfig, error) {
 	return &h, nil
 }
 
-func HalToFront50(h *client.HalConfig) (*client.Front50Config, error) {
-	f := &client.Front50Config{
-		Spinnaker: &client.Front50Config_Spinnaker{
+func HalToFront50(h *config.Hal) (*config.Front50, error) {
+	f := &config.Front50{
+		Spinnaker: &config.Front50_Spinnaker{
 			Gcs:    h.GetPersistentStorage().GetGcs(),
 			Azs:    h.GetPersistentStorage().GetAzs(),
 			Oracle: h.GetPersistentStorage().GetOracle(),
@@ -45,8 +45,8 @@ func HalToFront50(h *client.HalConfig) (*client.Front50Config, error) {
 	return f, nil
 }
 
-func HalToClouddriver(h *client.HalConfig) (*client.ClouddriverConfig, error) {
-	c := &client.ClouddriverConfig{
+func HalToClouddriver(h *config.Hal) (*config.Clouddriver, error) {
+	c := &config.Clouddriver{
 		Kubernetes:     h.GetProviders().GetKubernetes(),
 		Google:         h.GetProviders().GetGoogle(),
 		Appengine:      h.GetProviders().GetAppengine(),
@@ -63,8 +63,8 @@ func HalToClouddriver(h *client.HalConfig) (*client.ClouddriverConfig, error) {
 	return c, nil
 }
 
-func HalToEcho(h *client.HalConfig) (*client.EchoConfig, error) {
-	c := &client.EchoConfig{
+func HalToEcho(h *config.Hal) (*config.Echo, error) {
+	c := &config.Echo{
 		Slack:        h.GetNotifications().GetSlack(),
 		Twilio:       h.GetNotifications().GetTwilio(),
 		GithubStatus: h.GetNotifications().GetGithubStatus(),
@@ -76,7 +76,7 @@ func HalToEcho(h *client.HalConfig) (*client.EchoConfig, error) {
 	return c, nil
 }
 
-func HalToServiceConfigs(h *client.HalConfig) (*client.ServiceConfigs, error) {
+func HalToServiceConfigs(h *config.Hal) (*config.Services, error) {
 	c, err := HalToClouddriver(h)
 	if err != nil {
 		return nil, err
@@ -92,7 +92,7 @@ func HalToServiceConfigs(h *client.HalConfig) (*client.ServiceConfigs, error) {
 		return nil, err
 	}
 
-	return &client.ServiceConfigs{
+	return &config.Services{
 		Clouddriver: c,
 		Echo:        e,
 		Front50:     f,

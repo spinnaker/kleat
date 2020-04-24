@@ -1,0 +1,23 @@
+syntax = "proto3";
+package proto;
+
+option go_package = "github.com/spinnaker/kleat/api/client/artifact";
+
+// Configuration for the Maven artifact provider.
+message MavenArtifactProvider {
+    // Whether the Maven artifact provider is enabled.
+    bool enabled = 1;
+
+    // The list of configured Maven accounts.
+    repeated MavenArtifactAccount accounts = 2;
+}
+
+// Configuration for a Maven artifact account.
+message MavenArtifactAccount {
+    // The name of the account.
+    string name = 1;
+
+    // (Required) Full URI for the Maven repository (e.g.,
+    // `http://some.host.com/repository/path`).
+    string repositoryUrl = 2;
+}

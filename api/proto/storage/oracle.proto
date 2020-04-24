@@ -1,0 +1,34 @@
+syntax = "proto3";
+package proto;
+
+option go_package = "github.com/spinnaker/kleat/api/client/storage";
+
+// Configuration for an Oracle persistent store.
+message OraclePersistentStore {
+    // Whether this persistent store is enabled.
+    string enabled = 1;
+
+    // The bucket name to store persistent state object in.
+    string bucketName = 2;
+
+    // The namespace the bucket and objects should be created in.
+    string namespace = 3;
+
+    // An Oracle region (e.g., us-phoenix-1).
+    string region = 4;
+
+    // The OCID of the Oracle User you’re authenticating as.
+    string userId = 5;
+
+    // Fingerprint of the public key.
+    string fingerprint = 6;
+
+    // Path to the private key in PEM format.
+    string sshPrivateKeyFilePath = 7;
+
+    // Passphrase used for the private key, if it is encrypted.
+    string privateKeyPassphrase = 8;
+
+    // The OCID of the Oracle Tenancy to use.
+    string tenancyId = 9;
+}

@@ -17,11 +17,12 @@ package test
 
 import (
 	"bytes"
-	"github.com/spinnaker/kleat/api/client"
-	"github.com/spinnaker/kleat/pkg/parse_hal"
 	"io/ioutil"
-	"sigs.k8s.io/yaml"
 	"testing"
+
+	"github.com/spinnaker/kleat/api/client/config"
+	"github.com/spinnaker/kleat/pkg/parse_hal"
+	"sigs.k8s.io/yaml"
 )
 
 func TestHalToEcho(t *testing.T) {
@@ -56,10 +57,10 @@ func TestHalToEcho(t *testing.T) {
 	}
 }
 
-func parseEchoConfig(fn string) (*client.EchoConfig, error) {
+func parseEchoConfig(fn string) (*config.Echo, error) {
 	dat, err := ioutil.ReadFile(fn)
 
-	h := client.EchoConfig{}
+	h := config.Echo{}
 	err = yaml.UnmarshalStrict([]byte(dat), &h)
 	if err != nil {
 		return nil, err
