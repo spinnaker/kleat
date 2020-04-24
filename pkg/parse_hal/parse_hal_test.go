@@ -23,33 +23,33 @@ import (
 )
 
 func TestEmptyHalConfigToClouddriver(t *testing.T) {
-	h := client.HalConfig{}
+	h := &client.HalConfig{}
 	gotC, err := HalToClouddriver(h)
 	if err != nil {
 		t.Errorf("Error writing clouddriver config %s", err)
 	}
-	wantC := client.ClouddriverConfig{}
+	wantC := &client.ClouddriverConfig{}
 	if !reflect.DeepEqual(gotC, wantC) {
 		t.Errorf("Expected empty hal config to generate empty clouddriver config, got %v", gotC)
 	}
 }
 
 func TestEmptyProvidersToClouddriver(t *testing.T) {
-	h := client.HalConfig{
+	h := &client.HalConfig{
 		Providers: &client.HalConfig_Providers{},
 	}
 	gotC, err := HalToClouddriver(h)
 	if err != nil {
 		t.Errorf("Error writing clouddriver config %s", err)
 	}
-	wantC := client.ClouddriverConfig{}
+	wantC := &client.ClouddriverConfig{}
 	if !reflect.DeepEqual(gotC, wantC) {
 		t.Errorf("Expected empty hal config to generate empty clouddriver config, got %v", gotC)
 	}
 }
 
 func TestEmptyKubernetesProviderToClouddriverConfig(t *testing.T) {
-	h := client.HalConfig{
+	h := &client.HalConfig{
 		Providers: &client.HalConfig_Providers{
 			Kubernetes: &client.KubernetesProvider{},
 		},
@@ -58,7 +58,7 @@ func TestEmptyKubernetesProviderToClouddriverConfig(t *testing.T) {
 	if err != nil {
 		t.Errorf("Error writing clouddriver config %s", err)
 	}
-	wantC := client.ClouddriverConfig{
+	wantC := &client.ClouddriverConfig{
 		Kubernetes: &client.KubernetesProvider{},
 	}
 	if !reflect.DeepEqual(gotC, wantC) {
@@ -78,7 +78,7 @@ func TestKubernetesAccountToClouddriver(t *testing.T) {
 		},
 		PrimaryAccount: "my-account",
 	}
-	h := client.HalConfig{
+	h := &client.HalConfig{
 		Providers: &client.HalConfig_Providers{
 			Kubernetes: k,
 		},
@@ -87,7 +87,7 @@ func TestKubernetesAccountToClouddriver(t *testing.T) {
 	if err != nil {
 		t.Errorf("Error writing clouddriver config %s", err)
 	}
-	wantC := client.ClouddriverConfig{
+	wantC := &client.ClouddriverConfig{
 		Kubernetes: k,
 	}
 	if !reflect.DeepEqual(gotC, wantC) {
@@ -96,14 +96,14 @@ func TestKubernetesAccountToClouddriver(t *testing.T) {
 }
 
 func TestEmptyArtifactsToHalConfig(t *testing.T) {
-	h := client.HalConfig{
+	h := &client.HalConfig{
 		Artifacts: &client.ArtifactProviders{},
 	}
 	gotC, err := HalToClouddriver(h)
 	if err != nil {
 		t.Errorf("Error writing clouddriver config %s", err)
 	}
-	wantC := client.ClouddriverConfig{
+	wantC := &client.ClouddriverConfig{
 		Artifacts: &client.ArtifactProviders{},
 	}
 	if !reflect.DeepEqual(gotC, wantC) {
@@ -115,14 +115,14 @@ func TestEmptyGcsArtifactConfigToHalConfig(t *testing.T) {
 	a := &client.ArtifactProviders{
 		Gcs: &client.GcsArtifactProvider{},
 	}
-	h := client.HalConfig{
+	h := &client.HalConfig{
 		Artifacts: a,
 	}
 	gotC, err := HalToClouddriver(h)
 	if err != nil {
 		t.Errorf("Error writing clouddriver config %s", err)
 	}
-	wantC := client.ClouddriverConfig{
+	wantC := &client.ClouddriverConfig{
 		Artifacts: a,
 	}
 	if !reflect.DeepEqual(gotC, wantC) {
@@ -142,14 +142,14 @@ func TestGcsArtifactAccountToHalConfig(t *testing.T) {
 			},
 		},
 	}
-	h := client.HalConfig{
+	h := &client.HalConfig{
 		Artifacts: a,
 	}
 	gotC, err := HalToClouddriver(h)
 	if err != nil {
 		t.Errorf("Error writing clouddriver config %s", err)
 	}
-	wantC := client.ClouddriverConfig{
+	wantC := &client.ClouddriverConfig{
 		Artifacts: a,
 	}
 	if !reflect.DeepEqual(gotC, wantC) {
@@ -158,26 +158,26 @@ func TestGcsArtifactAccountToHalConfig(t *testing.T) {
 }
 
 func TestEmptyHalConfigToEcho(t *testing.T) {
-	h := client.HalConfig{}
+	h := &client.HalConfig{}
 	gotE, err := HalToEcho(h)
 	if err != nil {
 		t.Errorf("Error writing echo config %s", err)
 	}
-	wantE := client.EchoConfig{}
+	wantE := &client.EchoConfig{}
 	if !reflect.DeepEqual(gotE, wantE) {
 		t.Errorf("Expected empty hal config to generate empty echo config, got %v", gotE)
 	}
 }
 
 func TestEmptyNotificationsToEchoConfig(t *testing.T) {
-	h := client.HalConfig{
+	h := &client.HalConfig{
 		Notifications: &client.HalConfig_Notifications{},
 	}
 	gotE, err := HalToEcho(h)
 	if err != nil {
 		t.Errorf("Error writing echo config %s", err)
 	}
-	wantE := client.EchoConfig{}
+	wantE := &client.EchoConfig{}
 	if !reflect.DeepEqual(gotE, wantE) {
 		t.Errorf("Expected empty hal config to generate empty echo config, got %v", gotE)
 	}
@@ -190,7 +190,7 @@ func TestSlackNotificationToEchoConfig(t *testing.T) {
 		Token:   "my-token",
 		BaseUrl: "https://slack.test/",
 	}
-	h := client.HalConfig{
+	h := &client.HalConfig{
 		Notifications: &client.HalConfig_Notifications{
 			Slack: slack,
 		},
@@ -199,7 +199,7 @@ func TestSlackNotificationToEchoConfig(t *testing.T) {
 	if err != nil {
 		t.Errorf("Error writing echo config %s", err)
 	}
-	wantE := client.EchoConfig{
+	wantE := &client.EchoConfig{
 		Slack: slack,
 	}
 	if !reflect.DeepEqual(gotE, wantE) {
@@ -208,14 +208,14 @@ func TestSlackNotificationToEchoConfig(t *testing.T) {
 }
 
 func TestEmptyPubsubsToEchoConfig(t *testing.T) {
-	h := client.HalConfig{
+	h := &client.HalConfig{
 		Pubsub: &client.PubsubProviders{},
 	}
 	gotE, err := HalToEcho(h)
 	if err != nil {
 		t.Errorf("Error writing echo config %s", err)
 	}
-	wantE := client.EchoConfig{
+	wantE := &client.EchoConfig{
 		Pubsub: &client.PubsubProviders{},
 	}
 	if !reflect.DeepEqual(gotE, wantE) {
@@ -227,14 +227,14 @@ func TestEmptyGooglePubsubToEchoConfig(t *testing.T) {
 	pubsub := &client.PubsubProviders{
 		Google: &client.GooglePubsub{},
 	}
-	h := client.HalConfig{
+	h := &client.HalConfig{
 		Pubsub: pubsub,
 	}
 	gotE, err := HalToEcho(h)
 	if err != nil {
 		t.Errorf("Error writing echo config %s", err)
 	}
-	wantE := client.EchoConfig{
+	wantE := &client.EchoConfig{
 		Pubsub: pubsub,
 	}
 	if !reflect.DeepEqual(gotE, wantE) {
@@ -263,14 +263,14 @@ func TestGooglePubsubToEchoConfig(t *testing.T) {
 			},
 		},
 	}
-	h := client.HalConfig{
+	h := &client.HalConfig{
 		Pubsub: pubsub,
 	}
 	gotE, err := HalToEcho(h)
 	if err != nil {
 		t.Errorf("Error writing echo config %s", err)
 	}
-	wantE := client.EchoConfig{
+	wantE := &client.EchoConfig{
 		Pubsub: pubsub,
 	}
 	if !reflect.DeepEqual(gotE, wantE) {

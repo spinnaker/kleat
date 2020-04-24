@@ -30,7 +30,7 @@ func TestHalToEcho(t *testing.T) {
 		t.Errorf(err.Error())
 	}
 
-	gotE, err := parse_hal.HalToEcho(*h)
+	gotE, err := parse_hal.HalToEcho(h)
 	if err != nil {
 		t.Errorf(err.Error())
 	}

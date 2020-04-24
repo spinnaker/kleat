@@ -30,7 +30,7 @@ func TestHalToClouddriver(t *testing.T) {
 		t.Errorf(err.Error())
 	}
 
-	gotC, err := parse_hal.HalToClouddriver(*h)
+	gotC, err := parse_hal.HalToClouddriver(h)
 	if err != nil {
 		t.Errorf(err.Error())
 	}

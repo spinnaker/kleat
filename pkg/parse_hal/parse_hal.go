@@ -33,8 +33,8 @@ func ParseHalConfig(fn string) (*client.HalConfig, error) {
 	return &h, nil
 }
 
-func HalToFront50(h client.HalConfig) (client.Front50Config, error) {
-	f := client.Front50Config{
+func HalToFront50(h *client.HalConfig) (*client.Front50Config, error) {
+	f := &client.Front50Config{
 		Spinnaker: &client.Front50Config_Spinnaker{
 			PersistentStoreType: h.PersistentStorage.PersistentStoreType,
 			Gcs:                 h.PersistentStorage.Gcs,
@@ -43,8 +43,8 @@ func HalToFront50(h client.HalConfig) (client.Front50Config, error) {
 	return f, nil
 }
 
-func HalToClouddriver(h client.HalConfig) (client.ClouddriverConfig, error) {
-	c := client.ClouddriverConfig{
+func HalToClouddriver(h *client.HalConfig) (*client.ClouddriverConfig, error) {
+	c := &client.ClouddriverConfig{
 		Kubernetes:     h.GetProviders().GetKubernetes(),
 		Google:         h.GetProviders().GetGoogle(),
 		Appengine:      h.GetProviders().GetAppengine(),
@@ -61,8 +61,8 @@ func HalToClouddriver(h client.HalConfig) (client.ClouddriverConfig, error) {
 	return c, nil
 }
 
-func HalToEcho(h client.HalConfig) (client.EchoConfig, error) {
-	c := client.EchoConfig{
+func HalToEcho(h *client.HalConfig) (*client.EchoConfig, error) {
+	c := &client.EchoConfig{
 		Slack:        h.GetNotifications().GetSlack(),
 		Twilio:       h.GetNotifications().GetTwilio(),
 		GithubStatus: h.GetNotifications().GetGithubStatus(),
