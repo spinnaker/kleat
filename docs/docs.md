@@ -1247,7 +1247,7 @@ Configuration for the ECS provider.
 <a name="proto.GoogleCloudBuildAccount"></a>
 
 ### GoogleCloudBuildAccount
-
+Configuration for a Google Cloud Build account.
 
 
 | Field | Type | Label | Description |
@@ -1266,7 +1266,7 @@ Configuration for the ECS provider.
 <a name="proto.GoogleCloudBuildProvider"></a>
 
 ### GoogleCloudBuildProvider
-
+Configuration for the Google Cloud Build Provider.
 
 
 | Field | Type | Label | Description |

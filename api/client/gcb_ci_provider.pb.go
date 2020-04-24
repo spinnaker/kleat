@@ -25,6 +25,7 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
+// Configuration for the Google Cloud Build Provider.
 type GoogleCloudBuildProvider struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -80,6 +81,7 @@ func (x *GoogleCloudBuildProvider) GetAccounts() []*GoogleCloudBuildAccount {
 	return nil
 }
 
+// Configuration for a Google Cloud Build account.
 type GoogleCloudBuildAccount struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
