@@ -21,6 +21,7 @@ import (
 	"testing"
 
 	"github.com/spinnaker/kleat/api/client/config"
+
 	"github.com/spinnaker/kleat/pkg/parse_hal"
 	"sigs.k8s.io/yaml"
 )
@@ -31,10 +32,7 @@ func TestHalToClouddriver(t *testing.T) {
 		t.Errorf(err.Error())
 	}
 
-	gotC, err := parse_hal.HalToClouddriver(h)
-	if err != nil {
-		t.Errorf(err.Error())
-	}
+	gotC := parse_hal.HalToClouddriver(h)
 
 	wantC, err := parseClouddriverConfig("./data/clouddriver.yml")
 	if err != nil {

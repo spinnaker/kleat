@@ -21,6 +21,7 @@ import (
 	"testing"
 
 	"github.com/spinnaker/kleat/api/client/config"
+
 	"github.com/spinnaker/kleat/pkg/parse_hal"
 	"sigs.k8s.io/yaml"
 )
@@ -31,10 +32,7 @@ func TestHalToEcho(t *testing.T) {
 		t.Errorf(err.Error())
 	}
 
-	gotE, err := parse_hal.HalToEcho(h)
-	if err != nil {
-		t.Errorf(err.Error())
-	}
+	gotE := parse_hal.HalToEcho(h)
 
 	wantE, err := parseEchoConfig("./data/echo.yml")
 	if err != nil {

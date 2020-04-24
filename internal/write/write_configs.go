@@ -56,10 +56,7 @@ func WriteConfigs(hal string, d string) error {
 }
 
 func writeClouddriver(h *config.Hal, d string) error {
-	c, err := parse_hal.HalToClouddriver(h)
-	if err != nil {
-		return err
-	}
+	c := parse_hal.HalToClouddriver(h)
 
 	f, err := os.Create(filepath.Join(d, "clouddriver.yml"))
 	if err != nil {
@@ -73,10 +70,7 @@ func writeClouddriver(h *config.Hal, d string) error {
 }
 
 func writeEcho(h *config.Hal, d string) error {
-	c, err := parse_hal.HalToEcho(h)
-	if err != nil {
-		return err
-	}
+	c := parse_hal.HalToEcho(h)
 
 	f, err := os.Create(filepath.Join(d, "echo.yml"))
 	if err != nil {
