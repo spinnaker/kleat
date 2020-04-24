@@ -29,10 +29,7 @@ import (
 
 func TestEmptyHalConfigToClouddriver(t *testing.T) {
 	h := &config.Hal{}
-	gotC, err := HalToClouddriver(h)
-	if err != nil {
-		t.Errorf("Error writing clouddriver config %s", err)
-	}
+	gotC := HalToClouddriver(h)
 	wantC := &config.Clouddriver{}
 	if !reflect.DeepEqual(gotC, wantC) {
 		t.Errorf("Expected empty hal config to generate empty clouddriver config, got %v", gotC)
@@ -43,10 +40,7 @@ func TestEmptyProvidersToClouddriver(t *testing.T) {
 	h := &config.Hal{
 		Providers: &config.Hal_Providers{},
 	}
-	gotC, err := HalToClouddriver(h)
-	if err != nil {
-		t.Errorf("Error writing clouddriver config %s", err)
-	}
+	gotC := HalToClouddriver(h)
 	wantC := &config.Clouddriver{}
 	if !reflect.DeepEqual(gotC, wantC) {
 		t.Errorf("Expected empty hal config to generate empty clouddriver config, got %v", gotC)
@@ -59,10 +53,7 @@ func TestEmptyKubernetesProviderToClouddriverConfig(t *testing.T) {
 			Kubernetes: &cloudprovider.KubernetesProvider{},
 		},
 	}
-	gotC, err := HalToClouddriver(h)
-	if err != nil {
-		t.Errorf("Error writing clouddriver config %s", err)
-	}
+	gotC := HalToClouddriver(h)
 	wantC := &config.Clouddriver{
 		Kubernetes: &cloudprovider.KubernetesProvider{},
 	}
@@ -88,10 +79,7 @@ func TestKubernetesAccountToClouddriver(t *testing.T) {
 			Kubernetes: k,
 		},
 	}
-	gotC, err := HalToClouddriver(h)
-	if err != nil {
-		t.Errorf("Error writing clouddriver config %s", err)
-	}
+	gotC := HalToClouddriver(h)
 	wantC := &config.Clouddriver{
 		Kubernetes: k,
 	}
@@ -104,10 +92,7 @@ func TestEmptyArtifactsToHalConfig(t *testing.T) {
 	h := &config.Hal{
 		Artifacts: &artifact.ArtifactProviders{},
 	}
-	gotC, err := HalToClouddriver(h)
-	if err != nil {
-		t.Errorf("Error writing clouddriver config %s", err)
-	}
+	gotC := HalToClouddriver(h)
 	wantC := &config.Clouddriver{
 		Artifacts: &artifact.ArtifactProviders{},
 	}
@@ -123,10 +108,7 @@ func TestEmptyGcsArtifactConfigToHalConfig(t *testing.T) {
 	h := &config.Hal{
 		Artifacts: a,
 	}
-	gotC, err := HalToClouddriver(h)
-	if err != nil {
-		t.Errorf("Error writing clouddriver config %s", err)
-	}
+	gotC := HalToClouddriver(h)
 	wantC := &config.Clouddriver{
 		Artifacts: a,
 	}
@@ -150,10 +132,7 @@ func TestGcsArtifactAccountToHalConfig(t *testing.T) {
 	h := &config.Hal{
 		Artifacts: a,
 	}
-	gotC, err := HalToClouddriver(h)
-	if err != nil {
-		t.Errorf("Error writing clouddriver config %s", err)
-	}
+	gotC := HalToClouddriver(h)
 	wantC := &config.Clouddriver{
 		Artifacts: a,
 	}
@@ -164,10 +143,7 @@ func TestGcsArtifactAccountToHalConfig(t *testing.T) {
 
 func TestEmptyHalConfigToEcho(t *testing.T) {
 	h := &config.Hal{}
-	gotE, err := HalToEcho(h)
-	if err != nil {
-		t.Errorf("Error writing echo config %s", err)
-	}
+	gotE := HalToEcho(h)
 	wantE := &config.Echo{}
 	if !reflect.DeepEqual(gotE, wantE) {
 		t.Errorf("Expected empty hal config to generate empty echo config, got %v", gotE)
@@ -178,10 +154,7 @@ func TestEmptyNotificationsToEchoConfig(t *testing.T) {
 	h := &config.Hal{
 		Notifications: &config.Hal_Notifications{},
 	}
-	gotE, err := HalToEcho(h)
-	if err != nil {
-		t.Errorf("Error writing echo config %s", err)
-	}
+	gotE := HalToEcho(h)
 	wantE := &config.Echo{}
 	if !reflect.DeepEqual(gotE, wantE) {
 		t.Errorf("Expected empty hal config to generate empty echo config, got %v", gotE)
@@ -200,10 +173,7 @@ func TestSlackNotificationToEchoConfig(t *testing.T) {
 			Slack: slack,
 		},
 	}
-	gotE, err := HalToEcho(h)
-	if err != nil {
-		t.Errorf("Error writing echo config %s", err)
-	}
+	gotE := HalToEcho(h)
 	wantE := &config.Echo{
 		Slack: slack,
 	}
@@ -216,10 +186,7 @@ func TestEmptyPubsubsToEchoConfig(t *testing.T) {
 	h := &config.Hal{
 		Pubsub: &pubsub.PubsubProviders{},
 	}
-	gotE, err := HalToEcho(h)
-	if err != nil {
-		t.Errorf("Error writing echo config %s", err)
-	}
+	gotE := HalToEcho(h)
 	wantE := &config.Echo{
 		Pubsub: &pubsub.PubsubProviders{},
 	}
@@ -235,10 +202,7 @@ func TestEmptyGooglePubsubToEchoConfig(t *testing.T) {
 	h := &config.Hal{
 		Pubsub: pubsub,
 	}
-	gotE, err := HalToEcho(h)
-	if err != nil {
-		t.Errorf("Error writing echo config %s", err)
-	}
+	gotE := HalToEcho(h)
 	wantE := &config.Echo{
 		Pubsub: pubsub,
 	}
@@ -271,10 +235,7 @@ func TestGooglePubsubToEchoConfig(t *testing.T) {
 	h := &config.Hal{
 		Pubsub: pubsub,
 	}
-	gotE, err := HalToEcho(h)
-	if err != nil {
-		t.Errorf("Error writing echo config %s", err)
-	}
+	gotE := HalToEcho(h)
 	wantE := &config.Echo{
 		Pubsub: pubsub,
 	}
@@ -287,10 +248,7 @@ func TestEmptyCiConfigToEcho(t *testing.T) {
 	h := &config.Hal{
 		Ci: &config.Hal_CiProviders{},
 	}
-	gotE, err := HalToEcho(h)
-	if err != nil {
-		t.Errorf("Error writing echo config %s", err)
-	}
+	gotE := HalToEcho(h)
 	wantE := &config.Echo{}
 	if !reflect.DeepEqual(gotE, wantE) {
 		t.Errorf("Expected empty CI config to lead to empty echo config, got %v", gotE)
@@ -305,10 +263,7 @@ func TestEmptyGcbConfigAccountToEcho(t *testing.T) {
 	h := &config.Hal{
 		Ci: cis,
 	}
-	gotE, err := HalToEcho(h)
-	if err != nil {
-		t.Errorf("Error writing echo config %s", err)
-	}
+	gotE := HalToEcho(h)
 	wantE := &config.Echo{
 		Gcb: gcb,
 	}
@@ -334,10 +289,7 @@ func TestGcbAccountToEcho(t *testing.T) {
 	h := &config.Hal{
 		Ci: cis,
 	}
-	gotE, err := HalToEcho(h)
-	if err != nil {
-		t.Errorf("Error writing echo config %s", err)
-	}
+	gotE := HalToEcho(h)
 	wantE := &config.Echo{
 		Gcb: gcb,
 	}
@@ -350,10 +302,7 @@ func TestEmptyStatsToEcho(t *testing.T) {
 	h := &config.Hal{
 		Stats: &client.Stats{},
 	}
-	gotE, err := HalToEcho(h)
-	if err != nil {
-		t.Errorf("Error writing echo config %s", err)
-	}
+	gotE := HalToEcho(h)
 	wantE := &config.Echo{
 		Stats: &client.Stats{},
 	}
@@ -367,10 +316,7 @@ func TestStatsEnabledToEcho(t *testing.T) {
 	h := &config.Hal{
 		Stats: stats,
 	}
-	gotE, err := HalToEcho(h)
-	if err != nil {
-		t.Errorf("Error writing echo config %s", err)
-	}
+	gotE := HalToEcho(h)
 	wantE := &config.Echo{
 		Stats: stats,
 	}
@@ -384,10 +330,7 @@ func TestStatsDisabledToEcho(t *testing.T) {
 	h := &config.Hal{
 		Stats: stats,
 	}
-	gotE, err := HalToEcho(h)
-	if err != nil {
-		t.Errorf("Error writing echo config %s", err)
-	}
+	gotE := HalToEcho(h)
 	wantE := &config.Echo{
 		Stats: stats,
 	}

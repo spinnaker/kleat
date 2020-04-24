@@ -34,19 +34,18 @@ func ParseHalConfig(fn string) (*config.Hal, error) {
 	return &h, nil
 }
 
-func HalToFront50(h *config.Hal) (*config.Front50, error) {
-	f := &config.Front50{
+func HalToFront50(h *config.Hal) *config.Front50 {
+	return &config.Front50{
 		Spinnaker: &config.Front50_Spinnaker{
 			Gcs:    h.GetPersistentStorage().GetGcs(),
 			Azs:    h.GetPersistentStorage().GetAzs(),
 			Oracle: h.GetPersistentStorage().GetOracle(),
 		},
 	}
-	return f, nil
 }
 
-func HalToClouddriver(h *config.Hal) (*config.Clouddriver, error) {
-	c := &config.Clouddriver{
+func HalToClouddriver(h *config.Hal) *config.Clouddriver {
+	return &config.Clouddriver{
 		Kubernetes:     h.GetProviders().GetKubernetes(),
 		Google:         h.GetProviders().GetGoogle(),
 		Appengine:      h.GetProviders().GetAppengine(),
@@ -60,11 +59,10 @@ func HalToClouddriver(h *config.Hal) (*config.Clouddriver, error) {
 		Oracle:         h.GetProviders().GetOracle(),
 		Artifacts:      h.GetArtifacts(),
 	}
-	return c, nil
 }
 
-func HalToEcho(h *config.Hal) (*config.Echo, error) {
-	c := &config.Echo{
+func HalToEcho(h *config.Hal) *config.Echo {
+	return &config.Echo{
 		Slack:        h.GetNotifications().GetSlack(),
 		Twilio:       h.GetNotifications().GetTwilio(),
 		GithubStatus: h.GetNotifications().GetGithubStatus(),
@@ -73,28 +71,12 @@ func HalToEcho(h *config.Hal) (*config.Echo, error) {
 		Gcb:          h.GetCi().GetGcb(),
 		Stats:        h.GetStats(),
 	}
-	return c, nil
 }
 
-func HalToServiceConfigs(h *config.Hal) (*config.Services, error) {
-	c, err := HalToClouddriver(h)
-	if err != nil {
-		return nil, err
-	}
-
-	e, err := HalToEcho(h)
-	if err != nil {
-		return nil, err
-	}
-
-	f, err := HalToFront50(h)
-	if err != nil {
-		return nil, err
-	}
-
+func HalToServiceConfigs(h *config.Hal) *config.Services {
 	return &config.Services{
-		Clouddriver: c,
-		Echo:        e,
-		Front50:     f,
-	}, nil
+		Clouddriver: HalToClouddriver(h),
+		Echo:        HalToEcho(h),
+		Front50:     HalToFront50(h),
+	}
 }

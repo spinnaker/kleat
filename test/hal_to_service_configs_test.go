@@ -30,28 +30,15 @@ func TestHalToServiceConfigs(t *testing.T) {
 		t.Errorf(err.Error())
 	}
 
-	gotS, err := parse_hal.HalToServiceConfigs(h)
-	if err != nil {
-		t.Errorf(err.Error())
-	}
-
-	c, err := parse_hal.HalToClouddriver(h)
-	if err != nil {
-		t.Errorf(err.Error())
-	}
-	e, err := parse_hal.HalToEcho(h)
-	if err != nil {
-		t.Errorf(err.Error())
-	}
-	f, err := parse_hal.HalToFront50(h)
+	gotS := parse_hal.HalToServiceConfigs(h)
 	if err != nil {
 		t.Errorf(err.Error())
 	}
 
 	wantS := &config.Services{
-		Clouddriver: c,
-		Echo:        e,
-		Front50:     f,
+		Clouddriver: parse_hal.HalToClouddriver(h),
+		Echo:        parse_hal.HalToEcho(h),
+		Front50:     parse_hal.HalToFront50(h),
 	}
 
 	if !reflect.DeepEqual(gotS, wantS) {
