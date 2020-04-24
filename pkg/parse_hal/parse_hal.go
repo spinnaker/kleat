@@ -16,8 +16,9 @@
 package parse_hal
 
 import (
-	"github.com/spinnaker/kleat/api/client"
 	"io/ioutil"
+
+	"github.com/spinnaker/kleat/api/client"
 	"sigs.k8s.io/yaml"
 )
 
@@ -69,6 +70,7 @@ func HalToEcho(h *client.HalConfig) (*client.EchoConfig, error) {
 		Artifacts:    h.GetArtifacts(),
 		Pubsub:       h.GetPubsub(),
 		Gcb:          h.GetCi().GetGcb(),
+		Stats:        h.GetStats(),
 	}
 	return c, nil
 }

@@ -102,3 +102,5 @@ pubsub:
       topicName: my-topic
       jsonPath: /var/secrets/my-publisher-token
       content: NOTIFICATIONS
+stats:
+  enabled: false

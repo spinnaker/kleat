@@ -19,6 +19,7 @@ import "artifacts.proto";
 import "notifications.proto";
 import "pubsub.proto";
 import "gcb_ci_provider.proto";
+import "stats.proto";
 
 message HalConfig {
   PersistentStorage persistentStorage = 1;
@@ -27,6 +28,7 @@ message HalConfig {
   Notifications notifications = 4;
   PubsubProviders pubsub = 5;
   CiProviders ci = 6;
+  Stats stats = 7;
 
   message PersistentStorage {
     string persistentStoreType = 1;

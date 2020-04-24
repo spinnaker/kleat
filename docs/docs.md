@@ -290,6 +290,13 @@
   
   
 
+- [stats.proto](#stats.proto)
+    - [Stats](#proto.Stats)
+  
+  
+  
+  
+
 - [Scalar Value Types](#scalar-value-types)
 
 
@@ -1115,6 +1122,7 @@ Configuration for the Docker Registry provider.
 | artifacts | [ArtifactProviders](#proto.ArtifactProviders) |  |  |
 | pubsub | [PubsubProviders](#proto.PubsubProviders) |  |  |
 | gcb | [GoogleCloudBuildProvider](#proto.GoogleCloudBuildProvider) |  |  |
+| stats | [Stats](#proto.Stats) |  |  |
 
 
 
@@ -1661,6 +1669,7 @@ Image source configuration.
 | notifications | [HalConfig.Notifications](#proto.HalConfig.Notifications) |  |  |
 | pubsub | [PubsubProviders](#proto.PubsubProviders) |  |  |
 | ci | [HalConfig.CiProviders](#proto.HalConfig.CiProviders) |  |  |
+| stats | [Stats](#proto.Stats) |  |  |
 
 
 
@@ -2604,6 +2613,37 @@ Configuration for the S3 artifact provider.
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether the S3 artifact provider is enabled. |
 | accounts | [S3ArtifactAccount](#proto.S3ArtifactAccount) | repeated | The list of configured S3 artifact accounts. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="stats.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## stats.proto
+
+
+
+<a name="proto.Stats"></a>
+
+### Stats
+Configuration for optional collection of usage metrics.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether to send usage metrics. |
 
 
 
