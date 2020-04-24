@@ -3,21 +3,71 @@ package proto;
 
 option go_package = "github.com/spinnaker/kleat/api/client";
 
-message GCS {
+// Configuration for a Google Cloud Storage persistent store
+message GcsPersistentStore {
+    // Whether this persistent store is enabled.
+    string enabled = 1;
+
     // A path to a JSON service account with permission to read and write to the bucket to be used as a backing store.
-    string jsonPath = 1;
+    string jsonPath = 2;
 
     // The Google Cloud Platform project you are using to host the GCS bucket as a backing store.
-    string project = 2;
+    string project = 3;
 
     // The name of a storage bucket that your specified account has access to. If not specified, a
     // random name will be chosen. If you specify a globally unique bucket name that does not exist
     // yet, Halyard will create that bucket for you.
-    string bucket = 3;
+    string bucket = 4;
 
     // The root folder in the chosen bucket to place all of Spinnaker's persistent data in.
-    string rootFolder = 4;
+    string rootFolder = 5;
 
     // This is only required if the bucket you specify does not exist yet.
-    string bucketLocation = 5;
+    string bucketLocation = 6;
+}
+
+// Configuration for an Azure Storage persistent store.
+message AzsPersistentStore {
+    // Whether this persistent store is enabled.
+    string enabled = 1;
+
+    // The name of an Azure Storage Account.
+    string storageAccountName = 2;
+
+    // The key to access the Azure Storage Account.
+    string storageAccountKey = 3;
+
+    // The container name in the chosen storage account to place Spinnaker’s
+    // persistent data. Defaults to 'spinnaker' if unspecified.
+    string storageContainerName = 4;
+}
+
+// Configuration for an Oracle persistent store.
+message OraclePersistentStore {
+    // Whether this persistent store is enabled.
+    string enabled = 1;
+
+    // The bucket name to store persistent state object in.
+    string bucketName = 2;
+
+    // The namespace the bucket and objects should be created in.
+    string namespace = 3;
+
+    // An Oracle region (e.g., us-phoenix-1).
+    string region = 4;
+
+    // The OCID of the Oracle User you’re authenticating as.
+    string userId = 5;
+
+    // Fingerprint of the public key.
+    string fingerprint = 6;
+
+    // Path to the private key in PEM format.
+    string sshPrivateKeyFilePath = 7;
+
+    // Passphrase used for the private key, if it is encrypted.
+    string privateKeyPassphrase = 8;
+
+    // The OCID of the Oracle Tenancy to use.
+    string tenancyId = 9;
 }

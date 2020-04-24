@@ -29,6 +29,10 @@ be used as input to Kleat.
 - Halyard required Github status notifications to be configured under
   `notifications.github-status`. To match the casing of other fields, `kleat`
   requires that it be under `notifications.githubStatus`.
+- Halyard used the field `persistentStorage.persistentStoreType` to select which
+  persistent store type is enabled. Kleat does not recognize this field and
+  instead requires that the flag `enabled: true` be set on the persistent store
+  that should be used.
 
 #### Optional Changes
 
