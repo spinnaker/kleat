@@ -1,5 +1,5 @@
 syntax = "proto3";
-package proto;
+package proto.config;
 
 option go_package = "github.com/spinnaker/kleat/api/client/config";
 
@@ -17,16 +17,16 @@ import "cloudprovider/oracle.proto";
 import "artifact/artifacts.proto";
 
 message Clouddriver {
-    KubernetesProvider kubernetes = 1;
-    GoogleProvider google = 2;
-    AppengineProvider appengine = 3;
-    AwsProvider aws = 4;
-    AzureProvider azure = 5;
-    CloudFoundryProvider cloudfoundry = 6;
-    DcosProvider dcos = 7;
-    DockerRegistryProvider dockerRegistry = 8;
-    EcsProvider ecs = 9;
-    HuaweiCloudProvider huaweicloud = 10;
-    OracleProvider oracle = 11;
-    ArtifactProviders artifacts = 12;
+    cloudprovider.KubernetesProvider kubernetes = 1;
+    cloudprovider.GoogleProvider google = 2;
+    cloudprovider.AppengineProvider appengine = 3;
+    cloudprovider.AwsProvider aws = 4;
+    cloudprovider.AzureProvider azure = 5;
+    cloudprovider.CloudFoundryProvider cloudfoundry = 6;
+    cloudprovider.DcosProvider dcos = 7;
+    cloudprovider.DockerRegistryProvider dockerRegistry = 8;
+    cloudprovider.EcsProvider ecs = 9;
+    cloudprovider.HuaweiCloudProvider huaweicloud = 10;
+    cloudprovider.OracleProvider oracle = 11;
+    artifact.ArtifactProviders artifacts = 12;
 }

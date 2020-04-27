@@ -1,5 +1,5 @@
 syntax = "proto3";
-package proto;
+package proto.notification;
 
 option go_package = "github.com/spinnaker/kleat/api/client/notification";
 

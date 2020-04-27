@@ -1,5 +1,5 @@
 syntax = "proto3";
-package proto;
+package proto.ci;
 
 option go_package = "github.com/spinnaker/kleat/api/client/ci";
 

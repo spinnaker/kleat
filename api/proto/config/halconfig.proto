@@ -1,5 +1,5 @@
 syntax = "proto3";
-package proto;
+package proto.config;
 
 option go_package = "github.com/spinnaker/kleat/api/client/config";
 
@@ -22,29 +22,29 @@ import "ci/gcb.proto";
 import "stats.proto";
 
 message Hal {
-  PersistentStorage persistentStorage = 1;
+  storage.PersistentStorage persistentStorage = 1;
   Providers providers = 2;
-  ArtifactProviders artifacts = 3;
-  Notifications notifications = 4;
-  PubsubProviders pubsub = 5;
+  artifact.ArtifactProviders artifacts = 3;
+  notification.Notifications notifications = 4;
+  pubsub.PubsubProviders pubsub = 5;
   CiProviders ci = 6;
   Stats stats = 7;
 
   message Providers {
-    KubernetesProvider kubernetes = 1;
-    GoogleProvider google = 2;
-    AppengineProvider appengine = 3;
-    AwsProvider aws = 4;
-    AzureProvider azure = 5;
-    CloudFoundryProvider cloudfoundry = 6;
-    DcosProvider dcos = 7;
-    DockerRegistryProvider dockerRegistry = 8;
-    EcsProvider ecs = 9;
-    HuaweiCloudProvider huaweicloud = 10;
-    OracleProvider oracle = 11;
+    cloudprovider.KubernetesProvider kubernetes = 1;
+    cloudprovider.GoogleProvider google = 2;
+    cloudprovider.AppengineProvider appengine = 3;
+    cloudprovider.AwsProvider aws = 4;
+    cloudprovider.AzureProvider azure = 5;
+    cloudprovider.CloudFoundryProvider cloudfoundry = 6;
+    cloudprovider.DcosProvider dcos = 7;
+    cloudprovider.DockerRegistryProvider dockerRegistry = 8;
+    cloudprovider.EcsProvider ecs = 9;
+    cloudprovider.HuaweiCloudProvider huaweicloud = 10;
+    cloudprovider.OracleProvider oracle = 11;
   }
 
   message CiProviders {
-    GoogleCloudBuildProvider gcb = 1;
+    ci.GoogleCloudBuildProvider gcb = 1;
   }
 }
