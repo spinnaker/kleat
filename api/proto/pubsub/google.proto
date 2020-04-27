@@ -36,9 +36,9 @@ message GoogleSubscriber {
   // The acknowledgement deadline as configured on the Pub/Sub subscription.
   int32 ackDeadlineSeconds = 5;
 
-  // The format of the incoming message. Must be one of one of GCB, GCS, GCR,
-  // or CUSTOM. Used to translate the incoming message into Spinnaker artifacts.
-  string messageFormat = 6;
+  // The format of the incoming message. Used to translate the incoming message
+  // into Spinnaker artifacts.
+  MessageFormat messageFormat = 6;
 
   // A path to a jinja template that specifies how artifacts from this pubsub system
   // are interpreted and transformed into Spinnaker artifacts. Only used if
@@ -66,5 +66,13 @@ message GooglePublisher {
 
   // The content to publish to the topic. Must be one of ALL or NOTIFICATIONS.
   string content = 5;
+}
+
+// Represents the format of an incoming pub/sub message.
+enum MessageFormat {
+  CUSTOM = 0;
+  GCB = 1;
+  GCS = 2;
+  GCR = 3;
 }
 

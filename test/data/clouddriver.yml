@@ -249,7 +249,7 @@ kubernetes:
     - kube-public
     - kube-system
     - docs-site-v1
-    providerVersion: "2"
+    providerVersion: V2
   enabled: true
   primaryAccount: k8s
 oracle:

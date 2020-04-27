@@ -116,6 +116,7 @@
     - [Appengine](#proto.cloudprovider.Appengine)
     - [AppengineAccount](#proto.cloudprovider.AppengineAccount)
   
+    - [GcloudReleaseTrack](#proto.cloudprovider.GcloudReleaseTrack)
   
   
   
@@ -215,6 +216,7 @@
     - [KubernetesCachingPolicy](#proto.cloudprovider.KubernetesCachingPolicy)
     - [KubernetesCustomResource](#proto.cloudprovider.KubernetesCustomResource)
   
+    - [KubernetesProviderVersion](#proto.cloudprovider.KubernetesProviderVersion)
   
   
   
@@ -308,6 +310,7 @@
     - [GooglePublisher](#proto.pubsub.GooglePublisher)
     - [GoogleSubscriber](#proto.pubsub.GoogleSubscriber)
   
+    - [MessageFormat](#proto.pubsub.MessageFormat)
   
   
   
@@ -1068,7 +1071,7 @@ Configuration for an App Engine account.
 | ----- | ---- | ----- | ----------- |
 | cachingIntervalSeconds | [int32](#int32) |  | The interval in seconds at which Spinnaker will poll for updates in your App Engine clusters. |
 | environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
-| gcloudReleaseTrack | [string](#string) |  | The gcloud release track (`ALPHA`, `BETA`, or `STABLE`) that Spinnaker will use when deploying to App Engine. |
+| gcloudReleaseTrack | [GcloudReleaseTrack](#proto.cloudprovider.GcloudReleaseTrack) |  | The gcloud release track that Spinnaker will use when deploying to App Engine. |
 | gitHttpsUsername | [string](#string) |  | A username to be used when connecting to a remote git repository server over HTTPS. If set, `gitHttpsPassword` must also be set. |
 | gitHttpsPassword | [string](#string) |  | A password to be used when connecting to a remote git repository server over HTTPS. If set, `gitHttpsUsername` must also be set. |
 | githubOAuthAccessToken | [string](#string) |  | An OAuth token provided by Github for connecting to a git repository over HTTPS. See https://help.github.com/articles/creating-an-access-token-for-command-line-use for more information. |
@@ -1092,6 +1095,19 @@ Configuration for an App Engine account.
 
 
  
+
+
+<a name="proto.cloudprovider.GcloudReleaseTrack"></a>
+
+### GcloudReleaseTrack
+Represents a release track of the gcloud tool.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| STABLE | 0 |  |
+| BETA | 1 |  |
+| ALPHA | 2 |  |
+
 
  
 
@@ -2041,7 +2057,7 @@ credential that can authenticate against your Kubernetes cluster.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The name of the account. |
-| providerVersion | [string](#string) |  | Some providers support multiple versions/release tracks. This allows you to pick the version of the provider (not the resources it manages) to run within Spinnaker. |
+| providerVersion | [KubernetesProviderVersion](#proto.cloudprovider.KubernetesProviderVersion) |  | Some providers support multiple versions/release tracks. This allows you to pick the version of the provider (not the resources it manages) to run within Spinnaker. |
 | kinds | [string](#string) | repeated | A list of resource kinds this Spinnaker account can deploy and will cache. When no kinds are configured, this defaults to all kinds described here: https://spinnaker.io/reference/providers/kubernetes-v2/. This can only be set when omitKinds is empty or not set. |
 | omitKinds | [string](#string) | repeated | A list of resource kinds this Spinnaker account cannot deploy to or cache. This can only be set when kinds is empty or not set. |
 | context | [string](#string) |  | The kubernetes context to be managed by Spinnaker. See http://kubernetes.io/docs/user-guide/kubeconfig-file/#context for more information. When no context is configured for an account the `current-context` in your kubeconfig is assumed. |
@@ -2114,6 +2130,18 @@ need to explicitly register each CRD.
 
 
  
+
+
+<a name="proto.cloudprovider.KubernetesProviderVersion"></a>
+
+### KubernetesProviderVersion
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| V1 | 0 |  |
+| V2 | 1 |  |
+
 
  
 
@@ -2699,7 +2727,7 @@ Configuration for a Google Cloud Pub/Sub subscriber.
 | subscriptionName | [string](#string) |  | The name of the subscription to listen to. This identifier does not include the name of the project, and must already be configured. |
 | jsonPath | [string](#string) |  | The path to a JSON service account that Spinnaker will use as credentials. This is only needed if Spinnaker is not deployed on a Google Compute Engine VM, or needs permissions not afforded to the VM it is running on. See https://cloud.google.com/compute/docs/access/service-accounts for more information. |
 | ackDeadlineSeconds | [int32](#int32) |  | The acknowledgement deadline as configured on the Pub/Sub subscription. |
-| messageFormat | [string](#string) |  | The format of the incoming message. Must be one of one of GCB, GCS, GCR, or CUSTOM. Used to translate the incoming message into Spinnaker artifacts. |
+| messageFormat | [MessageFormat](#proto.pubsub.MessageFormat) |  | The format of the incoming message. Used to translate the incoming message into Spinnaker artifacts. |
 | templatePath | [string](#string) |  | A path to a jinja template that specifies how artifacts from this pubsub system are interpreted and transformed into Spinnaker artifacts. Only used if messageFormat is set to CUSTOM. |
 
 
@@ -2707,6 +2735,20 @@ Configuration for a Google Cloud Pub/Sub subscriber.
 
 
  
+
+
+<a name="proto.pubsub.MessageFormat"></a>
+
+### MessageFormat
+Represents the format of an incoming pub/sub message.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| CUSTOM | 0 |  |
+| GCB | 1 |  |
+| GCS | 2 |  |
+| GCR | 3 |  |
+
 
  
 
