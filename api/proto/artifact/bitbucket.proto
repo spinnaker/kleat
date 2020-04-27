@@ -4,16 +4,16 @@ package proto.artifact;
 option go_package = "github.com/spinnaker/kleat/api/client/artifact";
 
 // Configuration for the Bitbucket artifact provider.
-message BitbucketArtifactProvider {
+message Bitbucket {
     // Whether the Bitbucket artifact provider is enabled.
     bool enabled = 1;
 
     // The list of configured Bitbucket accounts.
-    repeated BitbucketArtifactAccount accounts = 2;
+    repeated BitbucketAccount accounts = 2;
 }
 
 // Configuration for a Bitbucket artifact account.
-message BitbucketArtifactAccount {
+message BitbucketAccount {
     // The name of the account.
     string name = 1;
 

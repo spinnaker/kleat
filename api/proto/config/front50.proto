@@ -12,7 +12,7 @@ message Front50 {
 }
 
 message Front50Spinnaker {
-  storage.GcsPersistentStore gcs = 1;
-  storage.AzsPersistentStore azs = 2;
-  storage.OraclePersistentStore oracle = 3;
+  storage.Gcs gcs = 1;
+  storage.Azs azs = 2;
+  storage.Oracle oracle = 3;
 }

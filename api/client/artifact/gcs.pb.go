@@ -26,7 +26,7 @@ const (
 const _ = proto.ProtoPackageIsVersion4
 
 // Configuration for the Google Cloud Storage (GCS) artifact provider.
-type GcsArtifactProvider struct {
+type Gcs struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -34,11 +34,11 @@ type GcsArtifactProvider struct {
 	// Whether the GCS artifact provider is enabled.
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// The list of configured GCS accounts.
-	Accounts []*GcsArtifactAccount `protobuf:"bytes,2,rep,name=accounts,proto3" json:"accounts,omitempty"`
+	Accounts []*GcsAccount `protobuf:"bytes,2,rep,name=accounts,proto3" json:"accounts,omitempty"`
 }
 
-func (x *GcsArtifactProvider) Reset() {
-	*x = GcsArtifactProvider{}
+func (x *Gcs) Reset() {
+	*x = Gcs{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_artifact_gcs_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -46,13 +46,13 @@ func (x *GcsArtifactProvider) Reset() {
 	}
 }
 
-func (x *GcsArtifactProvider) String() string {
+func (x *Gcs) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GcsArtifactProvider) ProtoMessage() {}
+func (*Gcs) ProtoMessage() {}
 
-func (x *GcsArtifactProvider) ProtoReflect() protoreflect.Message {
+func (x *Gcs) ProtoReflect() protoreflect.Message {
 	mi := &file_artifact_gcs_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -64,19 +64,19 @@ func (x *GcsArtifactProvider) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GcsArtifactProvider.ProtoReflect.Descriptor instead.
-func (*GcsArtifactProvider) Descriptor() ([]byte, []int) {
+// Deprecated: Use Gcs.ProtoReflect.Descriptor instead.
+func (*Gcs) Descriptor() ([]byte, []int) {
 	return file_artifact_gcs_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *GcsArtifactProvider) GetEnabled() bool {
+func (x *Gcs) GetEnabled() bool {
 	if x != nil {
 		return x.Enabled
 	}
 	return false
 }
 
-func (x *GcsArtifactProvider) GetAccounts() []*GcsArtifactAccount {
+func (x *Gcs) GetAccounts() []*GcsAccount {
 	if x != nil {
 		return x.Accounts
 	}
@@ -84,7 +84,7 @@ func (x *GcsArtifactProvider) GetAccounts() []*GcsArtifactAccount {
 }
 
 // Configuration for a GCS artifact account.
-type GcsArtifactAccount struct {
+type GcsAccount struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -97,8 +97,8 @@ type GcsArtifactAccount struct {
 	JsonPath string `protobuf:"bytes,2,opt,name=jsonPath,proto3" json:"jsonPath,omitempty"`
 }
 
-func (x *GcsArtifactAccount) Reset() {
-	*x = GcsArtifactAccount{}
+func (x *GcsAccount) Reset() {
+	*x = GcsAccount{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_artifact_gcs_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -106,13 +106,13 @@ func (x *GcsArtifactAccount) Reset() {
 	}
 }
 
-func (x *GcsArtifactAccount) String() string {
+func (x *GcsAccount) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GcsArtifactAccount) ProtoMessage() {}
+func (*GcsAccount) ProtoMessage() {}
 
-func (x *GcsArtifactAccount) ProtoReflect() protoreflect.Message {
+func (x *GcsAccount) ProtoReflect() protoreflect.Message {
 	mi := &file_artifact_gcs_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -124,19 +124,19 @@ func (x *GcsArtifactAccount) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GcsArtifactAccount.ProtoReflect.Descriptor instead.
-func (*GcsArtifactAccount) Descriptor() ([]byte, []int) {
+// Deprecated: Use GcsAccount.ProtoReflect.Descriptor instead.
+func (*GcsAccount) Descriptor() ([]byte, []int) {
 	return file_artifact_gcs_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *GcsArtifactAccount) GetName() string {
+func (x *GcsAccount) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *GcsArtifactAccount) GetJsonPath() string {
+func (x *GcsAccount) GetJsonPath() string {
 	if x != nil {
 		return x.JsonPath
 	}
@@ -148,15 +148,13 @@ var File_artifact_gcs_proto protoreflect.FileDescriptor
 var file_artifact_gcs_proto_rawDesc = []byte{
 	0x0a, 0x12, 0x61, 0x72, 0x74, 0x69, 0x66, 0x61, 0x63, 0x74, 0x2f, 0x67, 0x63, 0x73, 0x2e, 0x70,
 	0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x61, 0x72, 0x74, 0x69,
-	0x66, 0x61, 0x63, 0x74, 0x22, 0x6f, 0x0a, 0x13, 0x47, 0x63, 0x73, 0x41, 0x72, 0x74, 0x69, 0x66,
-	0x61, 0x63, 0x74, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x12, 0x18, 0x0a, 0x07, 0x65,
+	0x66, 0x61, 0x63, 0x74, 0x22, 0x57, 0x0a, 0x03, 0x47, 0x63, 0x73, 0x12, 0x18, 0x0a, 0x07, 0x65,
 	0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x65, 0x6e,
-	0x61, 0x62, 0x6c, 0x65, 0x64, 0x12, 0x3e, 0x0a, 0x08, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74,
-	0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x22, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e,
-	0x61, 0x72, 0x74, 0x69, 0x66, 0x61, 0x63, 0x74, 0x2e, 0x47, 0x63, 0x73, 0x41, 0x72, 0x74, 0x69,
-	0x66, 0x61, 0x63, 0x74, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x08, 0x61, 0x63, 0x63,
-	0x6f, 0x75, 0x6e, 0x74, 0x73, 0x22, 0x44, 0x0a, 0x12, 0x47, 0x63, 0x73, 0x41, 0x72, 0x74, 0x69,
-	0x66, 0x61, 0x63, 0x74, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e,
+	0x61, 0x62, 0x6c, 0x65, 0x64, 0x12, 0x36, 0x0a, 0x08, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74,
+	0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e,
+	0x61, 0x72, 0x74, 0x69, 0x66, 0x61, 0x63, 0x74, 0x2e, 0x47, 0x63, 0x73, 0x41, 0x63, 0x63, 0x6f,
+	0x75, 0x6e, 0x74, 0x52, 0x08, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x22, 0x3c, 0x0a,
+	0x0a, 0x47, 0x63, 0x73, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e,
 	0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12,
 	0x1a, 0x0a, 0x08, 0x6a, 0x73, 0x6f, 0x6e, 0x50, 0x61, 0x74, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28,
 	0x09, 0x52, 0x08, 0x6a, 0x73, 0x6f, 0x6e, 0x50, 0x61, 0x74, 0x68, 0x42, 0x30, 0x5a, 0x2e, 0x67,
@@ -180,11 +178,11 @@ func file_artifact_gcs_proto_rawDescGZIP() []byte {
 
 var file_artifact_gcs_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_artifact_gcs_proto_goTypes = []interface{}{
-	(*GcsArtifactProvider)(nil), // 0: proto.artifact.GcsArtifactProvider
-	(*GcsArtifactAccount)(nil),  // 1: proto.artifact.GcsArtifactAccount
+	(*Gcs)(nil),        // 0: proto.artifact.Gcs
+	(*GcsAccount)(nil), // 1: proto.artifact.GcsAccount
 }
 var file_artifact_gcs_proto_depIdxs = []int32{
-	1, // 0: proto.artifact.GcsArtifactProvider.accounts:type_name -> proto.artifact.GcsArtifactAccount
+	1, // 0: proto.artifact.Gcs.accounts:type_name -> proto.artifact.GcsAccount
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
@@ -199,7 +197,7 @@ func file_artifact_gcs_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_artifact_gcs_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GcsArtifactProvider); i {
+			switch v := v.(*Gcs); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -211,7 +209,7 @@ func file_artifact_gcs_proto_init() {
 			}
 		}
 		file_artifact_gcs_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GcsArtifactAccount); i {
+			switch v := v.(*GcsAccount); i {
 			case 0:
 				return &v.state
 			case 1:

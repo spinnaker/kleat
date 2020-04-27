@@ -6,7 +6,7 @@ option go_package = "github.com/spinnaker/kleat/api/client/ci";
 import "permissions.proto";
 
 // Configuration for the Google Cloud Build Provider.
-message GoogleCloudBuildProvider {
+message GoogleCloudBuild {
   bool enabled = 1;
   repeated GoogleCloudBuildAccount accounts = 2;
 }

@@ -4,17 +4,17 @@ package proto.artifact;
 option go_package = "github.com/spinnaker/kleat/api/client/artifact";
 
 // Configuration for the GitLab artifact provider.
-message GitLabArtifactProvider {
+message GitLab {
     // Whether the GitLab artifact provider is enabled.
     bool enabled = 1;
 
     // The list of configured GitLab accounts.
-    repeated GitLabArtifactAccount accounts = 2;
+    repeated GitLabAccount accounts = 2;
 }
 
 // Configuration for a GitLab artifact account. Either `token` or
 // `tokenFile` should be specified as means of authentication.
-message GitLabArtifactAccount {
+message GitLabAccount {
     // The name of the account.
     string name = 1;
 

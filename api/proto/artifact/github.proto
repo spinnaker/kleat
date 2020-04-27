@@ -4,18 +4,18 @@ package proto.artifact;
 option go_package = "github.com/spinnaker/kleat/api/client/artifact";
 
 // Configuration for the GitHub artifact provider.
-message GitHubArtifactProvider {
+message GitHub {
     // Whether the GitHub artifact provider is enabled.
     bool enabled = 1;
 
     // The list of configured GitHub accounts.
-    repeated GitHubArtifactAccount accounts = 2;
+    repeated GitHubAccount accounts = 2;
 }
 
 // Configuration for a GitHub artifact account. Either `username` and
 // `password`, `usernamePasswordFile`, `token`, or `tokenFile` should be
 // specified as means of authentication.
-message GitHubArtifactAccount {
+message GitHubAccount {
     // The name of the account.
     string name = 1;
 

@@ -4,7 +4,7 @@ package proto.storage;
 option go_package = "github.com/spinnaker/kleat/api/client/storage";
 
 // Configuration for a Google Cloud Storage persistent store
-message GcsPersistentStore {
+message Gcs {
     // Whether this persistent store is enabled.
     string enabled = 1;
 

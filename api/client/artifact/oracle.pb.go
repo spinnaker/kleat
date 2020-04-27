@@ -26,7 +26,7 @@ const (
 const _ = proto.ProtoPackageIsVersion4
 
 // Configuration for the Oracle artifact provider.
-type OracleArtifactProvider struct {
+type Oracle struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -34,11 +34,11 @@ type OracleArtifactProvider struct {
 	// Whether the Oracle artifact provider is enabled.
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// The list of configured Oracle artifact accounts.
-	Accounts []*OracleArtifactAccount `protobuf:"bytes,2,rep,name=accounts,proto3" json:"accounts,omitempty"`
+	Accounts []*OracleAccount `protobuf:"bytes,2,rep,name=accounts,proto3" json:"accounts,omitempty"`
 }
 
-func (x *OracleArtifactProvider) Reset() {
-	*x = OracleArtifactProvider{}
+func (x *Oracle) Reset() {
+	*x = Oracle{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_artifact_oracle_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -46,13 +46,13 @@ func (x *OracleArtifactProvider) Reset() {
 	}
 }
 
-func (x *OracleArtifactProvider) String() string {
+func (x *Oracle) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OracleArtifactProvider) ProtoMessage() {}
+func (*Oracle) ProtoMessage() {}
 
-func (x *OracleArtifactProvider) ProtoReflect() protoreflect.Message {
+func (x *Oracle) ProtoReflect() protoreflect.Message {
 	mi := &file_artifact_oracle_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -64,19 +64,19 @@ func (x *OracleArtifactProvider) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use OracleArtifactProvider.ProtoReflect.Descriptor instead.
-func (*OracleArtifactProvider) Descriptor() ([]byte, []int) {
+// Deprecated: Use Oracle.ProtoReflect.Descriptor instead.
+func (*Oracle) Descriptor() ([]byte, []int) {
 	return file_artifact_oracle_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *OracleArtifactProvider) GetEnabled() bool {
+func (x *Oracle) GetEnabled() bool {
 	if x != nil {
 		return x.Enabled
 	}
 	return false
 }
 
-func (x *OracleArtifactProvider) GetAccounts() []*OracleArtifactAccount {
+func (x *Oracle) GetAccounts() []*OracleAccount {
 	if x != nil {
 		return x.Accounts
 	}
@@ -84,7 +84,7 @@ func (x *OracleArtifactProvider) GetAccounts() []*OracleArtifactAccount {
 }
 
 // Configuration for an Oracle artifact account.
-type OracleArtifactAccount struct {
+type OracleAccount struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -107,8 +107,8 @@ type OracleArtifactAccount struct {
 	UserId string `protobuf:"bytes,8,opt,name=userId,proto3" json:"userId,omitempty"`
 }
 
-func (x *OracleArtifactAccount) Reset() {
-	*x = OracleArtifactAccount{}
+func (x *OracleAccount) Reset() {
+	*x = OracleAccount{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_artifact_oracle_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -116,13 +116,13 @@ func (x *OracleArtifactAccount) Reset() {
 	}
 }
 
-func (x *OracleArtifactAccount) String() string {
+func (x *OracleAccount) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OracleArtifactAccount) ProtoMessage() {}
+func (*OracleAccount) ProtoMessage() {}
 
-func (x *OracleArtifactAccount) ProtoReflect() protoreflect.Message {
+func (x *OracleAccount) ProtoReflect() protoreflect.Message {
 	mi := &file_artifact_oracle_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -134,61 +134,61 @@ func (x *OracleArtifactAccount) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use OracleArtifactAccount.ProtoReflect.Descriptor instead.
-func (*OracleArtifactAccount) Descriptor() ([]byte, []int) {
+// Deprecated: Use OracleAccount.ProtoReflect.Descriptor instead.
+func (*OracleAccount) Descriptor() ([]byte, []int) {
 	return file_artifact_oracle_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *OracleArtifactAccount) GetName() string {
+func (x *OracleAccount) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *OracleArtifactAccount) GetFingerprint() string {
+func (x *OracleAccount) GetFingerprint() string {
 	if x != nil {
 		return x.Fingerprint
 	}
 	return ""
 }
 
-func (x *OracleArtifactAccount) GetNamespace() string {
+func (x *OracleAccount) GetNamespace() string {
 	if x != nil {
 		return x.Namespace
 	}
 	return ""
 }
 
-func (x *OracleArtifactAccount) GetPrivateKeyPassphrase() string {
+func (x *OracleAccount) GetPrivateKeyPassphrase() string {
 	if x != nil {
 		return x.PrivateKeyPassphrase
 	}
 	return ""
 }
 
-func (x *OracleArtifactAccount) GetRegion() string {
+func (x *OracleAccount) GetRegion() string {
 	if x != nil {
 		return x.Region
 	}
 	return ""
 }
 
-func (x *OracleArtifactAccount) GetSshPrivateKeyFilePath() string {
+func (x *OracleAccount) GetSshPrivateKeyFilePath() string {
 	if x != nil {
 		return x.SshPrivateKeyFilePath
 	}
 	return ""
 }
 
-func (x *OracleArtifactAccount) GetTenancyId() string {
+func (x *OracleAccount) GetTenancyId() string {
 	if x != nil {
 		return x.TenancyId
 	}
 	return ""
 }
 
-func (x *OracleArtifactAccount) GetUserId() string {
+func (x *OracleAccount) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
@@ -200,16 +200,14 @@ var File_artifact_oracle_proto protoreflect.FileDescriptor
 var file_artifact_oracle_proto_rawDesc = []byte{
 	0x0a, 0x15, 0x61, 0x72, 0x74, 0x69, 0x66, 0x61, 0x63, 0x74, 0x2f, 0x6f, 0x72, 0x61, 0x63, 0x6c,
 	0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x61,
-	0x72, 0x74, 0x69, 0x66, 0x61, 0x63, 0x74, 0x22, 0x75, 0x0a, 0x16, 0x4f, 0x72, 0x61, 0x63, 0x6c,
-	0x65, 0x41, 0x72, 0x74, 0x69, 0x66, 0x61, 0x63, 0x74, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65,
-	0x72, 0x12, 0x18, 0x0a, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x08, 0x52, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x12, 0x41, 0x0a, 0x08, 0x61,
-	0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x25, 0x2e,
+	0x72, 0x74, 0x69, 0x66, 0x61, 0x63, 0x74, 0x22, 0x5d, 0x0a, 0x06, 0x4f, 0x72, 0x61, 0x63, 0x6c,
+	0x65, 0x12, 0x18, 0x0a, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x08, 0x52, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x12, 0x39, 0x0a, 0x08, 0x61,
+	0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1d, 0x2e,
 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x61, 0x72, 0x74, 0x69, 0x66, 0x61, 0x63, 0x74, 0x2e, 0x4f,
-	0x72, 0x61, 0x63, 0x6c, 0x65, 0x41, 0x72, 0x74, 0x69, 0x66, 0x61, 0x63, 0x74, 0x41, 0x63, 0x63,
-	0x6f, 0x75, 0x6e, 0x74, 0x52, 0x08, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x22, 0xa3,
-	0x02, 0x0a, 0x15, 0x4f, 0x72, 0x61, 0x63, 0x6c, 0x65, 0x41, 0x72, 0x74, 0x69, 0x66, 0x61, 0x63,
-	0x74, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65,
+	0x72, 0x61, 0x63, 0x6c, 0x65, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x08, 0x61, 0x63,
+	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x22, 0x9b, 0x02, 0x0a, 0x0d, 0x4f, 0x72, 0x61, 0x63, 0x6c,
+	0x65, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65,
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x20, 0x0a, 0x0b,
 	0x66, 0x69, 0x6e, 0x67, 0x65, 0x72, 0x70, 0x72, 0x69, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28,
 	0x09, 0x52, 0x0b, 0x66, 0x69, 0x6e, 0x67, 0x65, 0x72, 0x70, 0x72, 0x69, 0x6e, 0x74, 0x12, 0x1c,
@@ -246,11 +244,11 @@ func file_artifact_oracle_proto_rawDescGZIP() []byte {
 
 var file_artifact_oracle_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_artifact_oracle_proto_goTypes = []interface{}{
-	(*OracleArtifactProvider)(nil), // 0: proto.artifact.OracleArtifactProvider
-	(*OracleArtifactAccount)(nil),  // 1: proto.artifact.OracleArtifactAccount
+	(*Oracle)(nil),        // 0: proto.artifact.Oracle
+	(*OracleAccount)(nil), // 1: proto.artifact.OracleAccount
 }
 var file_artifact_oracle_proto_depIdxs = []int32{
-	1, // 0: proto.artifact.OracleArtifactProvider.accounts:type_name -> proto.artifact.OracleArtifactAccount
+	1, // 0: proto.artifact.Oracle.accounts:type_name -> proto.artifact.OracleAccount
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
@@ -265,7 +263,7 @@ func file_artifact_oracle_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_artifact_oracle_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*OracleArtifactProvider); i {
+			switch v := v.(*Oracle); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -277,7 +275,7 @@ func file_artifact_oracle_proto_init() {
 			}
 		}
 		file_artifact_oracle_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*OracleArtifactAccount); i {
+			switch v := v.(*OracleAccount); i {
 			case 0:
 				return &v.state
 			case 1:

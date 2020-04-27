@@ -4,16 +4,16 @@ package proto.artifact;
 option go_package = "github.com/spinnaker/kleat/api/client/artifact";
 
 // Configuration for the Oracle artifact provider.
-message OracleArtifactProvider {
+message Oracle {
     // Whether the Oracle artifact provider is enabled.
     bool enabled = 1;
 
     // The list of configured Oracle artifact accounts.
-    repeated OracleArtifactAccount accounts = 2;
+    repeated OracleAccount accounts = 2;
 }
 
 // Configuration for an Oracle artifact account.
-message OracleArtifactAccount {
+message OracleAccount {
     // The name of the account.
     string name = 1;
 

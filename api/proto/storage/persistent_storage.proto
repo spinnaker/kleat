@@ -9,7 +9,7 @@ import "storage/oracle.proto";
 
 // Configuration of Spinnaker's persistent storage.
 message PersistentStorage {
-    GcsPersistentStore gcs = 1;
-    AzsPersistentStore azs = 2;
-    OraclePersistentStore oracle = 3;
+    Gcs gcs = 1;
+    Azs azs = 2;
+    Oracle oracle = 3;
 }

@@ -6,12 +6,12 @@ option go_package = "github.com/spinnaker/kleat/api/client/cloudprovider";
 import "permissions.proto";
 
 // Configuration for the Google Compute Engine (GCE) provider.
-message GoogleProvider {
+message GoogleComputeEngine {
     // Whether the provider is enabled.
     bool enabled = 1;
 
     // The list of configured accounts.
-    repeated GoogleAccount accounts = 2;
+    repeated GoogleComputeEngineAccount accounts = 2;
 
     // The name of the primary account.
     string primaryAccount = 3;
@@ -22,7 +22,7 @@ message GoogleProvider {
 
 // Configuration for a Spinnaker Google account. An account maps to a
 // credential that can authenticate against a GCP project.
-message GoogleAccount {
+message GoogleComputeEngineAccount {
     // The name of the account.
     string name = 1;
 

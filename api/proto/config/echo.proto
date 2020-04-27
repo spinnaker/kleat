@@ -16,8 +16,8 @@ message Echo {
     notification.Twilio twilio = 2;
     notification.GithubStatus githubStatus = 3;
 
-    artifact.ArtifactProviders artifacts = 4;
-    pubsub.PubsubProviders pubsub = 5;
-    ci.GoogleCloudBuildProvider gcb = 6;
+    artifact.Artifacts artifacts = 4;
+    pubsub.Pubsub pubsub = 5;
+    ci.GoogleCloudBuild gcb = 6;
     Stats stats = 7;
 }

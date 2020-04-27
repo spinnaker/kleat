@@ -3,117 +3,125 @@
 
 ## Table of Contents
 
-- [artifact/artifact_template.proto](#artifact/artifact_template.proto)
-    - [ArtifactTemplate](#proto.artifact.ArtifactTemplate)
-  
-  
-  
-  
-
 - [artifact/artifacts.proto](#artifact/artifacts.proto)
-    - [ArtifactProviders](#proto.artifact.ArtifactProviders)
+    - [Artifacts](#proto.artifact.Artifacts)
   
   
   
   
 
 - [artifact/bitbucket.proto](#artifact/bitbucket.proto)
-    - [BitbucketArtifactAccount](#proto.artifact.BitbucketArtifactAccount)
-    - [BitbucketArtifactProvider](#proto.artifact.BitbucketArtifactProvider)
+    - [Bitbucket](#proto.artifact.Bitbucket)
+    - [BitbucketAccount](#proto.artifact.BitbucketAccount)
   
   
   
   
 
 - [artifact/gcs.proto](#artifact/gcs.proto)
-    - [GcsArtifactAccount](#proto.artifact.GcsArtifactAccount)
-    - [GcsArtifactProvider](#proto.artifact.GcsArtifactProvider)
+    - [Gcs](#proto.artifact.Gcs)
+    - [GcsAccount](#proto.artifact.GcsAccount)
   
   
   
   
 
 - [artifact/github.proto](#artifact/github.proto)
-    - [GitHubArtifactAccount](#proto.artifact.GitHubArtifactAccount)
-    - [GitHubArtifactProvider](#proto.artifact.GitHubArtifactProvider)
+    - [GitHub](#proto.artifact.GitHub)
+    - [GitHubAccount](#proto.artifact.GitHubAccount)
   
   
   
   
 
 - [artifact/gitlab.proto](#artifact/gitlab.proto)
-    - [GitLabArtifactAccount](#proto.artifact.GitLabArtifactAccount)
-    - [GitLabArtifactProvider](#proto.artifact.GitLabArtifactProvider)
+    - [GitLab](#proto.artifact.GitLab)
+    - [GitLabAccount](#proto.artifact.GitLabAccount)
   
   
   
   
 
 - [artifact/gitrepo.proto](#artifact/gitrepo.proto)
-    - [GitRepoArtifactAccount](#proto.artifact.GitRepoArtifactAccount)
-    - [GitRepoArtifactProvider](#proto.artifact.GitRepoArtifactProvider)
+    - [GitRepo](#proto.artifact.GitRepo)
+    - [GitRepoAccount](#proto.artifact.GitRepoAccount)
   
   
   
   
 
 - [artifact/helm.proto](#artifact/helm.proto)
-    - [HelmArtifactAccount](#proto.artifact.HelmArtifactAccount)
-    - [HelmArtifactProvider](#proto.artifact.HelmArtifactProvider)
+    - [Helm](#proto.artifact.Helm)
+    - [HelmAccount](#proto.artifact.HelmAccount)
   
   
   
   
 
 - [artifact/http.proto](#artifact/http.proto)
-    - [HttpArtifactAccount](#proto.artifact.HttpArtifactAccount)
-    - [HttpArtifactProvider](#proto.artifact.HttpArtifactProvider)
+    - [Http](#proto.artifact.Http)
+    - [HttpAccount](#proto.artifact.HttpAccount)
   
   
   
   
 
 - [artifact/maven.proto](#artifact/maven.proto)
-    - [MavenArtifactAccount](#proto.artifact.MavenArtifactAccount)
-    - [MavenArtifactProvider](#proto.artifact.MavenArtifactProvider)
+    - [Maven](#proto.artifact.Maven)
+    - [MavenAccount](#proto.artifact.MavenAccount)
   
   
   
   
 
 - [artifact/oracle.proto](#artifact/oracle.proto)
-    - [OracleArtifactAccount](#proto.artifact.OracleArtifactAccount)
-    - [OracleArtifactProvider](#proto.artifact.OracleArtifactProvider)
+    - [Oracle](#proto.artifact.Oracle)
+    - [OracleAccount](#proto.artifact.OracleAccount)
   
   
   
   
 
 - [artifact/s3.proto](#artifact/s3.proto)
-    - [S3ArtifactAccount](#proto.artifact.S3ArtifactAccount)
-    - [S3ArtifactProvider](#proto.artifact.S3ArtifactProvider)
+    - [S3](#proto.artifact.S3)
+    - [S3Account](#proto.artifact.S3Account)
+  
+  
+  
+  
+
+- [artifact/template.proto](#artifact/template.proto)
+    - [Template](#proto.artifact.Template)
+  
+  
+  
+  
+
+- [ci/ci.proto](#ci/ci.proto)
+    - [Ci](#proto.ci.Ci)
   
   
   
   
 
 - [ci/gcb.proto](#ci/gcb.proto)
+    - [GoogleCloudBuild](#proto.ci.GoogleCloudBuild)
     - [GoogleCloudBuildAccount](#proto.ci.GoogleCloudBuildAccount)
-    - [GoogleCloudBuildProvider](#proto.ci.GoogleCloudBuildProvider)
   
   
   
   
 
 - [cloudprovider/appengine.proto](#cloudprovider/appengine.proto)
+    - [Appengine](#proto.cloudprovider.Appengine)
     - [AppengineAccount](#proto.cloudprovider.AppengineAccount)
-    - [AppengineProvider](#proto.cloudprovider.AppengineProvider)
   
   
   
   
 
 - [cloudprovider/aws.proto](#cloudprovider/aws.proto)
+    - [Aws](#proto.cloudprovider.Aws)
     - [AwsAccount](#proto.cloudprovider.AwsAccount)
     - [AwsBakeryDefaults](#proto.cloudprovider.AwsBakeryDefaults)
     - [AwsBaseImage](#proto.cloudprovider.AwsBaseImage)
@@ -121,7 +129,6 @@
     - [AwsFeatures](#proto.cloudprovider.AwsFeatures)
     - [AwsFeatures.CloudFormation](#proto.cloudprovider.AwsFeatures.CloudFormation)
     - [AwsLifecycleHook](#proto.cloudprovider.AwsLifecycleHook)
-    - [AwsProvider](#proto.cloudprovider.AwsProvider)
     - [AwsRegion](#proto.cloudprovider.AwsRegion)
     - [AwsVirtualizationSettings](#proto.cloudprovider.AwsVirtualizationSettings)
   
@@ -130,47 +137,47 @@
   
 
 - [cloudprovider/azure.proto](#cloudprovider/azure.proto)
+    - [Azure](#proto.cloudprovider.Azure)
     - [AzureAccount](#proto.cloudprovider.AzureAccount)
     - [AzureBakeryDefaults](#proto.cloudprovider.AzureBakeryDefaults)
     - [AzureBaseImage](#proto.cloudprovider.AzureBaseImage)
     - [AzureBaseImageSettings](#proto.cloudprovider.AzureBaseImageSettings)
-    - [AzureProvider](#proto.cloudprovider.AzureProvider)
   
   
   
   
 
 - [cloudprovider/cloudfoundry.proto](#cloudprovider/cloudfoundry.proto)
+    - [CloudFoundry](#proto.cloudprovider.CloudFoundry)
     - [CloudFoundryAccount](#proto.cloudprovider.CloudFoundryAccount)
-    - [CloudFoundryProvider](#proto.cloudprovider.CloudFoundryProvider)
   
   
   
   
 
 - [cloudprovider/dcos.proto](#cloudprovider/dcos.proto)
+    - [Dcos](#proto.cloudprovider.Dcos)
     - [DcosAccount](#proto.cloudprovider.DcosAccount)
     - [DcosAccountCluster](#proto.cloudprovider.DcosAccountCluster)
     - [DcosAccountDockerRegistry](#proto.cloudprovider.DcosAccountDockerRegistry)
     - [DcosCluster](#proto.cloudprovider.DcosCluster)
     - [DcosClusterLoadBalancer](#proto.cloudprovider.DcosClusterLoadBalancer)
-    - [DcosProvider](#proto.cloudprovider.DcosProvider)
   
   
   
   
 
 - [cloudprovider/docker_registry.proto](#cloudprovider/docker_registry.proto)
+    - [DockerRegistry](#proto.cloudprovider.DockerRegistry)
     - [DockerRegistryAccount](#proto.cloudprovider.DockerRegistryAccount)
-    - [DockerRegistryProvider](#proto.cloudprovider.DockerRegistryProvider)
   
   
   
   
 
 - [cloudprovider/ecs.proto](#cloudprovider/ecs.proto)
+    - [Ecs](#proto.cloudprovider.Ecs)
     - [EcsAccount](#proto.cloudprovider.EcsAccount)
-    - [EcsProvider](#proto.cloudprovider.EcsProvider)
   
   
   
@@ -178,11 +185,11 @@
 
 - [cloudprovider/google.proto](#cloudprovider/google.proto)
     - [Consul](#proto.cloudprovider.Consul)
-    - [GoogleAccount](#proto.cloudprovider.GoogleAccount)
     - [GoogleBakeryDefaults](#proto.cloudprovider.GoogleBakeryDefaults)
     - [GoogleBaseImage](#proto.cloudprovider.GoogleBaseImage)
     - [GoogleBaseImageSettings](#proto.cloudprovider.GoogleBaseImageSettings)
-    - [GoogleProvider](#proto.cloudprovider.GoogleProvider)
+    - [GoogleComputeEngine](#proto.cloudprovider.GoogleComputeEngine)
+    - [GoogleComputeEngineAccount](#proto.cloudprovider.GoogleComputeEngineAccount)
     - [VirtualizationSettings](#proto.cloudprovider.VirtualizationSettings)
   
   
@@ -190,11 +197,11 @@
   
 
 - [cloudprovider/huaweicloud.proto](#cloudprovider/huaweicloud.proto)
+    - [HuaweiCloud](#proto.cloudprovider.HuaweiCloud)
     - [HuaweiCloudAccount](#proto.cloudprovider.HuaweiCloudAccount)
     - [HuaweiCloudBakeryDefaults](#proto.cloudprovider.HuaweiCloudBakeryDefaults)
     - [HuaweiCloudBaseImage](#proto.cloudprovider.HuaweiCloudBaseImage)
     - [HuaweiCloudBaseImageSettings](#proto.cloudprovider.HuaweiCloudBaseImageSettings)
-    - [HuaweiCloudProvider](#proto.cloudprovider.HuaweiCloudProvider)
     - [HuaweiCloudVirtualizationSettings](#proto.cloudprovider.HuaweiCloudVirtualizationSettings)
   
   
@@ -202,22 +209,22 @@
   
 
 - [cloudprovider/kubernetes.proto](#cloudprovider/kubernetes.proto)
+    - [Kubernetes](#proto.cloudprovider.Kubernetes)
     - [KubernetesAccount](#proto.cloudprovider.KubernetesAccount)
     - [KubernetesAccountDockerRegistry](#proto.cloudprovider.KubernetesAccountDockerRegistry)
     - [KubernetesCachingPolicy](#proto.cloudprovider.KubernetesCachingPolicy)
     - [KubernetesCustomResource](#proto.cloudprovider.KubernetesCustomResource)
-    - [KubernetesProvider](#proto.cloudprovider.KubernetesProvider)
   
   
   
   
 
 - [cloudprovider/oracle.proto](#cloudprovider/oracle.proto)
+    - [Oracle](#proto.cloudprovider.Oracle)
     - [OracleAccount](#proto.cloudprovider.OracleAccount)
     - [OracleBakeryDefaults](#proto.cloudprovider.OracleBakeryDefaults)
     - [OracleBaseImage](#proto.cloudprovider.OracleBaseImage)
     - [OracleBaseImageSettings](#proto.cloudprovider.OracleBaseImageSettings)
-    - [OracleProvider](#proto.cloudprovider.OracleProvider)
     - [OracleVirtualizationSettings](#proto.cloudprovider.OracleVirtualizationSettings)
   
   
@@ -248,7 +255,6 @@
 
 - [config/halconfig.proto](#config/halconfig.proto)
     - [Hal](#proto.config.Hal)
-    - [Hal.CiProviders](#proto.config.Hal.CiProviders)
     - [Hal.Providers](#proto.config.Hal.Providers)
   
   
@@ -297,11 +303,17 @@
   
   
 
+- [pubsub/google.proto](#pubsub/google.proto)
+    - [Google](#proto.pubsub.Google)
+    - [GooglePublisher](#proto.pubsub.GooglePublisher)
+    - [GoogleSubscriber](#proto.pubsub.GoogleSubscriber)
+  
+  
+  
+  
+
 - [pubsub/pubsub.proto](#pubsub/pubsub.proto)
-    - [GooglePubsub](#proto.pubsub.GooglePubsub)
-    - [GooglePubsubPublisher](#proto.pubsub.GooglePubsubPublisher)
-    - [GooglePubsubSubscriber](#proto.pubsub.GooglePubsubSubscriber)
-    - [PubsubProviders](#proto.pubsub.PubsubProviders)
+    - [Pubsub](#proto.pubsub.Pubsub)
   
   
   
@@ -315,21 +327,21 @@
   
 
 - [storage/azs.proto](#storage/azs.proto)
-    - [AzsPersistentStore](#proto.storage.AzsPersistentStore)
+    - [Azs](#proto.storage.Azs)
   
   
   
   
 
 - [storage/gcs.proto](#storage/gcs.proto)
-    - [GcsPersistentStore](#proto.storage.GcsPersistentStore)
+    - [Gcs](#proto.storage.Gcs)
   
   
   
   
 
 - [storage/oracle.proto](#storage/oracle.proto)
-    - [OraclePersistentStore](#proto.storage.OraclePersistentStore)
+    - [Oracle](#proto.storage.Oracle)
   
   
   
@@ -346,40 +358,6 @@
 
 
 
-<a name="artifact/artifact_template.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## artifact/artifact_template.proto
-
-
-
-<a name="proto.artifact.ArtifactTemplate"></a>
-
-### ArtifactTemplate
-Configuration for a Jinja template for Spinnaker to use for artifact
-extraction. For more details, please read the documentation:
-https://www.spinnaker.io/reference/artifacts/from-build-triggers/#artifacts-from-build-triggers
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The name of the artifact template. |
-| templatePath | [string](#string) |  | The path to the artifact template. |
-
-
-
-
-
- 
-
- 
-
- 
-
- 
-
-
-
 <a name="artifact/artifacts.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -387,25 +365,25 @@ https://www.spinnaker.io/reference/artifacts/from-build-triggers/#artifacts-from
 
 
 
-<a name="proto.artifact.ArtifactProviders"></a>
+<a name="proto.artifact.Artifacts"></a>
 
-### ArtifactProviders
+### Artifacts
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| bitbucket | [BitbucketArtifactProvider](#proto.artifact.BitbucketArtifactProvider) |  |  |
-| gcs | [GcsArtifactProvider](#proto.artifact.GcsArtifactProvider) |  |  |
-| github | [GitHubArtifactProvider](#proto.artifact.GitHubArtifactProvider) |  |  |
-| gitlab | [GitLabArtifactProvider](#proto.artifact.GitLabArtifactProvider) |  |  |
-| gitrepo | [GitRepoArtifactProvider](#proto.artifact.GitRepoArtifactProvider) |  |  |
-| helm | [HelmArtifactProvider](#proto.artifact.HelmArtifactProvider) |  |  |
-| http | [HttpArtifactProvider](#proto.artifact.HttpArtifactProvider) |  |  |
-| maven | [MavenArtifactProvider](#proto.artifact.MavenArtifactProvider) |  |  |
-| oracle | [OracleArtifactProvider](#proto.artifact.OracleArtifactProvider) |  |  |
-| s3 | [S3ArtifactProvider](#proto.artifact.S3ArtifactProvider) |  |  |
-| templates | [ArtifactTemplate](#proto.artifact.ArtifactTemplate) | repeated |  |
+| bitbucket | [Bitbucket](#proto.artifact.Bitbucket) |  |  |
+| gcs | [Gcs](#proto.artifact.Gcs) |  |  |
+| github | [GitHub](#proto.artifact.GitHub) |  |  |
+| gitlab | [GitLab](#proto.artifact.GitLab) |  |  |
+| gitrepo | [GitRepo](#proto.artifact.GitRepo) |  |  |
+| helm | [Helm](#proto.artifact.Helm) |  |  |
+| http | [Http](#proto.artifact.Http) |  |  |
+| maven | [Maven](#proto.artifact.Maven) |  |  |
+| oracle | [Oracle](#proto.artifact.Oracle) |  |  |
+| s3 | [S3](#proto.artifact.S3) |  |  |
+| templates | [Template](#proto.artifact.Template) | repeated |  |
 
 
 
@@ -428,9 +406,25 @@ https://www.spinnaker.io/reference/artifacts/from-build-triggers/#artifacts-from
 
 
 
-<a name="proto.artifact.BitbucketArtifactAccount"></a>
+<a name="proto.artifact.Bitbucket"></a>
 
-### BitbucketArtifactAccount
+### Bitbucket
+Configuration for the Bitbucket artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the Bitbucket artifact provider is enabled. |
+| accounts | [BitbucketAccount](#proto.artifact.BitbucketAccount) | repeated | The list of configured Bitbucket accounts. |
+
+
+
+
+
+
+<a name="proto.artifact.BitbucketAccount"></a>
+
+### BitbucketAccount
 Configuration for a Bitbucket artifact account.
 
 
@@ -440,22 +434,6 @@ Configuration for a Bitbucket artifact account.
 | username | [string](#string) |  | The username of the account. Either `username` and `password` should be set, or `usernamePasswordFile` should be set. |
 | password | [string](#string) |  | The password of the account. Either `username` and `password` should be set, or `usernamePasswordFile` should be set. |
 | usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password of the account in the format `${username}:${password}`. Either `username` and `password` should be set, or `usernamePasswordFile` should be set. |
-
-
-
-
-
-
-<a name="proto.artifact.BitbucketArtifactProvider"></a>
-
-### BitbucketArtifactProvider
-Configuration for the Bitbucket artifact provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the Bitbucket artifact provider is enabled. |
-| accounts | [BitbucketArtifactAccount](#proto.artifact.BitbucketArtifactAccount) | repeated | The list of configured Bitbucket accounts. |
 
 
 
@@ -478,9 +456,25 @@ Configuration for the Bitbucket artifact provider.
 
 
 
-<a name="proto.artifact.GcsArtifactAccount"></a>
+<a name="proto.artifact.Gcs"></a>
 
-### GcsArtifactAccount
+### Gcs
+Configuration for the Google Cloud Storage (GCS) artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the GCS artifact provider is enabled. |
+| accounts | [GcsAccount](#proto.artifact.GcsAccount) | repeated | The list of configured GCS accounts. |
+
+
+
+
+
+
+<a name="proto.artifact.GcsAccount"></a>
+
+### GcsAccount
 Configuration for a GCS artifact account.
 
 
@@ -488,22 +482,6 @@ Configuration for a GCS artifact account.
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The name of the account. |
 | jsonPath | [string](#string) |  | The path to a JSON key for a GCP service account with which to authenticate. The service account must have the `roles/storage.admin` role enabled. |
-
-
-
-
-
-
-<a name="proto.artifact.GcsArtifactProvider"></a>
-
-### GcsArtifactProvider
-Configuration for the Google Cloud Storage (GCS) artifact provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the GCS artifact provider is enabled. |
-| accounts | [GcsArtifactAccount](#proto.artifact.GcsArtifactAccount) | repeated | The list of configured GCS accounts. |
 
 
 
@@ -526,9 +504,25 @@ Configuration for the Google Cloud Storage (GCS) artifact provider.
 
 
 
-<a name="proto.artifact.GitHubArtifactAccount"></a>
+<a name="proto.artifact.GitHub"></a>
 
-### GitHubArtifactAccount
+### GitHub
+Configuration for the GitHub artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the GitHub artifact provider is enabled. |
+| accounts | [GitHubAccount](#proto.artifact.GitHubAccount) | repeated | The list of configured GitHub accounts. |
+
+
+
+
+
+
+<a name="proto.artifact.GitHubAccount"></a>
+
+### GitHubAccount
 Configuration for a GitHub artifact account. Either `username` and
 `password`, `usernamePasswordFile`, `token`, or `tokenFile` should be
 specified as means of authentication.
@@ -542,22 +536,6 @@ specified as means of authentication.
 | usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password of the account in the format `${username}:${password}`. |
 | token | [string](#string) |  | The GitHub access token. |
 | tokenFile | [string](#string) |  | The path to a file containing the GitHub access token. |
-
-
-
-
-
-
-<a name="proto.artifact.GitHubArtifactProvider"></a>
-
-### GitHubArtifactProvider
-Configuration for the GitHub artifact provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the GitHub artifact provider is enabled. |
-| accounts | [GitHubArtifactAccount](#proto.artifact.GitHubArtifactAccount) | repeated | The list of configured GitHub accounts. |
 
 
 
@@ -580,9 +558,25 @@ Configuration for the GitHub artifact provider.
 
 
 
-<a name="proto.artifact.GitLabArtifactAccount"></a>
+<a name="proto.artifact.GitLab"></a>
 
-### GitLabArtifactAccount
+### GitLab
+Configuration for the GitLab artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the GitLab artifact provider is enabled. |
+| accounts | [GitLabAccount](#proto.artifact.GitLabAccount) | repeated | The list of configured GitLab accounts. |
+
+
+
+
+
+
+<a name="proto.artifact.GitLabAccount"></a>
+
+### GitLabAccount
 Configuration for a GitLab artifact account. Either `token` or
 `tokenFile` should be specified as means of authentication.
 
@@ -592,22 +586,6 @@ Configuration for a GitLab artifact account. Either `token` or
 | name | [string](#string) |  | The name of the account. |
 | token | [string](#string) |  | The GitLab access token. |
 | tokenFile | [string](#string) |  | The path to a file containing the GitLab access token. |
-
-
-
-
-
-
-<a name="proto.artifact.GitLabArtifactProvider"></a>
-
-### GitLabArtifactProvider
-Configuration for the GitLab artifact provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the GitLab artifact provider is enabled. |
-| accounts | [GitLabArtifactAccount](#proto.artifact.GitLabArtifactAccount) | repeated | The list of configured GitLab accounts. |
 
 
 
@@ -630,9 +608,25 @@ Configuration for the GitLab artifact provider.
 
 
 
-<a name="proto.artifact.GitRepoArtifactAccount"></a>
+<a name="proto.artifact.GitRepo"></a>
 
-### GitRepoArtifactAccount
+### GitRepo
+Configuration for the Git repo artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the Git repo artifact provider is enabled. |
+| accounts | [GitRepoAccount](#proto.artifact.GitRepoAccount) | repeated | The list of configured Git Repo accounts. |
+
+
+
+
+
+
+<a name="proto.artifact.GitRepoAccount"></a>
+
+### GitRepoAccount
 Configuration for a Git repo artifact account. An account maps to a
 credential that is able to authenticate against a Git repository hosted by a
 Git hosting service. Either `username` and `password`,
@@ -657,22 +651,6 @@ Git hosting service. Either `username` and `password`,
 
 
 
-
-<a name="proto.artifact.GitRepoArtifactProvider"></a>
-
-### GitRepoArtifactProvider
-Configuration for the Git repo artifact provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the Git repo artifact provider is enabled. |
-| accounts | [GitRepoArtifactAccount](#proto.artifact.GitRepoArtifactAccount) | repeated | The list of configured Git Repo accounts. |
-
-
-
-
-
  
 
  
@@ -690,9 +668,25 @@ Configuration for the Git repo artifact provider.
 
 
 
-<a name="proto.artifact.HelmArtifactAccount"></a>
+<a name="proto.artifact.Helm"></a>
 
-### HelmArtifactAccount
+### Helm
+Configuration for the Helm artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the Helm artifact provider is enabled. |
+| accounts | [HelmAccount](#proto.artifact.HelmAccount) | repeated | The list of configured Helm accounts. |
+
+
+
+
+
+
+<a name="proto.artifact.HelmAccount"></a>
+
+### HelmAccount
 Configuration for a Helm artifact account. Either `username` and `password`
 or `usernamePasswordFile` should be specified as means of authentication.
 
@@ -704,22 +698,6 @@ or `usernamePasswordFile` should be specified as means of authentication.
 | username | [string](#string) |  | A username for Helm chart repository basic auth. |
 | password | [string](#string) |  | A password for Helm chart repository basic auth. |
 | usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password for Helm chart repository basic auth. Must be in the format `${username}:${password}`. |
-
-
-
-
-
-
-<a name="proto.artifact.HelmArtifactProvider"></a>
-
-### HelmArtifactProvider
-Configuration for the Helm artifact provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the Helm artifact provider is enabled. |
-| accounts | [HelmArtifactAccount](#proto.artifact.HelmArtifactAccount) | repeated | The list of configured Helm accounts. |
 
 
 
@@ -742,9 +720,25 @@ Configuration for the Helm artifact provider.
 
 
 
-<a name="proto.artifact.HttpArtifactAccount"></a>
+<a name="proto.artifact.Http"></a>
 
-### HttpArtifactAccount
+### Http
+Configuration for the HTTP artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the HTTP artifact provider is enabled. |
+| accounts | [HttpAccount](#proto.artifact.HttpAccount) | repeated | The list of configured HTTP accounts. |
+
+
+
+
+
+
+<a name="proto.artifact.HttpAccount"></a>
+
+### HttpAccount
 Configuration for an HTTP artifact account. Either `username` and `password`
 or `usernamePasswordFile` should be specified as means of authentication.
 
@@ -755,22 +749,6 @@ or `usernamePasswordFile` should be specified as means of authentication.
 | username | [string](#string) |  | A username for HTTP basic auth. |
 | password | [string](#string) |  | A password for HTTP basic auth. |
 | usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password for HTTP basic auth. Must be in the format `${username}:${password}`. |
-
-
-
-
-
-
-<a name="proto.artifact.HttpArtifactProvider"></a>
-
-### HttpArtifactProvider
-Configuration for the HTTP artifact provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the HTTP artifact provider is enabled. |
-| accounts | [HttpArtifactAccount](#proto.artifact.HttpArtifactAccount) | repeated | The list of configured HTTP accounts. |
 
 
 
@@ -793,9 +771,25 @@ Configuration for the HTTP artifact provider.
 
 
 
-<a name="proto.artifact.MavenArtifactAccount"></a>
+<a name="proto.artifact.Maven"></a>
 
-### MavenArtifactAccount
+### Maven
+Configuration for the Maven artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the Maven artifact provider is enabled. |
+| accounts | [MavenAccount](#proto.artifact.MavenAccount) | repeated | The list of configured Maven accounts. |
+
+
+
+
+
+
+<a name="proto.artifact.MavenAccount"></a>
+
+### MavenAccount
 Configuration for a Maven artifact account.
 
 
@@ -803,22 +797,6 @@ Configuration for a Maven artifact account.
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The name of the account. |
 | repositoryUrl | [string](#string) |  | (Required) Full URI for the Maven repository (e.g., `http://some.host.com/repository/path`). |
-
-
-
-
-
-
-<a name="proto.artifact.MavenArtifactProvider"></a>
-
-### MavenArtifactProvider
-Configuration for the Maven artifact provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the Maven artifact provider is enabled. |
-| accounts | [MavenArtifactAccount](#proto.artifact.MavenArtifactAccount) | repeated | The list of configured Maven accounts. |
 
 
 
@@ -841,9 +819,25 @@ Configuration for the Maven artifact provider.
 
 
 
-<a name="proto.artifact.OracleArtifactAccount"></a>
+<a name="proto.artifact.Oracle"></a>
 
-### OracleArtifactAccount
+### Oracle
+Configuration for the Oracle artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the Oracle artifact provider is enabled. |
+| accounts | [OracleAccount](#proto.artifact.OracleAccount) | repeated | The list of configured Oracle artifact accounts. |
+
+
+
+
+
+
+<a name="proto.artifact.OracleAccount"></a>
+
+### OracleAccount
 Configuration for an Oracle artifact account.
 
 
@@ -857,22 +851,6 @@ Configuration for an Oracle artifact account.
 | sshPrivateKeyFilePath | [string](#string) |  | Path to the private key in PEM format. |
 | tenancyId | [string](#string) |  | The OCID of the Oracle Tenancy to use. |
 | userId | [string](#string) |  | The OCID of the Oracle User with which to authenticate. |
-
-
-
-
-
-
-<a name="proto.artifact.OracleArtifactProvider"></a>
-
-### OracleArtifactProvider
-Configuration for the Oracle artifact provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the Oracle artifact provider is enabled. |
-| accounts | [OracleArtifactAccount](#proto.artifact.OracleArtifactAccount) | repeated | The list of configured Oracle artifact accounts. |
 
 
 
@@ -895,9 +873,25 @@ Configuration for the Oracle artifact provider.
 
 
 
-<a name="proto.artifact.S3ArtifactAccount"></a>
+<a name="proto.artifact.S3"></a>
 
-### S3ArtifactAccount
+### S3
+Configuration for the S3 artifact provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the S3 artifact provider is enabled. |
+| accounts | [S3Account](#proto.artifact.S3Account) | repeated | The list of configured S3 artifact accounts. |
+
+
+
+
+
+
+<a name="proto.artifact.S3Account"></a>
+
+### S3Account
 Configuration for an S3 artifact account.
 
 
@@ -914,17 +908,66 @@ Configuration for an S3 artifact account.
 
 
 
+ 
 
-<a name="proto.artifact.S3ArtifactProvider"></a>
+ 
 
-### S3ArtifactProvider
-Configuration for the S3 artifact provider.
+ 
+
+ 
+
+
+
+<a name="artifact/template.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## artifact/template.proto
+
+
+
+<a name="proto.artifact.Template"></a>
+
+### Template
+Configuration for a Jinja template for Spinnaker to use for artifact
+extraction. For more details, please read the documentation:
+https://www.spinnaker.io/reference/artifacts/from-build-triggers/#artifacts-from-build-triggers
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the S3 artifact provider is enabled. |
-| accounts | [S3ArtifactAccount](#proto.artifact.S3ArtifactAccount) | repeated | The list of configured S3 artifact accounts. |
+| name | [string](#string) |  | The name of the artifact template. |
+| templatePath | [string](#string) |  | The path to the artifact template. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="ci/ci.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## ci/ci.proto
+
+
+
+<a name="proto.ci.Ci"></a>
+
+### Ci
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| gcb | [GoogleCloudBuild](#proto.ci.GoogleCloudBuild) |  |  |
 
 
 
@@ -947,6 +990,22 @@ Configuration for the S3 artifact provider.
 
 
 
+<a name="proto.ci.GoogleCloudBuild"></a>
+
+### GoogleCloudBuild
+Configuration for the Google Cloud Build Provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  |  |
+| accounts | [GoogleCloudBuildAccount](#proto.ci.GoogleCloudBuildAccount) | repeated |  |
+
+
+
+
+
+
 <a name="proto.ci.GoogleCloudBuildAccount"></a>
 
 ### GoogleCloudBuildAccount
@@ -960,22 +1019,6 @@ Configuration for a Google Cloud Build account.
 | subscriptionName | [string](#string) |  | The name of the Pub/Sub subscription on which to listen for build changes. |
 | jsonKey | [string](#string) |  | The path to a JSON service account that Spinnaker will use as credentials. This is only needed if Spinnaker is not deployed on a Google Compute Engine VM, or needs permissions not afforded to the VM it is running on. |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
-
-
-
-
-
-
-<a name="proto.ci.GoogleCloudBuildProvider"></a>
-
-### GoogleCloudBuildProvider
-Configuration for the Google Cloud Build Provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  |  |
-| accounts | [GoogleCloudBuildAccount](#proto.ci.GoogleCloudBuildAccount) | repeated |  |
 
 
 
@@ -995,6 +1038,23 @@ Configuration for the Google Cloud Build Provider.
 <p align="right"><a href="#top">Top</a></p>
 
 ## cloudprovider/appengine.proto
+
+
+
+<a name="proto.cloudprovider.Appengine"></a>
+
+### Appengine
+Configuration for the Google App Engine (GAE) provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [AppengineAccount](#proto.cloudprovider.AppengineAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+
+
+
 
 
 
@@ -1031,23 +1091,6 @@ Configuration for an App Engine account.
 
 
 
-
-<a name="proto.cloudprovider.AppengineProvider"></a>
-
-### AppengineProvider
-Configuration for the Google App Engine (GAE) provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
-| accounts | [AppengineAccount](#proto.cloudprovider.AppengineAccount) | repeated | The list of configured accounts. |
-| primaryAccount | [string](#string) |  | The name of the primary account. |
-
-
-
-
-
  
 
  
@@ -1062,6 +1105,28 @@ Configuration for the Google App Engine (GAE) provider.
 <p align="right"><a href="#top">Top</a></p>
 
 ## cloudprovider/aws.proto
+
+
+
+<a name="proto.cloudprovider.Aws"></a>
+
+### Aws
+Configuration for the AWS provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [AwsAccount](#proto.cloudprovider.AwsAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+| accessKeyId | [string](#string) |  | Your AWS Access Key ID. Note that if you are baking AMIs with Rosco, you may also need to set `AwsBakeryDefaults.awsAccessKey`. |
+| secretAccessKey | [string](#string) |  | Your AWS Secret Key. Note that if you are baking AMIs with Rosco, you may also need to set `AwsBakeryDefaults.awsSecretKey`. |
+| defaultRegions | [AwsRegion](#proto.cloudprovider.AwsRegion) | repeated | List of default regions. |
+| features | [AwsFeatures](#proto.cloudprovider.AwsFeatures) |  | Configuration for AWS-specific features. |
+| bakeryDefaults | [AwsBakeryDefaults](#proto.cloudprovider.AwsBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
+
+
+
 
 
 
@@ -1197,28 +1262,6 @@ https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html
 
 
 
-<a name="proto.cloudprovider.AwsProvider"></a>
-
-### AwsProvider
-Configuration for the AWS provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
-| accounts | [AwsAccount](#proto.cloudprovider.AwsAccount) | repeated | The list of configured accounts. |
-| primaryAccount | [string](#string) |  | The name of the primary account. |
-| accessKeyId | [string](#string) |  | Your AWS Access Key ID. Note that if you are baking AMIs with Rosco, you may also need to set `AwsBakeryDefaults.awsAccessKey`. |
-| secretAccessKey | [string](#string) |  | Your AWS Secret Key. Note that if you are baking AMIs with Rosco, you may also need to set `AwsBakeryDefaults.awsSecretKey`. |
-| defaultRegions | [AwsRegion](#proto.cloudprovider.AwsRegion) | repeated | List of default regions. |
-| features | [AwsFeatures](#proto.cloudprovider.AwsFeatures) |  | Configuration for AWS-specific features. |
-| bakeryDefaults | [AwsBakeryDefaults](#proto.cloudprovider.AwsBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
-
-
-
-
-
-
 <a name="proto.cloudprovider.AwsRegion"></a>
 
 ### AwsRegion
@@ -1269,6 +1312,24 @@ Base image virtualization settings.
 <p align="right"><a href="#top">Top</a></p>
 
 ## cloudprovider/azure.proto
+
+
+
+<a name="proto.cloudprovider.Azure"></a>
+
+### Azure
+Configuration for the Azure provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [AzureAccount](#proto.cloudprovider.AzureAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+| bakeryDefaults | [AzureBakeryDefaults](#proto.cloudprovider.AzureBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
+
+
+
 
 
 
@@ -1352,24 +1413,6 @@ Configuration for a base image for the Azure provider&#39;s bakery.
 
 
 
-
-<a name="proto.cloudprovider.AzureProvider"></a>
-
-### AzureProvider
-Configuration for the Azure provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
-| accounts | [AzureAccount](#proto.cloudprovider.AzureAccount) | repeated | The list of configured accounts. |
-| primaryAccount | [string](#string) |  | The name of the primary account. |
-| bakeryDefaults | [AzureBakeryDefaults](#proto.cloudprovider.AzureBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
-
-
-
-
-
  
 
  
@@ -1384,6 +1427,23 @@ Configuration for the Azure provider.
 <p align="right"><a href="#top">Top</a></p>
 
 ## cloudprovider/cloudfoundry.proto
+
+
+
+<a name="proto.cloudprovider.CloudFoundry"></a>
+
+### CloudFoundry
+Configuration for the Cloud Foundry provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [CloudFoundryAccount](#proto.cloudprovider.CloudFoundryAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+
+
+
 
 
 
@@ -1410,23 +1470,6 @@ Configuration for a Spinnaker Cloud Foundry account.
 
 
 
-
-<a name="proto.cloudprovider.CloudFoundryProvider"></a>
-
-### CloudFoundryProvider
-Configuration for the Cloud Foundry provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
-| accounts | [CloudFoundryAccount](#proto.cloudprovider.CloudFoundryAccount) | repeated | The list of configured accounts. |
-| primaryAccount | [string](#string) |  | The name of the primary account. |
-
-
-
-
-
  
 
  
@@ -1441,6 +1484,24 @@ Configuration for the Cloud Foundry provider.
 <p align="right"><a href="#top">Top</a></p>
 
 ## cloudprovider/dcos.proto
+
+
+
+<a name="proto.cloudprovider.Dcos"></a>
+
+### Dcos
+Configuration for the DC/OS (Distributed Cloud Operating System) provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [DcosAccount](#proto.cloudprovider.DcosAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+| clusters | [DcosCluster](#proto.cloudprovider.DcosCluster) | repeated | The list of configured clusters. |
+
+
+
 
 
 
@@ -1531,24 +1592,6 @@ Configuration for a DC/OS load balancer.
 
 
 
-
-<a name="proto.cloudprovider.DcosProvider"></a>
-
-### DcosProvider
-Configuration for the DC/OS (Distributed Cloud Operating System) provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
-| accounts | [DcosAccount](#proto.cloudprovider.DcosAccount) | repeated | The list of configured accounts. |
-| primaryAccount | [string](#string) |  | The name of the primary account. |
-| clusters | [DcosCluster](#proto.cloudprovider.DcosCluster) | repeated | The list of configured clusters. |
-
-
-
-
-
  
 
  
@@ -1563,6 +1606,23 @@ Configuration for the DC/OS (Distributed Cloud Operating System) provider.
 <p align="right"><a href="#top">Top</a></p>
 
 ## cloudprovider/docker_registry.proto
+
+
+
+<a name="proto.cloudprovider.DockerRegistry"></a>
+
+### DockerRegistry
+Configuration for the Docker Registry provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [DockerRegistryAccount](#proto.cloudprovider.DockerRegistryAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+
+
+
 
 
 
@@ -1597,23 +1657,6 @@ A credential able to authenticate against a set of Docker repositories.
 
 
 
-
-<a name="proto.cloudprovider.DockerRegistryProvider"></a>
-
-### DockerRegistryProvider
-Configuration for the Docker Registry provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
-| accounts | [DockerRegistryAccount](#proto.cloudprovider.DockerRegistryAccount) | repeated | The list of configured accounts. |
-| primaryAccount | [string](#string) |  | The name of the primary account. |
-
-
-
-
-
  
 
  
@@ -1631,6 +1674,23 @@ Configuration for the Docker Registry provider.
 
 
 
+<a name="proto.cloudprovider.Ecs"></a>
+
+### Ecs
+Configuration for the ECS provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [EcsAccount](#proto.cloudprovider.EcsAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+
+
+
+
+
+
 <a name="proto.cloudprovider.EcsAccount"></a>
 
 ### EcsAccount
@@ -1644,23 +1704,6 @@ Configuration for an ECS account.
 | awsAccount | [string](#string) |  | (Required) Provide the name of the AWS account associated with this ECS account. See https://github.com/spinnaker/clouddriver/blob/master/clouddriver-ecs/README.md for more information. |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
 | requiredGroupMemberships | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
-
-
-
-
-
-
-<a name="proto.cloudprovider.EcsProvider"></a>
-
-### EcsProvider
-Configuration for the ECS provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
-| accounts | [EcsAccount](#proto.cloudprovider.EcsAccount) | repeated | The list of configured accounts. |
-| primaryAccount | [string](#string) |  | The name of the primary account. |
 
 
 
@@ -1695,31 +1738,6 @@ Configuration for Consul.
 | agentEndpoint | [string](#string) |  | Reachable Consul node endpoint connected to the Consul cluster. Defaults to localhost. |
 | agentPort | [int32](#int32) |  | Port consul is running on for every agent. Defaults to 8500. |
 | datacenters | [string](#string) | repeated | List of data centers to cache and keep updated. Defaults to all. |
-
-
-
-
-
-
-<a name="proto.cloudprovider.GoogleAccount"></a>
-
-### GoogleAccount
-Configuration for a Spinnaker Google account. An account maps to a
-credential that can authenticate against a GCP project.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The name of the account. |
-| requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
-| permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
-| project | [string](#string) |  | The GCP project this Spinnaker account will manage. |
-| jsonPath | [string](#string) |  | The path to a JSON service account that Spinnaker will use as credentials. This is only needed if Spinnaker is not deployed on a Google Compute Engine VM, or needs permissions not afforded to the VM it is running on. See https://cloud.google.com/compute/docs/access/service-accounts for more information. |
-| alphaListed | [bool](#bool) |  | Enable this flag if your GCP project has access to alpha features and you want Spinnaker to take advantage of them. |
-| imageProjects | [string](#string) | repeated | A list of GCP projects from which Spinnaker will be able to cache and deploy images. When this is omitted, it defaults to the current project. Each project must have granted the IAM role compute.imageUser to the service account associated with the JSON key used by this account, as well as to the Google APIs service account automatically created for the project being managed (should look similar to 12345678912@cloudservices.gserviceaccount.com). See https://cloud.google.com/compute/docs/images/sharing-images-across-projects for more information about sharing images across GCP projects. |
-| consul | [Consul](#proto.cloudprovider.Consul) |  | Configuration for Consul. |
-| regions | [string](#string) | repeated | A list of regions for caching and mutating calls. This overwrites any default regions set on the provider. |
-| userDataFile | [string](#string) |  | The path to user data template file. Spinnaker has the ability to inject userdata into generated instance templates. The mechanism is via a template file that is token replaced to provide some specifics about the deployment. See https://github.com/spinnaker/clouddriver/blob/master/clouddriver-aws/UserData.md for more information. |
 
 
 
@@ -1781,18 +1799,43 @@ Configuration for a base image for the Google provider&#39;s bakery.
 
 
 
-<a name="proto.cloudprovider.GoogleProvider"></a>
+<a name="proto.cloudprovider.GoogleComputeEngine"></a>
 
-### GoogleProvider
+### GoogleComputeEngine
 Configuration for the Google Compute Engine (GCE) provider.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether the provider is enabled. |
-| accounts | [GoogleAccount](#proto.cloudprovider.GoogleAccount) | repeated | The list of configured accounts. |
+| accounts | [GoogleComputeEngineAccount](#proto.cloudprovider.GoogleComputeEngineAccount) | repeated | The list of configured accounts. |
 | primaryAccount | [string](#string) |  | The name of the primary account. |
 | bakeryDefaults | [GoogleBakeryDefaults](#proto.cloudprovider.GoogleBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
+
+
+
+
+
+
+<a name="proto.cloudprovider.GoogleComputeEngineAccount"></a>
+
+### GoogleComputeEngineAccount
+Configuration for a Spinnaker Google account. An account maps to a
+credential that can authenticate against a GCP project.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
+| permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
+| project | [string](#string) |  | The GCP project this Spinnaker account will manage. |
+| jsonPath | [string](#string) |  | The path to a JSON service account that Spinnaker will use as credentials. This is only needed if Spinnaker is not deployed on a Google Compute Engine VM, or needs permissions not afforded to the VM it is running on. See https://cloud.google.com/compute/docs/access/service-accounts for more information. |
+| alphaListed | [bool](#bool) |  | Enable this flag if your GCP project has access to alpha features and you want Spinnaker to take advantage of them. |
+| imageProjects | [string](#string) | repeated | A list of GCP projects from which Spinnaker will be able to cache and deploy images. When this is omitted, it defaults to the current project. Each project must have granted the IAM role compute.imageUser to the service account associated with the JSON key used by this account, as well as to the Google APIs service account automatically created for the project being managed (should look similar to 12345678912@cloudservices.gserviceaccount.com). See https://cloud.google.com/compute/docs/images/sharing-images-across-projects for more information about sharing images across GCP projects. |
+| consul | [Consul](#proto.cloudprovider.Consul) |  | Configuration for Consul. |
+| regions | [string](#string) | repeated | A list of regions for caching and mutating calls. This overwrites any default regions set on the provider. |
+| userDataFile | [string](#string) |  | The path to user data template file. Spinnaker has the ability to inject userdata into generated instance templates. The mechanism is via a template file that is token replaced to provide some specifics about the deployment. See https://github.com/spinnaker/clouddriver/blob/master/clouddriver-aws/UserData.md for more information. |
 
 
 
@@ -1828,6 +1871,24 @@ Image source configuration.
 <p align="right"><a href="#top">Top</a></p>
 
 ## cloudprovider/huaweicloud.proto
+
+
+
+<a name="proto.cloudprovider.HuaweiCloud"></a>
+
+### HuaweiCloud
+Configuration for the Huawei Cloud provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [HuaweiCloudAccount](#proto.cloudprovider.HuaweiCloudAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+| bakeryDefaults | [HuaweiCloudBakeryDefaults](#proto.cloudprovider.HuaweiCloudBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
+
+
+
 
 
 
@@ -1918,24 +1979,6 @@ Configuration for a base image for the Huawei Cloud provider&#39;s bakery.
 
 
 
-<a name="proto.cloudprovider.HuaweiCloudProvider"></a>
-
-### HuaweiCloudProvider
-Configuration for the Huawei Cloud provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
-| accounts | [HuaweiCloudAccount](#proto.cloudprovider.HuaweiCloudAccount) | repeated | The list of configured accounts. |
-| primaryAccount | [string](#string) |  | The name of the primary account. |
-| bakeryDefaults | [HuaweiCloudBakeryDefaults](#proto.cloudprovider.HuaweiCloudBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
-
-
-
-
-
-
 <a name="proto.cloudprovider.HuaweiCloudVirtualizationSettings"></a>
 
 ### HuaweiCloudVirtualizationSettings
@@ -1968,6 +2011,23 @@ Huawei Cloud virtualization settings.
 <p align="right"><a href="#top">Top</a></p>
 
 ## cloudprovider/kubernetes.proto
+
+
+
+<a name="proto.cloudprovider.Kubernetes"></a>
+
+### Kubernetes
+Configuration for the Kubernetes provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [KubernetesAccount](#proto.cloudprovider.KubernetesAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+
+
+
 
 
 
@@ -2053,23 +2113,6 @@ need to explicitly register each CRD.
 
 
 
-
-<a name="proto.cloudprovider.KubernetesProvider"></a>
-
-### KubernetesProvider
-Configuration for the Kubernetes provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
-| accounts | [KubernetesAccount](#proto.cloudprovider.KubernetesAccount) | repeated | The list of configured accounts. |
-| primaryAccount | [string](#string) |  | The name of the primary account. |
-
-
-
-
-
  
 
  
@@ -2084,6 +2127,24 @@ Configuration for the Kubernetes provider.
 <p align="right"><a href="#top">Top</a></p>
 
 ## cloudprovider/oracle.proto
+
+
+
+<a name="proto.cloudprovider.Oracle"></a>
+
+### Oracle
+Configuration for the Oracle provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| accounts | [OracleAccount](#proto.cloudprovider.OracleAccount) | repeated | The list of configured accounts. |
+| primaryAccount | [string](#string) |  | The name of the primary account. |
+| bakeryDefaults | [OracleBakeryDefaults](#proto.cloudprovider.OracleBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
+
+
+
 
 
 
@@ -2167,24 +2228,6 @@ Configuration for a base image for the Oracle provider&#39;s bakery.
 
 
 
-<a name="proto.cloudprovider.OracleProvider"></a>
-
-### OracleProvider
-Configuration for the Oracle provider.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
-| accounts | [OracleAccount](#proto.cloudprovider.OracleAccount) | repeated | The list of configured accounts. |
-| primaryAccount | [string](#string) |  | The name of the primary account. |
-| bakeryDefaults | [OracleBakeryDefaults](#proto.cloudprovider.OracleBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
-
-
-
-
-
-
 <a name="proto.cloudprovider.OracleVirtualizationSettings"></a>
 
 ### OracleVirtualizationSettings
@@ -2225,18 +2268,18 @@ Oracle virtualization settings.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| kubernetes | [proto.cloudprovider.KubernetesProvider](#proto.cloudprovider.KubernetesProvider) |  |  |
-| google | [proto.cloudprovider.GoogleProvider](#proto.cloudprovider.GoogleProvider) |  |  |
-| appengine | [proto.cloudprovider.AppengineProvider](#proto.cloudprovider.AppengineProvider) |  |  |
-| aws | [proto.cloudprovider.AwsProvider](#proto.cloudprovider.AwsProvider) |  |  |
-| azure | [proto.cloudprovider.AzureProvider](#proto.cloudprovider.AzureProvider) |  |  |
-| cloudfoundry | [proto.cloudprovider.CloudFoundryProvider](#proto.cloudprovider.CloudFoundryProvider) |  |  |
-| dcos | [proto.cloudprovider.DcosProvider](#proto.cloudprovider.DcosProvider) |  |  |
-| dockerRegistry | [proto.cloudprovider.DockerRegistryProvider](#proto.cloudprovider.DockerRegistryProvider) |  |  |
-| ecs | [proto.cloudprovider.EcsProvider](#proto.cloudprovider.EcsProvider) |  |  |
-| huaweicloud | [proto.cloudprovider.HuaweiCloudProvider](#proto.cloudprovider.HuaweiCloudProvider) |  |  |
-| oracle | [proto.cloudprovider.OracleProvider](#proto.cloudprovider.OracleProvider) |  |  |
-| artifacts | [proto.artifact.ArtifactProviders](#proto.artifact.ArtifactProviders) |  |  |
+| kubernetes | [proto.cloudprovider.Kubernetes](#proto.cloudprovider.Kubernetes) |  |  |
+| google | [proto.cloudprovider.GoogleComputeEngine](#proto.cloudprovider.GoogleComputeEngine) |  |  |
+| appengine | [proto.cloudprovider.Appengine](#proto.cloudprovider.Appengine) |  |  |
+| aws | [proto.cloudprovider.Aws](#proto.cloudprovider.Aws) |  |  |
+| azure | [proto.cloudprovider.Azure](#proto.cloudprovider.Azure) |  |  |
+| cloudfoundry | [proto.cloudprovider.CloudFoundry](#proto.cloudprovider.CloudFoundry) |  |  |
+| dcos | [proto.cloudprovider.Dcos](#proto.cloudprovider.Dcos) |  |  |
+| dockerRegistry | [proto.cloudprovider.DockerRegistry](#proto.cloudprovider.DockerRegistry) |  |  |
+| ecs | [proto.cloudprovider.Ecs](#proto.cloudprovider.Ecs) |  |  |
+| huaweicloud | [proto.cloudprovider.HuaweiCloud](#proto.cloudprovider.HuaweiCloud) |  |  |
+| oracle | [proto.cloudprovider.Oracle](#proto.cloudprovider.Oracle) |  |  |
+| artifacts | [proto.artifact.Artifacts](#proto.artifact.Artifacts) |  |  |
 
 
 
@@ -2270,9 +2313,9 @@ Oracle virtualization settings.
 | slack | [proto.notification.Slack](#proto.notification.Slack) |  |  |
 | twilio | [proto.notification.Twilio](#proto.notification.Twilio) |  |  |
 | githubStatus | [proto.notification.GithubStatus](#proto.notification.GithubStatus) |  |  |
-| artifacts | [proto.artifact.ArtifactProviders](#proto.artifact.ArtifactProviders) |  |  |
-| pubsub | [proto.pubsub.PubsubProviders](#proto.pubsub.PubsubProviders) |  |  |
-| gcb | [proto.ci.GoogleCloudBuildProvider](#proto.ci.GoogleCloudBuildProvider) |  |  |
+| artifacts | [proto.artifact.Artifacts](#proto.artifact.Artifacts) |  |  |
+| pubsub | [proto.pubsub.Pubsub](#proto.pubsub.Pubsub) |  |  |
+| gcb | [proto.ci.GoogleCloudBuild](#proto.ci.GoogleCloudBuild) |  |  |
 | stats | [proto.Stats](#proto.Stats) |  |  |
 
 
@@ -2319,9 +2362,9 @@ Oracle virtualization settings.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| gcs | [proto.storage.GcsPersistentStore](#proto.storage.GcsPersistentStore) |  |  |
-| azs | [proto.storage.AzsPersistentStore](#proto.storage.AzsPersistentStore) |  |  |
-| oracle | [proto.storage.OraclePersistentStore](#proto.storage.OraclePersistentStore) |  |  |
+| gcs | [proto.storage.Gcs](#proto.storage.Gcs) |  |  |
+| azs | [proto.storage.Azs](#proto.storage.Azs) |  |  |
+| oracle | [proto.storage.Oracle](#proto.storage.Oracle) |  |  |
 
 
 
@@ -2354,26 +2397,11 @@ Oracle virtualization settings.
 | ----- | ---- | ----- | ----------- |
 | persistentStorage | [proto.storage.PersistentStorage](#proto.storage.PersistentStorage) |  |  |
 | providers | [Hal.Providers](#proto.config.Hal.Providers) |  |  |
-| artifacts | [proto.artifact.ArtifactProviders](#proto.artifact.ArtifactProviders) |  |  |
+| artifacts | [proto.artifact.Artifacts](#proto.artifact.Artifacts) |  |  |
 | notifications | [proto.notification.Notifications](#proto.notification.Notifications) |  |  |
-| pubsub | [proto.pubsub.PubsubProviders](#proto.pubsub.PubsubProviders) |  |  |
-| ci | [Hal.CiProviders](#proto.config.Hal.CiProviders) |  |  |
+| pubsub | [proto.pubsub.Pubsub](#proto.pubsub.Pubsub) |  |  |
+| ci | [proto.ci.Ci](#proto.ci.Ci) |  |  |
 | stats | [proto.Stats](#proto.Stats) |  |  |
-
-
-
-
-
-
-<a name="proto.config.Hal.CiProviders"></a>
-
-### Hal.CiProviders
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| gcb | [proto.ci.GoogleCloudBuildProvider](#proto.ci.GoogleCloudBuildProvider) |  |  |
 
 
 
@@ -2388,17 +2416,17 @@ Oracle virtualization settings.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| kubernetes | [proto.cloudprovider.KubernetesProvider](#proto.cloudprovider.KubernetesProvider) |  |  |
-| google | [proto.cloudprovider.GoogleProvider](#proto.cloudprovider.GoogleProvider) |  |  |
-| appengine | [proto.cloudprovider.AppengineProvider](#proto.cloudprovider.AppengineProvider) |  |  |
-| aws | [proto.cloudprovider.AwsProvider](#proto.cloudprovider.AwsProvider) |  |  |
-| azure | [proto.cloudprovider.AzureProvider](#proto.cloudprovider.AzureProvider) |  |  |
-| cloudfoundry | [proto.cloudprovider.CloudFoundryProvider](#proto.cloudprovider.CloudFoundryProvider) |  |  |
-| dcos | [proto.cloudprovider.DcosProvider](#proto.cloudprovider.DcosProvider) |  |  |
-| dockerRegistry | [proto.cloudprovider.DockerRegistryProvider](#proto.cloudprovider.DockerRegistryProvider) |  |  |
-| ecs | [proto.cloudprovider.EcsProvider](#proto.cloudprovider.EcsProvider) |  |  |
-| huaweicloud | [proto.cloudprovider.HuaweiCloudProvider](#proto.cloudprovider.HuaweiCloudProvider) |  |  |
-| oracle | [proto.cloudprovider.OracleProvider](#proto.cloudprovider.OracleProvider) |  |  |
+| kubernetes | [proto.cloudprovider.Kubernetes](#proto.cloudprovider.Kubernetes) |  |  |
+| google | [proto.cloudprovider.GoogleComputeEngine](#proto.cloudprovider.GoogleComputeEngine) |  |  |
+| appengine | [proto.cloudprovider.Appengine](#proto.cloudprovider.Appengine) |  |  |
+| aws | [proto.cloudprovider.Aws](#proto.cloudprovider.Aws) |  |  |
+| azure | [proto.cloudprovider.Azure](#proto.cloudprovider.Azure) |  |  |
+| cloudfoundry | [proto.cloudprovider.CloudFoundry](#proto.cloudprovider.CloudFoundry) |  |  |
+| dcos | [proto.cloudprovider.Dcos](#proto.cloudprovider.Dcos) |  |  |
+| dockerRegistry | [proto.cloudprovider.DockerRegistry](#proto.cloudprovider.DockerRegistry) |  |  |
+| ecs | [proto.cloudprovider.Ecs](#proto.cloudprovider.Ecs) |  |  |
+| huaweicloud | [proto.cloudprovider.HuaweiCloud](#proto.cloudprovider.HuaweiCloud) |  |  |
+| oracle | [proto.cloudprovider.Oracle](#proto.cloudprovider.Oracle) |  |  |
 
 
 
@@ -2615,33 +2643,33 @@ A Fiat permissions configuration object.
 
 
 
-<a name="pubsub/pubsub.proto"></a>
+<a name="pubsub/google.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## pubsub/pubsub.proto
+## pubsub/google.proto
 
 
 
-<a name="proto.pubsub.GooglePubsub"></a>
+<a name="proto.pubsub.Google"></a>
 
-### GooglePubsub
+### Google
 Configuration for Google Cloud Pub/Sub integration.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether Google Cloud Pub/Sub is enabled. |
-| subscriptions | [GooglePubsubSubscriber](#proto.pubsub.GooglePubsubSubscriber) | repeated | The list of configured subscriptions. |
-| publishers | [GooglePubsubPublisher](#proto.pubsub.GooglePubsubPublisher) | repeated | The list of configured publishers. |
+| subscriptions | [GoogleSubscriber](#proto.pubsub.GoogleSubscriber) | repeated | The list of configured subscriptions. |
+| publishers | [GooglePublisher](#proto.pubsub.GooglePublisher) | repeated | The list of configured publishers. |
 
 
 
 
 
 
-<a name="proto.pubsub.GooglePubsubPublisher"></a>
+<a name="proto.pubsub.GooglePublisher"></a>
 
-### GooglePubsubPublisher
+### GooglePublisher
 Configuration for a Google Cloud Pub/Sub publisher.
 
 
@@ -2658,9 +2686,9 @@ Configuration for a Google Cloud Pub/Sub publisher.
 
 
 
-<a name="proto.pubsub.GooglePubsubSubscriber"></a>
+<a name="proto.pubsub.GoogleSubscriber"></a>
 
-### GooglePubsubSubscriber
+### GoogleSubscriber
 Configuration for a Google Cloud Pub/Sub subscriber.
 
 
@@ -2678,17 +2706,33 @@ Configuration for a Google Cloud Pub/Sub subscriber.
 
 
 
+ 
 
-<a name="proto.pubsub.PubsubProviders"></a>
+ 
 
-### PubsubProviders
+ 
+
+ 
+
+
+
+<a name="pubsub/pubsub.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## pubsub/pubsub.proto
+
+
+
+<a name="proto.pubsub.Pubsub"></a>
+
+### Pubsub
 Configuration for Pub/Sub integration.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether Pub/Sub is enabled. |
-| google | [GooglePubsub](#proto.pubsub.GooglePubsub) |  | Configuration for the Google Cloud Pub/Sub integration. |
+| google | [Google](#proto.pubsub.Google) |  | Configuration for the Google Cloud Pub/Sub integration. |
 
 
 
@@ -2742,9 +2786,9 @@ Configuration for optional collection of usage metrics.
 
 
 
-<a name="proto.storage.AzsPersistentStore"></a>
+<a name="proto.storage.Azs"></a>
 
-### AzsPersistentStore
+### Azs
 Configuration for an Azure Storage persistent store.
 
 
@@ -2776,9 +2820,9 @@ Configuration for an Azure Storage persistent store.
 
 
 
-<a name="proto.storage.GcsPersistentStore"></a>
+<a name="proto.storage.Gcs"></a>
 
-### GcsPersistentStore
+### Gcs
 Configuration for a Google Cloud Storage persistent store
 
 
@@ -2812,9 +2856,9 @@ Configuration for a Google Cloud Storage persistent store
 
 
 
-<a name="proto.storage.OraclePersistentStore"></a>
+<a name="proto.storage.Oracle"></a>
 
-### OraclePersistentStore
+### Oracle
 Configuration for an Oracle persistent store.
 
 
@@ -2859,9 +2903,9 @@ Configuration of Spinnaker&#39;s persistent storage.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| gcs | [GcsPersistentStore](#proto.storage.GcsPersistentStore) |  |  |
-| azs | [AzsPersistentStore](#proto.storage.AzsPersistentStore) |  |  |
-| oracle | [OraclePersistentStore](#proto.storage.OraclePersistentStore) |  |  |
+| gcs | [Gcs](#proto.storage.Gcs) |  |  |
+| azs | [Azs](#proto.storage.Azs) |  |  |
+| oracle | [Oracle](#proto.storage.Oracle) |  |  |
 
 
 

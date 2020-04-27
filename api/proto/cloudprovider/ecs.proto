@@ -6,7 +6,7 @@ option go_package = "github.com/spinnaker/kleat/api/client/cloudprovider";
 import "permissions.proto";
 
 // Configuration for the ECS provider.
-message EcsProvider {
+message Ecs {
   // Whether the provider is enabled.
   bool enabled = 1;
 

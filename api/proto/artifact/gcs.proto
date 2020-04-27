@@ -4,16 +4,16 @@ package proto.artifact;
 option go_package = "github.com/spinnaker/kleat/api/client/artifact";
 
 // Configuration for the Google Cloud Storage (GCS) artifact provider.
-message GcsArtifactProvider {
+message Gcs {
     // Whether the GCS artifact provider is enabled.
     bool enabled = 1;
 
     // The list of configured GCS accounts.
-    repeated GcsArtifactAccount accounts = 2;
+    repeated GcsAccount accounts = 2;
 }
 
 // Configuration for a GCS artifact account.
-message GcsArtifactAccount {
+message GcsAccount {
     // The name of the account.
     string name = 1;
 

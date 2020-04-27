@@ -17,16 +17,16 @@ import "cloudprovider/oracle.proto";
 import "artifact/artifacts.proto";
 
 message Clouddriver {
-    cloudprovider.KubernetesProvider kubernetes = 1;
-    cloudprovider.GoogleProvider google = 2;
-    cloudprovider.AppengineProvider appengine = 3;
-    cloudprovider.AwsProvider aws = 4;
-    cloudprovider.AzureProvider azure = 5;
-    cloudprovider.CloudFoundryProvider cloudfoundry = 6;
-    cloudprovider.DcosProvider dcos = 7;
-    cloudprovider.DockerRegistryProvider dockerRegistry = 8;
-    cloudprovider.EcsProvider ecs = 9;
-    cloudprovider.HuaweiCloudProvider huaweicloud = 10;
-    cloudprovider.OracleProvider oracle = 11;
-    artifact.ArtifactProviders artifacts = 12;
+    cloudprovider.Kubernetes kubernetes = 1;
+    cloudprovider.GoogleComputeEngine google = 2;
+    cloudprovider.Appengine appengine = 3;
+    cloudprovider.Aws aws = 4;
+    cloudprovider.Azure azure = 5;
+    cloudprovider.CloudFoundry cloudfoundry = 6;
+    cloudprovider.Dcos dcos = 7;
+    cloudprovider.DockerRegistry dockerRegistry = 8;
+    cloudprovider.Ecs ecs = 9;
+    cloudprovider.HuaweiCloud huaweicloud = 10;
+    cloudprovider.Oracle oracle = 11;
+    artifact.Artifacts artifacts = 12;
 }

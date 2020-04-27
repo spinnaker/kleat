@@ -26,7 +26,7 @@ const (
 const _ = proto.ProtoPackageIsVersion4
 
 // Configuration for Pub/Sub integration.
-type PubsubProviders struct {
+type Pubsub struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -34,11 +34,11 @@ type PubsubProviders struct {
 	// Whether Pub/Sub is enabled.
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// Configuration for the Google Cloud Pub/Sub integration.
-	Google *GooglePubsub `protobuf:"bytes,2,opt,name=google,proto3" json:"google,omitempty"`
+	Google *Google `protobuf:"bytes,2,opt,name=google,proto3" json:"google,omitempty"`
 }
 
-func (x *PubsubProviders) Reset() {
-	*x = PubsubProviders{}
+func (x *Pubsub) Reset() {
+	*x = Pubsub{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_pubsub_pubsub_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -46,13 +46,13 @@ func (x *PubsubProviders) Reset() {
 	}
 }
 
-func (x *PubsubProviders) String() string {
+func (x *Pubsub) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PubsubProviders) ProtoMessage() {}
+func (*Pubsub) ProtoMessage() {}
 
-func (x *PubsubProviders) ProtoReflect() protoreflect.Message {
+func (x *Pubsub) ProtoReflect() protoreflect.Message {
 	mi := &file_pubsub_pubsub_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -64,289 +64,23 @@ func (x *PubsubProviders) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PubsubProviders.ProtoReflect.Descriptor instead.
-func (*PubsubProviders) Descriptor() ([]byte, []int) {
+// Deprecated: Use Pubsub.ProtoReflect.Descriptor instead.
+func (*Pubsub) Descriptor() ([]byte, []int) {
 	return file_pubsub_pubsub_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *PubsubProviders) GetEnabled() bool {
+func (x *Pubsub) GetEnabled() bool {
 	if x != nil {
 		return x.Enabled
 	}
 	return false
 }
 
-func (x *PubsubProviders) GetGoogle() *GooglePubsub {
+func (x *Pubsub) GetGoogle() *Google {
 	if x != nil {
 		return x.Google
 	}
 	return nil
-}
-
-// Configuration for Google Cloud Pub/Sub integration.
-type GooglePubsub struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	// Whether Google Cloud Pub/Sub is enabled.
-	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	// The list of configured subscriptions.
-	Subscriptions []*GooglePubsubSubscriber `protobuf:"bytes,2,rep,name=subscriptions,proto3" json:"subscriptions,omitempty"`
-	// The list of configured publishers.
-	Publishers []*GooglePubsubPublisher `protobuf:"bytes,3,rep,name=publishers,proto3" json:"publishers,omitempty"`
-}
-
-func (x *GooglePubsub) Reset() {
-	*x = GooglePubsub{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_pubsub_pubsub_proto_msgTypes[1]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *GooglePubsub) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GooglePubsub) ProtoMessage() {}
-
-func (x *GooglePubsub) ProtoReflect() protoreflect.Message {
-	mi := &file_pubsub_pubsub_proto_msgTypes[1]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GooglePubsub.ProtoReflect.Descriptor instead.
-func (*GooglePubsub) Descriptor() ([]byte, []int) {
-	return file_pubsub_pubsub_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *GooglePubsub) GetEnabled() bool {
-	if x != nil {
-		return x.Enabled
-	}
-	return false
-}
-
-func (x *GooglePubsub) GetSubscriptions() []*GooglePubsubSubscriber {
-	if x != nil {
-		return x.Subscriptions
-	}
-	return nil
-}
-
-func (x *GooglePubsub) GetPublishers() []*GooglePubsubPublisher {
-	if x != nil {
-		return x.Publishers
-	}
-	return nil
-}
-
-// Configuration for a Google Cloud Pub/Sub subscriber.
-type GooglePubsubSubscriber struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	// The name of the subscriber account.
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// The name of the GCP project your subscription lives in.
-	Project string `protobuf:"bytes,2,opt,name=project,proto3" json:"project,omitempty"`
-	// The name of the subscription to listen to. This identifier does not include
-	// the name of the project, and must already be configured.
-	SubscriptionName string `protobuf:"bytes,3,opt,name=subscriptionName,proto3" json:"subscriptionName,omitempty"`
-	// The path to a JSON service account that Spinnaker will use as credentials.
-	// This is only needed if Spinnaker is not deployed on a Google Compute Engine
-	// VM, or needs permissions not afforded to the VM it is running on.
-	// See https://cloud.google.com/compute/docs/access/service-accounts for more information.
-	JsonPath string `protobuf:"bytes,4,opt,name=jsonPath,proto3" json:"jsonPath,omitempty"`
-	// The acknowledgement deadline as configured on the Pub/Sub subscription.
-	AckDeadlineSeconds int32 `protobuf:"varint,5,opt,name=ackDeadlineSeconds,proto3" json:"ackDeadlineSeconds,omitempty"`
-	// The format of the incoming message. Must be one of one of GCB, GCS, GCR,
-	// or CUSTOM. Used to translate the incoming message into Spinnaker artifacts.
-	MessageFormat string `protobuf:"bytes,6,opt,name=messageFormat,proto3" json:"messageFormat,omitempty"`
-	// A path to a jinja template that specifies how artifacts from this pubsub system
-	// are interpreted and transformed into Spinnaker artifacts. Only used if
-	// messageFormat is set to CUSTOM.
-	TemplatePath string `protobuf:"bytes,7,opt,name=templatePath,proto3" json:"templatePath,omitempty"`
-}
-
-func (x *GooglePubsubSubscriber) Reset() {
-	*x = GooglePubsubSubscriber{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_pubsub_pubsub_proto_msgTypes[2]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *GooglePubsubSubscriber) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GooglePubsubSubscriber) ProtoMessage() {}
-
-func (x *GooglePubsubSubscriber) ProtoReflect() protoreflect.Message {
-	mi := &file_pubsub_pubsub_proto_msgTypes[2]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GooglePubsubSubscriber.ProtoReflect.Descriptor instead.
-func (*GooglePubsubSubscriber) Descriptor() ([]byte, []int) {
-	return file_pubsub_pubsub_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *GooglePubsubSubscriber) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *GooglePubsubSubscriber) GetProject() string {
-	if x != nil {
-		return x.Project
-	}
-	return ""
-}
-
-func (x *GooglePubsubSubscriber) GetSubscriptionName() string {
-	if x != nil {
-		return x.SubscriptionName
-	}
-	return ""
-}
-
-func (x *GooglePubsubSubscriber) GetJsonPath() string {
-	if x != nil {
-		return x.JsonPath
-	}
-	return ""
-}
-
-func (x *GooglePubsubSubscriber) GetAckDeadlineSeconds() int32 {
-	if x != nil {
-		return x.AckDeadlineSeconds
-	}
-	return 0
-}
-
-func (x *GooglePubsubSubscriber) GetMessageFormat() string {
-	if x != nil {
-		return x.MessageFormat
-	}
-	return ""
-}
-
-func (x *GooglePubsubSubscriber) GetTemplatePath() string {
-	if x != nil {
-		return x.TemplatePath
-	}
-	return ""
-}
-
-// Configuration for a Google Cloud Pub/Sub publisher.
-type GooglePubsubPublisher struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	// The name of the publisher account.
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// The name of the GCP project your topic lives in.
-	Project string `protobuf:"bytes,2,opt,name=project,proto3" json:"project,omitempty"`
-	// The name of the topic to publish to. This identifier does not include the
-	// name of the project, and must already be configured.
-	TopicName string `protobuf:"bytes,3,opt,name=topicName,proto3" json:"topicName,omitempty"`
-	// The path to a JSON service account that Spinnaker will use as credentials.
-	// This is only needed if Spinnaker is not deployed on a Google Compute Engine
-	// VM, or needs permissions not afforded to the VM it is running on.
-	// See https://cloud.google.com/compute/docs/access/service-accounts for more information.
-	JsonPath string `protobuf:"bytes,4,opt,name=jsonPath,proto3" json:"jsonPath,omitempty"`
-	// The content to publish to the topic. Must be one of ALL or NOTIFICATIONS.
-	Content string `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
-}
-
-func (x *GooglePubsubPublisher) Reset() {
-	*x = GooglePubsubPublisher{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_pubsub_pubsub_proto_msgTypes[3]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *GooglePubsubPublisher) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GooglePubsubPublisher) ProtoMessage() {}
-
-func (x *GooglePubsubPublisher) ProtoReflect() protoreflect.Message {
-	mi := &file_pubsub_pubsub_proto_msgTypes[3]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GooglePubsubPublisher.ProtoReflect.Descriptor instead.
-func (*GooglePubsubPublisher) Descriptor() ([]byte, []int) {
-	return file_pubsub_pubsub_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *GooglePubsubPublisher) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *GooglePubsubPublisher) GetProject() string {
-	if x != nil {
-		return x.Project
-	}
-	return ""
-}
-
-func (x *GooglePubsubPublisher) GetTopicName() string {
-	if x != nil {
-		return x.TopicName
-	}
-	return ""
-}
-
-func (x *GooglePubsubPublisher) GetJsonPath() string {
-	if x != nil {
-		return x.JsonPath
-	}
-	return ""
-}
-
-func (x *GooglePubsubPublisher) GetContent() string {
-	if x != nil {
-		return x.Content
-	}
-	return ""
 }
 
 var File_pubsub_pubsub_proto protoreflect.FileDescriptor
@@ -354,54 +88,17 @@ var File_pubsub_pubsub_proto protoreflect.FileDescriptor
 var file_pubsub_pubsub_proto_rawDesc = []byte{
 	0x0a, 0x13, 0x70, 0x75, 0x62, 0x73, 0x75, 0x62, 0x2f, 0x70, 0x75, 0x62, 0x73, 0x75, 0x62, 0x2e,
 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0c, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x70, 0x75, 0x62,
-	0x73, 0x75, 0x62, 0x22, 0x5f, 0x0a, 0x0f, 0x50, 0x75, 0x62, 0x73, 0x75, 0x62, 0x50, 0x72, 0x6f,
-	0x76, 0x69, 0x64, 0x65, 0x72, 0x73, 0x12, 0x18, 0x0a, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65,
-	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64,
-	0x12, 0x32, 0x0a, 0x06, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b,
-	0x32, 0x1a, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x70, 0x75, 0x62, 0x73, 0x75, 0x62, 0x2e,
-	0x47, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x50, 0x75, 0x62, 0x73, 0x75, 0x62, 0x52, 0x06, 0x67, 0x6f,
-	0x6f, 0x67, 0x6c, 0x65, 0x22, 0xb9, 0x01, 0x0a, 0x0c, 0x47, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x50,
-	0x75, 0x62, 0x73, 0x75, 0x62, 0x12, 0x18, 0x0a, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x12,
-	0x4a, 0x0a, 0x0d, 0x73, 0x75, 0x62, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73,
-	0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x24, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x70,
-	0x75, 0x62, 0x73, 0x75, 0x62, 0x2e, 0x47, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x50, 0x75, 0x62, 0x73,
-	0x75, 0x62, 0x53, 0x75, 0x62, 0x73, 0x63, 0x72, 0x69, 0x62, 0x65, 0x72, 0x52, 0x0d, 0x73, 0x75,
-	0x62, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x43, 0x0a, 0x0a, 0x70,
-	0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x65, 0x72, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32,
-	0x23, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x70, 0x75, 0x62, 0x73, 0x75, 0x62, 0x2e, 0x47,
-	0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x50, 0x75, 0x62, 0x73, 0x75, 0x62, 0x50, 0x75, 0x62, 0x6c, 0x69,
-	0x73, 0x68, 0x65, 0x72, 0x52, 0x0a, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x65, 0x72, 0x73,
-	0x22, 0x88, 0x02, 0x0a, 0x16, 0x47, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x50, 0x75, 0x62, 0x73, 0x75,
-	0x62, 0x53, 0x75, 0x62, 0x73, 0x63, 0x72, 0x69, 0x62, 0x65, 0x72, 0x12, 0x12, 0x0a, 0x04, 0x6e,
-	0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12,
-	0x18, 0x0a, 0x07, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x07, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x12, 0x2a, 0x0a, 0x10, 0x73, 0x75, 0x62,
-	0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x03, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x10, 0x73, 0x75, 0x62, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f,
-	0x6e, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x6a, 0x73, 0x6f, 0x6e, 0x50, 0x61, 0x74,
-	0x68, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x6a, 0x73, 0x6f, 0x6e, 0x50, 0x61, 0x74,
-	0x68, 0x12, 0x2e, 0x0a, 0x12, 0x61, 0x63, 0x6b, 0x44, 0x65, 0x61, 0x64, 0x6c, 0x69, 0x6e, 0x65,
-	0x53, 0x65, 0x63, 0x6f, 0x6e, 0x64, 0x73, 0x18, 0x05, 0x20, 0x01, 0x28, 0x05, 0x52, 0x12, 0x61,
-	0x63, 0x6b, 0x44, 0x65, 0x61, 0x64, 0x6c, 0x69, 0x6e, 0x65, 0x53, 0x65, 0x63, 0x6f, 0x6e, 0x64,
-	0x73, 0x12, 0x24, 0x0a, 0x0d, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x46, 0x6f, 0x72, 0x6d,
-	0x61, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67,
-	0x65, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x12, 0x22, 0x0a, 0x0c, 0x74, 0x65, 0x6d, 0x70, 0x6c,
-	0x61, 0x74, 0x65, 0x50, 0x61, 0x74, 0x68, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x74,
-	0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x50, 0x61, 0x74, 0x68, 0x22, 0x99, 0x01, 0x0a, 0x15,
-	0x47, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x50, 0x75, 0x62, 0x73, 0x75, 0x62, 0x50, 0x75, 0x62, 0x6c,
-	0x69, 0x73, 0x68, 0x65, 0x72, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x70, 0x72, 0x6f,
-	0x6a, 0x65, 0x63, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x70, 0x72, 0x6f, 0x6a,
-	0x65, 0x63, 0x74, 0x12, 0x1c, 0x0a, 0x09, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x4e, 0x61, 0x6d, 0x65,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x4e, 0x61, 0x6d,
-	0x65, 0x12, 0x1a, 0x0a, 0x08, 0x6a, 0x73, 0x6f, 0x6e, 0x50, 0x61, 0x74, 0x68, 0x18, 0x04, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x08, 0x6a, 0x73, 0x6f, 0x6e, 0x50, 0x61, 0x74, 0x68, 0x12, 0x18, 0x0a,
-	0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,
-	0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x42, 0x2e, 0x5a, 0x2c, 0x67, 0x69, 0x74, 0x68, 0x75,
-	0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x69, 0x6e, 0x6e, 0x61, 0x6b, 0x65, 0x72, 0x2f,
-	0x6b, 0x6c, 0x65, 0x61, 0x74, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74,
-	0x2f, 0x70, 0x75, 0x62, 0x73, 0x75, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x75, 0x62, 0x1a, 0x13, 0x70, 0x75, 0x62, 0x73, 0x75, 0x62, 0x2f, 0x67, 0x6f, 0x6f, 0x67,
+	0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x50, 0x0a, 0x06, 0x50, 0x75, 0x62, 0x73,
+	0x75, 0x62, 0x12, 0x18, 0x0a, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x08, 0x52, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x12, 0x2c, 0x0a, 0x06,
+	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x70, 0x75, 0x62, 0x73, 0x75, 0x62, 0x2e, 0x47, 0x6f, 0x6f, 0x67,
+	0x6c, 0x65, 0x52, 0x06, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x42, 0x2e, 0x5a, 0x2c, 0x67, 0x69,
+	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x69, 0x6e, 0x6e, 0x61, 0x6b,
+	0x65, 0x72, 0x2f, 0x6b, 0x6c, 0x65, 0x61, 0x74, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x6c, 0x69,
+	0x65, 0x6e, 0x74, 0x2f, 0x70, 0x75, 0x62, 0x73, 0x75, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
@@ -416,22 +113,18 @@ func file_pubsub_pubsub_proto_rawDescGZIP() []byte {
 	return file_pubsub_pubsub_proto_rawDescData
 }
 
-var file_pubsub_pubsub_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_pubsub_pubsub_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_pubsub_pubsub_proto_goTypes = []interface{}{
-	(*PubsubProviders)(nil),        // 0: proto.pubsub.PubsubProviders
-	(*GooglePubsub)(nil),           // 1: proto.pubsub.GooglePubsub
-	(*GooglePubsubSubscriber)(nil), // 2: proto.pubsub.GooglePubsubSubscriber
-	(*GooglePubsubPublisher)(nil),  // 3: proto.pubsub.GooglePubsubPublisher
+	(*Pubsub)(nil), // 0: proto.pubsub.Pubsub
+	(*Google)(nil), // 1: proto.pubsub.Google
 }
 var file_pubsub_pubsub_proto_depIdxs = []int32{
-	1, // 0: proto.pubsub.PubsubProviders.google:type_name -> proto.pubsub.GooglePubsub
-	2, // 1: proto.pubsub.GooglePubsub.subscriptions:type_name -> proto.pubsub.GooglePubsubSubscriber
-	3, // 2: proto.pubsub.GooglePubsub.publishers:type_name -> proto.pubsub.GooglePubsubPublisher
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	1, // 0: proto.pubsub.Pubsub.google:type_name -> proto.pubsub.Google
+	1, // [1:1] is the sub-list for method output_type
+	1, // [1:1] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_pubsub_pubsub_proto_init() }
@@ -439,45 +132,10 @@ func file_pubsub_pubsub_proto_init() {
 	if File_pubsub_pubsub_proto != nil {
 		return
 	}
+	file_pubsub_google_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_pubsub_pubsub_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PubsubProviders); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_pubsub_pubsub_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GooglePubsub); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_pubsub_pubsub_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GooglePubsubSubscriber); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_pubsub_pubsub_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GooglePubsubPublisher); i {
+			switch v := v.(*Pubsub); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -495,7 +153,7 @@ func file_pubsub_pubsub_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_pubsub_pubsub_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

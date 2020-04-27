@@ -43,7 +43,7 @@ func TestEmptyProviders(t *testing.T) {
 func TestEmptyKubernetes(t *testing.T) {
 	h := &config.Hal{
 		Providers: &config.Hal_Providers{
-			Kubernetes: &cloudprovider.KubernetesProvider{},
+			Kubernetes: &cloudprovider.Kubernetes{},
 		},
 	}
 	err := ValidateHalConfig(h)
@@ -55,7 +55,7 @@ func TestEmptyKubernetes(t *testing.T) {
 func TestNoKubernetesAccounts(t *testing.T) {
 	h := &config.Hal{
 		Providers: &config.Hal_Providers{
-			Kubernetes: &cloudprovider.KubernetesProvider{
+			Kubernetes: &cloudprovider.Kubernetes{
 				Enabled:  false,
 				Accounts: []*cloudprovider.KubernetesAccount{},
 			},
@@ -70,7 +70,7 @@ func TestNoKubernetesAccounts(t *testing.T) {
 func TestKuberntesAccountWithNoOmitKinds(t *testing.T) {
 	h := &config.Hal{
 		Providers: &config.Hal_Providers{
-			Kubernetes: &cloudprovider.KubernetesProvider{
+			Kubernetes: &cloudprovider.Kubernetes{
 				Accounts: []*cloudprovider.KubernetesAccount{
 					{
 						Name:  "my-account",
@@ -89,7 +89,7 @@ func TestKuberntesAccountWithNoOmitKinds(t *testing.T) {
 func TestKuberntesAccountWithEmptyOmitKinds(t *testing.T) {
 	h := &config.Hal{
 		Providers: &config.Hal_Providers{
-			Kubernetes: &cloudprovider.KubernetesProvider{
+			Kubernetes: &cloudprovider.Kubernetes{
 				Accounts: []*cloudprovider.KubernetesAccount{
 					{
 						Name:      "my-account",
@@ -109,7 +109,7 @@ func TestKuberntesAccountWithEmptyOmitKinds(t *testing.T) {
 func TestInvalidKubernetesAccount(t *testing.T) {
 	h := &config.Hal{
 		Providers: &config.Hal_Providers{
-			Kubernetes: &cloudprovider.KubernetesProvider{
+			Kubernetes: &cloudprovider.Kubernetes{
 				Accounts: []*cloudprovider.KubernetesAccount{
 					{
 						Name:      "my-account",

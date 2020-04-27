@@ -26,7 +26,7 @@ const (
 const _ = proto.ProtoPackageIsVersion4
 
 // Configuration for the GitHub artifact provider.
-type GitHubArtifactProvider struct {
+type GitHub struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -34,11 +34,11 @@ type GitHubArtifactProvider struct {
 	// Whether the GitHub artifact provider is enabled.
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// The list of configured GitHub accounts.
-	Accounts []*GitHubArtifactAccount `protobuf:"bytes,2,rep,name=accounts,proto3" json:"accounts,omitempty"`
+	Accounts []*GitHubAccount `protobuf:"bytes,2,rep,name=accounts,proto3" json:"accounts,omitempty"`
 }
 
-func (x *GitHubArtifactProvider) Reset() {
-	*x = GitHubArtifactProvider{}
+func (x *GitHub) Reset() {
+	*x = GitHub{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_artifact_github_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -46,13 +46,13 @@ func (x *GitHubArtifactProvider) Reset() {
 	}
 }
 
-func (x *GitHubArtifactProvider) String() string {
+func (x *GitHub) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GitHubArtifactProvider) ProtoMessage() {}
+func (*GitHub) ProtoMessage() {}
 
-func (x *GitHubArtifactProvider) ProtoReflect() protoreflect.Message {
+func (x *GitHub) ProtoReflect() protoreflect.Message {
 	mi := &file_artifact_github_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -64,19 +64,19 @@ func (x *GitHubArtifactProvider) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GitHubArtifactProvider.ProtoReflect.Descriptor instead.
-func (*GitHubArtifactProvider) Descriptor() ([]byte, []int) {
+// Deprecated: Use GitHub.ProtoReflect.Descriptor instead.
+func (*GitHub) Descriptor() ([]byte, []int) {
 	return file_artifact_github_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *GitHubArtifactProvider) GetEnabled() bool {
+func (x *GitHub) GetEnabled() bool {
 	if x != nil {
 		return x.Enabled
 	}
 	return false
 }
 
-func (x *GitHubArtifactProvider) GetAccounts() []*GitHubArtifactAccount {
+func (x *GitHub) GetAccounts() []*GitHubAccount {
 	if x != nil {
 		return x.Accounts
 	}
@@ -86,7 +86,7 @@ func (x *GitHubArtifactProvider) GetAccounts() []*GitHubArtifactAccount {
 // Configuration for a GitHub artifact account. Either `username` and
 // `password`, `usernamePasswordFile`, `token`, or `tokenFile` should be
 // specified as means of authentication.
-type GitHubArtifactAccount struct {
+type GitHubAccount struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -106,8 +106,8 @@ type GitHubArtifactAccount struct {
 	TokenFile string `protobuf:"bytes,6,opt,name=tokenFile,proto3" json:"tokenFile,omitempty"`
 }
 
-func (x *GitHubArtifactAccount) Reset() {
-	*x = GitHubArtifactAccount{}
+func (x *GitHubAccount) Reset() {
+	*x = GitHubAccount{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_artifact_github_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -115,13 +115,13 @@ func (x *GitHubArtifactAccount) Reset() {
 	}
 }
 
-func (x *GitHubArtifactAccount) String() string {
+func (x *GitHubAccount) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GitHubArtifactAccount) ProtoMessage() {}
+func (*GitHubAccount) ProtoMessage() {}
 
-func (x *GitHubArtifactAccount) ProtoReflect() protoreflect.Message {
+func (x *GitHubAccount) ProtoReflect() protoreflect.Message {
 	mi := &file_artifact_github_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -133,47 +133,47 @@ func (x *GitHubArtifactAccount) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GitHubArtifactAccount.ProtoReflect.Descriptor instead.
-func (*GitHubArtifactAccount) Descriptor() ([]byte, []int) {
+// Deprecated: Use GitHubAccount.ProtoReflect.Descriptor instead.
+func (*GitHubAccount) Descriptor() ([]byte, []int) {
 	return file_artifact_github_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *GitHubArtifactAccount) GetName() string {
+func (x *GitHubAccount) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *GitHubArtifactAccount) GetUsername() string {
+func (x *GitHubAccount) GetUsername() string {
 	if x != nil {
 		return x.Username
 	}
 	return ""
 }
 
-func (x *GitHubArtifactAccount) GetPassword() string {
+func (x *GitHubAccount) GetPassword() string {
 	if x != nil {
 		return x.Password
 	}
 	return ""
 }
 
-func (x *GitHubArtifactAccount) GetUsernamePasswordFile() string {
+func (x *GitHubAccount) GetUsernamePasswordFile() string {
 	if x != nil {
 		return x.UsernamePasswordFile
 	}
 	return ""
 }
 
-func (x *GitHubArtifactAccount) GetToken() string {
+func (x *GitHubAccount) GetToken() string {
 	if x != nil {
 		return x.Token
 	}
 	return ""
 }
 
-func (x *GitHubArtifactAccount) GetTokenFile() string {
+func (x *GitHubAccount) GetTokenFile() string {
 	if x != nil {
 		return x.TokenFile
 	}
@@ -185,16 +185,14 @@ var File_artifact_github_proto protoreflect.FileDescriptor
 var file_artifact_github_proto_rawDesc = []byte{
 	0x0a, 0x15, 0x61, 0x72, 0x74, 0x69, 0x66, 0x61, 0x63, 0x74, 0x2f, 0x67, 0x69, 0x74, 0x68, 0x75,
 	0x62, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x61,
-	0x72, 0x74, 0x69, 0x66, 0x61, 0x63, 0x74, 0x22, 0x75, 0x0a, 0x16, 0x47, 0x69, 0x74, 0x48, 0x75,
-	0x62, 0x41, 0x72, 0x74, 0x69, 0x66, 0x61, 0x63, 0x74, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65,
-	0x72, 0x12, 0x18, 0x0a, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x08, 0x52, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x12, 0x41, 0x0a, 0x08, 0x61,
-	0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x25, 0x2e,
+	0x72, 0x74, 0x69, 0x66, 0x61, 0x63, 0x74, 0x22, 0x5d, 0x0a, 0x06, 0x47, 0x69, 0x74, 0x48, 0x75,
+	0x62, 0x12, 0x18, 0x0a, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x08, 0x52, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x12, 0x39, 0x0a, 0x08, 0x61,
+	0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1d, 0x2e,
 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x61, 0x72, 0x74, 0x69, 0x66, 0x61, 0x63, 0x74, 0x2e, 0x47,
-	0x69, 0x74, 0x48, 0x75, 0x62, 0x41, 0x72, 0x74, 0x69, 0x66, 0x61, 0x63, 0x74, 0x41, 0x63, 0x63,
-	0x6f, 0x75, 0x6e, 0x74, 0x52, 0x08, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x22, 0xcb,
-	0x01, 0x0a, 0x15, 0x47, 0x69, 0x74, 0x48, 0x75, 0x62, 0x41, 0x72, 0x74, 0x69, 0x66, 0x61, 0x63,
-	0x74, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65,
+	0x69, 0x74, 0x48, 0x75, 0x62, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x08, 0x61, 0x63,
+	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x22, 0xc3, 0x01, 0x0a, 0x0d, 0x47, 0x69, 0x74, 0x48, 0x75,
+	0x62, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65,
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08,
 	0x75, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08,
 	0x75, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x61, 0x73, 0x73,
@@ -226,11 +224,11 @@ func file_artifact_github_proto_rawDescGZIP() []byte {
 
 var file_artifact_github_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_artifact_github_proto_goTypes = []interface{}{
-	(*GitHubArtifactProvider)(nil), // 0: proto.artifact.GitHubArtifactProvider
-	(*GitHubArtifactAccount)(nil),  // 1: proto.artifact.GitHubArtifactAccount
+	(*GitHub)(nil),        // 0: proto.artifact.GitHub
+	(*GitHubAccount)(nil), // 1: proto.artifact.GitHubAccount
 }
 var file_artifact_github_proto_depIdxs = []int32{
-	1, // 0: proto.artifact.GitHubArtifactProvider.accounts:type_name -> proto.artifact.GitHubArtifactAccount
+	1, // 0: proto.artifact.GitHub.accounts:type_name -> proto.artifact.GitHubAccount
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
@@ -245,7 +243,7 @@ func file_artifact_github_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_artifact_github_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GitHubArtifactProvider); i {
+			switch v := v.(*GitHub); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -257,7 +255,7 @@ func file_artifact_github_proto_init() {
 			}
 		}
 		file_artifact_github_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GitHubArtifactAccount); i {
+			switch v := v.(*GitHubAccount); i {
 			case 0:
 				return &v.state
 			case 1:
