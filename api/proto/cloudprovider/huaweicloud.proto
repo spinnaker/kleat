@@ -1,12 +1,12 @@
 syntax = "proto3";
-package proto;
+package proto.cloudprovider;
 
 option go_package = "github.com/spinnaker/kleat/api/client/cloudprovider";
 
 import "permissions.proto";
 
 // Configuration for the Huawei Cloud provider.
-message HuaweiCloudProvider {
+message HuaweiCloud {
   // Whether the provider is enabled.
   bool enabled = 1;
 

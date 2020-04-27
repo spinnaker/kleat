@@ -51,12 +51,12 @@ func TestEmptyProvidersToClouddriver(t *testing.T) {
 func TestEmptyKubernetesProviderToClouddriverConfig(t *testing.T) {
 	h := &config.Hal{
 		Providers: &config.Hal_Providers{
-			Kubernetes: &cloudprovider.KubernetesProvider{},
+			Kubernetes: &cloudprovider.Kubernetes{},
 		},
 	}
 	gotC := HalToClouddriver(h)
 	wantC := &config.Clouddriver{
-		Kubernetes: &cloudprovider.KubernetesProvider{},
+		Kubernetes: &cloudprovider.Kubernetes{},
 	}
 	if !reflect.DeepEqual(gotC, wantC) {
 		t.Errorf("Expected empty Kubernetes config in hal config to pass through to clouddriver config, got %+v", gotC)
@@ -64,7 +64,7 @@ func TestEmptyKubernetesProviderToClouddriverConfig(t *testing.T) {
 }
 
 func TestKubernetesAccountToClouddriver(t *testing.T) {
-	k := &cloudprovider.KubernetesProvider{
+	k := &cloudprovider.Kubernetes{
 		Enabled: true,
 		Accounts: []*cloudprovider.KubernetesAccount{
 			{
@@ -91,11 +91,11 @@ func TestKubernetesAccountToClouddriver(t *testing.T) {
 
 func TestEmptyArtifactsToHalConfig(t *testing.T) {
 	h := &config.Hal{
-		Artifacts: &artifact.ArtifactProviders{},
+		Artifacts: &artifact.Artifacts{},
 	}
 	gotC := HalToClouddriver(h)
 	wantC := &config.Clouddriver{
-		Artifacts: &artifact.ArtifactProviders{},
+		Artifacts: &artifact.Artifacts{},
 	}
 	if !reflect.DeepEqual(gotC, wantC) {
 		t.Errorf("Expected empty artifact providers to be passed to clouddriver config, got %+v", gotC)
@@ -103,8 +103,8 @@ func TestEmptyArtifactsToHalConfig(t *testing.T) {
 }
 
 func TestEmptyGcsArtifactConfigToHalConfig(t *testing.T) {
-	a := &artifact.ArtifactProviders{
-		Gcs: &artifact.GcsArtifactProvider{},
+	a := &artifact.Artifacts{
+		Gcs: &artifact.Gcs{},
 	}
 	h := &config.Hal{
 		Artifacts: a,
@@ -119,10 +119,10 @@ func TestEmptyGcsArtifactConfigToHalConfig(t *testing.T) {
 }
 
 func TestGcsArtifactAccountToHalConfig(t *testing.T) {
-	a := &artifact.ArtifactProviders{
-		Gcs: &artifact.GcsArtifactProvider{
+	a := &artifact.Artifacts{
+		Gcs: &artifact.Gcs{
 			Enabled: true,
-			Accounts: []*artifact.GcsArtifactAccount{
+			Accounts: []*artifact.GcsAccount{
 				{
 					Name:     "my-account",
 					JsonPath: "/var/secrets/my-key.json",
@@ -185,11 +185,11 @@ func TestSlackNotificationToEchoConfig(t *testing.T) {
 
 func TestEmptyPubsubsToEchoConfig(t *testing.T) {
 	h := &config.Hal{
-		Pubsub: &pubsub.PubsubProviders{},
+		Pubsub: &pubsub.Pubsub{},
 	}
 	gotE := HalToEcho(h)
 	wantE := &config.Echo{
-		Pubsub: &pubsub.PubsubProviders{},
+		Pubsub: &pubsub.Pubsub{},
 	}
 	if !reflect.DeepEqual(gotE, wantE) {
 		t.Errorf("Expected empty pubsubs to be passed through to echo config, got %v", gotE)
@@ -197,8 +197,8 @@ func TestEmptyPubsubsToEchoConfig(t *testing.T) {
 }
 
 func TestEmptyGooglePubsubToEchoConfig(t *testing.T) {
-	pubsub := &pubsub.PubsubProviders{
-		Google: &pubsub.GooglePubsub{},
+	pubsub := &pubsub.Pubsub{
+		Google: &pubsub.Google{},
 	}
 	h := &config.Hal{
 		Pubsub: pubsub,
@@ -213,9 +213,9 @@ func TestEmptyGooglePubsubToEchoConfig(t *testing.T) {
 }
 
 func TestGooglePubsubToEchoConfig(t *testing.T) {
-	pubsub := &pubsub.PubsubProviders{
-		Google: &pubsub.GooglePubsub{
-			Subscriptions: []*pubsub.GooglePubsubSubscriber{
+	pubsub := &pubsub.Pubsub{
+		Google: &pubsub.Google{
+			Subscriptions: []*pubsub.GoogleSubscriber{
 				{
 					Name:             "my-account",
 					Project:          "my-project",
@@ -224,7 +224,7 @@ func TestGooglePubsubToEchoConfig(t *testing.T) {
 					MessageFormat:    "GCS",
 				},
 			},
-			Publishers: []*pubsub.GooglePubsubPublisher{
+			Publishers: []*pubsub.GooglePublisher{
 				{
 					Name:      "my-account",
 					Project:   "my-project",
@@ -247,7 +247,7 @@ func TestGooglePubsubToEchoConfig(t *testing.T) {
 
 func TestEmptyCiConfigToEcho(t *testing.T) {
 	h := &config.Hal{
-		Ci: &config.Hal_CiProviders{},
+		Ci: &ci.Ci{},
 	}
 	gotE := HalToEcho(h)
 	wantE := &config.Echo{}
@@ -257,8 +257,8 @@ func TestEmptyCiConfigToEcho(t *testing.T) {
 }
 
 func TestEmptyGcbConfigAccountToEcho(t *testing.T) {
-	gcb := &ci.GoogleCloudBuildProvider{}
-	cis := &config.Hal_CiProviders{
+	gcb := &ci.GoogleCloudBuild{}
+	cis := &ci.Ci{
 		Gcb: gcb,
 	}
 	h := &config.Hal{
@@ -274,7 +274,7 @@ func TestEmptyGcbConfigAccountToEcho(t *testing.T) {
 }
 
 func TestGcbAccountToEcho(t *testing.T) {
-	gcb := &ci.GoogleCloudBuildProvider{
+	gcb := &ci.GoogleCloudBuild{
 		Enabled: true,
 		Accounts: []*ci.GoogleCloudBuildAccount{
 			{
@@ -284,7 +284,7 @@ func TestGcbAccountToEcho(t *testing.T) {
 			},
 		},
 	}
-	cis := &config.Hal_CiProviders{
+	cis := &ci.Ci{
 		Gcb: gcb,
 	}
 	h := &config.Hal{

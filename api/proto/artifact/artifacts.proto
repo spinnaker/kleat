@@ -1,5 +1,5 @@
 syntax = "proto3";
-package proto;
+package proto.artifact;
 
 option go_package = "github.com/spinnaker/kleat/api/client/artifact";
 
@@ -13,18 +13,18 @@ import "artifact/http.proto";
 import "artifact/maven.proto";
 import "artifact/oracle.proto";
 import "artifact/s3.proto";
-import "artifact/artifact_template.proto";
+import "artifact/template.proto";
 
-message ArtifactProviders {
-    BitbucketArtifactProvider bitbucket = 1;
-    GcsArtifactProvider gcs = 2;
-    GitHubArtifactProvider github = 3;
-    GitLabArtifactProvider gitlab = 4;
-    GitRepoArtifactProvider gitrepo = 5;
-    HelmArtifactProvider helm = 6;
-    HttpArtifactProvider http = 7;
-    MavenArtifactProvider maven = 8;
-    OracleArtifactProvider oracle = 9;
-    S3ArtifactProvider s3 = 10;
-    repeated ArtifactTemplate templates = 11;
+message Artifacts {
+    artifact.Bitbucket bitbucket = 1;
+    artifact.Gcs gcs = 2;
+    artifact.GitHub github = 3;
+    artifact.GitLab gitlab = 4;
+    artifact.GitRepo gitrepo = 5;
+    artifact.Helm helm = 6;
+    artifact.Http http = 7;
+    artifact.Maven maven = 8;
+    artifact.Oracle oracle = 9;
+    artifact.S3 s3 = 10;
+    repeated artifact.Template templates = 11;
 }

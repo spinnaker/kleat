@@ -1,10 +1,10 @@
 syntax = "proto3";
-package proto;
+package proto.storage;
 
 option go_package = "github.com/spinnaker/kleat/api/client/storage";
 
 // Configuration for an Azure Storage persistent store.
-message AzsPersistentStore {
+message Azs {
     // Whether this persistent store is enabled.
     string enabled = 1;
 

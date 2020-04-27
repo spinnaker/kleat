@@ -1,15 +1,15 @@
 syntax = "proto3";
-package proto;
+package proto.artifact;
 
 option go_package = "github.com/spinnaker/kleat/api/client/artifact";
 
 // Configuration for the Git repo artifact provider.
-message GitRepoArtifactProvider {
+message GitRepo {
     // Whether the Git repo artifact provider is enabled.
     bool enabled = 1;
 
     // The list of configured Git Repo accounts.
-    repeated GitRepoArtifactAccount accounts = 2;
+    repeated GitRepoAccount accounts = 2;
 }
 
 // Configuration for a Git repo artifact account. An account maps to a
@@ -17,7 +17,7 @@ message GitRepoArtifactProvider {
 // Git hosting service. Either `username` and `password`,
 // `usernamePasswordFile`, `token`, `tokenFile`, or `sshPrivateKeyFilePath` and
 // `sshPrivateKeyPassphrase` must be set.
-message GitRepoArtifactAccount {
+message GitRepoAccount {
     // The name of the account.
     string name = 1;
 

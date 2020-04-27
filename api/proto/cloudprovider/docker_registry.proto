@@ -1,12 +1,12 @@
 syntax = "proto3";
-package proto;
+package proto.cloudprovider;
 
 option go_package = "github.com/spinnaker/kleat/api/client/cloudprovider";
 
 import "permissions.proto";
 
 // Configuration for the Docker Registry provider.
-message DockerRegistryProvider {
+message DockerRegistry {
     // Whether the provider is enabled.
     bool enabled = 1;
 

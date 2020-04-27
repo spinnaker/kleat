@@ -1,20 +1,20 @@
 syntax = "proto3";
-package proto;
+package proto.artifact;
 
 option go_package = "github.com/spinnaker/kleat/api/client/artifact";
 
 // Configuration for the HTTP artifact provider.
-message HttpArtifactProvider {
+message Http {
     // Whether the HTTP artifact provider is enabled.
     bool enabled = 1;
 
     // The list of configured HTTP accounts.
-    repeated HttpArtifactAccount accounts = 2;
+    repeated HttpAccount accounts = 2;
 }
 
 // Configuration for an HTTP artifact account. Either `username` and `password`
 // or `usernamePasswordFile` should be specified as means of authentication.
-message HttpArtifactAccount {
+message HttpAccount {
     // The name of the account.
     string name = 1;
 

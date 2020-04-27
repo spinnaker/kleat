@@ -1,19 +1,19 @@
 syntax = "proto3";
-package proto;
+package proto.artifact;
 
 option go_package = "github.com/spinnaker/kleat/api/client/artifact";
 
 // Configuration for the S3 artifact provider.
-message S3ArtifactProvider {
+message S3 {
     // Whether the S3 artifact provider is enabled.
     bool enabled = 1;
 
     // The list of configured S3 artifact accounts.
-    repeated S3ArtifactAccount accounts = 2;
+    repeated S3Account accounts = 2;
 }
 
 // Configuration for an S3 artifact account.
-message S3ArtifactAccount {
+message S3Account {
     // The name of the account.
     string name = 1;
 
