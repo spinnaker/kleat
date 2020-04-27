@@ -21,9 +21,9 @@ import (
 	"testing"
 
 	"github.com/spinnaker/kleat/api/client/config"
+	"github.com/spinnaker/kleat/internal/protoyaml"
 
 	"github.com/spinnaker/kleat/pkg/parse_hal"
-	"sigs.k8s.io/yaml"
 )
 
 func TestHalToClouddriver(t *testing.T) {
@@ -39,12 +39,12 @@ func TestHalToClouddriver(t *testing.T) {
 		t.Errorf(err.Error())
 	}
 
-	want, err := yaml.Marshal(wantC)
+	want, err := protoyaml.Marshal(wantC)
 	if err != nil {
 		t.Errorf(err.Error())
 	}
 
-	got, err := yaml.Marshal(gotC)
+	got, err := protoyaml.Marshal(gotC)
 	if err != nil {
 		t.Errorf(err.Error())
 	}
@@ -60,7 +60,7 @@ func parseClouddriverConfig(fn string) (*config.Clouddriver, error) {
 	dat, err := ioutil.ReadFile(fn)
 
 	h := config.Clouddriver{}
-	err = yaml.UnmarshalStrict([]byte(dat), &h)
+	err = protoyaml.UnmarshalStrict([]byte(dat), &h)
 	if err != nil {
 		return nil, err
 	}

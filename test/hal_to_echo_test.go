@@ -21,9 +21,9 @@ import (
 	"testing"
 
 	"github.com/spinnaker/kleat/api/client/config"
+	"github.com/spinnaker/kleat/internal/protoyaml"
 
 	"github.com/spinnaker/kleat/pkg/parse_hal"
-	"sigs.k8s.io/yaml"
 )
 
 func TestHalToEcho(t *testing.T) {
@@ -39,12 +39,12 @@ func TestHalToEcho(t *testing.T) {
 		t.Errorf(err.Error())
 	}
 
-	want, err := yaml.Marshal(wantE)
+	want, err := protoyaml.Marshal(wantE)
 	if err != nil {
 		t.Errorf(err.Error())
 	}
 
-	got, err := yaml.Marshal(gotE)
+	got, err := protoyaml.Marshal(gotE)
 	if err != nil {
 		t.Errorf(err.Error())
 	}
@@ -59,7 +59,7 @@ func parseEchoConfig(fn string) (*config.Echo, error) {
 	dat, err := ioutil.ReadFile(fn)
 
 	h := config.Echo{}
-	err = yaml.UnmarshalStrict([]byte(dat), &h)
+	err = protoyaml.UnmarshalStrict([]byte(dat), &h)
 	if err != nil {
 		return nil, err
 	}
