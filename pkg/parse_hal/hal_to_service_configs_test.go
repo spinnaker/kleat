@@ -13,19 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package test
+package parse_hal_test
 
 import (
+	"path/filepath"
 	"reflect"
 	"testing"
 
-	"github.com/spinnaker/kleat/api/client/config"
-
 	"github.com/spinnaker/kleat/pkg/parse_hal"
+
+	"github.com/spinnaker/kleat/api/client/config"
 )
 
 func TestHalToServiceConfigs(t *testing.T) {
-	h, err := parse_hal.ParseHalConfig("./data/halconfig.yml")
+	h, err := parse_hal.ParseHalConfig(filepath.Join("../../testdata", "halconfig.yml"))
 	if err != nil {
 		t.Errorf(err.Error())
 	}

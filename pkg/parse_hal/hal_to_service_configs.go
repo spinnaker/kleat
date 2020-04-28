@@ -15,22 +15,12 @@
  */
 package parse_hal
 
-import (
-	"io/ioutil"
+import "github.com/spinnaker/kleat/api/client/config"
 
-	"github.com/spinnaker/kleat/api/client/config"
-	"github.com/spinnaker/kleat/internal/protoyaml"
-)
-
-func ParseHalConfig(fn string) (*config.Hal, error) {
-	dat, err := ioutil.ReadFile(fn)
-	if err != nil {
-		return nil, err
+func HalToServiceConfigs(h *config.Hal) *config.Services {
+	return &config.Services{
+		Clouddriver: HalToClouddriver(h),
+		Echo:        HalToEcho(h),
+		Front50:     HalToFront50(h),
 	}
-
-	h := &config.Hal{}
-	if err = protoyaml.Unmarshal(dat, h); err != nil {
-		return nil, err
-	}
-	return h, nil
 }

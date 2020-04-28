@@ -15,22 +15,16 @@
  */
 package parse_hal
 
-import (
-	"io/ioutil"
+import "github.com/spinnaker/kleat/api/client/config"
 
-	"github.com/spinnaker/kleat/api/client/config"
-	"github.com/spinnaker/kleat/internal/protoyaml"
-)
-
-func ParseHalConfig(fn string) (*config.Hal, error) {
-	dat, err := ioutil.ReadFile(fn)
-	if err != nil {
-		return nil, err
+func HalToEcho(h *config.Hal) *config.Echo {
+	return &config.Echo{
+		Slack:        h.GetNotifications().GetSlack(),
+		Twilio:       h.GetNotifications().GetTwilio(),
+		GithubStatus: h.GetNotifications().GetGithubStatus(),
+		Artifacts:    h.GetArtifacts(),
+		Pubsub:       h.GetPubsub(),
+		Gcb:          h.GetCi().GetGcb(),
+		Stats:        h.GetStats(),
 	}
-
-	h := &config.Hal{}
-	if err = protoyaml.Unmarshal(dat, h); err != nil {
-		return nil, err
-	}
-	return h, nil
 }

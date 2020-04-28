@@ -13,24 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package parse_hal
 
-import (
-	"io/ioutil"
+import "github.com/spinnaker/kleat/api/client/config"
 
-	"github.com/spinnaker/kleat/api/client/config"
-	"github.com/spinnaker/kleat/internal/protoyaml"
-)
-
-func ParseHalConfig(fn string) (*config.Hal, error) {
-	dat, err := ioutil.ReadFile(fn)
-	if err != nil {
-		return nil, err
+func HalToFront50(h *config.Hal) *config.Front50 {
+	return &config.Front50{
+		Spinnaker: &config.Front50_Spinnaker{
+			Gcs:    h.GetPersistentStorage().GetGcs(),
+			Azs:    h.GetPersistentStorage().GetAzs(),
+			Oracle: h.GetPersistentStorage().GetOracle(),
+		},
 	}
-
-	h := &config.Hal{}
-	if err = protoyaml.Unmarshal(dat, h); err != nil {
-		return nil, err
-	}
-	return h, nil
 }
