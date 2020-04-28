@@ -216,7 +216,6 @@
     - [KubernetesCachingPolicy](#proto.cloudprovider.KubernetesCachingPolicy)
     - [KubernetesCustomResource](#proto.cloudprovider.KubernetesCustomResource)
   
-    - [KubernetesProviderVersion](#proto.cloudprovider.KubernetesProviderVersion)
   
   
   
@@ -2057,7 +2056,6 @@ credential that can authenticate against your Kubernetes cluster.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The name of the account. |
-| providerVersion | [KubernetesProviderVersion](#proto.cloudprovider.KubernetesProviderVersion) |  | Some providers support multiple versions/release tracks. This allows you to pick the version of the provider (not the resources it manages) to run within Spinnaker. |
 | kinds | [string](#string) | repeated | A list of resource kinds this Spinnaker account can deploy and will cache. When no kinds are configured, this defaults to all kinds described here: https://spinnaker.io/reference/providers/kubernetes-v2/. This can only be set when omitKinds is empty or not set. |
 | omitKinds | [string](#string) | repeated | A list of resource kinds this Spinnaker account cannot deploy to or cache. This can only be set when kinds is empty or not set. |
 | context | [string](#string) |  | The kubernetes context to be managed by Spinnaker. See http://kubernetes.io/docs/user-guide/kubeconfig-file/#context for more information. When no context is configured for an account the `current-context` in your kubeconfig is assumed. |
@@ -2130,18 +2128,6 @@ need to explicitly register each CRD.
 
 
  
-
-
-<a name="proto.cloudprovider.KubernetesProviderVersion"></a>
-
-### KubernetesProviderVersion
-
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| V1 | 0 |  |
-| V2 | 1 |  |
-
 
  
 
