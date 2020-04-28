@@ -232,6 +232,13 @@
   
   
 
+- [cloudprovider/providers.proto](#cloudprovider/providers.proto)
+    - [Providers](#proto.cloudprovider.Providers)
+  
+  
+  
+  
+
 - [config/clouddriver.proto](#config/clouddriver.proto)
     - [Clouddriver](#proto.config.Clouddriver)
   
@@ -256,7 +263,6 @@
 
 - [config/halconfig.proto](#config/halconfig.proto)
     - [Hal](#proto.config.Hal)
-    - [Hal.Providers](#proto.config.Hal.Providers)
   
   
   
@@ -2267,6 +2273,47 @@ Oracle virtualization settings.
 
 
 
+<a name="cloudprovider/providers.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## cloudprovider/providers.proto
+
+
+
+<a name="proto.cloudprovider.Providers"></a>
+
+### Providers
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| kubernetes | [Kubernetes](#proto.cloudprovider.Kubernetes) |  |  |
+| google | [GoogleComputeEngine](#proto.cloudprovider.GoogleComputeEngine) |  |  |
+| appengine | [Appengine](#proto.cloudprovider.Appengine) |  |  |
+| aws | [Aws](#proto.cloudprovider.Aws) |  |  |
+| azure | [Azure](#proto.cloudprovider.Azure) |  |  |
+| cloudfoundry | [CloudFoundry](#proto.cloudprovider.CloudFoundry) |  |  |
+| dcos | [Dcos](#proto.cloudprovider.Dcos) |  |  |
+| dockerRegistry | [DockerRegistry](#proto.cloudprovider.DockerRegistry) |  |  |
+| ecs | [Ecs](#proto.cloudprovider.Ecs) |  |  |
+| huaweicloud | [HuaweiCloud](#proto.cloudprovider.HuaweiCloud) |  |  |
+| oracle | [Oracle](#proto.cloudprovider.Oracle) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
 <a name="config/clouddriver.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -2410,37 +2457,12 @@ Oracle virtualization settings.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | persistentStorage | [proto.storage.PersistentStorage](#proto.storage.PersistentStorage) |  |  |
-| providers | [Hal.Providers](#proto.config.Hal.Providers) |  |  |
+| providers | [proto.cloudprovider.Providers](#proto.cloudprovider.Providers) |  |  |
 | artifacts | [proto.artifact.Artifacts](#proto.artifact.Artifacts) |  |  |
 | notifications | [proto.notification.Notifications](#proto.notification.Notifications) |  |  |
 | pubsub | [proto.pubsub.Pubsub](#proto.pubsub.Pubsub) |  |  |
 | ci | [proto.ci.Ci](#proto.ci.Ci) |  |  |
 | stats | [proto.Stats](#proto.Stats) |  |  |
-
-
-
-
-
-
-<a name="proto.config.Hal.Providers"></a>
-
-### Hal.Providers
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| kubernetes | [proto.cloudprovider.Kubernetes](#proto.cloudprovider.Kubernetes) |  |  |
-| google | [proto.cloudprovider.GoogleComputeEngine](#proto.cloudprovider.GoogleComputeEngine) |  |  |
-| appengine | [proto.cloudprovider.Appengine](#proto.cloudprovider.Appengine) |  |  |
-| aws | [proto.cloudprovider.Aws](#proto.cloudprovider.Aws) |  |  |
-| azure | [proto.cloudprovider.Azure](#proto.cloudprovider.Azure) |  |  |
-| cloudfoundry | [proto.cloudprovider.CloudFoundry](#proto.cloudprovider.CloudFoundry) |  |  |
-| dcos | [proto.cloudprovider.Dcos](#proto.cloudprovider.Dcos) |  |  |
-| dockerRegistry | [proto.cloudprovider.DockerRegistry](#proto.cloudprovider.DockerRegistry) |  |  |
-| ecs | [proto.cloudprovider.Ecs](#proto.cloudprovider.Ecs) |  |  |
-| huaweicloud | [proto.cloudprovider.HuaweiCloud](#proto.cloudprovider.HuaweiCloud) |  |  |
-| oracle | [proto.cloudprovider.Oracle](#proto.cloudprovider.Oracle) |  |  |
 
 
 
