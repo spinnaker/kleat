@@ -3,8 +3,7 @@ package proto.config;
 
 option go_package = "github.com/spinnaker/kleat/api/client/config";
 
-import "cloudprovider/kubernetes.proto";
-import "cloudprovider/google.proto";
+import "artifact/artifacts.proto";
 import "cloudprovider/appengine.proto";
 import "cloudprovider/aws.proto";
 import "cloudprovider/azure.proto";
@@ -12,10 +11,12 @@ import "cloudprovider/cloudfoundry.proto";
 import "cloudprovider/dcos.proto";
 import "cloudprovider/docker_registry.proto";
 import "cloudprovider/ecs.proto";
+import "cloudprovider/google.proto";
 import "cloudprovider/huaweicloud.proto";
+import "cloudprovider/kubernetes.proto";
 import "cloudprovider/oracle.proto";
-import "artifact/artifacts.proto";
 
+// Configuration for the clouddriver microservice.
 message Clouddriver {
     cloudprovider.Kubernetes kubernetes = 1;
     cloudprovider.GoogleComputeEngine google = 2;

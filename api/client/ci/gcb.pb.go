@@ -32,7 +32,9 @@ type GoogleCloudBuild struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Enabled  bool                       `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// Whether the Google Cloud Build provider is enabled.
+	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// The list of configured Google Cloud Build accounts.
 	Accounts []*GoogleCloudBuildAccount `protobuf:"bytes,2,rep,name=accounts,proto3" json:"accounts,omitempty"`
 }
 

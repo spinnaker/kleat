@@ -30,9 +30,12 @@ const _ = proto.ProtoPackageIsVersion4
 type GcloudReleaseTrack int32
 
 const (
+	// Standard release track; runs commands via `gcloud...`
 	GcloudReleaseTrack_STABLE GcloudReleaseTrack = 0
-	GcloudReleaseTrack_BETA   GcloudReleaseTrack = 1
-	GcloudReleaseTrack_ALPHA  GcloudReleaseTrack = 2
+	// Alpha release track; runs commands via `gcloud beta...`
+	GcloudReleaseTrack_BETA GcloudReleaseTrack = 1
+	// Alpha release track; runs commands via `gcloud alpha...`
+	GcloudReleaseTrack_ALPHA GcloudReleaseTrack = 2
 )
 
 // Enum value maps for GcloudReleaseTrack.

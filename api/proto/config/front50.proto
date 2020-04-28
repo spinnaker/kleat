@@ -7,6 +7,7 @@ import "storage/azs.proto";
 import "storage/gcs.proto";
 import "storage/oracle.proto";
 
+// Configuration for the front50 microservice.
 message Front50 {
   Spinnaker spinnaker = 1;
 

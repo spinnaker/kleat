@@ -124,5 +124,4 @@ message OracleVirtualizationSettings {
 
   // (Required) The ssh username for the baking configuration.
   string sshUserName = 2;
-
 }

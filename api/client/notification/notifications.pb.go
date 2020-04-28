@@ -25,6 +25,7 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
+// Configuration for notifications.
 type Notifications struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

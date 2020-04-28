@@ -376,7 +376,7 @@
 <a name="proto.artifact.Artifacts"></a>
 
 ### Artifacts
-
+Configuration for artifact support.
 
 
 | Field | Type | Label | Description |
@@ -970,7 +970,7 @@ https://www.spinnaker.io/reference/artifacts/from-build-triggers/#artifacts-from
 <a name="proto.ci.Ci"></a>
 
 ### Ci
-
+Configuration for integration with continuous integration systems.
 
 
 | Field | Type | Label | Description |
@@ -1006,8 +1006,8 @@ Configuration for the Google Cloud Build Provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  |  |
-| accounts | [GoogleCloudBuildAccount](#proto.ci.GoogleCloudBuildAccount) | repeated |  |
+| enabled | [bool](#bool) |  | Whether the Google Cloud Build provider is enabled. |
+| accounts | [GoogleCloudBuildAccount](#proto.ci.GoogleCloudBuildAccount) | repeated | The list of configured Google Cloud Build accounts. |
 
 
 
@@ -1109,9 +1109,9 @@ Represents a release track of the gcloud tool.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| STABLE | 0 |  |
-| BETA | 1 |  |
-| ALPHA | 2 |  |
+| STABLE | 0 | Standard release track; runs commands via `gcloud...` |
+| BETA | 1 | Alpha release track; runs commands via `gcloud beta...` |
+| ALPHA | 2 | Alpha release track; runs commands via `gcloud alpha...` |
 
 
  
@@ -1357,7 +1357,7 @@ Configuration for the Azure provider.
 <a name="proto.cloudprovider.AzureAccount"></a>
 
 ### AzureAccount
-
+Configuration for an Azure account.
 
 
 | Field | Type | Label | Description |
@@ -2283,7 +2283,7 @@ Oracle virtualization settings.
 <a name="proto.cloudprovider.Providers"></a>
 
 ### Providers
-
+Configuration for cloud provider integrations.
 
 
 | Field | Type | Label | Description |
@@ -2324,7 +2324,7 @@ Oracle virtualization settings.
 <a name="proto.config.Clouddriver"></a>
 
 ### Clouddriver
-
+Configuration for the clouddriver microservice.
 
 
 | Field | Type | Label | Description |
@@ -2366,7 +2366,7 @@ Oracle virtualization settings.
 <a name="proto.config.Echo"></a>
 
 ### Echo
-
+Configuration for the echo microservice.
 
 
 | Field | Type | Label | Description |
@@ -2403,7 +2403,7 @@ Oracle virtualization settings.
 <a name="proto.config.Front50"></a>
 
 ### Front50
-
+Configuration for the front50 microservice.
 
 
 | Field | Type | Label | Description |
@@ -2451,7 +2451,7 @@ Oracle virtualization settings.
 <a name="proto.config.Hal"></a>
 
 ### Hal
-
+Configuration for a Spinnaker installation.
 
 
 | Field | Type | Label | Description |
@@ -2488,7 +2488,7 @@ Oracle virtualization settings.
 <a name="proto.config.Services"></a>
 
 ### Services
-
+Configuration for Spinnaker&#39;s microservices.
 
 
 | Field | Type | Label | Description |
@@ -2553,7 +2553,7 @@ Configuration for Github status notifications.
 <a name="proto.notification.Notifications"></a>
 
 ### Notifications
-
+Configuration for notifications.
 
 
 | Field | Type | Label | Description |

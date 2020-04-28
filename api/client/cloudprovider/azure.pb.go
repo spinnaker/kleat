@@ -102,6 +102,7 @@ func (x *Azure) GetBakeryDefaults() *AzureBakeryDefaults {
 	return nil
 }
 
+// Configuration for an Azure account.
 type AzureAccount struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

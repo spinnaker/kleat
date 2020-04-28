@@ -9,6 +9,7 @@ import "pubsub/google.proto";
 message Pubsub {
   // Whether Pub/Sub is enabled.
   bool enabled = 1;
+
   // Configuration for the Google Cloud Pub/Sub integration.
   Google google = 2;
 }

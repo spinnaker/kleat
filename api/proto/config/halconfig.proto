@@ -3,15 +3,15 @@ package proto.config;
 
 option go_package = "github.com/spinnaker/kleat/api/client/config";
 
-import "storage/persistent_storage.proto";
-
 import "artifact/artifacts.proto";
+import "ci/ci.proto";
+import "cloudprovider/providers.proto";
 import "notification/notifications.proto";
 import "pubsub/pubsub.proto";
-import "ci/ci.proto";
 import "stats.proto";
-import "cloudprovider/providers.proto";
+import "storage/persistent_storage.proto";
 
+// Configuration for a Spinnaker installation.
 message Hal {
   storage.PersistentStorage persistentStorage = 1;
   cloudprovider.Providers providers = 2;
@@ -20,6 +20,4 @@ message Hal {
   pubsub.Pubsub pubsub = 5;
   ci.Ci ci = 6;
   Stats stats = 7;
-
-
 }

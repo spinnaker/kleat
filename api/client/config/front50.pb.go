@@ -26,6 +26,7 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
+// Configuration for the front50 microservice.
 type Front50 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

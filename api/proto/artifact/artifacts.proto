@@ -15,6 +15,7 @@ import "artifact/oracle.proto";
 import "artifact/s3.proto";
 import "artifact/template.proto";
 
+// Configuration for artifact support.
 message Artifacts {
     artifact.Bitbucket bitbucket = 1;
     artifact.Gcs gcs = 2;

@@ -75,4 +75,3 @@ enum MessageFormat {
   GCS = 2;
   GCR = 3;
 }
-
