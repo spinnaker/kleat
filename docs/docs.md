@@ -255,7 +255,7 @@
 
 - [config/front50.proto](#config/front50.proto)
     - [Front50](#proto.config.Front50)
-    - [Front50Spinnaker](#proto.config.Front50Spinnaker)
+    - [Front50.Spinnaker](#proto.config.Front50.Spinnaker)
   
   
   
@@ -2408,16 +2408,16 @@ Oracle virtualization settings.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| spinnaker | [Front50Spinnaker](#proto.config.Front50Spinnaker) |  |  |
+| spinnaker | [Front50.Spinnaker](#proto.config.Front50.Spinnaker) |  |  |
 
 
 
 
 
 
-<a name="proto.config.Front50Spinnaker"></a>
+<a name="proto.config.Front50.Spinnaker"></a>
 
-### Front50Spinnaker
+### Front50.Spinnaker
 
 
 
