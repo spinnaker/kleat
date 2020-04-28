@@ -23,11 +23,6 @@ message KubernetesAccount {
     // The name of the account.
     string name = 1;
 
-    // Some providers support multiple versions/release tracks.
-    // This allows you to pick the version of the provider (not the
-    // resources it manages) to run within Spinnaker.
-    string providerVersion = 2;
-
     // A list of resource kinds this Spinnaker account can deploy and
     // will cache. When no kinds are configured, this defaults to all kinds
     // described here:
@@ -130,3 +125,4 @@ message KubernetesAccountDockerRegistry {
     // The list of Docker registry namespaces usable as image sources.
     repeated string namespaces = 2;
 }
+

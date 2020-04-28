@@ -221,7 +221,7 @@ func TestGooglePubsubToEchoConfig(t *testing.T) {
 					Project:          "my-project",
 					SubscriptionName: "my-subscription",
 					JsonPath:         "/var/secrets/my-account.json",
-					MessageFormat:    "GCS",
+					MessageFormat:    pubsub.MessageFormat_GCS,
 				},
 			},
 			Publishers: []*pubsub.GooglePublisher{

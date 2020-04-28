@@ -19,19 +19,20 @@ import (
 	"io/ioutil"
 
 	"github.com/spinnaker/kleat/api/client/config"
-	"sigs.k8s.io/yaml"
+	"github.com/spinnaker/kleat/internal/protoyaml"
 )
 
 func ParseHalConfig(fn string) (*config.Hal, error) {
 	dat, err := ioutil.ReadFile(fn)
-
-	h := config.Hal{}
-	err = yaml.Unmarshal([]byte(dat), &h)
 	if err != nil {
 		return nil, err
 	}
 
-	return &h, nil
+	h := &config.Hal{}
+	if err = protoyaml.Unmarshal(dat, h); err != nil {
+		return nil, err
+	}
+	return h, nil
 }
 
 func HalToFront50(h *config.Hal) *config.Front50 {

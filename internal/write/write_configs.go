@@ -19,10 +19,11 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/spinnaker/kleat/internal/protoyaml"
 	"github.com/spinnaker/kleat/internal/validate_paths"
 	"github.com/spinnaker/kleat/pkg/parse_hal"
 	"github.com/spinnaker/kleat/pkg/validate_hal"
-	"sigs.k8s.io/yaml"
+	"google.golang.org/protobuf/proto"
 )
 
 func WriteConfigs(hal string, d string) error {
@@ -55,13 +56,13 @@ func WriteConfigs(hal string, d string) error {
 	return nil
 }
 
-func write(i interface{}, d string, f string) error {
+func write(m proto.Message, d string, f string) error {
 	w, err := os.Create(filepath.Join(d, f))
 	if err != nil {
 		return err
 	}
 
-	bytes, err := yaml.Marshal(i)
+	bytes, err := protoyaml.Marshal(m)
 	if err != nil {
 		return err
 	}
