@@ -7,12 +7,13 @@ import "storage/azs.proto";
 import "storage/gcs.proto";
 import "storage/oracle.proto";
 
+// Configuration for the front50 microservice.
 message Front50 {
-  Front50Spinnaker spinnaker = 1;
-}
+  Spinnaker spinnaker = 1;
 
-message Front50Spinnaker {
-  storage.Gcs gcs = 1;
-  storage.Azs azs = 2;
-  storage.Oracle oracle = 3;
+  message Spinnaker {
+    storage.Gcs gcs = 1;
+    storage.Azs azs = 2;
+    storage.Oracle oracle = 3;
+  }
 }

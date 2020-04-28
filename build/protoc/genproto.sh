@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 gen_proto() {
   output_dir=$1
@@ -6,8 +7,10 @@ gen_proto() {
 }
 
 update_proto() {
+  gen_proto /staging
   rm -rf /output/go/* /output/doc/*
-  gen_proto /output
+  cp -r /staging/doc/* /output/doc/
+  cp -r /staging/go/* /output/go/
 }
 
 check_proto() {

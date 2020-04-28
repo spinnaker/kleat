@@ -41,14 +41,14 @@ var halToClouddriverTests = []struct {
 	{
 		"Empty providers",
 		&config.Hal{
-			Providers: &config.Hal_Providers{},
+			Providers: &cloudprovider.Providers{},
 		},
 		&config.Clouddriver{},
 	},
 	{
 		"Empty Kubernetes provider",
 		&config.Hal{
-			Providers: &config.Hal_Providers{
+			Providers: &cloudprovider.Providers{
 				Kubernetes: &cloudprovider.Kubernetes{},
 			},
 		},
@@ -59,7 +59,7 @@ var halToClouddriverTests = []struct {
 	{
 		"Kubernetes account",
 		&config.Hal{
-			Providers: &config.Hal_Providers{
+			Providers: &cloudprovider.Providers{
 				Kubernetes: &cloudprovider.Kubernetes{
 					Enabled: true,
 					Accounts: []*cloudprovider.KubernetesAccount{

@@ -232,6 +232,13 @@
   
   
 
+- [cloudprovider/providers.proto](#cloudprovider/providers.proto)
+    - [Providers](#proto.cloudprovider.Providers)
+  
+  
+  
+  
+
 - [config/clouddriver.proto](#config/clouddriver.proto)
     - [Clouddriver](#proto.config.Clouddriver)
   
@@ -248,7 +255,7 @@
 
 - [config/front50.proto](#config/front50.proto)
     - [Front50](#proto.config.Front50)
-    - [Front50Spinnaker](#proto.config.Front50Spinnaker)
+    - [Front50.Spinnaker](#proto.config.Front50.Spinnaker)
   
   
   
@@ -256,7 +263,6 @@
 
 - [config/halconfig.proto](#config/halconfig.proto)
     - [Hal](#proto.config.Hal)
-    - [Hal.Providers](#proto.config.Hal.Providers)
   
   
   
@@ -370,7 +376,7 @@
 <a name="proto.artifact.Artifacts"></a>
 
 ### Artifacts
-
+Configuration for artifact support.
 
 
 | Field | Type | Label | Description |
@@ -964,7 +970,7 @@ https://www.spinnaker.io/reference/artifacts/from-build-triggers/#artifacts-from
 <a name="proto.ci.Ci"></a>
 
 ### Ci
-
+Configuration for integration with continuous integration systems.
 
 
 | Field | Type | Label | Description |
@@ -1000,8 +1006,8 @@ Configuration for the Google Cloud Build Provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  |  |
-| accounts | [GoogleCloudBuildAccount](#proto.ci.GoogleCloudBuildAccount) | repeated |  |
+| enabled | [bool](#bool) |  | Whether the Google Cloud Build provider is enabled. |
+| accounts | [GoogleCloudBuildAccount](#proto.ci.GoogleCloudBuildAccount) | repeated | The list of configured Google Cloud Build accounts. |
 
 
 
@@ -1103,9 +1109,9 @@ Represents a release track of the gcloud tool.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| STABLE | 0 |  |
-| BETA | 1 |  |
-| ALPHA | 2 |  |
+| STABLE | 0 | Standard release track; runs commands via `gcloud...` |
+| BETA | 1 | Alpha release track; runs commands via `gcloud beta...` |
+| ALPHA | 2 | Alpha release track; runs commands via `gcloud alpha...` |
 
 
  
@@ -1351,7 +1357,7 @@ Configuration for the Azure provider.
 <a name="proto.cloudprovider.AzureAccount"></a>
 
 ### AzureAccount
-
+Configuration for an Azure account.
 
 
 | Field | Type | Label | Description |
@@ -2267,6 +2273,47 @@ Oracle virtualization settings.
 
 
 
+<a name="cloudprovider/providers.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## cloudprovider/providers.proto
+
+
+
+<a name="proto.cloudprovider.Providers"></a>
+
+### Providers
+Configuration for cloud provider integrations.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| kubernetes | [Kubernetes](#proto.cloudprovider.Kubernetes) |  |  |
+| google | [GoogleComputeEngine](#proto.cloudprovider.GoogleComputeEngine) |  |  |
+| appengine | [Appengine](#proto.cloudprovider.Appengine) |  |  |
+| aws | [Aws](#proto.cloudprovider.Aws) |  |  |
+| azure | [Azure](#proto.cloudprovider.Azure) |  |  |
+| cloudfoundry | [CloudFoundry](#proto.cloudprovider.CloudFoundry) |  |  |
+| dcos | [Dcos](#proto.cloudprovider.Dcos) |  |  |
+| dockerRegistry | [DockerRegistry](#proto.cloudprovider.DockerRegistry) |  |  |
+| ecs | [Ecs](#proto.cloudprovider.Ecs) |  |  |
+| huaweicloud | [HuaweiCloud](#proto.cloudprovider.HuaweiCloud) |  |  |
+| oracle | [Oracle](#proto.cloudprovider.Oracle) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
 <a name="config/clouddriver.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -2277,7 +2324,7 @@ Oracle virtualization settings.
 <a name="proto.config.Clouddriver"></a>
 
 ### Clouddriver
-
+Configuration for the clouddriver microservice.
 
 
 | Field | Type | Label | Description |
@@ -2319,7 +2366,7 @@ Oracle virtualization settings.
 <a name="proto.config.Echo"></a>
 
 ### Echo
-
+Configuration for the echo microservice.
 
 
 | Field | Type | Label | Description |
@@ -2356,21 +2403,21 @@ Oracle virtualization settings.
 <a name="proto.config.Front50"></a>
 
 ### Front50
-
+Configuration for the front50 microservice.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| spinnaker | [Front50Spinnaker](#proto.config.Front50Spinnaker) |  |  |
+| spinnaker | [Front50.Spinnaker](#proto.config.Front50.Spinnaker) |  |  |
 
 
 
 
 
 
-<a name="proto.config.Front50Spinnaker"></a>
+<a name="proto.config.Front50.Spinnaker"></a>
 
-### Front50Spinnaker
+### Front50.Spinnaker
 
 
 
@@ -2404,43 +2451,18 @@ Oracle virtualization settings.
 <a name="proto.config.Hal"></a>
 
 ### Hal
-
+Configuration for a Spinnaker installation.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | persistentStorage | [proto.storage.PersistentStorage](#proto.storage.PersistentStorage) |  |  |
-| providers | [Hal.Providers](#proto.config.Hal.Providers) |  |  |
+| providers | [proto.cloudprovider.Providers](#proto.cloudprovider.Providers) |  |  |
 | artifacts | [proto.artifact.Artifacts](#proto.artifact.Artifacts) |  |  |
 | notifications | [proto.notification.Notifications](#proto.notification.Notifications) |  |  |
 | pubsub | [proto.pubsub.Pubsub](#proto.pubsub.Pubsub) |  |  |
 | ci | [proto.ci.Ci](#proto.ci.Ci) |  |  |
 | stats | [proto.Stats](#proto.Stats) |  |  |
-
-
-
-
-
-
-<a name="proto.config.Hal.Providers"></a>
-
-### Hal.Providers
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| kubernetes | [proto.cloudprovider.Kubernetes](#proto.cloudprovider.Kubernetes) |  |  |
-| google | [proto.cloudprovider.GoogleComputeEngine](#proto.cloudprovider.GoogleComputeEngine) |  |  |
-| appengine | [proto.cloudprovider.Appengine](#proto.cloudprovider.Appengine) |  |  |
-| aws | [proto.cloudprovider.Aws](#proto.cloudprovider.Aws) |  |  |
-| azure | [proto.cloudprovider.Azure](#proto.cloudprovider.Azure) |  |  |
-| cloudfoundry | [proto.cloudprovider.CloudFoundry](#proto.cloudprovider.CloudFoundry) |  |  |
-| dcos | [proto.cloudprovider.Dcos](#proto.cloudprovider.Dcos) |  |  |
-| dockerRegistry | [proto.cloudprovider.DockerRegistry](#proto.cloudprovider.DockerRegistry) |  |  |
-| ecs | [proto.cloudprovider.Ecs](#proto.cloudprovider.Ecs) |  |  |
-| huaweicloud | [proto.cloudprovider.HuaweiCloud](#proto.cloudprovider.HuaweiCloud) |  |  |
-| oracle | [proto.cloudprovider.Oracle](#proto.cloudprovider.Oracle) |  |  |
 
 
 
@@ -2466,7 +2488,7 @@ Oracle virtualization settings.
 <a name="proto.config.Services"></a>
 
 ### Services
-
+Configuration for Spinnaker&#39;s microservices.
 
 
 | Field | Type | Label | Description |
@@ -2531,7 +2553,7 @@ Configuration for Github status notifications.
 <a name="proto.notification.Notifications"></a>
 
 ### Notifications
-
+Configuration for notifications.
 
 
 | Field | Type | Label | Description |

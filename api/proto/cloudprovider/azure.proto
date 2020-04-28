@@ -20,6 +20,7 @@ message Azure {
     AzureBakeryDefaults bakeryDefaults = 4;
 }
 
+// Configuration for an Azure account.
 message AzureAccount {
     // The name of the account.
     string name = 1;

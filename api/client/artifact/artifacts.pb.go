@@ -25,6 +25,7 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
+// Configuration for artifact support.
 type Artifacts struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

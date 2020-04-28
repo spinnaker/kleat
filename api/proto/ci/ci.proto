@@ -5,6 +5,7 @@ option go_package = "github.com/spinnaker/kleat/api/client/ci";
 
 import "ci/gcb.proto";
 
+// Configuration for integration with continuous integration systems.
 message Ci {
   ci.GoogleCloudBuild gcb = 1;
 }

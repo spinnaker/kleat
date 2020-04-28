@@ -1,0 +1,31 @@
+syntax = "proto3";
+package proto.cloudprovider;
+
+option go_package = "github.com/spinnaker/kleat/api/client/cloudprovider";
+
+import "cloudprovider/appengine.proto";
+import "cloudprovider/aws.proto";
+import "cloudprovider/azure.proto";
+import "cloudprovider/cloudfoundry.proto";
+import "cloudprovider/dcos.proto";
+import "cloudprovider/docker_registry.proto";
+import "cloudprovider/ecs.proto";
+import "cloudprovider/google.proto";
+import "cloudprovider/huaweicloud.proto";
+import "cloudprovider/kubernetes.proto";
+import "cloudprovider/oracle.proto";
+
+// Configuration for cloud provider integrations.
+message Providers {
+  cloudprovider.Kubernetes kubernetes = 1;
+  cloudprovider.GoogleComputeEngine google = 2;
+  cloudprovider.Appengine appengine = 3;
+  cloudprovider.Aws aws = 4;
+  cloudprovider.Azure azure = 5;
+  cloudprovider.CloudFoundry cloudfoundry = 6;
+  cloudprovider.Dcos dcos = 7;
+  cloudprovider.DockerRegistry dockerRegistry = 8;
+  cloudprovider.Ecs ecs = 9;
+  cloudprovider.HuaweiCloud huaweicloud = 10;
+  cloudprovider.Oracle oracle = 11;
+}

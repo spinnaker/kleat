@@ -4,13 +4,14 @@ package proto.config;
 option go_package = "github.com/spinnaker/kleat/api/client/config";
 
 import "artifact/artifacts.proto";
+import "ci/gcb.proto";
 import "notification/github_status.proto";
 import "notification/slack.proto";
 import "notification/twilio.proto";
 import "pubsub/pubsub.proto";
-import "ci/gcb.proto";
 import "stats.proto";
 
+// Configuration for the echo microservice.
 message Echo {
     notification.Slack slack = 1;
     notification.Twilio twilio = 2;

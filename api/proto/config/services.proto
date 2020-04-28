@@ -7,6 +7,7 @@ import "config/clouddriver.proto";
 import "config/echo.proto";
 import "config/front50.proto";
 
+// Configuration for Spinnaker's microservices.
 message Services {
   Clouddriver clouddriver = 1;
   Echo echo = 2;
