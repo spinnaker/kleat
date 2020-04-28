@@ -18,8 +18,9 @@ package parse_hal
 import (
 	"io/ioutil"
 
-	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/protoyaml"
+
+	"github.com/spinnaker/kleat/api/client/config"
 )
 
 func ParseHalConfig(fn string) (*config.Hal, error) {

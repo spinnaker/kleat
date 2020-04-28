@@ -1,0 +1,6 @@
+artifacts:
+  gcs:
+    enabled: true
+    accounts:
+      - name: my-account
+        jsonPath: /var/secrets/my-key.json

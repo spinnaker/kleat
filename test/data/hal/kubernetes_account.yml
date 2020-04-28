@@ -1,0 +1,10 @@
+providers:
+  kubernetes:
+    enabled: true
+    accounts:
+      - name: my-account
+        kinds:
+          - deployment
+        omitNamespaces:
+          - kube-system
+    primaryAccount: my-account
