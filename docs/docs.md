@@ -2434,6 +2434,7 @@ Configuration for the front50 microservice.
 | gcs | [proto.storage.Gcs](#proto.storage.Gcs) |  |  |
 | azs | [proto.storage.Azs](#proto.storage.Azs) |  |  |
 | oracle | [proto.storage.Oracle](#proto.storage.Oracle) |  |  |
+| s3 | [proto.storage.S3](#proto.storage.S3) |  |  |
 
 
 
@@ -2964,6 +2965,7 @@ Configuration of Spinnaker&#39;s persistent storage.
 | gcs | [Gcs](#proto.storage.Gcs) |  |  |
 | azs | [Azs](#proto.storage.Azs) |  |  |
 | oracle | [Oracle](#proto.storage.Oracle) |  |  |
+| s3 | [S3](#proto.storage.S3) |  |  |
 
 
 

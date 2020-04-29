@@ -6,10 +6,12 @@ option go_package = "github.com/spinnaker/kleat/api/client/storage";
 import "storage/azs.proto";
 import "storage/gcs.proto";
 import "storage/oracle.proto";
+import "storage/s3.proto";
 
 // Configuration of Spinnaker's persistent storage.
 message PersistentStorage {
     Gcs gcs = 1;
     Azs azs = 2;
     Oracle oracle = 3;
+    S3 s3 = 4;
 }
