@@ -6,7 +6,7 @@ option go_package = "github.com/spinnaker/kleat/api/client/storage";
 // Configuration for an Oracle persistent store.
 message Oracle {
     // Whether this persistent store is enabled.
-    string enabled = 1;
+    bool enabled = 1;
 
     // The bucket name to store persistent state object in.
     string bucketName = 2;
