@@ -53,6 +53,11 @@ func WriteConfigs(hal string, d string) error {
 		return err
 	}
 
+	f := parse_hal.HalToFront50(h)
+	if err := write(f, d, "front50.yml"); err != nil {
+		return err
+	}
+
 	return nil
 }
 
