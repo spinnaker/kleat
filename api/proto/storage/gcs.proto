@@ -14,9 +14,7 @@ message Gcs {
     // The Google Cloud Platform project you are using to host the GCS bucket as a backing store.
     string project = 3;
 
-    // The name of a storage bucket that your specified account has access to. If not specified, a
-    // random name will be chosen. If you specify a globally unique bucket name that does not exist
-    // yet, Halyard will create that bucket for you.
+    // The name of a storage bucket that your specified account has access to.
     string bucket = 4;
 
     // The root folder in the chosen bucket to place all of Spinnaker's persistent data in.

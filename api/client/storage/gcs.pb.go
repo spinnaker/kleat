@@ -37,9 +37,7 @@ type Gcs struct {
 	JsonPath string `protobuf:"bytes,2,opt,name=jsonPath,proto3" json:"jsonPath,omitempty"`
 	// The Google Cloud Platform project you are using to host the GCS bucket as a backing store.
 	Project string `protobuf:"bytes,3,opt,name=project,proto3" json:"project,omitempty"`
-	// The name of a storage bucket that your specified account has access to. If not specified, a
-	// random name will be chosen. If you specify a globally unique bucket name that does not exist
-	// yet, Halyard will create that bucket for you.
+	// The name of a storage bucket that your specified account has access to.
 	Bucket string `protobuf:"bytes,4,opt,name=bucket,proto3" json:"bucket,omitempty"`
 	// The root folder in the chosen bucket to place all of Spinnaker's persistent data in.
 	RootFolder string `protobuf:"bytes,5,opt,name=rootFolder,proto3" json:"rootFolder,omitempty"`
