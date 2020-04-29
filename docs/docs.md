@@ -2844,7 +2844,7 @@ Configuration for an Azure Storage persistent store.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [string](#string) |  | Whether this persistent store is enabled. |
+| enabled | [bool](#bool) |  | Whether this persistent store is enabled. |
 | storageAccountName | [string](#string) |  | The name of an Azure Storage Account. |
 | storageAccountKey | [string](#string) |  | The key to access the Azure Storage Account. |
 | storageContainerName | [string](#string) |  | The container name in the chosen storage account to place Spinnaker’s persistent data. Defaults to &#39;spinnaker&#39; if unspecified. |
@@ -2878,7 +2878,7 @@ Configuration for a Google Cloud Storage persistent store
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [string](#string) |  | Whether this persistent store is enabled. |
+| enabled | [bool](#bool) |  | Whether this persistent store is enabled. |
 | jsonPath | [string](#string) |  | A path to a JSON service account with permission to read and write to the bucket to be used as a backing store. |
 | project | [string](#string) |  | The Google Cloud Platform project you are using to host the GCS bucket as a backing store. |
 | bucket | [string](#string) |  | The name of a storage bucket that your specified account has access to. If not specified, a random name will be chosen. If you specify a globally unique bucket name that does not exist yet, Halyard will create that bucket for you. |
@@ -2914,7 +2914,7 @@ Configuration for an Oracle persistent store.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [string](#string) |  | Whether this persistent store is enabled. |
+| enabled | [bool](#bool) |  | Whether this persistent store is enabled. |
 | bucketName | [string](#string) |  | The bucket name to store persistent state object in. |
 | namespace | [string](#string) |  | The namespace the bucket and objects should be created in. |
 | region | [string](#string) |  | An Oracle region (e.g., us-phoenix-1). |
