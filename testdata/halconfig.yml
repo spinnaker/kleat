@@ -223,16 +223,35 @@ providers:
       instanceShape: shape
 persistentStorage:
   persistentStoreType: gcs
-  azs: {}
+  azs:
+    storageAccountName: my-azs-account-name
+    storageAccountKey: bXktYXpzLWFjY291bnQta2V5Cg==
+    storageContainerName: spinnaker
   gcs:
-    project: ezimanyi-spinnaker-dev
-    bucket: ezimanyi-spinnaker-dev-pipelines
-    rootFolder: front50
+    enabled: true
+    project: my-gcp-project
+    bucket: my-spinnaker-pipelines
     bucketLocation: us
   redis: {}
   s3:
-    rootFolder: front50
-  oracle: {}
+    bucket: my-bucket
+    rootFolder: my-root-folder
+    region: my-region
+    pathStyleAccess: true
+    endpoint: my-endpoint
+    accessKeyId: my-access-key-id
+    serverSideEncryption: AES256
+    secretAccessKey: my-secret-access-key
+  oracle:
+    bucketName: my-bucket
+    namespace: my-namespace
+    compartmentId: compartment
+    region: us-phoenix-1
+    userId: my-user-id
+    fingerprint: 74:63:08:82:95:75:e1:7c:33:31:bb:cb:00:c0:89:8b
+    sshPrivateKeyFilePath: /var/secrets/oracle-key
+    privateKeyPassphrase: my-secret
+    tenancyId: my-tenancy-id
 artifacts:
   bitbucket:
     enabled: true
