@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package validate_hal
+package validate_hal_test
 
 import (
 	"testing"
+
+	"github.com/spinnaker/kleat/pkg/validate_hal"
 
 	"github.com/spinnaker/kleat/api/client/cloudprovider"
 	"github.com/spinnaker/kleat/api/client/config"
@@ -24,7 +26,7 @@ import (
 
 func TestEmptyHalConfig(t *testing.T) {
 	h := &config.Hal{}
-	err := ValidateHalConfig(h)
+	err := validate_hal.ValidateHalConfig(h)
 	if err != nil {
 		t.Errorf("Expected no validation failures, got %s", err)
 	}
@@ -34,7 +36,7 @@ func TestEmptyProviders(t *testing.T) {
 	h := &config.Hal{
 		Providers: &cloudprovider.Providers{},
 	}
-	err := ValidateHalConfig(h)
+	err := validate_hal.ValidateHalConfig(h)
 	if err != nil {
 		t.Errorf("Expected no validation failures, got %s", err)
 	}
@@ -46,7 +48,7 @@ func TestEmptyKubernetes(t *testing.T) {
 			Kubernetes: &cloudprovider.Kubernetes{},
 		},
 	}
-	err := ValidateHalConfig(h)
+	err := validate_hal.ValidateHalConfig(h)
 	if err != nil {
 		t.Errorf("Expected no validation failures, got %s", err)
 	}
@@ -61,7 +63,7 @@ func TestNoKubernetesAccounts(t *testing.T) {
 			},
 		},
 	}
-	err := ValidateHalConfig(h)
+	err := validate_hal.ValidateHalConfig(h)
 	if err != nil {
 		t.Errorf("Expected no validation failures, got %s", err)
 	}
@@ -80,7 +82,7 @@ func TestKuberntesAccountWithNoOmitKinds(t *testing.T) {
 			},
 		},
 	}
-	err := ValidateHalConfig(h)
+	err := validate_hal.ValidateHalConfig(h)
 	if err != nil {
 		t.Errorf("Expected no validation failures, got %s", err)
 	}
@@ -100,7 +102,7 @@ func TestKuberntesAccountWithEmptyOmitKinds(t *testing.T) {
 			},
 		},
 	}
-	err := ValidateHalConfig(h)
+	err := validate_hal.ValidateHalConfig(h)
 	if err != nil {
 		t.Errorf("Expected no validation failures, got %s", err)
 	}
@@ -120,7 +122,7 @@ func TestInvalidKubernetesAccount(t *testing.T) {
 			},
 		},
 	}
-	err := ValidateHalConfig(h)
+	err := validate_hal.ValidateHalConfig(h)
 	if err == nil {
 		t.Error("Expected a validation failure, got none")
 	}
