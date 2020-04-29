@@ -6,7 +6,7 @@ option go_package = "github.com/spinnaker/kleat/api/client/storage";
 // Configuration for an Amazon S3 persistent store.
 message S3 {
   // Whether this persistent store is enabled.
-  string enabled = 1;
+  bool enabled = 1;
 
   // The name of a storage bucket that your specified account has access to.
   string bucket = 2;

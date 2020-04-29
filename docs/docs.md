@@ -2996,7 +2996,7 @@ Configuration for an Amazon S3 persistent store.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [string](#string) |  | Whether this persistent store is enabled. |
+| enabled | [bool](#bool) |  | Whether this persistent store is enabled. |
 | bucket | [string](#string) |  | The name of a storage bucket that your specified account has access to. |
 | rootFolder | [string](#string) |  | The root folder in the chosen bucket to place all of Spinnaker&#39;s persistent data in. |
 | region | [string](#string) |  | This is only required if the bucket you specify doesn&#39;t exist yet. In that case, the bucket will be created in that region. See http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region. |
