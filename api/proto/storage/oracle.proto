@@ -17,7 +17,7 @@ message Oracle {
     // An Oracle region (e.g., us-phoenix-1).
     string region = 4;
 
-    // The OCID of the Oracle User you’re authenticating as.
+    // The OCID of the Oracle User you're authenticating as.
     string userId = 5;
 
     // Fingerprint of the public key.

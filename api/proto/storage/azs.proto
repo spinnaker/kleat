@@ -14,7 +14,7 @@ message Azs {
     // The key to access the Azure Storage Account.
     string storageAccountKey = 3;
 
-    // The container name in the chosen storage account to place Spinnaker’s
+    // The container name in the chosen storage account to place Spinnaker's
     // persistent data. Defaults to 'spinnaker' if unspecified.
     string storageContainerName = 4;
 }

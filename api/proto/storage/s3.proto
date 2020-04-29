@@ -1,0 +1,50 @@
+syntax = "proto3";
+package proto.storage;
+
+option go_package = "github.com/spinnaker/kleat/api/client/storage";
+
+// Configuration for an Amazon S3 persistent store.
+message S3 {
+  // Whether this persistent store is enabled.
+  bool enabled = 1;
+
+  // The name of a storage bucket that your specified account has access to.
+  string bucket = 2;
+
+  // The root folder in the chosen bucket to place all of Spinnaker's persistent
+  // data in.
+  string rootFolder = 3;
+
+  // This is only required if the bucket you specify doesn't exist yet. In that
+  // case, the bucket will be created in that region.
+  // See http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region.
+  string region = 4;
+
+  // When true, use path-style to access bucket; when false, use virtual hosted-style
+  // to access bucket.
+  // See https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html#VirtualHostingExamples.
+  bool pathStyleAccess = 5;
+
+  // An alternate endpoint that your S3-compatible storage can be found at. This is
+  // intended for self-hosted storage services with S3-compatible APIs, e.g. Minio.
+  string endpoint = 6;
+
+  // Your AWS Access Key ID. If not provided, Spinnaker will try to find AWS credentials
+  // as described at http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default
+  string accessKeyId = 7;
+
+  // Configuration for S3 server-size encryption.
+  S3ServerSideEncryption serverSideEncryption = 8;
+
+  // Your AWS Secret Key.
+  string secretAccessKey = 9;
+}
+
+// Configuration for S3 server-side encryption; values correspond to values of
+// the 'x-amz-server-side-encryption' header.
+enum S3ServerSideEncryption {
+  // Amazon S3-managed encryption keys, equivalent to a header value of 'AES256'.
+  AES256 = 0;
+  // AWS KMS-managed encryption keys, equivalent to a header value of 'aws:kms'.
+  AWSKMS = 1;
+}

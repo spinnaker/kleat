@@ -37,7 +37,7 @@ type Azs struct {
 	StorageAccountName string `protobuf:"bytes,2,opt,name=storageAccountName,proto3" json:"storageAccountName,omitempty"`
 	// The key to access the Azure Storage Account.
 	StorageAccountKey string `protobuf:"bytes,3,opt,name=storageAccountKey,proto3" json:"storageAccountKey,omitempty"`
-	// The container name in the chosen storage account to place Spinnaker’s
+	// The container name in the chosen storage account to place Spinnaker's
 	// persistent data. Defaults to 'spinnaker' if unspecified.
 	StorageContainerName string `protobuf:"bytes,4,opt,name=storageContainerName,proto3" json:"storageContainerName,omitempty"`
 }

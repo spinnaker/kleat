@@ -39,7 +39,7 @@ type Oracle struct {
 	Namespace string `protobuf:"bytes,3,opt,name=namespace,proto3" json:"namespace,omitempty"`
 	// An Oracle region (e.g., us-phoenix-1).
 	Region string `protobuf:"bytes,4,opt,name=region,proto3" json:"region,omitempty"`
-	// The OCID of the Oracle User you’re authenticating as.
+	// The OCID of the Oracle User you're authenticating as.
 	UserId string `protobuf:"bytes,5,opt,name=userId,proto3" json:"userId,omitempty"`
 	// Fingerprint of the public key.
 	Fingerprint string `protobuf:"bytes,6,opt,name=fingerprint,proto3" json:"fingerprint,omitempty"`

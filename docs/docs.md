@@ -362,6 +362,14 @@
   
   
 
+- [storage/s3.proto](#storage/s3.proto)
+    - [S3](#proto.storage.S3)
+  
+    - [S3ServerSideEncryption](#proto.storage.S3ServerSideEncryption)
+  
+  
+  
+
 - [Scalar Value Types](#scalar-value-types)
 
 
@@ -2426,6 +2434,7 @@ Configuration for the front50 microservice.
 | gcs | [proto.storage.Gcs](#proto.storage.Gcs) |  |  |
 | azs | [proto.storage.Azs](#proto.storage.Azs) |  |  |
 | oracle | [proto.storage.Oracle](#proto.storage.Oracle) |  |  |
+| s3 | [proto.storage.S3](#proto.storage.S3) |  |  |
 
 
 
@@ -2847,7 +2856,7 @@ Configuration for an Azure Storage persistent store.
 | enabled | [bool](#bool) |  | Whether this persistent store is enabled. |
 | storageAccountName | [string](#string) |  | The name of an Azure Storage Account. |
 | storageAccountKey | [string](#string) |  | The key to access the Azure Storage Account. |
-| storageContainerName | [string](#string) |  | The container name in the chosen storage account to place Spinnaker’s persistent data. Defaults to &#39;spinnaker&#39; if unspecified. |
+| storageContainerName | [string](#string) |  | The container name in the chosen storage account to place Spinnaker&#39;s persistent data. Defaults to &#39;spinnaker&#39; if unspecified. |
 
 
 
@@ -2881,7 +2890,7 @@ Configuration for a Google Cloud Storage persistent store
 | enabled | [bool](#bool) |  | Whether this persistent store is enabled. |
 | jsonPath | [string](#string) |  | A path to a JSON service account with permission to read and write to the bucket to be used as a backing store. |
 | project | [string](#string) |  | The Google Cloud Platform project you are using to host the GCS bucket as a backing store. |
-| bucket | [string](#string) |  | The name of a storage bucket that your specified account has access to. If not specified, a random name will be chosen. If you specify a globally unique bucket name that does not exist yet, Halyard will create that bucket for you. |
+| bucket | [string](#string) |  | The name of a storage bucket that your specified account has access to. |
 | rootFolder | [string](#string) |  | The root folder in the chosen bucket to place all of Spinnaker&#39;s persistent data in. |
 | bucketLocation | [string](#string) |  | This is only required if the bucket you specify does not exist yet. |
 
@@ -2918,7 +2927,7 @@ Configuration for an Oracle persistent store.
 | bucketName | [string](#string) |  | The bucket name to store persistent state object in. |
 | namespace | [string](#string) |  | The namespace the bucket and objects should be created in. |
 | region | [string](#string) |  | An Oracle region (e.g., us-phoenix-1). |
-| userId | [string](#string) |  | The OCID of the Oracle User you’re authenticating as. |
+| userId | [string](#string) |  | The OCID of the Oracle User you&#39;re authenticating as. |
 | fingerprint | [string](#string) |  | Fingerprint of the public key. |
 | sshPrivateKeyFilePath | [string](#string) |  | Path to the private key in PEM format. |
 | privateKeyPassphrase | [string](#string) |  | Passphrase used for the private key, if it is encrypted. |
@@ -2956,12 +2965,65 @@ Configuration of Spinnaker&#39;s persistent storage.
 | gcs | [Gcs](#proto.storage.Gcs) |  |  |
 | azs | [Azs](#proto.storage.Azs) |  |  |
 | oracle | [Oracle](#proto.storage.Oracle) |  |  |
+| s3 | [S3](#proto.storage.S3) |  |  |
 
 
 
 
 
  
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="storage/s3.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## storage/s3.proto
+
+
+
+<a name="proto.storage.S3"></a>
+
+### S3
+Configuration for an Amazon S3 persistent store.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether this persistent store is enabled. |
+| bucket | [string](#string) |  | The name of a storage bucket that your specified account has access to. |
+| rootFolder | [string](#string) |  | The root folder in the chosen bucket to place all of Spinnaker&#39;s persistent data in. |
+| region | [string](#string) |  | This is only required if the bucket you specify doesn&#39;t exist yet. In that case, the bucket will be created in that region. See http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region. |
+| pathStyleAccess | [bool](#bool) |  | When true, use path-style to access bucket; when false, use virtual hosted-style to access bucket. See https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html#VirtualHostingExamples. |
+| endpoint | [string](#string) |  | An alternate endpoint that your S3-compatible storage can be found at. This is intended for self-hosted storage services with S3-compatible APIs, e.g. Minio. |
+| accessKeyId | [string](#string) |  | Your AWS Access Key ID. If not provided, Spinnaker will try to find AWS credentials as described at http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default |
+| serverSideEncryption | [S3ServerSideEncryption](#proto.storage.S3ServerSideEncryption) |  | Configuration for S3 server-size encryption. |
+| secretAccessKey | [string](#string) |  | Your AWS Secret Key. |
+
+
+
+
+
+ 
+
+
+<a name="proto.storage.S3ServerSideEncryption"></a>
+
+### S3ServerSideEncryption
+Configuration for S3 server-side encryption; values correspond to values of
+the &#39;x-amz-server-side-encryption&#39; header.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| AES256 | 0 | Amazon S3-managed encryption keys, equivalent to a header value of &#39;AES256&#39;. |
+| AWSKMS | 1 | AWS KMS-managed encryption keys, equivalent to a header value of &#39;aws:kms&#39;. |
+
 
  
 
