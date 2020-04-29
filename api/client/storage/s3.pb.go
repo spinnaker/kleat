@@ -26,13 +26,13 @@ const (
 const _ = proto.ProtoPackageIsVersion4
 
 // Configuration for S3 server-side encryption; values correspond to values of
-// the ‘x-amz-server-side-encryption’ header.
+// the 'x-amz-server-side-encryption' header.
 type S3ServerSideEncryption int32
 
 const (
-	// Amazon S3-managed encryption keys, equivalent to a header value of ‘AES256’.
+	// Amazon S3-managed encryption keys, equivalent to a header value of 'AES256'.
 	S3ServerSideEncryption_AES256 S3ServerSideEncryption = 0
-	// AWS KMS-managed encryption keys, equivalent to a header value of ‘aws:kms’.
+	// AWS KMS-managed encryption keys, equivalent to a header value of 'aws:kms'.
 	S3ServerSideEncryption_AWSKMS S3ServerSideEncryption = 1
 )
 
@@ -85,10 +85,10 @@ type S3 struct {
 	Enabled string `protobuf:"bytes,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// The name of a storage bucket that your specified account has access to.
 	Bucket string `protobuf:"bytes,2,opt,name=bucket,proto3" json:"bucket,omitempty"`
-	// The root folder in the chosen bucket to place all of Spinnaker’s persistent
+	// The root folder in the chosen bucket to place all of Spinnaker's persistent
 	// data in.
 	RootFolder string `protobuf:"bytes,3,opt,name=rootFolder,proto3" json:"rootFolder,omitempty"`
-	// This is only required if the bucket you specify doesn’t exist yet. In that
+	// This is only required if the bucket you specify doesn't exist yet. In that
 	// case, the bucket will be created in that region.
 	// See http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region.
 	Region string `protobuf:"bytes,4,opt,name=region,proto3" json:"region,omitempty"`
