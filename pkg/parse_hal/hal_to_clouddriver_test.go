@@ -148,7 +148,7 @@ func TestHalToClouddriver(t *testing.T) {
 		t.Run(tt.n, func(t *testing.T) {
 			gotC := parse_hal.HalToClouddriver(tt.h)
 			if !reflect.DeepEqual(gotC, tt.wantC) {
-				t.Errorf("Expected hal config to generate %v, got %v", tt.wantC, gotC)
+				t.Errorf("%s: Expected hal config to generate %v, got %v", tt.n, tt.wantC, gotC)
 			}
 		})
 	}

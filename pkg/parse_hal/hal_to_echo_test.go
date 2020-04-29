@@ -34,9 +34,9 @@ import (
 )
 
 var halToEchoTests = []struct {
-	n     string
-	h     *config.Hal
-	wantE *config.Echo
+	n    string
+	h    *config.Hal
+	want *config.Echo
 }{
 	{
 		"Empty hal config",
@@ -219,9 +219,9 @@ var halToEchoTests = []struct {
 func TestHalToEcho(t *testing.T) {
 	for _, tt := range halToEchoTests {
 		t.Run(tt.n, func(t *testing.T) {
-			gotC := parse_hal.HalToEcho(tt.h)
-			if !reflect.DeepEqual(gotC, tt.wantE) {
-				t.Errorf("Expected hal config to generate %v, got %v", tt.wantE, gotC)
+			got := parse_hal.HalToEcho(tt.h)
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("%s: Expected hal config to generate %v, got %v", tt.n, tt.want, got)
 			}
 		})
 	}

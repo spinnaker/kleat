@@ -24,7 +24,7 @@ func HalToFront50(h *config.Hal) *config.Front50 {
 			Gcs:    h.GetPersistentStorage().GetGcs(),
 			Azs:    h.GetPersistentStorage().GetAzs(),
 			Oracle: h.GetPersistentStorage().GetOracle(),
-			S3: h.GetPersistentStorage().GetS3(),
+			S3:     h.GetPersistentStorage().GetS3(),
 		},
 	}
 }
