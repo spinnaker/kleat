@@ -22,5 +22,6 @@ func HalToServiceConfigs(h *config.Hal) *config.Services {
 		Clouddriver: HalToClouddriver(h),
 		Echo:        HalToEcho(h),
 		Front50:     HalToFront50(h),
+		Orca:        HalToOrca(h),
 	}
 }

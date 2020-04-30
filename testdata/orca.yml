@@ -1,0 +1,10 @@
+webhook:
+  trust:
+    enabled: true
+    trustStore: /var/secrets/webhook-keystore.jks
+    trustStorePassword: abcdefg
+pipelineTemplates:
+  enabled: true
+default:
+  bake:
+    account: my-aws-account

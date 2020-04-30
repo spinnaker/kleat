@@ -44,6 +44,7 @@ func TestHalToServiceConfigs(t *testing.T) {
 		Clouddriver: parse_hal.HalToClouddriver(h),
 		Echo:        parse_hal.HalToEcho(h),
 		Front50:     parse_hal.HalToFront50(h),
+		Orca:        parse_hal.HalToOrca(h),
 	}
 
 	if !reflect.DeepEqual(gotS, wantS) {
@@ -80,6 +81,10 @@ func TestHalToServiceYAML(t *testing.T) {
 			"front50.yml",
 			services.GetFront50(),
 		},
+		{
+			"orca.yml",
+			services.GetOrca(),
+		},
 	}
 
 	for _, tt := range halToServiceTests {
@@ -105,7 +110,7 @@ func TestHalToServiceYAML(t *testing.T) {
 				t.Fatal(err)
 			}
 			if !reflect.DeepEqual(got, want) {
-				t.Errorf("Expected %s to contian %v, got %v", tt.file, want, got)
+				t.Errorf("Expected %s to contain %v, got %v", tt.file, string(want), string(got))
 			}
 		})
 	}
