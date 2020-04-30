@@ -16,9 +16,6 @@
 package parse_hal_test
 
 import (
-	"bytes"
-	"io/ioutil"
-	"path/filepath"
 	"reflect"
 	"testing"
 
@@ -27,7 +24,6 @@ import (
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/api/client/notification"
 	"github.com/spinnaker/kleat/api/client/pubsub"
-	"github.com/spinnaker/kleat/internal/protoyaml"
 	"github.com/spinnaker/kleat/pkg/parse_hal"
 )
 
@@ -223,50 +219,4 @@ func TestHalToEcho(t *testing.T) {
 			}
 		})
 	}
-}
-
-func TestHalToEchoYaml(t *testing.T) {
-	data, err := ioutil.ReadFile(filepath.Join("../../testdata", "halconfig.yml"))
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	h := &config.Hal{}
-	if err := protoyaml.Unmarshal(data, h); err != nil {
-		t.Fatal(err)
-	}
-
-	gotE := parse_hal.HalToEcho(h)
-
-	wantE, err := parseEchoConfig(filepath.Join("../../testdata", "echo.yml"))
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	want, err := protoyaml.Marshal(wantE)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	got, err := protoyaml.Marshal(gotE)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	res := bytes.Compare(want, got)
-	if res != 0 {
-		t.Errorf("Expected generated Echo config to match contents of echo.yml, but got:\n" + string(got))
-	}
-}
-
-func parseEchoConfig(fn string) (*config.Echo, error) {
-	dat, err := ioutil.ReadFile(fn)
-
-	h := config.Echo{}
-	err = protoyaml.UnmarshalStrict([]byte(dat), &h)
-	if err != nil {
-		return nil, err
-	}
-
-	return &h, nil
 }
