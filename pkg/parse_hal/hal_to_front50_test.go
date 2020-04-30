@@ -115,29 +115,29 @@ func TestHalToFront50(t *testing.T) {
 func TestHalToFront50Yaml(t *testing.T) {
 	data, err := ioutil.ReadFile(filepath.Join("../../testdata", "halconfig.yml"))
 	if err != nil {
-		t.Errorf(err.Error())
+		t.Fatal(err)
 	}
 
 	h := &config.Hal{}
 	if err := protoyaml.Unmarshal(data, h); err != nil {
-		t.Errorf(err.Error())
+		t.Fatal(err)
 	}
 
 	gotF := parse_hal.HalToFront50(h)
 
 	wantF, err := parseFront50Config(filepath.Join("../../testdata", "front50.yml"))
 	if err != nil {
-		t.Errorf(err.Error())
+		t.Fatal(err)
 	}
 
 	want, err := protoyaml.Marshal(wantF)
 	if err != nil {
-		t.Errorf(err.Error())
+		t.Fatal(err)
 	}
 
 	got, err := protoyaml.Marshal(gotF)
 	if err != nil {
-		t.Errorf(err.Error())
+		t.Fatal(err)
 	}
 
 	res := bytes.Compare(want, got)

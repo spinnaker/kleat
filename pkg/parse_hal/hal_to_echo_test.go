@@ -32,8 +32,8 @@ import (
 )
 
 var halToEchoTests = []struct {
-	n    string
-	h    *config.Hal
+	name string
+	hal  *config.Hal
 	want *config.Echo
 }{
 	{
@@ -216,8 +216,8 @@ var halToEchoTests = []struct {
 
 func TestHalToEcho(t *testing.T) {
 	for _, tt := range halToEchoTests {
-		t.Run(tt.n, func(t *testing.T) {
-			got := parse_hal.HalToEcho(tt.h)
+		t.Run(tt.name, func(t *testing.T) {
+			got := parse_hal.HalToEcho(tt.hal)
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
 			}
@@ -228,29 +228,29 @@ func TestHalToEcho(t *testing.T) {
 func TestHalToEchoYaml(t *testing.T) {
 	data, err := ioutil.ReadFile(filepath.Join("../../testdata", "halconfig.yml"))
 	if err != nil {
-		t.Errorf(err.Error())
+		t.Fatal(err)
 	}
 
 	h := &config.Hal{}
 	if err := protoyaml.Unmarshal(data, h); err != nil {
-		t.Errorf(err.Error())
+		t.Fatal(err)
 	}
 
 	gotE := parse_hal.HalToEcho(h)
 
 	wantE, err := parseEchoConfig(filepath.Join("../../testdata", "echo.yml"))
 	if err != nil {
-		t.Errorf(err.Error())
+		t.Fatal(err)
 	}
 
 	want, err := protoyaml.Marshal(wantE)
 	if err != nil {
-		t.Errorf(err.Error())
+		t.Fatal(err)
 	}
 
 	got, err := protoyaml.Marshal(gotE)
 	if err != nil {
-		t.Errorf(err.Error())
+		t.Fatal(err)
 	}
 
 	res := bytes.Compare(want, got)

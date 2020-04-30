@@ -30,8 +30,8 @@ import (
 )
 
 var halToClouddriverTests = []struct {
-	n    string
-	h    *config.Hal
+	name string
+	hal  *config.Hal
 	want *config.Clouddriver
 }{
 	{
@@ -143,8 +143,8 @@ var halToClouddriverTests = []struct {
 
 func TestHalToClouddriver(t *testing.T) {
 	for _, tt := range halToClouddriverTests {
-		t.Run(tt.n, func(t *testing.T) {
-			got := parse_hal.HalToClouddriver(tt.h)
+		t.Run(tt.name, func(t *testing.T) {
+			got := parse_hal.HalToClouddriver(tt.hal)
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
 			}
@@ -155,36 +155,35 @@ func TestHalToClouddriver(t *testing.T) {
 func TestHalToClouddriverYaml(t *testing.T) {
 	data, err := ioutil.ReadFile(filepath.Join("../../testdata", "halconfig.yml"))
 	if err != nil {
-		t.Errorf(err.Error())
+		t.Fatal(err)
 	}
 
 	h := &config.Hal{}
 	if err := protoyaml.Unmarshal(data, h); err != nil {
-		t.Errorf(err.Error())
+		t.Fatal(err)
 	}
 
 	gotC := parse_hal.HalToClouddriver(h)
 
 	wantC, err := parseClouddriverConfig(filepath.Join("../../testdata", "clouddriver.yml"))
 	if err != nil {
-		t.Errorf(err.Error())
+		t.Fatal(err)
 	}
 
 	want, err := protoyaml.Marshal(wantC)
 	if err != nil {
-		t.Errorf(err.Error())
+		t.Fatal(err)
 	}
 
 	got, err := protoyaml.Marshal(gotC)
 	if err != nil {
-		t.Errorf(err.Error())
+		t.Fatal(err)
 	}
 
 	res := bytes.Compare(want, got)
 	if res != 0 {
 		t.Errorf("Expected generated Clouddriver config to match contents of clouddriver.yml, but got:\n" + string(got))
 	}
-
 }
 
 func parseClouddriverConfig(fn string) (*config.Clouddriver, error) {

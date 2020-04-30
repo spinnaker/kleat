@@ -29,18 +29,14 @@ import (
 func TestHalToServiceConfigs(t *testing.T) {
 	data, err := ioutil.ReadFile(filepath.Join("../../testdata", "halconfig.yml"))
 	if err != nil {
-		t.Errorf(err.Error())
+		t.Fatal(err)
 	}
 	h := &config.Hal{}
 	if err := protoyaml.Unmarshal(data, h); err != nil {
-		t.Errorf(err.Error())
+		t.Fatal(err)
 	}
 
 	gotS := parse_hal.HalToServiceConfigs(h)
-	if err != nil {
-		t.Errorf(err.Error())
-	}
-
 	wantS := &config.Services{
 		Clouddriver: parse_hal.HalToClouddriver(h),
 		Echo:        parse_hal.HalToEcho(h),
