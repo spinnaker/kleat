@@ -22,6 +22,7 @@ import (
 	"testing"
 
 	"github.com/spinnaker/kleat/api/client/config"
+	"github.com/spinnaker/kleat/internal/protoyaml"
 	"github.com/spinnaker/kleat/pkg/parse_hal"
 )
 
@@ -30,8 +31,8 @@ func TestHalToServiceConfigs(t *testing.T) {
 	if err != nil {
 		t.Errorf(err.Error())
 	}
-	h, err := parse_hal.ParseHalConfig(data)
-	if err != nil {
+	h := &config.Hal{}
+	if err := protoyaml.Unmarshal(data, h); err != nil {
 		t.Errorf(err.Error())
 	}
 

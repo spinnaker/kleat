@@ -117,8 +117,9 @@ func TestHalToFront50Yaml(t *testing.T) {
 	if err != nil {
 		t.Errorf(err.Error())
 	}
-	h, err := parse_hal.ParseHalConfig(data)
-	if err != nil {
+
+	h := &config.Hal{}
+	if err := protoyaml.Unmarshal(data, h); err != nil {
 		t.Errorf(err.Error())
 	}
 
