@@ -1,0 +1,27 @@
+spinnaker:
+  azs:
+    storageAccountKey: bXktYXpzLWFjY291bnQta2V5Cg==
+    storageAccountName: my-azs-account-name
+    storageContainerName: spinnaker
+  gcs:
+    enabled: true
+    project: my-gcp-project
+    bucket: my-spinnaker-pipelines
+    bucketLocation: us
+  oracle:
+    bucketName: my-bucket
+    fingerprint: 74:63:08:82:95:75:e1:7c:33:31:bb:cb:00:c0:89:8b
+    namespace: my-namespace
+    privateKeyPassphrase: my-secret
+    region: us-phoenix-1
+    sshPrivateKeyFilePath: /var/secrets/oracle-key
+    tenancyId: my-tenancy-id
+    userId: my-user-id
+  s3:
+    accessKeyId: my-access-key-id
+    bucket: my-bucket
+    endpoint: my-endpoint
+    pathStyleAccess: true
+    region: my-region
+    rootFolder: my-root-folder
+    secretAccessKey: my-secret-access-key
