@@ -16,26 +16,30 @@
 package parse_hal_test
 
 import (
+	"io/ioutil"
 	"path/filepath"
 	"reflect"
 	"testing"
 
-	"github.com/spinnaker/kleat/pkg/parse_hal"
-
 	"github.com/spinnaker/kleat/api/client/config"
+	"github.com/spinnaker/kleat/internal/protoyaml"
+	"github.com/spinnaker/kleat/pkg/parse_hal"
+	"google.golang.org/protobuf/proto"
 )
 
+const dataDir = "../../testdata"
+
 func TestHalToServiceConfigs(t *testing.T) {
-	h, err := parse_hal.ParseHalConfig(filepath.Join("../../testdata", "halconfig.yml"))
+	data, err := ioutil.ReadFile(filepath.Join(dataDir, "halconfig.yml"))
 	if err != nil {
-		t.Errorf(err.Error())
+		t.Fatal(err)
+	}
+	h := &config.Hal{}
+	if err := protoyaml.Unmarshal(data, h); err != nil {
+		t.Fatal(err)
 	}
 
 	gotS := parse_hal.HalToServiceConfigs(h)
-	if err != nil {
-		t.Errorf(err.Error())
-	}
-
 	wantS := &config.Services{
 		Clouddriver: parse_hal.HalToClouddriver(h),
 		Echo:        parse_hal.HalToEcho(h),
@@ -45,4 +49,77 @@ func TestHalToServiceConfigs(t *testing.T) {
 	if !reflect.DeepEqual(gotS, wantS) {
 		t.Errorf("Expected HalToServiceConfigs to generate map of service configs, got %v", gotS)
 	}
+}
+
+func TestHalToServiceYAML(t *testing.T) {
+	data, err := ioutil.ReadFile(filepath.Join(dataDir, "halconfig.yml"))
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	hal := &config.Hal{}
+	if err := protoyaml.Unmarshal(data, hal); err != nil {
+		t.Fatal(err)
+	}
+
+	services := parse_hal.HalToServiceConfigs(hal)
+
+	var halToServiceTests = []struct {
+		file      string
+		gotConfig proto.Message
+	}{
+		{
+			"clouddriver.yml",
+			services.GetClouddriver(),
+		},
+		{
+			"echo.yml",
+			services.GetEcho(),
+		},
+		{
+			"front50.yml",
+			services.GetFront50(),
+		},
+	}
+
+	for _, tt := range halToServiceTests {
+		t.Run(tt.file, func(t *testing.T) {
+			got, err := protoyaml.Marshal(tt.gotConfig)
+			if err != nil {
+				t.Fatal(err)
+			}
+
+			data, err := ioutil.ReadFile(filepath.Join(dataDir, tt.file))
+			if err != nil {
+				t.Fatal(err)
+			}
+
+			// Note that we're re-using tt.gotConfig here and will unmarshal the expected
+			// YAML into it; this is acceptable as we have already converted tt.gotConfig to
+			// YAML and have the YAML representation stored in got.
+			// (We can't just create a new pointer as we don't have access to the concrete
+			// type from within this function, so we'll re-use gotConfig rather than require
+			// the test to pass in an empty config of the concrete type.)
+			want, err := canonicalYaml(data, tt.gotConfig)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if !reflect.DeepEqual(got, want) {
+				t.Errorf("Expected %s to contian %v, got %v", tt.file, want, got)
+			}
+		})
+	}
+}
+
+// canonicalYaml converts the YAML representation of a proto.Message into its
+// canonical form (ie, the form produced by serializing the object it represents)
+// by unmarshaling then marshaling the provided YAML.
+// The motivation is that the tests want to compare the generated YAML to
+// expected YAML, but we don't want to be sensitive to key order in the provided
+// YAML.
+func canonicalYaml(data []byte, m proto.Message) ([]byte, error) {
+	if err := protoyaml.UnmarshalStrict(data, m); err != nil {
+		return nil, err
+	}
+	return protoyaml.Marshal(m)
 }

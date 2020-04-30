@@ -16,17 +16,12 @@
 package parse_hal_test
 
 import (
-	"bytes"
-	"io/ioutil"
-	"path/filepath"
 	"reflect"
 	"testing"
 
-	"github.com/spinnaker/kleat/api/client/storage"
-	"github.com/spinnaker/kleat/internal/protoyaml"
-	"github.com/spinnaker/kleat/pkg/parse_hal"
-
 	"github.com/spinnaker/kleat/api/client/config"
+	"github.com/spinnaker/kleat/api/client/storage"
+	"github.com/spinnaker/kleat/pkg/parse_hal"
 )
 
 var halToFront50Tests = []struct {
@@ -111,45 +106,4 @@ func TestHalToFront50(t *testing.T) {
 			}
 		})
 	}
-}
-
-func TestHalToFront50Yaml(t *testing.T) {
-	h, err := parse_hal.ParseHalConfig(filepath.Join("../../testdata", "halconfig.yml"))
-	if err != nil {
-		t.Errorf(err.Error())
-	}
-
-	gotF := parse_hal.HalToFront50(h)
-
-	wantF, err := parseFront50Config(filepath.Join("../../testdata", "front50.yml"))
-	if err != nil {
-		t.Errorf(err.Error())
-	}
-
-	want, err := protoyaml.Marshal(wantF)
-	if err != nil {
-		t.Errorf(err.Error())
-	}
-
-	got, err := protoyaml.Marshal(gotF)
-	if err != nil {
-		t.Errorf(err.Error())
-	}
-
-	res := bytes.Compare(want, got)
-	if res != 0 {
-		t.Errorf("Expected generated Front50 config to match contents of front50.yml, but got:\n" + string(got))
-	}
-}
-
-func parseFront50Config(fn string) (*config.Front50, error) {
-	dat, err := ioutil.ReadFile(fn)
-
-	f := config.Front50{}
-	err = protoyaml.UnmarshalStrict([]byte(dat), &f)
-	if err != nil {
-		return nil, err
-	}
-
-	return &f, nil
 }

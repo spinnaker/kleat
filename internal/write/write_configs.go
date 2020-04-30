@@ -16,9 +16,11 @@
 package write
 
 import (
+	"io/ioutil"
 	"os"
 	"path/filepath"
 
+	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/protoyaml"
 	"github.com/spinnaker/kleat/internal/validate_paths"
 	"github.com/spinnaker/kleat/pkg/parse_hal"
@@ -26,43 +28,43 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-func WriteConfigs(hal string, d string) error {
-	if err := validate_paths.EnsureFile(hal); err != nil {
-		return err
-	}
-	if err := validate_paths.EnsureDirectory(d); err != nil {
+func WriteConfigs(halPath string, dir string) error {
+	if err := validate_paths.EnsureDirectory(dir); err != nil {
 		return err
 	}
 
-	h, err := parse_hal.ParseHalConfig(hal)
-	if err != nil {
+	hal := &config.Hal{}
+	if err := read(hal, halPath); err != nil {
 		return err
 	}
 
-	if err := validate_hal.ValidateHalConfig(h); err != nil {
+	if err := validate_hal.ValidateHalConfig(hal); err != nil {
 		return err
 	}
 
-	c := parse_hal.HalToClouddriver(h)
-	if err := write(c, d, "clouddriver.yml"); err != nil {
+	services := parse_hal.HalToServiceConfigs(hal)
+	if err := write(services.GetClouddriver(), filepath.Join(dir, "clouddriver.yml")); err != nil {
 		return err
 	}
-
-	e := parse_hal.HalToEcho(h)
-	if err := write(e, d, "echo.yml"); err != nil {
+	if err := write(services.GetEcho(), filepath.Join(dir, "echo.yml")); err != nil {
 		return err
 	}
-
-	f := parse_hal.HalToFront50(h)
-	if err := write(f, d, "front50.yml"); err != nil {
+	if err := write(services.GetFront50(), filepath.Join(dir, "front50.yml")); err != nil {
 		return err
 	}
-
 	return nil
 }
 
-func write(m proto.Message, d string, f string) error {
-	w, err := os.Create(filepath.Join(d, f))
+func read(m proto.Message, file string) error {
+	data, err := ioutil.ReadFile(file)
+	if err != nil {
+		return err
+	}
+	return protoyaml.Unmarshal(data, m)
+}
+
+func write(m proto.Message, file string) error {
+	w, err := os.Create(file)
 	if err != nil {
 		return err
 	}

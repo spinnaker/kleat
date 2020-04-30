@@ -16,24 +16,18 @@
 package parse_hal_test
 
 import (
-	"bytes"
-	"io/ioutil"
-	"path/filepath"
 	"reflect"
 	"testing"
-
-	"github.com/spinnaker/kleat/internal/protoyaml"
-
-	"github.com/spinnaker/kleat/pkg/parse_hal"
 
 	"github.com/spinnaker/kleat/api/client/artifact"
 	"github.com/spinnaker/kleat/api/client/cloudprovider"
 	"github.com/spinnaker/kleat/api/client/config"
+	"github.com/spinnaker/kleat/pkg/parse_hal"
 )
 
 var halToClouddriverTests = []struct {
-	n    string
-	h    *config.Hal
+	name string
+	hal  *config.Hal
 	want *config.Clouddriver
 }{
 	{
@@ -145,53 +139,11 @@ var halToClouddriverTests = []struct {
 
 func TestHalToClouddriver(t *testing.T) {
 	for _, tt := range halToClouddriverTests {
-		t.Run(tt.n, func(t *testing.T) {
-			got := parse_hal.HalToClouddriver(tt.h)
+		t.Run(tt.name, func(t *testing.T) {
+			got := parse_hal.HalToClouddriver(tt.hal)
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
 			}
 		})
 	}
-}
-
-func TestHalToClouddriverYaml(t *testing.T) {
-	h, err := parse_hal.ParseHalConfig(filepath.Join("../../testdata", "halconfig.yml"))
-	if err != nil {
-		t.Errorf(err.Error())
-	}
-
-	gotC := parse_hal.HalToClouddriver(h)
-
-	wantC, err := parseClouddriverConfig(filepath.Join("../../testdata", "clouddriver.yml"))
-	if err != nil {
-		t.Errorf(err.Error())
-	}
-
-	want, err := protoyaml.Marshal(wantC)
-	if err != nil {
-		t.Errorf(err.Error())
-	}
-
-	got, err := protoyaml.Marshal(gotC)
-	if err != nil {
-		t.Errorf(err.Error())
-	}
-
-	res := bytes.Compare(want, got)
-	if res != 0 {
-		t.Errorf("Expected generated Clouddriver config to match contents of clouddriver.yml, but got:\n" + string(got))
-	}
-
-}
-
-func parseClouddriverConfig(fn string) (*config.Clouddriver, error) {
-	dat, err := ioutil.ReadFile(fn)
-
-	h := config.Clouddriver{}
-	err = protoyaml.UnmarshalStrict([]byte(dat), &h)
-	if err != nil {
-		return nil, err
-	}
-
-	return &h, nil
 }

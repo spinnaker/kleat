@@ -16,8 +16,9 @@
 package main
 
 import (
-	"github.com/spinnaker/kleat/internal/write"
 	"os"
+
+	"github.com/spinnaker/kleat/internal/write"
 )
 
 func main() {
