@@ -18,10 +18,9 @@ package validate_hal_test
 import (
 	"testing"
 
-	"github.com/spinnaker/kleat/pkg/validate_hal"
-
 	"github.com/spinnaker/kleat/api/client/cloudprovider"
 	"github.com/spinnaker/kleat/api/client/config"
+	"github.com/spinnaker/kleat/pkg/validate_hal"
 )
 
 func TestEmptyHalConfig(t *testing.T) {

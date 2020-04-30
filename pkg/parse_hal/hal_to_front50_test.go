@@ -22,11 +22,10 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/api/client/storage"
 	"github.com/spinnaker/kleat/internal/protoyaml"
 	"github.com/spinnaker/kleat/pkg/parse_hal"
-
-	"github.com/spinnaker/kleat/api/client/config"
 )
 
 var halToFront50Tests = []struct {

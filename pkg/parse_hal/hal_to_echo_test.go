@@ -22,15 +22,13 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/spinnaker/kleat/internal/protoyaml"
-
-	"github.com/spinnaker/kleat/pkg/parse_hal"
-
 	"github.com/spinnaker/kleat/api/client"
 	"github.com/spinnaker/kleat/api/client/ci"
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/api/client/notification"
 	"github.com/spinnaker/kleat/api/client/pubsub"
+	"github.com/spinnaker/kleat/internal/protoyaml"
+	"github.com/spinnaker/kleat/pkg/parse_hal"
 )
 
 var halToEchoTests = []struct {
