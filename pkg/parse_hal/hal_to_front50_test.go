@@ -107,7 +107,7 @@ func TestHalToFront50(t *testing.T) {
 		t.Run(tt.n, func(t *testing.T) {
 			got := parse_hal.HalToFront50(tt.h)
 			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("%s: Expected hal config to generate %v, got %v", tt.n, tt.want, got)
+				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
 			}
 		})
 	}

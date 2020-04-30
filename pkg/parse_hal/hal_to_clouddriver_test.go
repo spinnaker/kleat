@@ -32,9 +32,9 @@ import (
 )
 
 var halToClouddriverTests = []struct {
-	n     string
-	h     *config.Hal
-	wantC *config.Clouddriver
+	n    string
+	h    *config.Hal
+	want *config.Clouddriver
 }{
 	{
 		"Empty hal config",
@@ -146,9 +146,9 @@ var halToClouddriverTests = []struct {
 func TestHalToClouddriver(t *testing.T) {
 	for _, tt := range halToClouddriverTests {
 		t.Run(tt.n, func(t *testing.T) {
-			gotC := parse_hal.HalToClouddriver(tt.h)
-			if !reflect.DeepEqual(gotC, tt.wantC) {
-				t.Errorf("%s: Expected hal config to generate %v, got %v", tt.n, tt.wantC, gotC)
+			got := parse_hal.HalToClouddriver(tt.h)
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
 			}
 		})
 	}
