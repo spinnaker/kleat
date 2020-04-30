@@ -113,7 +113,11 @@ func TestHalToFront50(t *testing.T) {
 }
 
 func TestHalToFront50Yaml(t *testing.T) {
-	h, err := parse_hal.ParseHalConfig(filepath.Join("../../testdata", "halconfig.yml"))
+	data, err := ioutil.ReadFile(filepath.Join("../../testdata", "halconfig.yml"))
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+	h, err := parse_hal.ParseHalConfig(data)
 	if err != nil {
 		t.Errorf(err.Error())
 	}

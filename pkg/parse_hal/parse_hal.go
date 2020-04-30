@@ -16,20 +16,13 @@
 package parse_hal
 
 import (
-	"io/ioutil"
-
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/protoyaml"
 )
 
-func ParseHalConfig(fn string) (*config.Hal, error) {
-	dat, err := ioutil.ReadFile(fn)
-	if err != nil {
-		return nil, err
-	}
-
+func ParseHalConfig(data []byte) (*config.Hal, error) {
 	h := &config.Hal{}
-	if err = protoyaml.Unmarshal(dat, h); err != nil {
+	if err := protoyaml.Unmarshal(data, h); err != nil {
 		return nil, err
 	}
 	return h, nil
