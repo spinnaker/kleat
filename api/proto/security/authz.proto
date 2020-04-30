@@ -1,0 +1,121 @@
+syntax = "proto3";
+package proto.security;
+
+option go_package = "github.com/spinnaker/kleat/api/client/security";
+
+// Configuration for what resources users of Spinnaker can read and modify.
+message Authorization {
+  // Whether Spinnaker's role-based authorization is enabled.
+  bool enabled = 1;
+
+  // Configuration role providers that map users to groups.
+  GroupMembership groupMembership = 2;
+}
+
+// Configuration role providers that map users to groups.
+message GroupMembership {
+  // Configuration for which role provider to use for authorization decisions.
+  RoleProviderType service = 1;
+
+  // Configuration for the Google role provider.
+  GoogleRoleProvider google = 2;
+
+  // Configuration for the GitHub role provider.
+  GithubRoleProvider github = 3;
+
+  // Configuration for the file-based role provider.
+  FileRoleProvider file = 4;
+
+  // Configuration for the LDAP role provider.
+  LdapRoleProvider ldap = 5;
+}
+
+// Configuration for which role provider to use for authorization decisions.
+enum RoleProviderType {
+  // External role provider.
+  external = 0;
+
+  // File-based role provider.
+  file = 1;
+
+  // Google role provider.
+  google = 2;
+
+  // GitHub role provider.
+  github = 3;
+
+  // LDAP role provider.
+  ldap = 4;
+}
+
+// Configuration for the Google role provider.
+message GoogleRoleProvider {
+  // A path to a valid json service account that can authenticate against the
+  // Google role provider.
+  string credentialPath = 1;
+
+  // Your role provider's admin username e.g. admin@myorg.net.
+  string adminUsername = 2;
+
+  // The domain your role provider is configured for e.g. myorg.net.
+  string domain = 3;
+}
+
+// Configuration for the GitHub role provider.
+message GithubRoleProvider {
+  // Used if using GitHub enterprise some other non github.com GitHub installation.
+  string baseUrl = 1;
+
+  // A personal access token of an account with access to your organization's
+  // GitHub Teams structure.
+  string accessToken = 2;
+
+  // The GitHub organization under which to query for GitHub Teams.
+  string organization = 3;
+}
+
+// Configuration for the file-based role provider.
+message FileRoleProvider {
+  // A path to a file describing the roles of each user.
+  string path = 1;
+}
+
+// Configuration for the LDAP role provider.
+message LdapRoleProvider {
+  // ldap:// or ldaps:// url of the LDAP server.
+  string url = 1;
+
+  // The manager user's distinguished name (principal) to use for querying LDAP groups.
+  string managerDn = 2;
+
+  // The manager user's password to use for querying LDAP groups.
+  string managerPassword = 3;
+
+  // The pattern for finding a user's DN using simple pattern matching. For example,
+  // if your LDAP server has the URL ldap://mysite.com/dc=spinnaker,dc=org, and
+  // you have the pattern 'uid={0},ou=members', 'me' will map to a DN
+  // uid=me,ou=members,dc=spinnaker,dc=org. If no match is found, will try to
+  // find the user using -user-search-filter, if set.
+  string userDnPattern = 4;
+
+  // The part of the directory tree under which user searches should be performed.
+  // If -user-search-base isn't supplied, the search will be performed from the root.
+  string userSearchBase = 5;
+
+  // The part of the directory tree under which group searches should be performed.
+  string groupSearchBase = 6;
+
+  // The filter to use when searching for a user's DN. Will search either from
+  // -user-search-base (if specified) or root for entries matching the filter.
+  string userSearchFilter = 7;
+
+  // The filter which is used to search for group membership. The default is
+  // 'uniqueMember={0}', corresponding to the groupOfUniqueMembers LDAP class. In
+  // this case, the substituted parameter is the full distinguished name of the
+  // user. The parameter '{1}' can be used if you want to filter on the login name.
+  string groupSearchFilter = 8;
+
+  // The attribute which contains the name of the authority defined by the group
+  // entry. Defaults to 'cn'.
+  string groupRoleAttributes = 9;
+}

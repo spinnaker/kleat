@@ -327,6 +327,50 @@
   
   
 
+- [security/authn.proto](#security/authn.proto)
+    - [Authentication](#proto.security.Authentication)
+    - [Iap](#proto.security.Iap)
+    - [Ldap](#proto.security.Ldap)
+    - [OAuth2](#proto.security.OAuth2)
+    - [Saml](#proto.security.Saml)
+    - [Saml.UserAttributes](#proto.security.Saml.UserAttributes)
+    - [X509](#proto.security.X509)
+  
+  
+  
+  
+
+- [security/authz.proto](#security/authz.proto)
+    - [Authorization](#proto.security.Authorization)
+    - [FileRoleProvider](#proto.security.FileRoleProvider)
+    - [GithubRoleProvider](#proto.security.GithubRoleProvider)
+    - [GoogleRoleProvider](#proto.security.GoogleRoleProvider)
+    - [GroupMembership](#proto.security.GroupMembership)
+    - [LdapRoleProvider](#proto.security.LdapRoleProvider)
+  
+    - [RoleProviderType](#proto.security.RoleProviderType)
+  
+  
+  
+
+- [security/security.proto](#security/security.proto)
+    - [Security](#proto.security.Security)
+  
+  
+  
+  
+
+- [security/ssl.proto](#security/ssl.proto)
+    - [ApiSecurity](#proto.security.ApiSecurity)
+    - [ApiSsl](#proto.security.ApiSsl)
+    - [UiSecurity](#proto.security.UiSecurity)
+    - [UiSsl](#proto.security.UiSsl)
+  
+    - [ClientAuth](#proto.security.ClientAuth)
+  
+  
+  
+
 - [stats.proto](#stats.proto)
     - [Stats](#proto.Stats)
   
@@ -2798,6 +2842,454 @@ Configuration for Pub/Sub integration.
 
 
  
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="security/authn.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## security/authn.proto
+
+
+
+<a name="proto.security.Authentication"></a>
+
+### Authentication
+Configuration of how users authenticate against Spinnaker.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether to enabled authentication. |
+| oauth2 | [OAuth2](#proto.security.OAuth2) |  | OAuth 2 configuration. |
+| saml | [Saml](#proto.security.Saml) |  | SAML configuration. |
+| ldap | [Ldap](#proto.security.Ldap) |  | LDAP configuration. |
+| x509 | [X509](#proto.security.X509) |  | X509 configuration. |
+| iap | [Iap](#proto.security.Iap) |  | Google Cloud Identity-Aware Proxy configuration. |
+
+
+
+
+
+
+<a name="proto.security.Iap"></a>
+
+### Iap
+Configuration for authentication via Google Cloud Identity-Aware Proxy.
+Google Cloud Identity-Aware Proxy (IAP) is an authentication model that utilizes
+Google OAuth2.0 and an authorization service to provide access control for users
+of GCP. After a user has been authenticated and authorized by IAP&#39;s service, a
+JWT token is passed along which Spinnaker uses to check for authenticity and to
+get the user email from the payload and sign the user in. To configure IAP, set
+the audience field retrieved from the IAP console.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the authentication method is enabled. |
+| jwtHeader | [string](#string) |  | The HTTP request header that contains the JWT token. |
+| issuerId | [string](#string) |  | The Issuer from the ID token payload. |
+| audience | [string](#string) |  | The Audience from the ID token payload. You can retrieve this field from the IAP console: https://cloud.google.com/iap/docs/signed-headers-howto#verify_the_id_token_header. |
+| iapVerifyKeyUrl | [string](#string) |  | The URL containing the Cloud IAP public keys in JWK format. |
+
+
+
+
+
+
+<a name="proto.security.Ldap"></a>
+
+### Ldap
+Configuration for authentication via LDAP.
+Lightweight Directory Access Protocol (LDAP) is a standard way many organizations
+maintain user credentials and group memberships. Spinnaker uses the standard
+&#39;bind&#39; approach for user authentication. This is a fancy way of saying that
+Gate uses your username and password to login to the LDAP server, and if the
+connection is successful, you&#39;re considered authenticated.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the authentication method is enabled. |
+| url | [string](#string) |  | ldap:// or ldaps:// url of the LDAP server. |
+| userDnPattern | [string](#string) |  | The pattern for finding a user&#39;s DN using simple pattern matching. For example, if your LDAP server has the URL ldap://mysite.com/dc=spinnaker,dc=org, and you have the pattern &#39;uid={0},ou=members&#39;, &#39;me&#39; will map to a DN uid=me,ou=members,dc=spinnaker,dc=org. If no match is found, will try to find the user using user-search-filter, if set. |
+| userSearchBase | [string](#string) |  | The part of the directory tree under which user searches should be performed. If user-search-base isn&#39;t supplied, the search will be performed from the root. |
+| userSearchFilter | [string](#string) |  | The filter to use when searching for a user&#39;s DN. Will search either from user-search-base (if specified) or root for entires matching the filter, then attempt to bind as that user with the login password. For example, the filter &#39;uid={0}&#39; would apply to any user where uid matched the user&#39;s login name. If -user-dn-pattern is also specified, will attempt to find a match using the specified pattern first, before searching with the specified search filter if no match is found from the pattern. |
+| managerDn | [string](#string) |  | An LDAP manager user is required for binding to the LDAP server for the user authentication process. This property refers to the DN of that entry. I.e. this is not the user which will be authenticated when logging into DHIS2, rather the user which binds to the LDAP server in order to do the authentication. |
+| managerPassword | [string](#string) |  | The password for the LDAP manager user. |
+| groupSearchBase | [string](#string) |  | The part of the directory tree under which group searches should be performed. |
+
+
+
+
+
+
+<a name="proto.security.OAuth2"></a>
+
+### OAuth2
+Configuration for authentication via OAuth 2.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the authentication method is enabled. |
+
+
+
+
+
+
+<a name="proto.security.Saml"></a>
+
+### Saml
+Configuration for authentication via SAML.
+SAML authenticates users by passing cryptographically signed XML documents
+between the Gate server and an identity provider. Gate&#39;s key is stored and
+accessed via the -keystore parameters, while the identity provider&#39;s keys are
+included in the metadata.xml. Finally, the identity provider must redirect the
+control flow (through the user&#39;s browser) back to Gate by way of the
+-serviceAddressUrl. This is likely the address of Gate&#39;s load balancer.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the authentication method is enabled. |
+| metadataLocal | [string](#string) |  | The path to a local file containing your identity provider&#39;s metadata XML file. |
+| metadataRemote | [string](#string) |  | The URL pointing to your identity provider&#39;s metadata XML file. |
+| issuerId | [string](#string) |  | The identity of the Spinnaker application registered with the SAML provider. |
+| keyStore | [string](#string) |  | Path to the keystore that contains this server&#39;s private key. This key is used to cryptographically sign SAML AuthNRequest objects. |
+| keyStorePassword | [string](#string) |  | The password used to access the file specified in -keystore. |
+| keyStoreAliasName | [string](#string) |  | The name of the alias under which this server&#39;s private key is stored in the -keystore file. |
+| serviceAddress | [string](#string) |  | The address of the Gate server that will be accesible by the SAML identity provider. This should be the full URL, including port, e.g. https://gate.org.com:8084/. If deployed behind a load balancer, this would be the laod balancer&#39;s address. |
+| userAttributeMapping | [Saml.UserAttributes](#proto.security.Saml.UserAttributes) |  | Configuration for fields returned from your SAML provider. |
+
+
+
+
+
+
+<a name="proto.security.Saml.UserAttributes"></a>
+
+### Saml.UserAttributes
+Configuration for fields returned from your SAML provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| firstName | [string](#string) |  | First name. |
+| lastName | [string](#string) |  | Last name. |
+| roles | [string](#string) |  | Roles. |
+| rolesDelimiter | [string](#string) |  | Roles delimiter. |
+| username | [string](#string) |  | Username. |
+| email | [string](#string) |  | Email. |
+
+
+
+
+
+
+<a name="proto.security.X509"></a>
+
+### X509
+Configuration for authentication via X509 certificates.
+X509 authenticates users via client certificate and a corresponding private key.
+These certificates optionally provide authorization information via custom Oids
+with corresponding group information for the user. This can be configured via -roleOid.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the authentication method is enabled. |
+| roleOid | [string](#string) |  | The OID that encodes roles that the user specified in the x509 certificate belongs to. |
+| subjectPrincipalRegex | [string](#string) |  | The regex used to parse the subject principal name embedded in the x509 certificate if necessary. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="security/authz.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## security/authz.proto
+
+
+
+<a name="proto.security.Authorization"></a>
+
+### Authorization
+Configuration for what resources users of Spinnaker can read and modify.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether Spinnaker&#39;s role-based authorization is enabled. |
+| groupMembership | [GroupMembership](#proto.security.GroupMembership) |  | Configuration role providers that map users to groups. |
+
+
+
+
+
+
+<a name="proto.security.FileRoleProvider"></a>
+
+### FileRoleProvider
+Configuration for the file-based role provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| path | [string](#string) |  | A path to a file describing the roles of each user. |
+
+
+
+
+
+
+<a name="proto.security.GithubRoleProvider"></a>
+
+### GithubRoleProvider
+Configuration for the GitHub role provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| baseUrl | [string](#string) |  | Used if using GitHub enterprise some other non github.com GitHub installation. |
+| accessToken | [string](#string) |  | A personal access token of an account with access to your organization&#39;s GitHub Teams structure. |
+| organization | [string](#string) |  | The GitHub organization under which to query for GitHub Teams. |
+
+
+
+
+
+
+<a name="proto.security.GoogleRoleProvider"></a>
+
+### GoogleRoleProvider
+Configuration for the Google role provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| credentialPath | [string](#string) |  | A path to a valid json service account that can authenticate against the Google role provider. |
+| adminUsername | [string](#string) |  | Your role provider&#39;s admin username e.g. admin@myorg.net. |
+| domain | [string](#string) |  | The domain your role provider is configured for e.g. myorg.net. |
+
+
+
+
+
+
+<a name="proto.security.GroupMembership"></a>
+
+### GroupMembership
+Configuration role providers that map users to groups.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| service | [RoleProviderType](#proto.security.RoleProviderType) |  | Configuration for which role provider to use for authorization decisions. |
+| google | [GoogleRoleProvider](#proto.security.GoogleRoleProvider) |  | Configuration for the Google role provider. |
+| github | [GithubRoleProvider](#proto.security.GithubRoleProvider) |  | Configuration for the GitHub role provider. |
+| file | [FileRoleProvider](#proto.security.FileRoleProvider) |  | Configuration for the file-based role provider. |
+| ldap | [LdapRoleProvider](#proto.security.LdapRoleProvider) |  | Configuration for the LDAP role provider. |
+
+
+
+
+
+
+<a name="proto.security.LdapRoleProvider"></a>
+
+### LdapRoleProvider
+Configuration for the LDAP role provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| url | [string](#string) |  | ldap:// or ldaps:// url of the LDAP server. |
+| managerDn | [string](#string) |  | The manager user&#39;s distinguished name (principal) to use for querying LDAP groups. |
+| managerPassword | [string](#string) |  | The manager user&#39;s password to use for querying LDAP groups. |
+| userDnPattern | [string](#string) |  | The pattern for finding a user&#39;s DN using simple pattern matching. For example, if your LDAP server has the URL ldap://mysite.com/dc=spinnaker,dc=org, and you have the pattern &#39;uid={0},ou=members&#39;, &#39;me&#39; will map to a DN uid=me,ou=members,dc=spinnaker,dc=org. If no match is found, will try to find the user using -user-search-filter, if set. |
+| userSearchBase | [string](#string) |  | The part of the directory tree under which user searches should be performed. If -user-search-base isn&#39;t supplied, the search will be performed from the root. |
+| groupSearchBase | [string](#string) |  | The part of the directory tree under which group searches should be performed. |
+| userSearchFilter | [string](#string) |  | The filter to use when searching for a user&#39;s DN. Will search either from -user-search-base (if specified) or root for entries matching the filter. |
+| groupSearchFilter | [string](#string) |  | The filter which is used to search for group membership. The default is &#39;uniqueMember={0}&#39;, corresponding to the groupOfUniqueMembers LDAP class. In this case, the substituted parameter is the full distinguished name of the user. The parameter &#39;{1}&#39; can be used if you want to filter on the login name. |
+| groupRoleAttributes | [string](#string) |  | The attribute which contains the name of the authority defined by the group entry. Defaults to &#39;cn&#39;. |
+
+
+
+
+
+ 
+
+
+<a name="proto.security.RoleProviderType"></a>
+
+### RoleProviderType
+Configuration for which role provider to use for authorization decisions.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| external | 0 | External role provider. |
+| file | 1 | File-based role provider. |
+| google | 2 | Google role provider. |
+| github | 3 | GitHub role provider. |
+| ldap | 4 | LDAP role provider. |
+
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="security/security.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## security/security.proto
+
+
+
+<a name="proto.security.Security"></a>
+
+### Security
+Configuration for security settings.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| apiSecurity | [ApiSecurity](#proto.security.ApiSecurity) |  | Configuration for the API server&#39;s addressable URL and CORS policies. |
+| uiSecurity | [UiSecurity](#proto.security.UiSecurity) |  | Configuration for the UI server&#39;s addressable URL. |
+| authn | [Authentication](#proto.security.Authentication) |  | Configuration of how users authenticate against Spinnaker. |
+| authz | [Authorization](#proto.security.Authorization) |  | Configuration for what resources users of Spinnaker can read and modify. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="security/ssl.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## security/ssl.proto
+
+
+
+<a name="proto.security.ApiSecurity"></a>
+
+### ApiSecurity
+Configuration for the API server&#39;s addressable URL and CORS policies.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| corsAccessPattern | [string](#string) |  | If you have authentication enabled, are accessing Spinnaker remotely, and are logging in from sources other than the UI, provide a regex matching all URLs authentication redirects may come from. |
+| ssl | [ApiSsl](#proto.security.ApiSsl) |  | If you want the API server to do SSL termination, it must be enabled and configured here. If you are doing your own SSL termination, leave this disabled. |
+| overrideBaseUrl | [string](#string) |  | If you are accessing the API server remotely, provide the full base URL of whatever proxy or load balancer is fronting the API requests |
+
+
+
+
+
+
+<a name="proto.security.ApiSsl"></a>
+
+### ApiSsl
+Configuration for SSL termination by the API server.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether SSL is enabled. |
+| keyAlias | [string](#string) |  | Name of your keystore entry as generated with your keytool. |
+| keyStore | [string](#string) |  | Path to the keystore holding your security certificates. |
+| keyStoreType | [string](#string) |  | The type of your keystore. Examples include JKS, and PKCS12. |
+| keyStorePassword | [string](#string) |  | The password to unlock your keystore. Due to a limitation in Tomcat, this must match your key&#39;s password in the keystore. |
+| trustStore | [string](#string) |  | Path to the truststore holding your trusted certificates. |
+| trustStoreType | [string](#string) |  | The type of your truststore. Examples include JKS, and PKCS12. |
+| trustStorePassword | [string](#string) |  | The password to unlock your truststore. |
+| clientAuth | [ClientAuth](#proto.security.ClientAuth) |  | Whether to require or allow client authentication. |
+
+
+
+
+
+
+<a name="proto.security.UiSecurity"></a>
+
+### UiSecurity
+Configuration for the UI server&#39;s addressable URL.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ssl | [UiSsl](#proto.security.UiSsl) |  | Configuration for SSL termination by the UI gateway. |
+| overrideBaseUrl | [string](#string) |  | If you are accessing the UI server remotely, provide the full base URL of whatever proxy or load balancer is fronting the UI requests. |
+
+
+
+
+
+
+<a name="proto.security.UiSsl"></a>
+
+### UiSsl
+Configuration for SSL termination by the UI gateway.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether SSL is enabled. |
+| sslCertificateFile | [string](#string) |  | Path to your .crt file. |
+| sslCertificateKeyFile | [string](#string) |  | Path to your .key file. |
+| sslCACertificateFile | [string](#string) |  | Path to the .crt file for the CA that issued your SSL certificate. This is only needed for local git deployments that serve the UI using webpack dev server. |
+| sslCertificatePassphrase | [string](#string) |  | The passphrase needed to unlock your SSL certificate. This will be provided to Apache on startup. |
+
+
+
+
+
+ 
+
+
+<a name="proto.security.ClientAuth"></a>
+
+### ClientAuth
+Setting for client authentication.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| NONE | 0 | No client authentication. |
+| WANT | 1 | Client authentication is optional. |
+| NEED | 2 | Client authentication is required. |
+
 
  
 
