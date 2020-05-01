@@ -2966,7 +2966,7 @@ control flow (through the user&#39;s browser) back to Gate by way of the
 | keyStore | [string](#string) |  | Path to the keystore that contains this server&#39;s private key. This key is used to cryptographically sign SAML AuthNRequest objects. |
 | keyStorePassword | [string](#string) |  | The password used to access the file specified in -keystore. |
 | keyStoreAliasName | [string](#string) |  | The name of the alias under which this server&#39;s private key is stored in the -keystore file. |
-| serviceAddress | [string](#string) |  | The address of the Gate server that will be accesible by the SAML identity provider. This should be the full URL, including port, e.g. https://gate.org.com:8084/. If deployed behind a load balancer, this would be the laod balancer&#39;s address. |
+| serviceAddress | [string](#string) |  | The address of the Gate server that will be accesible by the SAML identity provider. This should be the full URL, including port, e.g. https://gate.org.com:8084/. If deployed behind a load balancer, this would be the load balancer&#39;s address. |
 | userAttributeMapping | [Saml.UserAttributes](#proto.security.Saml.UserAttributes) |  | Configuration for fields returned from your SAML provider. |
 
 
@@ -2999,7 +2999,7 @@ Configuration for fields returned from your SAML provider.
 ### X509
 Configuration for authentication via X509 certificates.
 X509 authenticates users via client certificate and a corresponding private key.
-These certificates optionally provide authorization information via custom Oids
+These certificates optionally provide authorization information via custom OIDs
 with corresponding group information for the user. This can be configured via -roleOid.
 
 

@@ -198,7 +198,7 @@ type Saml struct {
 	KeyStoreAliasName string `protobuf:"bytes,7,opt,name=keyStoreAliasName,proto3" json:"keyStoreAliasName,omitempty"`
 	// The address of the Gate server that will be accesible by the SAML identity
 	// provider. This should be the full URL, including port, e.g. https://gate.org.com:8084/.
-	// If deployed behind a load balancer, this would be the laod balancer's address.
+	// If deployed behind a load balancer, this would be the load balancer's address.
 	ServiceAddress string `protobuf:"bytes,8,opt,name=serviceAddress,proto3" json:"serviceAddress,omitempty"`
 	// Configuration for fields returned from your SAML provider.
 	UserAttributeMapping *Saml_UserAttributes `protobuf:"bytes,9,opt,name=userAttributeMapping,proto3" json:"userAttributeMapping,omitempty"`
@@ -432,7 +432,7 @@ func (x *Ldap) GetGroupSearchBase() string {
 
 // Configuration for authentication via X509 certificates.
 // X509 authenticates users via client certificate and a corresponding private key.
-// These certificates optionally provide authorization information via custom Oids
+// These certificates optionally provide authorization information via custom OIDs
 // with corresponding group information for the user. This can be configured via -roleOid.
 type X509 struct {
 	state         protoimpl.MessageState
