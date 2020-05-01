@@ -268,8 +268,25 @@
   
   
 
+- [config/orca.proto](#config/orca.proto)
+    - [Orca](#proto.config.Orca)
+    - [Orca.Defaults](#proto.config.Orca.Defaults)
+    - [Orca.Defaults.BakeDefaults](#proto.config.Orca.Defaults.BakeDefaults)
+    - [Orca.PipelineTemplates](#proto.config.Orca.PipelineTemplates)
+  
+  
+  
+  
+
 - [config/services.proto](#config/services.proto)
     - [Services](#proto.config.Services)
+  
+  
+  
+  
+
+- [features.proto](#features.proto)
+    - [Features](#proto.Features)
   
   
   
@@ -322,6 +339,14 @@
 
 - [pubsub/pubsub.proto](#pubsub/pubsub.proto)
     - [Pubsub](#proto.pubsub.Pubsub)
+  
+  
+  
+  
+
+- [security/trust_store.proto](#security/trust_store.proto)
+    - [TrustStore](#proto.TrustStore)
+    - [WebhookConfig](#proto.WebhookConfig)
   
   
   
@@ -2472,6 +2497,86 @@ Configuration for a Spinnaker installation.
 | pubsub | [proto.pubsub.Pubsub](#proto.pubsub.Pubsub) |  |  |
 | ci | [proto.ci.Ci](#proto.ci.Ci) |  |  |
 | stats | [proto.Stats](#proto.Stats) |  |  |
+| features | [proto.Features](#proto.Features) |  |  |
+| webhook | [proto.WebhookConfig](#proto.WebhookConfig) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="config/orca.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## config/orca.proto
+
+
+
+<a name="proto.config.Orca"></a>
+
+### Orca
+Configuration for the Orca microservice.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| pipelineTemplates | [Orca.PipelineTemplates](#proto.config.Orca.PipelineTemplates) |  |  |
+| webhook | [proto.WebhookConfig](#proto.WebhookConfig) |  |  |
+| default | [Orca.Defaults](#proto.config.Orca.Defaults) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Orca.Defaults"></a>
+
+### Orca.Defaults
+Defaults applicable to the orca microservice.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| bake | [Orca.Defaults.BakeDefaults](#proto.config.Orca.Defaults.BakeDefaults) |  | Configuration of bakery defaults. |
+
+
+
+
+
+
+<a name="proto.config.Orca.Defaults.BakeDefaults"></a>
+
+### Orca.Defaults.BakeDefaults
+Configuration of bakery defaults.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| account | [string](#string) |  | The default account to use for baking. |
+
+
+
+
+
+
+<a name="proto.config.Orca.PipelineTemplates"></a>
+
+### Orca.PipelineTemplates
+Configuration for pipeline templates.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether pipeline templates are enabled. |
 
 
 
@@ -2505,6 +2610,44 @@ Configuration for Spinnaker&#39;s microservices.
 | clouddriver | [Clouddriver](#proto.config.Clouddriver) |  |  |
 | echo | [Echo](#proto.config.Echo) |  |  |
 | front50 | [Front50](#proto.config.Front50) |  |  |
+| orca | [Orca](#proto.config.Orca) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="features.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## features.proto
+
+
+
+<a name="proto.Features"></a>
+
+### Features
+Feature flags
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| pipelineTemplates | [bool](#bool) |  | Enable pipeline template support. Read more at https://github.com/spinnaker/dcd-spec. |
+| auth | [bool](#bool) |  |  |
+| fiat | [bool](#bool) |  |  |
+| chaos | [bool](#bool) |  |  |
+| entityTags | [bool](#bool) |  |  |
+| mineCanary | [bool](#bool) |  | Enable canary support. For this to work, you&#39;ll need a canary judge configured. |
+| managedPipelineTemplatesV2UI | [bool](#bool) |  |  |
 
 
 
@@ -2792,6 +2935,54 @@ Configuration for Pub/Sub integration.
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether Pub/Sub is enabled. |
 | google | [Google](#proto.pubsub.Google) |  | Configuration for the Google Cloud Pub/Sub integration. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="security/trust_store.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## security/trust_store.proto
+
+
+
+<a name="proto.TrustStore"></a>
+
+### TrustStore
+Configuration for a custom trust store.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether this custom trust store is enabled. |
+| trustStore | [string](#string) |  | The path to a key store in JKS format containing certification authorities that should be trusted. |
+| trustStorePassword | [string](#string) |  | The password for the supplied trustStore. |
+
+
+
+
+
+
+<a name="proto.WebhookConfig"></a>
+
+### WebhookConfig
+Configuration for webhooks.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| trust | [TrustStore](#proto.TrustStore) |  | A custom trust store to use for outgoing webhook connections. |
 
 
 

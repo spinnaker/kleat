@@ -1,0 +1,31 @@
+syntax = "proto3";
+package proto.config;
+
+option go_package = "github.com/spinnaker/kleat/api/client/config";
+
+import "security/trust_store.proto";
+
+// Configuration for the Orca microservice.
+message Orca {
+  PipelineTemplates pipelineTemplates = 1;
+  WebhookConfig webhook = 2;
+  Defaults default = 3;
+
+  // Configuration for pipeline templates.
+  message PipelineTemplates {
+    // Whether pipeline templates are enabled.
+    bool enabled = 1;
+  }
+
+  // Defaults applicable to the orca microservice.
+  message Defaults {
+    // Configuration of bakery defaults.
+    BakeDefaults bake = 1;
+
+    // Configuration of bakery defaults.
+    message BakeDefaults {
+      // The default account to use for baking.
+      string account = 1;
+    }
+  }
+}
