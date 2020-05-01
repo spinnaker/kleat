@@ -1,0 +1,23 @@
+syntax = "proto3";
+package proto.security;
+
+option go_package = "github.com/spinnaker/kleat/api/client/security";
+
+import "security/authn.proto";
+import "security/authz.proto";
+import "security/ssl.proto";
+
+// Configuration for security settings.
+message Security {
+  // Configuration for the API server's addressable URL and CORS policies.
+  ApiSecurity apiSecurity = 1;
+
+  // Configuration for the UI server's addressable URL.
+  UiSecurity uiSecurity = 2;
+
+  // Configuration of how users authenticate against Spinnaker.
+  Authentication authn = 3;
+
+  // Configuration for what resources users of Spinnaker can read and modify.
+  Authorization authz = 4;
+}

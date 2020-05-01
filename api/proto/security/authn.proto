@@ -1,0 +1,183 @@
+syntax = "proto3";
+package proto.security;
+
+option go_package = "github.com/spinnaker/kleat/api/client/security";
+
+// Configuration of how users authenticate against Spinnaker.
+message Authentication {
+  // Whether to enabled authentication.
+  bool enabled = 1;
+
+  // OAuth 2 configuration.
+  OAuth2 oauth2 = 2;
+
+  // SAML configuration.
+  Saml saml = 3;
+
+  // LDAP configuration.
+  Ldap ldap = 4;
+
+  // X509 configuration.
+  X509 x509 = 5;
+
+  // Google Cloud Identity-Aware Proxy configuration.
+  Iap iap = 6;
+}
+
+// Configuration for authentication via OAuth 2.
+message OAuth2 {
+  // Whether the authentication method is enabled.
+  bool enabled = 1;
+
+  // TODO: Fill in the rest of this, as it looks like there is some reasonably
+  // complex logic in Halyard around this.
+}
+
+// Configuration for authentication via SAML.
+// SAML authenticates users by passing cryptographically signed XML documents
+// between the Gate server and an identity provider. Gate's key is stored and
+// accessed via the -keystore parameters, while the identity provider's keys are
+// included in the metadata.xml. Finally, the identity provider must redirect the
+// control flow (through the user's browser) back to Gate by way of the
+// -serviceAddressUrl. This is likely the address of Gate's load balancer.
+message Saml {
+  // Whether the authentication method is enabled.
+  bool enabled = 1;
+
+  // The path to a local file containing your identity provider's metadata XML file.
+  string metadataLocal = 2;
+
+  // The URL pointing to  your identity provider's metadata XML file.
+  string metadataRemote = 3;
+
+  // The identity of the Spinnaker application registered with the SAML provider.
+  string issuerId = 4;
+
+  // Path to the keystore that contains this server's private key. This key is
+  // used to cryptographically sign SAML AuthNRequest objects.
+  string keyStore = 5;
+
+  // The password used to access the file specified in -keystore.
+  string keyStorePassword = 6;
+
+  // The name of the alias under which this server's private key is stored in
+  // the -keystore file.
+  string keyStoreAliasName = 7;
+
+  // The address of the Gate server that will be accesible by the SAML identity
+  // provider. This should be the full URL, including port, e.g. https://gate.org.com:8084/.
+  // If deployed behind a load balancer, this would be the load balancer's address.
+  string serviceAddress = 8;
+
+  // Configuration for fields returned from your SAML provider.
+  UserAttributes userAttributeMapping = 9;
+
+  // Configuration for fields returned from your SAML provider.
+  message UserAttributes {
+    // First name.
+    string firstName = 1;
+
+    // Last name.
+    string lastName = 2;
+
+    // Roles.
+    string roles = 3;
+
+    // Roles delimiter.
+    string rolesDelimiter = 4;
+
+    // Username.
+    string username = 5;
+
+    // Email.
+    string email = 6;
+  }
+}
+
+// Configuration for authentication via LDAP.
+// Lightweight Directory Access Protocol (LDAP) is a standard way many organizations
+// maintain user credentials and group memberships. Spinnaker uses the standard
+// 'bind' approach for user authentication. This is a fancy way of saying that
+// Gate uses your username and password to login to the LDAP server, and if the
+// connection is successful, you're considered authenticated.
+message Ldap {
+  // Whether the authentication method is enabled.
+  bool enabled = 1;
+
+  // ldap:// or ldaps:// url of the LDAP server.
+  string url = 2;
+
+  // The pattern for finding a user's DN using simple pattern matching. For example,
+  // if your LDAP server has the URL ldap://mysite.com/dc=spinnaker,dc=org, and
+  // you have the pattern 'uid={0},ou=members', 'me' will map to a DN
+  // uid=me,ou=members,dc=spinnaker,dc=org. If no match is found, will try to
+  // find the user using user-search-filter, if set.
+  string userDnPattern = 3;
+
+  // The part of the directory tree under which user searches should be performed.
+  // If user-search-base isn't supplied, the search will be performed from the root.
+  string userSearchBase = 4;
+
+  // The filter to use when searching for a user's DN. Will search either from
+  // user-search-base (if specified) or root for entires matching the filter, then
+  // attempt to bind as that user with the login password. For example, the filter
+  // 'uid={0}' would apply to any user where uid matched the user's login name. If
+  // -user-dn-pattern is also specified, will attempt to find a match using the
+  // specified pattern first, before searching with the specified search filter
+  // if no match is found from the pattern.
+  string userSearchFilter = 5;
+
+  // An LDAP manager user is required for binding to the LDAP server for the user
+  // authentication process. This property refers to the DN of that entry. I.e.
+  // this is not the user which will be authenticated when logging into DHIS2,
+  // rather the user which binds to the LDAP server in order to do the authentication.
+  string managerDn = 6;
+
+  // The password for the LDAP manager user.
+  string managerPassword = 7;
+
+  // The part of the directory tree under which group searches should be performed.
+  string groupSearchBase = 8;
+}
+
+// Configuration for authentication via X509 certificates.
+// X509 authenticates users via client certificate and a corresponding private key.
+// These certificates optionally provide authorization information via custom OIDs
+// with corresponding group information for the user. This can be configured via -roleOid.
+message X509 {
+  // Whether the authentication method is enabled.
+  bool enabled = 1;
+
+  // The OID that encodes roles that the user specified in the x509 certificate
+  // belongs to.
+  string roleOid = 2;
+
+  // The regex used to parse the subject principal name embedded in the x509
+  // certificate if necessary.
+  string subjectPrincipalRegex = 3;
+}
+
+// Configuration for authentication via Google Cloud Identity-Aware Proxy.
+// Google Cloud Identity-Aware Proxy (IAP) is an authentication model that utilizes
+// Google OAuth2.0 and an authorization service to provide access control for users
+// of GCP. After a user has been authenticated and authorized by IAP's service, a
+// JWT token is passed along which Spinnaker uses to check for authenticity and to
+// get the user email from the payload and sign the user in. To configure IAP, set
+// the audience field retrieved from the IAP console.
+message Iap {
+  // Whether the authentication method is enabled.
+  bool enabled = 1;
+
+  // The HTTP request header that contains the JWT token.
+  string jwtHeader = 2;
+
+  // The Issuer from the ID token payload.
+  string issuerId = 3;
+
+  // The Audience from the ID token payload. You can retrieve this field from the
+  // IAP console: https://cloud.google.com/iap/docs/signed-headers-howto#verify_the_id_token_header.
+  string audience = 4;
+
+  // The URL containing the Cloud IAP public keys in JWK format.
+  string iapVerifyKeyUrl = 5;
+}

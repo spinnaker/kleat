@@ -1,0 +1,93 @@
+syntax = "proto3";
+package proto.security;
+
+option go_package = "github.com/spinnaker/kleat/api/client/security";
+
+// Configuration for the API server's addressable URL and CORS policies.
+message ApiSecurity {
+  // If you have authentication enabled, are accessing Spinnaker remotely, and
+  // are logging in from sources other than the UI, provide a regex matching all
+  // URLs authentication redirects may come from.
+  string corsAccessPattern = 1;
+
+  // If you want the API server to do SSL termination, it must be enabled and
+  // configured here. If you are doing your own SSL termination, leave this disabled.
+  ApiSsl ssl = 2;
+
+  // If you are accessing the API server remotely, provide the full base URL of
+  // whatever proxy or load balancer is fronting the API requests
+  string overrideBaseUrl = 3;
+}
+
+// Configuration for the UI server's addressable URL.
+message UiSecurity {
+  // Configuration for SSL termination by the UI gateway.
+  UiSsl ssl = 1;
+
+  // If you are accessing the UI server remotely, provide the full base URL of
+  // whatever proxy or load balancer is fronting the UI requests.
+  string overrideBaseUrl = 2;
+}
+
+// Configuration for SSL termination by the API server.
+message ApiSsl {
+  // Whether SSL is enabled.
+  bool enabled = 1;
+
+  // Name of your keystore entry as generated with your keytool.
+  string keyAlias = 2;
+
+  // Path to the keystore holding your security certificates.
+  string keyStore = 3;
+
+  // The type of your keystore. Examples include JKS, and PKCS12.
+  string keyStoreType = 4;
+
+  // The password to unlock your keystore. Due to a limitation in Tomcat, this
+  // must match your key's password in the keystore.
+  string keyStorePassword = 5;
+
+  // Path to the truststore holding your trusted certificates.
+  string trustStore = 6;
+
+  // The type of your truststore. Examples include JKS, and PKCS12.
+  string trustStoreType = 7;
+
+  // The password to unlock your truststore.
+  string trustStorePassword = 8;
+
+  // Whether to require or allow client authentication.
+  ClientAuth clientAuth = 9;
+}
+
+// Configuration for SSL termination by the UI gateway.
+message UiSsl {
+  // Whether SSL is enabled.
+  bool enabled = 1;
+
+  // Path to your .crt file.
+  string sslCertificateFile = 2;
+
+  // Path to your .key file.
+  string sslCertificateKeyFile = 3;
+
+  // Path to the .crt file for the CA that issued your SSL certificate. This is
+  // only needed for local git deployments that serve the UI using webpack dev server.
+  string sslCACertificateFile = 4;
+
+  // The passphrase needed to unlock your SSL certificate. This will be provided
+  // to Apache on startup.
+  string sslCertificatePassphrase = 5;
+}
+
+// Setting for client authentication.
+enum ClientAuth {
+  // No client authentication.
+  NONE = 0;
+
+  // Client authentication is optional.
+  WANT = 1;
+
+  // Client authentication is required.
+  NEED = 2;
+}
