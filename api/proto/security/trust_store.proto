@@ -1,0 +1,23 @@
+syntax = "proto3";
+package proto;
+
+option go_package = "github.com/spinnaker/kleat/api/client/security";
+
+// Configuration for a custom trust store.
+message TrustStore {
+  // Whether this custom trust store is enabled.
+  bool enabled = 1;
+
+  // The path to a key store in JKS format containing certification authorities
+  // that should be trusted.
+  string trustStore = 2;
+
+  // The password for the supplied trustStore.
+  string trustStorePassword = 3;
+}
+
+// Configuration for webhooks.
+message WebhookConfig {
+  // A custom trust store to use for outgoing webhook connections.
+  TrustStore trust = 1;
+}

@@ -359,3 +359,10 @@ pubsub:
       content: NOTIFICATIONS
 stats:
   enabled: false
+webhook:
+  trust:
+    enabled: true
+    trustStore: /var/secrets/webhook-keystore.jks
+    trustStorePassword: abcdefg
+features:
+  pipelineTemplates: true

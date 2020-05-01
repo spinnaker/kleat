@@ -6,8 +6,10 @@ option go_package = "github.com/spinnaker/kleat/api/client/config";
 import "artifact/artifacts.proto";
 import "ci/ci.proto";
 import "cloudprovider/providers.proto";
+import "features.proto";
 import "notification/notifications.proto";
 import "pubsub/pubsub.proto";
+import "security/trust_store.proto";
 import "stats.proto";
 import "storage/persistent_storage.proto";
 
@@ -20,4 +22,6 @@ message Hal {
   pubsub.Pubsub pubsub = 5;
   ci.Ci ci = 6;
   Stats stats = 7;
+  Features features = 8;
+  WebhookConfig webhook = 9;
 }
