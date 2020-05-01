@@ -23,5 +23,5 @@ message Hal {
   ci.Ci ci = 6;
   Stats stats = 7;
   Features features = 8;
-  WebhookConfig webhook = 9;
+  security.WebhookConfig webhook = 9;
 }

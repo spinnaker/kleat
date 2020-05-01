@@ -389,8 +389,8 @@
   
 
 - [security/trust_store.proto](#security/trust_store.proto)
-    - [TrustStore](#proto.TrustStore)
-    - [WebhookConfig](#proto.WebhookConfig)
+    - [TrustStore](#proto.security.TrustStore)
+    - [WebhookConfig](#proto.security.WebhookConfig)
   
   
   
@@ -2542,7 +2542,7 @@ Configuration for a Spinnaker installation.
 | ci | [proto.ci.Ci](#proto.ci.Ci) |  |  |
 | stats | [proto.Stats](#proto.Stats) |  |  |
 | features | [proto.Features](#proto.Features) |  |  |
-| webhook | [proto.WebhookConfig](#proto.WebhookConfig) |  |  |
+| webhook | [proto.security.WebhookConfig](#proto.security.WebhookConfig) |  |  |
 
 
 
@@ -2574,7 +2574,7 @@ Configuration for the Orca microservice.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | pipelineTemplates | [Orca.PipelineTemplates](#proto.config.Orca.PipelineTemplates) |  |  |
-| webhook | [proto.WebhookConfig](#proto.WebhookConfig) |  |  |
+| webhook | [proto.security.WebhookConfig](#proto.security.WebhookConfig) |  |  |
 | default | [Orca.Defaults](#proto.config.Orca.Defaults) |  |  |
 
 
@@ -3449,7 +3449,7 @@ Setting for client authentication.
 
 
 
-<a name="proto.TrustStore"></a>
+<a name="proto.security.TrustStore"></a>
 
 ### TrustStore
 Configuration for a custom trust store.
@@ -3466,7 +3466,7 @@ Configuration for a custom trust store.
 
 
 
-<a name="proto.WebhookConfig"></a>
+<a name="proto.security.WebhookConfig"></a>
 
 ### WebhookConfig
 Configuration for webhooks.
@@ -3474,7 +3474,7 @@ Configuration for webhooks.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| trust | [TrustStore](#proto.TrustStore) |  | A custom trust store to use for outgoing webhook connections. |
+| trust | [TrustStore](#proto.security.TrustStore) |  | A custom trust store to use for outgoing webhook connections. |
 
 
 

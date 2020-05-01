@@ -8,7 +8,7 @@ import "security/trust_store.proto";
 // Configuration for the Orca microservice.
 message Orca {
   PipelineTemplates pipelineTemplates = 1;
-  WebhookConfig webhook = 2;
+  security.WebhookConfig webhook = 2;
   Defaults default = 3;
 
   // Configuration for pipeline templates.
