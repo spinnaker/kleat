@@ -29,8 +29,90 @@ message OAuth2 {
   // Whether the authentication method is enabled.
   bool enabled = 1;
 
-  // TODO: Fill in the rest of this, as it looks like there is some reasonably
-  // complex logic in Halyard around this.
+  // Configuration for your OAuth2 client.
+  OAuth2Client client = 2;
+
+  // The map of requirements the userInfo request must have. This is used to
+  // restrict user login to specific domains or having a specific attribute.
+  map<string, string> userInfoRequirements = 3;
+
+  // Configuration for OAuth2 resources.
+  OAuth2Resource resource = 4;
+
+  // Mapping of user attributes to fields returned by your OAuth2 provider.
+  OAuth2UserInfoMapping userInfoMapping = 5;
+
+  // The OAuth2 provider handling authentication.
+  OAuth2Provider provider = 6;
+
+  // Supported OAuth2 providers.
+  enum OAuth2Provider {
+    // Other OAuth2 provider.
+    other = 0;
+
+    // Azure OAuth2 provider.
+    azure = 1;
+
+    // Github OAuth2 provider.
+    github = 2;
+
+    // Oracle OAuth2 provider.
+    oracle = 3;
+
+    // Google OAuth2 provider.
+    google = 4;
+  }
+}
+
+// Configuration for an OAuth2 client.
+message OAuth2Client {
+  // The OAuth client ID you have configured with your OAuth2 provider.
+  string clientId = 1;
+
+  // The OAuth client secret you have configured with your OAuth provider.
+  string clientSecret = 2;
+
+  // The access token uri for your OAuth provider.
+  string accessTokenUri = 3;
+
+  // The user authorization uri for your OAuth2 provider.
+  string userAuthorizationUri = 4;
+
+  // The client authentication scheme for your OAuth2 provider.
+  string clientAuthenticationScheme = 5;
+
+  // The scope for your OAuth2 provider.
+  string scope = 6;
+
+  // The externally accessible URL for Gate. For use with load balancers that do
+  // any kind of address manipulation for Gate traffic, such as an SSL terminating
+  // load balancer.
+  string preEstablishedRedirectUri = 7;
+
+  // Whether the current URI in the request should be preferred over the pre-established
+  // redirect URI.
+  bool useCurrentUri = 8;
+}
+
+// Configuration for OAuth2 resources.
+message OAuth2Resource {
+  // The user authorization uri for your OAuth2 provider.
+  string userInfoUri = 1;
+}
+
+// Mapping of user attributes to fields returned by an OAuth2 provider.
+message OAuth2UserInfoMapping {
+  // Email.
+  string email = 1;
+
+  // First name.
+  string firstName = 2;
+
+  // Last name.
+  string lastName = 3;
+
+  // Username.
+  string username = 4;
 }
 
 // Configuration for authentication via SAML.

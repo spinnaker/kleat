@@ -349,10 +349,15 @@
     - [Iap](#proto.security.Iap)
     - [Ldap](#proto.security.Ldap)
     - [OAuth2](#proto.security.OAuth2)
+    - [OAuth2.UserInfoRequirementsEntry](#proto.security.OAuth2.UserInfoRequirementsEntry)
+    - [OAuth2Client](#proto.security.OAuth2Client)
+    - [OAuth2Resource](#proto.security.OAuth2Resource)
+    - [OAuth2UserInfoMapping](#proto.security.OAuth2UserInfoMapping)
     - [Saml](#proto.security.Saml)
     - [Saml.UserAttributes](#proto.security.Saml.UserAttributes)
     - [X509](#proto.security.X509)
   
+    - [OAuth2.OAuth2Provider](#proto.security.OAuth2.OAuth2Provider)
   
   
   
@@ -3082,6 +3087,82 @@ Configuration for authentication via OAuth 2.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether the authentication method is enabled. |
+| client | [OAuth2Client](#proto.security.OAuth2Client) |  | Configuration for your OAuth2 client. |
+| userInfoRequirements | [OAuth2.UserInfoRequirementsEntry](#proto.security.OAuth2.UserInfoRequirementsEntry) | repeated | The map of requirements the userInfo request must have. This is used to restrict user login to specific domains or having a specific attribute. |
+| resource | [OAuth2Resource](#proto.security.OAuth2Resource) |  | Configuration for OAuth2 resources. |
+| userInfoMapping | [OAuth2UserInfoMapping](#proto.security.OAuth2UserInfoMapping) |  | Mapping of user attributes to fields returned by your OAuth2 provider. |
+| provider | [OAuth2.OAuth2Provider](#proto.security.OAuth2.OAuth2Provider) |  | The OAuth2 provider handling authentication. |
+
+
+
+
+
+
+<a name="proto.security.OAuth2.UserInfoRequirementsEntry"></a>
+
+### OAuth2.UserInfoRequirementsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="proto.security.OAuth2Client"></a>
+
+### OAuth2Client
+Configuration for an OAuth2 client.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| clientId | [string](#string) |  | The OAuth client ID you have configured with your OAuth2 provider. |
+| clientSecret | [string](#string) |  | The OAuth client secret you have configured with your OAuth provider. |
+| accessTokenUri | [string](#string) |  | The access token uri for your OAuth provider. |
+| userAuthorizationUri | [string](#string) |  | The user authorization uri for your OAuth2 provider. |
+| clientAuthenticationScheme | [string](#string) |  | The client authentication scheme for your OAuth2 provider. |
+| scope | [string](#string) |  | The scope for your OAuth2 provider. |
+| preEstablishedRedirectUri | [string](#string) |  | The externally accessible URL for Gate. For use with load balancers that do any kind of address manipulation for Gate traffic, such as an SSL terminating load balancer. |
+| useCurrentUri | [bool](#bool) |  | Whether the current URI in the request should be preferred over the pre-established redirect URI. |
+
+
+
+
+
+
+<a name="proto.security.OAuth2Resource"></a>
+
+### OAuth2Resource
+Configuration for OAuth2 resources.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| userInfoUri | [string](#string) |  | The user authorization uri for your OAuth2 provider. |
+
+
+
+
+
+
+<a name="proto.security.OAuth2UserInfoMapping"></a>
+
+### OAuth2UserInfoMapping
+Mapping of user attributes to fields returned by an OAuth2 provider.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| email | [string](#string) |  | Email. |
+| firstName | [string](#string) |  | First name. |
+| lastName | [string](#string) |  | Last name. |
+| username | [string](#string) |  | Username. |
 
 
 
@@ -3157,6 +3238,21 @@ with corresponding group information for the user. This can be configured via -r
 
 
  
+
+
+<a name="proto.security.OAuth2.OAuth2Provider"></a>
+
+### OAuth2.OAuth2Provider
+Supported OAuth2 providers.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| other | 0 | Other OAuth2 provider. |
+| azure | 1 | Azure OAuth2 provider. |
+| github | 2 | Github OAuth2 provider. |
+| oracle | 3 | Oracle OAuth2 provider. |
+| google | 4 | Google OAuth2 provider. |
+
 
  
 
