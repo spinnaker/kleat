@@ -216,7 +216,6 @@ message Ldap {
   // find the user using user-search-filter, if set.
   string userDnPattern = 3;
 
-
   // The part of the directory tree under which user searches should be performed.
   // If user-search-base isn't supplied, the search will be performed from the root.
   string userSearchBase = 4;
