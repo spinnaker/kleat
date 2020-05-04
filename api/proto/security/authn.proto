@@ -8,7 +8,7 @@ message Authentication {
   // Whether to enabled authentication.
   bool enabled = 1;
 
-  // OAuth 2 configuration.
+  // OAuth 2.0 configuration.
   OAuth2 oauth2 = 2;
 
   // SAML configuration.
@@ -24,49 +24,51 @@ message Authentication {
   Iap iap = 6;
 }
 
-// Configuration for authentication via OAuth 2.
+// Configuration for authentication via OAuth 2.0.
 message OAuth2 {
   // Whether the authentication method is enabled.
   bool enabled = 1;
 
-  // Configuration for your OAuth2 client.
+  // Configuration for your OAuth 2.0 client.
   OAuth2Client client = 2;
 
   // The map of requirements the userInfo request must have. This is used to
   // restrict user login to specific domains or having a specific attribute.
   map<string, string> userInfoRequirements = 3;
 
-  // Configuration for OAuth2 resources.
+  // Configuration for OAuth 2.0 resources.
   OAuth2Resource resource = 4;
 
-  // Mapping of user attributes to fields returned by your OAuth2 provider.
+  // Mapping of user attributes to fields returned by your OAuth 2.0 provider.
+  // This field controls how the fields returned from the OAuth 2.0 provider's user
+  // info endpoint are translated into a Spinnaker user.
   OAuth2UserInfoMapping userInfoMapping = 5;
 
-  // The OAuth2 provider handling authentication.
+  // The OAuth 2.0 provider handling authentication.
   OAuth2Provider provider = 6;
 
-  // Supported OAuth2 providers.
+  // Supported OAuth 2.0 providers.
   enum OAuth2Provider {
-    // Other OAuth2 provider.
+    // Other OAuth 2.0 provider.
     other = 0;
 
-    // Azure OAuth2 provider.
+    // Azure OAuth 2.0 provider.
     azure = 1;
 
-    // Github OAuth2 provider.
+    // Github OAuth 2.0 provider.
     github = 2;
 
-    // Oracle OAuth2 provider.
+    // Oracle OAuth 2.0 provider.
     oracle = 3;
 
-    // Google OAuth2 provider.
+    // Google OAuth 2.0 provider.
     google = 4;
   }
 }
 
-// Configuration for an OAuth2 client.
+// Configuration for an OAuth 2.0 client.
 message OAuth2Client {
-  // The OAuth client ID you have configured with your OAuth2 provider.
+  // The OAuth client ID you have configured with your OAuth 2.0 provider.
   string clientId = 1;
 
   // The OAuth client secret you have configured with your OAuth provider.
@@ -75,13 +77,14 @@ message OAuth2Client {
   // The access token uri for your OAuth provider.
   string accessTokenUri = 3;
 
-  // The user authorization uri for your OAuth2 provider.
+  // The user authorization uri for your OAuth 2.0 provider.
   string userAuthorizationUri = 4;
 
-  // The client authentication scheme for your OAuth2 provider.
-  string clientAuthenticationScheme = 5;
+  // The method used to transmit authentication credentials to your OAuth 2.0
+  // provider.
+  AuthenticationScheme clientAuthenticationScheme = 5;
 
-  // The scope for your OAuth2 provider.
+  // The scope to request when obtaining an access token from your OAuth 2.0 provider.
   string scope = 6;
 
   // The externally accessible URL for Gate. For use with load balancers that do
@@ -92,15 +95,32 @@ message OAuth2Client {
   // Whether the current URI in the request should be preferred over the pre-established
   // redirect URI.
   bool useCurrentUri = 8;
+
+  // Methods to transmit authentication tokens to an OAuth 2.0 provider.
+  enum AuthenticationScheme {
+    // Token is sent in the request header.
+    header = 0;
+
+    // Token is sent as a query parameter.
+    query = 1;
+
+    // Token is sent in the form body.
+    form = 2;
+
+    // Token is not sent at all.
+    none = 3;
+  }
 }
 
-// Configuration for OAuth2 resources.
+// Configuration for OAuth 2.0 resources.
 message OAuth2Resource {
-  // The user authorization uri for your OAuth2 provider.
+  // The user info URI for your OAuth 2.0 provider.
   string userInfoUri = 1;
 }
 
-// Mapping of user attributes to fields returned by an OAuth2 provider.
+// Mapping of user attributes to fields returned by an OAuth 2.0 provider.
+// This field controls how the fields returned from the OAuth 2.0 provider's user
+// info endpoint are translated into a Spinnaker user.
 message OAuth2UserInfoMapping {
   // Email.
   string email = 1;
@@ -241,7 +261,7 @@ message X509 {
 
 // Configuration for authentication via Google Cloud Identity-Aware Proxy.
 // Google Cloud Identity-Aware Proxy (IAP) is an authentication model that utilizes
-// Google OAuth2.0 and an authorization service to provide access control for users
+// Google OAuth 2.0 and an authorization service to provide access control for users
 // of GCP. After a user has been authenticated and authorized by IAP's service, a
 // JWT token is passed along which Spinnaker uses to check for authenticity and to
 // get the user email from the payload and sign the user in. To configure IAP, set
