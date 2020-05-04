@@ -358,6 +358,7 @@
     - [X509](#proto.security.X509)
   
     - [OAuth2.OAuth2Provider](#proto.security.OAuth2.OAuth2Provider)
+    - [OAuth2Client.AuthenticationScheme](#proto.security.OAuth2Client.AuthenticationScheme)
   
   
   
@@ -3015,7 +3016,7 @@ Configuration of how users authenticate against Spinnaker.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether to enabled authentication. |
-| oauth2 | [OAuth2](#proto.security.OAuth2) |  | OAuth 2 configuration. |
+| oauth2 | [OAuth2](#proto.security.OAuth2) |  | OAuth 2.0 configuration. |
 | saml | [Saml](#proto.security.Saml) |  | SAML configuration. |
 | ldap | [Ldap](#proto.security.Ldap) |  | LDAP configuration. |
 | x509 | [X509](#proto.security.X509) |  | X509 configuration. |
@@ -3031,7 +3032,7 @@ Configuration of how users authenticate against Spinnaker.
 ### Iap
 Configuration for authentication via Google Cloud Identity-Aware Proxy.
 Google Cloud Identity-Aware Proxy (IAP) is an authentication model that utilizes
-Google OAuth2.0 and an authorization service to provide access control for users
+Google OAuth 2.0 and an authorization service to provide access control for users
 of GCP. After a user has been authenticated and authorized by IAP&#39;s service, a
 JWT token is passed along which Spinnaker uses to check for authenticity and to
 get the user email from the payload and sign the user in. To configure IAP, set
@@ -3081,17 +3082,17 @@ connection is successful, you&#39;re considered authenticated.
 <a name="proto.security.OAuth2"></a>
 
 ### OAuth2
-Configuration for authentication via OAuth 2.
+Configuration for authentication via OAuth 2.0.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether the authentication method is enabled. |
-| client | [OAuth2Client](#proto.security.OAuth2Client) |  | Configuration for your OAuth2 client. |
+| client | [OAuth2Client](#proto.security.OAuth2Client) |  | Configuration for your OAuth 2.0 client. |
 | userInfoRequirements | [OAuth2.UserInfoRequirementsEntry](#proto.security.OAuth2.UserInfoRequirementsEntry) | repeated | The map of requirements the userInfo request must have. This is used to restrict user login to specific domains or having a specific attribute. |
-| resource | [OAuth2Resource](#proto.security.OAuth2Resource) |  | Configuration for OAuth2 resources. |
-| userInfoMapping | [OAuth2UserInfoMapping](#proto.security.OAuth2UserInfoMapping) |  | Mapping of user attributes to fields returned by your OAuth2 provider. |
-| provider | [OAuth2.OAuth2Provider](#proto.security.OAuth2.OAuth2Provider) |  | The OAuth2 provider handling authentication. |
+| resource | [OAuth2Resource](#proto.security.OAuth2Resource) |  | Configuration for OAuth 2.0 resources. |
+| userInfoMapping | [OAuth2UserInfoMapping](#proto.security.OAuth2UserInfoMapping) |  | Mapping of user attributes to fields returned by your OAuth 2.0 provider. This field controls how the fields returned from the OAuth 2.0 provider&#39;s user info endpoint are translated into a Spinnaker user. |
+| provider | [OAuth2.OAuth2Provider](#proto.security.OAuth2.OAuth2Provider) |  | The OAuth 2.0 provider handling authentication. |
 
 
 
@@ -3117,17 +3118,17 @@ Configuration for authentication via OAuth 2.
 <a name="proto.security.OAuth2Client"></a>
 
 ### OAuth2Client
-Configuration for an OAuth2 client.
+Configuration for an OAuth 2.0 client.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| clientId | [string](#string) |  | The OAuth client ID you have configured with your OAuth2 provider. |
+| clientId | [string](#string) |  | The OAuth client ID you have configured with your OAuth 2.0 provider. |
 | clientSecret | [string](#string) |  | The OAuth client secret you have configured with your OAuth provider. |
 | accessTokenUri | [string](#string) |  | The access token uri for your OAuth provider. |
-| userAuthorizationUri | [string](#string) |  | The user authorization uri for your OAuth2 provider. |
-| clientAuthenticationScheme | [string](#string) |  | The client authentication scheme for your OAuth2 provider. |
-| scope | [string](#string) |  | The scope for your OAuth2 provider. |
+| userAuthorizationUri | [string](#string) |  | The user authorization uri for your OAuth 2.0 provider. |
+| clientAuthenticationScheme | [OAuth2Client.AuthenticationScheme](#proto.security.OAuth2Client.AuthenticationScheme) |  | The method used to transmit authentication credentials to your OAuth 2.0 provider. |
+| scope | [string](#string) |  | The scope to request when obtaining an access token from your OAuth 2.0 provider. |
 | preEstablishedRedirectUri | [string](#string) |  | The externally accessible URL for Gate. For use with load balancers that do any kind of address manipulation for Gate traffic, such as an SSL terminating load balancer. |
 | useCurrentUri | [bool](#bool) |  | Whether the current URI in the request should be preferred over the pre-established redirect URI. |
 
@@ -3139,12 +3140,12 @@ Configuration for an OAuth2 client.
 <a name="proto.security.OAuth2Resource"></a>
 
 ### OAuth2Resource
-Configuration for OAuth2 resources.
+Configuration for OAuth 2.0 resources.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| userInfoUri | [string](#string) |  | The user authorization uri for your OAuth2 provider. |
+| userInfoUri | [string](#string) |  | The user info URI for your OAuth 2.0 provider. |
 
 
 
@@ -3154,7 +3155,9 @@ Configuration for OAuth2 resources.
 <a name="proto.security.OAuth2UserInfoMapping"></a>
 
 ### OAuth2UserInfoMapping
-Mapping of user attributes to fields returned by an OAuth2 provider.
+Mapping of user attributes to fields returned by an OAuth 2.0 provider.
+This field controls how the fields returned from the OAuth 2.0 provider&#39;s user
+info endpoint are translated into a Spinnaker user.
 
 
 | Field | Type | Label | Description |
@@ -3243,15 +3246,29 @@ with corresponding group information for the user. This can be configured via -r
 <a name="proto.security.OAuth2.OAuth2Provider"></a>
 
 ### OAuth2.OAuth2Provider
-Supported OAuth2 providers.
+Supported OAuth 2.0 providers.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| other | 0 | Other OAuth2 provider. |
-| azure | 1 | Azure OAuth2 provider. |
-| github | 2 | Github OAuth2 provider. |
-| oracle | 3 | Oracle OAuth2 provider. |
-| google | 4 | Google OAuth2 provider. |
+| other | 0 | Other OAuth 2.0 provider. |
+| azure | 1 | Azure OAuth 2.0 provider. |
+| github | 2 | Github OAuth 2.0 provider. |
+| oracle | 3 | Oracle OAuth 2.0 provider. |
+| google | 4 | Google OAuth 2.0 provider. |
+
+
+
+<a name="proto.security.OAuth2Client.AuthenticationScheme"></a>
+
+### OAuth2Client.AuthenticationScheme
+Methods to transmit authentication tokens to an OAuth 2.0 provider.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| header | 0 | Token is sent in the request header. |
+| query | 1 | Token is sent as a query parameter. |
+| form | 2 | Token is sent in the form body. |
+| none | 3 | Token is not sent at all. |
 
 
  
