@@ -3187,13 +3187,14 @@ control flow (through the user&#39;s browser) back to Gate by way of the
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether the authentication method is enabled. |
-| metadataLocal | [string](#string) |  | The path to a local file containing your identity provider&#39;s metadata XML file. |
-| metadataRemote | [string](#string) |  | The URL pointing to your identity provider&#39;s metadata XML file. |
+| metadataUrl | [string](#string) |  | The path to a local file containing identity provider&#39;s metadata XML file; can be either a local file or a URI. |
 | issuerId | [string](#string) |  | The identity of the Spinnaker application registered with the SAML provider. |
 | keyStore | [string](#string) |  | Path to the keystore that contains this server&#39;s private key. This key is used to cryptographically sign SAML AuthNRequest objects. |
 | keyStorePassword | [string](#string) |  | The password used to access the file specified in -keystore. |
 | keyStoreAliasName | [string](#string) |  | The name of the alias under which this server&#39;s private key is stored in the -keystore file. |
-| serviceAddress | [string](#string) |  | The address of the Gate server that will be accesible by the SAML identity provider. This should be the full URL, including port, e.g. https://gate.org.com:8084/. If deployed behind a load balancer, this would be the load balancer&#39;s address. |
+| redirectHostname | [string](#string) |  | The host name of the gate server as accessible by the SAML identity provider. If deployed behind a load balancer, this would be the load balancer&#39;s address. (Ex: gate.org.com:8084) |
+| redirectBasePath | [string](#string) |  | The base path on the gate server to which redirects will be sent. Defaults to &#39;/&#39; if absent. |
+| redirectProtocol | [string](#string) |  | The protocol to use to when redirecting back to the Gate server. Defaults to &#39;https&#39; if absent. |
 | userAttributeMapping | [Saml.UserAttributes](#proto.security.Saml.UserAttributes) |  | Configuration for fields returned from your SAML provider. |
 
 

@@ -146,33 +146,39 @@ message Saml {
   // Whether the authentication method is enabled.
   bool enabled = 1;
 
-  // The path to a local file containing your identity provider's metadata XML file.
-  string metadataLocal = 2;
-
-  // The URL pointing to  your identity provider's metadata XML file.
-  string metadataRemote = 3;
+  // The path to a local file containing identity provider's metadata XML file; can
+  // be either a local file or a URI.
+  string metadataUrl = 2;
 
   // The identity of the Spinnaker application registered with the SAML provider.
-  string issuerId = 4;
+  string issuerId = 3;
 
   // Path to the keystore that contains this server's private key. This key is
   // used to cryptographically sign SAML AuthNRequest objects.
-  string keyStore = 5;
+  string keyStore = 4;
 
   // The password used to access the file specified in -keystore.
-  string keyStorePassword = 6;
+  string keyStorePassword = 5;
 
   // The name of the alias under which this server's private key is stored in
   // the -keystore file.
-  string keyStoreAliasName = 7;
+  string keyStoreAliasName = 6;
 
-  // The address of the Gate server that will be accesible by the SAML identity
-  // provider. This should be the full URL, including port, e.g. https://gate.org.com:8084/.
-  // If deployed behind a load balancer, this would be the load balancer's address.
-  string serviceAddress = 8;
+  // The host name of the gate server as accessible by the SAML identity
+  // provider. If deployed behind a load balancer, this would be the load
+  // balancer's address. (Ex: gate.org.com:8084)
+  string redirectHostname = 7;
+
+  // The base path on the gate server to which redirects will be sent. Defaults
+  // to '/' if absent.
+  string redirectBasePath = 8;
+
+  // The protocol to use to when redirecting back to the Gate server. Defaults
+  // to 'https' if absent.
+  string redirectProtocol = 9;
 
   // Configuration for fields returned from your SAML provider.
-  UserAttributes userAttributeMapping = 9;
+  UserAttributes userAttributeMapping = 10;
 
   // Configuration for fields returned from your SAML provider.
   message UserAttributes {
