@@ -45,6 +45,7 @@ func TestHalToServiceConfigs(t *testing.T) {
 		Echo:        parse_hal.HalToEcho(h),
 		Front50:     parse_hal.HalToFront50(h),
 		Orca:        parse_hal.HalToOrca(h),
+		Gate:        parse_hal.HalToGate(h),
 	}
 
 	if !reflect.DeepEqual(gotS, wantS) {

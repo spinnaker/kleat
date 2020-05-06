@@ -261,6 +261,17 @@
   
   
 
+- [config/gate.proto](#config/gate.proto)
+    - [Cors](#proto.config.Cors)
+    - [Gate](#proto.config.Gate)
+    - [Gate.GoogleConfig](#proto.config.Gate.GoogleConfig)
+    - [Gate.Spring](#proto.config.Gate.Spring)
+    - [ServerConfig](#proto.config.ServerConfig)
+  
+  
+  
+  
+
 - [config/halconfig.proto](#config/halconfig.proto)
     - [Hal](#proto.config.Hal)
   
@@ -2525,6 +2536,103 @@ Configuration for the front50 microservice.
 
 
 
+<a name="config/gate.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## config/gate.proto
+
+
+
+<a name="proto.config.Cors"></a>
+
+### Cors
+Configuration for cross-origin resource sharing.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| allowedOriginsPattern | [string](#string) |  | A regex matching all URLs authentication redirects may come from. |
+
+
+
+
+
+
+<a name="proto.config.Gate"></a>
+
+### Gate
+Configuration for the gate microservice.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| server | [ServerConfig](#proto.config.ServerConfig) |  | Web server configuration. |
+| cors | [Cors](#proto.config.Cors) |  | Configuration for cross-origin resource sharing. |
+| spring | [Gate.Spring](#proto.config.Gate.Spring) |  | Wrapper for Spring configuration properties (including OAuth2 authentication). |
+| saml | [proto.security.Saml](#proto.security.Saml) |  | Configuration for SAML authentication. |
+| ldap | [proto.security.Ldap](#proto.security.Ldap) |  | Configuration for LDAP authentication. |
+| x509 | [proto.security.X509](#proto.security.X509) |  | Configuration for X509 authentication. |
+| google | [Gate.GoogleConfig](#proto.config.Gate.GoogleConfig) |  | Wrapper for Google-specific authentication (ex: IAP). |
+
+
+
+
+
+
+<a name="proto.config.Gate.GoogleConfig"></a>
+
+### Gate.GoogleConfig
+Wrapper for Google-specific authentication.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| iap | [proto.security.Iap](#proto.security.Iap) |  | Configuration for Identity-Aware Proxy authentication. |
+
+
+
+
+
+
+<a name="proto.config.Gate.Spring"></a>
+
+### Gate.Spring
+Wrapper for Spring configuration properties.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| oauth2 | [proto.security.OAuth2](#proto.security.OAuth2) |  | Configuration for OAuth2 authentication. |
+
+
+
+
+
+
+<a name="proto.config.ServerConfig"></a>
+
+### ServerConfig
+Web server configuration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ssl | [proto.security.ApiSsl](#proto.security.ApiSsl) |  | SSL configuration. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
 <a name="config/halconfig.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -2549,6 +2657,7 @@ Configuration for a Spinnaker installation.
 | stats | [proto.Stats](#proto.Stats) |  |  |
 | features | [proto.Features](#proto.Features) |  |  |
 | webhook | [proto.security.WebhookConfig](#proto.security.WebhookConfig) |  |  |
+| security | [proto.security.Security](#proto.security.Security) |  |  |
 
 
 
@@ -2661,6 +2770,7 @@ Configuration for Spinnaker&#39;s microservices.
 | echo | [Echo](#proto.config.Echo) |  |  |
 | front50 | [Front50](#proto.config.Front50) |  |  |
 | orca | [Orca](#proto.config.Orca) |  |  |
+| gate | [Gate](#proto.config.Gate) |  |  |
 
 
 

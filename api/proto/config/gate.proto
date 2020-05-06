@@ -1,0 +1,55 @@
+syntax = "proto3";
+package proto.config;
+
+option go_package = "github.com/spinnaker/kleat/api/client/config";
+
+import "security/authn.proto";
+import "security/ssl.proto";
+
+// Configuration for the gate microservice.
+message Gate {
+  // Web server configuration.
+  ServerConfig server = 1;
+
+  // Configuration for cross-origin resource sharing.
+  Cors cors = 2;
+
+  // Wrapper for Spring configuration properties (including OAuth2 authentication).
+  Spring spring = 3;
+
+  // Configuration for SAML authentication.
+  security.Saml saml = 4;
+
+  // Configuration for LDAP authentication.
+  security.Ldap ldap = 5;
+
+  // Configuration for X509 authentication.
+  security.X509 x509 = 6;
+
+  // Wrapper for Google-specific authentication (ex: IAP).
+  GoogleConfig google = 7;
+
+  // Wrapper for Google-specific authentication.
+  message GoogleConfig {
+    // Configuration for Identity-Aware Proxy authentication.
+    security.Iap iap = 1;
+  }
+
+  // Wrapper for Spring configuration properties.
+  message Spring {
+    // Configuration for OAuth2 authentication.
+    security.OAuth2 oauth2 = 1;
+  }
+}
+
+// Web server configuration.
+message ServerConfig {
+  // SSL configuration.
+  security.ApiSsl ssl = 1;
+}
+
+// Configuration for cross-origin resource sharing.
+message Cors {
+  // A regex matching all URLs authentication redirects may come from.
+  string allowedOriginsPattern = 1;
+}

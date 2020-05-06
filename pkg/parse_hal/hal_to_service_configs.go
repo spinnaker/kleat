@@ -23,5 +23,6 @@ func HalToServiceConfigs(h *config.Hal) *config.Services {
 		Echo:        HalToEcho(h),
 		Front50:     HalToFront50(h),
 		Orca:        HalToOrca(h),
+		Gate:        HalToGate(h),
 	}
 }
