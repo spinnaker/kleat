@@ -1,0 +1,36 @@
+syntax = "proto3";
+package proto.ci;
+
+option go_package = "github.com/spinnaker/kleat/api/client/ci";
+
+import "permissions.proto";
+
+// Configuration for Concourse.
+message Concourse {
+  // Whether Concourse is enabled.
+  bool enabled = 1;
+
+  // The list of configured Concourse accounts.
+  repeated ConcourseAccount masters = 2;
+}
+
+// Configuration for a Concourse account.
+message ConcourseAccount {
+  // The name of the account.
+  string name = 1;
+
+  // (Required) The username of the Concourse user to authenticate as.
+  string username = 2;
+
+  // (Required) The password of the Concourse user to authenticate as.
+  string password = 3;
+
+  // (Required) The URL at which your Concourse search is reachable.
+  string url = 4;
+
+  // Fiat permissions configuration. A user must have at least one of the READ
+  // roles in order to view this build account or use it as a trigger source.
+  // A user must have at least one of the WRITE roles in order to run jobs on
+  // this build account.
+  Permissions permissions = 5;
+}
