@@ -25,7 +25,7 @@ message JenkinsAccount {
   // (Required) The password of the Jenkins user to authenticate as.
   string password = 3;
 
-  // (Required) The address at which the Jenkins master is reachable.
+  // (Required) The address at which the Jenkins server is reachable.
   string address = 4;
 
   // Whether or not to negotiate CSRF tokens when calling Jenkins.

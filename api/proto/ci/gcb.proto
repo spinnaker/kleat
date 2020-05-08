@@ -3,6 +3,8 @@ package proto.ci;
 
 option go_package = "github.com/spinnaker/kleat/api/client/ci";
 
+import "permissions.proto";
+
 // Configuration for the Google Cloud Build Provider.
 message GoogleCloudBuild {
   // Whether the Google Cloud Build provider is enabled.
@@ -28,4 +30,7 @@ message GoogleCloudBuildAccount {
   // Google Compute Engine VM, or needs permissions not afforded to the VM
   // it is running on.
   string jsonKey = 4;
+
+  // Fiat permissions configuration.
+  Permissions permissions = 5;
 }

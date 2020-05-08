@@ -96,7 +96,7 @@ type JenkinsAccount struct {
 	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
 	// (Required) The password of the Jenkins user to authenticate as.
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-	// (Required) The address at which the Jenkins master is reachable.
+	// (Required) The address at which the Jenkins server is reachable.
 	Address string `protobuf:"bytes,4,opt,name=address,proto3" json:"address,omitempty"`
 	// Whether or not to negotiate CSRF tokens when calling Jenkins.
 	Csrf bool `protobuf:"varint,5,opt,name=csrf,proto3" json:"csrf,omitempty"`

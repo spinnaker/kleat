@@ -1268,6 +1268,7 @@ Configuration for a Google Cloud Build account.
 | project | [string](#string) |  | The name of the Google Cloud Platform project in which to trigger and monitor builds. |
 | subscriptionName | [string](#string) |  | The name of the Pub/Sub subscription on which to listen for build changes. |
 | jsonKey | [string](#string) |  | The path to a JSON service account that Spinnaker will use as credentials. This is only needed if Spinnaker is not deployed on a Google Compute Engine VM, or needs permissions not afforded to the VM it is running on. |
+| permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
 
 
 
@@ -1317,7 +1318,7 @@ Configuration for a Jenkins account.
 | name | [string](#string) |  | The name of the account. |
 | username | [string](#string) |  | (Required) The username of the Jenkins user to authenticate as. |
 | password | [string](#string) |  | (Required) The password of the Jenkins user to authenticate as. |
-| address | [string](#string) |  | (Required) The address at which the Jenkins master is reachable. |
+| address | [string](#string) |  | (Required) The address at which the Jenkins server is reachable. |
 | csrf | [bool](#bool) |  | Whether or not to negotiate CSRF tokens when calling Jenkins. |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. A user must have at least one of the READ roles in order to view this build account or use it as a trigger source. A user must have at least one of the WRITE roles in order to run jobs on this build account. |
 
