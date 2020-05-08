@@ -3,9 +3,19 @@ package proto.ci;
 
 option go_package = "github.com/spinnaker/kleat/api/client/ci";
 
+import "ci/codebuild.proto";
+import "ci/concourse.proto";
 import "ci/gcb.proto";
+import "ci/jenkins.proto";
+import "ci/travis.proto";
+import "ci/wercker.proto";
 
 // Configuration for integration with continuous integration systems.
 message Ci {
   ci.GoogleCloudBuild gcb = 1;
+  ci.CodeBuild codebuild = 2;
+  ci.Concourse concourse = 3;
+  ci.Jenkins jenkins = 4;
+  ci.Travis travis = 5;
+  ci.Wercker wercker = 6;
 }

@@ -1,0 +1,37 @@
+syntax = "proto3";
+package proto.ci;
+
+option go_package = "github.com/spinnaker/kleat/api/client/ci";
+
+// Configuration for AWS CodeBuild.
+message CodeBuild {
+  // Whether AWS CodeBuild is enabled.
+  bool enabled = 1;
+
+  // The list of configured AWS CodeBuild accounts.
+  repeated CodeBuildAccount accounts = 2;
+
+  // Your AWS Access Key ID. If not provided, Spinnaker will try to find AWS
+  // credentials as described at
+  // http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default
+  string accessKeyId = 3;
+
+  // Your AWS Secret Key.
+  string secretAccessKey = 4;
+}
+
+// Configuration for an AWS CodeBuild account.
+message CodeBuildAccount {
+  // The name of the account.
+  string name = 1;
+
+  // The AWS account ID that will be used to trigger CodeBuild builds.
+  string accountId = 2;
+
+  // If set, Spinnaker will configure a credentials provider that uses the AWS
+  // Security Token Service to assume the specified role.
+  string assumeRole = 3;
+
+  //  (Required) The AWS region in which your CodeBuild projects live.
+  string region = 4;
+}

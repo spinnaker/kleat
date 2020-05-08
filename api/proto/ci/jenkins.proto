@@ -1,0 +1,39 @@
+syntax = "proto3";
+package proto.ci;
+
+option go_package = "github.com/spinnaker/kleat/api/client/ci";
+
+import "permissions.proto";
+
+// Configuration for Jenkins.
+message Jenkins {
+  // Whether Jenkins is enabled.
+  bool enabled = 1;
+
+  // The list of configured Jenkins accounts.
+  repeated JenkinsAccount masters = 2;
+}
+
+// Configuration for a Jenkins account.
+message JenkinsAccount {
+  // The name of the account.
+  string name = 1;
+
+  // (Required) The username of the Jenkins user to authenticate as.
+  string username = 2;
+
+  // (Required) The password of the Jenkins user to authenticate as.
+  string password = 3;
+
+  // (Required) The address at which the Jenkins master is reachable.
+  string address = 4;
+
+  // Whether or not to negotiate CSRF tokens when calling Jenkins.
+  bool csrf = 5;
+
+  // Fiat permissions configuration. A user must have at least one of the READ
+  // roles in order to view this build account or use it as a trigger source.
+  // A user must have at least one of the WRITE roles in order to run jobs on
+  // this build account.
+  Permissions permissions = 6;
+}

@@ -104,9 +104,49 @@
   
   
 
+- [ci/codebuild.proto](#ci/codebuild.proto)
+    - [CodeBuild](#proto.ci.CodeBuild)
+    - [CodeBuildAccount](#proto.ci.CodeBuildAccount)
+  
+  
+  
+  
+
+- [ci/concourse.proto](#ci/concourse.proto)
+    - [Concourse](#proto.ci.Concourse)
+    - [ConcourseAccount](#proto.ci.ConcourseAccount)
+  
+  
+  
+  
+
 - [ci/gcb.proto](#ci/gcb.proto)
     - [GoogleCloudBuild](#proto.ci.GoogleCloudBuild)
     - [GoogleCloudBuildAccount](#proto.ci.GoogleCloudBuildAccount)
+  
+  
+  
+  
+
+- [ci/jenkins.proto](#ci/jenkins.proto)
+    - [Jenkins](#proto.ci.Jenkins)
+    - [JenkinsAccount](#proto.ci.JenkinsAccount)
+  
+  
+  
+  
+
+- [ci/travis.proto](#ci/travis.proto)
+    - [Travis](#proto.ci.Travis)
+    - [TravisAccount](#proto.ci.TravisAccount)
+  
+  
+  
+  
+
+- [ci/wercker.proto](#ci/wercker.proto)
+    - [Wercker](#proto.ci.Wercker)
+    - [WerckerAccount](#proto.ci.WerckerAccount)
   
   
   
@@ -1070,6 +1110,114 @@ Configuration for integration with continuous integration systems.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | gcb | [GoogleCloudBuild](#proto.ci.GoogleCloudBuild) |  |  |
+| codebuild | [CodeBuild](#proto.ci.CodeBuild) |  |  |
+| concourse | [Concourse](#proto.ci.Concourse) |  |  |
+| jenkins | [Jenkins](#proto.ci.Jenkins) |  |  |
+| travis | [Travis](#proto.ci.Travis) |  |  |
+| wercker | [Wercker](#proto.ci.Wercker) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="ci/codebuild.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## ci/codebuild.proto
+
+
+
+<a name="proto.ci.CodeBuild"></a>
+
+### CodeBuild
+Configuration for AWS CodeBuild.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether AWS CodeBuild is enabled. |
+| accounts | [CodeBuildAccount](#proto.ci.CodeBuildAccount) | repeated | The list of configured AWS CodeBuild accounts. |
+| accessKeyId | [string](#string) |  | Your AWS Access Key ID. If not provided, Spinnaker will try to find AWS credentials as described at http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default |
+| secretAccessKey | [string](#string) |  | Your AWS Secret Key. |
+
+
+
+
+
+
+<a name="proto.ci.CodeBuildAccount"></a>
+
+### CodeBuildAccount
+Configuration for an AWS CodeBuild account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| accountId | [string](#string) |  | The AWS account ID that will be used to trigger CodeBuild builds. |
+| assumeRole | [string](#string) |  | If set, Spinnaker will configure a credentials provider that uses the AWS Security Token Service to assume the specified role. |
+| region | [string](#string) |  | (Required) The AWS region in which your CodeBuild projects live. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="ci/concourse.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## ci/concourse.proto
+
+
+
+<a name="proto.ci.Concourse"></a>
+
+### Concourse
+Configuration for Concourse.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether Concourse is enabled. |
+| masters | [ConcourseAccount](#proto.ci.ConcourseAccount) | repeated | The list of configured Concourse accounts. |
+
+
+
+
+
+
+<a name="proto.ci.ConcourseAccount"></a>
+
+### ConcourseAccount
+Configuration for a Concourse account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| username | [string](#string) |  | (Required) The username of the Concourse user to authenticate as. |
+| password | [string](#string) |  | (Required) The password of the Concourse user to authenticate as. |
+| url | [string](#string) |  | (Required) The URL at which your Concourse search is reachable. |
+| permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. A user must have at least one of the READ roles in order to view this build account or use it as a trigger source. A user must have at least one of the WRITE roles in order to run jobs on this build account. |
 
 
 
@@ -1120,7 +1268,161 @@ Configuration for a Google Cloud Build account.
 | project | [string](#string) |  | The name of the Google Cloud Platform project in which to trigger and monitor builds. |
 | subscriptionName | [string](#string) |  | The name of the Pub/Sub subscription on which to listen for build changes. |
 | jsonKey | [string](#string) |  | The path to a JSON service account that Spinnaker will use as credentials. This is only needed if Spinnaker is not deployed on a Google Compute Engine VM, or needs permissions not afforded to the VM it is running on. |
-| permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="ci/jenkins.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## ci/jenkins.proto
+
+
+
+<a name="proto.ci.Jenkins"></a>
+
+### Jenkins
+Configuration for Jenkins.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether Jenkins is enabled. |
+| masters | [JenkinsAccount](#proto.ci.JenkinsAccount) | repeated | The list of configured Jenkins accounts. |
+
+
+
+
+
+
+<a name="proto.ci.JenkinsAccount"></a>
+
+### JenkinsAccount
+Configuration for a Jenkins account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| username | [string](#string) |  | (Required) The username of the Jenkins user to authenticate as. |
+| password | [string](#string) |  | (Required) The password of the Jenkins user to authenticate as. |
+| address | [string](#string) |  | (Required) The address at which the Jenkins master is reachable. |
+| csrf | [bool](#bool) |  | Whether or not to negotiate CSRF tokens when calling Jenkins. |
+| permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. A user must have at least one of the READ roles in order to view this build account or use it as a trigger source. A user must have at least one of the WRITE roles in order to run jobs on this build account. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="ci/travis.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## ci/travis.proto
+
+
+
+<a name="proto.ci.Travis"></a>
+
+### Travis
+Configuration for Travis.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether Travis is enabled. |
+| masters | [TravisAccount](#proto.ci.TravisAccount) | repeated | The list of configured Travis accounts. |
+
+
+
+
+
+
+<a name="proto.ci.TravisAccount"></a>
+
+### TravisAccount
+Configuration for a Travis account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| address | [string](#string) |  | (Required) The address of the Travis API (https://api.travis-ci.org). |
+| baseUrl | [string](#string) |  | (Required) The base URL to the Travis UI (https://travis-ci.org). |
+| githubToken | [string](#string) |  | The GitHub token with which to authenticate against Travis. |
+| numberOfRepositories | [int32](#int32) |  | (Required) The number of repositories the Travis integration should fetch from the API each time the poller runs. Should be set a bit higher than the expected maximum number of repositories built within the poll interval. |
+| permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. A user must have at least one of the READ roles in order to view this build account or use it as a trigger source. A user must have at least one of the WRITE roles in order to run jobs on this build account. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="ci/wercker.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## ci/wercker.proto
+
+
+
+<a name="proto.ci.Wercker"></a>
+
+### Wercker
+Configuration for Wercker.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether Wercker is enabled. |
+| masters | [WerckerAccount](#proto.ci.WerckerAccount) | repeated | The list of configured Wercker accounts. |
+
+
+
+
+
+
+<a name="proto.ci.WerckerAccount"></a>
+
+### WerckerAccount
+Configuration for a Wercker account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| address | [string](#string) |  | (Required) The address at which your Wercker instance is reachable. |
+| token | [string](#string) |  | The personal token of the Wercker user to authenticate as. |
+| user | [string](#string) |  | The username of the Wercker user to authenticate as. |
+| permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. A user must have at least one of the READ roles in order to view this build account or use it as a trigger source. A user must have at least one of the WRITE roles in order to run jobs on this build account. |
 
 
 

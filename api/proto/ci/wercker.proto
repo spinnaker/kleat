@@ -1,0 +1,36 @@
+syntax = "proto3";
+package proto.ci;
+
+option go_package = "github.com/spinnaker/kleat/api/client/ci";
+
+import "permissions.proto";
+
+// Configuration for Wercker.
+message Wercker {
+  // Whether Wercker is enabled.
+  bool enabled = 1;
+
+  // The list of configured Wercker accounts.
+  repeated WerckerAccount masters = 2;
+}
+
+// Configuration for a Wercker account.
+message WerckerAccount {
+  // The name of the account.
+  string name = 1;
+
+  // (Required) The address at which your Wercker instance is reachable.
+  string address = 2;
+
+  // The personal token of the Wercker user to authenticate as.
+  string token = 3;
+
+  // The username of the Wercker user to authenticate as.
+  string user = 4;
+
+  // Fiat permissions configuration. A user must have at least one of the READ
+  // roles in order to view this build account or use it as a trigger source.
+  // A user must have at least one of the WRITE roles in order to run jobs on
+  // this build account.
+  Permissions permissions = 5;
+}
