@@ -14,7 +14,7 @@ RUN go get -d github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc \
  && go install github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
 
 FROM alpine:3.11.6
-RUN apk add protoc
+RUN apk add protoc protobuf-dev
 COPY --from=protoc-gen-go /go/bin/protoc-gen-go /bin/
 COPY --from=protoc-gen-doc /go/bin/protoc-gen-doc /bin/
 RUN mkdir -p /output /staging/go /staging/doc
