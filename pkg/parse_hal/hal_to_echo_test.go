@@ -19,6 +19,7 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/golang/protobuf/ptypes/wrappers"
 	"github.com/spinnaker/kleat/api/client"
 	"github.com/spinnaker/kleat/api/client/ci"
 	"github.com/spinnaker/kleat/api/client/config"
@@ -193,19 +194,19 @@ var halToEchoTests = []struct {
 	{
 		"Stats enabled",
 		&config.Hal{
-			Stats: &client.Stats{Enabled: true},
+			Stats: &client.Stats{Enabled: &wrappers.BoolValue{Value: true}},
 		},
 		&config.Echo{
-			Stats: &client.Stats{Enabled: true},
+			Stats: &client.Stats{Enabled: &wrappers.BoolValue{Value: true}},
 		},
 	},
 	{
 		"Stats disabled",
 		&config.Hal{
-			Stats: &client.Stats{Enabled: false},
+			Stats: &client.Stats{Enabled: &wrappers.BoolValue{Value: false}},
 		},
 		&config.Echo{
-			Stats: &client.Stats{Enabled: false},
+			Stats: &client.Stats{Enabled: &wrappers.BoolValue{Value: false}},
 		},
 	},
 }
