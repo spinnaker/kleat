@@ -3,8 +3,10 @@ package proto;
 
 option go_package = "github.com/spinnaker/kleat/api/client";
 
+import "google/protobuf/wrappers.proto";
+
 // Configuration for optional collection of usage metrics.
 message Stats {
   // Whether to send usage metrics.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 }

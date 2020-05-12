@@ -28,11 +28,6 @@ message TravisAccount {
   // The GitHub token with which to authenticate against Travis.
   string githubToken = 4;
 
-  // (Required) The number of repositories the Travis integration should fetch
-  // from the API each time the poller runs. Should be set a bit higher than the
-  // expected maximum number of repositories built within the poll interval.
-  int32 numberOfRepositories = 5;
-
   // Fiat permissions configuration. A user must have at least one of the READ
   // roles in order to view this build account or use it as a trigger source.
   // A user must have at least one of the WRITE roles in order to run jobs on

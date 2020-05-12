@@ -3,6 +3,8 @@ package proto.storage;
 
 option go_package = "github.com/spinnaker/kleat/api/client/storage";
 
+import "google/protobuf/wrappers.proto";
+
 // Configuration for an Amazon S3 persistent store.
 message S3 {
   // Whether this persistent store is enabled.
@@ -23,7 +25,7 @@ message S3 {
   // When true, use path-style to access bucket; when false, use virtual hosted-style
   // to access bucket.
   // See https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html#VirtualHostingExamples.
-  bool pathStyleAccess = 5;
+  google.protobuf.BoolValue pathStyleAccess = 5;
 
   // An alternate endpoint that your S3-compatible storage can be found at. This is
   // intended for self-hosted storage services with S3-compatible APIs, e.g. Minio.

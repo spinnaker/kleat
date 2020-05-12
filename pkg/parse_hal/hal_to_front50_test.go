@@ -19,6 +19,7 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/golang/protobuf/ptypes/wrappers"
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/api/client/storage"
 	"github.com/spinnaker/kleat/pkg/parse_hal"
@@ -73,7 +74,7 @@ var halToFront50Tests = []struct {
 				S3: &storage.S3{
 					Enabled:              false,
 					Bucket:               "my-s3-bucket",
-					PathStyleAccess:      true,
+					PathStyleAccess:      &wrappers.BoolValue{Value: true},
 					ServerSideEncryption: storage.S3ServerSideEncryption_AES256,
 				},
 			},
@@ -89,7 +90,7 @@ var halToFront50Tests = []struct {
 				S3: &storage.S3{
 					Enabled:              false,
 					Bucket:               "my-s3-bucket",
-					PathStyleAccess:      true,
+					PathStyleAccess:      &wrappers.BoolValue{Value: true},
 					ServerSideEncryption: storage.S3ServerSideEncryption_AES256,
 				},
 			},

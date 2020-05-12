@@ -3,6 +3,8 @@ package proto.ci;
 
 option go_package = "github.com/spinnaker/kleat/api/client/ci";
 
+import "google/protobuf/wrappers.proto";
+
 import "permissions.proto";
 
 // Configuration for Jenkins.
@@ -29,7 +31,7 @@ message JenkinsAccount {
   string address = 4;
 
   // Whether or not to negotiate CSRF tokens when calling Jenkins.
-  bool csrf = 5;
+  google.protobuf.BoolValue csrf = 5;
 
   // Fiat permissions configuration. A user must have at least one of the READ
   // roles in order to view this build account or use it as a trigger source.
