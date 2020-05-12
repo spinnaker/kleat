@@ -1319,7 +1319,7 @@ Configuration for a Jenkins account.
 | username | [string](#string) |  | (Required) The username of the Jenkins user to authenticate as. |
 | password | [string](#string) |  | (Required) The password of the Jenkins user to authenticate as. |
 | address | [string](#string) |  | (Required) The address at which the Jenkins server is reachable. |
-| csrf | [bool](#bool) |  | Whether or not to negotiate CSRF tokens when calling Jenkins. |
+| csrf | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether or not to negotiate CSRF tokens when calling Jenkins. |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. A user must have at least one of the READ roles in order to view this build account or use it as a trigger source. A user must have at least one of the WRITE roles in order to run jobs on this build account. |
 
 
@@ -1371,7 +1371,6 @@ Configuration for a Travis account.
 | address | [string](#string) |  | (Required) The address of the Travis API (https://api.travis-ci.org). |
 | baseUrl | [string](#string) |  | (Required) The base URL to the Travis UI (https://travis-ci.org). |
 | githubToken | [string](#string) |  | The GitHub token with which to authenticate against Travis. |
-| numberOfRepositories | [int32](#int32) |  | (Required) The number of repositories the Travis integration should fetch from the API each time the poller runs. Should be set a bit higher than the expected maximum number of repositories built within the poll interval. |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. A user must have at least one of the READ roles in order to view this build account or use it as a trigger source. A user must have at least one of the WRITE roles in order to run jobs on this build account. |
 
 
@@ -4032,7 +4031,7 @@ Configuration for optional collection of usage metrics.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether to send usage metrics. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether to send usage metrics. |
 
 
 
@@ -4210,7 +4209,7 @@ Configuration for an Amazon S3 persistent store.
 | bucket | [string](#string) |  | The name of a storage bucket that your specified account has access to. |
 | rootFolder | [string](#string) |  | The root folder in the chosen bucket to place all of Spinnaker&#39;s persistent data in. |
 | region | [string](#string) |  | This is only required if the bucket you specify doesn&#39;t exist yet. In that case, the bucket will be created in that region. See http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region. |
-| pathStyleAccess | [bool](#bool) |  | When true, use path-style to access bucket; when false, use virtual hosted-style to access bucket. See https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html#VirtualHostingExamples. |
+| pathStyleAccess | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | When true, use path-style to access bucket; when false, use virtual hosted-style to access bucket. See https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html#VirtualHostingExamples. |
 | endpoint | [string](#string) |  | An alternate endpoint that your S3-compatible storage can be found at. This is intended for self-hosted storage services with S3-compatible APIs, e.g. Minio. |
 | accessKeyId | [string](#string) |  | Your AWS Access Key ID. If not provided, Spinnaker will try to find AWS credentials as described at http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default |
 | serverSideEncryption | [S3ServerSideEncryption](#proto.storage.S3ServerSideEncryption) |  | Configuration for S3 server-size encryption. |
