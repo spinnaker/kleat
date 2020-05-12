@@ -11,11 +11,8 @@ message Features {
   // Fields below this line are not yet used in any service that kleat supports
   // TODO: Ensure that they are actually needed and move above this line
 
-  bool auth = 2;
-  bool fiat = 3;
-  bool chaos = 4;
-  bool entityTags = 5;
+  bool chaos = 2;
   // Enable canary support. For this to work, you'll need a canary judge configured.
-  bool mineCanary = 6;
-  bool managedPipelineTemplatesV2UI = 7;
+  bool mineCanary = 3;
+  bool managedPipelineTemplatesV2UI = 4;
 }
