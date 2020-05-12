@@ -3104,10 +3104,7 @@ Feature flags
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | pipelineTemplates | [bool](#bool) |  | Enable pipeline template support. Read more at https://github.com/spinnaker/dcd-spec. |
-| auth | [bool](#bool) |  |  |
-| fiat | [bool](#bool) |  |  |
 | chaos | [bool](#bool) |  |  |
-| entityTags | [bool](#bool) |  |  |
 | mineCanary | [bool](#bool) |  | Enable canary support. For this to work, you&#39;ll need a canary judge configured. |
 | managedPipelineTemplatesV2UI | [bool](#bool) |  |  |
 
