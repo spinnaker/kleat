@@ -12,7 +12,7 @@ RUN curl -L https://github.com/pseudomuto/protoc-gen-doc/releases/download/v$PRO
  | tar --strip-components=1 -xz
 
 FROM curl as protoc
-ARG PROTOC_VERSION=3.11.2
+ARG PROTOC_VERSION=3.11.4
 RUN curl -vLo protoc.zip https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-x86_64.zip \
  && unzip protoc.zip
 
