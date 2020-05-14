@@ -16,9 +16,9 @@
 package parse_hal_test
 
 import (
+	"bytes"
 	"io/ioutil"
 	"path/filepath"
-	"reflect"
 	"testing"
 
 	"github.com/spinnaker/kleat/api/client/config"
@@ -48,7 +48,7 @@ func TestHalToServiceConfigs(t *testing.T) {
 		Gate:        parse_hal.HalToGate(h),
 	}
 
-	if !reflect.DeepEqual(gotS, wantS) {
+	if !proto.Equal(gotS, wantS) {
 		t.Errorf("Expected HalToServiceConfigs to generate map of service configs, got %v", gotS)
 	}
 }
@@ -114,7 +114,7 @@ func TestHalToServiceYAML(t *testing.T) {
 			if err != nil {
 				t.Fatal(err)
 			}
-			if !reflect.DeepEqual(got, want) {
+			if !bytes.Equal(got, want) {
 				t.Errorf("Expected %s to contain %v, got %v", tt.file, string(want), string(got))
 			}
 		})

@@ -16,13 +16,13 @@
 package parse_hal_test
 
 import (
-	"reflect"
 	"testing"
 
 	"github.com/golang/protobuf/ptypes/wrappers"
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/api/client/storage"
 	"github.com/spinnaker/kleat/pkg/parse_hal"
+	"google.golang.org/protobuf/proto"
 )
 
 var halToFront50Tests = []struct {
@@ -102,7 +102,7 @@ func TestHalToFront50(t *testing.T) {
 	for _, tt := range halToFront50Tests {
 		t.Run(tt.n, func(t *testing.T) {
 			got := parse_hal.HalToFront50(tt.h)
-			if !reflect.DeepEqual(got, tt.want) {
+			if !proto.Equal(got, tt.want) {
 				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
 			}
 		})

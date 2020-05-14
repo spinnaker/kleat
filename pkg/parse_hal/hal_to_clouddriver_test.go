@@ -16,13 +16,13 @@
 package parse_hal_test
 
 import (
-	"reflect"
 	"testing"
 
 	"github.com/spinnaker/kleat/api/client/artifact"
 	"github.com/spinnaker/kleat/api/client/cloudprovider"
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/pkg/parse_hal"
+	"google.golang.org/protobuf/proto"
 )
 
 var halToClouddriverTests = []struct {
@@ -141,7 +141,7 @@ func TestHalToClouddriver(t *testing.T) {
 	for _, tt := range halToClouddriverTests {
 		t.Run(tt.name, func(t *testing.T) {
 			got := parse_hal.HalToClouddriver(tt.hal)
-			if !reflect.DeepEqual(got, tt.want) {
+			if !proto.Equal(got, tt.want) {
 				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
 			}
 		})

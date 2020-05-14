@@ -16,7 +16,6 @@
 package parse_hal_test
 
 import (
-	"reflect"
 	"testing"
 
 	"github.com/golang/protobuf/ptypes/wrappers"
@@ -26,6 +25,7 @@ import (
 	"github.com/spinnaker/kleat/api/client/notification"
 	"github.com/spinnaker/kleat/api/client/pubsub"
 	"github.com/spinnaker/kleat/pkg/parse_hal"
+	"google.golang.org/protobuf/proto"
 )
 
 var halToEchoTests = []struct {
@@ -215,7 +215,7 @@ func TestHalToEcho(t *testing.T) {
 	for _, tt := range halToEchoTests {
 		t.Run(tt.name, func(t *testing.T) {
 			got := parse_hal.HalToEcho(tt.hal)
-			if !reflect.DeepEqual(got, tt.want) {
+			if !proto.Equal(got, tt.want) {
 				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
 			}
 		})
