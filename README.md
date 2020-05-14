@@ -33,6 +33,13 @@ be used as input to Kleat.
   persistent store type is enabled. Kleat does not recognize this field and
   instead requires that the flag `enabled: true` be set on the persistent store
   that should be used.
+- Halyard specified `canary.serviceIntegrations` as a list, with each
+integration specifying its type under a `name` key. Kleat requires
+`canary.serviceIntegrations` to be specified as a map with each type as a key.
+You are only required to specify an entry for each integration type you wish to
+configure. For example, if you are using GCS as your canary persistent store
+and Prometheus as your metric source, your `canary.serviceIntegrations` block
+is only required to have `google` and `prometheus` entries.
 
 #### Optional Changes
 
