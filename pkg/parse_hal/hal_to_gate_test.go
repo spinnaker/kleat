@@ -1,0 +1,248 @@
+/*
+ * Copyright The Spinnaker Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package parse_hal_test
+
+import (
+	"testing"
+
+	"github.com/spinnaker/kleat/api/client/config"
+	"github.com/spinnaker/kleat/api/client/security"
+	"github.com/spinnaker/kleat/pkg/parse_hal"
+	"google.golang.org/protobuf/proto"
+)
+
+var halToGateTests = []struct {
+	name string
+	hal  *config.Hal
+	want *config.Gate
+}{
+	{
+		"Empty hal config",
+		&config.Hal{},
+		&config.Gate{},
+	},
+	{
+		"Server SSL config",
+		&config.Hal{
+			Security: &security.Security{
+				ApiSecurity: &security.ApiSecurity{
+					Ssl: &security.ApiSsl{
+						Enabled:      true,
+						KeyAlias:     "alias",
+						KeyStore:     "/var/secrets/keystore.jks",
+						KeyStoreType: "jks",
+						ClientAuth:   security.ClientAuth_WANT,
+					},
+				},
+			},
+		},
+		&config.Gate{
+			Server: &config.ServerConfig{
+				Ssl: &security.ApiSsl{
+					Enabled:      true,
+					KeyAlias:     "alias",
+					KeyStore:     "/var/secrets/keystore.jks",
+					KeyStoreType: "jks",
+					ClientAuth:   security.ClientAuth_WANT,
+				},
+			},
+		},
+	},
+	{
+		"CORS config",
+		&config.Hal{
+			Security: &security.Security{
+				ApiSecurity: &security.ApiSecurity{
+					CorsAccessPattern: "https://spinnaker.test/",
+				},
+			},
+		},
+		&config.Gate{
+			Cors: &config.Cors{
+				AllowedOriginsPattern: "https://spinnaker.test/",
+			},
+		},
+	},
+	{
+		"Basic auth",
+		&config.Hal{
+			Security: &security.Security{
+				Authn: &security.Authentication{
+					Basic: &security.Basic{
+						Enabled: true,
+						User: &security.UsernamePassword{
+							Username: "user",
+							Password: "passw0rd",
+						},
+					},
+				},
+			},
+		},
+		&config.Gate{
+			Security: &config.SpringSecurity{
+				Basic: &security.Basic{
+					Enabled: true,
+					User: &security.UsernamePassword{
+						Username: "user",
+						Password: "passw0rd",
+					},
+				},
+			},
+		},
+	},
+	{
+		"Oauth2 enabled",
+		&config.Hal{
+			Security: &security.Security{
+				Authn: &security.Authentication{
+					Oauth2: &security.OAuth2{
+						Enabled: true,
+						Client: &security.OAuth2Client{
+							ClientId:     "my-client",
+							ClientSecret: "my-secret",
+						},
+						Provider: security.OAuth2_GITHUB,
+					},
+				},
+			},
+		},
+		&config.Gate{
+			Security: &config.SpringSecurity{
+				Oauth2: &security.OAuth2{
+					Enabled: true,
+					Client: &security.OAuth2Client{
+						ClientId:     "my-client",
+						ClientSecret: "my-secret",
+					},
+					Provider: security.OAuth2_GITHUB,
+				},
+			},
+		},
+	},
+	{
+		// Because Gate does not look at the enabled field for Oauth2 and instead
+		// enables Oauth2 any time there is a client id set, we should not write out
+		// the config if it is disabled. We can change this and remove the test if
+		// we update gate to look at the enabled flag.
+		"Oauth2 disabled",
+		&config.Hal{
+			Security: &security.Security{
+				Authn: &security.Authentication{
+					Oauth2: &security.OAuth2{
+						Enabled: false,
+						Client: &security.OAuth2Client{
+							ClientId:     "my-client",
+							ClientSecret: "my-secret",
+						},
+						Provider: security.OAuth2_GITHUB,
+					},
+				},
+			},
+		},
+		&config.Gate{},
+	},
+	{
+		"SAML",
+		&config.Hal{
+			Security: &security.Security{
+				Authn: &security.Authentication{
+					Saml: &security.Saml{
+						Enabled:     true,
+						MetadataUrl: "https://my-saml-provider.test/",
+					},
+				},
+			},
+		},
+		&config.Gate{
+			Saml: &security.Saml{
+				Enabled:     true,
+				MetadataUrl: "https://my-saml-provider.test/",
+			},
+		},
+	},
+	{
+		"LDAP",
+		&config.Hal{
+			Security: &security.Security{
+				Authn: &security.Authentication{
+					Ldap: &security.Ldap{
+						Enabled: true,
+						Url:     "https://my-ldap-provider.test",
+					},
+				},
+			},
+		},
+		&config.Gate{
+			Ldap: &security.Ldap{
+				Enabled: true,
+				Url:     "https://my-ldap-provider.test",
+			},
+		},
+	},
+	{
+		"X509",
+		&config.Hal{
+			Security: &security.Security{
+				Authn: &security.Authentication{
+					X509: &security.X509{
+						Enabled: true,
+						RoleOid: "abc",
+					},
+				},
+			},
+		},
+		&config.Gate{
+			X509: &security.X509{
+				Enabled: true,
+				RoleOid: "abc",
+			},
+		},
+	},
+	{
+		"IAP",
+		&config.Hal{
+			Security: &security.Security{
+				Authn: &security.Authentication{
+					Iap: &security.Iap{
+						Enabled:   true,
+						JwtHeader: "my-header",
+						IssuerId:  "abc",
+					},
+				},
+			},
+		},
+		&config.Gate{
+			Google: &config.Gate_GoogleConfig{
+				Iap: &security.Iap{
+					Enabled:   true,
+					JwtHeader: "my-header",
+					IssuerId:  "abc",
+				},
+			},
+		},
+	},
+}
+
+func TestHalToGate(t *testing.T) {
+	for _, tt := range halToGateTests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := parse_hal.HalToGate(tt.hal)
+			if !proto.Equal(got, tt.want) {
+				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
+			}
+		})
+	}
+}
