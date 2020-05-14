@@ -6,249 +6,126 @@
 - [artifact/artifacts.proto](#artifact/artifacts.proto)
     - [Artifacts](#proto.artifact.Artifacts)
   
-  
-  
-  
-
 - [artifact/bitbucket.proto](#artifact/bitbucket.proto)
     - [Bitbucket](#proto.artifact.Bitbucket)
     - [BitbucketAccount](#proto.artifact.BitbucketAccount)
   
-  
-  
-  
-
 - [artifact/gcs.proto](#artifact/gcs.proto)
     - [Gcs](#proto.artifact.Gcs)
     - [GcsAccount](#proto.artifact.GcsAccount)
   
-  
-  
-  
-
 - [artifact/github.proto](#artifact/github.proto)
     - [GitHub](#proto.artifact.GitHub)
     - [GitHubAccount](#proto.artifact.GitHubAccount)
   
-  
-  
-  
-
 - [artifact/gitlab.proto](#artifact/gitlab.proto)
     - [GitLab](#proto.artifact.GitLab)
     - [GitLabAccount](#proto.artifact.GitLabAccount)
   
-  
-  
-  
-
 - [artifact/gitrepo.proto](#artifact/gitrepo.proto)
     - [GitRepo](#proto.artifact.GitRepo)
     - [GitRepoAccount](#proto.artifact.GitRepoAccount)
   
-  
-  
-  
-
 - [artifact/helm.proto](#artifact/helm.proto)
     - [Helm](#proto.artifact.Helm)
     - [HelmAccount](#proto.artifact.HelmAccount)
   
-  
-  
-  
-
 - [artifact/http.proto](#artifact/http.proto)
     - [Http](#proto.artifact.Http)
     - [HttpAccount](#proto.artifact.HttpAccount)
   
-  
-  
-  
-
 - [artifact/maven.proto](#artifact/maven.proto)
     - [Maven](#proto.artifact.Maven)
     - [MavenAccount](#proto.artifact.MavenAccount)
   
-  
-  
-  
-
 - [artifact/oracle.proto](#artifact/oracle.proto)
     - [Oracle](#proto.artifact.Oracle)
     - [OracleAccount](#proto.artifact.OracleAccount)
   
-  
-  
-  
-
 - [artifact/s3.proto](#artifact/s3.proto)
     - [S3](#proto.artifact.S3)
     - [S3Account](#proto.artifact.S3Account)
   
-  
-  
-  
-
 - [artifact/template.proto](#artifact/template.proto)
     - [Template](#proto.artifact.Template)
   
-  
-  
-  
-
 - [canary/aws.proto](#canary/aws.proto)
     - [Aws](#proto.canary.Aws)
     - [AwsAccount](#proto.canary.AwsAccount)
   
-  
-  
-  
-
 - [canary/canary.proto](#canary/canary.proto)
     - [Canary](#proto.canary.Canary)
     - [Canary.ServiceIntegrations](#proto.canary.Canary.ServiceIntegrations)
   
-  
-  
-  
-
 - [canary/datadog.proto](#canary/datadog.proto)
     - [Datadog](#proto.canary.Datadog)
     - [DatadogAccount](#proto.canary.DatadogAccount)
     - [DatadogAccount.Endpoint](#proto.canary.DatadogAccount.Endpoint)
   
-  
-  
-  
-
 - [canary/gcs.proto](#canary/gcs.proto)
     - [Gcs](#proto.canary.Gcs)
   
-  
-  
-  
-
 - [canary/google.proto](#canary/google.proto)
     - [Google](#proto.canary.Google)
     - [GoogleAccount](#proto.canary.GoogleAccount)
   
-  
-  
-  
-
 - [canary/newrelic.proto](#canary/newrelic.proto)
     - [NewRelic](#proto.canary.NewRelic)
     - [NewRelicAccount](#proto.canary.NewRelicAccount)
     - [NewRelicAccount.Endpoint](#proto.canary.NewRelicAccount.Endpoint)
   
-  
-  
-  
-
 - [canary/prometheus.proto](#canary/prometheus.proto)
     - [Prometheus](#proto.canary.Prometheus)
     - [PrometheusAccount](#proto.canary.PrometheusAccount)
     - [PrometheusAccount.Endpoint](#proto.canary.PrometheusAccount.Endpoint)
   
-  
-  
-  
-
 - [canary/s3.proto](#canary/s3.proto)
     - [S3](#proto.canary.S3)
   
-  
-  
-  
-
 - [canary/signalfx.proto](#canary/signalfx.proto)
     - [SignalFx](#proto.canary.SignalFx)
     - [SignalFxAccount](#proto.canary.SignalFxAccount)
     - [SignalFxAccount.Endpoint](#proto.canary.SignalFxAccount.Endpoint)
   
-  
-  
-  
-
 - [canary/stackdriver.proto](#canary/stackdriver.proto)
     - [Stackdriver](#proto.canary.Stackdriver)
   
-  
-  
-  
-
 - [canary/supported_type.proto](#canary/supported_type.proto)
-  
     - [SupportedType](#proto.canary.SupportedType)
   
-  
-  
-
 - [ci/ci.proto](#ci/ci.proto)
     - [Ci](#proto.ci.Ci)
   
-  
-  
-  
-
 - [ci/codebuild.proto](#ci/codebuild.proto)
     - [CodeBuild](#proto.ci.CodeBuild)
     - [CodeBuildAccount](#proto.ci.CodeBuildAccount)
   
-  
-  
-  
-
 - [ci/concourse.proto](#ci/concourse.proto)
     - [Concourse](#proto.ci.Concourse)
     - [ConcourseAccount](#proto.ci.ConcourseAccount)
   
-  
-  
-  
-
 - [ci/gcb.proto](#ci/gcb.proto)
     - [GoogleCloudBuild](#proto.ci.GoogleCloudBuild)
     - [GoogleCloudBuildAccount](#proto.ci.GoogleCloudBuildAccount)
   
-  
-  
-  
-
 - [ci/jenkins.proto](#ci/jenkins.proto)
     - [Jenkins](#proto.ci.Jenkins)
     - [JenkinsAccount](#proto.ci.JenkinsAccount)
   
-  
-  
-  
-
 - [ci/travis.proto](#ci/travis.proto)
     - [Travis](#proto.ci.Travis)
     - [TravisAccount](#proto.ci.TravisAccount)
   
-  
-  
-  
-
 - [ci/wercker.proto](#ci/wercker.proto)
     - [Wercker](#proto.ci.Wercker)
     - [WerckerAccount](#proto.ci.WerckerAccount)
   
-  
-  
-  
-
 - [cloudprovider/appengine.proto](#cloudprovider/appengine.proto)
     - [Appengine](#proto.cloudprovider.Appengine)
     - [AppengineAccount](#proto.cloudprovider.AppengineAccount)
   
     - [GcloudReleaseTrack](#proto.cloudprovider.GcloudReleaseTrack)
   
-  
-  
-
 - [cloudprovider/aws.proto](#cloudprovider/aws.proto)
     - [Aws](#proto.cloudprovider.Aws)
     - [AwsAccount](#proto.cloudprovider.AwsAccount)
@@ -261,10 +138,6 @@
     - [AwsRegion](#proto.cloudprovider.AwsRegion)
     - [AwsVirtualizationSettings](#proto.cloudprovider.AwsVirtualizationSettings)
   
-  
-  
-  
-
 - [cloudprovider/azure.proto](#cloudprovider/azure.proto)
     - [Azure](#proto.cloudprovider.Azure)
     - [AzureAccount](#proto.cloudprovider.AzureAccount)
@@ -272,18 +145,10 @@
     - [AzureBaseImage](#proto.cloudprovider.AzureBaseImage)
     - [AzureBaseImageSettings](#proto.cloudprovider.AzureBaseImageSettings)
   
-  
-  
-  
-
 - [cloudprovider/cloudfoundry.proto](#cloudprovider/cloudfoundry.proto)
     - [CloudFoundry](#proto.cloudprovider.CloudFoundry)
     - [CloudFoundryAccount](#proto.cloudprovider.CloudFoundryAccount)
   
-  
-  
-  
-
 - [cloudprovider/dcos.proto](#cloudprovider/dcos.proto)
     - [Dcos](#proto.cloudprovider.Dcos)
     - [DcosAccount](#proto.cloudprovider.DcosAccount)
@@ -292,26 +157,14 @@
     - [DcosCluster](#proto.cloudprovider.DcosCluster)
     - [DcosClusterLoadBalancer](#proto.cloudprovider.DcosClusterLoadBalancer)
   
-  
-  
-  
-
 - [cloudprovider/docker_registry.proto](#cloudprovider/docker_registry.proto)
     - [DockerRegistry](#proto.cloudprovider.DockerRegistry)
     - [DockerRegistryAccount](#proto.cloudprovider.DockerRegistryAccount)
   
-  
-  
-  
-
 - [cloudprovider/ecs.proto](#cloudprovider/ecs.proto)
     - [Ecs](#proto.cloudprovider.Ecs)
     - [EcsAccount](#proto.cloudprovider.EcsAccount)
   
-  
-  
-  
-
 - [cloudprovider/google.proto](#cloudprovider/google.proto)
     - [Consul](#proto.cloudprovider.Consul)
     - [GoogleBakeryDefaults](#proto.cloudprovider.GoogleBakeryDefaults)
@@ -321,10 +174,6 @@
     - [GoogleComputeEngineAccount](#proto.cloudprovider.GoogleComputeEngineAccount)
     - [VirtualizationSettings](#proto.cloudprovider.VirtualizationSettings)
   
-  
-  
-  
-
 - [cloudprovider/huaweicloud.proto](#cloudprovider/huaweicloud.proto)
     - [HuaweiCloud](#proto.cloudprovider.HuaweiCloud)
     - [HuaweiCloudAccount](#proto.cloudprovider.HuaweiCloudAccount)
@@ -333,10 +182,6 @@
     - [HuaweiCloudBaseImageSettings](#proto.cloudprovider.HuaweiCloudBaseImageSettings)
     - [HuaweiCloudVirtualizationSettings](#proto.cloudprovider.HuaweiCloudVirtualizationSettings)
   
-  
-  
-  
-
 - [cloudprovider/kubernetes.proto](#cloudprovider/kubernetes.proto)
     - [Kubernetes](#proto.cloudprovider.Kubernetes)
     - [KubernetesAccount](#proto.cloudprovider.KubernetesAccount)
@@ -344,10 +189,6 @@
     - [KubernetesCachingPolicy](#proto.cloudprovider.KubernetesCachingPolicy)
     - [KubernetesCustomResource](#proto.cloudprovider.KubernetesCustomResource)
   
-  
-  
-  
-
 - [cloudprovider/oracle.proto](#cloudprovider/oracle.proto)
     - [Oracle](#proto.cloudprovider.Oracle)
     - [OracleAccount](#proto.cloudprovider.OracleAccount)
@@ -356,39 +197,19 @@
     - [OracleBaseImageSettings](#proto.cloudprovider.OracleBaseImageSettings)
     - [OracleVirtualizationSettings](#proto.cloudprovider.OracleVirtualizationSettings)
   
-  
-  
-  
-
 - [cloudprovider/providers.proto](#cloudprovider/providers.proto)
     - [Providers](#proto.cloudprovider.Providers)
   
-  
-  
-  
-
 - [config/clouddriver.proto](#config/clouddriver.proto)
     - [Clouddriver](#proto.config.Clouddriver)
   
-  
-  
-  
-
 - [config/echo.proto](#config/echo.proto)
     - [Echo](#proto.config.Echo)
   
-  
-  
-  
-
 - [config/front50.proto](#config/front50.proto)
     - [Front50](#proto.config.Front50)
     - [Front50.Spinnaker](#proto.config.Front50.Spinnaker)
   
-  
-  
-  
-
 - [config/gate.proto](#config/gate.proto)
     - [Cors](#proto.config.Cors)
     - [Gate](#proto.config.Gate)
@@ -396,86 +217,42 @@
     - [ServerConfig](#proto.config.ServerConfig)
     - [SpringSecurity](#proto.config.SpringSecurity)
   
-  
-  
-  
-
 - [config/halconfig.proto](#config/halconfig.proto)
     - [Hal](#proto.config.Hal)
   
-  
-  
-  
-
 - [config/kayenta.proto](#config/kayenta.proto)
     - [Kayenta](#proto.config.Kayenta)
     - [Kayenta.ServiceIntegrations](#proto.config.Kayenta.ServiceIntegrations)
     - [Kayenta.ServiceIntegrations.Aws](#proto.config.Kayenta.ServiceIntegrations.Aws)
     - [Kayenta.ServiceIntegrations.Google](#proto.config.Kayenta.ServiceIntegrations.Google)
   
-  
-  
-  
-
 - [config/orca.proto](#config/orca.proto)
     - [Orca](#proto.config.Orca)
     - [Orca.Defaults](#proto.config.Orca.Defaults)
     - [Orca.Defaults.BakeDefaults](#proto.config.Orca.Defaults.BakeDefaults)
     - [Orca.PipelineTemplates](#proto.config.Orca.PipelineTemplates)
   
-  
-  
-  
-
 - [config/services.proto](#config/services.proto)
     - [Services](#proto.config.Services)
   
-  
-  
-  
-
 - [features.proto](#features.proto)
     - [Features](#proto.Features)
   
-  
-  
-  
-
 - [notification/github_status.proto](#notification/github_status.proto)
     - [GithubStatus](#proto.notification.GithubStatus)
   
-  
-  
-  
-
 - [notification/notifications.proto](#notification/notifications.proto)
     - [Notifications](#proto.notification.Notifications)
   
-  
-  
-  
-
 - [notification/slack.proto](#notification/slack.proto)
     - [Slack](#proto.notification.Slack)
   
-  
-  
-  
-
 - [notification/twilio.proto](#notification/twilio.proto)
     - [Twilio](#proto.notification.Twilio)
   
-  
-  
-  
-
 - [permissions.proto](#permissions.proto)
     - [Permissions](#proto.Permissions)
   
-  
-  
-  
-
 - [pubsub/google.proto](#pubsub/google.proto)
     - [Google](#proto.pubsub.Google)
     - [GooglePublisher](#proto.pubsub.GooglePublisher)
@@ -483,16 +260,9 @@
   
     - [MessageFormat](#proto.pubsub.MessageFormat)
   
-  
-  
-
 - [pubsub/pubsub.proto](#pubsub/pubsub.proto)
     - [Pubsub](#proto.pubsub.Pubsub)
   
-  
-  
-  
-
 - [security/authn.proto](#security/authn.proto)
     - [Authentication](#proto.security.Authentication)
     - [Basic](#proto.security.Basic)
@@ -511,9 +281,6 @@
     - [OAuth2.OAuth2Provider](#proto.security.OAuth2.OAuth2Provider)
     - [OAuth2Client.AuthenticationScheme](#proto.security.OAuth2Client.AuthenticationScheme)
   
-  
-  
-
 - [security/authz.proto](#security/authz.proto)
     - [Authorization](#proto.security.Authorization)
     - [FileRoleProvider](#proto.security.FileRoleProvider)
@@ -524,16 +291,9 @@
   
     - [RoleProviderType](#proto.security.RoleProviderType)
   
-  
-  
-
 - [security/security.proto](#security/security.proto)
     - [Security](#proto.security.Security)
   
-  
-  
-  
-
 - [security/ssl.proto](#security/ssl.proto)
     - [ApiSecurity](#proto.security.ApiSecurity)
     - [ApiSsl](#proto.security.ApiSsl)
@@ -542,60 +302,30 @@
   
     - [ClientAuth](#proto.security.ClientAuth)
   
-  
-  
-
 - [security/trust_store.proto](#security/trust_store.proto)
     - [TrustStore](#proto.security.TrustStore)
     - [WebhookConfig](#proto.security.WebhookConfig)
   
-  
-  
-  
-
 - [stats.proto](#stats.proto)
     - [Stats](#proto.Stats)
   
-  
-  
-  
-
 - [storage/azs.proto](#storage/azs.proto)
     - [Azs](#proto.storage.Azs)
   
-  
-  
-  
-
 - [storage/gcs.proto](#storage/gcs.proto)
     - [Gcs](#proto.storage.Gcs)
   
-  
-  
-  
-
 - [storage/oracle.proto](#storage/oracle.proto)
     - [Oracle](#proto.storage.Oracle)
   
-  
-  
-  
-
 - [storage/persistent_storage.proto](#storage/persistent_storage.proto)
     - [PersistentStorage](#proto.storage.PersistentStorage)
   
-  
-  
-  
-
 - [storage/s3.proto](#storage/s3.proto)
     - [S3](#proto.storage.S3)
   
     - [S3ServerSideEncryption](#proto.storage.S3ServerSideEncryption)
   
-  
-  
-
 - [Scalar Value Types](#scalar-value-types)
 
 
