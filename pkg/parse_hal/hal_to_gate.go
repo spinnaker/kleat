@@ -16,27 +16,64 @@
 
 package parse_hal
 
-import "github.com/spinnaker/kleat/api/client/config"
+import (
+	"github.com/spinnaker/kleat/api/client/config"
+	"github.com/spinnaker/kleat/api/client/security"
+	"google.golang.org/protobuf/proto"
+)
 
 func HalToGate(h *config.Hal) *config.Gate {
 	return &config.Gate{
-		Server: &config.ServerConfig{
-			Ssl: h.GetSecurity().GetApiSecurity().GetSsl(),
-			// TODO(ezimanyi): Halyard is setting the port and address here by looking
-			// them up on the service settings map; the other services just set this
-			// in their default config. We can probably do the same for Gate so that
-			// kleat doesn't need to involve itself in service discovery. If we do
-			// need to set these values here, we'll need to add them to the Server
-			// proto and set them here.
-		},
-		Cors: &config.Cors{AllowedOriginsPattern: h.GetSecurity().GetApiSecurity().GetCorsAccessPattern()},
-		Security: &config.SpringSecurity{
-			Oauth2: h.GetSecurity().GetAuthn().GetOauth2(),
-			Basic:  h.GetSecurity().GetAuthn().GetBasic(),
-		},
-		Saml:   h.GetSecurity().GetAuthn().GetSaml(),
-		Ldap:   h.GetSecurity().GetAuthn().GetLdap(),
-		X509:   h.GetSecurity().GetAuthn().GetX509(),
-		Google: &config.Gate_GoogleConfig{Iap: h.GetSecurity().GetAuthn().GetIap()},
+		Server:   getServerConfig(h),
+		Cors:     getCorsConfig(h),
+		Security: getSpringConfig(h),
+		Saml:     h.GetSecurity().GetAuthn().GetSaml(),
+		Ldap:     h.GetSecurity().GetAuthn().GetLdap(),
+		X509:     h.GetSecurity().GetAuthn().GetX509(),
+		Google:   getGoogleConfig(h),
 	}
+}
+
+func getServerConfig(h *config.Hal) *config.ServerConfig {
+	if ssl := h.GetSecurity().GetApiSecurity().GetSsl(); ssl != nil {
+		return &config.ServerConfig{Ssl: ssl}
+	}
+	return nil
+}
+
+func getSpringConfig(h *config.Hal) *config.SpringSecurity {
+	result := &config.SpringSecurity{
+		Oauth2: getOauth2Config(h),
+		Basic:  h.GetSecurity().GetAuthn().GetBasic(),
+	}
+
+	if proto.Equal(result, &config.SpringSecurity{}) {
+		return nil
+	}
+	return result
+}
+
+func getOauth2Config(h *config.Hal) *security.OAuth2 {
+	// TODO(ezimanyi): Consider changing the oauth2 to instead pass through the
+	// config anytime oauth2 != nil. This requires changing the logic in gate
+	// to properly check the enabled flag.
+	// (In that case we can probably just inline and remove this function.)
+	if oauth2 := h.GetSecurity().GetAuthn().GetOauth2(); oauth2.GetEnabled() {
+		return oauth2
+	}
+	return nil
+}
+
+func getCorsConfig(h *config.Hal) *config.Cors {
+	if p := h.GetSecurity().GetApiSecurity().GetCorsAccessPattern(); p != "" {
+		return &config.Cors{AllowedOriginsPattern: p}
+	}
+	return nil
+}
+
+func getGoogleConfig(h *config.Hal) *config.Gate_GoogleConfig {
+	if iap := h.GetSecurity().GetAuthn().GetIap(); iap != nil {
+		return &config.Gate_GoogleConfig{Iap: iap}
+	}
+	return nil
 }
