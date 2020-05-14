@@ -1,0 +1,41 @@
+syntax = "proto3";
+package proto.config;
+
+option go_package = "github.com/spinnaker/kleat/api/client/config";
+
+import "canary/aws.proto";
+import "canary/datadog.proto";
+import "canary/google.proto";
+import "canary/newrelic.proto";
+import "canary/prometheus.proto";
+import "canary/signalfx.proto";
+import "canary/stackdriver.proto";
+import "canary/gcs.proto";
+import "canary/s3.proto";
+
+// Configuration for the Kayenta microservice.
+message Kayenta {
+  ServiceIntegrations kayenta = 1;
+
+  message ServiceIntegrations {
+    Google google = 1;
+    canary.Stackdriver stackdriver = 2;
+    canary.Gcs gcs = 3;
+    canary.Prometheus prometheus = 4;
+    canary.Datadog datadog = 5;
+    Aws aws = 6;
+    canary.S3 s3 = 7;
+    canary.SignalFx signalfx = 8;
+    canary.NewRelic newrelic = 9;
+
+    message Google {
+      bool enabled = 1;
+      repeated canary.GoogleAccount accounts = 2;
+    }
+
+    message Aws {
+      bool enabled = 1;
+      repeated canary.AwsAccount accounts = 3;
+    }
+  }
+}

@@ -97,6 +97,94 @@
   
   
 
+- [canary/aws.proto](#canary/aws.proto)
+    - [Aws](#proto.canary.Aws)
+    - [AwsAccount](#proto.canary.AwsAccount)
+  
+  
+  
+  
+
+- [canary/canary.proto](#canary/canary.proto)
+    - [Canary](#proto.canary.Canary)
+    - [Canary.ServiceIntegrations](#proto.canary.Canary.ServiceIntegrations)
+  
+  
+  
+  
+
+- [canary/datadog.proto](#canary/datadog.proto)
+    - [Datadog](#proto.canary.Datadog)
+    - [DatadogAccount](#proto.canary.DatadogAccount)
+    - [DatadogAccount.Endpoint](#proto.canary.DatadogAccount.Endpoint)
+  
+  
+  
+  
+
+- [canary/gcs.proto](#canary/gcs.proto)
+    - [Gcs](#proto.canary.Gcs)
+  
+  
+  
+  
+
+- [canary/google.proto](#canary/google.proto)
+    - [Google](#proto.canary.Google)
+    - [GoogleAccount](#proto.canary.GoogleAccount)
+  
+  
+  
+  
+
+- [canary/newrelic.proto](#canary/newrelic.proto)
+    - [NewRelic](#proto.canary.NewRelic)
+    - [NewRelicAccount](#proto.canary.NewRelicAccount)
+    - [NewRelicAccount.Endpoint](#proto.canary.NewRelicAccount.Endpoint)
+  
+  
+  
+  
+
+- [canary/prometheus.proto](#canary/prometheus.proto)
+    - [Prometheus](#proto.canary.Prometheus)
+    - [PrometheusAccount](#proto.canary.PrometheusAccount)
+    - [PrometheusAccount.Endpoint](#proto.canary.PrometheusAccount.Endpoint)
+  
+  
+  
+  
+
+- [canary/s3.proto](#canary/s3.proto)
+    - [S3](#proto.canary.S3)
+  
+  
+  
+  
+
+- [canary/signalfx.proto](#canary/signalfx.proto)
+    - [SignalFx](#proto.canary.SignalFx)
+    - [SignalFxAccount](#proto.canary.SignalFxAccount)
+    - [SignalFxAccount.Endpoint](#proto.canary.SignalFxAccount.Endpoint)
+  
+  
+  
+  
+
+- [canary/stackdriver.proto](#canary/stackdriver.proto)
+    - [Stackdriver](#proto.canary.Stackdriver)
+  
+  
+  
+  
+
+- [canary/supported_type.proto](#canary/supported_type.proto)
+  
+    - [SupportedType](#proto.canary.SupportedType)
+  
+  
+  
+
 - [ci/ci.proto](#ci/ci.proto)
     - [Ci](#proto.ci.Ci)
   
@@ -314,6 +402,16 @@
 
 - [config/halconfig.proto](#config/halconfig.proto)
     - [Hal](#proto.config.Hal)
+  
+  
+  
+  
+
+- [config/kayenta.proto](#config/kayenta.proto)
+    - [Kayenta](#proto.config.Kayenta)
+    - [Kayenta.ServiceIntegrations](#proto.config.Kayenta.ServiceIntegrations)
+    - [Kayenta.ServiceIntegrations.Aws](#proto.config.Kayenta.ServiceIntegrations.Aws)
+    - [Kayenta.ServiceIntegrations.Google](#proto.config.Kayenta.ServiceIntegrations.Google)
   
   
   
@@ -1087,6 +1185,563 @@ https://www.spinnaker.io/reference/artifacts/from-build-triggers/#artifacts-from
 
 
  
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="canary/aws.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## canary/aws.proto
+
+
+
+<a name="proto.canary.Aws"></a>
+
+### Aws
+Configuration for the AWS canary integration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the integration is enabled. |
+| accounts | [AwsAccount](#proto.canary.AwsAccount) | repeated | The list of configured accounts. |
+| s3Enabled | [bool](#bool) |  | Whether to enable S3 as a persistent store. |
+
+
+
+
+
+
+<a name="proto.canary.AwsAccount"></a>
+
+### AwsAccount
+Configuration for an AWS account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| bucket | [string](#string) |  | The name of a storage bucket that this account has access to. If you specify a globally unique bucket name that doesn&#39;t exist yet, Kayenta will create that bucket for you. |
+| region | [string](#string) |  | The AWS region to use. |
+| rootFolder | [string](#string) |  | The root folder in the chosen bucket in which to store all of the canary service&#39;s persistent data. Defaults to `kayenta`. |
+| profileName | [string](#string) |  | The profile name to use when resolving AWS credentials. Typically found in `~/.aws/credentials`. Defaults to `default`. |
+| endpoint | [string](#string) |  | The endpoint used to reach the service implementing the AWS API. Typical use is with Minio. |
+| accessKeyId | [string](#string) |  | The default access key used to communicate with AWS. |
+| supportedTypes | [SupportedType](#proto.canary.SupportedType) | repeated | If enabling S3, include CONFIGURATION_STORE and/or OBJECT_STORE in this list. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="canary/canary.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## canary/canary.proto
+
+
+
+<a name="proto.canary.Canary"></a>
+
+### Canary
+Configuration for Spinnaker&#39;s canary service.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the canary service is enabled. |
+| serviceIntegrations | [Canary.ServiceIntegrations](#proto.canary.Canary.ServiceIntegrations) |  | Canary service integrations. You must configure at least one account of each canary.SupportedType (METRICS_STORE, CONFIGURATION_STORE, OBJECT_STORE) in order to use Spinnaker&#39;s canary service. |
+
+
+
+
+
+
+<a name="proto.canary.Canary.ServiceIntegrations"></a>
+
+### Canary.ServiceIntegrations
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| aws | [Aws](#proto.canary.Aws) |  |  |
+| datadog | [Datadog](#proto.canary.Datadog) |  |  |
+| google | [Google](#proto.canary.Google) |  |  |
+| newrelic | [NewRelic](#proto.canary.NewRelic) |  |  |
+| prometheus | [Prometheus](#proto.canary.Prometheus) |  |  |
+| signalfx | [SignalFx](#proto.canary.SignalFx) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="canary/datadog.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## canary/datadog.proto
+
+
+
+<a name="proto.canary.Datadog"></a>
+
+### Datadog
+Configuration for the Datadog canary integration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the integration is enabled. |
+| accounts | [DatadogAccount](#proto.canary.DatadogAccount) | repeated | The list of configured accounts. |
+
+
+
+
+
+
+<a name="proto.canary.DatadogAccount"></a>
+
+### DatadogAccount
+Configuration for a Datadog account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| endpoint | [DatadogAccount.Endpoint](#proto.canary.DatadogAccount.Endpoint) |  | Configuration for the Datadog server endpoint. |
+| apiKey | [string](#string) |  | Your organization&#39;s unique Datadog API key. See https://app.datadoghq.com/account/settings#api. |
+| applicationKey | [string](#string) |  | Your Datadog application key. See https://app.datadoghq.com/account/settings#api. |
+
+
+
+
+
+
+<a name="proto.canary.DatadogAccount.Endpoint"></a>
+
+### DatadogAccount.Endpoint
+Configuration for the Datadog server endpoint.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| baseUrl | [string](#string) |  | (Required) The base URL of the Datadog server. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="canary/gcs.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## canary/gcs.proto
+
+
+
+<a name="proto.canary.Gcs"></a>
+
+### Gcs
+Configuration for the GCS canary integration. If enabled, you must
+also configure at least one canary.GoogleAccount with a list of
+supportedTypes that includes canary.SupportedType.CONFIGURATION_STORE and/or
+canary.SupportedType.OBJECT_STORE.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the integration is enabled. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="canary/google.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## canary/google.proto
+
+
+
+<a name="proto.canary.Google"></a>
+
+### Google
+Configuration for the Google canary integration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the integration is enabled. |
+| accounts | [GoogleAccount](#proto.canary.GoogleAccount) | repeated | The list of configured accounts. |
+| gcsEnabled | [bool](#bool) |  | Whether GCS is enabled as a persistent store. |
+| stackdriverEnabled | [bool](#bool) |  | Whether Stackdriver is enabled as a metrics source. |
+| metadataCachingIntervalMS | [int32](#int32) |  | Number of milliseconds to wait in between caching the names of available Stackdriver metric types (used when building canary configs). Defaults to 60000. |
+
+
+
+
+
+
+<a name="proto.canary.GoogleAccount"></a>
+
+### GoogleAccount
+Configuration for a Google account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| jsonPath | [string](#string) |  | The path to a JSON service account that Spinnaker will use as credentials. This is only needed if Spinnaker is not deployed on a Google Compute Engine VM, or needs permissions not afforded to the VM it is running on. See https://cloud.google.com/compute/docs/access/service-accounts for more information. |
+| bucket | [string](#string) |  | The name of a storage bucket that this account has access to. If you specify a globally unique bucket name that doesn&#39;t exist yet, Kayenta will create that bucket for you. |
+| bucketLocation | [string](#string) |  | This is only required if the bucket you specify doesn’t exist yet. In that case, the bucket will be created in that location. See https://cloud.google.com/storage/docs/managing-buckets#manage-class-location. |
+| rootFolder | [string](#string) |  | The root folder in the chosen bucket in which to store all of the canary service&#39;s persistent data in. Defaults to `kayenta`. |
+| project | [string](#string) |  | (Required) The Google Cloud Platform project the canary service will use to consume GCS and Stackdriver. |
+| supportedTypes | [SupportedType](#proto.canary.SupportedType) | repeated | If enabling Stackdriver, include METRICS_STORE in this list. If enabling GCS, include CONFIGURATION_STORE and/or OBJECT_STORE in this list. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="canary/newrelic.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## canary/newrelic.proto
+
+
+
+<a name="proto.canary.NewRelic"></a>
+
+### NewRelic
+Configuration for the New Relic canary integration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the integration is enabled. |
+| accounts | [NewRelicAccount](#proto.canary.NewRelicAccount) | repeated | The list of configured accounts. |
+
+
+
+
+
+
+<a name="proto.canary.NewRelicAccount"></a>
+
+### NewRelicAccount
+Configuration for a New Relic account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| endpoint | [NewRelicAccount.Endpoint](#proto.canary.NewRelicAccount.Endpoint) |  | Configuration for the New Relic Insights server endpoint. |
+| apiKey | [string](#string) |  | (Required) Your account&#39;s unique New Relic Insights API key. See https://docs.newrelic.com/docs/insights/insights-api/get-data/query-insights-event-data-api. |
+| applicationKey | [string](#string) |  | (Required) Your New Relic account ID. See https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/account-id. |
+
+
+
+
+
+
+<a name="proto.canary.NewRelicAccount.Endpoint"></a>
+
+### NewRelicAccount.Endpoint
+Configuration for the New Relic Insights server endpoint.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| baseUrl | [string](#string) |  | The base URL to the New Relic Insights server. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="canary/prometheus.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## canary/prometheus.proto
+
+
+
+<a name="proto.canary.Prometheus"></a>
+
+### Prometheus
+Configuration for the Prometheus canary integration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the integration is enabled. |
+| accounts | [PrometheusAccount](#proto.canary.PrometheusAccount) | repeated | The list of configured accounts. |
+| metadataCachingIntervalMS | [int32](#int32) |  | Number of milliseconds to wait in between caching the names of available metric types (used when building canary configs). Defaults to 60000. |
+
+
+
+
+
+
+<a name="proto.canary.PrometheusAccount"></a>
+
+### PrometheusAccount
+Configuration for a Prometheus account.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| endpoint | [PrometheusAccount.Endpoint](#proto.canary.PrometheusAccount.Endpoint) |  | Configuration for the Prometheus server endpoint. |
+| username | [string](#string) |  | A basic auth username. Either `usernamePasswordFile` or `username` and `password` is required. |
+| password | [string](#string) |  | A basic auth password. Either `usernamePasswordFile` or `username` and `password` is required. |
+| usernamePasswordFile | [string](#string) |  | The path to a file containing the basic auth username and password in the format `${username}:${password}`. Either `usernamePasswordFile` or `username` and `password` is required. |
+
+
+
+
+
+
+<a name="proto.canary.PrometheusAccount.Endpoint"></a>
+
+### PrometheusAccount.Endpoint
+Configuration for the Prometheus server endpoint.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| baseUrl | [string](#string) |  | (Required) The base URL of the Prometheus server. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="canary/s3.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## canary/s3.proto
+
+
+
+<a name="proto.canary.S3"></a>
+
+### S3
+Configuration for the S3 canary integration. If enabled, you must
+also configure at least one canary.AwsAccount with a list of
+supportedTypes that includes canary.SupportedType.CONFIGURATION_STORE and/or
+canary.SupportedType.OBJECT_STORE.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the integration is enabled. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="canary/signalfx.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## canary/signalfx.proto
+
+
+
+<a name="proto.canary.SignalFx"></a>
+
+### SignalFx
+Configuration for the SignalFx canary integration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the integration is enabled. |
+| accounts | [SignalFxAccount](#proto.canary.SignalFxAccount) | repeated | The list of configured accounts. |
+
+
+
+
+
+
+<a name="proto.canary.SignalFxAccount"></a>
+
+### SignalFxAccount
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the account. |
+| accessToken | [string](#string) |  | (Required) The SignalFx access token. |
+| endpoint | [SignalFxAccount.Endpoint](#proto.canary.SignalFxAccount.Endpoint) |  | The SignalFx server endpoint. |
+| defaultScopeKey | [string](#string) |  | Scope key is used to distinguish between base and canary deployments. If omitted, every request must supply the `_scope_key` param in extended scope params. |
+| defaultLocationKey | [string](#string) |  | Location key is used to filter by deployment region. If omitted, requests must supply the `_location_key` if it is needed. |
+
+
+
+
+
+
+<a name="proto.canary.SignalFxAccount.Endpoint"></a>
+
+### SignalFxAccount.Endpoint
+The SignalFx server endpoint.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| baseUrl | [string](#string) |  | The base URL to the SignalFx server. Defaults to https://stream.signalfx.com |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="canary/stackdriver.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## canary/stackdriver.proto
+
+
+
+<a name="proto.canary.Stackdriver"></a>
+
+### Stackdriver
+Configuration for the Stackdriver canary integration. If enabled, you must
+also configure at least one canary.GoogleAccount with a list of
+supportedTypes that includes canary.SupportedType.METRICS_STORE.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the integration is enabled. |
+| metadataCachingIntervalMS | [int32](#int32) |  | Number of milliseconds to wait in between caching the names of available Stackdriver metric types (used when building canary configs). Defaults to 60000. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="canary/supported_type.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## canary/supported_type.proto
+
+
+ 
+
+
+<a name="proto.canary.SupportedType"></a>
+
+### SupportedType
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| METRICS_STORE | 0 |  |
+| CONFIGURATION_STORE | 1 |  |
+| OBJECT_STORE | 2 |  |
+
 
  
 
@@ -2963,6 +3618,93 @@ Configuration for a Spinnaker installation.
 | features | [proto.Features](#proto.Features) |  |  |
 | webhook | [proto.security.WebhookConfig](#proto.security.WebhookConfig) |  |  |
 | security | [proto.security.Security](#proto.security.Security) |  |  |
+| canary | [proto.canary.Canary](#proto.canary.Canary) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="config/kayenta.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## config/kayenta.proto
+
+
+
+<a name="proto.config.Kayenta"></a>
+
+### Kayenta
+Configuration for the Kayenta microservice.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| kayenta | [Kayenta.ServiceIntegrations](#proto.config.Kayenta.ServiceIntegrations) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Kayenta.ServiceIntegrations"></a>
+
+### Kayenta.ServiceIntegrations
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| google | [Kayenta.ServiceIntegrations.Google](#proto.config.Kayenta.ServiceIntegrations.Google) |  |  |
+| stackdriver | [proto.canary.Stackdriver](#proto.canary.Stackdriver) |  |  |
+| gcs | [proto.canary.Gcs](#proto.canary.Gcs) |  |  |
+| prometheus | [proto.canary.Prometheus](#proto.canary.Prometheus) |  |  |
+| datadog | [proto.canary.Datadog](#proto.canary.Datadog) |  |  |
+| aws | [Kayenta.ServiceIntegrations.Aws](#proto.config.Kayenta.ServiceIntegrations.Aws) |  |  |
+| s3 | [proto.canary.S3](#proto.canary.S3) |  |  |
+| signalfx | [proto.canary.SignalFx](#proto.canary.SignalFx) |  |  |
+| newrelic | [proto.canary.NewRelic](#proto.canary.NewRelic) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Kayenta.ServiceIntegrations.Aws"></a>
+
+### Kayenta.ServiceIntegrations.Aws
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  |  |
+| accounts | [proto.canary.AwsAccount](#proto.canary.AwsAccount) | repeated |  |
+
+
+
+
+
+
+<a name="proto.config.Kayenta.ServiceIntegrations.Google"></a>
+
+### Kayenta.ServiceIntegrations.Google
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  |  |
+| accounts | [proto.canary.GoogleAccount](#proto.canary.GoogleAccount) | repeated |  |
 
 
 

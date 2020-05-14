@@ -13,6 +13,7 @@ import "security/security.proto";
 import "security/trust_store.proto";
 import "stats.proto";
 import "storage/persistent_storage.proto";
+import "canary/canary.proto";
 
 // Configuration for a Spinnaker installation.
 message Hal {
@@ -26,4 +27,5 @@ message Hal {
   Features features = 8;
   security.WebhookConfig webhook = 9;
   security.Security security = 10;
+  canary.Canary canary = 11;
 }

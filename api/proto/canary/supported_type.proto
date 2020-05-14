@@ -1,0 +1,10 @@
+syntax = "proto3";
+package proto.canary;
+
+option go_package = "github.com/spinnaker/kleat/api/client/canary";
+
+enum SupportedType {
+  METRICS_STORE = 0;
+  CONFIGURATION_STORE = 1;
+  OBJECT_STORE = 2;
+}
