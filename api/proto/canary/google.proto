@@ -1,0 +1,61 @@
+syntax = "proto3";
+package proto.canary;
+
+option go_package = "github.com/spinnaker/kleat/api/client/canary";
+
+import "canary/supported_type.proto";
+
+// Configuration for the Google canary integration.
+message Google {
+  // Whether the integration is enabled.
+  bool enabled = 1;
+
+  // The list of configured accounts.
+  repeated GoogleAccount accounts = 2;
+
+  // Whether GCS is enabled as a persistent store.
+  bool gcsEnabled = 3;
+
+  // Whether Stackdriver is enabled as a metrics source.
+  bool stackdriverEnabled = 4;
+
+  // Number of milliseconds to wait in between caching the names of available
+  // Stackdriver metric types (used when building canary configs). Defaults to
+  // 60000.
+  int32 metadataCachingIntervalMS = 5;
+}
+
+// Configuration for a Google account.
+message GoogleAccount {
+  // The name of the account.
+  string name = 1;
+
+  // The path to a JSON service account that Spinnaker will use as credentials.
+  // This is only needed if Spinnaker is not deployed on a Google Compute Engine
+  // VM, or needs permissions not afforded to the VM it is running on. See
+  // https://cloud.google.com/compute/docs/access/service-accounts for more information.
+  string jsonPath = 2;
+
+  // The name of a storage bucket that this account has access to. If you
+  // specify a globally unique bucket name that doesn't exist yet, Kayenta will
+  // create that bucket for you.
+  string bucket = 3;
+
+  // This is only required if the bucket you specify doesn’t exist yet. In that
+  // case, the bucket will be created in that location. See
+  // https://cloud.google.com/storage/docs/managing-buckets#manage-class-location.
+  string bucketLocation = 4;
+
+  // The root folder in the chosen bucket in which to store all of the canary
+  // service's persistent data in. Defaults to `kayenta`.
+  string rootFolder = 5;
+
+  // (Required) The Google Cloud Platform project the canary service will use to
+  // consume GCS and Stackdriver.
+  string project = 6;
+
+  // If enabling Stackdriver, include METRICS_STORE in this list.
+  // If enabling GCS, include CONFIGURATION_STORE and/or OBJECT_STORE in this
+  // list.
+  repeated SupportedType supportedTypes = 7;
+}

@@ -1,0 +1,31 @@
+syntax = "proto3";
+package proto.canary;
+
+option go_package = "github.com/spinnaker/kleat/api/client/canary";
+
+import "canary/aws.proto";
+import "canary/datadog.proto";
+import "canary/google.proto";
+import "canary/newrelic.proto";
+import "canary/prometheus.proto";
+import "canary/signalfx.proto";
+
+// Configuration for Spinnaker's canary service.
+message Canary {
+  // Whether the canary service is enabled.
+  bool enabled = 1;
+
+  // Canary service integrations. You must configure at least one account of
+  // each canary.SupportedType (METRICS_STORE, CONFIGURATION_STORE,
+  // OBJECT_STORE) in order to use Spinnaker's canary service.
+  ServiceIntegrations serviceIntegrations = 2;
+
+  message ServiceIntegrations {
+    canary.Aws aws = 1;
+    canary.Datadog datadog = 2;
+    canary.Google google = 3;
+    canary.NewRelic newrelic = 4;
+    canary.Prometheus prometheus = 5;
+    canary.SignalFx signalfx = 6;
+  }
+}

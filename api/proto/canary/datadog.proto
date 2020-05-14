@@ -1,0 +1,36 @@
+syntax = "proto3";
+package proto.canary;
+
+option go_package = "github.com/spinnaker/kleat/api/client/canary";
+
+// Configuration for the Datadog canary integration.
+message Datadog {
+  // Whether the integration is enabled.
+  bool enabled = 1;
+
+  // The list of configured accounts.
+  repeated DatadogAccount accounts = 2;
+}
+
+// Configuration for a Datadog account.
+message DatadogAccount {
+  // The name of the account.
+  string name = 1;
+
+  // Configuration for the Datadog server endpoint.
+  Endpoint endpoint = 2;
+
+  // Your organization's unique Datadog API key. See
+  // https://app.datadoghq.com/account/settings#api.
+  string apiKey = 3;
+
+  // Your Datadog application key. See
+  // https://app.datadoghq.com/account/settings#api.
+  string applicationKey = 4;
+
+  // Configuration for the Datadog server endpoint.
+  message Endpoint {
+    // (Required) The base URL of the Datadog server.
+    string baseUrl = 1;
+  }
+}

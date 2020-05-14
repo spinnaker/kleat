@@ -1,0 +1,40 @@
+syntax = "proto3";
+package proto.canary;
+
+option go_package = "github.com/spinnaker/kleat/api/client/canary";
+
+// Configuration for the SignalFx canary integration.
+message SignalFx {
+  // Whether the integration is enabled.
+  bool enabled = 1;
+
+  // The list of configured accounts.
+  repeated SignalFxAccount accounts = 2;
+}
+
+message SignalFxAccount {
+  // The name of the account.
+  string name = 1;
+
+  // (Required) The SignalFx access token.
+  string accessToken = 2;
+
+  // The SignalFx server endpoint.
+  Endpoint endpoint = 3;
+
+  // Scope key is used to distinguish between base and canary deployments. If
+  // omitted, every request must supply the `_scope_key` param in extended scope
+  // params.
+  string defaultScopeKey = 4;
+
+  // Location key is used to filter by deployment region. If omitted, requests
+  // must supply the `_location_key` if it is needed.
+  string defaultLocationKey = 5;
+
+  // The SignalFx server endpoint.
+  message Endpoint {
+    // The base URL to the SignalFx server. Defaults to
+    // https://stream.signalfx.com
+    string baseUrl = 1;
+  }
+}

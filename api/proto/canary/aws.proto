@@ -1,0 +1,51 @@
+syntax = "proto3";
+package proto.canary;
+
+option go_package = "github.com/spinnaker/kleat/api/client/canary";
+
+import "canary/supported_type.proto";
+
+// Configuration for the AWS canary integration.
+message Aws {
+  // Whether the integration is enabled.
+  bool enabled = 1;
+
+  // The list of configured accounts.
+  repeated AwsAccount accounts = 2;
+
+  // Whether to enable S3 as a persistent store.
+  bool s3Enabled = 3;
+}
+
+// Configuration for an AWS account.
+message AwsAccount {
+  // The name of the account.
+  string name = 1;
+
+  // The name of a storage bucket that this account has access to. If you
+  // specify a globally unique bucket name that doesn't exist yet, Kayenta will
+  // create that bucket for you.
+  string bucket = 2;
+
+  // The AWS region to use.
+  string region = 3;
+
+  // The root folder in the chosen bucket in which to store all of the canary
+  // service's persistent data. Defaults to `kayenta`.
+  string rootFolder = 4;
+
+  // The profile name to use when resolving AWS credentials. Typically found in
+  // `~/.aws/credentials`. Defaults to `default`.
+  string profileName = 5;
+
+  // The endpoint used to reach the service implementing the AWS API. Typical
+  // use is with Minio.
+  string endpoint = 6;
+
+  // The default access key used to communicate with AWS.
+  string accessKeyId = 7;
+
+  // If enabling S3, include CONFIGURATION_STORE and/or OBJECT_STORE in this
+  // list.
+  repeated SupportedType  supportedTypes = 8;
+}

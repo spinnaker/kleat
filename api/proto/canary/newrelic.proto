@@ -1,0 +1,36 @@
+syntax = "proto3";
+package proto.canary;
+
+option go_package = "github.com/spinnaker/kleat/api/client/canary";
+
+// Configuration for the New Relic canary integration.
+message NewRelic {
+  // Whether the integration is enabled.
+  bool enabled = 1;
+
+  // The list of configured accounts.
+  repeated NewRelicAccount accounts = 2;
+}
+
+// Configuration for a New Relic account.
+message NewRelicAccount {
+  // The name of the account.
+  string name = 1;
+
+  // Configuration for the New Relic Insights server endpoint.
+  Endpoint endpoint = 2;
+
+  // (Required) Your account's unique New Relic Insights API key. See
+  // https://docs.newrelic.com/docs/insights/insights-api/get-data/query-insights-event-data-api.
+  string apiKey = 3;
+
+  // (Required) Your New Relic account ID. See
+  // https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/account-id.
+  string applicationKey = 4;
+
+  // Configuration for the New Relic Insights server endpoint.
+  message Endpoint {
+    // The base URL to the New Relic Insights server.
+    string baseUrl = 1;
+  }
+}
