@@ -15,7 +15,7 @@ message Gate {
   Cors cors = 2;
 
   // Wrapper for Spring configuration properties (including OAuth2 authentication).
-  Spring spring = 3;
+  SpringSecurity security = 3;
 
   // Configuration for SAML authentication.
   security.Saml saml = 4;
@@ -34,12 +34,15 @@ message Gate {
     // Configuration for Identity-Aware Proxy authentication.
     security.Iap iap = 1;
   }
+}
 
-  // Wrapper for Spring configuration properties.
-  message Spring {
-    // Configuration for OAuth2 authentication.
-    security.OAuth2 oauth2 = 1;
-  }
+// Wrapper for Spring security configuration properties.
+message SpringSecurity {
+  // Configuration for OAuth2 authentication.
+  security.OAuth2 oauth2 = 1;
+
+  // Configuration for basic authentication.
+  security.Basic basic = 2;
 }
 
 // Web server configuration.

@@ -16,7 +16,6 @@
 package parse_hal_test
 
 import (
-	"reflect"
 	"testing"
 
 	"github.com/spinnaker/kleat/api/client"
@@ -24,6 +23,7 @@ import (
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/api/client/security"
 	"github.com/spinnaker/kleat/pkg/parse_hal"
+	"google.golang.org/protobuf/proto"
 )
 
 var halToOrcaTests = []struct {
@@ -111,7 +111,7 @@ func TestHalToOrca(t *testing.T) {
 	for _, tt := range halToOrcaTests {
 		t.Run(tt.name, func(t *testing.T) {
 			got := parse_hal.HalToOrca(tt.hal)
-			if !reflect.DeepEqual(got, tt.want) {
+			if !proto.Equal(got, tt.want) {
 				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
 			}
 		})

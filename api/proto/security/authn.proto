@@ -22,6 +22,9 @@ message Authentication {
 
   // Google Cloud Identity-Aware Proxy configuration.
   Iap iap = 6;
+
+  // Basic username/password authentication.
+  Basic basic = 7;
 }
 
 // Configuration for authentication via OAuth 2.0.
@@ -50,19 +53,19 @@ message OAuth2 {
   // Supported OAuth 2.0 providers.
   enum OAuth2Provider {
     // Other OAuth 2.0 provider.
-    other = 0;
+    OTHER = 0;
 
     // Azure OAuth 2.0 provider.
-    azure = 1;
+    AZURE = 1;
 
     // Github OAuth 2.0 provider.
-    github = 2;
+    GITHUB = 2;
 
     // Oracle OAuth 2.0 provider.
-    oracle = 3;
+    ORACLE = 3;
 
     // Google OAuth 2.0 provider.
-    google = 4;
+    GOOGLE = 4;
   }
 }
 
@@ -288,4 +291,21 @@ message Iap {
 
   // The URL containing the Cloud IAP public keys in JWK format.
   string iapVerifyKeyUrl = 5;
+}
+
+// Configuration for basic username/password authentication
+message Basic {
+  // Whether the authentication method is enabled.
+  bool enabled = 1;
+
+  // The username and password used to log in via basic authentication.
+  UsernamePassword user = 2;
+}
+
+// Configuration for a username/password combination.
+message UsernamePassword {
+  // Username.
+  string username = 1;
+  // Password.
+  string password = 2;
 }

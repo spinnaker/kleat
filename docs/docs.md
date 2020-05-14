@@ -305,8 +305,8 @@
     - [Cors](#proto.config.Cors)
     - [Gate](#proto.config.Gate)
     - [Gate.GoogleConfig](#proto.config.Gate.GoogleConfig)
-    - [Gate.Spring](#proto.config.Gate.Spring)
     - [ServerConfig](#proto.config.ServerConfig)
+    - [SpringSecurity](#proto.config.SpringSecurity)
   
   
   
@@ -397,6 +397,7 @@
 
 - [security/authn.proto](#security/authn.proto)
     - [Authentication](#proto.security.Authentication)
+    - [Basic](#proto.security.Basic)
     - [Iap](#proto.security.Iap)
     - [Ldap](#proto.security.Ldap)
     - [OAuth2](#proto.security.OAuth2)
@@ -406,6 +407,7 @@
     - [OAuth2UserInfoMapping](#proto.security.OAuth2UserInfoMapping)
     - [Saml](#proto.security.Saml)
     - [Saml.UserAttributes](#proto.security.Saml.UserAttributes)
+    - [UsernamePassword](#proto.security.UsernamePassword)
     - [X509](#proto.security.X509)
   
     - [OAuth2.OAuth2Provider](#proto.security.OAuth2.OAuth2Provider)
@@ -2870,7 +2872,7 @@ Configuration for the gate microservice.
 | ----- | ---- | ----- | ----------- |
 | server | [ServerConfig](#proto.config.ServerConfig) |  | Web server configuration. |
 | cors | [Cors](#proto.config.Cors) |  | Configuration for cross-origin resource sharing. |
-| spring | [Gate.Spring](#proto.config.Gate.Spring) |  | Wrapper for Spring configuration properties (including OAuth2 authentication). |
+| security | [SpringSecurity](#proto.config.SpringSecurity) |  | Wrapper for Spring configuration properties (including OAuth2 authentication). |
 | saml | [proto.security.Saml](#proto.security.Saml) |  | Configuration for SAML authentication. |
 | ldap | [proto.security.Ldap](#proto.security.Ldap) |  | Configuration for LDAP authentication. |
 | x509 | [proto.security.X509](#proto.security.X509) |  | Configuration for X509 authentication. |
@@ -2896,21 +2898,6 @@ Wrapper for Google-specific authentication.
 
 
 
-<a name="proto.config.Gate.Spring"></a>
-
-### Gate.Spring
-Wrapper for Spring configuration properties.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| oauth2 | [proto.security.OAuth2](#proto.security.OAuth2) |  | Configuration for OAuth2 authentication. |
-
-
-
-
-
-
 <a name="proto.config.ServerConfig"></a>
 
 ### ServerConfig
@@ -2920,6 +2907,22 @@ Web server configuration.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | ssl | [proto.security.ApiSsl](#proto.security.ApiSsl) |  | SSL configuration. |
+
+
+
+
+
+
+<a name="proto.config.SpringSecurity"></a>
+
+### SpringSecurity
+Wrapper for Spring security configuration properties.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| oauth2 | [proto.security.OAuth2](#proto.security.OAuth2) |  | Configuration for OAuth2 authentication. |
+| basic | [proto.security.Basic](#proto.security.Basic) |  | Configuration for basic authentication. |
 
 
 
@@ -3430,6 +3433,23 @@ Configuration of how users authenticate against Spinnaker.
 | ldap | [Ldap](#proto.security.Ldap) |  | LDAP configuration. |
 | x509 | [X509](#proto.security.X509) |  | X509 configuration. |
 | iap | [Iap](#proto.security.Iap) |  | Google Cloud Identity-Aware Proxy configuration. |
+| basic | [Basic](#proto.security.Basic) |  | Basic username/password authentication. |
+
+
+
+
+
+
+<a name="proto.security.Basic"></a>
+
+### Basic
+Configuration for basic username/password authentication
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the authentication method is enabled. |
+| user | [UsernamePassword](#proto.security.UsernamePassword) |  | The username and password used to log in via basic authentication. |
 
 
 
@@ -3631,6 +3651,22 @@ Configuration for fields returned from your SAML provider.
 
 
 
+<a name="proto.security.UsernamePassword"></a>
+
+### UsernamePassword
+Configuration for a username/password combination.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| username | [string](#string) |  | Username. |
+| password | [string](#string) |  | Password. |
+
+
+
+
+
+
 <a name="proto.security.X509"></a>
 
 ### X509
@@ -3660,11 +3696,11 @@ Supported OAuth 2.0 providers.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| other | 0 | Other OAuth 2.0 provider. |
-| azure | 1 | Azure OAuth 2.0 provider. |
-| github | 2 | Github OAuth 2.0 provider. |
-| oracle | 3 | Oracle OAuth 2.0 provider. |
-| google | 4 | Google OAuth 2.0 provider. |
+| OTHER | 0 | Other OAuth 2.0 provider. |
+| AZURE | 1 | Azure OAuth 2.0 provider. |
+| GITHUB | 2 | Github OAuth 2.0 provider. |
+| ORACLE | 3 | Oracle OAuth 2.0 provider. |
+| GOOGLE | 4 | Google OAuth 2.0 provider. |
 
 
 
@@ -3812,11 +3848,11 @@ Configuration for which role provider to use for authorization decisions.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| external | 0 | External role provider. |
-| file | 1 | File-based role provider. |
-| google | 2 | Google role provider. |
-| github | 3 | GitHub role provider. |
-| ldap | 4 | LDAP role provider. |
+| EXTERNAL | 0 | External role provider. |
+| FILE | 1 | File-based role provider. |
+| GOOGLE | 2 | Google role provider. |
+| GITHUB | 3 | GitHub role provider. |
+| LDAP | 4 | LDAP role provider. |
 
 
  
