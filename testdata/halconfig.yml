@@ -366,3 +366,79 @@ webhook:
     trustStorePassword: abcdefg
 features:
   pipelineTemplates: true
+security:
+  apiSecurity:
+    ssl:
+      enabled: true
+      keyAlias: spinnaker
+      keyStore: /var/secrets/keystore.jks
+      keyStoreType: jks
+      keyStorePassword: my-keystore-password
+      trustStore: /var/secrets/truststore.jks
+      trustStoreType: jks
+      trustStorePassword: my-truststore-password
+      clientAuth: WANT
+    overrideBaseUrl: https://spinnaker.test:8084
+  uiSecurity:
+    ssl:
+      enabled: true
+      sslCertificateFile: /var/secrets/spinnaker.crt
+      sslCertificateKeyFile: /var/secrets/spinnaker.key.pem
+      sslCACertificateFile: /var/secrets/ca.crt
+      sslCertificatePassphrase: my-cert-password
+    overrideBaseUrl: https://spinnaker.test:9000
+  authn:
+    oauth2:
+      enabled: true
+      client:
+        clientId: my-client
+        clientSecret: my-secret
+        accessTokenUri: https://www.googleapis.com/oauth2/v4/token
+        userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+        scope: profile email
+      userInfoRequirements:
+        foo: bar
+        baz: qux
+      resource:
+        userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
+      userInfoMapping:
+        email: email
+        firstName: given_name
+        lastName: family_name
+      provider: GOOGLE
+    saml:
+      enabled: true
+      metadataUrl: /var/secrets/metadata
+      keyStore: /var/secrets/keystore.jks
+      keyStorePassword: my-keystore-password
+      keyStoreAliasName: my-key
+      serviceAddress: https://spinnaker.test:8084
+      redirectProtocol: https
+      redirectHostname: spinnaker.test:8084
+      redirectBasePath: /
+      userAttributeMapping:
+        email: user-email
+    ldap:
+      enabled: true
+      url: ldaps://ldap.my-organization.test:636/dc=my-organization,dc=com
+      userDnPattern: uid={0},ou=users
+      userSearchBase: users
+      userSearchFilter: (d={0})
+      managerPassword: my-manager-password
+      groupSearchBase: groups
+    x509:
+      enabled: true
+      roleOid: 1.2.840.10070.8.1
+      subjectPrincipalRegex: user.*
+    iap:
+      enabled: true
+      jwtHeader: X-JWT-HEADER
+      issuerId: my-issuer-id
+      audience: projects/0/apps/0
+      iapVerifyKeyUrl: https://my-url.test/
+    basic:
+      enabled: true
+      user:
+        username: my-username
+        password: my-password
+    enabled: true

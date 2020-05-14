@@ -86,6 +86,10 @@ func TestHalToServiceYAML(t *testing.T) {
 			"orca.yml",
 			services.GetOrca(),
 		},
+		{
+			"gate.yml",
+			services.GetGate(),
+		},
 	}
 
 	for _, tt := range halToServiceTests {
