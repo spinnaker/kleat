@@ -41,8 +41,8 @@ be used as input to Kleat.
   store and Prometheus as your metric source, your `canary.serviceIntegrations`
   block is only required to have `google` and `prometheus` entries.
 - There are two changes to SAML config in the `security.authn.saml` block in the
-  halconfig
-  - Halyard has two separate fields for the medatadata depending on whether it
+  halconfig:
+  - Halyard has two separate fields for the metadata depending on whether it
     represents a local file (`metadataLocal`) or a remote file
     (`metadataRemote`). Kleat does not make this distinction and requires the
     metadata location to be specified under the `metadataUrl` field. Users
@@ -52,14 +52,14 @@ be used as input to Kleat.
     this prefix if it is missing for a local file).
   - Halyard requires the `redirectUrl` to be configured as a full URL (ex:
     `https://gate.org.com:8084/mypath`). Kleat will require that the redirect
-    host name, path, and protocol be separately configured. Users will nned to
+    host name, path, and protocol be separately configured. Users will need to
     remove the `redirectUrl` field and instead specify the following fields:
     - `redirectProtocol` (ex: `https`)
     - `redirectHostname` (ex: `gate.org.com:8084`)
     - `redirectBasePath` (ex: `/mypath`)
 - Halyard allowed basic username/password authentication to be configured for
   Gate by adding entries to the `~/.hal/default/service-settings/gate.yml` file.
-  Kleat will move this configuration to be alongside the configuratino of other
+  Kleat will move this configuration to be alongside the configuration of other
   authentication methods in the halconfig. Users who have configured basic auth
   for Gate in the above file will need to instead specify their basic auth
   settings in `security.authn.basic` in their halconfig.
