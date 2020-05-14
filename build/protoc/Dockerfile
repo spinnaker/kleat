@@ -7,7 +7,7 @@ RUN curl -L https://github.com/protocolbuffers/protobuf-go/releases/download/$PR
  | tar -xz
 
 FROM curl as protoc-gen-doc
-ARG PROTOC_GEN_DOC_TAG=1.3.1
+ARG PROTOC_GEN_DOC_TAG=1.3.2
 RUN curl -L https://github.com/pseudomuto/protoc-gen-doc/releases/download/v$PROTOC_GEN_DOC_TAG/protoc-gen-doc-$PROTOC_GEN_DOC_TAG.linux-amd64.go1.12.6.tar.gz \
  | tar --strip-components=1 -xz
 
