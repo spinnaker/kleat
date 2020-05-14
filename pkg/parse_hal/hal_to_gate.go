@@ -29,11 +29,11 @@ func HalToGate(h *config.Hal) *config.Gate {
 			// need to set these values here, we'll need to add them to the Server
 			// proto and set them here.
 		},
-		Cors:   &config.Cors{AllowedOriginsPattern: h.GetSecurity().GetApiSecurity().GetCorsAccessPattern()},
-		Spring: &config.Gate_Spring{Oauth2: h.GetSecurity().GetAuthn().GetOauth2()},
-		Saml:   h.GetSecurity().GetAuthn().GetSaml(),
-		Ldap:   h.GetSecurity().GetAuthn().GetLdap(),
-		X509:   h.GetSecurity().GetAuthn().GetX509(),
-		Google: &config.Gate_GoogleConfig{Iap: h.GetSecurity().GetAuthn().GetIap()},
+		Cors:     &config.Cors{AllowedOriginsPattern: h.GetSecurity().GetApiSecurity().GetCorsAccessPattern()},
+		Security: &config.SpringSecurity{Oauth2: h.GetSecurity().GetAuthn().GetOauth2()},
+		Saml:     h.GetSecurity().GetAuthn().GetSaml(),
+		Ldap:     h.GetSecurity().GetAuthn().GetLdap(),
+		X509:     h.GetSecurity().GetAuthn().GetX509(),
+		Google:   &config.Gate_GoogleConfig{Iap: h.GetSecurity().GetAuthn().GetIap()},
 	}
 }

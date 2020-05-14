@@ -305,8 +305,8 @@
     - [Cors](#proto.config.Cors)
     - [Gate](#proto.config.Gate)
     - [Gate.GoogleConfig](#proto.config.Gate.GoogleConfig)
-    - [Gate.Spring](#proto.config.Gate.Spring)
     - [ServerConfig](#proto.config.ServerConfig)
+    - [SpringSecurity](#proto.config.SpringSecurity)
   
   
   
@@ -2870,7 +2870,7 @@ Configuration for the gate microservice.
 | ----- | ---- | ----- | ----------- |
 | server | [ServerConfig](#proto.config.ServerConfig) |  | Web server configuration. |
 | cors | [Cors](#proto.config.Cors) |  | Configuration for cross-origin resource sharing. |
-| spring | [Gate.Spring](#proto.config.Gate.Spring) |  | Wrapper for Spring configuration properties (including OAuth2 authentication). |
+| security | [SpringSecurity](#proto.config.SpringSecurity) |  | Wrapper for Spring configuration properties (including OAuth2 authentication). |
 | saml | [proto.security.Saml](#proto.security.Saml) |  | Configuration for SAML authentication. |
 | ldap | [proto.security.Ldap](#proto.security.Ldap) |  | Configuration for LDAP authentication. |
 | x509 | [proto.security.X509](#proto.security.X509) |  | Configuration for X509 authentication. |
@@ -2896,21 +2896,6 @@ Wrapper for Google-specific authentication.
 
 
 
-<a name="proto.config.Gate.Spring"></a>
-
-### Gate.Spring
-Wrapper for Spring configuration properties.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| oauth2 | [proto.security.OAuth2](#proto.security.OAuth2) |  | Configuration for OAuth2 authentication. |
-
-
-
-
-
-
 <a name="proto.config.ServerConfig"></a>
 
 ### ServerConfig
@@ -2920,6 +2905,21 @@ Web server configuration.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | ssl | [proto.security.ApiSsl](#proto.security.ApiSsl) |  | SSL configuration. |
+
+
+
+
+
+
+<a name="proto.config.SpringSecurity"></a>
+
+### SpringSecurity
+Wrapper for Spring security configuration properties.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| oauth2 | [proto.security.OAuth2](#proto.security.OAuth2) |  | Configuration for OAuth2 authentication. |
 
 
 
@@ -3660,11 +3660,11 @@ Supported OAuth 2.0 providers.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| other | 0 | Other OAuth 2.0 provider. |
-| azure | 1 | Azure OAuth 2.0 provider. |
-| github | 2 | Github OAuth 2.0 provider. |
-| oracle | 3 | Oracle OAuth 2.0 provider. |
-| google | 4 | Google OAuth 2.0 provider. |
+| OTHER | 0 | Other OAuth 2.0 provider. |
+| AZURE | 1 | Azure OAuth 2.0 provider. |
+| GITHUB | 2 | Github OAuth 2.0 provider. |
+| ORACLE | 3 | Oracle OAuth 2.0 provider. |
+| GOOGLE | 4 | Google OAuth 2.0 provider. |
 
 
 
@@ -3812,11 +3812,11 @@ Configuration for which role provider to use for authorization decisions.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| external | 0 | External role provider. |
-| file | 1 | File-based role provider. |
-| google | 2 | Google role provider. |
-| github | 3 | GitHub role provider. |
-| ldap | 4 | LDAP role provider. |
+| EXTERNAL | 0 | External role provider. |
+| FILE | 1 | File-based role provider. |
+| GOOGLE | 2 | Google role provider. |
+| GITHUB | 3 | GitHub role provider. |
+| LDAP | 4 | LDAP role provider. |
 
 
  

@@ -50,19 +50,19 @@ message OAuth2 {
   // Supported OAuth 2.0 providers.
   enum OAuth2Provider {
     // Other OAuth 2.0 provider.
-    other = 0;
+    OTHER = 0;
 
     // Azure OAuth 2.0 provider.
-    azure = 1;
+    AZURE = 1;
 
     // Github OAuth 2.0 provider.
-    github = 2;
+    GITHUB = 2;
 
     // Oracle OAuth 2.0 provider.
-    oracle = 3;
+    ORACLE = 3;
 
     // Google OAuth 2.0 provider.
-    google = 4;
+    GOOGLE = 4;
   }
 }
 
