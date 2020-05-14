@@ -397,6 +397,7 @@
 
 - [security/authn.proto](#security/authn.proto)
     - [Authentication](#proto.security.Authentication)
+    - [Basic](#proto.security.Basic)
     - [Iap](#proto.security.Iap)
     - [Ldap](#proto.security.Ldap)
     - [OAuth2](#proto.security.OAuth2)
@@ -406,6 +407,7 @@
     - [OAuth2UserInfoMapping](#proto.security.OAuth2UserInfoMapping)
     - [Saml](#proto.security.Saml)
     - [Saml.UserAttributes](#proto.security.Saml.UserAttributes)
+    - [UsernamePassword](#proto.security.UsernamePassword)
     - [X509](#proto.security.X509)
   
     - [OAuth2.OAuth2Provider](#proto.security.OAuth2.OAuth2Provider)
@@ -2920,6 +2922,7 @@ Wrapper for Spring security configuration properties.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | oauth2 | [proto.security.OAuth2](#proto.security.OAuth2) |  | Configuration for OAuth2 authentication. |
+| basic | [proto.security.Basic](#proto.security.Basic) |  | Configuration for basic authentication. |
 
 
 
@@ -3430,6 +3433,23 @@ Configuration of how users authenticate against Spinnaker.
 | ldap | [Ldap](#proto.security.Ldap) |  | LDAP configuration. |
 | x509 | [X509](#proto.security.X509) |  | X509 configuration. |
 | iap | [Iap](#proto.security.Iap) |  | Google Cloud Identity-Aware Proxy configuration. |
+| basic | [Basic](#proto.security.Basic) |  | Basic username/password authentication. |
+
+
+
+
+
+
+<a name="proto.security.Basic"></a>
+
+### Basic
+Configuration for basic username/password authentication
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the authentication method is enabled. |
+| user | [UsernamePassword](#proto.security.UsernamePassword) |  | The username and password used to log in via basic authentication. |
 
 
 
@@ -3625,6 +3645,22 @@ Configuration for fields returned from your SAML provider.
 | rolesDelimiter | [string](#string) |  | Roles delimiter. |
 | username | [string](#string) |  | Username. |
 | email | [string](#string) |  | Email. |
+
+
+
+
+
+
+<a name="proto.security.UsernamePassword"></a>
+
+### UsernamePassword
+Configuration for a username/password combination.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| username | [string](#string) |  | Username. |
+| password | [string](#string) |  | Password. |
 
 
 
