@@ -289,7 +289,7 @@
     - [GroupMembership](#proto.security.authz.GroupMembership)
     - [LdapRoleProvider](#proto.security.authz.LdapRoleProvider)
   
-    - [RoleProviderType](#proto.security.authz.RoleProviderType)
+    - [GroupMembership.RoleProviderType](#proto.security.authz.GroupMembership.RoleProviderType)
   
 - [security/security.proto](#security/security.proto)
     - [Security](#proto.security.Security)
@@ -4277,7 +4277,7 @@ Configuration role providers that map users to groups.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| service | [RoleProviderType](#proto.security.authz.RoleProviderType) |  | Configuration for which role provider to use for authorization decisions. |
+| service | [GroupMembership.RoleProviderType](#proto.security.authz.GroupMembership.RoleProviderType) |  | Configuration for which role provider to use for authorization decisions. Each role provider has a corresponding field; configuration specific to the role provider you are using should be added to the appropriate field. |
 | google | [GoogleRoleProvider](#proto.security.authz.GoogleRoleProvider) |  | Configuration for the Google role provider. |
 | github | [GithubRoleProvider](#proto.security.authz.GithubRoleProvider) |  | Configuration for the GitHub role provider. |
 | file | [FileRoleProvider](#proto.security.authz.FileRoleProvider) |  | Configuration for the file-based role provider. |
@@ -4313,9 +4313,9 @@ Configuration for the LDAP role provider.
  
 
 
-<a name="proto.security.authz.RoleProviderType"></a>
+<a name="proto.security.authz.GroupMembership.RoleProviderType"></a>
 
-### RoleProviderType
+### GroupMembership.RoleProviderType
 Configuration for which role provider to use for authorization decisions.
 
 | Name | Number | Description |

@@ -15,6 +15,8 @@ message Authorization {
 // Configuration role providers that map users to groups.
 message GroupMembership {
   // Configuration for which role provider to use for authorization decisions.
+  // Each role provider has a corresponding field; configuration specific to
+  // the role provider you are using should be added to the appropriate field.
   RoleProviderType service = 1;
 
   // Configuration for the Google role provider.
@@ -28,24 +30,24 @@ message GroupMembership {
 
   // Configuration for the LDAP role provider.
   LdapRoleProvider ldap = 5;
-}
 
-// Configuration for which role provider to use for authorization decisions.
-enum RoleProviderType {
-  // External role provider.
-  EXTERNAL = 0;
+  // Configuration for which role provider to use for authorization decisions.
+  enum RoleProviderType {
+    // External role provider.
+    EXTERNAL = 0;
 
-  // File-based role provider.
-  FILE = 1;
+    // File-based role provider.
+    FILE = 1;
 
-  // Google role provider.
-  GOOGLE = 2;
+    // Google role provider.
+    GOOGLE = 2;
 
-  // GitHub role provider.
-  GITHUB = 3;
+    // GitHub role provider.
+    GITHUB = 3;
 
-  // LDAP role provider.
-  LDAP = 4;
+    // LDAP role provider.
+    LDAP = 4;
+  }
 }
 
 // Configuration for the Google role provider.
