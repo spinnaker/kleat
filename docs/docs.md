@@ -206,6 +206,9 @@
 - [config/echo.proto](#config/echo.proto)
     - [Echo](#proto.config.Echo)
   
+- [config/fiat.proto](#config/fiat.proto)
+    - [Fiat](#proto.config.Fiat)
+  
 - [config/front50.proto](#config/front50.proto)
     - [Front50](#proto.config.Front50)
     - [Front50.Spinnaker](#proto.config.Front50.Spinnaker)
@@ -3176,6 +3179,37 @@ Configuration for the echo microservice.
 
 
 
+<a name="config/fiat.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## config/fiat.proto
+
+
+
+<a name="proto.config.Fiat"></a>
+
+### Fiat
+Configuration for the fiat microservice.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| auth | [proto.security.authz.Authorization](#proto.security.authz.Authorization) |  | Configuration for what resources users of Spinnaker can read and modify. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
 <a name="config/front50.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -3548,6 +3582,7 @@ Configuration for Spinnaker&#39;s microservices.
 | front50 | [Front50](#proto.config.Front50) |  |  |
 | orca | [Orca](#proto.config.Orca) |  |  |
 | gate | [Gate](#proto.config.Gate) |  |  |
+| fiat | [Fiat](#proto.config.Fiat) |  |  |
 
 
 

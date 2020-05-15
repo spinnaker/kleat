@@ -1,0 +1,12 @@
+syntax = "proto3";
+package proto.config;
+
+option go_package = "github.com/spinnaker/kleat/api/client/config";
+
+import "security/authz/authz.proto";
+
+// Configuration for the fiat microservice.
+message Fiat {
+  // Configuration for what resources users of Spinnaker can read and modify.
+  security.authz.Authorization auth = 1;
+}
