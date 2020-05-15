@@ -1,0 +1,20 @@
+auth:
+  groupMembership:
+    service: FILE
+    google:
+      credentialPath: /var/secrets/credentials.json
+      adminUsername: my-admin-username
+      domain: myorg.test
+    github:
+      accessToken: my-token
+      organization: my-org
+    file:
+      path: /var/secrets/authz-file.yml
+    ldap:
+      url: ldaps://ldap.my-organization.com:636/dc=my-organization,dc=com
+      managerPassword: my-manager-password
+      userDnPattern: uid={0},ou=users
+      userSearchBase: users
+      groupSearchBase: groups
+      userSearchFilter: (d={0})
+  enabled: true

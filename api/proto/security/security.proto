@@ -3,8 +3,8 @@ package proto.security;
 
 option go_package = "github.com/spinnaker/kleat/api/client/security";
 
-import "security/authn.proto";
-import "security/authz.proto";
+import "security/authn/authn.proto";
+import "security/authz/authz.proto";
 import "security/ssl.proto";
 
 // Configuration for security settings.
@@ -16,8 +16,8 @@ message Security {
   UiSecurity uiSecurity = 2;
 
   // Configuration of how users authenticate against Spinnaker.
-  Authentication authn = 3;
+  authn.Authentication authn = 3;
 
   // Configuration for what resources users of Spinnaker can read and modify.
-  Authorization authz = 4;
+  authz.Authorization authz = 4;
 }

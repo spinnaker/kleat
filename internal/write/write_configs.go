@@ -55,6 +55,9 @@ func WriteConfigs(halPath string, dir string) error {
 	if err := write(services.GetGate(), filepath.Join(dir, "gate.yml")); err != nil {
 		return err
 	}
+	if err := write(services.GetFiat(), filepath.Join(dir, "fiat.yml")); err != nil {
+		return err
+	}
 	return nil
 }
 

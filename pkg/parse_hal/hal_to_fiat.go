@@ -13,17 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package parse_hal
 
-import "github.com/spinnaker/kleat/api/client/config"
+import (
+	"github.com/spinnaker/kleat/api/client/config"
+)
 
-func HalToServiceConfigs(h *config.Hal) *config.Services {
-	return &config.Services{
-		Clouddriver: HalToClouddriver(h),
-		Echo:        HalToEcho(h),
-		Front50:     HalToFront50(h),
-		Orca:        HalToOrca(h),
-		Gate:        HalToGate(h),
-		Fiat:        HalToFiat(h),
+func HalToFiat(h *config.Hal) *config.Fiat {
+	return &config.Fiat{
+		Auth: h.GetSecurity().GetAuthz(),
 	}
 }

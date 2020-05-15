@@ -46,6 +46,7 @@ func TestHalToServiceConfigs(t *testing.T) {
 		Front50:     parse_hal.HalToFront50(h),
 		Orca:        parse_hal.HalToOrca(h),
 		Gate:        parse_hal.HalToGate(h),
+		Fiat:        parse_hal.HalToFiat(h),
 	}
 
 	if !proto.Equal(gotS, wantS) {
@@ -89,6 +90,10 @@ func TestHalToServiceYAML(t *testing.T) {
 		{
 			"gate.yml",
 			services.GetGate(),
+		},
+		{
+			"fiat.yml",
+			services.GetFiat(),
 		},
 	}
 
