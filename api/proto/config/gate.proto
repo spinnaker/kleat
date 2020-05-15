@@ -3,7 +3,7 @@ package proto.config;
 
 option go_package = "github.com/spinnaker/kleat/api/client/config";
 
-import "security/authn.proto";
+import "security/authn/authn.proto";
 import "security/ssl.proto";
 
 // Configuration for the gate microservice.
@@ -18,13 +18,13 @@ message Gate {
   SpringSecurity security = 3;
 
   // Configuration for SAML authentication.
-  security.Saml saml = 4;
+  security.authn.Saml saml = 4;
 
   // Configuration for LDAP authentication.
-  security.Ldap ldap = 5;
+  security.authn.Ldap ldap = 5;
 
   // Configuration for X509 authentication.
-  security.X509 x509 = 6;
+  security.authn.X509 x509 = 6;
 
   // Wrapper for Google-specific authentication (ex: IAP).
   GoogleConfig google = 7;
@@ -32,17 +32,17 @@ message Gate {
   // Wrapper for Google-specific authentication.
   message GoogleConfig {
     // Configuration for Identity-Aware Proxy authentication.
-    security.Iap iap = 1;
+    security.authn.Iap iap = 1;
   }
 }
 
 // Wrapper for Spring security configuration properties.
 message SpringSecurity {
   // Configuration for OAuth2 authentication.
-  security.OAuth2 oauth2 = 1;
+  security.authn.OAuth2 oauth2 = 1;
 
   // Configuration for basic authentication.
-  security.Basic basic = 2;
+  security.authn.Basic basic = 2;
 }
 
 // Web server configuration.

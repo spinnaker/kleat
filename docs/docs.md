@@ -263,33 +263,33 @@
 - [pubsub/pubsub.proto](#pubsub/pubsub.proto)
     - [Pubsub](#proto.pubsub.Pubsub)
   
-- [security/authn.proto](#security/authn.proto)
-    - [Authentication](#proto.security.Authentication)
-    - [Basic](#proto.security.Basic)
-    - [Iap](#proto.security.Iap)
-    - [Ldap](#proto.security.Ldap)
-    - [OAuth2](#proto.security.OAuth2)
-    - [OAuth2.UserInfoRequirementsEntry](#proto.security.OAuth2.UserInfoRequirementsEntry)
-    - [OAuth2Client](#proto.security.OAuth2Client)
-    - [OAuth2Resource](#proto.security.OAuth2Resource)
-    - [OAuth2UserInfoMapping](#proto.security.OAuth2UserInfoMapping)
-    - [Saml](#proto.security.Saml)
-    - [Saml.UserAttributes](#proto.security.Saml.UserAttributes)
-    - [UsernamePassword](#proto.security.UsernamePassword)
-    - [X509](#proto.security.X509)
+- [security/authn/authn.proto](#security/authn/authn.proto)
+    - [Authentication](#proto.security.authn.Authentication)
+    - [Basic](#proto.security.authn.Basic)
+    - [Iap](#proto.security.authn.Iap)
+    - [Ldap](#proto.security.authn.Ldap)
+    - [OAuth2](#proto.security.authn.OAuth2)
+    - [OAuth2.UserInfoRequirementsEntry](#proto.security.authn.OAuth2.UserInfoRequirementsEntry)
+    - [OAuth2Client](#proto.security.authn.OAuth2Client)
+    - [OAuth2Resource](#proto.security.authn.OAuth2Resource)
+    - [OAuth2UserInfoMapping](#proto.security.authn.OAuth2UserInfoMapping)
+    - [Saml](#proto.security.authn.Saml)
+    - [Saml.UserAttributes](#proto.security.authn.Saml.UserAttributes)
+    - [UsernamePassword](#proto.security.authn.UsernamePassword)
+    - [X509](#proto.security.authn.X509)
   
-    - [OAuth2.OAuth2Provider](#proto.security.OAuth2.OAuth2Provider)
-    - [OAuth2Client.AuthenticationScheme](#proto.security.OAuth2Client.AuthenticationScheme)
+    - [OAuth2.OAuth2Provider](#proto.security.authn.OAuth2.OAuth2Provider)
+    - [OAuth2Client.AuthenticationScheme](#proto.security.authn.OAuth2Client.AuthenticationScheme)
   
-- [security/authz.proto](#security/authz.proto)
-    - [Authorization](#proto.security.Authorization)
-    - [FileRoleProvider](#proto.security.FileRoleProvider)
-    - [GithubRoleProvider](#proto.security.GithubRoleProvider)
-    - [GoogleRoleProvider](#proto.security.GoogleRoleProvider)
-    - [GroupMembership](#proto.security.GroupMembership)
-    - [LdapRoleProvider](#proto.security.LdapRoleProvider)
+- [security/authz/authz.proto](#security/authz/authz.proto)
+    - [Authorization](#proto.security.authz.Authorization)
+    - [FileRoleProvider](#proto.security.authz.FileRoleProvider)
+    - [GithubRoleProvider](#proto.security.authz.GithubRoleProvider)
+    - [GoogleRoleProvider](#proto.security.authz.GoogleRoleProvider)
+    - [GroupMembership](#proto.security.authz.GroupMembership)
+    - [LdapRoleProvider](#proto.security.authz.LdapRoleProvider)
   
-    - [RoleProviderType](#proto.security.RoleProviderType)
+    - [RoleProviderType](#proto.security.authz.RoleProviderType)
   
 - [security/security.proto](#security/security.proto)
     - [Security](#proto.security.Security)
@@ -3258,9 +3258,9 @@ Configuration for the gate microservice.
 | server | [ServerConfig](#proto.config.ServerConfig) |  | Web server configuration. |
 | cors | [Cors](#proto.config.Cors) |  | Configuration for cross-origin resource sharing. |
 | security | [SpringSecurity](#proto.config.SpringSecurity) |  | Wrapper for Spring configuration properties (including OAuth2 authentication). |
-| saml | [proto.security.Saml](#proto.security.Saml) |  | Configuration for SAML authentication. |
-| ldap | [proto.security.Ldap](#proto.security.Ldap) |  | Configuration for LDAP authentication. |
-| x509 | [proto.security.X509](#proto.security.X509) |  | Configuration for X509 authentication. |
+| saml | [proto.security.authn.Saml](#proto.security.authn.Saml) |  | Configuration for SAML authentication. |
+| ldap | [proto.security.authn.Ldap](#proto.security.authn.Ldap) |  | Configuration for LDAP authentication. |
+| x509 | [proto.security.authn.X509](#proto.security.authn.X509) |  | Configuration for X509 authentication. |
 | google | [Gate.GoogleConfig](#proto.config.Gate.GoogleConfig) |  | Wrapper for Google-specific authentication (ex: IAP). |
 
 
@@ -3276,7 +3276,7 @@ Wrapper for Google-specific authentication.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| iap | [proto.security.Iap](#proto.security.Iap) |  | Configuration for Identity-Aware Proxy authentication. |
+| iap | [proto.security.authn.Iap](#proto.security.authn.Iap) |  | Configuration for Identity-Aware Proxy authentication. |
 
 
 
@@ -3306,8 +3306,8 @@ Wrapper for Spring security configuration properties.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| oauth2 | [proto.security.OAuth2](#proto.security.OAuth2) |  | Configuration for OAuth2 authentication. |
-| basic | [proto.security.Basic](#proto.security.Basic) |  | Configuration for basic authentication. |
+| oauth2 | [proto.security.authn.OAuth2](#proto.security.authn.OAuth2) |  | Configuration for OAuth2 authentication. |
+| basic | [proto.security.authn.Basic](#proto.security.authn.Basic) |  | Configuration for basic authentication. |
 
 
 
@@ -3884,14 +3884,14 @@ Configuration for Pub/Sub integration.
 
 
 
-<a name="security/authn.proto"></a>
+<a name="security/authn/authn.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## security/authn.proto
+## security/authn/authn.proto
 
 
 
-<a name="proto.security.Authentication"></a>
+<a name="proto.security.authn.Authentication"></a>
 
 ### Authentication
 Configuration of how users authenticate against Spinnaker.
@@ -3900,19 +3900,19 @@ Configuration of how users authenticate against Spinnaker.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether to enabled authentication. |
-| oauth2 | [OAuth2](#proto.security.OAuth2) |  | OAuth 2.0 configuration. |
-| saml | [Saml](#proto.security.Saml) |  | SAML configuration. |
-| ldap | [Ldap](#proto.security.Ldap) |  | LDAP configuration. |
-| x509 | [X509](#proto.security.X509) |  | X509 configuration. |
-| iap | [Iap](#proto.security.Iap) |  | Google Cloud Identity-Aware Proxy configuration. |
-| basic | [Basic](#proto.security.Basic) |  | Basic username/password authentication. |
+| oauth2 | [OAuth2](#proto.security.authn.OAuth2) |  | OAuth 2.0 configuration. |
+| saml | [Saml](#proto.security.authn.Saml) |  | SAML configuration. |
+| ldap | [Ldap](#proto.security.authn.Ldap) |  | LDAP configuration. |
+| x509 | [X509](#proto.security.authn.X509) |  | X509 configuration. |
+| iap | [Iap](#proto.security.authn.Iap) |  | Google Cloud Identity-Aware Proxy configuration. |
+| basic | [Basic](#proto.security.authn.Basic) |  | Basic username/password authentication. |
 
 
 
 
 
 
-<a name="proto.security.Basic"></a>
+<a name="proto.security.authn.Basic"></a>
 
 ### Basic
 Configuration for basic username/password authentication
@@ -3921,14 +3921,14 @@ Configuration for basic username/password authentication
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether the authentication method is enabled. |
-| user | [UsernamePassword](#proto.security.UsernamePassword) |  | The username and password used to log in via basic authentication. |
+| user | [UsernamePassword](#proto.security.authn.UsernamePassword) |  | The username and password used to log in via basic authentication. |
 
 
 
 
 
 
-<a name="proto.security.Iap"></a>
+<a name="proto.security.authn.Iap"></a>
 
 ### Iap
 Configuration for authentication via Google Cloud Identity-Aware Proxy.
@@ -3953,7 +3953,7 @@ the audience field retrieved from the IAP console.
 
 
 
-<a name="proto.security.Ldap"></a>
+<a name="proto.security.authn.Ldap"></a>
 
 ### Ldap
 Configuration for authentication via LDAP.
@@ -3980,7 +3980,7 @@ connection is successful, you&#39;re considered authenticated.
 
 
 
-<a name="proto.security.OAuth2"></a>
+<a name="proto.security.authn.OAuth2"></a>
 
 ### OAuth2
 Configuration for authentication via OAuth 2.0.
@@ -3989,18 +3989,18 @@ Configuration for authentication via OAuth 2.0.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether the authentication method is enabled. |
-| client | [OAuth2Client](#proto.security.OAuth2Client) |  | Configuration for your OAuth 2.0 client. |
-| userInfoRequirements | [OAuth2.UserInfoRequirementsEntry](#proto.security.OAuth2.UserInfoRequirementsEntry) | repeated | The map of requirements the userInfo request must have. This is used to restrict user login to specific domains or having a specific attribute. |
-| resource | [OAuth2Resource](#proto.security.OAuth2Resource) |  | Configuration for OAuth 2.0 resources. |
-| userInfoMapping | [OAuth2UserInfoMapping](#proto.security.OAuth2UserInfoMapping) |  | Mapping of user attributes to fields returned by your OAuth 2.0 provider. This field controls how the fields returned from the OAuth 2.0 provider&#39;s user info endpoint are translated into a Spinnaker user. |
-| provider | [OAuth2.OAuth2Provider](#proto.security.OAuth2.OAuth2Provider) |  | The OAuth 2.0 provider handling authentication. |
+| client | [OAuth2Client](#proto.security.authn.OAuth2Client) |  | Configuration for your OAuth 2.0 client. |
+| userInfoRequirements | [OAuth2.UserInfoRequirementsEntry](#proto.security.authn.OAuth2.UserInfoRequirementsEntry) | repeated | The map of requirements the userInfo request must have. This is used to restrict user login to specific domains or having a specific attribute. |
+| resource | [OAuth2Resource](#proto.security.authn.OAuth2Resource) |  | Configuration for OAuth 2.0 resources. |
+| userInfoMapping | [OAuth2UserInfoMapping](#proto.security.authn.OAuth2UserInfoMapping) |  | Mapping of user attributes to fields returned by your OAuth 2.0 provider. This field controls how the fields returned from the OAuth 2.0 provider&#39;s user info endpoint are translated into a Spinnaker user. |
+| provider | [OAuth2.OAuth2Provider](#proto.security.authn.OAuth2.OAuth2Provider) |  | The OAuth 2.0 provider handling authentication. |
 
 
 
 
 
 
-<a name="proto.security.OAuth2.UserInfoRequirementsEntry"></a>
+<a name="proto.security.authn.OAuth2.UserInfoRequirementsEntry"></a>
 
 ### OAuth2.UserInfoRequirementsEntry
 
@@ -4016,7 +4016,7 @@ Configuration for authentication via OAuth 2.0.
 
 
 
-<a name="proto.security.OAuth2Client"></a>
+<a name="proto.security.authn.OAuth2Client"></a>
 
 ### OAuth2Client
 Configuration for an OAuth 2.0 client.
@@ -4028,7 +4028,7 @@ Configuration for an OAuth 2.0 client.
 | clientSecret | [string](#string) |  | The OAuth client secret you have configured with your OAuth provider. |
 | accessTokenUri | [string](#string) |  | The access token uri for your OAuth provider. |
 | userAuthorizationUri | [string](#string) |  | The user authorization uri for your OAuth 2.0 provider. |
-| clientAuthenticationScheme | [OAuth2Client.AuthenticationScheme](#proto.security.OAuth2Client.AuthenticationScheme) |  | The method used to transmit authentication credentials to your OAuth 2.0 provider. |
+| clientAuthenticationScheme | [OAuth2Client.AuthenticationScheme](#proto.security.authn.OAuth2Client.AuthenticationScheme) |  | The method used to transmit authentication credentials to your OAuth 2.0 provider. |
 | scope | [string](#string) |  | The scope to request when obtaining an access token from your OAuth 2.0 provider. |
 | preEstablishedRedirectUri | [string](#string) |  | The externally accessible URL for Gate. For use with load balancers that do any kind of address manipulation for Gate traffic, such as an SSL terminating load balancer. |
 | useCurrentUri | [bool](#bool) |  | Whether the current URI in the request should be preferred over the pre-established redirect URI. |
@@ -4038,7 +4038,7 @@ Configuration for an OAuth 2.0 client.
 
 
 
-<a name="proto.security.OAuth2Resource"></a>
+<a name="proto.security.authn.OAuth2Resource"></a>
 
 ### OAuth2Resource
 Configuration for OAuth 2.0 resources.
@@ -4053,7 +4053,7 @@ Configuration for OAuth 2.0 resources.
 
 
 
-<a name="proto.security.OAuth2UserInfoMapping"></a>
+<a name="proto.security.authn.OAuth2UserInfoMapping"></a>
 
 ### OAuth2UserInfoMapping
 Mapping of user attributes to fields returned by an OAuth 2.0 provider.
@@ -4073,7 +4073,7 @@ info endpoint are translated into a Spinnaker user.
 
 
 
-<a name="proto.security.Saml"></a>
+<a name="proto.security.authn.Saml"></a>
 
 ### Saml
 Configuration for authentication via SAML.
@@ -4096,14 +4096,14 @@ control flow (through the user&#39;s browser) back to Gate by way of the
 | redirectHostname | [string](#string) |  | The host name of the gate server as accessible by the SAML identity provider. If deployed behind a load balancer, this would be the load balancer&#39;s address. (Ex: gate.org.com:8084) |
 | redirectBasePath | [string](#string) |  | The base path on the gate server to which redirects will be sent. Defaults to &#39;/&#39; if absent. |
 | redirectProtocol | [string](#string) |  | The protocol to use to when redirecting back to the Gate server. Defaults to &#39;https&#39; if absent. |
-| userAttributeMapping | [Saml.UserAttributes](#proto.security.Saml.UserAttributes) |  | Configuration for fields returned from your SAML provider. |
+| userAttributeMapping | [Saml.UserAttributes](#proto.security.authn.Saml.UserAttributes) |  | Configuration for fields returned from your SAML provider. |
 
 
 
 
 
 
-<a name="proto.security.Saml.UserAttributes"></a>
+<a name="proto.security.authn.Saml.UserAttributes"></a>
 
 ### Saml.UserAttributes
 Configuration for fields returned from your SAML provider.
@@ -4123,7 +4123,7 @@ Configuration for fields returned from your SAML provider.
 
 
 
-<a name="proto.security.UsernamePassword"></a>
+<a name="proto.security.authn.UsernamePassword"></a>
 
 ### UsernamePassword
 Configuration for a username/password combination.
@@ -4139,7 +4139,7 @@ Configuration for a username/password combination.
 
 
 
-<a name="proto.security.X509"></a>
+<a name="proto.security.authn.X509"></a>
 
 ### X509
 Configuration for authentication via X509 certificates.
@@ -4161,7 +4161,7 @@ with corresponding group information for the user. This can be configured via -r
  
 
 
-<a name="proto.security.OAuth2.OAuth2Provider"></a>
+<a name="proto.security.authn.OAuth2.OAuth2Provider"></a>
 
 ### OAuth2.OAuth2Provider
 Supported OAuth 2.0 providers.
@@ -4176,7 +4176,7 @@ Supported OAuth 2.0 providers.
 
 
 
-<a name="proto.security.OAuth2Client.AuthenticationScheme"></a>
+<a name="proto.security.authn.OAuth2Client.AuthenticationScheme"></a>
 
 ### OAuth2Client.AuthenticationScheme
 Methods to transmit authentication tokens to an OAuth 2.0 provider.
@@ -4197,14 +4197,14 @@ Methods to transmit authentication tokens to an OAuth 2.0 provider.
 
 
 
-<a name="security/authz.proto"></a>
+<a name="security/authz/authz.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## security/authz.proto
+## security/authz/authz.proto
 
 
 
-<a name="proto.security.Authorization"></a>
+<a name="proto.security.authz.Authorization"></a>
 
 ### Authorization
 Configuration for what resources users of Spinnaker can read and modify.
@@ -4213,14 +4213,14 @@ Configuration for what resources users of Spinnaker can read and modify.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether Spinnaker&#39;s role-based authorization is enabled. |
-| groupMembership | [GroupMembership](#proto.security.GroupMembership) |  | Configuration role providers that map users to groups. |
+| groupMembership | [GroupMembership](#proto.security.authz.GroupMembership) |  | Configuration role providers that map users to groups. |
 
 
 
 
 
 
-<a name="proto.security.FileRoleProvider"></a>
+<a name="proto.security.authz.FileRoleProvider"></a>
 
 ### FileRoleProvider
 Configuration for the file-based role provider.
@@ -4235,7 +4235,7 @@ Configuration for the file-based role provider.
 
 
 
-<a name="proto.security.GithubRoleProvider"></a>
+<a name="proto.security.authz.GithubRoleProvider"></a>
 
 ### GithubRoleProvider
 Configuration for the GitHub role provider.
@@ -4252,7 +4252,7 @@ Configuration for the GitHub role provider.
 
 
 
-<a name="proto.security.GoogleRoleProvider"></a>
+<a name="proto.security.authz.GoogleRoleProvider"></a>
 
 ### GoogleRoleProvider
 Configuration for the Google role provider.
@@ -4269,7 +4269,7 @@ Configuration for the Google role provider.
 
 
 
-<a name="proto.security.GroupMembership"></a>
+<a name="proto.security.authz.GroupMembership"></a>
 
 ### GroupMembership
 Configuration role providers that map users to groups.
@@ -4277,18 +4277,18 @@ Configuration role providers that map users to groups.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| service | [RoleProviderType](#proto.security.RoleProviderType) |  | Configuration for which role provider to use for authorization decisions. |
-| google | [GoogleRoleProvider](#proto.security.GoogleRoleProvider) |  | Configuration for the Google role provider. |
-| github | [GithubRoleProvider](#proto.security.GithubRoleProvider) |  | Configuration for the GitHub role provider. |
-| file | [FileRoleProvider](#proto.security.FileRoleProvider) |  | Configuration for the file-based role provider. |
-| ldap | [LdapRoleProvider](#proto.security.LdapRoleProvider) |  | Configuration for the LDAP role provider. |
+| service | [RoleProviderType](#proto.security.authz.RoleProviderType) |  | Configuration for which role provider to use for authorization decisions. |
+| google | [GoogleRoleProvider](#proto.security.authz.GoogleRoleProvider) |  | Configuration for the Google role provider. |
+| github | [GithubRoleProvider](#proto.security.authz.GithubRoleProvider) |  | Configuration for the GitHub role provider. |
+| file | [FileRoleProvider](#proto.security.authz.FileRoleProvider) |  | Configuration for the file-based role provider. |
+| ldap | [LdapRoleProvider](#proto.security.authz.LdapRoleProvider) |  | Configuration for the LDAP role provider. |
 
 
 
 
 
 
-<a name="proto.security.LdapRoleProvider"></a>
+<a name="proto.security.authz.LdapRoleProvider"></a>
 
 ### LdapRoleProvider
 Configuration for the LDAP role provider.
@@ -4313,7 +4313,7 @@ Configuration for the LDAP role provider.
  
 
 
-<a name="proto.security.RoleProviderType"></a>
+<a name="proto.security.authz.RoleProviderType"></a>
 
 ### RoleProviderType
 Configuration for which role provider to use for authorization decisions.
@@ -4352,8 +4352,8 @@ Configuration for security settings.
 | ----- | ---- | ----- | ----------- |
 | apiSecurity | [ApiSecurity](#proto.security.ApiSecurity) |  | Configuration for the API server&#39;s addressable URL and CORS policies. |
 | uiSecurity | [UiSecurity](#proto.security.UiSecurity) |  | Configuration for the UI server&#39;s addressable URL. |
-| authn | [Authentication](#proto.security.Authentication) |  | Configuration of how users authenticate against Spinnaker. |
-| authz | [Authorization](#proto.security.Authorization) |  | Configuration for what resources users of Spinnaker can read and modify. |
+| authn | [authn.Authentication](#proto.security.authn.Authentication) |  | Configuration of how users authenticate against Spinnaker. |
+| authz | [authz.Authorization](#proto.security.authz.Authorization) |  | Configuration for what resources users of Spinnaker can read and modify. |
 
 
 

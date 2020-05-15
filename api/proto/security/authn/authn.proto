@@ -1,7 +1,7 @@
 syntax = "proto3";
-package proto.security;
+package proto.security.authn;
 
-option go_package = "github.com/spinnaker/kleat/api/client/security";
+option go_package = "github.com/spinnaker/kleat/api/client/security/authn";
 
 // Configuration of how users authenticate against Spinnaker.
 message Authentication {

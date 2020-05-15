@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.22.0
 // 	protoc        v3.11.4
-// source: security/authz.proto
+// source: security/authz/authz.proto
 
-package security
+package authz
 
 import (
 	proto "github.com/golang/protobuf/proto"
@@ -70,11 +70,11 @@ func (x RoleProviderType) String() string {
 }
 
 func (RoleProviderType) Descriptor() protoreflect.EnumDescriptor {
-	return file_security_authz_proto_enumTypes[0].Descriptor()
+	return file_security_authz_authz_proto_enumTypes[0].Descriptor()
 }
 
 func (RoleProviderType) Type() protoreflect.EnumType {
-	return &file_security_authz_proto_enumTypes[0]
+	return &file_security_authz_authz_proto_enumTypes[0]
 }
 
 func (x RoleProviderType) Number() protoreflect.EnumNumber {
@@ -83,7 +83,7 @@ func (x RoleProviderType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use RoleProviderType.Descriptor instead.
 func (RoleProviderType) EnumDescriptor() ([]byte, []int) {
-	return file_security_authz_proto_rawDescGZIP(), []int{0}
+	return file_security_authz_authz_proto_rawDescGZIP(), []int{0}
 }
 
 // Configuration for what resources users of Spinnaker can read and modify.
@@ -101,7 +101,7 @@ type Authorization struct {
 func (x *Authorization) Reset() {
 	*x = Authorization{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_security_authz_proto_msgTypes[0]
+		mi := &file_security_authz_authz_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -114,7 +114,7 @@ func (x *Authorization) String() string {
 func (*Authorization) ProtoMessage() {}
 
 func (x *Authorization) ProtoReflect() protoreflect.Message {
-	mi := &file_security_authz_proto_msgTypes[0]
+	mi := &file_security_authz_authz_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -127,7 +127,7 @@ func (x *Authorization) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Authorization.ProtoReflect.Descriptor instead.
 func (*Authorization) Descriptor() ([]byte, []int) {
-	return file_security_authz_proto_rawDescGZIP(), []int{0}
+	return file_security_authz_authz_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Authorization) GetEnabled() bool {
@@ -151,7 +151,7 @@ type GroupMembership struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Configuration for which role provider to use for authorization decisions.
-	Service RoleProviderType `protobuf:"varint,1,opt,name=service,proto3,enum=proto.security.RoleProviderType" json:"service,omitempty"`
+	Service RoleProviderType `protobuf:"varint,1,opt,name=service,proto3,enum=proto.security.authz.RoleProviderType" json:"service,omitempty"`
 	// Configuration for the Google role provider.
 	Google *GoogleRoleProvider `protobuf:"bytes,2,opt,name=google,proto3" json:"google,omitempty"`
 	// Configuration for the GitHub role provider.
@@ -165,7 +165,7 @@ type GroupMembership struct {
 func (x *GroupMembership) Reset() {
 	*x = GroupMembership{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_security_authz_proto_msgTypes[1]
+		mi := &file_security_authz_authz_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -178,7 +178,7 @@ func (x *GroupMembership) String() string {
 func (*GroupMembership) ProtoMessage() {}
 
 func (x *GroupMembership) ProtoReflect() protoreflect.Message {
-	mi := &file_security_authz_proto_msgTypes[1]
+	mi := &file_security_authz_authz_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -191,7 +191,7 @@ func (x *GroupMembership) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GroupMembership.ProtoReflect.Descriptor instead.
 func (*GroupMembership) Descriptor() ([]byte, []int) {
-	return file_security_authz_proto_rawDescGZIP(), []int{1}
+	return file_security_authz_authz_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *GroupMembership) GetService() RoleProviderType {
@@ -247,7 +247,7 @@ type GoogleRoleProvider struct {
 func (x *GoogleRoleProvider) Reset() {
 	*x = GoogleRoleProvider{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_security_authz_proto_msgTypes[2]
+		mi := &file_security_authz_authz_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -260,7 +260,7 @@ func (x *GoogleRoleProvider) String() string {
 func (*GoogleRoleProvider) ProtoMessage() {}
 
 func (x *GoogleRoleProvider) ProtoReflect() protoreflect.Message {
-	mi := &file_security_authz_proto_msgTypes[2]
+	mi := &file_security_authz_authz_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -273,7 +273,7 @@ func (x *GoogleRoleProvider) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GoogleRoleProvider.ProtoReflect.Descriptor instead.
 func (*GoogleRoleProvider) Descriptor() ([]byte, []int) {
-	return file_security_authz_proto_rawDescGZIP(), []int{2}
+	return file_security_authz_authz_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *GoogleRoleProvider) GetCredentialPath() string {
@@ -315,7 +315,7 @@ type GithubRoleProvider struct {
 func (x *GithubRoleProvider) Reset() {
 	*x = GithubRoleProvider{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_security_authz_proto_msgTypes[3]
+		mi := &file_security_authz_authz_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -328,7 +328,7 @@ func (x *GithubRoleProvider) String() string {
 func (*GithubRoleProvider) ProtoMessage() {}
 
 func (x *GithubRoleProvider) ProtoReflect() protoreflect.Message {
-	mi := &file_security_authz_proto_msgTypes[3]
+	mi := &file_security_authz_authz_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -341,7 +341,7 @@ func (x *GithubRoleProvider) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GithubRoleProvider.ProtoReflect.Descriptor instead.
 func (*GithubRoleProvider) Descriptor() ([]byte, []int) {
-	return file_security_authz_proto_rawDescGZIP(), []int{3}
+	return file_security_authz_authz_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *GithubRoleProvider) GetBaseUrl() string {
@@ -378,7 +378,7 @@ type FileRoleProvider struct {
 func (x *FileRoleProvider) Reset() {
 	*x = FileRoleProvider{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_security_authz_proto_msgTypes[4]
+		mi := &file_security_authz_authz_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -391,7 +391,7 @@ func (x *FileRoleProvider) String() string {
 func (*FileRoleProvider) ProtoMessage() {}
 
 func (x *FileRoleProvider) ProtoReflect() protoreflect.Message {
-	mi := &file_security_authz_proto_msgTypes[4]
+	mi := &file_security_authz_authz_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -404,7 +404,7 @@ func (x *FileRoleProvider) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FileRoleProvider.ProtoReflect.Descriptor instead.
 func (*FileRoleProvider) Descriptor() ([]byte, []int) {
-	return file_security_authz_proto_rawDescGZIP(), []int{4}
+	return file_security_authz_authz_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *FileRoleProvider) GetPath() string {
@@ -453,7 +453,7 @@ type LdapRoleProvider struct {
 func (x *LdapRoleProvider) Reset() {
 	*x = LdapRoleProvider{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_security_authz_proto_msgTypes[5]
+		mi := &file_security_authz_authz_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -466,7 +466,7 @@ func (x *LdapRoleProvider) String() string {
 func (*LdapRoleProvider) ProtoMessage() {}
 
 func (x *LdapRoleProvider) ProtoReflect() protoreflect.Message {
-	mi := &file_security_authz_proto_msgTypes[5]
+	mi := &file_security_authz_authz_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -479,7 +479,7 @@ func (x *LdapRoleProvider) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LdapRoleProvider.ProtoReflect.Descriptor instead.
 func (*LdapRoleProvider) Descriptor() ([]byte, []int) {
-	return file_security_authz_proto_rawDescGZIP(), []int{5}
+	return file_security_authz_authz_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *LdapRoleProvider) GetUrl() string {
@@ -545,37 +545,40 @@ func (x *LdapRoleProvider) GetGroupRoleAttributes() string {
 	return ""
 }
 
-var File_security_authz_proto protoreflect.FileDescriptor
+var File_security_authz_authz_proto protoreflect.FileDescriptor
 
-var file_security_authz_proto_rawDesc = []byte{
-	0x0a, 0x14, 0x73, 0x65, 0x63, 0x75, 0x72, 0x69, 0x74, 0x79, 0x2f, 0x61, 0x75, 0x74, 0x68, 0x7a,
-	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x73, 0x65,
-	0x63, 0x75, 0x72, 0x69, 0x74, 0x79, 0x22, 0x74, 0x0a, 0x0d, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72,
-	0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x18, 0x0a, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c,
-	0x65, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65,
-	0x64, 0x12, 0x49, 0x0a, 0x0f, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72,
-	0x73, 0x68, 0x69, 0x70, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x2e, 0x73, 0x65, 0x63, 0x75, 0x72, 0x69, 0x74, 0x79, 0x2e, 0x47, 0x72, 0x6f, 0x75,
-	0x70, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x52, 0x0f, 0x67, 0x72, 0x6f,
-	0x75, 0x70, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x22, 0xb1, 0x02, 0x0a,
-	0x0f, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70,
-	0x12, 0x3a, 0x0a, 0x07, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x0e, 0x32, 0x20, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x73, 0x65, 0x63, 0x75, 0x72, 0x69,
-	0x74, 0x79, 0x2e, 0x52, 0x6f, 0x6c, 0x65, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x54,
-	0x79, 0x70, 0x65, 0x52, 0x07, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x3a, 0x0a, 0x06,
-	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x22, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x73, 0x65, 0x63, 0x75, 0x72, 0x69, 0x74, 0x79, 0x2e, 0x47, 0x6f,
-	0x6f, 0x67, 0x6c, 0x65, 0x52, 0x6f, 0x6c, 0x65, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72,
-	0x52, 0x06, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x12, 0x3a, 0x0a, 0x06, 0x67, 0x69, 0x74, 0x68,
-	0x75, 0x62, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x22, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x2e, 0x73, 0x65, 0x63, 0x75, 0x72, 0x69, 0x74, 0x79, 0x2e, 0x47, 0x69, 0x74, 0x68, 0x75, 0x62,
-	0x52, 0x6f, 0x6c, 0x65, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x52, 0x06, 0x67, 0x69,
-	0x74, 0x68, 0x75, 0x62, 0x12, 0x34, 0x0a, 0x04, 0x66, 0x69, 0x6c, 0x65, 0x18, 0x04, 0x20, 0x01,
-	0x28, 0x0b, 0x32, 0x20, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x73, 0x65, 0x63, 0x75, 0x72,
-	0x69, 0x74, 0x79, 0x2e, 0x46, 0x69, 0x6c, 0x65, 0x52, 0x6f, 0x6c, 0x65, 0x50, 0x72, 0x6f, 0x76,
-	0x69, 0x64, 0x65, 0x72, 0x52, 0x04, 0x66, 0x69, 0x6c, 0x65, 0x12, 0x34, 0x0a, 0x04, 0x6c, 0x64,
-	0x61, 0x70, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x2e, 0x73, 0x65, 0x63, 0x75, 0x72, 0x69, 0x74, 0x79, 0x2e, 0x4c, 0x64, 0x61, 0x70, 0x52, 0x6f,
+var file_security_authz_authz_proto_rawDesc = []byte{
+	0x0a, 0x1a, 0x73, 0x65, 0x63, 0x75, 0x72, 0x69, 0x74, 0x79, 0x2f, 0x61, 0x75, 0x74, 0x68, 0x7a,
+	0x2f, 0x61, 0x75, 0x74, 0x68, 0x7a, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x14, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x2e, 0x73, 0x65, 0x63, 0x75, 0x72, 0x69, 0x74, 0x79, 0x2e, 0x61, 0x75, 0x74,
+	0x68, 0x7a, 0x22, 0x7a, 0x0a, 0x0d, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x12, 0x18, 0x0a, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x12, 0x4f, 0x0a,
+	0x0f, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x25, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x73,
+	0x65, 0x63, 0x75, 0x72, 0x69, 0x74, 0x79, 0x2e, 0x61, 0x75, 0x74, 0x68, 0x7a, 0x2e, 0x47, 0x72,
+	0x6f, 0x75, 0x70, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x52, 0x0f, 0x67,
+	0x72, 0x6f, 0x75, 0x70, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x22, 0xcf,
+	0x02, 0x0a, 0x0f, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68,
+	0x69, 0x70, 0x12, 0x40, 0x0a, 0x07, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0e, 0x32, 0x26, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x73, 0x65, 0x63, 0x75,
+	0x72, 0x69, 0x74, 0x79, 0x2e, 0x61, 0x75, 0x74, 0x68, 0x7a, 0x2e, 0x52, 0x6f, 0x6c, 0x65, 0x50,
+	0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x54, 0x79, 0x70, 0x65, 0x52, 0x07, 0x73, 0x65, 0x72,
+	0x76, 0x69, 0x63, 0x65, 0x12, 0x40, 0x0a, 0x06, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x28, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x73, 0x65, 0x63,
+	0x75, 0x72, 0x69, 0x74, 0x79, 0x2e, 0x61, 0x75, 0x74, 0x68, 0x7a, 0x2e, 0x47, 0x6f, 0x6f, 0x67,
+	0x6c, 0x65, 0x52, 0x6f, 0x6c, 0x65, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x52, 0x06,
+	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x12, 0x40, 0x0a, 0x06, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x28, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x73,
+	0x65, 0x63, 0x75, 0x72, 0x69, 0x74, 0x79, 0x2e, 0x61, 0x75, 0x74, 0x68, 0x7a, 0x2e, 0x47, 0x69,
+	0x74, 0x68, 0x75, 0x62, 0x52, 0x6f, 0x6c, 0x65, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72,
+	0x52, 0x06, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x12, 0x3a, 0x0a, 0x04, 0x66, 0x69, 0x6c, 0x65,
+	0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x73,
+	0x65, 0x63, 0x75, 0x72, 0x69, 0x74, 0x79, 0x2e, 0x61, 0x75, 0x74, 0x68, 0x7a, 0x2e, 0x46, 0x69,
+	0x6c, 0x65, 0x52, 0x6f, 0x6c, 0x65, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x52, 0x04,
+	0x66, 0x69, 0x6c, 0x65, 0x12, 0x3a, 0x0a, 0x04, 0x6c, 0x64, 0x61, 0x70, 0x18, 0x05, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x26, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x73, 0x65, 0x63, 0x75, 0x72,
+	0x69, 0x74, 0x79, 0x2e, 0x61, 0x75, 0x74, 0x68, 0x7a, 0x2e, 0x4c, 0x64, 0x61, 0x70, 0x52, 0x6f,
 	0x6c, 0x65, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x52, 0x04, 0x6c, 0x64, 0x61, 0x70,
 	0x22, 0x7a, 0x0a, 0x12, 0x47, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x52, 0x6f, 0x6c, 0x65, 0x50, 0x72,
 	0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x12, 0x26, 0x0a, 0x0e, 0x63, 0x72, 0x65, 0x64, 0x65, 0x6e,
@@ -622,43 +625,43 @@ var file_security_authz_proto_rawDesc = []byte{
 	0x65, 0x12, 0x0c, 0x0a, 0x08, 0x45, 0x58, 0x54, 0x45, 0x52, 0x4e, 0x41, 0x4c, 0x10, 0x00, 0x12,
 	0x08, 0x0a, 0x04, 0x46, 0x49, 0x4c, 0x45, 0x10, 0x01, 0x12, 0x0a, 0x0a, 0x06, 0x47, 0x4f, 0x4f,
 	0x47, 0x4c, 0x45, 0x10, 0x02, 0x12, 0x0a, 0x0a, 0x06, 0x47, 0x49, 0x54, 0x48, 0x55, 0x42, 0x10,
-	0x03, 0x12, 0x08, 0x0a, 0x04, 0x4c, 0x44, 0x41, 0x50, 0x10, 0x04, 0x42, 0x30, 0x5a, 0x2e, 0x67,
+	0x03, 0x12, 0x08, 0x0a, 0x04, 0x4c, 0x44, 0x41, 0x50, 0x10, 0x04, 0x42, 0x36, 0x5a, 0x34, 0x67,
 	0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x69, 0x6e, 0x6e, 0x61,
 	0x6b, 0x65, 0x72, 0x2f, 0x6b, 0x6c, 0x65, 0x61, 0x74, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x6c,
-	0x69, 0x65, 0x6e, 0x74, 0x2f, 0x73, 0x65, 0x63, 0x75, 0x72, 0x69, 0x74, 0x79, 0x62, 0x06, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x69, 0x65, 0x6e, 0x74, 0x2f, 0x73, 0x65, 0x63, 0x75, 0x72, 0x69, 0x74, 0x79, 0x2f, 0x61, 0x75,
+	0x74, 0x68, 0x7a, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
-	file_security_authz_proto_rawDescOnce sync.Once
-	file_security_authz_proto_rawDescData = file_security_authz_proto_rawDesc
+	file_security_authz_authz_proto_rawDescOnce sync.Once
+	file_security_authz_authz_proto_rawDescData = file_security_authz_authz_proto_rawDesc
 )
 
-func file_security_authz_proto_rawDescGZIP() []byte {
-	file_security_authz_proto_rawDescOnce.Do(func() {
-		file_security_authz_proto_rawDescData = protoimpl.X.CompressGZIP(file_security_authz_proto_rawDescData)
+func file_security_authz_authz_proto_rawDescGZIP() []byte {
+	file_security_authz_authz_proto_rawDescOnce.Do(func() {
+		file_security_authz_authz_proto_rawDescData = protoimpl.X.CompressGZIP(file_security_authz_authz_proto_rawDescData)
 	})
-	return file_security_authz_proto_rawDescData
+	return file_security_authz_authz_proto_rawDescData
 }
 
-var file_security_authz_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_security_authz_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
-var file_security_authz_proto_goTypes = []interface{}{
-	(RoleProviderType)(0),      // 0: proto.security.RoleProviderType
-	(*Authorization)(nil),      // 1: proto.security.Authorization
-	(*GroupMembership)(nil),    // 2: proto.security.GroupMembership
-	(*GoogleRoleProvider)(nil), // 3: proto.security.GoogleRoleProvider
-	(*GithubRoleProvider)(nil), // 4: proto.security.GithubRoleProvider
-	(*FileRoleProvider)(nil),   // 5: proto.security.FileRoleProvider
-	(*LdapRoleProvider)(nil),   // 6: proto.security.LdapRoleProvider
+var file_security_authz_authz_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_security_authz_authz_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_security_authz_authz_proto_goTypes = []interface{}{
+	(RoleProviderType)(0),      // 0: proto.security.authz.RoleProviderType
+	(*Authorization)(nil),      // 1: proto.security.authz.Authorization
+	(*GroupMembership)(nil),    // 2: proto.security.authz.GroupMembership
+	(*GoogleRoleProvider)(nil), // 3: proto.security.authz.GoogleRoleProvider
+	(*GithubRoleProvider)(nil), // 4: proto.security.authz.GithubRoleProvider
+	(*FileRoleProvider)(nil),   // 5: proto.security.authz.FileRoleProvider
+	(*LdapRoleProvider)(nil),   // 6: proto.security.authz.LdapRoleProvider
 }
-var file_security_authz_proto_depIdxs = []int32{
-	2, // 0: proto.security.Authorization.groupMembership:type_name -> proto.security.GroupMembership
-	0, // 1: proto.security.GroupMembership.service:type_name -> proto.security.RoleProviderType
-	3, // 2: proto.security.GroupMembership.google:type_name -> proto.security.GoogleRoleProvider
-	4, // 3: proto.security.GroupMembership.github:type_name -> proto.security.GithubRoleProvider
-	5, // 4: proto.security.GroupMembership.file:type_name -> proto.security.FileRoleProvider
-	6, // 5: proto.security.GroupMembership.ldap:type_name -> proto.security.LdapRoleProvider
+var file_security_authz_authz_proto_depIdxs = []int32{
+	2, // 0: proto.security.authz.Authorization.groupMembership:type_name -> proto.security.authz.GroupMembership
+	0, // 1: proto.security.authz.GroupMembership.service:type_name -> proto.security.authz.RoleProviderType
+	3, // 2: proto.security.authz.GroupMembership.google:type_name -> proto.security.authz.GoogleRoleProvider
+	4, // 3: proto.security.authz.GroupMembership.github:type_name -> proto.security.authz.GithubRoleProvider
+	5, // 4: proto.security.authz.GroupMembership.file:type_name -> proto.security.authz.FileRoleProvider
+	6, // 5: proto.security.authz.GroupMembership.ldap:type_name -> proto.security.authz.LdapRoleProvider
 	6, // [6:6] is the sub-list for method output_type
 	6, // [6:6] is the sub-list for method input_type
 	6, // [6:6] is the sub-list for extension type_name
@@ -666,13 +669,13 @@ var file_security_authz_proto_depIdxs = []int32{
 	0, // [0:6] is the sub-list for field type_name
 }
 
-func init() { file_security_authz_proto_init() }
-func file_security_authz_proto_init() {
-	if File_security_authz_proto != nil {
+func init() { file_security_authz_authz_proto_init() }
+func file_security_authz_authz_proto_init() {
+	if File_security_authz_authz_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_security_authz_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_security_authz_authz_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Authorization); i {
 			case 0:
 				return &v.state
@@ -684,7 +687,7 @@ func file_security_authz_proto_init() {
 				return nil
 			}
 		}
-		file_security_authz_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+		file_security_authz_authz_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GroupMembership); i {
 			case 0:
 				return &v.state
@@ -696,7 +699,7 @@ func file_security_authz_proto_init() {
 				return nil
 			}
 		}
-		file_security_authz_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+		file_security_authz_authz_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GoogleRoleProvider); i {
 			case 0:
 				return &v.state
@@ -708,7 +711,7 @@ func file_security_authz_proto_init() {
 				return nil
 			}
 		}
-		file_security_authz_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_security_authz_authz_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GithubRoleProvider); i {
 			case 0:
 				return &v.state
@@ -720,7 +723,7 @@ func file_security_authz_proto_init() {
 				return nil
 			}
 		}
-		file_security_authz_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+		file_security_authz_authz_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*FileRoleProvider); i {
 			case 0:
 				return &v.state
@@ -732,7 +735,7 @@ func file_security_authz_proto_init() {
 				return nil
 			}
 		}
-		file_security_authz_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+		file_security_authz_authz_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*LdapRoleProvider); i {
 			case 0:
 				return &v.state
@@ -749,19 +752,19 @@ func file_security_authz_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_security_authz_proto_rawDesc,
+			RawDescriptor: file_security_authz_authz_proto_rawDesc,
 			NumEnums:      1,
 			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_security_authz_proto_goTypes,
-		DependencyIndexes: file_security_authz_proto_depIdxs,
-		EnumInfos:         file_security_authz_proto_enumTypes,
-		MessageInfos:      file_security_authz_proto_msgTypes,
+		GoTypes:           file_security_authz_authz_proto_goTypes,
+		DependencyIndexes: file_security_authz_authz_proto_depIdxs,
+		EnumInfos:         file_security_authz_authz_proto_enumTypes,
+		MessageInfos:      file_security_authz_authz_proto_msgTypes,
 	}.Build()
-	File_security_authz_proto = out.File
-	file_security_authz_proto_rawDesc = nil
-	file_security_authz_proto_goTypes = nil
-	file_security_authz_proto_depIdxs = nil
+	File_security_authz_authz_proto = out.File
+	file_security_authz_authz_proto_rawDesc = nil
+	file_security_authz_authz_proto_goTypes = nil
+	file_security_authz_authz_proto_depIdxs = nil
 }

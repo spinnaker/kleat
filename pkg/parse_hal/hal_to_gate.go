@@ -18,7 +18,7 @@ package parse_hal
 
 import (
 	"github.com/spinnaker/kleat/api/client/config"
-	"github.com/spinnaker/kleat/api/client/security"
+	"github.com/spinnaker/kleat/api/client/security/authn"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -53,7 +53,7 @@ func getSpringConfig(h *config.Hal) *config.SpringSecurity {
 	return result
 }
 
-func getOauth2Config(h *config.Hal) *security.OAuth2 {
+func getOauth2Config(h *config.Hal) *authn.OAuth2 {
 	// TODO(ezimanyi): Consider changing the oauth2 to instead pass through the
 	// config anytime oauth2 != nil. This requires changing the logic in gate
 	// to properly check the enabled flag.

@@ -1,7 +1,7 @@
 syntax = "proto3";
-package proto.security;
+package proto.security.authz;
 
-option go_package = "github.com/spinnaker/kleat/api/client/security";
+option go_package = "github.com/spinnaker/kleat/api/client/security/authz";
 
 // Configuration for what resources users of Spinnaker can read and modify.
 message Authorization {

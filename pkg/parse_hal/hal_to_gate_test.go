@@ -20,6 +20,7 @@ import (
 
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/api/client/security"
+	"github.com/spinnaker/kleat/api/client/security/authn"
 	"github.com/spinnaker/kleat/pkg/parse_hal"
 	"google.golang.org/protobuf/proto"
 )
@@ -80,10 +81,10 @@ var halToGateTests = []struct {
 		"Basic auth",
 		&config.Hal{
 			Security: &security.Security{
-				Authn: &security.Authentication{
-					Basic: &security.Basic{
+				Authn: &authn.Authentication{
+					Basic: &authn.Basic{
 						Enabled: true,
-						User: &security.UsernamePassword{
+						User: &authn.UsernamePassword{
 							Username: "user",
 							Password: "passw0rd",
 						},
@@ -93,9 +94,9 @@ var halToGateTests = []struct {
 		},
 		&config.Gate{
 			Security: &config.SpringSecurity{
-				Basic: &security.Basic{
+				Basic: &authn.Basic{
 					Enabled: true,
-					User: &security.UsernamePassword{
+					User: &authn.UsernamePassword{
 						Username: "user",
 						Password: "passw0rd",
 					},
@@ -107,27 +108,27 @@ var halToGateTests = []struct {
 		"Oauth2 enabled",
 		&config.Hal{
 			Security: &security.Security{
-				Authn: &security.Authentication{
-					Oauth2: &security.OAuth2{
+				Authn: &authn.Authentication{
+					Oauth2: &authn.OAuth2{
 						Enabled: true,
-						Client: &security.OAuth2Client{
+						Client: &authn.OAuth2Client{
 							ClientId:     "my-client",
 							ClientSecret: "my-secret",
 						},
-						Provider: security.OAuth2_GITHUB,
+						Provider: authn.OAuth2_GITHUB,
 					},
 				},
 			},
 		},
 		&config.Gate{
 			Security: &config.SpringSecurity{
-				Oauth2: &security.OAuth2{
+				Oauth2: &authn.OAuth2{
 					Enabled: true,
-					Client: &security.OAuth2Client{
+					Client: &authn.OAuth2Client{
 						ClientId:     "my-client",
 						ClientSecret: "my-secret",
 					},
-					Provider: security.OAuth2_GITHUB,
+					Provider: authn.OAuth2_GITHUB,
 				},
 			},
 		},
@@ -140,14 +141,14 @@ var halToGateTests = []struct {
 		"Oauth2 disabled",
 		&config.Hal{
 			Security: &security.Security{
-				Authn: &security.Authentication{
-					Oauth2: &security.OAuth2{
+				Authn: &authn.Authentication{
+					Oauth2: &authn.OAuth2{
 						Enabled: false,
-						Client: &security.OAuth2Client{
+						Client: &authn.OAuth2Client{
 							ClientId:     "my-client",
 							ClientSecret: "my-secret",
 						},
-						Provider: security.OAuth2_GITHUB,
+						Provider: authn.OAuth2_GITHUB,
 					},
 				},
 			},
@@ -158,8 +159,8 @@ var halToGateTests = []struct {
 		"SAML",
 		&config.Hal{
 			Security: &security.Security{
-				Authn: &security.Authentication{
-					Saml: &security.Saml{
+				Authn: &authn.Authentication{
+					Saml: &authn.Saml{
 						Enabled:     true,
 						MetadataUrl: "https://my-saml-provider.test/",
 					},
@@ -167,7 +168,7 @@ var halToGateTests = []struct {
 			},
 		},
 		&config.Gate{
-			Saml: &security.Saml{
+			Saml: &authn.Saml{
 				Enabled:     true,
 				MetadataUrl: "https://my-saml-provider.test/",
 			},
@@ -177,8 +178,8 @@ var halToGateTests = []struct {
 		"LDAP",
 		&config.Hal{
 			Security: &security.Security{
-				Authn: &security.Authentication{
-					Ldap: &security.Ldap{
+				Authn: &authn.Authentication{
+					Ldap: &authn.Ldap{
 						Enabled: true,
 						Url:     "https://my-ldap-provider.test",
 					},
@@ -186,7 +187,7 @@ var halToGateTests = []struct {
 			},
 		},
 		&config.Gate{
-			Ldap: &security.Ldap{
+			Ldap: &authn.Ldap{
 				Enabled: true,
 				Url:     "https://my-ldap-provider.test",
 			},
@@ -196,8 +197,8 @@ var halToGateTests = []struct {
 		"X509",
 		&config.Hal{
 			Security: &security.Security{
-				Authn: &security.Authentication{
-					X509: &security.X509{
+				Authn: &authn.Authentication{
+					X509: &authn.X509{
 						Enabled: true,
 						RoleOid: "abc",
 					},
@@ -205,7 +206,7 @@ var halToGateTests = []struct {
 			},
 		},
 		&config.Gate{
-			X509: &security.X509{
+			X509: &authn.X509{
 				Enabled: true,
 				RoleOid: "abc",
 			},
@@ -215,8 +216,8 @@ var halToGateTests = []struct {
 		"IAP",
 		&config.Hal{
 			Security: &security.Security{
-				Authn: &security.Authentication{
-					Iap: &security.Iap{
+				Authn: &authn.Authentication{
+					Iap: &authn.Iap{
 						Enabled:   true,
 						JwtHeader: "my-header",
 						IssuerId:  "abc",
@@ -226,7 +227,7 @@ var halToGateTests = []struct {
 		},
 		&config.Gate{
 			Google: &config.Gate_GoogleConfig{
-				Iap: &security.Iap{
+				Iap: &authn.Iap{
 					Enabled:   true,
 					JwtHeader: "my-header",
 					IssuerId:  "abc",
