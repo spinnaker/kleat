@@ -63,6 +63,10 @@ be used as input to Kleat.
   authentication methods in the halconfig. Users who have configured basic auth
   for Gate in the above file will need to instead specify their basic auth
   settings in `security.authn.basic` in their halconfig.
+- In the `security.authz.groupMembership` block, there is a field
+  `roleProviderType` under each configurable role provider. This field can be
+  removed as it was only used internally by Halyard and does not affect the
+  generated config.
 
 #### Optional Changes
 
