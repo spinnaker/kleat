@@ -3583,6 +3583,7 @@ Configuration for Spinnaker&#39;s microservices.
 | orca | [Orca](#proto.config.Orca) |  |  |
 | gate | [Gate](#proto.config.Gate) |  |  |
 | fiat | [Fiat](#proto.config.Fiat) |  |  |
+| kayenta | [Kayenta](#proto.config.Kayenta) |  |  |
 
 
 
