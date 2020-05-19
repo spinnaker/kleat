@@ -9,6 +9,7 @@ import "config/fiat.proto";
 import "config/front50.proto";
 import "config/gate.proto";
 import "config/orca.proto";
+import "config/kayenta.proto";
 
 // Configuration for Spinnaker's microservices.
 message Services {
@@ -18,4 +19,5 @@ message Services {
   Orca orca = 4;
   Gate gate = 5;
   Fiat fiat = 6;
+  Kayenta kayenta = 7;
 }
