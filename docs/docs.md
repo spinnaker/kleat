@@ -3332,6 +3332,7 @@ Wrapper for Google-specific authentication.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | kayenta | [ServiceSettings](#proto.config.ServiceSettings) |  |  |
+| deck | [ServiceSettings](#proto.config.ServiceSettings) |  |  |
 
 
 

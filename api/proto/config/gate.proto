@@ -35,6 +35,7 @@ message Gate {
 
   message Services {
     ServiceSettings kayenta = 1;
+    ServiceSettings deck = 2;
   }
 
   // Wrapper for Google-specific authentication.
