@@ -18,6 +18,8 @@ package parse_hal_test
 import (
 	"testing"
 
+	"github.com/spinnaker/kleat/api/client/canary"
+
 	"github.com/spinnaker/kleat/api/client"
 	"github.com/spinnaker/kleat/api/client/cloudprovider"
 	"github.com/spinnaker/kleat/api/client/config"
@@ -101,6 +103,21 @@ var halToOrcaTests = []struct {
 					Enabled:            true,
 					TrustStore:         "/var/secrets/store.jks",
 					TrustStorePassword: "passw0rd",
+				},
+			},
+		},
+	},
+	{
+		"Canary enabled",
+		&config.Hal{
+			Canary: &canary.Canary{
+				Enabled: true,
+			},
+		},
+		&config.Orca{
+			Services: &config.Orca_Services{
+				Kayenta: &config.ServiceEnabled{
+					Enabled: true,
 				},
 			},
 		},

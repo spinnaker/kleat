@@ -5,6 +5,7 @@ option go_package = "github.com/spinnaker/kleat/api/client/config";
 
 import "security/authn/authn.proto";
 import "security/ssl.proto";
+import "config/service_enabled.proto";
 
 // Configuration for the gate microservice.
 message Gate {
@@ -28,6 +29,13 @@ message Gate {
 
   // Wrapper for Google-specific authentication (ex: IAP).
   GoogleConfig google = 7;
+
+  // Configuration for the status of non-core services.
+  Services services = 8;
+
+  message Services {
+    ServiceEnabled kayenta = 1;
+  }
 
   // Wrapper for Google-specific authentication.
   message GoogleConfig {

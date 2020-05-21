@@ -18,6 +18,8 @@ package parse_hal_test
 import (
 	"testing"
 
+	"github.com/spinnaker/kleat/api/client/canary"
+
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/api/client/security"
 	"github.com/spinnaker/kleat/api/client/security/authn"
@@ -231,6 +233,21 @@ var halToGateTests = []struct {
 					Enabled:   true,
 					JwtHeader: "my-header",
 					IssuerId:  "abc",
+				},
+			},
+		},
+	},
+	{
+		"Canary enabled",
+		&config.Hal{
+			Canary: &canary.Canary{
+				Enabled: true,
+			},
+		},
+		&config.Gate{
+			Services: &config.Gate_Services{
+				Kayenta: &config.ServiceEnabled{
+					Enabled: true,
 				},
 			},
 		},

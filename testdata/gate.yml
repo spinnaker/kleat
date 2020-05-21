@@ -63,4 +63,6 @@ google:
     issuerId: my-issuer-id
     audience: projects/0/apps/0
     iapVerifyKeyUrl: https://my-url.test/
-
+services:
+  kayenta:
+    enabled: true

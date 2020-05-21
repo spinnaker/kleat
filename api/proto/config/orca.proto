@@ -4,12 +4,19 @@ package proto.config;
 option go_package = "github.com/spinnaker/kleat/api/client/config";
 
 import "security/trust_store.proto";
+import "config/service_enabled.proto";
 
 // Configuration for the Orca microservice.
 message Orca {
   PipelineTemplates pipelineTemplates = 1;
   security.WebhookConfig webhook = 2;
   Defaults default = 3;
+  Services services = 4;
+
+  // Configuration for the status of non-core services.
+  message Services {
+    ServiceEnabled kayenta = 1;
+  }
 
   // Configuration for pipeline templates.
   message PipelineTemplates {

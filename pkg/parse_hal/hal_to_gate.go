@@ -31,6 +31,7 @@ func HalToGate(h *config.Hal) *config.Gate {
 		Ldap:     h.GetSecurity().GetAuthn().GetLdap(),
 		X509:     h.GetSecurity().GetAuthn().GetX509(),
 		Google:   getGoogleConfig(h),
+		Services: getGateServices(h),
 	}
 }
 
@@ -74,6 +75,17 @@ func getCorsConfig(h *config.Hal) *config.Cors {
 func getGoogleConfig(h *config.Hal) *config.Gate_GoogleConfig {
 	if iap := h.GetSecurity().GetAuthn().GetIap(); iap != nil {
 		return &config.Gate_GoogleConfig{Iap: iap}
+	}
+	return nil
+}
+
+func getGateServices(h *config.Hal) *config.Gate_Services {
+	if h.GetCanary().GetEnabled() == true {
+		return &config.Gate_Services{
+			Kayenta: &config.ServiceEnabled{
+				Enabled: h.GetCanary().GetEnabled(),
+			},
+		}
 	}
 	return nil
 }

@@ -8,3 +8,6 @@ pipelineTemplates:
 default:
   bake:
     account: my-aws-account
+services:
+  kayenta:
+    enabled: true
