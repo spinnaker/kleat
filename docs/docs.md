@@ -238,7 +238,7 @@
     - [Orca.Services](#proto.config.Orca.Services)
   
 - [config/service_enabled.proto](#config/service_enabled.proto)
-    - [ServiceEnabled](#proto.config.ServiceEnabled)
+    - [ServiceSettings](#proto.config.ServiceSettings)
   
 - [config/services.proto](#config/services.proto)
     - [Services](#proto.config.Services)
@@ -3331,7 +3331,7 @@ Wrapper for Google-specific authentication.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| kayenta | [ServiceEnabled](#proto.config.ServiceEnabled) |  |  |
+| kayenta | [ServiceSettings](#proto.config.ServiceSettings) |  |  |
 
 
 
@@ -3583,7 +3583,7 @@ Configuration for the status of non-core services.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| kayenta | [ServiceEnabled](#proto.config.ServiceEnabled) |  |  |
+| kayenta | [ServiceSettings](#proto.config.ServiceSettings) |  |  |
 
 
 
@@ -3606,15 +3606,16 @@ Configuration for the status of non-core services.
 
 
 
-<a name="proto.config.ServiceEnabled"></a>
+<a name="proto.config.ServiceSettings"></a>
 
-### ServiceEnabled
-Configuration for whether a particular microservice is enabled.
+### ServiceSettings
+Configuration for a particular microservice.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  |  |
+| enabled | [bool](#bool) |  | Whether the microservice is enabled. |
+| baseUrl | [string](#string) |  | The base URL for the microservice. In general, this should be the externally-resolvable URL for services that are exposed externally (ie, deck and gate). |
 
 
 

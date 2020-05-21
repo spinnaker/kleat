@@ -246,7 +246,7 @@ var halToGateTests = []struct {
 		},
 		&config.Gate{
 			Services: &config.Gate_Services{
-				Kayenta: &config.ServiceEnabled{
+				Kayenta: &config.ServiceSettings{
 					Enabled: true,
 				},
 			},

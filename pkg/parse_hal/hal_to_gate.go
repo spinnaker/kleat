@@ -82,7 +82,7 @@ func getGoogleConfig(h *config.Hal) *config.Gate_GoogleConfig {
 func getGateServices(h *config.Hal) *config.Gate_Services {
 	if h.GetCanary().GetEnabled() == true {
 		return &config.Gate_Services{
-			Kayenta: &config.ServiceEnabled{
+			Kayenta: &config.ServiceSettings{
 				Enabled: h.GetCanary().GetEnabled(),
 			},
 		}
