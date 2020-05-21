@@ -3,7 +3,12 @@ package proto.config;
 
 option go_package = "github.com/spinnaker/kleat/api/client/config";
 
-// Configuration for whether a particular microservice is enabled.
-message ServiceEnabled {
+// Configuration for a particular microservice.
+message ServiceSettings {
+  // Whether the microservice is enabled.
   bool enabled = 1;
+  // The base URL for the microservice. In general, this should be the
+  // externally-resolvable URL for services that are exposed externally
+  // (ie, deck and gate).
+  string baseUrl = 2;
 }

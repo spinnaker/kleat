@@ -246,8 +246,25 @@ var halToGateTests = []struct {
 		},
 		&config.Gate{
 			Services: &config.Gate_Services{
-				Kayenta: &config.ServiceEnabled{
+				Kayenta: &config.ServiceSettings{
 					Enabled: true,
+				},
+			},
+		},
+	},
+	{
+		"Deck base URL",
+		&config.Hal{
+			Security: &security.Security{
+				UiSecurity: &security.UiSecurity{
+					OverrideBaseUrl: "https://spinnaker.test:9000",
+				},
+			},
+		},
+		&config.Gate{
+			Services: &config.Gate_Services{
+				Deck: &config.ServiceSettings{
+					BaseUrl: "https://spinnaker.test:9000",
 				},
 			},
 		},

@@ -80,11 +80,29 @@ func getGoogleConfig(h *config.Hal) *config.Gate_GoogleConfig {
 }
 
 func getGateServices(h *config.Hal) *config.Gate_Services {
-	if h.GetCanary().GetEnabled() == true {
-		return &config.Gate_Services{
-			Kayenta: &config.ServiceEnabled{
-				Enabled: h.GetCanary().GetEnabled(),
-			},
+	result := &config.Gate_Services{
+		Deck:    getDeckConfig(h),
+		Kayenta: getKayentaConfig(h),
+	}
+	if proto.Equal(result, &config.Gate_Services{}) {
+		return nil
+	}
+	return result
+}
+
+func getKayentaConfig(h *config.Hal) *config.ServiceSettings {
+	if h.GetCanary().GetEnabled() {
+		return &config.ServiceSettings{
+			Enabled: h.GetCanary().GetEnabled(),
+		}
+	}
+	return nil
+}
+
+func getDeckConfig(h *config.Hal) *config.ServiceSettings {
+	if h.GetSecurity().GetUiSecurity().GetOverrideBaseUrl() != "" {
+		return &config.ServiceSettings{
+			BaseUrl: h.GetSecurity().GetUiSecurity().GetOverrideBaseUrl(),
 		}
 	}
 	return nil

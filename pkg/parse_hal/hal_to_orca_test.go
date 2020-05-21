@@ -116,7 +116,7 @@ var halToOrcaTests = []struct {
 		},
 		&config.Orca{
 			Services: &config.Orca_Services{
-				Kayenta: &config.ServiceEnabled{
+				Kayenta: &config.ServiceSettings{
 					Enabled: true,
 				},
 			},

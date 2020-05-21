@@ -49,7 +49,7 @@ func getPipelineTemplates(h *config.Hal) *config.Orca_PipelineTemplates {
 func getOrcaServices(h *config.Hal) *config.Orca_Services {
 	if h.GetCanary().GetEnabled() == true {
 		return &config.Orca_Services{
-			Kayenta: &config.ServiceEnabled{
+			Kayenta: &config.ServiceSettings{
 				Enabled: h.GetCanary().GetEnabled(),
 			},
 		}

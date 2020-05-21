@@ -15,7 +15,7 @@ message Orca {
 
   // Configuration for the status of non-core services.
   message Services {
-    ServiceEnabled kayenta = 1;
+    ServiceSettings kayenta = 1;
   }
 
   // Configuration for pipeline templates.
