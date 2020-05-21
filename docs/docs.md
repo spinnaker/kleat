@@ -217,6 +217,7 @@
     - [Cors](#proto.config.Cors)
     - [Gate](#proto.config.Gate)
     - [Gate.GoogleConfig](#proto.config.Gate.GoogleConfig)
+    - [Gate.Services](#proto.config.Gate.Services)
     - [ServerConfig](#proto.config.ServerConfig)
     - [SpringSecurity](#proto.config.SpringSecurity)
   
@@ -234,6 +235,10 @@
     - [Orca.Defaults](#proto.config.Orca.Defaults)
     - [Orca.Defaults.BakeDefaults](#proto.config.Orca.Defaults.BakeDefaults)
     - [Orca.PipelineTemplates](#proto.config.Orca.PipelineTemplates)
+    - [Orca.Services](#proto.config.Orca.Services)
+  
+- [config/service_enabled.proto](#config/service_enabled.proto)
+    - [ServiceEnabled](#proto.config.ServiceEnabled)
   
 - [config/services.proto](#config/services.proto)
     - [Services](#proto.config.Services)
@@ -3296,6 +3301,7 @@ Configuration for the gate microservice.
 | ldap | [proto.security.authn.Ldap](#proto.security.authn.Ldap) |  | Configuration for LDAP authentication. |
 | x509 | [proto.security.authn.X509](#proto.security.authn.X509) |  | Configuration for X509 authentication. |
 | google | [Gate.GoogleConfig](#proto.config.Gate.GoogleConfig) |  | Wrapper for Google-specific authentication (ex: IAP). |
+| services | [Gate.Services](#proto.config.Gate.Services) |  | Configuration for the status of non-core services. |
 
 
 
@@ -3311,6 +3317,21 @@ Wrapper for Google-specific authentication.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | iap | [proto.security.authn.Iap](#proto.security.authn.Iap) |  | Configuration for Identity-Aware Proxy authentication. |
+
+
+
+
+
+
+<a name="proto.config.Gate.Services"></a>
+
+### Gate.Services
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| kayenta | [ServiceEnabled](#proto.config.ServiceEnabled) |  |  |
 
 
 
@@ -3502,6 +3523,7 @@ Configuration for the Orca microservice.
 | pipelineTemplates | [Orca.PipelineTemplates](#proto.config.Orca.PipelineTemplates) |  |  |
 | webhook | [proto.security.WebhookConfig](#proto.security.WebhookConfig) |  |  |
 | default | [Orca.Defaults](#proto.config.Orca.Defaults) |  |  |
+| services | [Orca.Services](#proto.config.Orca.Services) |  |  |
 
 
 
@@ -3547,6 +3569,52 @@ Configuration for pipeline templates.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether pipeline templates are enabled. |
+
+
+
+
+
+
+<a name="proto.config.Orca.Services"></a>
+
+### Orca.Services
+Configuration for the status of non-core services.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| kayenta | [ServiceEnabled](#proto.config.ServiceEnabled) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="config/service_enabled.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## config/service_enabled.proto
+
+
+
+<a name="proto.config.ServiceEnabled"></a>
+
+### ServiceEnabled
+Configuration for whether a particular microservice is enabled.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  |  |
 
 
 

@@ -1,0 +1,9 @@
+syntax = "proto3";
+package proto.config;
+
+option go_package = "github.com/spinnaker/kleat/api/client/config";
+
+// Configuration for whether a particular microservice is enabled.
+message ServiceEnabled {
+  bool enabled = 1;
+}

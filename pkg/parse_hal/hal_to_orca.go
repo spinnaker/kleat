@@ -22,6 +22,7 @@ func HalToOrca(h *config.Hal) *config.Orca {
 		Default:           getDefaults(h),
 		PipelineTemplates: getPipelineTemplates(h),
 		Webhook:           h.GetWebhook(),
+		Services:          getOrcaServices(h),
 	}
 }
 
@@ -43,4 +44,15 @@ func getPipelineTemplates(h *config.Hal) *config.Orca_PipelineTemplates {
 		return nil
 	}
 	return &config.Orca_PipelineTemplates{Enabled: h.GetFeatures().GetPipelineTemplates()}
+}
+
+func getOrcaServices(h *config.Hal) *config.Orca_Services {
+	if h.GetCanary().GetEnabled() == true {
+		return &config.Orca_Services{
+			Kayenta: &config.ServiceEnabled{
+				Enabled: h.GetCanary().GetEnabled(),
+			},
+		}
+	}
+	return nil
 }
