@@ -1,0 +1,19 @@
+syntax = "proto3";
+package proto.config;
+
+option go_package = "github.com/spinnaker/kleat/api/client/config";
+
+import "cloudprovider/aws.proto";
+import "cloudprovider/azure.proto";
+import "cloudprovider/google.proto";
+import "cloudprovider/huaweicloud.proto";
+import "cloudprovider/oracle.proto";
+
+// Configuration for the rosco microservice.
+message Rosco {
+    cloudprovider.GoogleComputeEngine google = 1;
+    cloudprovider.Aws aws = 2;
+    cloudprovider.Azure azure = 3;
+    cloudprovider.HuaweiCloud huaweicloud = 4;
+    cloudprovider.Oracle oracle = 5;
+}
