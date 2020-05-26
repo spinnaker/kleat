@@ -61,6 +61,12 @@ func WriteConfigs(halPath string, dir string) error {
 	if err := write(services.GetKayenta(), filepath.Join(dir, "kayenta.yml")); err != nil {
 		return err
 	}
+	if err := write(services.GetOrca(), filepath.Join(dir, "orca.yml")); err != nil {
+		return err
+	}
+	if err := write(services.GetRosco(), filepath.Join(dir, "rosco.yml")); err != nil {
+		return err
+	}
 	return nil
 }
 
