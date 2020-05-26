@@ -237,6 +237,9 @@
     - [Orca.PipelineTemplates](#proto.config.Orca.PipelineTemplates)
     - [Orca.Services](#proto.config.Orca.Services)
   
+- [config/rosco.proto](#config/rosco.proto)
+    - [Rosco](#proto.config.Rosco)
+  
 - [config/service_enabled.proto](#config/service_enabled.proto)
     - [ServiceSettings](#proto.config.ServiceSettings)
   
@@ -3600,6 +3603,41 @@ Configuration for the status of non-core services.
 
 
 
+<a name="config/rosco.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## config/rosco.proto
+
+
+
+<a name="proto.config.Rosco"></a>
+
+### Rosco
+Configuration for the rosco microservice.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| google | [proto.cloudprovider.GoogleComputeEngine](#proto.cloudprovider.GoogleComputeEngine) |  |  |
+| aws | [proto.cloudprovider.Aws](#proto.cloudprovider.Aws) |  |  |
+| azure | [proto.cloudprovider.Azure](#proto.cloudprovider.Azure) |  |  |
+| huaweicloud | [proto.cloudprovider.HuaweiCloud](#proto.cloudprovider.HuaweiCloud) |  |  |
+| oracle | [proto.cloudprovider.Oracle](#proto.cloudprovider.Oracle) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
 <a name="config/service_enabled.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -3654,6 +3692,7 @@ Configuration for Spinnaker&#39;s microservices.
 | gate | [Gate](#proto.config.Gate) |  |  |
 | fiat | [Fiat](#proto.config.Fiat) |  |  |
 | kayenta | [Kayenta](#proto.config.Kayenta) |  |  |
+| rosco | [Rosco](#proto.config.Rosco) |  |  |
 
 
 

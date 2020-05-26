@@ -67,6 +67,12 @@ be used as input to Kleat.
   `roleProviderType` under each configurable role provider. This field can be
   removed as it was only used internally by Halyard and does not affect the
   generated config.
+- The `[provider].bakeryDefaults.images` field in the `halconfig` allows a user
+  to specify the images that will be available to use as base images. Halyard
+  would merge any images specified here with the default images defined in the
+  microservice, which is not how any of the other list entries behaved. Kleat
+  will treat this field as all other fields; if this field is specified, its
+  value will override the default images.
 
 #### Optional Changes
 
