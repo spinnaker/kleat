@@ -2,7 +2,7 @@ FROM alpine:3.11.6 as curl
 RUN apk add --no-cache curl unzip
 
 FROM curl as protoc-gen-go
-ARG PROTOC_GEN_GO_TAG=v1.22.0
+ARG PROTOC_GEN_GO_TAG=v1.23.0
 RUN curl -L https://github.com/protocolbuffers/protobuf-go/releases/download/$PROTOC_GEN_GO_TAG/protoc-gen-go.$PROTOC_GEN_GO_TAG.linux.amd64.tar.gz \
  | tar -xz
 
@@ -12,7 +12,7 @@ RUN curl -L https://github.com/pseudomuto/protoc-gen-doc/releases/download/v$PRO
  | tar --strip-components=1 -xz
 
 FROM curl as protoc
-ARG PROTOC_VERSION=3.11.4
+ARG PROTOC_VERSION=3.12.1
 RUN curl -vLo protoc.zip https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-x86_64.zip \
  && unzip protoc.zip
 
