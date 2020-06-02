@@ -1,0 +1,10 @@
+syntax = "proto3";
+package proto.notification;
+
+option go_package = "github.com/spinnaker/kleat/api/client/notification";
+
+// Configuration for Pub/Sub notifications.
+message PubSub {
+  // Whether Pub/Sub notifications are enabled.
+  bool enabled = 1;
+}

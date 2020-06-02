@@ -20,6 +20,29 @@ message Canary {
   // OBJECT_STORE) in order to use Spinnaker's canary service.
   ServiceIntegrations serviceIntegrations = 2;
 
+  // Name of the metrics account to use by default.
+  string defaultMetricsAccount = 3;
+
+  // Name of the metrics store to use by default (e.g., `prometheus`, `datadog`).
+  string defaultMetricsStore = 4;
+
+  // Whether or not to show all canary configs in Deck, or just those scoped to
+  // the current application.
+  bool showAllConfigsEnabled = 5;
+
+  // Whether or not to enable custom filter templates for canary configs in Deck.
+  bool templatesEnabled = 6;
+
+  // Whether or not to enable canary stages in Deck. Defaults to true.
+  bool stagesEnabled = 7;
+
+  // The default canary judge. Defaults to `NetflixACAJudge-v1.0`, which is
+  // currently the only open-source judge available by default.
+  string defaultJudge = 8;
+
+  // Name of storage account to use by default.
+  string storageAccountName = 9;
+
   message ServiceIntegrations {
     canary.Aws aws = 1;
     canary.Datadog datadog = 2;

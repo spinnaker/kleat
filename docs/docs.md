@@ -203,6 +203,32 @@
 - [config/clouddriver.proto](#config/clouddriver.proto)
     - [Clouddriver](#proto.config.Clouddriver)
   
+- [config/deck.proto](#config/deck.proto)
+    - [Deck](#proto.config.Deck)
+    - [Deck.Canary](#proto.config.Deck.Canary)
+    - [Deck.Changelog](#proto.config.Deck.Changelog)
+    - [Deck.Features](#proto.config.Deck.Features)
+    - [Deck.Notifications](#proto.config.Deck.Notifications)
+    - [Deck.Providers](#proto.config.Deck.Providers)
+    - [Deck.Providers.Appengine](#proto.config.Deck.Providers.Appengine)
+    - [Deck.Providers.Appengine.Defaults](#proto.config.Deck.Providers.Appengine.Defaults)
+    - [Deck.Providers.Aws](#proto.config.Deck.Providers.Aws)
+    - [Deck.Providers.Aws.Defaults](#proto.config.Deck.Providers.Aws.Defaults)
+    - [Deck.Providers.Azure](#proto.config.Deck.Providers.Azure)
+    - [Deck.Providers.Azure.Defaults](#proto.config.Deck.Providers.Azure.Defaults)
+    - [Deck.Providers.Cloudfoundry](#proto.config.Deck.Providers.Cloudfoundry)
+    - [Deck.Providers.Cloudfoundry.Defaults](#proto.config.Deck.Providers.Cloudfoundry.Defaults)
+    - [Deck.Providers.Dcos](#proto.config.Deck.Providers.Dcos)
+    - [Deck.Providers.Dcos.Defaults](#proto.config.Deck.Providers.Dcos.Defaults)
+    - [Deck.Providers.Ecs](#proto.config.Deck.Providers.Ecs)
+    - [Deck.Providers.Ecs.Defaults](#proto.config.Deck.Providers.Ecs.Defaults)
+    - [Deck.Providers.Gce](#proto.config.Deck.Providers.Gce)
+    - [Deck.Providers.Gce.Defaults](#proto.config.Deck.Providers.Gce.Defaults)
+    - [Deck.Providers.HuaweiCloud](#proto.config.Deck.Providers.HuaweiCloud)
+    - [Deck.Providers.HuaweiCloud.Defaults](#proto.config.Deck.Providers.HuaweiCloud.Defaults)
+    - [Deck.Providers.TencentCloud](#proto.config.Deck.Providers.TencentCloud)
+    - [Deck.Providers.TencentCloud.Defaults](#proto.config.Deck.Providers.TencentCloud.Defaults)
+  
 - [config/echo.proto](#config/echo.proto)
     - [Echo](#proto.config.Echo)
   
@@ -217,6 +243,8 @@
     - [Cors](#proto.config.Cors)
     - [Gate](#proto.config.Gate)
     - [Gate.GoogleConfig](#proto.config.Gate.GoogleConfig)
+    - [Gate.Integrations](#proto.config.Gate.Integrations)
+    - [Gate.Integrations.Gremlin](#proto.config.Gate.Integrations.Gremlin)
     - [Gate.Services](#proto.config.Gate.Services)
     - [ServerConfig](#proto.config.ServerConfig)
     - [SpringSecurity](#proto.config.SpringSecurity)
@@ -249,11 +277,23 @@
 - [features.proto](#features.proto)
     - [Features](#proto.Features)
   
+- [notification/bearychat.proto](#notification/bearychat.proto)
+    - [BearyChat](#proto.notification.BearyChat)
+  
+- [notification/email.proto](#notification/email.proto)
+    - [Email](#proto.notification.Email)
+  
 - [notification/github_status.proto](#notification/github_status.proto)
     - [GithubStatus](#proto.notification.GithubStatus)
   
+- [notification/google_chat.proto](#notification/google_chat.proto)
+    - [GoogleChat](#proto.notification.GoogleChat)
+  
 - [notification/notifications.proto](#notification/notifications.proto)
     - [Notifications](#proto.notification.Notifications)
+  
+- [notification/pubsub.proto](#notification/pubsub.proto)
+    - [PubSub](#proto.notification.PubSub)
   
 - [notification/slack.proto](#notification/slack.proto)
     - [Slack](#proto.notification.Slack)
@@ -1007,6 +1047,13 @@ Configuration for Spinnaker&#39;s canary service.
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether the canary service is enabled. |
 | serviceIntegrations | [Canary.ServiceIntegrations](#proto.canary.Canary.ServiceIntegrations) |  | Canary service integrations. You must configure at least one account of each canary.SupportedType (METRICS_STORE, CONFIGURATION_STORE, OBJECT_STORE) in order to use Spinnaker&#39;s canary service. |
+| defaultMetricsAccount | [string](#string) |  | Name of the metrics account to use by default. |
+| defaultMetricsStore | [string](#string) |  | Name of the metrics store to use by default (e.g., `prometheus`, `datadog`). |
+| showAllConfigsEnabled | [bool](#bool) |  | Whether or not to show all canary configs in Deck, or just those scoped to the current application. |
+| templatesEnabled | [bool](#bool) |  | Whether or not to enable custom filter templates for canary configs in Deck. |
+| stagesEnabled | [bool](#bool) |  | Whether or not to enable canary stages in Deck. Defaults to true. |
+| defaultJudge | [string](#string) |  | The default canary judge. Defaults to `NetflixACAJudge-v1.0`, which is currently the only open-source judge available by default. |
+| storageAccountName | [string](#string) |  | Name of storage account to use by default. |
 
 
 
@@ -3150,6 +3197,436 @@ Configuration for the clouddriver microservice.
 
 
 
+<a name="config/deck.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## config/deck.proto
+
+
+
+<a name="proto.config.Deck"></a>
+
+### Deck
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| gateUrl | [string](#string) |  | The endpoint at which Deck communicates with Gate. |
+| authEnabled | [bool](#bool) |  | Whether authn is enabled. |
+| authEndpoint | [string](#string) |  | The Gate authn endpoint. |
+| bakeryDetailUrl | [string](#string) |  | Baking details URL used in Bake stage execution details. |
+| canary | [Deck.Canary](#proto.config.Deck.Canary) |  | Configuration for the canary UI. |
+| changelog | [Deck.Changelog](#proto.config.Deck.Changelog) |  | Configuration for surfacing the Spinnaker changelog in Deck. |
+| notifications | [Deck.Notifications](#proto.config.Deck.Notifications) |  | Configuration for notifications providers. |
+| providers | [Deck.Providers](#proto.config.Deck.Providers) |  | Configuration for cloud provider defaults. |
+| version | [string](#string) |  | Spinnaker version. TODO: Should we maintain version as top-level halconfig property? |
+| defaultTimeZone | [string](#string) |  | Default time zone in which to display timestamps in the UI. |
+| features | [Deck.Features](#proto.config.Deck.Features) |  | Configuration for UI-related feature flags. |
+
+
+
+
+
+
+<a name="proto.config.Deck.Canary"></a>
+
+### Deck.Canary
+Configuration for the canary UI.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| defaultJudge | [string](#string) |  | The default canary judge. Defaults to `NetflixACAJudge-v1.0`, which is currently the only open-source judge available by default. |
+| featureDisabled | [bool](#bool) |  | Whether the canary UI is disabled. |
+| metricsAccountName | [string](#string) |  | Name of the canary metrics account to use by default. |
+| metricStore | [string](#string) |  | Name of the metrics store to use by default (e.g., `prometheus`, `datadog`). |
+| showAllConfigs | [bool](#bool) |  | Whether or not to show all canary configs in Deck, or just those scoped to the current application. |
+| stagesEnabled | [bool](#bool) |  | Whether or not to enable canary stages in deck. Defaults to true. |
+| storageAccountName | [string](#string) |  | Name of storage account to use by default. |
+| templatesEnabled | [bool](#bool) |  | Whether or not to enable custom filter templates for canary configs in Deck. |
+
+
+
+
+
+
+<a name="proto.config.Deck.Changelog"></a>
+
+### Deck.Changelog
+Configuration for surfacing the Spinnaker changelog in Deck.
+TODO: can we do one of the following?
+1. Change the component in Deck to fall back to just displaying
+a link to the spinnaker.io versions page, bookmarked to correct version?
+2. Somehow derive the gist ID from the top-level version
+without reaching out to the internet?
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| fileName | [string](#string) |  | The Spinnaker changelog gist file name. |
+| gistId | [string](#string) |  | The Spinnaker changelog gist ID. |
+
+
+
+
+
+
+<a name="proto.config.Deck.Features"></a>
+
+### Deck.Features
+Configuration for UI-related feature flags.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| pipelineTemplates | [bool](#bool) |  | Enable pipeline template support. Read more at https://github.com/spinnaker/dcd-spec. |
+| canary | [bool](#bool) |  | Enable canary UI support. |
+| chaosMonkey | [bool](#bool) |  | Enable Chaos Monkey support. For this to work, you&#39;ll need a running Chaos Monkey deployment. See https://github.com/Netflix/chaosmonkey/wiki. |
+| fiatEnabled | [bool](#bool) |  | Whether authz is enabled. |
+| roscoMode | [bool](#bool) |  | Whether Rosco UI support is enabled. TODO: handle per comments in feature.proto |
+
+
+
+
+
+
+<a name="proto.config.Deck.Notifications"></a>
+
+### Deck.Notifications
+Configuration for notifications providers.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| bearychat | [proto.notification.BearyChat](#proto.notification.BearyChat) |  | Configuration for the BearyChat notification provider. |
+| email | [proto.notification.Email](#proto.notification.Email) |  | Configuration for the email notification provider. |
+| githubStatus | [proto.notification.GithubStatus](#proto.notification.GithubStatus) |  | Configuration for the GitHub Status notification provider. |
+| googleChat | [proto.notification.GoogleChat](#proto.notification.GoogleChat) |  | Configuration for the Google Chat notification provider. |
+| pubsub | [proto.notification.PubSub](#proto.notification.PubSub) |  | Configuration for the Pub/Sub notification provider. |
+| slack | [proto.notification.Slack](#proto.notification.Slack) |  | Configuration for the Slack notification provider. |
+| sms | [proto.notification.Twilio](#proto.notification.Twilio) |  | Configuration for the SMS notification provider. |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers"></a>
+
+### Deck.Providers
+UI-specific provider default settings.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| appengine | [Deck.Providers.Appengine](#proto.config.Deck.Providers.Appengine) |  | Appengine provider defaults. |
+| aws | [Deck.Providers.Aws](#proto.config.Deck.Providers.Aws) |  | AWS provider defaults. |
+| azure | [Deck.Providers.Azure](#proto.config.Deck.Providers.Azure) |  | Azure provider defaults. |
+| cloudfoundry | [Deck.Providers.Cloudfoundry](#proto.config.Deck.Providers.Cloudfoundry) |  | Cloudfoundry provider defaults. |
+| dcos | [Deck.Providers.Dcos](#proto.config.Deck.Providers.Dcos) |  | DC/OS provider defaults. |
+| ecs | [Deck.Providers.Ecs](#proto.config.Deck.Providers.Ecs) |  | ECS provider defaults. |
+| gce | [Deck.Providers.Gce](#proto.config.Deck.Providers.Gce) |  | GCE provider defaults. |
+| huaweicloud | [Deck.Providers.HuaweiCloud](#proto.config.Deck.Providers.HuaweiCloud) |  | Huawei Cloud provider defaults. |
+| tencentcloud | [Deck.Providers.TencentCloud](#proto.config.Deck.Providers.TencentCloud) |  | Tencent Cloud provider defaults. |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Appengine"></a>
+
+### Deck.Providers.Appengine
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| defaults | [Deck.Providers.Appengine.Defaults](#proto.config.Deck.Providers.Appengine.Defaults) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Appengine.Defaults"></a>
+
+### Deck.Providers.Appengine.Defaults
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| account | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Aws"></a>
+
+### Deck.Providers.Aws
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| defaults | [Deck.Providers.Aws.Defaults](#proto.config.Deck.Providers.Aws.Defaults) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Aws.Defaults"></a>
+
+### Deck.Providers.Aws.Defaults
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| account | [string](#string) |  |  |
+| region | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Azure"></a>
+
+### Deck.Providers.Azure
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| defaults | [Deck.Providers.Azure.Defaults](#proto.config.Deck.Providers.Azure.Defaults) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Azure.Defaults"></a>
+
+### Deck.Providers.Azure.Defaults
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| account | [string](#string) |  |  |
+| region | [string](#string) |  | TODO: is this breaking change worth documenting? Halyard set this to &#34;westus&#34;. Kleat will use first configured region of primary account. |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Cloudfoundry"></a>
+
+### Deck.Providers.Cloudfoundry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| defaults | [Deck.Providers.Cloudfoundry.Defaults](#proto.config.Deck.Providers.Cloudfoundry.Defaults) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Cloudfoundry.Defaults"></a>
+
+### Deck.Providers.Cloudfoundry.Defaults
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| account | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Dcos"></a>
+
+### Deck.Providers.Dcos
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| defaults | [Deck.Providers.Dcos.Defaults](#proto.config.Deck.Providers.Dcos.Defaults) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Dcos.Defaults"></a>
+
+### Deck.Providers.Dcos.Defaults
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| account | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Ecs"></a>
+
+### Deck.Providers.Ecs
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| defaults | [Deck.Providers.Ecs.Defaults](#proto.config.Deck.Providers.Ecs.Defaults) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Ecs.Defaults"></a>
+
+### Deck.Providers.Ecs.Defaults
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| account | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Gce"></a>
+
+### Deck.Providers.Gce
+TODO: is this breaking change worth documenting?
+ Halyard set default.region to
+&#34;us-central1&#34; and default.zone to &#34;us-central1-f&#34;, but Kleat
+will use the first configured region of the primary account
+and not expose `zone` parameter, as there was never a way
+to configure this but I don&#39;t think us-central1-f is a reasonable
+default for all users to codify in Deck (and it makes more sense to not
+have a default and force users to make a selection where this is used).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| defaults | [Deck.Providers.Gce.Defaults](#proto.config.Deck.Providers.Gce.Defaults) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Gce.Defaults"></a>
+
+### Deck.Providers.Gce.Defaults
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| account | [string](#string) |  |  |
+| region | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.HuaweiCloud"></a>
+
+### Deck.Providers.HuaweiCloud
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| defaults | [Deck.Providers.HuaweiCloud.Defaults](#proto.config.Deck.Providers.HuaweiCloud.Defaults) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.HuaweiCloud.Defaults"></a>
+
+### Deck.Providers.HuaweiCloud.Defaults
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| account | [string](#string) |  |  |
+| region | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.TencentCloud"></a>
+
+### Deck.Providers.TencentCloud
+TODO: add TencentCloud as a cloud provider so we can write
+config to Deck and Clouddriver.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| defaults | [Deck.Providers.TencentCloud.Defaults](#proto.config.Deck.Providers.TencentCloud.Defaults) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.TencentCloud.Defaults"></a>
+
+### Deck.Providers.TencentCloud.Defaults
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| account | [string](#string) |  |  |
+| region | [string](#string) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
 <a name="config/echo.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -3305,6 +3782,7 @@ Configuration for the gate microservice.
 | x509 | [proto.security.authn.X509](#proto.security.authn.X509) |  | Configuration for X509 authentication. |
 | google | [Gate.GoogleConfig](#proto.config.Gate.GoogleConfig) |  | Wrapper for Google-specific authentication (ex: IAP). |
 | services | [Gate.Services](#proto.config.Gate.Services) |  | Configuration for the status of non-core services. |
+| integrations | [Gate.Integrations](#proto.config.Gate.Integrations) |  |  |
 
 
 
@@ -3320,6 +3798,36 @@ Wrapper for Google-specific authentication.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | iap | [proto.security.authn.Iap](#proto.security.authn.Iap) |  | Configuration for Identity-Aware Proxy authentication. |
+
+
+
+
+
+
+<a name="proto.config.Gate.Integrations"></a>
+
+### Gate.Integrations
+Wrapper for Gate integrations.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| gremlin | [Gate.Integrations.Gremlin](#proto.config.Gate.Integrations.Gremlin) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Gate.Integrations.Gremlin"></a>
+
+### Gate.Integrations.Gremlin
+Configuration for Gremlin fault-injection support.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether Gremlin is enabled. |
 
 
 
@@ -3408,6 +3916,7 @@ Configuration for a Spinnaker installation.
 | webhook | [proto.security.WebhookConfig](#proto.security.WebhookConfig) |  |  |
 | security | [proto.security.Security](#proto.security.Security) |  |  |
 | canary | [proto.canary.Canary](#proto.canary.Canary) |  |  |
+| timezone | [string](#string) |  | The timezone in which your Spinnaker instance runs. This affects what the UI will display as well as how CRON triggers are run. TODO: Halyard currently writes `global.spinnaker.timezone` to spinnaker.yml, but I think only Deck, Echo, and Orca need this property. Need to confirm this and pass timezone through to Echo and Orca. |
 
 
 
@@ -3724,9 +4233,73 @@ Feature flags
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | pipelineTemplates | [bool](#bool) |  | Enable pipeline template support. Read more at https://github.com/spinnaker/dcd-spec. |
-| chaos | [bool](#bool) |  |  |
 | mineCanary | [bool](#bool) |  | Enable canary support. For this to work, you&#39;ll need a canary judge configured. |
-| managedPipelineTemplatesV2UI | [bool](#bool) |  |  |
+| chaos | [bool](#bool) |  | Enable Chaos Monkey support. For this to work, you&#39;ll need a running Chaos Monkey deployment. See https://github.com/Netflix/chaosmonkey/wiki. |
+| managedPipelineTemplatesV2UI | [bool](#bool) |  | Enable managed pipeline templates v2 UI support. |
+| gremlin | [bool](#bool) |  | Enable Gremlin fault-injection support. |
+| roscoMode | [bool](#bool) |  | Enable Rosco UI support. TODO: one of the following: 1. Safely default this to true in Deck 2. Document among breaking changes that users will need to manually set this to true. 3. Have Kleat set this to true if there is at least one configured and enabled VM-based cloud provider consumed by Rosco. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="notification/bearychat.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## notification/bearychat.proto
+
+
+
+<a name="proto.notification.BearyChat"></a>
+
+### BearyChat
+Configuration for BearyChat notifications.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether BearyChat notifications are enabled. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="notification/email.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## notification/email.proto
+
+
+
+<a name="proto.notification.Email"></a>
+
+### Email
+Configuration for Email notifications.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether Email notifications are enabled. |
 
 
 
@@ -3774,6 +4347,37 @@ Configuration for Github status notifications.
 
 
 
+<a name="notification/google_chat.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## notification/google_chat.proto
+
+
+
+<a name="proto.notification.GoogleChat"></a>
+
+### GoogleChat
+Configuration for Google Chat notifications.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether Google Chat notifications are enabled. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
 <a name="notification/notifications.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -3792,6 +4396,41 @@ Configuration for notifications.
 | slack | [Slack](#proto.notification.Slack) |  |  |
 | twilio | [Twilio](#proto.notification.Twilio) |  |  |
 | githubStatus | [GithubStatus](#proto.notification.GithubStatus) |  |  |
+| bearychat | [BearyChat](#proto.notification.BearyChat) |  |  |
+| email | [Email](#proto.notification.Email) |  |  |
+| googlechat | [GoogleChat](#proto.notification.GoogleChat) |  |  |
+| pubsub | [PubSub](#proto.notification.PubSub) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="notification/pubsub.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## notification/pubsub.proto
+
+
+
+<a name="proto.notification.PubSub"></a>
+
+### PubSub
+Configuration for Pub/Sub notifications.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether Pub/Sub notifications are enabled. |
 
 
 

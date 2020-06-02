@@ -6,10 +6,18 @@ option go_package = "github.com/spinnaker/kleat/api/client/notification";
 import "notification/github_status.proto";
 import "notification/slack.proto";
 import "notification/twilio.proto";
+import "notification/bearychat.proto";
+import "notification/email.proto";
+import "notification/google_chat.proto";
+import "notification/pubsub.proto";
 
 // Configuration for notifications.
 message Notifications {
   Slack slack = 1;
   Twilio twilio = 2;
   GithubStatus githubStatus = 3;
+  BearyChat bearychat = 4;
+  Email email = 5;
+  GoogleChat googlechat = 6;
+  PubSub pubsub = 7;
 }

@@ -18,6 +18,8 @@ package parse_hal_test
 import (
 	"testing"
 
+	"github.com/spinnaker/kleat/api/client"
+
 	"github.com/spinnaker/kleat/api/client/canary"
 
 	"github.com/spinnaker/kleat/api/client/config"
@@ -266,6 +268,17 @@ var halToGateTests = []struct {
 				Deck: &config.ServiceSettings{
 					BaseUrl: "https://spinnaker.test:9000",
 				},
+			},
+		},
+	},
+	{
+		"Gremlin enabled",
+		&config.Hal{
+			Features: &client.Features{Gremlin: true},
+		},
+		&config.Gate{
+			Integrations: &config.Gate_Integrations{
+				Gremlin: &config.Gate_Integrations_Gremlin{Enabled: true},
 			},
 		},
 	},

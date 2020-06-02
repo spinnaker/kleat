@@ -24,14 +24,15 @@ import (
 
 func HalToGate(h *config.Hal) *config.Gate {
 	return &config.Gate{
-		Server:   getServerConfig(h),
-		Cors:     getCorsConfig(h),
-		Security: getSpringConfig(h),
-		Saml:     h.GetSecurity().GetAuthn().GetSaml(),
-		Ldap:     h.GetSecurity().GetAuthn().GetLdap(),
-		X509:     h.GetSecurity().GetAuthn().GetX509(),
-		Google:   getGoogleConfig(h),
-		Services: getGateServices(h),
+		Server:       getServerConfig(h),
+		Cors:         getCorsConfig(h),
+		Security:     getSpringConfig(h),
+		Saml:         h.GetSecurity().GetAuthn().GetSaml(),
+		Ldap:         h.GetSecurity().GetAuthn().GetLdap(),
+		X509:         h.GetSecurity().GetAuthn().GetX509(),
+		Google:       getGoogleConfig(h),
+		Services:     getGateServices(h),
+		Integrations: getGateIntegrations(h),
 	}
 }
 
@@ -103,6 +104,17 @@ func getDeckConfig(h *config.Hal) *config.ServiceSettings {
 	if h.GetSecurity().GetUiSecurity().GetOverrideBaseUrl() != "" {
 		return &config.ServiceSettings{
 			BaseUrl: h.GetSecurity().GetUiSecurity().GetOverrideBaseUrl(),
+		}
+	}
+	return nil
+}
+
+func getGateIntegrations(h *config.Hal) *config.Gate_Integrations {
+	if h.GetFeatures().GetGremlin() {
+		return &config.Gate_Integrations{
+			Gremlin: &config.Gate_Integrations_Gremlin{
+				Enabled: h.GetFeatures().GetGremlin(),
+			},
 		}
 	}
 	return nil
