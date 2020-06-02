@@ -73,6 +73,11 @@ be used as input to Kleat.
   microservice, which is not how any of the other list entries behaved. Kleat
   will treat this field as all other fields; if this field is specified, its
   value will override the default images.
+- Halyard only exposed commands to enable the Slack, Twilio, and GitHub Status
+  notification types, but defaulted the remaining notification types (BearyChat,
+  Email, Google Chat, and Pub/Sub) to enabled in Deck. Kleat requires you to
+  explicitly enable BearyChat, Email, Google Chat, and Pub/Sub notification
+  types.
 
 #### Optional Changes
 

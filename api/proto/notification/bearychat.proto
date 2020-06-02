@@ -1,0 +1,10 @@
+syntax = "proto3";
+package proto.notification;
+
+option go_package = "github.com/spinnaker/kleat/api/client/notification";
+
+// Configuration for BearyChat notifications.
+message BearyChat {
+  // Whether BearyChat notifications are enabled.
+  bool enabled = 1;
+}

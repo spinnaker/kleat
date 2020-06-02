@@ -249,11 +249,23 @@
 - [features.proto](#features.proto)
     - [Features](#proto.Features)
   
+- [notification/bearychat.proto](#notification/bearychat.proto)
+    - [BearyChat](#proto.notification.BearyChat)
+  
+- [notification/email.proto](#notification/email.proto)
+    - [Email](#proto.notification.Email)
+  
 - [notification/github_status.proto](#notification/github_status.proto)
     - [GithubStatus](#proto.notification.GithubStatus)
   
+- [notification/google_chat.proto](#notification/google_chat.proto)
+    - [GoogleChat](#proto.notification.GoogleChat)
+  
 - [notification/notifications.proto](#notification/notifications.proto)
     - [Notifications](#proto.notification.Notifications)
+  
+- [notification/pubsub.proto](#notification/pubsub.proto)
+    - [PubSub](#proto.notification.PubSub)
   
 - [notification/slack.proto](#notification/slack.proto)
     - [Slack](#proto.notification.Slack)
@@ -3742,6 +3754,68 @@ Feature flags
 
 
 
+<a name="notification/bearychat.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## notification/bearychat.proto
+
+
+
+<a name="proto.notification.BearyChat"></a>
+
+### BearyChat
+Configuration for BearyChat notifications.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether BearyChat notifications are enabled. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="notification/email.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## notification/email.proto
+
+
+
+<a name="proto.notification.Email"></a>
+
+### Email
+Configuration for Email notifications.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether Email notifications are enabled. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
 <a name="notification/github_status.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -3759,6 +3833,37 @@ Configuration for Github status notifications.
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether GitHub status notifications are enabled. |
 | token | [string](#string) |  | Your GitHub account token. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="notification/google_chat.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## notification/google_chat.proto
+
+
+
+<a name="proto.notification.GoogleChat"></a>
+
+### GoogleChat
+Configuration for Google Chat notifications.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether Google Chat notifications are enabled. |
 
 
 
@@ -3792,6 +3897,41 @@ Configuration for notifications.
 | slack | [Slack](#proto.notification.Slack) |  |  |
 | twilio | [Twilio](#proto.notification.Twilio) |  |  |
 | githubStatus | [GithubStatus](#proto.notification.GithubStatus) |  |  |
+| bearychat | [BearyChat](#proto.notification.BearyChat) |  |  |
+| email | [Email](#proto.notification.Email) |  |  |
+| googlechat | [GoogleChat](#proto.notification.GoogleChat) |  |  |
+| pubsub | [PubSub](#proto.notification.PubSub) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="notification/pubsub.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## notification/pubsub.proto
+
+
+
+<a name="proto.notification.PubSub"></a>
+
+### PubSub
+Configuration for Pub/Sub notifications.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether Pub/Sub notifications are enabled. |
 
 
 
