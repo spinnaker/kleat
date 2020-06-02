@@ -16,12 +16,18 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/spinnaker/kleat/internal/write"
 )
 
 func main() {
+	if len(os.Args) != 2 {
+		fmt.Fprintf(os.Stderr, "arguments must be <halPath> <dir>\n")
+		os.Exit(1)
+	}
+
 	hal := os.Args[1]
 	dir := os.Args[2]
 	if err := write.WriteConfigs(hal, dir); err != nil {
