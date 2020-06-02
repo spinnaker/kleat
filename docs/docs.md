@@ -203,6 +203,32 @@
 - [config/clouddriver.proto](#config/clouddriver.proto)
     - [Clouddriver](#proto.config.Clouddriver)
   
+- [config/deck.proto](#config/deck.proto)
+    - [Deck](#proto.config.Deck)
+    - [Deck.Canary](#proto.config.Deck.Canary)
+    - [Deck.Changelog](#proto.config.Deck.Changelog)
+    - [Deck.Features](#proto.config.Deck.Features)
+    - [Deck.Notifications](#proto.config.Deck.Notifications)
+    - [Deck.Providers](#proto.config.Deck.Providers)
+    - [Deck.Providers.Appengine](#proto.config.Deck.Providers.Appengine)
+    - [Deck.Providers.Appengine.Defaults](#proto.config.Deck.Providers.Appengine.Defaults)
+    - [Deck.Providers.Aws](#proto.config.Deck.Providers.Aws)
+    - [Deck.Providers.Aws.Defaults](#proto.config.Deck.Providers.Aws.Defaults)
+    - [Deck.Providers.Azure](#proto.config.Deck.Providers.Azure)
+    - [Deck.Providers.Azure.Defaults](#proto.config.Deck.Providers.Azure.Defaults)
+    - [Deck.Providers.Cloudfoundry](#proto.config.Deck.Providers.Cloudfoundry)
+    - [Deck.Providers.Cloudfoundry.Defaults](#proto.config.Deck.Providers.Cloudfoundry.Defaults)
+    - [Deck.Providers.Dcos](#proto.config.Deck.Providers.Dcos)
+    - [Deck.Providers.Dcos.Defaults](#proto.config.Deck.Providers.Dcos.Defaults)
+    - [Deck.Providers.Ecs](#proto.config.Deck.Providers.Ecs)
+    - [Deck.Providers.Ecs.Defaults](#proto.config.Deck.Providers.Ecs.Defaults)
+    - [Deck.Providers.Gce](#proto.config.Deck.Providers.Gce)
+    - [Deck.Providers.Gce.Defaults](#proto.config.Deck.Providers.Gce.Defaults)
+    - [Deck.Providers.HuaweiCloud](#proto.config.Deck.Providers.HuaweiCloud)
+    - [Deck.Providers.HuaweiCloud.Defaults](#proto.config.Deck.Providers.HuaweiCloud.Defaults)
+    - [Deck.Providers.TencentCloud](#proto.config.Deck.Providers.TencentCloud)
+    - [Deck.Providers.TencentCloud.Defaults](#proto.config.Deck.Providers.TencentCloud.Defaults)
+  
 - [config/echo.proto](#config/echo.proto)
     - [Echo](#proto.config.Echo)
   
@@ -3156,6 +3182,436 @@ Configuration for the clouddriver microservice.
 | huaweicloud | [proto.cloudprovider.HuaweiCloud](#proto.cloudprovider.HuaweiCloud) |  |  |
 | oracle | [proto.cloudprovider.Oracle](#proto.cloudprovider.Oracle) |  |  |
 | artifacts | [proto.artifact.Artifacts](#proto.artifact.Artifacts) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="config/deck.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## config/deck.proto
+
+
+
+<a name="proto.config.Deck"></a>
+
+### Deck
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| gateUrl | [string](#string) |  | The endpoint at which Deck communicates with Gate. |
+| authEnabled | [bool](#bool) |  | Whether authn is enabled. |
+| authEndpoint | [string](#string) |  | The Gate authn endpoint. |
+| bakeryDetailUrl | [string](#string) |  | Baking details URL used in Bake stage execution details. |
+| canary | [Deck.Canary](#proto.config.Deck.Canary) |  | Configuration for the canary UI. |
+| changelog | [Deck.Changelog](#proto.config.Deck.Changelog) |  | Configuration for surfacing the Spinnaker changelog in Deck. |
+| notifications | [Deck.Notifications](#proto.config.Deck.Notifications) |  | Configuration for notifications providers. |
+| providers | [Deck.Providers](#proto.config.Deck.Providers) |  | Configuration for cloud provider defaults. |
+| version | [string](#string) |  | Spinnaker version. TODO: Should we maintain version as top-level halconfig property? |
+| defaultTimeZone | [string](#string) |  | Default time zone in which to display timestamps in the UI. |
+| features | [Deck.Features](#proto.config.Deck.Features) |  | Configuration for UI-related feature flags. |
+
+
+
+
+
+
+<a name="proto.config.Deck.Canary"></a>
+
+### Deck.Canary
+Configuration for the canary UI.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| defaultJudge | [string](#string) |  | The default canary judge. Defaults to `NetflixACAJudge-v1.0`, which is currently the only open-source judge available by default. |
+| featureDisabled | [bool](#bool) |  | Whether the canary UI is disabled. |
+| metricsAccountName | [string](#string) |  | Name of the canary metrics account to use by default. |
+| metricStore | [string](#string) |  | Name of the metrics store to use by default (e.g., `prometheus`, `datadog`). |
+| showAllConfigs | [bool](#bool) |  | Whether or not to show all canary configs in Deck, or just those scoped to the current application. |
+| stagesEnabled | [bool](#bool) |  | Whether or not to enable canary stages in deck. Defaults to true. |
+| storageAccountName | [string](#string) |  | Name of storage account to use by default. |
+| templatesEnabled | [bool](#bool) |  | Whether or not to enable custom filter templates for canary configs in Deck. |
+
+
+
+
+
+
+<a name="proto.config.Deck.Changelog"></a>
+
+### Deck.Changelog
+Configuration for surfacing the Spinnaker changelog in Deck.
+TODO: can we do one of the following?
+1. Change the component in Deck to fall back to just displaying
+a link to the spinnaker.io versions page, bookmarked to correct version?
+2. Somehow derive the gist ID from the top-level version
+without reaching out to the internet?
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| fileName | [string](#string) |  | The Spinnaker changelog gist file name. |
+| gistId | [string](#string) |  | The Spinnaker changelog gist ID. |
+
+
+
+
+
+
+<a name="proto.config.Deck.Features"></a>
+
+### Deck.Features
+Configuration for UI-related feature flags.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| pipelineTemplates | [bool](#bool) |  | Enable pipeline template support. Read more at https://github.com/spinnaker/dcd-spec. |
+| canary | [bool](#bool) |  | Enable canary UI support. |
+| chaosMonkey | [bool](#bool) |  | Enable Chaos Monkey support. For this to work, you&#39;ll need a running Chaos Monkey deployment. See https://github.com/Netflix/chaosmonkey/wiki. |
+| fiatEnabled | [bool](#bool) |  | Whether authz is enabled. |
+| roscoMode | [bool](#bool) |  | Whether Rosco UI support is enabled. TODO: handle per comments in feature.proto |
+
+
+
+
+
+
+<a name="proto.config.Deck.Notifications"></a>
+
+### Deck.Notifications
+Configuration for notifications providers.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| bearychat | [proto.notification.BearyChat](#proto.notification.BearyChat) |  | Configuration for the BearyChat notification provider. |
+| email | [proto.notification.Email](#proto.notification.Email) |  | Configuration for the email notification provider. |
+| githubStatus | [proto.notification.GithubStatus](#proto.notification.GithubStatus) |  | Configuration for the GitHub Status notification provider. |
+| googleChat | [proto.notification.GoogleChat](#proto.notification.GoogleChat) |  | Configuration for the Google Chat notification provider. |
+| pubsub | [proto.notification.PubSub](#proto.notification.PubSub) |  | Configuration for the Pub/Sub notification provider. |
+| slack | [proto.notification.Slack](#proto.notification.Slack) |  | Configuration for the Slack notification provider. |
+| sms | [proto.notification.Twilio](#proto.notification.Twilio) |  | Configuration for the SMS notification provider. |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers"></a>
+
+### Deck.Providers
+UI-specific provider default settings.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| appengine | [Deck.Providers.Appengine](#proto.config.Deck.Providers.Appengine) |  | Appengine provider defaults. |
+| aws | [Deck.Providers.Aws](#proto.config.Deck.Providers.Aws) |  | AWS provider defaults. |
+| azure | [Deck.Providers.Azure](#proto.config.Deck.Providers.Azure) |  | Azure provider defaults. |
+| cloudfoundry | [Deck.Providers.Cloudfoundry](#proto.config.Deck.Providers.Cloudfoundry) |  | Cloudfoundry provider defaults. |
+| dcos | [Deck.Providers.Dcos](#proto.config.Deck.Providers.Dcos) |  | DC/OS provider defaults. |
+| ecs | [Deck.Providers.Ecs](#proto.config.Deck.Providers.Ecs) |  | ECS provider defaults. |
+| gce | [Deck.Providers.Gce](#proto.config.Deck.Providers.Gce) |  | GCE provider defaults. |
+| huaweicloud | [Deck.Providers.HuaweiCloud](#proto.config.Deck.Providers.HuaweiCloud) |  | Huawei Cloud provider defaults. |
+| tencentcloud | [Deck.Providers.TencentCloud](#proto.config.Deck.Providers.TencentCloud) |  | Tencent Cloud provider defaults. |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Appengine"></a>
+
+### Deck.Providers.Appengine
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| defaults | [Deck.Providers.Appengine.Defaults](#proto.config.Deck.Providers.Appengine.Defaults) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Appengine.Defaults"></a>
+
+### Deck.Providers.Appengine.Defaults
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| account | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Aws"></a>
+
+### Deck.Providers.Aws
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| defaults | [Deck.Providers.Aws.Defaults](#proto.config.Deck.Providers.Aws.Defaults) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Aws.Defaults"></a>
+
+### Deck.Providers.Aws.Defaults
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| account | [string](#string) |  |  |
+| region | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Azure"></a>
+
+### Deck.Providers.Azure
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| defaults | [Deck.Providers.Azure.Defaults](#proto.config.Deck.Providers.Azure.Defaults) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Azure.Defaults"></a>
+
+### Deck.Providers.Azure.Defaults
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| account | [string](#string) |  |  |
+| region | [string](#string) |  | TODO: is this breaking change worth documenting? Halyard set this to &#34;westus&#34;. Kleat will use first configured region of primary account. |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Cloudfoundry"></a>
+
+### Deck.Providers.Cloudfoundry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| defaults | [Deck.Providers.Cloudfoundry.Defaults](#proto.config.Deck.Providers.Cloudfoundry.Defaults) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Cloudfoundry.Defaults"></a>
+
+### Deck.Providers.Cloudfoundry.Defaults
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| account | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Dcos"></a>
+
+### Deck.Providers.Dcos
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| defaults | [Deck.Providers.Dcos.Defaults](#proto.config.Deck.Providers.Dcos.Defaults) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Dcos.Defaults"></a>
+
+### Deck.Providers.Dcos.Defaults
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| account | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Ecs"></a>
+
+### Deck.Providers.Ecs
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| defaults | [Deck.Providers.Ecs.Defaults](#proto.config.Deck.Providers.Ecs.Defaults) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Ecs.Defaults"></a>
+
+### Deck.Providers.Ecs.Defaults
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| account | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Gce"></a>
+
+### Deck.Providers.Gce
+TODO: is this breaking change worth documenting?
+ Halyard set default.region to
+&#34;us-central1&#34; and default.zone to &#34;us-central1-f&#34;, but Kleat
+will use the first configured region of the primary account
+and not expose `zone` parameter, as there was never a way
+to configure this but I don&#39;t think us-central1-f is a reasonable
+default for all users to codify in Deck (and it makes more sense to not
+have a default and force users to make a selection where this is used).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| defaults | [Deck.Providers.Gce.Defaults](#proto.config.Deck.Providers.Gce.Defaults) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Gce.Defaults"></a>
+
+### Deck.Providers.Gce.Defaults
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| account | [string](#string) |  |  |
+| region | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.HuaweiCloud"></a>
+
+### Deck.Providers.HuaweiCloud
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| defaults | [Deck.Providers.HuaweiCloud.Defaults](#proto.config.Deck.Providers.HuaweiCloud.Defaults) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.HuaweiCloud.Defaults"></a>
+
+### Deck.Providers.HuaweiCloud.Defaults
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| account | [string](#string) |  |  |
+| region | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.TencentCloud"></a>
+
+### Deck.Providers.TencentCloud
+TODO: add TencentCloud as a cloud provider so we can write
+config to Deck and Clouddriver.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| defaults | [Deck.Providers.TencentCloud.Defaults](#proto.config.Deck.Providers.TencentCloud.Defaults) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.TencentCloud.Defaults"></a>
+
+### Deck.Providers.TencentCloud.Defaults
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| account | [string](#string) |  |  |
+| region | [string](#string) |  |  |
 
 
 

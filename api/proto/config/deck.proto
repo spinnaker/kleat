@@ -1,0 +1,248 @@
+syntax = "proto3";
+package proto.config;
+
+option go_package = "github.com/spinnaker/kleat/api/client/config";
+
+import "notification/bearychat.proto";
+import "notification/email.proto";
+import "notification/google_chat.proto";
+import "notification/github_status.proto";
+import "notification/pubsub.proto";
+import "notification/slack.proto";
+import "notification/twilio.proto";
+
+message Deck {
+  // The endpoint at which Deck communicates with Gate.
+  string gateUrl = 1;
+
+  // Whether authn is enabled.
+  bool authEnabled = 2;
+
+  // The Gate authn endpoint.
+  string authEndpoint = 3;
+
+  // Baking details URL used in Bake stage execution details.
+  string bakeryDetailUrl = 4;
+
+  // Configuration for the canary UI.
+  Canary canary = 5;
+
+  // Configuration for surfacing the Spinnaker changelog in Deck.
+  Changelog changelog = 6;
+
+  // Configuration for notifications providers.
+  Notifications notifications = 7;
+
+  // Configuration for cloud provider defaults.
+  Providers providers = 8;
+
+  // Spinnaker version.
+  // TODO: Should we maintain version as top-level halconfig property?
+  string version = 9;
+
+  // Default time zone in which to display timestamps in the UI.
+  string defaultTimeZone = 10;
+
+  // Configuration for UI-related feature flags.
+  Features features = 11;
+
+  // Configuration for UI-related feature flags.
+  message Features {
+    // Enable pipeline template support. Read more at
+    // https://github.com/spinnaker/dcd-spec.
+    bool pipelineTemplates = 1;
+
+    // Enable canary UI support.
+    bool canary = 2;
+
+    // Enable Chaos Monkey support. For this to work, you'll need a running Chaos
+    // Monkey deployment. See https://github.com/Netflix/chaosmonkey/wiki.
+    bool chaosMonkey = 3;
+
+    // Whether authz is enabled.
+    bool fiatEnabled = 4;
+
+    // Whether Rosco UI support is enabled.
+    // TODO: handle per comments in feature.proto
+    bool roscoMode = 5;
+  }
+
+  // Configuration for the canary UI.
+  message Canary {
+    // The default canary judge. Defaults to `NetflixACAJudge-v1.0`, which is
+    // currently the only open-source judge available by default.
+    string defaultJudge = 1;
+
+    // Whether the canary UI is disabled.
+    bool featureDisabled = 2;
+
+    // Name of the canary metrics account to use by default.
+    string metricsAccountName = 3;
+
+    // Name of the metrics store to use by default (e.g., `prometheus`, `datadog`).
+    string metricStore = 4;
+
+    // Whether or not to show all canary configs in Deck, or just those scoped
+    // to the current application.
+    bool showAllConfigs = 5;
+
+    // Whether or not to enable canary stages in deck. Defaults to true.
+    bool stagesEnabled = 6;
+
+    // Name of storage account to use by default.
+    string storageAccountName = 7;
+
+    // Whether or not to enable custom filter templates for canary configs in
+    // Deck.
+    bool templatesEnabled = 8;
+  }
+
+  // Configuration for surfacing the Spinnaker changelog in Deck.
+  // TODO: can we do one of the following?
+  // 1. Change the component in Deck to fall back to just displaying
+  // a link to the spinnaker.io versions page, bookmarked to correct version?
+  // 2. Somehow derive the gist ID from the top-level version
+  // without reaching out to the internet?
+  message Changelog {
+    // The Spinnaker changelog gist file name.
+    string fileName = 1;
+
+    // The Spinnaker changelog gist ID.
+    string gistId = 2;
+  }
+
+  // Configuration for notifications providers.
+  message Notifications {
+    // Configuration for the BearyChat notification provider.
+    notification.BearyChat bearychat = 1;
+
+    // Configuration for the email notification provider.
+    notification.Email email = 2;
+
+    // Configuration for the GitHub Status notification provider.
+    notification.GithubStatus githubStatus = 3;
+
+    // Configuration for the Google Chat notification provider.
+    notification.GoogleChat googleChat = 4;
+
+    // Configuration for the Pub/Sub notification provider.
+    notification.PubSub pubsub = 5;
+
+    // Configuration for the Slack notification provider.
+    notification.Slack slack = 6;
+
+    // Configuration for the SMS notification provider.
+    notification.Twilio sms = 7;
+  }
+
+  // UI-specific provider default settings.
+  message Providers {
+    // Appengine provider defaults.
+    Appengine appengine = 1;
+
+    // AWS provider defaults.
+    Aws aws = 2;
+
+    // Azure provider defaults.
+    Azure azure = 3;
+
+    // Cloudfoundry provider defaults.
+    Cloudfoundry cloudfoundry = 4;
+
+    // DC/OS provider defaults.
+    Dcos dcos = 5;
+
+    // ECS provider defaults.
+    Ecs ecs = 6;
+
+    // GCE provider defaults.
+    Gce gce = 7;
+
+    // Huawei Cloud provider defaults.
+    HuaweiCloud huaweicloud = 8;
+
+    // Tencent Cloud provider defaults.
+    TencentCloud tencentcloud = 9;
+
+    message Appengine {
+      Defaults defaults = 1;
+      message Defaults {
+        string account = 1;
+      }
+    }
+
+    message Aws {
+      Defaults defaults = 1;
+      message Defaults {
+        string account = 1;
+        string region = 2;
+      }
+    }
+
+    message Azure {
+      Defaults defaults = 1;
+      message Defaults {
+        string account = 1;
+        // TODO: is this breaking change worth documenting?
+        //  Halyard set this to "westus". Kleat will use first configured region
+        //  of primary account.
+        string region = 2;
+      }
+    }
+
+    message Cloudfoundry {
+      Defaults defaults = 1;
+      message Defaults {
+        string account = 1;
+      }
+    }
+
+    message Dcos {
+      Defaults defaults = 1;
+      message Defaults {
+        string account = 1;
+      }
+    }
+
+    message Ecs {
+      Defaults defaults = 1;
+      message Defaults {
+        string account = 1;
+      }
+    }
+
+    // TODO: is this breaking change worth documenting?
+    //  Halyard set default.region to
+    // "us-central1" and default.zone to "us-central1-f", but Kleat
+    // will use the first configured region of the primary account
+    // and not expose `zone` parameter, as there was never a way
+    // to configure this but I don't think us-central1-f is a reasonable
+    // default for all users to codify in Deck (and it makes more sense to not
+    // have a default and force users to make a selection where this is used).
+    message Gce {
+      Defaults defaults = 1;
+      message Defaults {
+        string account = 1;
+        string region = 2;
+      }
+    }
+
+    message HuaweiCloud {
+      Defaults defaults = 1;
+      message Defaults {
+        string account = 1;
+        string region = 2;
+      }
+    }
+
+    // TODO: add TencentCloud as a cloud provider so we can write
+    // config to Deck and Clouddriver.
+    message TencentCloud {
+      Defaults defaults = 1;
+      message Defaults {
+        string account = 1;
+        string region = 2;
+      }
+    }
+  }
+}
