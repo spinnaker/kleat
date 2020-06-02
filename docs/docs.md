@@ -217,6 +217,8 @@
     - [Cors](#proto.config.Cors)
     - [Gate](#proto.config.Gate)
     - [Gate.GoogleConfig](#proto.config.Gate.GoogleConfig)
+    - [Gate.Integrations](#proto.config.Gate.Integrations)
+    - [Gate.Integrations.Gremlin](#proto.config.Gate.Integrations.Gremlin)
     - [Gate.Services](#proto.config.Gate.Services)
     - [ServerConfig](#proto.config.ServerConfig)
     - [SpringSecurity](#proto.config.SpringSecurity)
@@ -3324,6 +3326,7 @@ Configuration for the gate microservice.
 | x509 | [proto.security.authn.X509](#proto.security.authn.X509) |  | Configuration for X509 authentication. |
 | google | [Gate.GoogleConfig](#proto.config.Gate.GoogleConfig) |  | Wrapper for Google-specific authentication (ex: IAP). |
 | services | [Gate.Services](#proto.config.Gate.Services) |  | Configuration for the status of non-core services. |
+| integrations | [Gate.Integrations](#proto.config.Gate.Integrations) |  |  |
 
 
 
@@ -3339,6 +3342,36 @@ Wrapper for Google-specific authentication.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | iap | [proto.security.authn.Iap](#proto.security.authn.Iap) |  | Configuration for Identity-Aware Proxy authentication. |
+
+
+
+
+
+
+<a name="proto.config.Gate.Integrations"></a>
+
+### Gate.Integrations
+Wrapper for Gate integrations.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| gremlin | [Gate.Integrations.Gremlin](#proto.config.Gate.Integrations.Gremlin) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Gate.Integrations.Gremlin"></a>
+
+### Gate.Integrations.Gremlin
+Configuration for Gremlin fault-injection support.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether Gremlin is enabled. |
 
 
 

@@ -365,6 +365,7 @@ webhook:
     trustStore: /var/secrets/webhook-keystore.jks
     trustStorePassword: abcdefg
 features:
+  gremlin: true
   pipelineTemplates: true
 security:
   apiSecurity:

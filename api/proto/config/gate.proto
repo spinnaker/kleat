@@ -33,6 +33,8 @@ message Gate {
   // Configuration for the status of non-core services.
   Services services = 8;
 
+  Integrations integrations = 9;
+
   message Services {
     ServiceSettings kayenta = 1;
     ServiceSettings deck = 2;
@@ -42,6 +44,16 @@ message Gate {
   message GoogleConfig {
     // Configuration for Identity-Aware Proxy authentication.
     security.authn.Iap iap = 1;
+  }
+
+  // Wrapper for Gate integrations.
+  message Integrations {
+    Gremlin gremlin = 1;
+    // Configuration for Gremlin fault-injection support.
+    message Gremlin {
+      // Whether Gremlin is enabled.
+      bool enabled = 1;
+    }
   }
 }
 

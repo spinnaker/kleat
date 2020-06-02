@@ -68,3 +68,6 @@ services:
     baseUrl: https://spinnaker.test:9000
   kayenta:
     enabled: true
+integrations:
+  gremlin:
+    enabled: true
