@@ -1019,6 +1019,13 @@ Configuration for Spinnaker&#39;s canary service.
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether the canary service is enabled. |
 | serviceIntegrations | [Canary.ServiceIntegrations](#proto.canary.Canary.ServiceIntegrations) |  | Canary service integrations. You must configure at least one account of each canary.SupportedType (METRICS_STORE, CONFIGURATION_STORE, OBJECT_STORE) in order to use Spinnaker&#39;s canary service. |
+| defaultMetricsAccount | [string](#string) |  | Name of the metrics account to use by default. |
+| defaultMetricsStore | [string](#string) |  | Name of the metrics store to use by default (e.g., `prometheus`, `datadog`). |
+| showAllConfigsEnabled | [bool](#bool) |  | Whether or not to show all canary configs in Deck, or just those scoped to the current application. |
+| templatesEnabled | [bool](#bool) |  | Whether or not to enable custom filter templates for canary configs in Deck. |
+| stagesEnabled | [bool](#bool) |  | Whether or not to enable canary stages in Deck. Defaults to true. |
+| defaultJudge | [string](#string) |  | The default canary judge. Defaults to `NetflixACAJudge-v1.0`, which is currently the only open-source judge available by default. |
+| storageAccountName | [string](#string) |  | Name of storage account to use by default. |
 
 
 
