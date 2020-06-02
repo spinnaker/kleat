@@ -3427,6 +3427,7 @@ Configuration for a Spinnaker installation.
 | webhook | [proto.security.WebhookConfig](#proto.security.WebhookConfig) |  |  |
 | security | [proto.security.Security](#proto.security.Security) |  |  |
 | canary | [proto.canary.Canary](#proto.canary.Canary) |  |  |
+| timezone | [string](#string) |  | The timezone in which your Spinnaker instance runs. This affects what the UI will display as well as how CRON triggers are run. TODO: Halyard currently writes `global.spinnaker.timezone` to spinnaker.yml, but I think only Deck, Echo, and Orca need this property. Need to confirm this and pass timezone through to Echo and Orca. |
 
 
 
