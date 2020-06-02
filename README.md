@@ -78,6 +78,10 @@ be used as input to Kleat.
   Email, Google Chat, and Pub/Sub) to enabled in Deck. Kleat requires you to
   explicitly enable BearyChat, Email, Google Chat, and Pub/Sub notification
   types.
+- Kleat requires you to explicitly specify a primaryAccount for each enabled
+  cloud provider for which you expect Deck to receive a statically configured
+  default account and/or region. (Halyard will fall back to the first configured
+  account if no primaryAccount is configured.)  
 
 #### Optional Changes
 
