@@ -8,11 +8,25 @@ message Features {
   // Enable pipeline template support. Read more at https://github.com/spinnaker/dcd-spec.
   bool pipelineTemplates = 1;
 
-  // Fields below this line are not yet used in any service that kleat supports
-  // TODO: Ensure that they are actually needed and move above this line
-
-  bool chaos = 2;
   // Enable canary support. For this to work, you'll need a canary judge configured.
-  bool mineCanary = 3;
+  bool mineCanary = 2;
+
+  // Enable Chaos Monkey support. For this to work, you'll need a running Chaos
+  // Monkey deployment. See https://github.com/Netflix/chaosmonkey/wiki.
+  bool chaos = 3;
+
+  // Enable managed pipeline templates v2 UI support.
   bool managedPipelineTemplatesV2UI = 4;
+
+  // Enable Gremlin fault-injection support.
+  bool gremlin = 5;
+
+  // Enable Rosco UI support.
+  // TODO: one of the following:
+  // 1. Safely default this to true in Deck
+  // 2. Document among breaking changes that users will need to manually set
+  //    this to true.
+  // 3. Have Kleat set this to true if there is at least one configured and
+  //    enabled VM-based cloud provider consumed by Rosco.
+  bool roscoMode = 6;
 }

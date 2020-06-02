@@ -3744,9 +3744,11 @@ Feature flags
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | pipelineTemplates | [bool](#bool) |  | Enable pipeline template support. Read more at https://github.com/spinnaker/dcd-spec. |
-| chaos | [bool](#bool) |  |  |
 | mineCanary | [bool](#bool) |  | Enable canary support. For this to work, you&#39;ll need a canary judge configured. |
-| managedPipelineTemplatesV2UI | [bool](#bool) |  |  |
+| chaos | [bool](#bool) |  | Enable Chaos Monkey support. For this to work, you&#39;ll need a running Chaos Monkey deployment. See https://github.com/Netflix/chaosmonkey/wiki. |
+| managedPipelineTemplatesV2UI | [bool](#bool) |  | Enable managed pipeline templates v2 UI support. |
+| gremlin | [bool](#bool) |  | Enable Gremlin fault-injection support. |
+| roscoMode | [bool](#bool) |  | Enable Rosco UI support. TODO: one of the following: 1. Safely default this to true in Deck 2. Document among breaking changes that users will need to manually set this to true. 3. Have Kleat set this to true if there is at least one configured and enabled VM-based cloud provider consumed by Rosco. |
 
 
 
