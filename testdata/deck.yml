@@ -1,0 +1,66 @@
+authEnabled: true
+authEndpoint: https://gate.spinnaker:8084/auth/user
+bakeryDetailUrl: https://gate.spinnaker:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}
+canary:
+  metricStore: stackdriver
+  metricsAccountName: my-google-canary-account
+  showAllConfigs: true
+  storageAccountName: my-google-canary-account
+  templatesEnabled: true
+features:
+  canary: true
+  chaosMonkey: true
+  fiatEnabled: true
+  managedPipelineTemplatesV2UI: true
+  pipelineTemplates: true
+  roscoMode: true
+gateUrl: https://gate.spinnaker:8084
+notifications:
+  githubStatus:
+    enabled: true
+    token: my-github-token
+  slack:
+    baseUrl: https://slack.test/
+    botName: my-bot
+    enabled: true
+    forceUseIncomingWebhook: true
+    token: my-secret-token
+  sms:
+    account: my-twilio-account
+    baseUrl: https://api.twilio.com/
+    enabled: true
+    from: +1212-555-0100
+    token: my-twilio-token
+  bearychat:
+    enabled: true
+  email:
+    enabled: true
+  pubsub:
+    enabled: true
+  googleChat:
+    enabled: true
+providers:
+  appengine:
+    defaults:
+      account: my-appengine-account
+  aws:
+    defaults:
+      account: my-aws-account
+      region: myregion
+  cloudfoundry:
+    defaults:
+      account: my-cf-account
+  dcos:
+    defaults:
+      account: my-dcos-account
+  ecs:
+    defaults:
+      account: my-ecs-account
+  gce:
+    defaults:
+      account: my-gce-account
+      region: us-east1-b
+  huaweicloud:
+    defaults:
+      account: my-huawei-account
+      region: us-east1

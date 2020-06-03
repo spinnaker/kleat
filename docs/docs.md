@@ -4203,6 +4203,7 @@ Configuration for Spinnaker&#39;s microservices.
 | fiat | [Fiat](#proto.config.Fiat) |  |  |
 | kayenta | [Kayenta](#proto.config.Kayenta) |  |  |
 | rosco | [Rosco](#proto.config.Rosco) |  |  |
+| deck | [Deck](#proto.config.Deck) |  |  |
 
 
 

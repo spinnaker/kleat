@@ -27,5 +27,6 @@ func HalToServiceConfigs(h *config.Hal) *config.Services {
 		Fiat:        HalToFiat(h),
 		Kayenta:     HalToKayenta(h),
 		Rosco:       HalToRosco(h),
+		Deck:        HalToDeck(h),
 	}
 }

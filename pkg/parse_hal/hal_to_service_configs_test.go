@@ -49,6 +49,7 @@ func TestHalToServiceConfigs(t *testing.T) {
 		Fiat:        parse_hal.HalToFiat(h),
 		Kayenta:     parse_hal.HalToKayenta(h),
 		Rosco:       parse_hal.HalToRosco(h),
+		Deck:        parse_hal.HalToDeck(h),
 	}
 
 	if !proto.Equal(gotS, wantS) {
@@ -104,6 +105,10 @@ func TestHalToServiceYAML(t *testing.T) {
 		{
 			"rosco.yml",
 			services.GetRosco(),
+		},
+		{
+			"deck.yml",
+			services.GetDeck(),
 		},
 	}
 
