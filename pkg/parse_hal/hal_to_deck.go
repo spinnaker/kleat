@@ -22,14 +22,14 @@ import (
 
 // TODO: Actually get Gate's URL (which may be http or https)
 // Should Kleat output the service discovery file?
-const gateUrl = "https://gate.spinnaker:8084"
+const GateUrl = "https://gate.spinnaker:8084"
 
 func HalToDeck(h *config.Hal) *config.Deck {
 	return &config.Deck{
-		GateUrl:         gateUrl,
+		GateUrl:         GateUrl,
 		AuthEnabled:     h.GetSecurity().GetAuthn().GetEnabled(),
-		AuthEndpoint:    gateUrl + "/auth/user",
-		BakeryDetailUrl: gateUrl + "/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
+		AuthEndpoint:    GateUrl + "/auth/user",
+		BakeryDetailUrl: GateUrl + "/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
 		Canary:          getDeckCanaryConfig(h),
 		Changelog:       getDeckChangelogConfig(h),
 		DefaultTimeZone: h.GetTimezone(),
@@ -46,7 +46,10 @@ func getDeckCanaryConfig(h *config.Hal) *config.Deck_Canary {
 		MetricsAccountName: h.GetCanary().GetDefaultMetricsAccount(),
 		MetricStore:        h.GetCanary().GetDefaultMetricsStore(),
 		ShowAllConfigs:     h.GetCanary().GetShowAllConfigsEnabled(),
-		StagesEnabled:      h.GetCanary().GetStagesEnabled(),
+		// TODO: Convert to bool wrapper or do not expose? This will soon
+		// default to true in deck-kayenta, and I doubt any existing Halyard
+		// users wish canary to be enabled but stages to be disabled.
+		//StagesEnabled:      h.GetCanary().GetStagesEnabled(),
 		StorageAccountName: h.GetCanary().GetStorageAccountName(),
 		TemplatesEnabled:   h.GetCanary().GetTemplatesEnabled(),
 	}
@@ -54,19 +57,21 @@ func getDeckCanaryConfig(h *config.Hal) *config.Deck_Canary {
 
 // TODO: Actually get changelog config
 func getDeckChangelogConfig(h *config.Hal) *config.Deck_Changelog {
-	return &config.Deck_Changelog{
-		FileName: "",
-		GistId:   "",
-	}
+	return nil
+	//return &config.Deck_Changelog{
+	//	FileName: "",
+	//	GistId:   "",
+	//}
 }
 
 func getDeckFeaturesConfig(h *config.Hal) *config.Deck_Features {
 	return &config.Deck_Features{
-		PipelineTemplates: h.GetFeatures().GetPipelineTemplates(),
-		Canary:            h.GetFeatures().GetMineCanary(),
-		ChaosMonkey:       h.GetFeatures().GetChaos(),
-		FiatEnabled:       h.GetSecurity().GetAuthz().GetEnabled(),
-		RoscoMode:         h.GetFeatures().GetRoscoMode(),
+		PipelineTemplates:            h.GetFeatures().GetPipelineTemplates(),
+		Canary:                       h.GetFeatures().GetMineCanary(),
+		ChaosMonkey:                  h.GetFeatures().GetChaos(),
+		FiatEnabled:                  h.GetSecurity().GetAuthz().GetEnabled(),
+		RoscoMode:                    h.GetFeatures().GetRoscoMode(),
+		ManagedPipelineTemplatesV2UI: h.GetFeatures().GetManagedPipelineTemplatesV2UI(),
 	}
 }
 

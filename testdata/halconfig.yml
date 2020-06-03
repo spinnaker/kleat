@@ -340,6 +340,14 @@ notifications:
   githubStatus:
     enabled: true
     token: my-github-token
+  bearychat:
+    enabled: true
+  email:
+    enabled: true
+  pubsub:
+    enabled: true
+  googlechat:
+    enabled: true
 pubsub:
   enabled: true
   google:
@@ -365,8 +373,12 @@ webhook:
     trustStore: /var/secrets/webhook-keystore.jks
     trustStorePassword: abcdefg
 features:
+  chaos: true
   gremlin: true
+  managedPipelineTemplatesV2UI: true
+  mineCanary: true
   pipelineTemplates: true
+  roscoMode: true
 security:
   apiSecurity:
     ssl:
@@ -466,6 +478,11 @@ security:
   enabled: true
 canary:
   enabled: true
+  defaultMetricsAccount: my-google-canary-account
+  defaultMetricsStore: stackdriver
+  showAllConfigsEnabled: true
+  storageAccountName: my-google-canary-account
+  templatesEnabled: true
   serviceIntegrations:
     google:
       enabled: true

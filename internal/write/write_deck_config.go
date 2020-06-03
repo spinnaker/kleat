@@ -13,20 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package parse_hal
+package write
 
-import "github.com/spinnaker/kleat/api/client/config"
+import (
+	"google.golang.org/protobuf/encoding/protojson"
+	"google.golang.org/protobuf/proto"
+)
 
-func HalToServiceConfigs(h *config.Hal) *config.Services {
-	return &config.Services{
-		Clouddriver: HalToClouddriver(h),
-		Echo:        HalToEcho(h),
-		Front50:     HalToFront50(h),
-		Orca:        HalToOrca(h),
-		Gate:        HalToGate(h),
-		Fiat:        HalToFiat(h),
-		Kayenta:     HalToKayenta(h),
-		Rosco:       HalToRosco(h),
-		Deck:        HalToDeck(h),
+func writeDeck(m proto.Message, file string) error {
+	js, err := getDeckBytes(m)
+	if err != nil {
+		return err
 	}
+	if err := writeBytes(js, file); err != nil {
+		return err
+	}
+	return nil
+}
+
+func getDeckBytes(m proto.Message) ([]byte, error) {
+	json, err := protojson.Marshal(m)
+	if err != nil {
+		return nil, err
+	}
+
+	const jsStart = "window.spinnakerSettings = JSON.parse('"
+	const jsEnd = "');"
+	js := append([]byte(jsStart), json...)
+	js = append(js, []byte(jsEnd)...)
+
+	return js, nil
 }
