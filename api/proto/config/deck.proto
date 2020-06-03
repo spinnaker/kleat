@@ -65,6 +65,9 @@ message Deck {
     // Whether Rosco UI support is enabled.
     // TODO: handle per comments in feature.proto
     bool roscoMode = 5;
+
+    // Enable managed pipeline templates v2 UI support.
+    bool managedPipelineTemplatesV2UI = 6;
   }
 
   // Configuration for the canary UI.

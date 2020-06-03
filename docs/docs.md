@@ -3285,6 +3285,7 @@ Configuration for UI-related feature flags.
 | chaosMonkey | [bool](#bool) |  | Enable Chaos Monkey support. For this to work, you&#39;ll need a running Chaos Monkey deployment. See https://github.com/Netflix/chaosmonkey/wiki. |
 | fiatEnabled | [bool](#bool) |  | Whether authz is enabled. |
 | roscoMode | [bool](#bool) |  | Whether Rosco UI support is enabled. TODO: handle per comments in feature.proto |
+| managedPipelineTemplatesV2UI | [bool](#bool) |  | Enable managed pipeline templates v2 UI support. |
 
 
 

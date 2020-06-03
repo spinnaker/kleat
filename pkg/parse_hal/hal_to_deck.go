@@ -62,11 +62,12 @@ func getDeckChangelogConfig(h *config.Hal) *config.Deck_Changelog {
 
 func getDeckFeaturesConfig(h *config.Hal) *config.Deck_Features {
 	return &config.Deck_Features{
-		PipelineTemplates: h.GetFeatures().GetPipelineTemplates(),
-		Canary:            h.GetFeatures().GetMineCanary(),
-		ChaosMonkey:       h.GetFeatures().GetChaos(),
-		FiatEnabled:       h.GetSecurity().GetAuthz().GetEnabled(),
-		RoscoMode:         h.GetFeatures().GetRoscoMode(),
+		PipelineTemplates:            h.GetFeatures().GetPipelineTemplates(),
+		Canary:                       h.GetFeatures().GetMineCanary(),
+		ChaosMonkey:                  h.GetFeatures().GetChaos(),
+		FiatEnabled:                  h.GetSecurity().GetAuthz().GetEnabled(),
+		RoscoMode:                    h.GetFeatures().GetRoscoMode(),
+		ManagedPipelineTemplatesV2UI: h.GetFeatures().GetManagedPipelineTemplatesV2UI(),
 	}
 }
 
