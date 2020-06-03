@@ -23,6 +23,7 @@ func HalToOrca(h *config.Hal) *config.Orca {
 		PipelineTemplates: getPipelineTemplates(h),
 		Webhook:           h.GetWebhook(),
 		Services:          getOrcaServices(h),
+		Tasks:             getOrcaTasks(h),
 	}
 }
 
@@ -55,4 +56,16 @@ func getOrcaServices(h *config.Hal) *config.Orca_Services {
 		}
 	}
 	return nil
+}
+
+func getOrcaTasks(h *config.Hal) *config.Orca_Tasks {
+	if h.GetTimezone() == "" {
+		return nil
+	}
+
+	return &config.Orca_Tasks{
+		ExecutionWindow: &config.Orca_Tasks_ExecutionWindow{
+			Timezone: h.GetTimezone(),
+		},
+	}
 }

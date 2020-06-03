@@ -104,3 +104,6 @@ pubsub:
       content: NOTIFICATIONS
 stats:
   enabled: false
+scheduler:
+  cron:
+    timezone: America/Chicago

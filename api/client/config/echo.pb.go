@@ -43,6 +43,7 @@ type Echo struct {
 	Pubsub       *pubsub.Pubsub             `protobuf:"bytes,5,opt,name=pubsub,proto3" json:"pubsub,omitempty"`
 	Gcb          *ci.GoogleCloudBuild       `protobuf:"bytes,6,opt,name=gcb,proto3" json:"gcb,omitempty"`
 	Stats        *client.Stats              `protobuf:"bytes,7,opt,name=stats,proto3" json:"stats,omitempty"`
+	Scheduler    *Echo_Scheduler            `protobuf:"bytes,8,opt,name=scheduler,proto3" json:"scheduler,omitempty"`
 }
 
 func (x *Echo) Reset() {
@@ -126,6 +127,111 @@ func (x *Echo) GetStats() *client.Stats {
 	return nil
 }
 
+func (x *Echo) GetScheduler() *Echo_Scheduler {
+	if x != nil {
+		return x.Scheduler
+	}
+	return nil
+}
+
+// Echo scheduler configuration.
+type Echo_Scheduler struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Cron configuration.
+	Cron *Echo_Scheduler_Cron `protobuf:"bytes,1,opt,name=cron,proto3" json:"cron,omitempty"`
+}
+
+func (x *Echo_Scheduler) Reset() {
+	*x = Echo_Scheduler{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_config_echo_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Echo_Scheduler) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Echo_Scheduler) ProtoMessage() {}
+
+func (x *Echo_Scheduler) ProtoReflect() protoreflect.Message {
+	mi := &file_config_echo_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Echo_Scheduler.ProtoReflect.Descriptor instead.
+func (*Echo_Scheduler) Descriptor() ([]byte, []int) {
+	return file_config_echo_proto_rawDescGZIP(), []int{0, 0}
+}
+
+func (x *Echo_Scheduler) GetCron() *Echo_Scheduler_Cron {
+	if x != nil {
+		return x.Cron
+	}
+	return nil
+}
+
+// Cron configuration.
+type Echo_Scheduler_Cron struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Default timezone. Defaults to `America/Los_Angeles`.
+	Timezone string `protobuf:"bytes,1,opt,name=timezone,proto3" json:"timezone,omitempty"`
+}
+
+func (x *Echo_Scheduler_Cron) Reset() {
+	*x = Echo_Scheduler_Cron{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_config_echo_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Echo_Scheduler_Cron) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Echo_Scheduler_Cron) ProtoMessage() {}
+
+func (x *Echo_Scheduler_Cron) ProtoReflect() protoreflect.Message {
+	mi := &file_config_echo_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Echo_Scheduler_Cron.ProtoReflect.Descriptor instead.
+func (*Echo_Scheduler_Cron) Descriptor() ([]byte, []int) {
+	return file_config_echo_proto_rawDescGZIP(), []int{0, 0, 0}
+}
+
+func (x *Echo_Scheduler_Cron) GetTimezone() string {
+	if x != nil {
+		return x.Timezone
+	}
+	return ""
+}
+
 var File_config_echo_proto protoreflect.FileDescriptor
 
 var file_config_echo_proto_rawDesc = []byte{
@@ -141,7 +247,7 @@ var file_config_echo_proto_rawDesc = []byte{
 	0x69, 0x6f, 0x6e, 0x2f, 0x74, 0x77, 0x69, 0x6c, 0x69, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
 	0x1a, 0x13, 0x70, 0x75, 0x62, 0x73, 0x75, 0x62, 0x2f, 0x70, 0x75, 0x62, 0x73, 0x75, 0x62, 0x2e,
 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x0b, 0x73, 0x74, 0x61, 0x74, 0x73, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x22, 0xea, 0x02, 0x0a, 0x04, 0x45, 0x63, 0x68, 0x6f, 0x12, 0x2f, 0x0a, 0x05, 0x73,
+	0x74, 0x6f, 0x22, 0x8e, 0x04, 0x0a, 0x04, 0x45, 0x63, 0x68, 0x6f, 0x12, 0x2f, 0x0a, 0x05, 0x73,
 	0x6c, 0x61, 0x63, 0x6b, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x70, 0x72, 0x6f,
 	0x74, 0x6f, 0x2e, 0x6e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e,
 	0x53, 0x6c, 0x61, 0x63, 0x6b, 0x52, 0x05, 0x73, 0x6c, 0x61, 0x63, 0x6b, 0x12, 0x32, 0x0a, 0x06,
@@ -163,11 +269,21 @@ var file_config_echo_proto_rawDesc = []byte{
 	0x74, 0x6f, 0x2e, 0x63, 0x69, 0x2e, 0x47, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x43, 0x6c, 0x6f, 0x75,
 	0x64, 0x42, 0x75, 0x69, 0x6c, 0x64, 0x52, 0x03, 0x67, 0x63, 0x62, 0x12, 0x22, 0x0a, 0x05, 0x73,
 	0x74, 0x61, 0x74, 0x73, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x73, 0x52, 0x05, 0x73, 0x74, 0x61, 0x74, 0x73, 0x42,
-	0x2e, 0x5a, 0x2c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70,
-	0x69, 0x6e, 0x6e, 0x61, 0x6b, 0x65, 0x72, 0x2f, 0x6b, 0x6c, 0x65, 0x61, 0x74, 0x2f, 0x61, 0x70,
-	0x69, 0x2f, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2f, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x74, 0x6f, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x73, 0x52, 0x05, 0x73, 0x74, 0x61, 0x74, 0x73, 0x12,
+	0x3a, 0x0a, 0x09, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x72, 0x18, 0x08, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x63, 0x6f, 0x6e, 0x66, 0x69,
+	0x67, 0x2e, 0x45, 0x63, 0x68, 0x6f, 0x2e, 0x53, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x72,
+	0x52, 0x09, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x72, 0x1a, 0x66, 0x0a, 0x09, 0x53,
+	0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x72, 0x12, 0x35, 0x0a, 0x04, 0x63, 0x72, 0x6f, 0x6e,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x63,
+	0x6f, 0x6e, 0x66, 0x69, 0x67, 0x2e, 0x45, 0x63, 0x68, 0x6f, 0x2e, 0x53, 0x63, 0x68, 0x65, 0x64,
+	0x75, 0x6c, 0x65, 0x72, 0x2e, 0x43, 0x72, 0x6f, 0x6e, 0x52, 0x04, 0x63, 0x72, 0x6f, 0x6e, 0x1a,
+	0x22, 0x0a, 0x04, 0x43, 0x72, 0x6f, 0x6e, 0x12, 0x1a, 0x0a, 0x08, 0x74, 0x69, 0x6d, 0x65, 0x7a,
+	0x6f, 0x6e, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x74, 0x69, 0x6d, 0x65, 0x7a,
+	0x6f, 0x6e, 0x65, 0x42, 0x2e, 0x5a, 0x2c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
+	0x6d, 0x2f, 0x73, 0x70, 0x69, 0x6e, 0x6e, 0x61, 0x6b, 0x65, 0x72, 0x2f, 0x6b, 0x6c, 0x65, 0x61,
+	0x74, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2f, 0x63, 0x6f, 0x6e,
+	0x66, 0x69, 0x67, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -182,30 +298,34 @@ func file_config_echo_proto_rawDescGZIP() []byte {
 	return file_config_echo_proto_rawDescData
 }
 
-var file_config_echo_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_config_echo_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_config_echo_proto_goTypes = []interface{}{
 	(*Echo)(nil),                      // 0: proto.config.Echo
-	(*notification.Slack)(nil),        // 1: proto.notification.Slack
-	(*notification.Twilio)(nil),       // 2: proto.notification.Twilio
-	(*notification.GithubStatus)(nil), // 3: proto.notification.GithubStatus
-	(*artifact.Artifacts)(nil),        // 4: proto.artifact.Artifacts
-	(*pubsub.Pubsub)(nil),             // 5: proto.pubsub.Pubsub
-	(*ci.GoogleCloudBuild)(nil),       // 6: proto.ci.GoogleCloudBuild
-	(*client.Stats)(nil),              // 7: proto.Stats
+	(*Echo_Scheduler)(nil),            // 1: proto.config.Echo.Scheduler
+	(*Echo_Scheduler_Cron)(nil),       // 2: proto.config.Echo.Scheduler.Cron
+	(*notification.Slack)(nil),        // 3: proto.notification.Slack
+	(*notification.Twilio)(nil),       // 4: proto.notification.Twilio
+	(*notification.GithubStatus)(nil), // 5: proto.notification.GithubStatus
+	(*artifact.Artifacts)(nil),        // 6: proto.artifact.Artifacts
+	(*pubsub.Pubsub)(nil),             // 7: proto.pubsub.Pubsub
+	(*ci.GoogleCloudBuild)(nil),       // 8: proto.ci.GoogleCloudBuild
+	(*client.Stats)(nil),              // 9: proto.Stats
 }
 var file_config_echo_proto_depIdxs = []int32{
-	1, // 0: proto.config.Echo.slack:type_name -> proto.notification.Slack
-	2, // 1: proto.config.Echo.twilio:type_name -> proto.notification.Twilio
-	3, // 2: proto.config.Echo.githubStatus:type_name -> proto.notification.GithubStatus
-	4, // 3: proto.config.Echo.artifacts:type_name -> proto.artifact.Artifacts
-	5, // 4: proto.config.Echo.pubsub:type_name -> proto.pubsub.Pubsub
-	6, // 5: proto.config.Echo.gcb:type_name -> proto.ci.GoogleCloudBuild
-	7, // 6: proto.config.Echo.stats:type_name -> proto.Stats
-	7, // [7:7] is the sub-list for method output_type
-	7, // [7:7] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	3, // 0: proto.config.Echo.slack:type_name -> proto.notification.Slack
+	4, // 1: proto.config.Echo.twilio:type_name -> proto.notification.Twilio
+	5, // 2: proto.config.Echo.githubStatus:type_name -> proto.notification.GithubStatus
+	6, // 3: proto.config.Echo.artifacts:type_name -> proto.artifact.Artifacts
+	7, // 4: proto.config.Echo.pubsub:type_name -> proto.pubsub.Pubsub
+	8, // 5: proto.config.Echo.gcb:type_name -> proto.ci.GoogleCloudBuild
+	9, // 6: proto.config.Echo.stats:type_name -> proto.Stats
+	1, // 7: proto.config.Echo.scheduler:type_name -> proto.config.Echo.Scheduler
+	2, // 8: proto.config.Echo.Scheduler.cron:type_name -> proto.config.Echo.Scheduler.Cron
+	9, // [9:9] is the sub-list for method output_type
+	9, // [9:9] is the sub-list for method input_type
+	9, // [9:9] is the sub-list for extension type_name
+	9, // [9:9] is the sub-list for extension extendee
+	0, // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_config_echo_proto_init() }
@@ -226,6 +346,30 @@ func file_config_echo_proto_init() {
 				return nil
 			}
 		}
+		file_config_echo_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Echo_Scheduler); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_config_echo_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Echo_Scheduler_Cron); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -233,7 +377,7 @@ func file_config_echo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_config_echo_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

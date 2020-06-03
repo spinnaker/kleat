@@ -231,6 +231,8 @@
   
 - [config/echo.proto](#config/echo.proto)
     - [Echo](#proto.config.Echo)
+    - [Echo.Scheduler](#proto.config.Echo.Scheduler)
+    - [Echo.Scheduler.Cron](#proto.config.Echo.Scheduler.Cron)
   
 - [config/fiat.proto](#config/fiat.proto)
     - [Fiat](#proto.config.Fiat)
@@ -264,6 +266,8 @@
     - [Orca.Defaults.BakeDefaults](#proto.config.Orca.Defaults.BakeDefaults)
     - [Orca.PipelineTemplates](#proto.config.Orca.PipelineTemplates)
     - [Orca.Services](#proto.config.Orca.Services)
+    - [Orca.Tasks](#proto.config.Orca.Tasks)
+    - [Orca.Tasks.ExecutionWindow](#proto.config.Orca.Tasks.ExecutionWindow)
   
 - [config/rosco.proto](#config/rosco.proto)
     - [Rosco](#proto.config.Rosco)
@@ -3650,6 +3654,37 @@ Configuration for the echo microservice.
 | pubsub | [proto.pubsub.Pubsub](#proto.pubsub.Pubsub) |  |  |
 | gcb | [proto.ci.GoogleCloudBuild](#proto.ci.GoogleCloudBuild) |  |  |
 | stats | [proto.Stats](#proto.Stats) |  |  |
+| scheduler | [Echo.Scheduler](#proto.config.Echo.Scheduler) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Echo.Scheduler"></a>
+
+### Echo.Scheduler
+Echo scheduler configuration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| cron | [Echo.Scheduler.Cron](#proto.config.Echo.Scheduler.Cron) |  | Cron configuration. |
+
+
+
+
+
+
+<a name="proto.config.Echo.Scheduler.Cron"></a>
+
+### Echo.Scheduler.Cron
+Cron configuration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| timezone | [string](#string) |  | Default timezone. Defaults to `America/Los_Angeles`. |
 
 
 
@@ -3917,7 +3952,7 @@ Configuration for a Spinnaker installation.
 | webhook | [proto.security.WebhookConfig](#proto.security.WebhookConfig) |  |  |
 | security | [proto.security.Security](#proto.security.Security) |  |  |
 | canary | [proto.canary.Canary](#proto.canary.Canary) |  |  |
-| timezone | [string](#string) |  | The timezone in which your Spinnaker instance runs. This affects what the UI will display as well as how CRON triggers are run. TODO: Halyard currently writes `global.spinnaker.timezone` to spinnaker.yml, but I think only Deck, Echo, and Orca need this property. Need to confirm this and pass timezone through to Echo and Orca. |
+| timezone | [string](#string) |  | The timezone in which your Spinnaker instance runs. This affects what the UI will display as well as how CRON triggers are run. |
 
 
 
@@ -4038,6 +4073,7 @@ Configuration for the Orca microservice.
 | webhook | [proto.security.WebhookConfig](#proto.security.WebhookConfig) |  |  |
 | default | [Orca.Defaults](#proto.config.Orca.Defaults) |  |  |
 | services | [Orca.Services](#proto.config.Orca.Services) |  |  |
+| tasks | [Orca.Tasks](#proto.config.Orca.Tasks) |  |  |
 
 
 
@@ -4098,6 +4134,36 @@ Configuration for the status of non-core services.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | kayenta | [ServiceSettings](#proto.config.ServiceSettings) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Orca.Tasks"></a>
+
+### Orca.Tasks
+Configuration for Orca tasks.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| executionWindow | [Orca.Tasks.ExecutionWindow](#proto.config.Orca.Tasks.ExecutionWindow) |  | Execution window configuration. |
+
+
+
+
+
+
+<a name="proto.config.Orca.Tasks.ExecutionWindow"></a>
+
+### Orca.Tasks.ExecutionWindow
+Execution window configuration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| timezone | [string](#string) |  | Default timezone. Defaults to `America/Los_Angeles`. |
 
 
 

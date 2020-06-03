@@ -209,6 +209,19 @@ var halToEchoTests = []struct {
 			Stats: &client.Stats{Enabled: &wrappers.BoolValue{Value: false}},
 		},
 	},
+	{
+		"Timezone set",
+		&config.Hal{
+			Timezone: "America/Chicago",
+		},
+		&config.Echo{
+			Scheduler: &config.Echo_Scheduler{
+				Cron: &config.Echo_Scheduler_Cron{
+					Timezone: "America/Chicago",
+				},
+			},
+		},
+	},
 }
 
 func TestHalToEcho(t *testing.T) {

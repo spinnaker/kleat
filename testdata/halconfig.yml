@@ -1,5 +1,6 @@
 name: default
 version: master-latest-unvalidated
+timezone: America/Chicago
 providers:
   kubernetes:
     enabled: true

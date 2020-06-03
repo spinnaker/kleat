@@ -64,3 +64,4 @@ providers:
     defaults:
       account: my-huawei-account
       region: us-east1
+defaultTimeZone: America/Chicago

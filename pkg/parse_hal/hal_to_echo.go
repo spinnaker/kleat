@@ -26,5 +26,17 @@ func HalToEcho(h *config.Hal) *config.Echo {
 		Pubsub:       h.GetPubsub(),
 		Gcb:          h.GetCi().GetGcb(),
 		Stats:        h.GetStats(),
+		Scheduler:    getEchoScheduler(h),
+	}
+}
+
+func getEchoScheduler(h *config.Hal) *config.Echo_Scheduler {
+	if h.GetTimezone() == "" {
+		return nil
+	}
+	return &config.Echo_Scheduler{
+		Cron: &config.Echo_Scheduler_Cron{
+			Timezone: h.GetTimezone(),
+		},
 	}
 }

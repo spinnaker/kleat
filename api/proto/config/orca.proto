@@ -12,6 +12,7 @@ message Orca {
   security.WebhookConfig webhook = 2;
   Defaults default = 3;
   Services services = 4;
+  Tasks tasks = 5;
 
   // Configuration for the status of non-core services.
   message Services {
@@ -33,6 +34,18 @@ message Orca {
     message BakeDefaults {
       // The default account to use for baking.
       string account = 1;
+    }
+  }
+
+  // Configuration for Orca tasks.
+  message Tasks {
+    // Execution window configuration.
+    ExecutionWindow executionWindow = 1;
+
+    // Execution window configuration.
+    message ExecutionWindow {
+      // Default timezone. Defaults to `America/Los_Angeles`.
+      string timezone = 1;
     }
   }
 }
