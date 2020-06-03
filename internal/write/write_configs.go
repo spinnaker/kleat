@@ -67,6 +67,9 @@ func WriteConfigs(halPath string, dir string) error {
 	if err := write(services.GetRosco(), filepath.Join(dir, "rosco.yml")); err != nil {
 		return err
 	}
+	if err := writeDeck(services.GetDeck(), filepath.Join(dir, "settings.js")); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -79,15 +82,22 @@ func read(m proto.Message, file string) error {
 }
 
 func write(m proto.Message, file string) error {
+	bytes, err := protoyaml.Marshal(m)
+	if err != nil {
+		return err
+	}
+	if err = writeBytes(bytes, file); err != nil {
+		return err
+	}
+	return nil
+}
+
+func writeBytes(bytes []byte, file string) error {
 	w, err := os.Create(file)
 	if err != nil {
 		return err
 	}
 
-	bytes, err := protoyaml.Marshal(m)
-	if err != nil {
-		return err
-	}
 	if _, err = w.Write(bytes); err != nil {
 		return err
 	}
