@@ -11,3 +11,6 @@ default:
 services:
   kayenta:
     enabled: true
+tasks:
+  executionWindow:
+    timezone: America/Chicago

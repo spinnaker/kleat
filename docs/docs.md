@@ -264,6 +264,8 @@
     - [Orca.Defaults.BakeDefaults](#proto.config.Orca.Defaults.BakeDefaults)
     - [Orca.PipelineTemplates](#proto.config.Orca.PipelineTemplates)
     - [Orca.Services](#proto.config.Orca.Services)
+    - [Orca.Tasks](#proto.config.Orca.Tasks)
+    - [Orca.Tasks.ExecutionWindow](#proto.config.Orca.Tasks.ExecutionWindow)
   
 - [config/rosco.proto](#config/rosco.proto)
     - [Rosco](#proto.config.Rosco)
@@ -4038,6 +4040,7 @@ Configuration for the Orca microservice.
 | webhook | [proto.security.WebhookConfig](#proto.security.WebhookConfig) |  |  |
 | default | [Orca.Defaults](#proto.config.Orca.Defaults) |  |  |
 | services | [Orca.Services](#proto.config.Orca.Services) |  |  |
+| tasks | [Orca.Tasks](#proto.config.Orca.Tasks) |  |  |
 
 
 
@@ -4098,6 +4101,36 @@ Configuration for the status of non-core services.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | kayenta | [ServiceSettings](#proto.config.ServiceSettings) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Orca.Tasks"></a>
+
+### Orca.Tasks
+Configuration for Orca tasks.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| executionWindow | [Orca.Tasks.ExecutionWindow](#proto.config.Orca.Tasks.ExecutionWindow) |  | Execution window configuration. |
+
+
+
+
+
+
+<a name="proto.config.Orca.Tasks.ExecutionWindow"></a>
+
+### Orca.Tasks.ExecutionWindow
+Execution window configuration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| timezone | [string](#string) |  | Default timezone. Defaults to `America/Los_Angeles`. |
 
 
 

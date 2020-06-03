@@ -36,6 +36,7 @@ type Orca struct {
 	Webhook           *security.WebhookConfig `protobuf:"bytes,2,opt,name=webhook,proto3" json:"webhook,omitempty"`
 	Default           *Orca_Defaults          `protobuf:"bytes,3,opt,name=default,proto3" json:"default,omitempty"`
 	Services          *Orca_Services          `protobuf:"bytes,4,opt,name=services,proto3" json:"services,omitempty"`
+	Tasks             *Orca_Tasks             `protobuf:"bytes,5,opt,name=tasks,proto3" json:"tasks,omitempty"`
 }
 
 func (x *Orca) Reset() {
@@ -94,6 +95,13 @@ func (x *Orca) GetDefault() *Orca_Defaults {
 func (x *Orca) GetServices() *Orca_Services {
 	if x != nil {
 		return x.Services
+	}
+	return nil
+}
+
+func (x *Orca) GetTasks() *Orca_Tasks {
+	if x != nil {
+		return x.Tasks
 	}
 	return nil
 }
@@ -244,6 +252,55 @@ func (x *Orca_Defaults) GetBake() *Orca_Defaults_BakeDefaults {
 	return nil
 }
 
+// Configuration for Orca tasks.
+type Orca_Tasks struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Execution window configuration.
+	ExecutionWindow *Orca_Tasks_ExecutionWindow `protobuf:"bytes,1,opt,name=executionWindow,proto3" json:"executionWindow,omitempty"`
+}
+
+func (x *Orca_Tasks) Reset() {
+	*x = Orca_Tasks{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_config_orca_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Orca_Tasks) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Orca_Tasks) ProtoMessage() {}
+
+func (x *Orca_Tasks) ProtoReflect() protoreflect.Message {
+	mi := &file_config_orca_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Orca_Tasks.ProtoReflect.Descriptor instead.
+func (*Orca_Tasks) Descriptor() ([]byte, []int) {
+	return file_config_orca_proto_rawDescGZIP(), []int{0, 3}
+}
+
+func (x *Orca_Tasks) GetExecutionWindow() *Orca_Tasks_ExecutionWindow {
+	if x != nil {
+		return x.ExecutionWindow
+	}
+	return nil
+}
+
 // Configuration of bakery defaults.
 type Orca_Defaults_BakeDefaults struct {
 	state         protoimpl.MessageState
@@ -257,7 +314,7 @@ type Orca_Defaults_BakeDefaults struct {
 func (x *Orca_Defaults_BakeDefaults) Reset() {
 	*x = Orca_Defaults_BakeDefaults{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_config_orca_proto_msgTypes[4]
+		mi := &file_config_orca_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -270,7 +327,7 @@ func (x *Orca_Defaults_BakeDefaults) String() string {
 func (*Orca_Defaults_BakeDefaults) ProtoMessage() {}
 
 func (x *Orca_Defaults_BakeDefaults) ProtoReflect() protoreflect.Message {
-	mi := &file_config_orca_proto_msgTypes[4]
+	mi := &file_config_orca_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -293,6 +350,55 @@ func (x *Orca_Defaults_BakeDefaults) GetAccount() string {
 	return ""
 }
 
+// Execution window configuration.
+type Orca_Tasks_ExecutionWindow struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Default timezone. Defaults to `America/Los_Angeles`.
+	Timezone string `protobuf:"bytes,1,opt,name=timezone,proto3" json:"timezone,omitempty"`
+}
+
+func (x *Orca_Tasks_ExecutionWindow) Reset() {
+	*x = Orca_Tasks_ExecutionWindow{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_config_orca_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Orca_Tasks_ExecutionWindow) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Orca_Tasks_ExecutionWindow) ProtoMessage() {}
+
+func (x *Orca_Tasks_ExecutionWindow) ProtoReflect() protoreflect.Message {
+	mi := &file_config_orca_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Orca_Tasks_ExecutionWindow.ProtoReflect.Descriptor instead.
+func (*Orca_Tasks_ExecutionWindow) Descriptor() ([]byte, []int) {
+	return file_config_orca_proto_rawDescGZIP(), []int{0, 3, 0}
+}
+
+func (x *Orca_Tasks_ExecutionWindow) GetTimezone() string {
+	if x != nil {
+		return x.Timezone
+	}
+	return ""
+}
+
 var File_config_orca_proto protoreflect.FileDescriptor
 
 var file_config_orca_proto_rawDesc = []byte{
@@ -301,7 +407,7 @@ var file_config_orca_proto_rawDesc = []byte{
 	0x67, 0x1a, 0x1a, 0x73, 0x65, 0x63, 0x75, 0x72, 0x69, 0x74, 0x79, 0x2f, 0x74, 0x72, 0x75, 0x73,
 	0x74, 0x5f, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1c, 0x63,
 	0x6f, 0x6e, 0x66, 0x69, 0x67, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x5f, 0x65, 0x6e,
-	0x61, 0x62, 0x6c, 0x65, 0x64, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xeb, 0x03, 0x0a, 0x04,
+	0x61, 0x62, 0x6c, 0x65, 0x64, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xa8, 0x05, 0x0a, 0x04,
 	0x4f, 0x72, 0x63, 0x61, 0x12, 0x52, 0x0a, 0x11, 0x70, 0x69, 0x70, 0x65, 0x6c, 0x69, 0x6e, 0x65,
 	0x54, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
 	0x24, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x2e, 0x4f,
@@ -318,6 +424,9 @@ var file_config_orca_proto_rawDesc = []byte{
 	0x69, 0x63, 0x65, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x70, 0x72, 0x6f,
 	0x74, 0x6f, 0x2e, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x2e, 0x4f, 0x72, 0x63, 0x61, 0x2e, 0x53,
 	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x52, 0x08, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
+	0x73, 0x12, 0x2e, 0x0a, 0x05, 0x74, 0x61, 0x73, 0x6b, 0x73, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x18, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x2e,
+	0x4f, 0x72, 0x63, 0x61, 0x2e, 0x54, 0x61, 0x73, 0x6b, 0x73, 0x52, 0x05, 0x74, 0x61, 0x73, 0x6b,
 	0x73, 0x1a, 0x43, 0x0a, 0x08, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x12, 0x37, 0x0a,
 	0x07, 0x6b, 0x61, 0x79, 0x65, 0x6e, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1d,
 	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x2e, 0x53, 0x65,
@@ -332,11 +441,19 @@ var file_config_orca_proto_rawDesc = []byte{
 	0x65, 0x44, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74, 0x73, 0x52, 0x04, 0x62, 0x61, 0x6b, 0x65, 0x1a,
 	0x28, 0x0a, 0x0c, 0x42, 0x61, 0x6b, 0x65, 0x44, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74, 0x73, 0x12,
 	0x18, 0x0a, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x42, 0x2e, 0x5a, 0x2c, 0x67, 0x69, 0x74,
-	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x69, 0x6e, 0x6e, 0x61, 0x6b, 0x65,
-	0x72, 0x2f, 0x6b, 0x6c, 0x65, 0x61, 0x74, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x6c, 0x69, 0x65,
-	0x6e, 0x74, 0x2f, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x52, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x1a, 0x8a, 0x01, 0x0a, 0x05, 0x54, 0x61,
+	0x73, 0x6b, 0x73, 0x12, 0x52, 0x0a, 0x0f, 0x65, 0x78, 0x65, 0x63, 0x75, 0x74, 0x69, 0x6f, 0x6e,
+	0x57, 0x69, 0x6e, 0x64, 0x6f, 0x77, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x28, 0x2e, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x2e, 0x4f, 0x72, 0x63, 0x61,
+	0x2e, 0x54, 0x61, 0x73, 0x6b, 0x73, 0x2e, 0x45, 0x78, 0x65, 0x63, 0x75, 0x74, 0x69, 0x6f, 0x6e,
+	0x57, 0x69, 0x6e, 0x64, 0x6f, 0x77, 0x52, 0x0f, 0x65, 0x78, 0x65, 0x63, 0x75, 0x74, 0x69, 0x6f,
+	0x6e, 0x57, 0x69, 0x6e, 0x64, 0x6f, 0x77, 0x1a, 0x2d, 0x0a, 0x0f, 0x45, 0x78, 0x65, 0x63, 0x75,
+	0x74, 0x69, 0x6f, 0x6e, 0x57, 0x69, 0x6e, 0x64, 0x6f, 0x77, 0x12, 0x1a, 0x0a, 0x08, 0x74, 0x69,
+	0x6d, 0x65, 0x7a, 0x6f, 0x6e, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x74, 0x69,
+	0x6d, 0x65, 0x7a, 0x6f, 0x6e, 0x65, 0x42, 0x2e, 0x5a, 0x2c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
+	0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x69, 0x6e, 0x6e, 0x61, 0x6b, 0x65, 0x72, 0x2f, 0x6b,
+	0x6c, 0x65, 0x61, 0x74, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2f,
+	0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -351,28 +468,32 @@ func file_config_orca_proto_rawDescGZIP() []byte {
 	return file_config_orca_proto_rawDescData
 }
 
-var file_config_orca_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_config_orca_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_config_orca_proto_goTypes = []interface{}{
 	(*Orca)(nil),                       // 0: proto.config.Orca
 	(*Orca_Services)(nil),              // 1: proto.config.Orca.Services
 	(*Orca_PipelineTemplates)(nil),     // 2: proto.config.Orca.PipelineTemplates
 	(*Orca_Defaults)(nil),              // 3: proto.config.Orca.Defaults
-	(*Orca_Defaults_BakeDefaults)(nil), // 4: proto.config.Orca.Defaults.BakeDefaults
-	(*security.WebhookConfig)(nil),     // 5: proto.security.WebhookConfig
-	(*ServiceSettings)(nil),            // 6: proto.config.ServiceSettings
+	(*Orca_Tasks)(nil),                 // 4: proto.config.Orca.Tasks
+	(*Orca_Defaults_BakeDefaults)(nil), // 5: proto.config.Orca.Defaults.BakeDefaults
+	(*Orca_Tasks_ExecutionWindow)(nil), // 6: proto.config.Orca.Tasks.ExecutionWindow
+	(*security.WebhookConfig)(nil),     // 7: proto.security.WebhookConfig
+	(*ServiceSettings)(nil),            // 8: proto.config.ServiceSettings
 }
 var file_config_orca_proto_depIdxs = []int32{
 	2, // 0: proto.config.Orca.pipelineTemplates:type_name -> proto.config.Orca.PipelineTemplates
-	5, // 1: proto.config.Orca.webhook:type_name -> proto.security.WebhookConfig
+	7, // 1: proto.config.Orca.webhook:type_name -> proto.security.WebhookConfig
 	3, // 2: proto.config.Orca.default:type_name -> proto.config.Orca.Defaults
 	1, // 3: proto.config.Orca.services:type_name -> proto.config.Orca.Services
-	6, // 4: proto.config.Orca.Services.kayenta:type_name -> proto.config.ServiceSettings
-	4, // 5: proto.config.Orca.Defaults.bake:type_name -> proto.config.Orca.Defaults.BakeDefaults
-	6, // [6:6] is the sub-list for method output_type
-	6, // [6:6] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	4, // 4: proto.config.Orca.tasks:type_name -> proto.config.Orca.Tasks
+	8, // 5: proto.config.Orca.Services.kayenta:type_name -> proto.config.ServiceSettings
+	5, // 6: proto.config.Orca.Defaults.bake:type_name -> proto.config.Orca.Defaults.BakeDefaults
+	6, // 7: proto.config.Orca.Tasks.executionWindow:type_name -> proto.config.Orca.Tasks.ExecutionWindow
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_config_orca_proto_init() }
@@ -431,7 +552,31 @@ func file_config_orca_proto_init() {
 			}
 		}
 		file_config_orca_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Orca_Tasks); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_config_orca_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Orca_Defaults_BakeDefaults); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_config_orca_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Orca_Tasks_ExecutionWindow); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -449,7 +594,7 @@ func file_config_orca_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_config_orca_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

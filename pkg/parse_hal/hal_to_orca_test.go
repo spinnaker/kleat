@@ -122,6 +122,19 @@ var halToOrcaTests = []struct {
 			},
 		},
 	},
+	{
+		"Timezone set",
+		&config.Hal{
+			Timezone: "America/Chicago",
+		},
+		&config.Orca{
+			Tasks: &config.Orca_Tasks{
+				ExecutionWindow: &config.Orca_Tasks_ExecutionWindow{
+					Timezone: "America/Chicago",
+				},
+			},
+		},
+	},
 }
 
 func TestHalToOrca(t *testing.T) {
