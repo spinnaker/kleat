@@ -21,4 +21,17 @@ message Echo {
     pubsub.Pubsub pubsub = 5;
     ci.GoogleCloudBuild gcb = 6;
     Stats stats = 7;
+    Scheduler scheduler = 8;
+
+    // Echo scheduler configuration.
+    message Scheduler {
+
+        // Cron configuration.
+        Cron cron = 1;
+        // Cron configuration.
+        message Cron {
+            // Default timezone. Defaults to `America/Los_Angeles`.
+            string timezone = 1;
+        }
+    }
 }

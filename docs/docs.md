@@ -231,6 +231,8 @@
   
 - [config/echo.proto](#config/echo.proto)
     - [Echo](#proto.config.Echo)
+    - [Echo.Scheduler](#proto.config.Echo.Scheduler)
+    - [Echo.Scheduler.Cron](#proto.config.Echo.Scheduler.Cron)
   
 - [config/fiat.proto](#config/fiat.proto)
     - [Fiat](#proto.config.Fiat)
@@ -3652,6 +3654,37 @@ Configuration for the echo microservice.
 | pubsub | [proto.pubsub.Pubsub](#proto.pubsub.Pubsub) |  |  |
 | gcb | [proto.ci.GoogleCloudBuild](#proto.ci.GoogleCloudBuild) |  |  |
 | stats | [proto.Stats](#proto.Stats) |  |  |
+| scheduler | [Echo.Scheduler](#proto.config.Echo.Scheduler) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Echo.Scheduler"></a>
+
+### Echo.Scheduler
+Echo scheduler configuration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| cron | [Echo.Scheduler.Cron](#proto.config.Echo.Scheduler.Cron) |  | Cron configuration. |
+
+
+
+
+
+
+<a name="proto.config.Echo.Scheduler.Cron"></a>
+
+### Echo.Scheduler.Cron
+Cron configuration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| timezone | [string](#string) |  | Default timezone. Defaults to `America/Los_Angeles`. |
 
 
 
