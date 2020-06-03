@@ -53,9 +53,6 @@ type Hal struct {
 	Canary            *canary.Canary              `protobuf:"bytes,11,opt,name=canary,proto3" json:"canary,omitempty"`
 	// The timezone in which your Spinnaker instance runs. This affects what the
 	// UI will display as well as how CRON triggers are run.
-	// TODO: Halyard currently writes `global.spinnaker.timezone` to spinnaker.yml,
-	// but I think only Deck, Echo, and Orca need this property. Need to confirm
-	// this and pass timezone through to Echo and Orca.
 	Timezone string `protobuf:"bytes,12,opt,name=timezone,proto3" json:"timezone,omitempty"`
 }
 
