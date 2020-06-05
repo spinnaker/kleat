@@ -73,7 +73,6 @@ message KubernetesAccount {
 
     // The path to your kubeconfig file. By default, it will be under the
     // Spinnaker user's home directory in the typical .kube/config location.
-    // todo: document new var/secrets convention.
     string kubeconfigFile = 13;
 
     // Fiat permissions configuration.

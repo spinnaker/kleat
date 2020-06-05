@@ -937,14 +937,6 @@ func (x *Deck_Providers_Ecs) GetDefaults() *Deck_Providers_Ecs_Defaults {
 	return nil
 }
 
-// TODO: is this breaking change worth documenting?
-//  Halyard set default.region to
-// "us-central1" and default.zone to "us-central1-f", but Kleat
-// will use the first configured region of the primary account
-// and not expose `zone` parameter, as there was never a way
-// to configure this but I don't think us-central1-f is a reasonable
-// default for all users to codify in Deck (and it makes more sense to not
-// have a default and force users to make a selection where this is used).
 type Deck_Providers_Gce struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1196,10 +1188,7 @@ type Deck_Providers_Azure_Defaults struct {
 	unknownFields protoimpl.UnknownFields
 
 	Account string `protobuf:"bytes,1,opt,name=account,proto3" json:"account,omitempty"`
-	// TODO: is this breaking change worth documenting?
-	//  Halyard set this to "westus". Kleat will use first configured region
-	//  of primary account.
-	Region string `protobuf:"bytes,2,opt,name=region,proto3" json:"region,omitempty"`
+	Region  string `protobuf:"bytes,2,opt,name=region,proto3" json:"region,omitempty"`
 }
 
 func (x *Deck_Providers_Azure_Defaults) Reset() {

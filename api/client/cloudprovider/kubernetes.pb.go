@@ -142,7 +142,6 @@ type KubernetesAccount struct {
 	OAuthScopes []string `protobuf:"bytes,12,rep,name=oAuthScopes,proto3" json:"oAuthScopes,omitempty"`
 	// The path to your kubeconfig file. By default, it will be under the
 	// Spinnaker user's home directory in the typical .kube/config location.
-	// todo: document new var/secrets convention.
 	KubeconfigFile string `protobuf:"bytes,13,opt,name=kubeconfigFile,proto3" json:"kubeconfigFile,omitempty"`
 	// Fiat permissions configuration.
 	Permissions *client.Permissions `protobuf:"bytes,14,opt,name=permissions,proto3" json:"permissions,omitempty"`
