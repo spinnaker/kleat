@@ -16,27 +16,35 @@
 package parse_hal
 
 import (
+	"fmt"
+
 	"github.com/spinnaker/kleat/api/client/cloudprovider"
 	"github.com/spinnaker/kleat/api/client/config"
 )
 
-// TODO: Actually get Gate's URL (which may be http or https)
-// Should Kleat output the service discovery file?
-const GateUrl = "https://gate.spinnaker:8084"
-
 func HalToDeck(h *config.Hal) *config.Deck {
+	gateUrl := getGateUrl(h)
 	return &config.Deck{
-		GateUrl:         GateUrl,
+		GateUrl:         gateUrl,
 		AuthEnabled:     h.GetSecurity().GetAuthn().GetEnabled(),
-		AuthEndpoint:    GateUrl + "/auth/user",
-		BakeryDetailUrl: GateUrl + "/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
+		AuthEndpoint:    gateUrl + "/auth/user",
+		BakeryDetailUrl: gateUrl + "/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
 		Canary:          getDeckCanaryConfig(h),
 		Changelog:       getDeckChangelogConfig(h),
 		DefaultTimeZone: h.GetTimezone(),
 		Features:        getDeckFeaturesConfig(h),
 		Notifications:   getDeckNotificationsConfig(h),
 		Providers:       getDeckProvidersConfig(h),
+		Version:         h.GetVersion(),
 	}
+}
+
+func getGateUrl(h *config.Hal) string {
+	scheme := "http"
+	if h.GetSecurity().GetApiSecurity().GetSsl().GetEnabled() {
+		scheme = "https"
+	}
+	return fmt.Sprintf("%s://gate.spinnaker:8084", scheme)
 }
 
 func getDeckCanaryConfig(h *config.Hal) *config.Deck_Canary {
@@ -46,10 +54,6 @@ func getDeckCanaryConfig(h *config.Hal) *config.Deck_Canary {
 		MetricsAccountName: h.GetCanary().GetDefaultMetricsAccount(),
 		MetricStore:        h.GetCanary().GetDefaultMetricsStore(),
 		ShowAllConfigs:     h.GetCanary().GetShowAllConfigsEnabled(),
-		// TODO: Convert to bool wrapper or do not expose? This will soon
-		// default to true in deck-kayenta, and I doubt any existing Halyard
-		// users wish canary to be enabled but stages to be disabled.
-		//StagesEnabled:      h.GetCanary().GetStagesEnabled(),
 		StorageAccountName: h.GetCanary().GetStorageAccountName(),
 		TemplatesEnabled:   h.GetCanary().GetTemplatesEnabled(),
 	}

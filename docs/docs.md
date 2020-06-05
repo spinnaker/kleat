@@ -1055,7 +1055,6 @@ Configuration for Spinnaker&#39;s canary service.
 | defaultMetricsStore | [string](#string) |  | Name of the metrics store to use by default (e.g., `prometheus`, `datadog`). |
 | showAllConfigsEnabled | [bool](#bool) |  | Whether or not to show all canary configs in Deck, or just those scoped to the current application. |
 | templatesEnabled | [bool](#bool) |  | Whether or not to enable custom filter templates for canary configs in Deck. |
-| stagesEnabled | [bool](#bool) |  | Whether or not to enable canary stages in Deck. Defaults to true. |
 | defaultJudge | [string](#string) |  | The default canary judge. Defaults to `NetflixACAJudge-v1.0`, which is currently the only open-source judge available by default. |
 | storageAccountName | [string](#string) |  | Name of storage account to use by default. |
 
@@ -2917,7 +2916,7 @@ credential that can authenticate against your Kubernetes cluster.
 | cachingPolicies | [KubernetesCachingPolicy](#proto.cloudprovider.KubernetesCachingPolicy) | repeated | The list of kind-specific caching policies. |
 | dockerRegistries | [KubernetesAccountDockerRegistry](#proto.cloudprovider.KubernetesAccountDockerRegistry) | repeated | The list of the Spinnaker docker registry account names this Spinnaker account can use as image sources. These docker registry accounts must be registered in your halconfig before you can add them here. |
 | oAuthScopes | [string](#string) | repeated | The list of OAuth scopes used by kubectl to fetch an OAuth token. |
-| kubeconfigFile | [string](#string) |  | The path to your kubeconfig file. By default, it will be under the Spinnaker user&#39;s home directory in the typical .kube/config location. todo: document new var/secrets convention. |
+| kubeconfigFile | [string](#string) |  | The path to your kubeconfig file. By default, it will be under the Spinnaker user&#39;s home directory in the typical .kube/config location. |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
 | requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
 
@@ -3224,7 +3223,7 @@ Configuration for the clouddriver microservice.
 | changelog | [Deck.Changelog](#proto.config.Deck.Changelog) |  | Configuration for surfacing the Spinnaker changelog in Deck. |
 | notifications | [Deck.Notifications](#proto.config.Deck.Notifications) |  | Configuration for notifications providers. |
 | providers | [Deck.Providers](#proto.config.Deck.Providers) |  | Configuration for cloud provider defaults. |
-| version | [string](#string) |  | Spinnaker version. TODO: Should we maintain version as top-level halconfig property? |
+| version | [string](#string) |  | Spinnaker version. |
 | defaultTimeZone | [string](#string) |  | Default time zone in which to display timestamps in the UI. |
 | features | [Deck.Features](#proto.config.Deck.Features) |  | Configuration for UI-related feature flags. |
 
@@ -3246,7 +3245,6 @@ Configuration for the canary UI.
 | metricsAccountName | [string](#string) |  | Name of the canary metrics account to use by default. |
 | metricStore | [string](#string) |  | Name of the metrics store to use by default (e.g., `prometheus`, `datadog`). |
 | showAllConfigs | [bool](#bool) |  | Whether or not to show all canary configs in Deck, or just those scoped to the current application. |
-| stagesEnabled | [bool](#bool) |  | Whether or not to enable canary stages in deck. Defaults to true. |
 | storageAccountName | [string](#string) |  | Name of storage account to use by default. |
 | templatesEnabled | [bool](#bool) |  | Whether or not to enable custom filter templates for canary configs in Deck. |
 
@@ -3425,7 +3423,7 @@ UI-specific provider default settings.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | account | [string](#string) |  |  |
-| region | [string](#string) |  | TODO: is this breaking change worth documenting? Halyard set this to &#34;westus&#34;. Kleat will use first configured region of primary account. |
+| region | [string](#string) |  |  |
 
 
 
@@ -3525,14 +3523,7 @@ UI-specific provider default settings.
 <a name="proto.config.Deck.Providers.Gce"></a>
 
 ### Deck.Providers.Gce
-TODO: is this breaking change worth documenting?
- Halyard set default.region to
-&#34;us-central1&#34; and default.zone to &#34;us-central1-f&#34;, but Kleat
-will use the first configured region of the primary account
-and not expose `zone` parameter, as there was never a way
-to configure this but I don&#39;t think us-central1-f is a reasonable
-default for all users to codify in Deck (and it makes more sense to not
-have a default and force users to make a selection where this is used).
+
 
 
 | Field | Type | Label | Description |
@@ -3953,6 +3944,7 @@ Configuration for a Spinnaker installation.
 | security | [proto.security.Security](#proto.security.Security) |  |  |
 | canary | [proto.canary.Canary](#proto.canary.Canary) |  |  |
 | timezone | [string](#string) |  | The timezone in which your Spinnaker instance runs. This affects what the UI will display as well as how CRON triggers are run. |
+| version | [string](#string) |  | Top-level Spinnaker version. |
 
 
 

@@ -32,4 +32,7 @@ message Hal {
   // The timezone in which your Spinnaker instance runs. This affects what the
   // UI will display as well as how CRON triggers are run.
   string timezone = 12;
+
+  // Top-level Spinnaker version.
+  string version = 13;
 }

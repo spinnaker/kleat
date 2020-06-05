@@ -37,7 +37,6 @@ message Deck {
   Providers providers = 8;
 
   // Spinnaker version.
-  // TODO: Should we maintain version as top-level halconfig property?
   string version = 9;
 
   // Default time zone in which to display timestamps in the UI.
@@ -89,15 +88,12 @@ message Deck {
     // to the current application.
     bool showAllConfigs = 5;
 
-    // Whether or not to enable canary stages in deck. Defaults to true.
-    bool stagesEnabled = 6;
-
     // Name of storage account to use by default.
-    string storageAccountName = 7;
+    string storageAccountName = 6;
 
     // Whether or not to enable custom filter templates for canary configs in
     // Deck.
-    bool templatesEnabled = 8;
+    bool templatesEnabled = 7;
   }
 
   // Configuration for surfacing the Spinnaker changelog in Deck.
@@ -186,9 +182,6 @@ message Deck {
       Defaults defaults = 1;
       message Defaults {
         string account = 1;
-        // TODO: is this breaking change worth documenting?
-        //  Halyard set this to "westus". Kleat will use first configured region
-        //  of primary account.
         string region = 2;
       }
     }
@@ -214,14 +207,6 @@ message Deck {
       }
     }
 
-    // TODO: is this breaking change worth documenting?
-    //  Halyard set default.region to
-    // "us-central1" and default.zone to "us-central1-f", but Kleat
-    // will use the first configured region of the primary account
-    // and not expose `zone` parameter, as there was never a way
-    // to configure this but I don't think us-central1-f is a reasonable
-    // default for all users to codify in Deck (and it makes more sense to not
-    // have a default and force users to make a selection where this is used).
     message Gce {
       Defaults defaults = 1;
       message Defaults {
