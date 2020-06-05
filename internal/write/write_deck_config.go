@@ -16,8 +16,12 @@
 package write
 
 import (
+	"bytes"
+	"fmt"
+
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
 func writeDeck(m proto.Message, file string) error {
@@ -43,4 +47,31 @@ func getDeckBytes(m proto.Message) ([]byte, error) {
 	js = append(js, []byte(jsEnd)...)
 
 	return js, nil
+}
+
+func writeDeckEnv(m proto.Message, file string) error {
+	js, err := getDeckEnvBytes(m)
+	if err != nil {
+		return err
+	}
+	if err := writeBytes(js, file); err != nil {
+		return err
+	}
+	return nil
+}
+
+func getDeckEnvBytes(m proto.Message) ([]byte, error) {
+	var buf bytes.Buffer
+	var err error
+	r := m.ProtoReflect()
+	r.Range(func(fd protoreflect.FieldDescriptor, v protoreflect.Value) bool {
+		if _, err = fmt.Fprintf(&buf, "%s=%s\n", fd.JSONName(), v); err != nil {
+			return false
+		}
+		return true
+	})
+	if err != nil {
+		return nil, err
+	}
+	return buf.Bytes(), nil
 }

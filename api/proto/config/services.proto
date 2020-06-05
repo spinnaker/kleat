@@ -4,6 +4,8 @@ package proto.config;
 option go_package = "github.com/spinnaker/kleat/api/client/config";
 
 import "config/clouddriver.proto";
+import "config/deck.proto";
+import "config/deck_env.proto";
 import "config/echo.proto";
 import "config/fiat.proto";
 import "config/front50.proto";
@@ -11,7 +13,6 @@ import "config/gate.proto";
 import "config/kayenta.proto";
 import "config/orca.proto";
 import "config/rosco.proto";
-import "config/deck.proto";
 
 // Configuration for Spinnaker's microservices.
 message Services {
@@ -24,4 +25,5 @@ message Services {
   Kayenta kayenta = 7;
   Rosco rosco = 8;
   Deck deck = 9;
+  DeckEnv deckEnv = 10;
 }
