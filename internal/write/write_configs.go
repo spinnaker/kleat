@@ -70,6 +70,9 @@ func WriteConfigs(halPath string, dir string) error {
 	if err := writeDeck(services.GetDeck(), filepath.Join(dir, "settings.js")); err != nil {
 		return err
 	}
+	if err := writeDeckEnv(services.GetDeckEnv(), filepath.Join(dir, "deck-env.yml")); err != nil {
+		return err
+	}
 	return nil
 }
 

@@ -1,0 +1,16 @@
+syntax = "proto3";
+package proto.config;
+
+option go_package = "github.com/spinnaker/kleat/api/client/config";
+
+// Environment variables to be set when running deck.
+message DeckEnv {
+  // Path to the .crt file containing deck's SSL certificate.
+  string deckCert = 1 [json_name="DECK_CERT"];
+
+  // Path to the .key file for deck's SSL certificate.
+  string deckKey = 2 [json_name="DECK_KEY"];
+
+  // The passphrase for deck's SSL certificate.
+  string passphrase = 3 [json_name="PASSPHRASE"];
+}

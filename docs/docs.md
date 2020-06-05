@@ -229,6 +229,9 @@
     - [Deck.Providers.TencentCloud](#proto.config.Deck.Providers.TencentCloud)
     - [Deck.Providers.TencentCloud.Defaults](#proto.config.Deck.Providers.TencentCloud.Defaults)
   
+- [config/deck_env.proto](#config/deck_env.proto)
+    - [DeckEnv](#proto.config.DeckEnv)
+  
 - [config/echo.proto](#config/echo.proto)
     - [Echo](#proto.config.Echo)
     - [Echo.Scheduler](#proto.config.Echo.Scheduler)
@@ -3622,6 +3625,39 @@ config to Deck and Clouddriver.
 
 
 
+<a name="config/deck_env.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## config/deck_env.proto
+
+
+
+<a name="proto.config.DeckEnv"></a>
+
+### DeckEnv
+Environment variables to be set when running deck.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| deckCert | [string](#string) |  | Path to the .crt file containing deck&#39;s SSL certificate. |
+| deckKey | [string](#string) |  | Path to the .key file for deck&#39;s SSL certificate. |
+| passphrase | [string](#string) |  | The passphrase for deck&#39;s SSL certificate. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
 <a name="config/echo.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -4261,6 +4297,7 @@ Configuration for Spinnaker&#39;s microservices.
 | kayenta | [Kayenta](#proto.config.Kayenta) |  |  |
 | rosco | [Rosco](#proto.config.Rosco) |  |  |
 | deck | [Deck](#proto.config.Deck) |  |  |
+| deckEnv | [DeckEnv](#proto.config.DeckEnv) |  |  |
 
 
 

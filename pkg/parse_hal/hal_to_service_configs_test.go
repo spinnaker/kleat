@@ -50,6 +50,7 @@ func TestHalToServiceConfigs(t *testing.T) {
 		Kayenta:     parse_hal.HalToKayenta(h),
 		Rosco:       parse_hal.HalToRosco(h),
 		Deck:        parse_hal.HalToDeck(h),
+		DeckEnv:     parse_hal.HalToDeckEnv(h),
 	}
 
 	if !proto.Equal(gotS, wantS) {
