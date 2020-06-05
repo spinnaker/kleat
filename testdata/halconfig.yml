@@ -379,7 +379,6 @@ features:
   managedPipelineTemplatesV2UI: true
   mineCanary: true
   pipelineTemplates: true
-  roscoMode: true
 security:
   apiSecurity:
     ssl:

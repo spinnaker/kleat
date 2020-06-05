@@ -13,7 +13,6 @@ features:
   fiatEnabled: true
   managedPipelineTemplatesV2UI: true
   pipelineTemplates: true
-  roscoMode: true
 gateUrl: https://gate.spinnaker:8084
 notifications:
   githubStatus:

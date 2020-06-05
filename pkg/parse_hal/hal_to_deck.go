@@ -74,7 +74,6 @@ func getDeckFeaturesConfig(h *config.Hal) *config.Deck_Features {
 		Canary:                       h.GetFeatures().GetMineCanary(),
 		ChaosMonkey:                  h.GetFeatures().GetChaos(),
 		FiatEnabled:                  h.GetSecurity().GetAuthz().GetEnabled(),
-		RoscoMode:                    h.GetFeatures().GetRoscoMode(),
 		ManagedPipelineTemplatesV2UI: h.GetFeatures().GetManagedPipelineTemplatesV2UI(),
 	}
 }
