@@ -48,7 +48,6 @@ type Deck struct {
 	// Configuration for cloud provider defaults.
 	Providers *Deck_Providers `protobuf:"bytes,8,opt,name=providers,proto3" json:"providers,omitempty"`
 	// Spinnaker version.
-	// TODO: Should we maintain version as top-level halconfig property?
 	Version string `protobuf:"bytes,9,opt,name=version,proto3" json:"version,omitempty"`
 	// Default time zone in which to display timestamps in the UI.
 	DefaultTimeZone string `protobuf:"bytes,10,opt,name=defaultTimeZone,proto3" json:"defaultTimeZone,omitempty"`

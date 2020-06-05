@@ -37,7 +37,6 @@ message Deck {
   Providers providers = 8;
 
   // Spinnaker version.
-  // TODO: Should we maintain version as top-level halconfig property?
   string version = 9;
 
   // Default time zone in which to display timestamps in the UI.

@@ -35,6 +35,7 @@ func HalToDeck(h *config.Hal) *config.Deck {
 		Features:        getDeckFeaturesConfig(h),
 		Notifications:   getDeckNotificationsConfig(h),
 		Providers:       getDeckProvidersConfig(h),
+		Version:         h.GetVersion(),
 	}
 }
 

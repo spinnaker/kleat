@@ -65,3 +65,4 @@ providers:
       account: my-huawei-account
       region: us-east1
 defaultTimeZone: America/Chicago
+version: master-latest-unvalidated

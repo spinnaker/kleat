@@ -3223,7 +3223,7 @@ Configuration for the clouddriver microservice.
 | changelog | [Deck.Changelog](#proto.config.Deck.Changelog) |  | Configuration for surfacing the Spinnaker changelog in Deck. |
 | notifications | [Deck.Notifications](#proto.config.Deck.Notifications) |  | Configuration for notifications providers. |
 | providers | [Deck.Providers](#proto.config.Deck.Providers) |  | Configuration for cloud provider defaults. |
-| version | [string](#string) |  | Spinnaker version. TODO: Should we maintain version as top-level halconfig property? |
+| version | [string](#string) |  | Spinnaker version. |
 | defaultTimeZone | [string](#string) |  | Default time zone in which to display timestamps in the UI. |
 | features | [Deck.Features](#proto.config.Deck.Features) |  | Configuration for UI-related feature flags. |
 
@@ -3944,6 +3944,7 @@ Configuration for a Spinnaker installation.
 | security | [proto.security.Security](#proto.security.Security) |  |  |
 | canary | [proto.canary.Canary](#proto.canary.Canary) |  |  |
 | timezone | [string](#string) |  | The timezone in which your Spinnaker instance runs. This affects what the UI will display as well as how CRON triggers are run. |
+| version | [string](#string) |  | Top-level Spinnaker version. |
 
 
 
