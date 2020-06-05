@@ -61,12 +61,8 @@ message Deck {
     // Whether authz is enabled.
     bool fiatEnabled = 4;
 
-    // Whether Rosco UI support is enabled.
-    // TODO: handle per comments in feature.proto
-    bool roscoMode = 5;
-
     // Enable managed pipeline templates v2 UI support.
-    bool managedPipelineTemplatesV2UI = 6;
+    bool managedPipelineTemplatesV2UI = 5;
   }
 
   // Configuration for the canary UI.

@@ -20,13 +20,4 @@ message Features {
 
   // Enable Gremlin fault-injection support.
   bool gremlin = 5;
-
-  // Enable Rosco UI support.
-  // TODO: one of the following:
-  // 1. Safely default this to true in Deck
-  // 2. Document among breaking changes that users will need to manually set
-  //    this to true.
-  // 3. Have Kleat set this to true if there is at least one configured and
-  //    enabled VM-based cloud provider consumed by Rosco.
-  bool roscoMode = 6;
 }
