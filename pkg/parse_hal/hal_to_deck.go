@@ -53,10 +53,6 @@ func getDeckCanaryConfig(h *config.Hal) *config.Deck_Canary {
 		MetricsAccountName: h.GetCanary().GetDefaultMetricsAccount(),
 		MetricStore:        h.GetCanary().GetDefaultMetricsStore(),
 		ShowAllConfigs:     h.GetCanary().GetShowAllConfigsEnabled(),
-		// TODO: Convert to bool wrapper or do not expose? This will soon
-		// default to true in deck-kayenta, and I doubt any existing Halyard
-		// users wish canary to be enabled but stages to be disabled.
-		//StagesEnabled:      h.GetCanary().GetStagesEnabled(),
 		StorageAccountName: h.GetCanary().GetStorageAccountName(),
 		TemplatesEnabled:   h.GetCanary().GetTemplatesEnabled(),
 	}

@@ -89,15 +89,12 @@ message Deck {
     // to the current application.
     bool showAllConfigs = 5;
 
-    // Whether or not to enable canary stages in deck. Defaults to true.
-    bool stagesEnabled = 6;
-
     // Name of storage account to use by default.
-    string storageAccountName = 7;
+    string storageAccountName = 6;
 
     // Whether or not to enable custom filter templates for canary configs in
     // Deck.
-    bool templatesEnabled = 8;
+    bool templatesEnabled = 7;
   }
 
   // Configuration for surfacing the Spinnaker changelog in Deck.

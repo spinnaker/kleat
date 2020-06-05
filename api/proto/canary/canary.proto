@@ -33,15 +33,12 @@ message Canary {
   // Whether or not to enable custom filter templates for canary configs in Deck.
   bool templatesEnabled = 6;
 
-  // Whether or not to enable canary stages in Deck. Defaults to true.
-  bool stagesEnabled = 7;
-
   // The default canary judge. Defaults to `NetflixACAJudge-v1.0`, which is
   // currently the only open-source judge available by default.
-  string defaultJudge = 8;
+  string defaultJudge = 7;
 
   // Name of storage account to use by default.
-  string storageAccountName = 9;
+  string storageAccountName = 8;
 
   message ServiceIntegrations {
     canary.Aws aws = 1;
