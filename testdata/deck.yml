@@ -7,7 +7,7 @@ canary:
   showAllConfigs: true
   storageAccountName: my-google-canary-account
   templatesEnabled: true
-features:
+feature:
   canary: true
   chaosMonkey: true
   fiatEnabled: true

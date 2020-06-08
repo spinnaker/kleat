@@ -3228,7 +3228,7 @@ Configuration for the clouddriver microservice.
 | providers | [Deck.Providers](#proto.config.Deck.Providers) |  | Configuration for cloud provider defaults. |
 | version | [string](#string) |  | Spinnaker version. |
 | defaultTimeZone | [string](#string) |  | Default time zone in which to display timestamps in the UI. |
-| features | [Deck.Features](#proto.config.Deck.Features) |  | Configuration for UI-related feature flags. |
+| feature | [Deck.Features](#proto.config.Deck.Features) |  | Configuration for UI-related feature flags. |
 
 
 

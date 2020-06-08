@@ -32,7 +32,7 @@ func HalToDeck(h *config.Hal) *config.Deck {
 		Canary:          getDeckCanaryConfig(h),
 		Changelog:       getDeckChangelogConfig(h),
 		DefaultTimeZone: h.GetTimezone(),
-		Features:        getDeckFeaturesConfig(h),
+		Feature:         getDeckFeaturesConfig(h),
 		Notifications:   getDeckNotificationsConfig(h),
 		Providers:       getDeckProvidersConfig(h),
 		Version:         h.GetVersion(),
