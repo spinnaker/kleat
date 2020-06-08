@@ -43,7 +43,7 @@ message Deck {
   string defaultTimeZone = 10;
 
   // Configuration for UI-related feature flags.
-  Features features = 11;
+  Features feature = 11;
 
   // Configuration for UI-related feature flags.
   message Features {
