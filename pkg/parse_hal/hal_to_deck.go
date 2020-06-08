@@ -40,11 +40,14 @@ func HalToDeck(h *config.Hal) *config.Deck {
 }
 
 func getGateUrl(h *config.Hal) string {
+	if override := h.GetSecurity().GetApiSecurity().GetOverrideBaseUrl(); override != "" {
+		return override
+	}
 	scheme := "http"
 	if h.GetSecurity().GetApiSecurity().GetSsl().GetEnabled() {
 		scheme = "https"
 	}
-	return fmt.Sprintf("%s://gate.spinnaker:8084", scheme)
+	return fmt.Sprintf("%s://localhost:8084", scheme)
 }
 
 func getDeckCanaryConfig(h *config.Hal) *config.Deck_Canary {
