@@ -1,6 +1,6 @@
 authEnabled: true
-authEndpoint: https://gate.spinnaker:8084/auth/user
-bakeryDetailUrl: https://gate.spinnaker:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}
+authEndpoint: https://spinnaker.test:8084/auth/user
+bakeryDetailUrl: https://spinnaker.test:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}
 canary:
   metricStore: stackdriver
   metricsAccountName: my-google-canary-account
@@ -13,7 +13,7 @@ features:
   fiatEnabled: true
   managedPipelineTemplatesV2UI: true
   pipelineTemplates: true
-gateUrl: https://gate.spinnaker:8084
+gateUrl: https://spinnaker.test:8084
 notifications:
   githubStatus:
     enabled: true

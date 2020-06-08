@@ -44,9 +44,9 @@ var halToDeckTests = []struct {
 		"Empty hal config",
 		&config.Hal{},
 		&config.Deck{
-			GateUrl:         "http://gate.spinnaker:8084",
-			AuthEndpoint:    "http://gate.spinnaker:8084/auth/user",
-			BakeryDetailUrl: "http://gate.spinnaker:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
+			GateUrl:         "http://localhost:8084",
+			AuthEndpoint:    "http://localhost:8084/auth/user",
+			BakeryDetailUrl: "http://localhost:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
 			Canary: &config.Deck_Canary{
 				FeatureDisabled: true,
 			},
@@ -67,9 +67,9 @@ var halToDeckTests = []struct {
 			},
 		},
 		&config.Deck{
-			GateUrl:         "https://gate.spinnaker:8084",
-			AuthEndpoint:    "https://gate.spinnaker:8084/auth/user",
-			BakeryDetailUrl: "https://gate.spinnaker:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
+			GateUrl:         "https://localhost:8084",
+			AuthEndpoint:    "https://localhost:8084/auth/user",
+			BakeryDetailUrl: "https://localhost:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
 			Canary: &config.Deck_Canary{
 				FeatureDisabled: true,
 			},
@@ -87,9 +87,9 @@ var halToDeckTests = []struct {
 		},
 		&config.Deck{
 			AuthEnabled:     true,
-			GateUrl:         "http://gate.spinnaker:8084",
-			AuthEndpoint:    "http://gate.spinnaker:8084/auth/user",
-			BakeryDetailUrl: "http://gate.spinnaker:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
+			GateUrl:         "http://localhost:8084",
+			AuthEndpoint:    "http://localhost:8084/auth/user",
+			BakeryDetailUrl: "http://localhost:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
 			Canary: &config.Deck_Canary{
 				FeatureDisabled: true,
 			},
@@ -111,9 +111,9 @@ var halToDeckTests = []struct {
 			},
 		},
 		&config.Deck{
-			GateUrl:         "http://gate.spinnaker:8084",
-			AuthEndpoint:    "http://gate.spinnaker:8084/auth/user",
-			BakeryDetailUrl: "http://gate.spinnaker:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
+			GateUrl:         "http://localhost:8084",
+			AuthEndpoint:    "http://localhost:8084/auth/user",
+			BakeryDetailUrl: "http://localhost:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
 			Canary: &config.Deck_Canary{
 				MetricsAccountName: "my-metrics-account",
 				MetricStore:        "datadog",
@@ -133,9 +133,9 @@ var halToDeckTests = []struct {
 		},
 		&config.Deck{
 			DefaultTimeZone: "America/Chicago",
-			GateUrl:         "http://gate.spinnaker:8084",
-			AuthEndpoint:    "http://gate.spinnaker:8084/auth/user",
-			BakeryDetailUrl: "http://gate.spinnaker:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
+			GateUrl:         "http://localhost:8084",
+			AuthEndpoint:    "http://localhost:8084/auth/user",
+			BakeryDetailUrl: "http://localhost:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
 			Canary: &config.Deck_Canary{
 				FeatureDisabled: true,
 			},
@@ -155,9 +155,9 @@ var halToDeckTests = []struct {
 			},
 		},
 		&config.Deck{
-			GateUrl:         "http://gate.spinnaker:8084",
-			AuthEndpoint:    "http://gate.spinnaker:8084/auth/user",
-			BakeryDetailUrl: "http://gate.spinnaker:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
+			GateUrl:         "http://localhost:8084",
+			AuthEndpoint:    "http://localhost:8084/auth/user",
+			BakeryDetailUrl: "http://localhost:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
 			// TODO: this test demonstrates less-than-ideal result of having
 			// multiple canary flags that users must enable: both canary.enabled
 			// and features.mineCanary must be set to true in order for the
@@ -185,9 +185,9 @@ var halToDeckTests = []struct {
 			},
 		},
 		&config.Deck{
-			GateUrl:         "http://gate.spinnaker:8084",
-			AuthEndpoint:    "http://gate.spinnaker:8084/auth/user",
-			BakeryDetailUrl: "http://gate.spinnaker:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
+			GateUrl:         "http://localhost:8084",
+			AuthEndpoint:    "http://localhost:8084/auth/user",
+			BakeryDetailUrl: "http://localhost:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
 			Canary: &config.Deck_Canary{
 				FeatureDisabled: true,
 			},
@@ -217,9 +217,9 @@ var halToDeckTests = []struct {
 			},
 		},
 		&config.Deck{
-			GateUrl:         "http://gate.spinnaker:8084",
-			AuthEndpoint:    "http://gate.spinnaker:8084/auth/user",
-			BakeryDetailUrl: "http://gate.spinnaker:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
+			GateUrl:         "http://localhost:8084",
+			AuthEndpoint:    "http://localhost:8084/auth/user",
+			BakeryDetailUrl: "http://localhost:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
 			Canary: &config.Deck_Canary{
 				FeatureDisabled: true,
 			},
@@ -233,6 +233,27 @@ var halToDeckTests = []struct {
 					},
 				},
 			},
+		},
+	},
+	{
+		"Override gate URL",
+		&config.Hal{
+			Security: &security.Security{
+				ApiSecurity: &security.ApiSecurity{
+					OverrideBaseUrl: "https://spinnaker.test:8084",
+				},
+			},
+		},
+		&config.Deck{
+			GateUrl:         "https://spinnaker.test:8084",
+			AuthEndpoint:    "https://spinnaker.test:8084/auth/user",
+			BakeryDetailUrl: "https://spinnaker.test:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
+			Canary: &config.Deck_Canary{
+				FeatureDisabled: true,
+			},
+			Features:      &config.Deck_Features{},
+			Notifications: &config.Deck_Notifications{},
+			Providers:     &config.Deck_Providers{},
 		},
 	},
 }
