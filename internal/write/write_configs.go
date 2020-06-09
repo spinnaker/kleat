@@ -24,20 +24,28 @@ import (
 	"github.com/spinnaker/kleat/internal/validate_paths"
 	"github.com/spinnaker/kleat/pkg/parse_hal"
 	"github.com/spinnaker/kleat/pkg/validate_hal"
-	"google.golang.org/protobuf/proto"
 )
 
-func WriteConfigs(halPath string, dir string) error {
-	if err := validate_paths.EnsureDirectory(dir); err != nil {
-		return err
+func ParseHalConfig(halPath string) (*config.Hal, error) {
+	data, err := ioutil.ReadFile(halPath)
+	if err != nil {
+		return nil, err
 	}
 
 	hal := &config.Hal{}
-	if err := read(hal, halPath); err != nil {
-		return err
+	if err := protoyaml.Unmarshal(data, hal); err != nil {
+		return nil, err
 	}
 
 	if err := validate_hal.ValidateHalConfig(hal); err != nil {
+		return nil, err
+	}
+
+	return hal, nil
+}
+
+func WriteConfigs(hal *config.Hal, dir string) error {
+	if err := validate_paths.EnsureDirectory(dir); err != nil {
 		return err
 	}
 
@@ -54,12 +62,4 @@ func WriteConfigs(halPath string, dir string) error {
 	}
 
 	return nil
-}
-
-func read(m proto.Message, file string) error {
-	data, err := ioutil.ReadFile(file)
-	if err != nil {
-		return err
-	}
-	return protoyaml.Unmarshal(data, m)
 }
