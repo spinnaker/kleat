@@ -16,12 +16,14 @@
 package write
 
 import (
+	"errors"
+	"fmt"
 	"io/ioutil"
+	"os"
 	"path/filepath"
 
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/protoyaml"
-	"github.com/spinnaker/kleat/internal/validate_paths"
 	"github.com/spinnaker/kleat/pkg/parse_hal"
 	"github.com/spinnaker/kleat/pkg/validate_hal"
 )
@@ -45,7 +47,7 @@ func ParseHalConfig(halPath string) (*config.Hal, error) {
 }
 
 func WriteConfigs(hal *config.Hal, dir string) error {
-	if err := validate_paths.EnsureDirectory(dir); err != nil {
+	if err := ensureDirectory(dir); err != nil {
 		return err
 	}
 
@@ -61,5 +63,16 @@ func WriteConfigs(hal *config.Hal, dir string) error {
 		}
 	}
 
+	return nil
+}
+
+func ensureDirectory(d string) error {
+	stat, err := os.Stat(d)
+	if err != nil {
+		return err
+	}
+	if !stat.IsDir() {
+		return errors.New(fmt.Sprintf("%s is not a directory", d))
+	}
 	return nil
 }
