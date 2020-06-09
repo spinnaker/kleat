@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package parse_hal_test
+package transform_test
 
 import (
 	"bytes"
@@ -26,7 +26,7 @@ import (
 
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/protoyaml"
-	"github.com/spinnaker/kleat/pkg/parse_hal"
+	"github.com/spinnaker/kleat/pkg/transform"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -42,7 +42,7 @@ func TestHalToServiceConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	gotS := parse_hal.HalToServiceConfigs(h)
+	gotS := transform.HalToServiceConfigs(h)
 	wantS := &config.Services{
 		Clouddriver: convert.HalToClouddriver(h),
 		Echo:        convert.HalToEcho(h),
@@ -73,7 +73,7 @@ func TestHalToServiceYAML(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	services := parse_hal.HalToServiceConfigs(hal)
+	services := transform.HalToServiceConfigs(hal)
 
 	var halToServiceTests = []struct {
 		file      string

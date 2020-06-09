@@ -49,7 +49,7 @@ to document each new message and field. Ensure the field is included in the
 [hal config](/api/proto/config/halconfig.proto) and each
 consuming service's config.
 
-2. **Translate.** If necessary, update the code that [translates](/pkg/parse_hal/hal_to_service_configs.go)
+2. **Translate.** If necessary, update the code that [translates](/pkg/transform/transform.go)
 the hal config to each individual microservice's config. Add unit tests to the
 appropriate service config tests in the `parse_hal` package.
 

@@ -24,8 +24,8 @@ import (
 
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/protoyaml"
-	"github.com/spinnaker/kleat/pkg/parse_hal"
-	"github.com/spinnaker/kleat/pkg/validate_hal"
+	"github.com/spinnaker/kleat/pkg/transform"
+	"github.com/spinnaker/kleat/pkg/validate"
 )
 
 func ParseHalConfig(halPath string) (*config.Hal, error) {
@@ -39,7 +39,7 @@ func ParseHalConfig(halPath string) (*config.Hal, error) {
 		return nil, err
 	}
 
-	if err := validate_hal.ValidateHalConfig(hal); err != nil {
+	if err := validate.ValidateHalConfig(hal); err != nil {
 		return nil, err
 	}
 
@@ -51,8 +51,8 @@ func WriteConfigs(hal *config.Hal, dir string) error {
 		return err
 	}
 
-	services := parse_hal.HalToServiceConfigs(hal)
-	configFiles, err := parse_hal.GenerateConfigFiles(services)
+	services := transform.HalToServiceConfigs(hal)
+	configFiles, err := transform.GenerateConfigFiles(services)
 	if err != nil {
 		return err
 	}
