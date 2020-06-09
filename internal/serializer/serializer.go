@@ -13,6 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// Package serializer provides functionality for serializing protocol buffer
+// messages into different formats.
 package serializer
 
 import (
@@ -25,12 +28,15 @@ import (
 	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
+// Serializer is an interface that wraps a method to serialize a proto.Message
+// to a []byte.
 type Serializer interface {
 	Serialize(proto.Message) ([]byte, error)
 }
 
 type yaml struct{}
 
+// Yaml is a Serializer that serializes a proto.Message in YAML format.
 var Yaml Serializer = new(yaml)
 
 func (yaml) Serialize(m proto.Message) ([]byte, error) {
@@ -39,6 +45,8 @@ func (yaml) Serialize(m proto.Message) ([]byte, error) {
 
 type settingsJs struct{}
 
+// SettingsJs is a Serializer that serializes a proto.Message by outputting a
+// JavaScript file to be consumed by Deck.
 var SettingsJs Serializer = new(settingsJs)
 
 func (settingsJs) Serialize(m proto.Message) ([]byte, error) {
@@ -57,6 +65,11 @@ func (settingsJs) Serialize(m proto.Message) ([]byte, error) {
 
 type envFile struct{}
 
+// EnvFile is a Serializer that serializes a proto.message as an environment
+// variable file.
+// For each top-level key in the message, a line key=value is appended to the
+// output, where key is the field's JSON name and value is the string string
+// representation of the field's value.
 var EnvFile Serializer = new(envFile)
 
 func (envFile) Serialize(m proto.Message) ([]byte, error) {

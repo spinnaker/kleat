@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package parse_hal
+package convert
 
 import (
 	"github.com/spinnaker/kleat/api/client/canary"
 	"github.com/spinnaker/kleat/api/client/config"
 )
 
+// HalToKayenta generates the kayanta config for the supplied config.Hal h.
 func HalToKayenta(h *config.Hal) *config.Kayenta {
 	if !h.GetCanary().GetEnabled() {
 		return &config.Kayenta{}

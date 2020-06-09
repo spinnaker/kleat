@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package parse_hal_test
+
+package convert_test
 
 import (
 	"testing"
 
 	"github.com/spinnaker/kleat/api/client/ci"
+	"github.com/spinnaker/kleat/internal/convert"
 
 	"github.com/spinnaker/kleat/api/client/repository"
 
@@ -27,7 +29,6 @@ import (
 	"github.com/spinnaker/kleat/api/client/cloudprovider"
 
 	"github.com/spinnaker/kleat/api/client/config"
-	"github.com/spinnaker/kleat/pkg/parse_hal"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -160,7 +161,7 @@ var halToIgorTests = []struct {
 func TestHalToIgor(t *testing.T) {
 	for _, tt := range halToIgorTests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := parse_hal.HalToIgor(tt.hal)
+			got := convert.HalToIgor(tt.hal)
 			if !proto.Equal(got, tt.want) {
 				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
 			}

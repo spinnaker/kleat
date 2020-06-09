@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-package parse_hal
+package convert
 
-import "github.com/spinnaker/kleat/api/client/config"
+import (
+	"github.com/spinnaker/kleat/api/client/config"
+)
 
-func HalToDeckEnv(h *config.Hal) *config.DeckEnv {
-	if !h.GetSecurity().GetUiSecurity().GetSsl().GetEnabled() {
-		return &config.DeckEnv{}
-	}
-	return &config.DeckEnv{
-		DeckCert:   h.GetSecurity().GetUiSecurity().GetSsl().GetSslCertificateFile(),
-		DeckKey:    h.GetSecurity().GetUiSecurity().GetSsl().GetSslCertificateKeyFile(),
-		Passphrase: h.GetSecurity().GetUiSecurity().GetSsl().GetSslCertificatePassphrase(),
+// HalToFiat generates the fiat config for the supplied config.Hal h.
+func HalToFiat(h *config.Hal) *config.Fiat {
+	return &config.Fiat{
+		Auth: h.GetSecurity().GetAuthz(),
 	}
 }

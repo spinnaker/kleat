@@ -13,6 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// Package protoyaml marshals and unmarshals protocol buffer messages in YAML
+// format.
 package protoyaml
 
 import (
@@ -24,6 +27,7 @@ import (
 var nonStrict = protojson.UnmarshalOptions{DiscardUnknown: true}
 var strict = protojson.UnmarshalOptions{DiscardUnknown: false}
 
+// Marshal writes the given proto.Message in YAML format.
 func Marshal(m proto.Message) ([]byte, error) {
 	json, err := protojson.Marshal(m)
 	if err != nil {
@@ -32,6 +36,8 @@ func Marshal(m proto.Message) ([]byte, error) {
 	return yaml.JSONToYAML(json)
 }
 
+// Unmarshal reads the given []byte into the given proto.Message, discarding
+// any unknown fields in the input.
 func Unmarshal(b []byte, m proto.Message) error {
 	json, err := yaml.YAMLToJSON(b)
 	if err != nil {
@@ -40,6 +46,8 @@ func Unmarshal(b []byte, m proto.Message) error {
 	return nonStrict.Unmarshal(json, m)
 }
 
+// UnmarshalStrict reads the given []byte into the given proto.Message. If there
+// are any unknown fields in the input, an error is returned.
 func UnmarshalStrict(b []byte, m proto.Message) error {
 	json, err := yaml.YAMLToJSON(b)
 	if err != nil {

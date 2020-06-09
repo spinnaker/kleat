@@ -13,7 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package parse_hal
+
+package convert
 
 import (
 	"fmt"
@@ -22,13 +23,14 @@ import (
 	"github.com/spinnaker/kleat/api/client/config"
 )
 
+// HalToDeck generates the deck config for the supplied config.Hal h.
 func HalToDeck(h *config.Hal) *config.Deck {
-	gateUrl := getGateUrl(h)
+	gateURL := getGateURL(h)
 	return &config.Deck{
-		GateUrl:         gateUrl,
+		GateUrl:         gateURL,
 		AuthEnabled:     h.GetSecurity().GetAuthn().GetEnabled(),
-		AuthEndpoint:    gateUrl + "/auth/user",
-		BakeryDetailUrl: gateUrl + "/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
+		AuthEndpoint:    gateURL + "/auth/user",
+		BakeryDetailUrl: gateURL + "/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
 		Canary:          getDeckCanaryConfig(h),
 		Changelog:       getDeckChangelogConfig(h),
 		DefaultTimeZone: h.GetTimezone(),
@@ -39,7 +41,7 @@ func HalToDeck(h *config.Hal) *config.Deck {
 	}
 }
 
-func getGateUrl(h *config.Hal) string {
+func getGateURL(h *config.Hal) string {
 	if override := h.GetSecurity().GetApiSecurity().GetOverrideBaseUrl(); override != "" {
 		return override
 	}

@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package parse_hal
+
+package convert
 
 import "github.com/spinnaker/kleat/api/client/config"
 
+// HalToOrca generates the orca config for the supplied config.Hal h.
 func HalToOrca(h *config.Hal) *config.Orca {
 	return &config.Orca{
 		Default:           getDefaults(h),

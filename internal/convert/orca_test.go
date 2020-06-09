@@ -13,18 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package parse_hal_test
+
+package convert_test
 
 import (
 	"testing"
 
 	"github.com/spinnaker/kleat/api/client/canary"
+	"github.com/spinnaker/kleat/internal/convert"
 
 	"github.com/spinnaker/kleat/api/client"
 	"github.com/spinnaker/kleat/api/client/cloudprovider"
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/api/client/security"
-	"github.com/spinnaker/kleat/pkg/parse_hal"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -140,7 +141,7 @@ var halToOrcaTests = []struct {
 func TestHalToOrca(t *testing.T) {
 	for _, tt := range halToOrcaTests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := parse_hal.HalToOrca(tt.hal)
+			got := convert.HalToOrca(tt.hal)
 			if !proto.Equal(got, tt.want) {
 				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
 			}

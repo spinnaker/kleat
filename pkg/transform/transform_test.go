@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package parse_hal_test
+package transform_test
 
 import (
 	"bytes"
@@ -22,10 +22,11 @@ import (
 	"testing"
 
 	"github.com/kylelemons/godebug/diff"
+	"github.com/spinnaker/kleat/internal/convert"
 
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/protoyaml"
-	"github.com/spinnaker/kleat/pkg/parse_hal"
+	"github.com/spinnaker/kleat/pkg/transform"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -41,19 +42,19 @@ func TestHalToServiceConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	gotS := parse_hal.HalToServiceConfigs(h)
+	gotS := transform.HalToServiceConfigs(h)
 	wantS := &config.Services{
-		Clouddriver: parse_hal.HalToClouddriver(h),
-		Echo:        parse_hal.HalToEcho(h),
-		Front50:     parse_hal.HalToFront50(h),
-		Orca:        parse_hal.HalToOrca(h),
-		Gate:        parse_hal.HalToGate(h),
-		Fiat:        parse_hal.HalToFiat(h),
-		Kayenta:     parse_hal.HalToKayenta(h),
-		Rosco:       parse_hal.HalToRosco(h),
-		Deck:        parse_hal.HalToDeck(h),
-		DeckEnv:     parse_hal.HalToDeckEnv(h),
-		Igor:        parse_hal.HalToIgor(h),
+		Clouddriver: convert.HalToClouddriver(h),
+		Echo:        convert.HalToEcho(h),
+		Front50:     convert.HalToFront50(h),
+		Orca:        convert.HalToOrca(h),
+		Gate:        convert.HalToGate(h),
+		Fiat:        convert.HalToFiat(h),
+		Kayenta:     convert.HalToKayenta(h),
+		Rosco:       convert.HalToRosco(h),
+		Deck:        convert.HalToDeck(h),
+		DeckEnv:     convert.HalToDeckEnv(h),
+		Igor:        convert.HalToIgor(h),
 	}
 
 	if !proto.Equal(gotS, wantS) {
@@ -72,7 +73,7 @@ func TestHalToServiceYAML(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	services := parse_hal.HalToServiceConfigs(hal)
+	services := transform.HalToServiceConfigs(hal)
 
 	var halToServiceTests = []struct {
 		file      string

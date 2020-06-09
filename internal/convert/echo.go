@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package parse_hal
+
+package convert
 
 import "github.com/spinnaker/kleat/api/client/config"
 
+// HalToEcho generates the echo config for the supplied config.Hal h.
 func HalToEcho(h *config.Hal) *config.Echo {
 	return &config.Echo{
 		Slack:        h.GetNotifications().GetSlack(),

@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package parse_hal
+
+package convert
 
 import "github.com/spinnaker/kleat/api/client/config"
 
+// HalToClouddriver generates the clouddriver config for the supplied config.Hal h.
 func HalToClouddriver(h *config.Hal) *config.Clouddriver {
 	return &config.Clouddriver{
 		Kubernetes:     h.GetProviders().GetKubernetes(),

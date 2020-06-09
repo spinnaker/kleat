@@ -13,7 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package parse_hal_test
+
+package convert_test
 
 import (
 	"testing"
@@ -21,7 +22,7 @@ import (
 	"github.com/spinnaker/kleat/api/client/artifact"
 	"github.com/spinnaker/kleat/api/client/cloudprovider"
 	"github.com/spinnaker/kleat/api/client/config"
-	"github.com/spinnaker/kleat/pkg/parse_hal"
+	"github.com/spinnaker/kleat/internal/convert"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -140,7 +141,7 @@ var halToClouddriverTests = []struct {
 func TestHalToClouddriver(t *testing.T) {
 	for _, tt := range halToClouddriverTests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := parse_hal.HalToClouddriver(tt.hal)
+			got := convert.HalToClouddriver(tt.hal)
 			if !proto.Equal(got, tt.want) {
 				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
 			}

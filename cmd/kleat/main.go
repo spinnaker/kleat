@@ -19,7 +19,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/spinnaker/kleat/internal/write"
+	"github.com/spinnaker/kleat/internal/fileio"
 )
 
 func main() {
@@ -36,10 +36,10 @@ func main() {
 }
 
 func writeServiceConfigs(halPath string, dir string) error {
-	h, err := write.ParseHalConfig(halPath)
+	h, err := fileio.ParseHalConfig(halPath)
 	if err != nil {
 		return err
 	}
 
-	return write.WriteConfigs(h, dir)
+	return fileio.WriteConfigs(h, dir)
 }

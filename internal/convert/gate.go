@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package parse_hal
+package convert
 
 import (
 	"github.com/spinnaker/kleat/api/client/config"
@@ -22,6 +22,7 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
+// HalToGate generates the gate config for the supplied config.Hal h.
 func HalToGate(h *config.Hal) *config.Gate {
 	return &config.Gate{
 		Server:       getServerConfig(h),

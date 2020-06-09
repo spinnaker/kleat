@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package parse_hal_test
+
+package convert_test
 
 import (
 	"testing"
 
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/api/client/security"
-	"github.com/spinnaker/kleat/pkg/parse_hal"
+	"github.com/spinnaker/kleat/internal/convert"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -75,7 +76,7 @@ var halToDeckEnvTests = []struct {
 func TestHalToDeckEnv(t *testing.T) {
 	for _, tt := range halToDeckEnvTests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := parse_hal.HalToDeckEnv(tt.hal)
+			got := convert.HalToDeckEnv(tt.hal)
 			if !proto.Equal(got, tt.want) {
 				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
 			}

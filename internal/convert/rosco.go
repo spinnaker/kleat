@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package parse_hal
+package convert
 
 import "github.com/spinnaker/kleat/api/client/config"
 
-func HalToFront50(h *config.Hal) *config.Front50 {
-	return &config.Front50{
-		Spinnaker: &config.Front50_Spinnaker{
-			Gcs:    h.GetPersistentStorage().GetGcs(),
-			Azs:    h.GetPersistentStorage().GetAzs(),
-			Oracle: h.GetPersistentStorage().GetOracle(),
-			S3:     h.GetPersistentStorage().GetS3(),
-		},
+// HalToRosco generates the rosco config for the supplied config.Hal h.
+func HalToRosco(h *config.Hal) *config.Rosco {
+	return &config.Rosco{
+		Google:      h.GetProviders().GetGoogle(),
+		Aws:         h.GetProviders().GetAws(),
+		Azure:       h.GetProviders().GetAzure(),
+		Huaweicloud: h.GetProviders().GetHuaweicloud(),
+		Oracle:      h.GetProviders().GetOracle(),
 	}
 }
