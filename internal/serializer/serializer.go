@@ -45,8 +45,8 @@ func (yaml) Serialize(m proto.Message) ([]byte, error) {
 
 type settingsJs struct{}
 
-// SettingsJs is a Serializer that serializes a proto.Message by outputting a JavaScript file to be consumed by Deck
-// .
+// SettingsJs is a Serializer that serializes a proto.Message by outputting a
+// JavaScript file to be consumed by Deck.
 var SettingsJs Serializer = new(settingsJs)
 
 func (settingsJs) Serialize(m proto.Message) ([]byte, error) {
