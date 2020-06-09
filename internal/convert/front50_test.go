@@ -26,11 +26,7 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var halToFront50Tests = []struct {
-	n    string
-	h    *config.Hal
-	want *config.Front50
-}{
+var front50Tests = []testCase{
 	{
 		"Empty hal config",
 		&config.Hal{},
@@ -100,9 +96,9 @@ var halToFront50Tests = []struct {
 }
 
 func TestHalToFront50(t *testing.T) {
-	for _, tt := range halToFront50Tests {
-		t.Run(tt.n, func(t *testing.T) {
-			got := convert.HalToFront50(tt.h)
+	for _, tt := range front50Tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := convert.HalToFront50(tt.hal)
 			if !proto.Equal(got, tt.want) {
 				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
 			}

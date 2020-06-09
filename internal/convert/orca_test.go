@@ -29,11 +29,7 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var halToOrcaTests = []struct {
-	name string
-	hal  *config.Hal
-	want *config.Orca
-}{
+var orcaTests = []testCase{
 	{
 		"Empty hal config",
 		&config.Hal{},
@@ -139,7 +135,7 @@ var halToOrcaTests = []struct {
 }
 
 func TestHalToOrca(t *testing.T) {
-	for _, tt := range halToOrcaTests {
+	for _, tt := range orcaTests {
 		t.Run(tt.name, func(t *testing.T) {
 			got := convert.HalToOrca(tt.hal)
 			if !proto.Equal(got, tt.want) {

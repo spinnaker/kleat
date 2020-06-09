@@ -36,11 +36,7 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var halToDeckTests = []struct {
-	name string
-	hal  *config.Hal
-	want *config.Deck
-}{
+var deckTests = []testCase{
 	{
 		"Empty hal config",
 		&config.Hal{},
@@ -260,7 +256,7 @@ var halToDeckTests = []struct {
 }
 
 func TestHalToDeck(t *testing.T) {
-	for _, tt := range halToDeckTests {
+	for _, tt := range deckTests {
 		t.Run(tt.name, func(t *testing.T) {
 			got := convert.HalToDeck(tt.hal)
 			if !proto.Equal(got, tt.want) {

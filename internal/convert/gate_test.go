@@ -30,11 +30,7 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var halToGateTests = []struct {
-	name string
-	hal  *config.Hal
-	want *config.Gate
-}{
+var gateTests = []testCase{
 	{
 		"Empty hal config",
 		&config.Hal{},
@@ -286,7 +282,7 @@ var halToGateTests = []struct {
 }
 
 func TestHalToGate(t *testing.T) {
-	for _, tt := range halToGateTests {
+	for _, tt := range gateTests {
 		t.Run(tt.name, func(t *testing.T) {
 			got := convert.HalToGate(tt.hal)
 			if !proto.Equal(got, tt.want) {

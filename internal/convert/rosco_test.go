@@ -25,11 +25,7 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var halToRoscoTests = []struct {
-	name string
-	hal  *config.Hal
-	want *config.Rosco
-}{
+var roscoTests = []testCase{
 	{
 		"Empty hal config",
 		&config.Hal{},
@@ -138,7 +134,7 @@ var halToRoscoTests = []struct {
 }
 
 func TestHalToRosco(t *testing.T) {
-	for _, tt := range halToRoscoTests {
+	for _, tt := range roscoTests {
 		t.Run(tt.name, func(t *testing.T) {
 			got := convert.HalToRosco(tt.hal)
 			if !proto.Equal(got, tt.want) {

@@ -32,11 +32,7 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var halToIgorTests = []struct {
-	name string
-	hal  *config.Hal
-	want *config.Igor
-}{
+var igorTests = []testCase{
 	{
 		"Empty hal config",
 		&config.Hal{},
@@ -159,7 +155,7 @@ var halToIgorTests = []struct {
 }
 
 func TestHalToIgor(t *testing.T) {
-	for _, tt := range halToIgorTests {
+	for _, tt := range igorTests {
 		t.Run(tt.name, func(t *testing.T) {
 			got := convert.HalToIgor(tt.hal)
 			if !proto.Equal(got, tt.want) {

@@ -29,11 +29,7 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var halToEchoTests = []struct {
-	name string
-	hal  *config.Hal
-	want *config.Echo
-}{
+var echoTests = []testCase{
 	{
 		"Empty hal config",
 		&config.Hal{},
@@ -226,7 +222,7 @@ var halToEchoTests = []struct {
 }
 
 func TestHalToEcho(t *testing.T) {
-	for _, tt := range halToEchoTests {
+	for _, tt := range echoTests {
 		t.Run(tt.name, func(t *testing.T) {
 			got := convert.HalToEcho(tt.hal)
 			if !proto.Equal(got, tt.want) {

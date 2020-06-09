@@ -26,11 +26,7 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var halToKayentaTests = []struct {
-	name string
-	hal  *config.Hal
-	want *config.Kayenta
-}{
+var kayentaTests = []testCase{
 	{
 		"Empty hal config",
 		&config.Hal{},
@@ -340,7 +336,7 @@ var halToKayentaTests = []struct {
 }
 
 func TestHalToKayenta(t *testing.T) {
-	for _, tt := range halToKayentaTests {
+	for _, tt := range kayentaTests {
 		t.Run(tt.name, func(t *testing.T) {
 			got := convert.HalToKayenta(tt.hal)
 			if !proto.Equal(got, tt.want) {

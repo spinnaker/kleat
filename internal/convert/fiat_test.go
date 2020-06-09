@@ -26,11 +26,7 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var halToFiatTests = []struct {
-	name string
-	hal  *config.Hal
-	want *config.Fiat
-}{
+var fiatTests = []testCase{
 	{
 		"Empty hal config",
 		&config.Hal{},
@@ -74,7 +70,7 @@ var halToFiatTests = []struct {
 }
 
 func TestHalToFiat(t *testing.T) {
-	for _, tt := range halToFiatTests {
+	for _, tt := range fiatTests {
 		t.Run(tt.name, func(t *testing.T) {
 			got := convert.HalToFiat(tt.hal)
 			if !proto.Equal(got, tt.want) {

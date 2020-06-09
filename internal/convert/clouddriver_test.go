@@ -26,11 +26,7 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var halToClouddriverTests = []struct {
-	name string
-	hal  *config.Hal
-	want *config.Clouddriver
-}{
+var clouddriverTests = []testCase{
 	{
 		"Empty hal config",
 		&config.Hal{},
@@ -139,7 +135,7 @@ var halToClouddriverTests = []struct {
 }
 
 func TestHalToClouddriver(t *testing.T) {
-	for _, tt := range halToClouddriverTests {
+	for _, tt := range clouddriverTests {
 		t.Run(tt.name, func(t *testing.T) {
 			got := convert.HalToClouddriver(tt.hal)
 			if !proto.Equal(got, tt.want) {
