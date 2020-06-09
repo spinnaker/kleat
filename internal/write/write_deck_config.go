@@ -16,16 +16,12 @@
 package write
 
 import (
-	"bytes"
-	"fmt"
-
-	"google.golang.org/protobuf/encoding/protojson"
+	"github.com/spinnaker/kleat/internal/serializer"
 	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
 func writeDeck(m proto.Message, file string) error {
-	js, err := getDeckBytes(m)
+	js, err := serializer.SettingsJs.Serialize(m)
 	if err != nil {
 		return err
 	}
@@ -33,24 +29,10 @@ func writeDeck(m proto.Message, file string) error {
 		return err
 	}
 	return nil
-}
-
-func getDeckBytes(m proto.Message) ([]byte, error) {
-	json, err := protojson.Marshal(m)
-	if err != nil {
-		return nil, err
-	}
-
-	const jsStart = "window.spinnakerSettings = JSON.parse('"
-	const jsEnd = "');"
-	js := append([]byte(jsStart), json...)
-	js = append(js, []byte(jsEnd)...)
-
-	return js, nil
 }
 
 func writeDeckEnv(m proto.Message, file string) error {
-	js, err := getDeckEnvBytes(m)
+	js, err := serializer.EnvFile.Serialize(m)
 	if err != nil {
 		return err
 	}
@@ -58,20 +40,4 @@ func writeDeckEnv(m proto.Message, file string) error {
 		return err
 	}
 	return nil
-}
-
-func getDeckEnvBytes(m proto.Message) ([]byte, error) {
-	var buf bytes.Buffer
-	var err error
-	r := m.ProtoReflect()
-	r.Range(func(fd protoreflect.FieldDescriptor, v protoreflect.Value) bool {
-		if _, err = fmt.Fprintf(&buf, "%s=%s\n", fd.JSONName(), v); err != nil {
-			return false
-		}
-		return true
-	})
-	if err != nil {
-		return nil, err
-	}
-	return buf.Bytes(), nil
 }

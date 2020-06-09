@@ -22,6 +22,7 @@ import (
 
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/protoyaml"
+	"github.com/spinnaker/kleat/internal/serializer"
 	"github.com/spinnaker/kleat/internal/validate_paths"
 	"github.com/spinnaker/kleat/pkg/parse_hal"
 	"github.com/spinnaker/kleat/pkg/validate_hal"
@@ -88,7 +89,7 @@ func read(m proto.Message, file string) error {
 }
 
 func write(m proto.Message, file string) error {
-	bytes, err := protoyaml.Marshal(m)
+	bytes, err := serializer.Yaml.Serialize(m)
 	if err != nil {
 		return err
 	}
