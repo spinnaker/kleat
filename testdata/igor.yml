@@ -1,0 +1,53 @@
+dockerRegistry:
+  enabled: true
+artifacts:
+  templates:
+    - name: my-template
+      templatePath: /var/secrets/my-template
+artifactory:
+  enabled: true
+  searches:
+    - name: my-search
+      baseUrl: https://my-artifactory
+      repo: my-repo
+      groupId: abc
+      username: my-artifactory-un
+      password: my-artifactory-pw
+travis:
+  enabled: true
+  masters:
+    - name: my-travis-account
+      address: https://my-travis
+gcb:
+  enabled: true
+  accounts:
+    - name: my-gcb-account
+      project: my-google-project
+      jsonKey: /var/secrets/google
+jenkins:
+  enabled: true
+  masters:
+    - name: my-jenkins-account
+      username: username
+      password: password
+      address: https://my-jenkins
+codebuild:
+  enabled: true
+  secretAccessKey: my-key
+  accounts:
+    - name: my-codebuild-account
+      accountId: my-id
+concourse:
+  enabled: true
+  masters:
+    - name: my-concourse-account
+      username: username
+      password: password
+      url: https://my-concourse
+wercker:
+  enabled: true
+  masters:
+    - name: my-wercker-account
+      address: https://my-wercker
+      user: user
+      token: token

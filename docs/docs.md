@@ -257,6 +257,11 @@
 - [config/halconfig.proto](#config/halconfig.proto)
     - [Hal](#proto.config.Hal)
   
+- [config/igor.proto](#config/igor.proto)
+    - [Igor](#proto.config.Igor)
+    - [Igor.Artifacts](#proto.config.Igor.Artifacts)
+    - [Igor.DockerRegistry](#proto.config.Igor.DockerRegistry)
+  
 - [config/kayenta.proto](#config/kayenta.proto)
     - [Kayenta](#proto.config.Kayenta)
     - [Kayenta.ServiceIntegrations](#proto.config.Kayenta.ServiceIntegrations)
@@ -320,6 +325,13 @@
   
 - [pubsub/pubsub.proto](#pubsub/pubsub.proto)
     - [Pubsub](#proto.pubsub.Pubsub)
+  
+- [repository/artifactory.proto](#repository/artifactory.proto)
+    - [Artifactory](#proto.repository.Artifactory)
+    - [Artifactory.Search](#proto.repository.Artifactory.Search)
+  
+- [repository/repository.proto](#repository/repository.proto)
+    - [Repository](#proto.repository.Repository)
   
 - [security/authn/authn.proto](#security/authn/authn.proto)
     - [Authentication](#proto.security.authn.Authentication)
@@ -3980,6 +3992,76 @@ Configuration for a Spinnaker installation.
 | canary | [proto.canary.Canary](#proto.canary.Canary) |  |  |
 | timezone | [string](#string) |  | The timezone in which your Spinnaker instance runs. This affects what the UI will display as well as how CRON triggers are run. |
 | version | [string](#string) |  | Top-level Spinnaker version. |
+| repository | [proto.repository.Repository](#proto.repository.Repository) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="config/igor.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## config/igor.proto
+
+
+
+<a name="proto.config.Igor"></a>
+
+### Igor
+Configuration for the Igor microservice.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| dockerRegistry | [Igor.DockerRegistry](#proto.config.Igor.DockerRegistry) |  |  |
+| artifacts | [Igor.Artifacts](#proto.config.Igor.Artifacts) |  |  |
+| artifactory | [proto.repository.Artifactory](#proto.repository.Artifactory) |  |  |
+| gcb | [proto.ci.GoogleCloudBuild](#proto.ci.GoogleCloudBuild) |  |  |
+| codebuild | [proto.ci.CodeBuild](#proto.ci.CodeBuild) |  |  |
+| concourse | [proto.ci.Concourse](#proto.ci.Concourse) |  |  |
+| jenkins | [proto.ci.Jenkins](#proto.ci.Jenkins) |  |  |
+| travis | [proto.ci.Travis](#proto.ci.Travis) |  |  |
+| wercker | [proto.ci.Wercker](#proto.ci.Wercker) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Igor.Artifacts"></a>
+
+### Igor.Artifacts
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| templates | [proto.artifact.Template](#proto.artifact.Template) | repeated |  |
+
+
+
+
+
+
+<a name="proto.config.Igor.DockerRegistry"></a>
+
+### Igor.DockerRegistry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  |  |
 
 
 
@@ -4298,6 +4380,7 @@ Configuration for Spinnaker&#39;s microservices.
 | rosco | [Rosco](#proto.config.Rosco) |  |  |
 | deck | [Deck](#proto.config.Deck) |  |  |
 | deckEnv | [DeckEnv](#proto.config.DeckEnv) |  |  |
+| igor | [Igor](#proto.config.Igor) |  |  |
 
 
 
@@ -4748,6 +4831,90 @@ Configuration for Pub/Sub integration.
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether Pub/Sub is enabled. |
 | google | [Google](#proto.pubsub.Google) |  | Configuration for the Google Cloud Pub/Sub integration. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="repository/artifactory.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## repository/artifactory.proto
+
+
+
+<a name="proto.repository.Artifactory"></a>
+
+### Artifactory
+Artifactory repository integration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the Artifactory integration is enabled. |
+| searches | [Artifactory.Search](#proto.repository.Artifactory.Search) | repeated | Artifactory service search configuration. |
+
+
+
+
+
+
+<a name="proto.repository.Artifactory.Search"></a>
+
+### Artifactory.Search
+Artifactory service search configuration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Name of the search. |
+| baseUrl | [string](#string) |  | The base URL at which your Artifactory search is reachable. |
+| repo | [string](#string) |  | The repo in your Artifactory to be searched. |
+| groupId | [string](#string) |  | The group ID in your Artifactory to be searched. |
+| repoType | [string](#string) |  | The package type of repo in your Artifactory to be searched. Defaults to `MAVEN`. |
+| username | [string](#string) |  | The username of the Artifactory user to authenticate as. |
+| password | [string](#string) |  | The password of the Artifactory user to authenticate as. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="repository/repository.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## repository/repository.proto
+
+
+
+<a name="proto.repository.Repository"></a>
+
+### Repository
+Repository integrations.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| artifactory | [Artifactory](#proto.repository.Artifactory) |  | Artifactory repository integration. |
 
 
 

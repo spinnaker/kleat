@@ -10,6 +10,7 @@ import "config/echo.proto";
 import "config/fiat.proto";
 import "config/front50.proto";
 import "config/gate.proto";
+import "config/igor.proto";
 import "config/kayenta.proto";
 import "config/orca.proto";
 import "config/rosco.proto";
@@ -26,4 +27,5 @@ message Services {
   Rosco rosco = 8;
   Deck deck = 9;
   DeckEnv deckEnv = 10;
+  Igor igor = 11;
 }

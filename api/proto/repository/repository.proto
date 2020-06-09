@@ -1,0 +1,12 @@
+syntax = "proto3";
+package proto.repository;
+
+option go_package = "github.com/spinnaker/kleat/api/client/repository";
+
+import "repository/artifactory.proto";
+
+// Repository integrations.
+message Repository {
+  // Artifactory repository integration.
+  Artifactory artifactory = 1;
+}

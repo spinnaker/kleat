@@ -1,0 +1,38 @@
+syntax = "proto3";
+package proto.repository;
+
+option go_package = "github.com/spinnaker/kleat/api/client/repository";
+
+// Artifactory repository integration.
+message Artifactory {
+  // Whether the Artifactory integration is enabled.
+  bool enabled = 1;
+
+  // Artifactory service search configuration.
+  repeated Search searches = 2;
+
+  // Artifactory service search configuration.
+  message Search {
+    // Name of the search.
+    string name = 1;
+
+    // The base URL at which your Artifactory search is reachable.
+    string baseUrl = 2;
+
+    // The repo in your Artifactory to be searched.
+    string repo = 3;
+
+    // The group ID in your Artifactory to be searched.
+    string groupId = 4;
+
+    // The package type of repo in your Artifactory to be searched. Defaults to
+    // `MAVEN`.
+    string repoType = 5;
+
+    // The username of the Artifactory user to authenticate as.
+    string username = 6;
+
+    // The password of the Artifactory user to authenticate as.
+    string password = 7;
+  }
+}

@@ -67,6 +67,9 @@ func WriteConfigs(halPath string, dir string) error {
 	if err := write(services.GetRosco(), filepath.Join(dir, "rosco.yml")); err != nil {
 		return err
 	}
+	if err := write(services.GetIgor(), filepath.Join(dir, "igor.yml")); err != nil {
+		return err
+	}
 	if err := writeDeck(services.GetDeck(), filepath.Join(dir, "settings.js")); err != nil {
 		return err
 	}

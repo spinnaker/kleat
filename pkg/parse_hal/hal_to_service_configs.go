@@ -29,5 +29,6 @@ func HalToServiceConfigs(h *config.Hal) *config.Services {
 		Rosco:       HalToRosco(h),
 		Deck:        HalToDeck(h),
 		DeckEnv:     HalToDeckEnv(h),
+		Igor:        HalToIgor(h),
 	}
 }
