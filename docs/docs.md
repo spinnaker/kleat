@@ -321,6 +321,13 @@
 - [pubsub/pubsub.proto](#pubsub/pubsub.proto)
     - [Pubsub](#proto.pubsub.Pubsub)
   
+- [repository/artifactory.proto](#repository/artifactory.proto)
+    - [Artifactory](#proto.repository.Artifactory)
+    - [Artifactory.Search](#proto.repository.Artifactory.Search)
+  
+- [repository/repository.proto](#repository/repository.proto)
+    - [Repository](#proto.repository.Repository)
+  
 - [security/authn/authn.proto](#security/authn/authn.proto)
     - [Authentication](#proto.security.authn.Authentication)
     - [Basic](#proto.security.authn.Basic)
@@ -3980,6 +3987,7 @@ Configuration for a Spinnaker installation.
 | canary | [proto.canary.Canary](#proto.canary.Canary) |  |  |
 | timezone | [string](#string) |  | The timezone in which your Spinnaker instance runs. This affects what the UI will display as well as how CRON triggers are run. |
 | version | [string](#string) |  | Top-level Spinnaker version. |
+| repository | [proto.repository.Repository](#proto.repository.Repository) |  |  |
 
 
 
@@ -4748,6 +4756,90 @@ Configuration for Pub/Sub integration.
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Whether Pub/Sub is enabled. |
 | google | [Google](#proto.pubsub.Google) |  | Configuration for the Google Cloud Pub/Sub integration. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="repository/artifactory.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## repository/artifactory.proto
+
+
+
+<a name="proto.repository.Artifactory"></a>
+
+### Artifactory
+Artifactory repository integration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the Artifactory integration is enabled. |
+| searches | [Artifactory.Search](#proto.repository.Artifactory.Search) | repeated | Artifactory service search configuration. |
+
+
+
+
+
+
+<a name="proto.repository.Artifactory.Search"></a>
+
+### Artifactory.Search
+Artifactory service search configuration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Name of the search. |
+| baseUrl | [string](#string) |  | The base URL at which your Artifactory search is reachable. |
+| repo | [string](#string) |  | The repo in your Artifactory to be searched. |
+| groupId | [string](#string) |  | The group ID in your Artifactory to be searched. |
+| repoType | [string](#string) |  | The package type of repo in your Artifactory to be searched. Defaults to `MAVEN`. |
+| username | [string](#string) |  | The username of the Artifactory user to authenticate as. |
+| password | [string](#string) |  | The password of the Artifactory user to authenticate as. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="repository/repository.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## repository/repository.proto
+
+
+
+<a name="proto.repository.Repository"></a>
+
+### Repository
+Repository integrations.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| artifactory | [Artifactory](#proto.repository.Artifactory) |  | Artifactory repository integration. |
 
 
 

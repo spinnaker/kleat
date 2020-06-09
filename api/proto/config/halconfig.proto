@@ -14,6 +14,7 @@ import "security/trust_store.proto";
 import "stats.proto";
 import "storage/persistent_storage.proto";
 import "canary/canary.proto";
+import "repository/repository.proto";
 
 // Configuration for a Spinnaker installation.
 message Hal {
@@ -35,4 +36,6 @@ message Hal {
 
   // Top-level Spinnaker version.
   string version = 13;
+
+  repository.Repository repository = 14;
 }
