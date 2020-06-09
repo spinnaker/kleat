@@ -339,12 +339,5 @@ var kayentaTests = configTest{
 }
 
 func TestHalToKayenta(t *testing.T) {
-	for _, tt := range kayentaTests.tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got := kayentaTests.generator(tt.hal)
-			if !proto.Equal(got, tt.want) {
-				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
-			}
-		})
-	}
+	runConfigTest(t, kayentaTests)
 }

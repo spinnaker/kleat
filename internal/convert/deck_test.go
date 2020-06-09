@@ -258,12 +258,5 @@ var deckTests = configTest{
 }
 
 func TestHalToDeck(t *testing.T) {
-	for _, tt := range deckTests.tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got := deckTests.generator(tt.hal)
-			if !proto.Equal(got, tt.want) {
-				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
-			}
-		})
-	}
+	runConfigTest(t, deckTests)
 }

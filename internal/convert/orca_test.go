@@ -138,12 +138,5 @@ var orcaTests = configTest{
 }
 
 func TestHalToOrca(t *testing.T) {
-	for _, tt := range orcaTests.tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got := orcaTests.generator(tt.hal)
-			if !proto.Equal(got, tt.want) {
-				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
-			}
-		})
-	}
+	runConfigTest(t, orcaTests)
 }

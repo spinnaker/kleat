@@ -17,6 +17,8 @@
 package convert_test
 
 import (
+	"testing"
+
 	"github.com/spinnaker/kleat/api/client/config"
 	"google.golang.org/protobuf/proto"
 )
@@ -35,4 +37,15 @@ type testCase struct {
 type configTest struct {
 	generator func(h *config.Hal) proto.Message
 	tests     []testCase
+}
+
+func runConfigTest(t *testing.T, test configTest) {
+	for _, tt := range test.tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := test.generator(tt.hal)
+			if !proto.Equal(got, tt.want) {
+				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
+			}
+		})
+	}
 }

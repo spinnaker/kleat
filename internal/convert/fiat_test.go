@@ -73,12 +73,5 @@ var fiatTests = configTest{
 }
 
 func TestHalToFiat(t *testing.T) {
-	for _, tt := range fiatTests.tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got := fiatTests.generator(tt.hal)
-			if !proto.Equal(got, tt.want) {
-				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
-			}
-		})
-	}
+	runConfigTest(t, fiatTests)
 }

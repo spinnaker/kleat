@@ -158,12 +158,5 @@ var igorTests = configTest{
 }
 
 func TestHalToIgor(t *testing.T) {
-	for _, tt := range igorTests.tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got := igorTests.generator(tt.hal)
-			if !proto.Equal(got, tt.want) {
-				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
-			}
-		})
-	}
+	runConfigTest(t, igorTests)
 }
