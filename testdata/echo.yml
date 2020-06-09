@@ -84,7 +84,7 @@ artifacts:
     enabled: true
   templates:
   - name: my-template
-    templatePath: /path/to/my/template
+    templatePath: /var/secrets/my-template
 pubsub:
   enabled: true
   google:
@@ -107,3 +107,9 @@ stats:
 scheduler:
   cron:
     timezone: America/Chicago
+gcb:
+  enabled: true
+  accounts:
+    - name: my-gcb-account
+      project: my-google-project
+      jsonKey: /var/secrets/google

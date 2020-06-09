@@ -77,7 +77,7 @@ artifacts:
     enabled: true
   templates:
   - name: my-template
-    templatePath: /path/to/my/template
+    templatePath: /var/secrets/my-template
 aws:
   accounts:
   - accountId: id

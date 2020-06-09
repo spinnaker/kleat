@@ -51,6 +51,7 @@ func TestHalToServiceConfigs(t *testing.T) {
 		Rosco:       parse_hal.HalToRosco(h),
 		Deck:        parse_hal.HalToDeck(h),
 		DeckEnv:     parse_hal.HalToDeckEnv(h),
+		Igor:        parse_hal.HalToIgor(h),
 	}
 
 	if !proto.Equal(gotS, wantS) {
@@ -110,6 +111,10 @@ func TestHalToServiceYAML(t *testing.T) {
 		{
 			"deck.yml",
 			services.GetDeck(),
+		},
+		{
+			"igor.yml",
+			services.GetIgor(),
 		},
 	}
 
