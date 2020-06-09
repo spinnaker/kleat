@@ -1,0 +1,17 @@
+syntax = "proto3";
+package proto.config;
+
+option go_package = "github.com/spinnaker/kleat/api/client/config";
+
+// Wrapper for serialized config files for Spinnaker microservices.
+message ConfigFiles {
+  repeated ConfigFile configFile = 1;
+}
+
+// A config file for a Spinnaker microservice.
+message ConfigFile {
+  // The name of the config file.
+  string name = 1;
+  // The contents of the config file.
+  bytes contents = 2;
+}

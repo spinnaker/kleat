@@ -16,96 +16,63 @@
 package write
 
 import (
+	"errors"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/protoyaml"
-	"github.com/spinnaker/kleat/internal/validate_paths"
 	"github.com/spinnaker/kleat/pkg/parse_hal"
 	"github.com/spinnaker/kleat/pkg/validate_hal"
-	"google.golang.org/protobuf/proto"
 )
 
-func WriteConfigs(halPath string, dir string) error {
-	if err := validate_paths.EnsureDirectory(dir); err != nil {
-		return err
+func ParseHalConfig(halPath string) (*config.Hal, error) {
+	data, err := ioutil.ReadFile(halPath)
+	if err != nil {
+		return nil, err
 	}
 
 	hal := &config.Hal{}
-	if err := read(hal, halPath); err != nil {
-		return err
+	if err := protoyaml.Unmarshal(data, hal); err != nil {
+		return nil, err
 	}
 
 	if err := validate_hal.ValidateHalConfig(hal); err != nil {
+		return nil, err
+	}
+
+	return hal, nil
+}
+
+func WriteConfigs(hal *config.Hal, dir string) error {
+	if err := ensureDirectory(dir); err != nil {
 		return err
 	}
 
 	services := parse_hal.HalToServiceConfigs(hal)
-	if err := write(services.GetClouddriver(), filepath.Join(dir, "clouddriver.yml")); err != nil {
+	configFiles, err := parse_hal.GenerateConfigFiles(services)
+	if err != nil {
 		return err
 	}
-	if err := write(services.GetEcho(), filepath.Join(dir, "echo.yml")); err != nil {
-		return err
+
+	for _, file := range configFiles.GetConfigFile() {
+		if err := ioutil.WriteFile(filepath.Join(dir, file.GetName()), file.GetContents(), 0666); err != nil {
+			return err
+		}
 	}
-	if err := write(services.GetFront50(), filepath.Join(dir, "front50.yml")); err != nil {
-		return err
-	}
-	if err := write(services.GetGate(), filepath.Join(dir, "gate.yml")); err != nil {
-		return err
-	}
-	if err := write(services.GetFiat(), filepath.Join(dir, "fiat.yml")); err != nil {
-		return err
-	}
-	if err := write(services.GetKayenta(), filepath.Join(dir, "kayenta.yml")); err != nil {
-		return err
-	}
-	if err := write(services.GetOrca(), filepath.Join(dir, "orca.yml")); err != nil {
-		return err
-	}
-	if err := write(services.GetRosco(), filepath.Join(dir, "rosco.yml")); err != nil {
-		return err
-	}
-	if err := write(services.GetIgor(), filepath.Join(dir, "igor.yml")); err != nil {
-		return err
-	}
-	if err := writeDeck(services.GetDeck(), filepath.Join(dir, "settings.js")); err != nil {
-		return err
-	}
-	if err := writeDeckEnv(services.GetDeckEnv(), filepath.Join(dir, "deck-env.yml")); err != nil {
-		return err
-	}
+
 	return nil
 }
 
-func read(m proto.Message, file string) error {
-	data, err := ioutil.ReadFile(file)
+func ensureDirectory(d string) error {
+	stat, err := os.Stat(d)
 	if err != nil {
 		return err
 	}
-	return protoyaml.Unmarshal(data, m)
-}
-
-func write(m proto.Message, file string) error {
-	bytes, err := protoyaml.Marshal(m)
-	if err != nil {
-		return err
-	}
-	if err = writeBytes(bytes, file); err != nil {
-		return err
-	}
-	return nil
-}
-
-func writeBytes(bytes []byte, file string) error {
-	w, err := os.Create(file)
-	if err != nil {
-		return err
-	}
-
-	if _, err = w.Write(bytes); err != nil {
-		return err
+	if !stat.IsDir() {
+		return errors.New(fmt.Sprintf("%s is not a directory", d))
 	}
 	return nil
 }

@@ -13,29 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package write
+package serializer
 
 import (
 	"bytes"
 	"fmt"
 
+	"github.com/spinnaker/kleat/internal/protoyaml"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
-func writeDeck(m proto.Message, file string) error {
-	js, err := getDeckBytes(m)
-	if err != nil {
-		return err
-	}
-	if err := writeBytes(js, file); err != nil {
-		return err
-	}
-	return nil
+type Serializer interface {
+	Serialize(proto.Message) ([]byte, error)
 }
 
-func getDeckBytes(m proto.Message) ([]byte, error) {
+type yaml struct{}
+
+var Yaml Serializer = new(yaml)
+
+func (yaml) Serialize(m proto.Message) ([]byte, error) {
+	return protoyaml.Marshal(m)
+}
+
+type settingsJs struct{}
+
+var SettingsJs Serializer = new(settingsJs)
+
+func (settingsJs) Serialize(m proto.Message) ([]byte, error) {
 	json, err := protojson.Marshal(m)
 	if err != nil {
 		return nil, err
@@ -49,18 +55,11 @@ func getDeckBytes(m proto.Message) ([]byte, error) {
 	return js, nil
 }
 
-func writeDeckEnv(m proto.Message, file string) error {
-	js, err := getDeckEnvBytes(m)
-	if err != nil {
-		return err
-	}
-	if err := writeBytes(js, file); err != nil {
-		return err
-	}
-	return nil
-}
+type envFile struct{}
 
-func getDeckEnvBytes(m proto.Message) ([]byte, error) {
+var EnvFile Serializer = new(envFile)
+
+func (envFile) Serialize(m proto.Message) ([]byte, error) {
 	var buf bytes.Buffer
 	var err error
 	r := m.ProtoReflect()

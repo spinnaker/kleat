@@ -30,7 +30,16 @@ func main() {
 
 	hal := os.Args[1]
 	dir := os.Args[2]
-	if err := write.WriteConfigs(hal, dir); err != nil {
+	if err := writeServiceConfigs(hal, dir); err != nil {
 		panic(err)
 	}
+}
+
+func writeServiceConfigs(halPath string, dir string) error {
+	h, err := write.ParseHalConfig(halPath)
+	if err != nil {
+		return err
+	}
+
+	return write.WriteConfigs(h, dir)
 }
