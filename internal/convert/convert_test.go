@@ -19,8 +19,10 @@ package convert_test
 import (
 	"testing"
 
+	"github.com/google/go-cmp/cmp"
 	"github.com/spinnaker/kleat/api/client/config"
 	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/testing/protocmp"
 )
 
 // testCase represents a test case for config generation, indicating
@@ -42,10 +44,22 @@ type configTest struct {
 func runConfigTest(t *testing.T, test configTest) {
 	for _, tt := range test.tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := test.generator(tt.hal)
-			if !proto.Equal(got, tt.want) {
-				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
+			if equal, diff := protoEqual(test.generator(tt.hal), tt.want); !equal {
+				t.Errorf("Incorrect config generated:\n%s", diff)
 			}
 		})
 	}
+}
+
+// protoEqual compares two protocol buffer messages.
+// If the messages are equal, the returned boolean will be true and the returned
+// string will not be meaningful. If they are not equal, the returned boolean
+// will be false and the returned string will contain a human-readable report of
+// the differences between the messages.
+func protoEqual(a proto.Message, b proto.Message) (bool, string) {
+	if !proto.Equal(a, b) {
+		diff := cmp.Diff(a, b, protocmp.Transform())
+		return false, diff
+	}
+	return true, ""
 }
