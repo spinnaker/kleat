@@ -37,3 +37,22 @@ they have `docker`).
 The versions of all tools used to compile the protocol buffers are specified in the
 [Dockerfile](/build/protoc/Dockerfile). To update the version of one of these dependencies,
 make the appropriate change to the Dockerfile, run `make proto`, and commit any changes.
+
+### Adding a new field
+
+Adding a new field to the [hal config](/api/proto/config/halconfig.proto)
+involves three steps:
+
+1. **Define and Document.** Define the field using protocol buffers.
+[Add comments](https://developers.google.com/protocol-buffers/docs/proto3#adding-comments)
+to document each new message and field. Ensure the field is included in the
+[hal config](/api/proto/config/halconfig.proto) and each
+consuming service's config.
+
+2. **Translate.** If necessary, update the code that [translates](/pkg/parse_hal/hal_to_service_configs.go)
+the hal config to each individual microservice's config. Add unit tests to the
+appropriate service config tests in the `parse_hal` package.
+
+3. **Test.** Update the end-to-end tests to exercise the inclusion of a
+non-default value for your field by updating the [test hal config](/testdata/halconfig.yml)
+and the appropriate test service configs.

@@ -21,6 +21,8 @@ import (
 	"path/filepath"
 	"testing"
 
+	"github.com/kylelemons/godebug/diff"
+
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/protoyaml"
 	"github.com/spinnaker/kleat/pkg/parse_hal"
@@ -141,7 +143,8 @@ func TestHalToServiceYAML(t *testing.T) {
 				t.Fatal(err)
 			}
 			if !bytes.Equal(got, want) {
-				t.Errorf("Expected %s to contain %v, got %v", tt.file, string(want), string(got))
+				diff := diff.Diff(string(got), string(want))
+				t.Errorf("Generated %s differs from expected:\n%s", tt.file, diff)
 			}
 		})
 	}
