@@ -203,6 +203,10 @@
 - [config/clouddriver.proto](#config/clouddriver.proto)
     - [Clouddriver](#proto.config.Clouddriver)
   
+- [config/config_files.proto](#config/config_files.proto)
+    - [ConfigFile](#proto.config.ConfigFile)
+    - [ConfigFiles](#proto.config.ConfigFiles)
+  
 - [config/deck.proto](#config/deck.proto)
     - [Deck](#proto.config.Deck)
     - [Deck.Canary](#proto.config.Deck.Canary)
@@ -3200,6 +3204,53 @@ Configuration for the clouddriver microservice.
 | huaweicloud | [proto.cloudprovider.HuaweiCloud](#proto.cloudprovider.HuaweiCloud) |  |  |
 | oracle | [proto.cloudprovider.Oracle](#proto.cloudprovider.Oracle) |  |  |
 | artifacts | [proto.artifact.Artifacts](#proto.artifact.Artifacts) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="config/config_files.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## config/config_files.proto
+
+
+
+<a name="proto.config.ConfigFile"></a>
+
+### ConfigFile
+A config file for a Spinnaker microservice.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The name of the config file. |
+| contents | [bytes](#bytes) |  | The contents of the config file. |
+
+
+
+
+
+
+<a name="proto.config.ConfigFiles"></a>
+
+### ConfigFiles
+Wrapper for serialized config files for Spinnaker microservices.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| configFile | [ConfigFile](#proto.config.ConfigFile) | repeated |  |
 
 
 
