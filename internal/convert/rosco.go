@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package convert
 
 import "github.com/spinnaker/kleat/api/client/config"
 
+// HalToRosco generates the rosco config for the supplied config.Hal h.
 func HalToRosco(h *config.Hal) *config.Rosco {
 	return &config.Rosco{
 		Google:      h.GetProviders().GetGoogle(),

@@ -20,6 +20,7 @@ import (
 	"github.com/spinnaker/kleat/api/client/config"
 )
 
+// HalToFiat generates the fiat config for the supplied config.Hal h.
 func HalToFiat(h *config.Hal) *config.Fiat {
 	return &config.Fiat{
 		Auth: h.GetSecurity().GetAuthz(),

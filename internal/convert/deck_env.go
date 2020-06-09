@@ -18,6 +18,7 @@ package convert
 
 import "github.com/spinnaker/kleat/api/client/config"
 
+// HalToDeckEnv generates the deck environment config for the supplied config.Hal h.
 func HalToDeckEnv(h *config.Hal) *config.DeckEnv {
 	if !h.GetSecurity().GetUiSecurity().GetSsl().GetEnabled() {
 		return &config.DeckEnv{}

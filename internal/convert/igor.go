@@ -20,6 +20,7 @@ import (
 	"github.com/spinnaker/kleat/api/client/config"
 )
 
+// HalToIgor generates the igor config for the supplied config.Hal h.
 func HalToIgor(h *config.Hal) *config.Igor {
 	return &config.Igor{
 		Artifactory:    h.GetRepository().GetArtifactory(),

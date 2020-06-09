@@ -18,6 +18,7 @@ package convert
 
 import "github.com/spinnaker/kleat/api/client/config"
 
+// HalToFront50 generates the front50 config for the supplied config.Hal h.
 func HalToFront50(h *config.Hal) *config.Front50 {
 	return &config.Front50{
 		Spinnaker: &config.Front50_Spinnaker{

@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package write
+
+// Package fileio supports reading reading and writing config files to the
+// filesystem.
+package fileio
 
 import (
-	"errors"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -28,6 +30,9 @@ import (
 	"github.com/spinnaker/kleat/pkg/validate"
 )
 
+// ParseHalConfig reads the YAML file at halPath parses it into a *config.Hal.
+// The config.Hal is validated; if there are any errors, they will be returned
+// in error and *config.Hal will be nil.
 func ParseHalConfig(halPath string) (*config.Hal, error) {
 	data, err := ioutil.ReadFile(halPath)
 	if err != nil {
@@ -46,6 +51,8 @@ func ParseHalConfig(halPath string) (*config.Hal, error) {
 	return hal, nil
 }
 
+// WriteConfigs generates the service configs from the supplied hal, and writes
+// them to the directory dir.
 func WriteConfigs(hal *config.Hal, dir string) error {
 	if err := ensureDirectory(dir); err != nil {
 		return err
@@ -72,7 +79,7 @@ func ensureDirectory(d string) error {
 		return err
 	}
 	if !stat.IsDir() {
-		return errors.New(fmt.Sprintf("%s is not a directory", d))
+		return fmt.Errorf("%s is not a directory", d)
 	}
 	return nil
 }
