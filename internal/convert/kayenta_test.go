@@ -26,28 +26,50 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var kayentaTests = []testCase{
-	{
-		"Empty hal config",
-		&config.Hal{},
-		&config.Kayenta{},
-	},
-	{
-		"Canary disabled",
-		&config.Hal{
-			Canary: &canary.Canary{
-				Enabled: false,
-			},
+var kayentaTests = configTest{
+	generator: func(h *config.Hal) proto.Message { return convert.HalToKayenta(h) },
+	tests: []testCase{
+		{
+			"Empty hal config",
+			&config.Hal{},
+			&config.Kayenta{},
 		},
-		&config.Kayenta{},
-	},
-	{
-		"Stackdriver enabled",
-		&config.Hal{
-			Canary: &canary.Canary{
-				Enabled: true,
-				ServiceIntegrations: &canary.Canary_ServiceIntegrations{
-					Google: &canary.Google{
+		{
+			"Canary disabled",
+			&config.Hal{
+				Canary: &canary.Canary{
+					Enabled: false,
+				},
+			},
+			&config.Kayenta{},
+		},
+		{
+			"Stackdriver enabled",
+			&config.Hal{
+				Canary: &canary.Canary{
+					Enabled: true,
+					ServiceIntegrations: &canary.Canary_ServiceIntegrations{
+						Google: &canary.Google{
+							Enabled: true,
+							Accounts: []*canary.GoogleAccount{
+								{
+									Name:    "my-google-account",
+									Project: "my-google-project",
+									SupportedTypes: []canary.SupportedType{
+										canary.SupportedType_METRICS_STORE,
+									},
+								},
+							},
+							GcsEnabled:                false,
+							StackdriverEnabled:        true,
+							MetadataCachingIntervalMS: 1000,
+						},
+					},
+				},
+			},
+			&config.Kayenta{
+				Kayenta: &config.Kayenta_ServiceIntegrations{
+					Google: &config.Kayenta_ServiceIntegrations_Google{
 						Enabled: true,
 						Accounts: []*canary.GoogleAccount{
 							{
@@ -58,44 +80,44 @@ var kayentaTests = []testCase{
 								},
 							},
 						},
-						GcsEnabled:                false,
-						StackdriverEnabled:        true,
+					},
+					Stackdriver: &canary.Stackdriver{
+						Enabled:                   true,
 						MetadataCachingIntervalMS: 1000,
+					},
+					Gcs: &canary.Gcs{
+						Enabled: false,
 					},
 				},
 			},
 		},
-		&config.Kayenta{
-			Kayenta: &config.Kayenta_ServiceIntegrations{
-				Google: &config.Kayenta_ServiceIntegrations_Google{
+		{
+			"GCS enabled",
+			&config.Hal{
+				Canary: &canary.Canary{
 					Enabled: true,
-					Accounts: []*canary.GoogleAccount{
-						{
-							Name:    "my-google-account",
-							Project: "my-google-project",
-							SupportedTypes: []canary.SupportedType{
-								canary.SupportedType_METRICS_STORE,
+					ServiceIntegrations: &canary.Canary_ServiceIntegrations{
+						Google: &canary.Google{
+							Enabled: true,
+							Accounts: []*canary.GoogleAccount{
+								{
+									Name:    "my-google-account",
+									Project: "my-google-project",
+									SupportedTypes: []canary.SupportedType{
+										canary.SupportedType_CONFIGURATION_STORE,
+										canary.SupportedType_OBJECT_STORE,
+									},
+								},
 							},
+							GcsEnabled:         true,
+							StackdriverEnabled: false,
 						},
 					},
 				},
-				Stackdriver: &canary.Stackdriver{
-					Enabled:                   true,
-					MetadataCachingIntervalMS: 1000,
-				},
-				Gcs: &canary.Gcs{
-					Enabled: false,
-				},
 			},
-		},
-	},
-	{
-		"GCS enabled",
-		&config.Hal{
-			Canary: &canary.Canary{
-				Enabled: true,
-				ServiceIntegrations: &canary.Canary_ServiceIntegrations{
-					Google: &canary.Google{
+			&config.Kayenta{
+				Kayenta: &config.Kayenta_ServiceIntegrations{
+					Google: &config.Kayenta_ServiceIntegrations_Google{
 						Enabled: true,
 						Accounts: []*canary.GoogleAccount{
 							{
@@ -107,42 +129,40 @@ var kayentaTests = []testCase{
 								},
 							},
 						},
-						GcsEnabled:         true,
-						StackdriverEnabled: false,
+					},
+					Stackdriver: &canary.Stackdriver{
+						Enabled: false,
+					},
+					Gcs: &canary.Gcs{
+						Enabled: true,
 					},
 				},
 			},
 		},
-		&config.Kayenta{
-			Kayenta: &config.Kayenta_ServiceIntegrations{
-				Google: &config.Kayenta_ServiceIntegrations_Google{
+		{
+			"Prometheus enabled",
+			&config.Hal{
+				Canary: &canary.Canary{
 					Enabled: true,
-					Accounts: []*canary.GoogleAccount{
-						{
-							Name:    "my-google-account",
-							Project: "my-google-project",
-							SupportedTypes: []canary.SupportedType{
-								canary.SupportedType_CONFIGURATION_STORE,
-								canary.SupportedType_OBJECT_STORE,
+					ServiceIntegrations: &canary.Canary_ServiceIntegrations{
+						Prometheus: &canary.Prometheus{
+							Enabled: true,
+							Accounts: []*canary.PrometheusAccount{
+								{
+									Name: "my-prometheus-account",
+									Endpoint: &canary.PrometheusAccount_Endpoint{
+										BaseUrl: "https://my-prometheus-server",
+									},
+									UsernamePasswordFile: "/var/secrets/prometheus",
+								},
 							},
+							MetadataCachingIntervalMS: 1000,
 						},
 					},
 				},
-				Stackdriver: &canary.Stackdriver{
-					Enabled: false,
-				},
-				Gcs: &canary.Gcs{
-					Enabled: true,
-				},
 			},
-		},
-	},
-	{
-		"Prometheus enabled",
-		&config.Hal{
-			Canary: &canary.Canary{
-				Enabled: true,
-				ServiceIntegrations: &canary.Canary_ServiceIntegrations{
+			&config.Kayenta{
+				Kayenta: &config.Kayenta_ServiceIntegrations{
 					Prometheus: &canary.Prometheus{
 						Enabled: true,
 						Accounts: []*canary.PrometheusAccount{
@@ -159,30 +179,30 @@ var kayentaTests = []testCase{
 				},
 			},
 		},
-		&config.Kayenta{
-			Kayenta: &config.Kayenta_ServiceIntegrations{
-				Prometheus: &canary.Prometheus{
+		{
+			"Datadog enabled",
+			&config.Hal{
+				Canary: &canary.Canary{
 					Enabled: true,
-					Accounts: []*canary.PrometheusAccount{
-						{
-							Name: "my-prometheus-account",
-							Endpoint: &canary.PrometheusAccount_Endpoint{
-								BaseUrl: "https://my-prometheus-server",
+					ServiceIntegrations: &canary.Canary_ServiceIntegrations{
+						Datadog: &canary.Datadog{
+							Enabled: true,
+							Accounts: []*canary.DatadogAccount{
+								{
+									Name: "my-datadog-account",
+									Endpoint: &canary.DatadogAccount_Endpoint{
+										BaseUrl: "https://my-datadog-server",
+									},
+									ApiKey:         "my-api-key",
+									ApplicationKey: "my-app-key",
+								},
 							},
-							UsernamePasswordFile: "/var/secrets/prometheus",
 						},
 					},
-					MetadataCachingIntervalMS: 1000,
 				},
 			},
-		},
-	},
-	{
-		"Datadog enabled",
-		&config.Hal{
-			Canary: &canary.Canary{
-				Enabled: true,
-				ServiceIntegrations: &canary.Canary_ServiceIntegrations{
+			&config.Kayenta{
+				Kayenta: &config.Kayenta_ServiceIntegrations{
 					Datadog: &canary.Datadog{
 						Enabled: true,
 						Accounts: []*canary.DatadogAccount{
@@ -199,31 +219,31 @@ var kayentaTests = []testCase{
 				},
 			},
 		},
-		&config.Kayenta{
-			Kayenta: &config.Kayenta_ServiceIntegrations{
-				Datadog: &canary.Datadog{
+		{
+			"S3 enabled",
+			&config.Hal{
+				Canary: &canary.Canary{
 					Enabled: true,
-					Accounts: []*canary.DatadogAccount{
-						{
-							Name: "my-datadog-account",
-							Endpoint: &canary.DatadogAccount_Endpoint{
-								BaseUrl: "https://my-datadog-server",
+					ServiceIntegrations: &canary.Canary_ServiceIntegrations{
+						Aws: &canary.Aws{
+							Enabled: true,
+							Accounts: []*canary.AwsAccount{
+								{
+									Name: "my-aws-account",
+									SupportedTypes: []canary.SupportedType{
+										canary.SupportedType_CONFIGURATION_STORE,
+										canary.SupportedType_OBJECT_STORE,
+									},
+								},
 							},
-							ApiKey:         "my-api-key",
-							ApplicationKey: "my-app-key",
+							S3Enabled: true,
 						},
 					},
 				},
 			},
-		},
-	},
-	{
-		"S3 enabled",
-		&config.Hal{
-			Canary: &canary.Canary{
-				Enabled: true,
-				ServiceIntegrations: &canary.Canary_ServiceIntegrations{
-					Aws: &canary.Aws{
+			&config.Kayenta{
+				Kayenta: &config.Kayenta_ServiceIntegrations{
+					Aws: &config.Kayenta_ServiceIntegrations_Aws{
 						Enabled: true,
 						Accounts: []*canary.AwsAccount{
 							{
@@ -234,37 +254,36 @@ var kayentaTests = []testCase{
 								},
 							},
 						},
-						S3Enabled: true,
+					},
+					S3: &canary.S3{
+						Enabled: true,
 					},
 				},
 			},
 		},
-		&config.Kayenta{
-			Kayenta: &config.Kayenta_ServiceIntegrations{
-				Aws: &config.Kayenta_ServiceIntegrations_Aws{
+		{
+			"SignalFx enabled",
+			&config.Hal{
+				Canary: &canary.Canary{
 					Enabled: true,
-					Accounts: []*canary.AwsAccount{
-						{
-							Name: "my-aws-account",
-							SupportedTypes: []canary.SupportedType{
-								canary.SupportedType_CONFIGURATION_STORE,
-								canary.SupportedType_OBJECT_STORE,
+					ServiceIntegrations: &canary.Canary_ServiceIntegrations{
+						Signalfx: &canary.SignalFx{
+							Enabled: true,
+							Accounts: []*canary.SignalFxAccount{
+								{
+									Name: "my-signalfx-account",
+									Endpoint: &canary.SignalFxAccount_Endpoint{
+										BaseUrl: "https://my-signalfx-server",
+									},
+									AccessToken: "my-token",
+								},
 							},
 						},
 					},
 				},
-				S3: &canary.S3{
-					Enabled: true,
-				},
 			},
-		},
-	},
-	{
-		"SignalFx enabled",
-		&config.Hal{
-			Canary: &canary.Canary{
-				Enabled: true,
-				ServiceIntegrations: &canary.Canary_ServiceIntegrations{
+			&config.Kayenta{
+				Kayenta: &config.Kayenta_ServiceIntegrations{
 					Signalfx: &canary.SignalFx{
 						Enabled: true,
 						Accounts: []*canary.SignalFxAccount{
@@ -280,29 +299,28 @@ var kayentaTests = []testCase{
 				},
 			},
 		},
-		&config.Kayenta{
-			Kayenta: &config.Kayenta_ServiceIntegrations{
-				Signalfx: &canary.SignalFx{
+		{
+			"New Relic enabled",
+			&config.Hal{
+				Canary: &canary.Canary{
 					Enabled: true,
-					Accounts: []*canary.SignalFxAccount{
-						{
-							Name: "my-signalfx-account",
-							Endpoint: &canary.SignalFxAccount_Endpoint{
-								BaseUrl: "https://my-signalfx-server",
+					ServiceIntegrations: &canary.Canary_ServiceIntegrations{
+						Newrelic: &canary.NewRelic{
+							Enabled: true,
+							Accounts: []*canary.NewRelicAccount{
+								{
+									Name: "my-newrelic-account",
+									Endpoint: &canary.NewRelicAccount_Endpoint{
+										BaseUrl: "https://my-signalfx-server",
+									},
+								},
 							},
-							AccessToken: "my-token",
 						},
 					},
 				},
 			},
-		},
-	},
-	{
-		"New Relic enabled",
-		&config.Hal{
-			Canary: &canary.Canary{
-				Enabled: true,
-				ServiceIntegrations: &canary.Canary_ServiceIntegrations{
+			&config.Kayenta{
+				Kayenta: &config.Kayenta_ServiceIntegrations{
 					Newrelic: &canary.NewRelic{
 						Enabled: true,
 						Accounts: []*canary.NewRelicAccount{
@@ -317,28 +335,13 @@ var kayentaTests = []testCase{
 				},
 			},
 		},
-		&config.Kayenta{
-			Kayenta: &config.Kayenta_ServiceIntegrations{
-				Newrelic: &canary.NewRelic{
-					Enabled: true,
-					Accounts: []*canary.NewRelicAccount{
-						{
-							Name: "my-newrelic-account",
-							Endpoint: &canary.NewRelicAccount_Endpoint{
-								BaseUrl: "https://my-signalfx-server",
-							},
-						},
-					},
-				},
-			},
-		},
 	},
 }
 
 func TestHalToKayenta(t *testing.T) {
-	for _, tt := range kayentaTests {
+	for _, tt := range kayentaTests.tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := convert.HalToKayenta(tt.hal)
+			got := kayentaTests.generator(tt.hal)
 			if !proto.Equal(got, tt.want) {
 				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
 			}

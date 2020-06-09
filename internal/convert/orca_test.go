@@ -29,105 +29,108 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var orcaTests = []testCase{
-	{
-		"Empty hal config",
-		&config.Hal{},
-		&config.Orca{},
-	},
-	{
-		"AWS disabled",
-		&config.Hal{
-			Providers: &cloudprovider.Providers{
-				Aws: &cloudprovider.Aws{
-					Enabled:        false,
-					PrimaryAccount: "my-account",
+var orcaTests = configTest{
+	generator: func(h *config.Hal) proto.Message { return convert.HalToOrca(h) },
+	tests: []testCase{
+		{
+			"Empty hal config",
+			&config.Hal{},
+			&config.Orca{},
+		},
+		{
+			"AWS disabled",
+			&config.Hal{
+				Providers: &cloudprovider.Providers{
+					Aws: &cloudprovider.Aws{
+						Enabled:        false,
+						PrimaryAccount: "my-account",
+					},
+				},
+			},
+			&config.Orca{},
+		},
+		{
+			"AWS enabled",
+			&config.Hal{
+				Providers: &cloudprovider.Providers{
+					Aws: &cloudprovider.Aws{
+						Enabled:        true,
+						PrimaryAccount: "my-account",
+					},
+				},
+			},
+			&config.Orca{
+				Default: &config.Orca_Defaults{
+					Bake: &config.Orca_Defaults_BakeDefaults{
+						Account: "my-account",
+					},
 				},
 			},
 		},
-		&config.Orca{},
-	},
-	{
-		"AWS enabled",
-		&config.Hal{
-			Providers: &cloudprovider.Providers{
-				Aws: &cloudprovider.Aws{
-					Enabled:        true,
-					PrimaryAccount: "my-account",
+		{
+			// TODO: This should probably explicitly set templates to disabled rather
+			// than return an empty config.
+			"Pipeline templates disabled",
+			&config.Hal{
+				Features: &client.Features{PipelineTemplates: false},
+			},
+			&config.Orca{},
+		},
+		{
+			"Pipeline templates enabled",
+			&config.Hal{
+				Features: &client.Features{PipelineTemplates: true},
+			},
+			&config.Orca{
+				PipelineTemplates: &config.Orca_PipelineTemplates{Enabled: true},
+			},
+		},
+		{
+			"Webhook trust configured",
+			&config.Hal{
+				Webhook: &security.WebhookConfig{
+					Trust: &security.TrustStore{
+						Enabled:            true,
+						TrustStore:         "/var/secrets/store.jks",
+						TrustStorePassword: "passw0rd",
+					},
+				},
+			},
+			&config.Orca{
+				Webhook: &security.WebhookConfig{
+					Trust: &security.TrustStore{
+						Enabled:            true,
+						TrustStore:         "/var/secrets/store.jks",
+						TrustStorePassword: "passw0rd",
+					},
 				},
 			},
 		},
-		&config.Orca{
-			Default: &config.Orca_Defaults{
-				Bake: &config.Orca_Defaults_BakeDefaults{
-					Account: "my-account",
-				},
-			},
-		},
-	},
-	{
-		// TODO: This should probably explicitly set templates to disabled rather
-		// than return an empty config.
-		"Pipeline templates disabled",
-		&config.Hal{
-			Features: &client.Features{PipelineTemplates: false},
-		},
-		&config.Orca{},
-	},
-	{
-		"Pipeline templates enabled",
-		&config.Hal{
-			Features: &client.Features{PipelineTemplates: true},
-		},
-		&config.Orca{
-			PipelineTemplates: &config.Orca_PipelineTemplates{Enabled: true},
-		},
-	},
-	{
-		"Webhook trust configured",
-		&config.Hal{
-			Webhook: &security.WebhookConfig{
-				Trust: &security.TrustStore{
-					Enabled:            true,
-					TrustStore:         "/var/secrets/store.jks",
-					TrustStorePassword: "passw0rd",
-				},
-			},
-		},
-		&config.Orca{
-			Webhook: &security.WebhookConfig{
-				Trust: &security.TrustStore{
-					Enabled:            true,
-					TrustStore:         "/var/secrets/store.jks",
-					TrustStorePassword: "passw0rd",
-				},
-			},
-		},
-	},
-	{
-		"Canary enabled",
-		&config.Hal{
-			Canary: &canary.Canary{
-				Enabled: true,
-			},
-		},
-		&config.Orca{
-			Services: &config.Orca_Services{
-				Kayenta: &config.ServiceSettings{
+		{
+			"Canary enabled",
+			&config.Hal{
+				Canary: &canary.Canary{
 					Enabled: true,
 				},
 			},
+			&config.Orca{
+				Services: &config.Orca_Services{
+					Kayenta: &config.ServiceSettings{
+						Enabled: true,
+					},
+				},
+			},
 		},
-	},
-	{
-		"Timezone set",
-		&config.Hal{
-			Timezone: "America/Chicago",
-		},
-		&config.Orca{
-			Tasks: &config.Orca_Tasks{
-				ExecutionWindow: &config.Orca_Tasks_ExecutionWindow{
-					Timezone: "America/Chicago",
+		{
+			"Timezone set",
+			&config.Hal{
+				Timezone: "America/Chicago",
+			},
+			&config.Orca{
+				Tasks: &config.Orca_Tasks{
+					ExecutionWindow: &config.Orca_Tasks_ExecutionWindow{
+						Timezone: "America/Chicago",
+					},
 				},
 			},
 		},
@@ -135,9 +138,9 @@ var orcaTests = []testCase{
 }
 
 func TestHalToOrca(t *testing.T) {
-	for _, tt := range orcaTests {
+	for _, tt := range orcaTests.tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := convert.HalToOrca(tt.hal)
+			got := orcaTests.generator(tt.hal)
 			if !proto.Equal(got, tt.want) {
 				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
 			}

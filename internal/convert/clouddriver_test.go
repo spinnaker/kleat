@@ -26,34 +26,50 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var clouddriverTests = []testCase{
-	{
-		"Empty hal config",
-		&config.Hal{},
-		&config.Clouddriver{},
-	},
-	{
-		"Empty providers",
-		&config.Hal{
-			Providers: &cloudprovider.Providers{},
+var clouddriverTests = configTest{
+	generator: func(h *config.Hal) proto.Message { return convert.HalToClouddriver(h) },
+	tests: []testCase{
+		{
+			"Empty hal config",
+			&config.Hal{},
+			&config.Clouddriver{},
 		},
-		&config.Clouddriver{},
-	},
-	{
-		"Empty Kubernetes provider",
-		&config.Hal{
-			Providers: &cloudprovider.Providers{
+		{
+			"Empty providers",
+			&config.Hal{
+				Providers: &cloudprovider.Providers{},
+			},
+			&config.Clouddriver{},
+		},
+		{
+			"Empty Kubernetes provider",
+			&config.Hal{
+				Providers: &cloudprovider.Providers{
+					Kubernetes: &cloudprovider.Kubernetes{},
+				},
+			},
+			&config.Clouddriver{
 				Kubernetes: &cloudprovider.Kubernetes{},
 			},
 		},
-		&config.Clouddriver{
-			Kubernetes: &cloudprovider.Kubernetes{},
-		},
-	},
-	{
-		"Kubernetes account",
-		&config.Hal{
-			Providers: &cloudprovider.Providers{
+		{
+			"Kubernetes account",
+			&config.Hal{
+				Providers: &cloudprovider.Providers{
+					Kubernetes: &cloudprovider.Kubernetes{
+						Enabled: true,
+						Accounts: []*cloudprovider.KubernetesAccount{
+							{
+								Name:           "my-account",
+								Kinds:          []string{"deployment"},
+								OmitNamespaces: []string{"kube-system"},
+							},
+						},
+						PrimaryAccount: "my-account",
+					},
+				},
+			},
+			&config.Clouddriver{
 				Kubernetes: &cloudprovider.Kubernetes{
 					Enabled: true,
 					Accounts: []*cloudprovider.KubernetesAccount{
@@ -67,65 +83,52 @@ var clouddriverTests = []testCase{
 				},
 			},
 		},
-		&config.Clouddriver{
-			Kubernetes: &cloudprovider.Kubernetes{
-				Enabled: true,
-				Accounts: []*cloudprovider.KubernetesAccount{
-					{
-						Name:           "my-account",
-						Kinds:          []string{"deployment"},
-						OmitNamespaces: []string{"kube-system"},
-					},
+		{
+			"Empty artifacts",
+			&config.Hal{
+				Artifacts: &artifact.Artifacts{},
+			},
+			&config.Clouddriver{
+				Artifacts: &artifact.Artifacts{},
+			},
+		},
+		{
+			"Empty GCS artifacts",
+			&config.Hal{
+				Artifacts: &artifact.Artifacts{
+					Gcs: &artifact.Gcs{},
 				},
-				PrimaryAccount: "my-account",
+			},
+			&config.Clouddriver{
+				Artifacts: &artifact.Artifacts{
+					Gcs: &artifact.Gcs{},
+				},
 			},
 		},
-	},
-	{
-		"Empty artifacts",
-		&config.Hal{
-			Artifacts: &artifact.Artifacts{},
-		},
-		&config.Clouddriver{
-			Artifacts: &artifact.Artifacts{},
-		},
-	},
-	{
-		"Empty GCS artifacts",
-		&config.Hal{
-			Artifacts: &artifact.Artifacts{
-				Gcs: &artifact.Gcs{},
-			},
-		},
-		&config.Clouddriver{
-			Artifacts: &artifact.Artifacts{
-				Gcs: &artifact.Gcs{},
-			},
-		},
-	},
-	{
-		"GCS artifact account",
-		&config.Hal{
-			Artifacts: &artifact.Artifacts{
-				Gcs: &artifact.Gcs{
-					Enabled: true,
-					Accounts: []*artifact.GcsAccount{
-						{
-							Name:     "my-account",
-							JsonPath: "/var/secrets/my-key.json",
+		{
+			"GCS artifact account",
+			&config.Hal{
+				Artifacts: &artifact.Artifacts{
+					Gcs: &artifact.Gcs{
+						Enabled: true,
+						Accounts: []*artifact.GcsAccount{
+							{
+								Name:     "my-account",
+								JsonPath: "/var/secrets/my-key.json",
+							},
 						},
 					},
 				},
 			},
-		},
-		&config.Clouddriver{
-			Artifacts: &artifact.Artifacts{
-				Gcs: &artifact.Gcs{
-					Enabled: true,
-					Accounts: []*artifact.GcsAccount{
-						{
-							Name:     "my-account",
-							JsonPath: "/var/secrets/my-key.json",
+			&config.Clouddriver{
+				Artifacts: &artifact.Artifacts{
+					Gcs: &artifact.Gcs{
+						Enabled: true,
+						Accounts: []*artifact.GcsAccount{
+							{
+								Name:     "my-account",
+								JsonPath: "/var/secrets/my-key.json",
+							},
 						},
 					},
 				},
@@ -135,9 +138,9 @@ var clouddriverTests = []testCase{
 }
 
 func TestHalToClouddriver(t *testing.T) {
-	for _, tt := range clouddriverTests {
+	for _, tt := range clouddriverTests.tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := convert.HalToClouddriver(tt.hal)
+			got := clouddriverTests.generator(tt.hal)
 			if !proto.Equal(got, tt.want) {
 				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
 			}

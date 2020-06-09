@@ -26,17 +26,35 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var fiatTests = []testCase{
-	{
-		"Empty hal config",
-		&config.Hal{},
-		&config.Fiat{},
-	},
-	{
-		"Authorization",
-		&config.Hal{
-			Security: &security.Security{
-				Authz: &authz.Authorization{
+var fiatTests = configTest{
+	generator: func(h *config.Hal) proto.Message { return convert.HalToFiat(h) },
+	tests: []testCase{
+		{
+			"Empty hal config",
+			&config.Hal{},
+			&config.Fiat{},
+		},
+		{
+			"Authorization",
+			&config.Hal{
+				Security: &security.Security{
+					Authz: &authz.Authorization{
+						Enabled: true,
+						GroupMembership: &authz.GroupMembership{
+							Service: authz.GroupMembership_GITHUB,
+							Github: &authz.GithubRoleProvider{
+								AccessToken:  "my-token",
+								Organization: "my-org",
+							},
+							File: &authz.FileRoleProvider{
+								Path: "/var/secrets/my-file.csv",
+							},
+						},
+					},
+				},
+			},
+			&config.Fiat{
+				Auth: &authz.Authorization{
 					Enabled: true,
 					GroupMembership: &authz.GroupMembership{
 						Service: authz.GroupMembership_GITHUB,
@@ -51,28 +69,13 @@ var fiatTests = []testCase{
 				},
 			},
 		},
-		&config.Fiat{
-			Auth: &authz.Authorization{
-				Enabled: true,
-				GroupMembership: &authz.GroupMembership{
-					Service: authz.GroupMembership_GITHUB,
-					Github: &authz.GithubRoleProvider{
-						AccessToken:  "my-token",
-						Organization: "my-org",
-					},
-					File: &authz.FileRoleProvider{
-						Path: "/var/secrets/my-file.csv",
-					},
-				},
-			},
-		},
 	},
 }
 
 func TestHalToFiat(t *testing.T) {
-	for _, tt := range fiatTests {
+	for _, tt := range fiatTests.tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := convert.HalToFiat(tt.hal)
+			got := fiatTests.generator(tt.hal)
 			if !proto.Equal(got, tt.want) {
 				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
 			}

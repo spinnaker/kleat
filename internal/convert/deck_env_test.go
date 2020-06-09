@@ -25,54 +25,57 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var deckEnvTests = []testCase{
-	{
-		"Empty hal config",
-		&config.Hal{},
-		&config.DeckEnv{},
-	},
-	{
-		"SSL disabled",
-		&config.Hal{
-			Security: &security.Security{
-				UiSecurity: &security.UiSecurity{
-					Ssl: &security.UiSsl{
-						Enabled:                  false,
-						SslCertificateFile:       "/var/secrets/cert.crt",
-						SslCertificateKeyFile:    "/var/secrets/cert.key",
-						SslCertificatePassphrase: "passw0rd",
+var deckEnvTests = configTest{
+	generator: func(h *config.Hal) proto.Message { return convert.HalToDeckEnv(h) },
+	tests: []testCase{
+		{
+			"Empty hal config",
+			&config.Hal{},
+			&config.DeckEnv{},
+		},
+		{
+			"SSL disabled",
+			&config.Hal{
+				Security: &security.Security{
+					UiSecurity: &security.UiSecurity{
+						Ssl: &security.UiSsl{
+							Enabled:                  false,
+							SslCertificateFile:       "/var/secrets/cert.crt",
+							SslCertificateKeyFile:    "/var/secrets/cert.key",
+							SslCertificatePassphrase: "passw0rd",
+						},
 					},
 				},
 			},
+			&config.DeckEnv{},
 		},
-		&config.DeckEnv{},
-	},
-	{
-		"SSL configured",
-		&config.Hal{
-			Security: &security.Security{
-				UiSecurity: &security.UiSecurity{
-					Ssl: &security.UiSsl{
-						Enabled:                  true,
-						SslCertificateFile:       "/var/secrets/cert.crt",
-						SslCertificateKeyFile:    "/var/secrets/cert.key",
-						SslCertificatePassphrase: "passw0rd",
+		{
+			"SSL configured",
+			&config.Hal{
+				Security: &security.Security{
+					UiSecurity: &security.UiSecurity{
+						Ssl: &security.UiSsl{
+							Enabled:                  true,
+							SslCertificateFile:       "/var/secrets/cert.crt",
+							SslCertificateKeyFile:    "/var/secrets/cert.key",
+							SslCertificatePassphrase: "passw0rd",
+						},
 					},
 				},
 			},
-		},
-		&config.DeckEnv{
-			DeckCert:   "/var/secrets/cert.crt",
-			DeckKey:    "/var/secrets/cert.key",
-			Passphrase: "passw0rd",
+			&config.DeckEnv{
+				DeckCert:   "/var/secrets/cert.crt",
+				DeckKey:    "/var/secrets/cert.key",
+				Passphrase: "passw0rd",
+			},
 		},
 	},
 }
 
 func TestHalToDeckEnv(t *testing.T) {
-	for _, tt := range deckEnvTests {
+	for _, tt := range deckEnvTests.tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := convert.HalToDeckEnv(tt.hal)
+			got := deckEnvTests.generator(tt.hal)
 			if !proto.Equal(got, tt.want) {
 				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
 			}

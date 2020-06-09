@@ -29,3 +29,10 @@ type testCase struct {
 	hal  *config.Hal
 	want proto.Message
 }
+
+// configTest represents a set of test on a config generator. The supplied
+// generator will be used for each of the supplied tests.
+type configTest struct {
+	generator func(h *config.Hal) proto.Message
+	tests     []testCase
+}

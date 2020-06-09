@@ -32,54 +32,72 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var igorTests = []testCase{
-	{
-		"Empty hal config",
-		&config.Hal{},
-		&config.Igor{},
-	},
-	{
-		"Docker registry enabled",
-		&config.Hal{
-			Providers: &cloudprovider.Providers{
-				DockerRegistry: &cloudprovider.DockerRegistry{
+var igorTests = configTest{
+	generator: func(h *config.Hal) proto.Message { return convert.HalToIgor(h) },
+	tests: []testCase{
+		{
+			"Empty hal config",
+			&config.Hal{},
+			&config.Igor{},
+		},
+		{
+			"Docker registry enabled",
+			&config.Hal{
+				Providers: &cloudprovider.Providers{
+					DockerRegistry: &cloudprovider.DockerRegistry{
+						Enabled: true,
+					},
+				},
+			},
+			&config.Igor{
+				DockerRegistry: &config.Igor_DockerRegistry{
 					Enabled: true,
 				},
 			},
 		},
-		&config.Igor{
-			DockerRegistry: &config.Igor_DockerRegistry{
-				Enabled: true,
+		{
+			"Artifact template configured",
+			&config.Hal{
+				Artifacts: &artifact.Artifacts{
+					Templates: []*artifact.Template{
+						{
+							Name:         "my-template",
+							TemplatePath: "/var/secrets/my-template",
+						},
+					},
+				},
 			},
-		},
-	},
-	{
-		"Artifact template configured",
-		&config.Hal{
-			Artifacts: &artifact.Artifacts{
-				Templates: []*artifact.Template{
-					{
-						Name:         "my-template",
-						TemplatePath: "/var/secrets/my-template",
+			&config.Igor{
+				Artifacts: &config.Igor_Artifacts{
+					Templates: []*artifact.Template{
+						{
+							Name:         "my-template",
+							TemplatePath: "/var/secrets/my-template",
+						},
 					},
 				},
 			},
 		},
-		&config.Igor{
-			Artifacts: &config.Igor_Artifacts{
-				Templates: []*artifact.Template{
-					{
-						Name:         "my-template",
-						TemplatePath: "/var/secrets/my-template",
+		{
+			"Artifactory enabled",
+			&config.Hal{
+				Repository: &repository.Repository{
+					Artifactory: &repository.Artifactory{
+						Enabled: true,
+						Searches: []*repository.Artifactory_Search{
+							{
+								Name:     "my-search",
+								BaseUrl:  "https://my-artifactory",
+								Repo:     "my-repo",
+								GroupId:  "abc",
+								Username: "my-un",
+								Password: "my-pw",
+							},
+						},
 					},
 				},
 			},
-		},
-	},
-	{
-		"Artifactory enabled",
-		&config.Hal{
-			Repository: &repository.Repository{
+			&config.Igor{
 				Artifactory: &repository.Artifactory{
 					Enabled: true,
 					Searches: []*repository.Artifactory_Search{
@@ -95,26 +113,29 @@ var igorTests = []testCase{
 				},
 			},
 		},
-		&config.Igor{
-			Artifactory: &repository.Artifactory{
-				Enabled: true,
-				Searches: []*repository.Artifactory_Search{
-					{
-						Name:     "my-search",
-						BaseUrl:  "https://my-artifactory",
-						Repo:     "my-repo",
-						GroupId:  "abc",
-						Username: "my-un",
-						Password: "my-pw",
+		{
+			"CI providers configured",
+			&config.Hal{
+				Ci: &ci.Ci{
+					Travis: &ci.Travis{
+						Enabled: true,
+						Masters: []*ci.TravisAccount{
+							{
+								Name: "my-travis-account",
+							},
+						},
+					},
+					Gcb: &ci.GoogleCloudBuild{
+						Enabled: true,
+						Accounts: []*ci.GoogleCloudBuildAccount{
+							{
+								Name: "my-gcb-account",
+							},
+						},
 					},
 				},
 			},
-		},
-	},
-	{
-		"CI providers configured",
-		&config.Hal{
-			Ci: &ci.Ci{
+			&config.Igor{
 				Travis: &ci.Travis{
 					Enabled: true,
 					Masters: []*ci.TravisAccount{
@@ -133,31 +154,13 @@ var igorTests = []testCase{
 				},
 			},
 		},
-		&config.Igor{
-			Travis: &ci.Travis{
-				Enabled: true,
-				Masters: []*ci.TravisAccount{
-					{
-						Name: "my-travis-account",
-					},
-				},
-			},
-			Gcb: &ci.GoogleCloudBuild{
-				Enabled: true,
-				Accounts: []*ci.GoogleCloudBuildAccount{
-					{
-						Name: "my-gcb-account",
-					},
-				},
-			},
-		},
 	},
 }
 
 func TestHalToIgor(t *testing.T) {
-	for _, tt := range igorTests {
+	for _, tt := range igorTests.tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := convert.HalToIgor(tt.hal)
+			got := igorTests.generator(tt.hal)
 			if !proto.Equal(got, tt.want) {
 				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
 			}
