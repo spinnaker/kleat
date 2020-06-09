@@ -17,23 +17,24 @@ package parse_hal
 
 import (
 	"github.com/spinnaker/kleat/api/client/config"
+	"github.com/spinnaker/kleat/internal/convert"
 	"github.com/spinnaker/kleat/internal/serializer"
 	"google.golang.org/protobuf/proto"
 )
 
 func HalToServiceConfigs(h *config.Hal) *config.Services {
 	return &config.Services{
-		Clouddriver: HalToClouddriver(h),
-		Echo:        HalToEcho(h),
-		Front50:     HalToFront50(h),
-		Orca:        HalToOrca(h),
-		Gate:        HalToGate(h),
-		Fiat:        HalToFiat(h),
-		Kayenta:     HalToKayenta(h),
-		Rosco:       HalToRosco(h),
-		Deck:        HalToDeck(h),
-		DeckEnv:     HalToDeckEnv(h),
-		Igor:        HalToIgor(h),
+		Clouddriver: convert.HalToClouddriver(h),
+		Echo:        convert.HalToEcho(h),
+		Front50:     convert.HalToFront50(h),
+		Orca:        convert.HalToOrca(h),
+		Gate:        convert.HalToGate(h),
+		Fiat:        convert.HalToFiat(h),
+		Kayenta:     convert.HalToKayenta(h),
+		Rosco:       convert.HalToRosco(h),
+		Deck:        convert.HalToDeck(h),
+		DeckEnv:     convert.HalToDeckEnv(h),
+		Igor:        convert.HalToIgor(h),
 	}
 }
 

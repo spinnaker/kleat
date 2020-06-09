@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package parse_hal_test
+package convert_test
 
 import (
 	"testing"
@@ -24,7 +24,7 @@ import (
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/api/client/notification"
 	"github.com/spinnaker/kleat/api/client/pubsub"
-	"github.com/spinnaker/kleat/pkg/parse_hal"
+	"github.com/spinnaker/kleat/internal/convert"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -227,7 +227,7 @@ var halToEchoTests = []struct {
 func TestHalToEcho(t *testing.T) {
 	for _, tt := range halToEchoTests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := parse_hal.HalToEcho(tt.hal)
+			got := convert.HalToEcho(tt.hal)
 			if !proto.Equal(got, tt.want) {
 				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
 			}

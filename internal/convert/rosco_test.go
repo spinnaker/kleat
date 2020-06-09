@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package parse_hal_test
+package convert_test
 
 import (
 	"testing"
 
 	"github.com/spinnaker/kleat/api/client/cloudprovider"
 	"github.com/spinnaker/kleat/api/client/config"
-	"github.com/spinnaker/kleat/pkg/parse_hal"
+	"github.com/spinnaker/kleat/internal/convert"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -139,7 +139,7 @@ var halToRoscoTests = []struct {
 func TestHalToRosco(t *testing.T) {
 	for _, tt := range halToRoscoTests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := parse_hal.HalToRosco(tt.hal)
+			got := convert.HalToRosco(tt.hal)
 			if !proto.Equal(got, tt.want) {
 				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
 			}

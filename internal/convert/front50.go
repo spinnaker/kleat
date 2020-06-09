@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-package parse_hal
+package convert
 
-import (
-	"github.com/spinnaker/kleat/api/client/config"
-)
+import "github.com/spinnaker/kleat/api/client/config"
 
-func HalToFiat(h *config.Hal) *config.Fiat {
-	return &config.Fiat{
-		Auth: h.GetSecurity().GetAuthz(),
+func HalToFront50(h *config.Hal) *config.Front50 {
+	return &config.Front50{
+		Spinnaker: &config.Front50_Spinnaker{
+			Gcs:    h.GetPersistentStorage().GetGcs(),
+			Azs:    h.GetPersistentStorage().GetAzs(),
+			Oracle: h.GetPersistentStorage().GetOracle(),
+			S3:     h.GetPersistentStorage().GetS3(),
+		},
 	}
 }

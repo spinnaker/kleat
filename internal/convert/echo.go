@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package parse_hal
+package convert
 
 import "github.com/spinnaker/kleat/api/client/config"
 
