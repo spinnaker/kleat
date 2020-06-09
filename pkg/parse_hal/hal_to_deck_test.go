@@ -50,7 +50,7 @@ var halToDeckTests = []struct {
 			Canary: &config.Deck_Canary{
 				FeatureDisabled: true,
 			},
-			Features:      &config.Deck_Features{},
+			Feature:       &config.Deck_Features{},
 			Notifications: &config.Deck_Notifications{},
 			Providers:     &config.Deck_Providers{},
 		},
@@ -73,7 +73,7 @@ var halToDeckTests = []struct {
 			Canary: &config.Deck_Canary{
 				FeatureDisabled: true,
 			},
-			Features:      &config.Deck_Features{},
+			Feature:       &config.Deck_Features{},
 			Notifications: &config.Deck_Notifications{},
 			Providers:     &config.Deck_Providers{},
 		},
@@ -93,7 +93,7 @@ var halToDeckTests = []struct {
 			Canary: &config.Deck_Canary{
 				FeatureDisabled: true,
 			},
-			Features:      &config.Deck_Features{},
+			Feature:       &config.Deck_Features{},
 			Notifications: &config.Deck_Notifications{},
 			Providers:     &config.Deck_Providers{},
 		},
@@ -121,7 +121,7 @@ var halToDeckTests = []struct {
 				StorageAccountName: "my-storage-account",
 				TemplatesEnabled:   true,
 			},
-			Features:      &config.Deck_Features{},
+			Feature:       &config.Deck_Features{},
 			Notifications: &config.Deck_Notifications{},
 			Providers:     &config.Deck_Providers{},
 		},
@@ -139,7 +139,7 @@ var halToDeckTests = []struct {
 			Canary: &config.Deck_Canary{
 				FeatureDisabled: true,
 			},
-			Features:      &config.Deck_Features{},
+			Feature:       &config.Deck_Features{},
 			Notifications: &config.Deck_Notifications{},
 			Providers:     &config.Deck_Providers{},
 		},
@@ -165,7 +165,7 @@ var halToDeckTests = []struct {
 			Canary: &config.Deck_Canary{
 				FeatureDisabled: true,
 			},
-			Features: &config.Deck_Features{
+			Feature: &config.Deck_Features{
 				PipelineTemplates:            true,
 				ManagedPipelineTemplatesV2UI: true,
 				ChaosMonkey:                  true,
@@ -191,7 +191,7 @@ var halToDeckTests = []struct {
 			Canary: &config.Deck_Canary{
 				FeatureDisabled: true,
 			},
-			Features: &config.Deck_Features{},
+			Feature: &config.Deck_Features{},
 			Notifications: &config.Deck_Notifications{
 				Sms: &notification.Twilio{
 					Enabled: true,
@@ -223,7 +223,7 @@ var halToDeckTests = []struct {
 			Canary: &config.Deck_Canary{
 				FeatureDisabled: true,
 			},
-			Features:      &config.Deck_Features{},
+			Feature:       &config.Deck_Features{},
 			Notifications: &config.Deck_Notifications{},
 			Providers: &config.Deck_Providers{
 				Gce: &config.Deck_Providers_Gce{
@@ -251,7 +251,7 @@ var halToDeckTests = []struct {
 			Canary: &config.Deck_Canary{
 				FeatureDisabled: true,
 			},
-			Features:      &config.Deck_Features{},
+			Feature:       &config.Deck_Features{},
 			Notifications: &config.Deck_Notifications{},
 			Providers:     &config.Deck_Providers{},
 		},
