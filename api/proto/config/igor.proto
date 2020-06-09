@@ -1,0 +1,34 @@
+syntax = "proto3";
+package proto.config;
+
+option go_package = "github.com/spinnaker/kleat/api/client/config";
+
+import "artifact/template.proto";
+import "repository/artifactory.proto";
+import "ci/codebuild.proto";
+import "ci/concourse.proto";
+import "ci/gcb.proto";
+import "ci/jenkins.proto";
+import "ci/travis.proto";
+import "ci/wercker.proto";
+
+// Configuration for the Igor microservice.
+message Igor {
+  DockerRegistry dockerRegistry = 1;
+  Artifacts artifacts = 2;
+  repository.Artifactory artifactory = 3;
+  ci.GoogleCloudBuild gcb = 4;
+  ci.CodeBuild codebuild = 5;
+  ci.Concourse concourse = 6;
+  ci.Jenkins jenkins = 7;
+  ci.Travis travis = 8;
+  ci.Wercker wercker = 9;
+
+  message DockerRegistry {
+    bool enabled = 1;
+  }
+
+  message Artifacts {
+    repeated artifact.Template templates = 1;
+  }
+}

@@ -257,6 +257,11 @@
 - [config/halconfig.proto](#config/halconfig.proto)
     - [Hal](#proto.config.Hal)
   
+- [config/igor.proto](#config/igor.proto)
+    - [Igor](#proto.config.Igor)
+    - [Igor.Artifacts](#proto.config.Igor.Artifacts)
+    - [Igor.DockerRegistry](#proto.config.Igor.DockerRegistry)
+  
 - [config/kayenta.proto](#config/kayenta.proto)
     - [Kayenta](#proto.config.Kayenta)
     - [Kayenta.ServiceIntegrations](#proto.config.Kayenta.ServiceIntegrations)
@@ -4003,6 +4008,75 @@ Configuration for a Spinnaker installation.
 
 
 
+<a name="config/igor.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## config/igor.proto
+
+
+
+<a name="proto.config.Igor"></a>
+
+### Igor
+Configuration for the Igor microservice.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| dockerRegistry | [Igor.DockerRegistry](#proto.config.Igor.DockerRegistry) |  |  |
+| artifacts | [Igor.Artifacts](#proto.config.Igor.Artifacts) |  |  |
+| artifactory | [proto.repository.Artifactory](#proto.repository.Artifactory) |  |  |
+| gcb | [proto.ci.GoogleCloudBuild](#proto.ci.GoogleCloudBuild) |  |  |
+| codebuild | [proto.ci.CodeBuild](#proto.ci.CodeBuild) |  |  |
+| concourse | [proto.ci.Concourse](#proto.ci.Concourse) |  |  |
+| jenkins | [proto.ci.Jenkins](#proto.ci.Jenkins) |  |  |
+| travis | [proto.ci.Travis](#proto.ci.Travis) |  |  |
+| wercker | [proto.ci.Wercker](#proto.ci.Wercker) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Igor.Artifacts"></a>
+
+### Igor.Artifacts
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| templates | [proto.artifact.Template](#proto.artifact.Template) | repeated |  |
+
+
+
+
+
+
+<a name="proto.config.Igor.DockerRegistry"></a>
+
+### Igor.DockerRegistry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
 <a name="config/kayenta.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -4306,6 +4380,7 @@ Configuration for Spinnaker&#39;s microservices.
 | rosco | [Rosco](#proto.config.Rosco) |  |  |
 | deck | [Deck](#proto.config.Deck) |  |  |
 | deckEnv | [DeckEnv](#proto.config.DeckEnv) |  |  |
+| igor | [Igor](#proto.config.Igor) |  |  |
 
 
 
