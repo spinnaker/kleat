@@ -108,7 +108,7 @@ func GenerateConfigFiles(s *config.Services) (*config.ConfigFiles, error) {
 		},
 	}
 
-	cf := make([]*config.ConfigFile, len(files), len(files))
+	cf := make([]*config.ConfigFile, len(files))
 	for i, file := range files {
 		contents, err := file.serializer.Serialize(file.message)
 		if err != nil {
