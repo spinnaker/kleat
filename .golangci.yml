@@ -1,0 +1,10 @@
+run:
+  skip-dirs:
+    - api/client
+  modules-download-mode: readonly
+linters:
+  enable:
+    - gofmt
+    - goimports
+    - golint
+    - govet
