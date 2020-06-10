@@ -26,73 +26,72 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var halToFront50Tests = []struct {
-	n    string
-	h    *config.Hal
-	want *config.Front50
-}{
-	{
-		"Empty hal config",
-		&config.Hal{},
-		&config.Front50{
-			Spinnaker: &config.Front50_Spinnaker{},
-		},
-	},
-	{
-		"Empty persistent storage",
-		&config.Hal{
-			PersistentStorage: &storage.PersistentStorage{},
-		},
-		&config.Front50{
-			Spinnaker: &config.Front50_Spinnaker{},
-		},
-	},
-	{
-		"Empty persistent storage configs",
-		&config.Hal{
-			PersistentStorage: &storage.PersistentStorage{
-				Gcs: &storage.Gcs{},
-				S3:  &storage.S3{},
+var front50Tests = configTest{
+	generator: func(h *config.Hal) proto.Message { return convert.HalToFront50(h) },
+	tests: []testCase{
+		{
+			"Empty hal config",
+			&config.Hal{},
+			&config.Front50{
+				Spinnaker: &config.Front50_Spinnaker{},
 			},
 		},
-		&config.Front50{
-			Spinnaker: &config.Front50_Spinnaker{
-				Gcs: &storage.Gcs{},
-				S3:  &storage.S3{},
+		{
+			"Empty persistent storage",
+			&config.Hal{
+				PersistentStorage: &storage.PersistentStorage{},
+			},
+			&config.Front50{
+				Spinnaker: &config.Front50_Spinnaker{},
 			},
 		},
-	},
-	{
-		"GCS and S3 storage configured",
-		&config.Hal{
-			PersistentStorage: &storage.PersistentStorage{
-				Gcs: &storage.Gcs{
-					Enabled:  true,
-					JsonPath: "/var/secrets/my-gcs-key.json",
-					Project:  "my-project",
-					Bucket:   "my-gcs-bucket",
+		{
+			"Empty persistent storage configs",
+			&config.Hal{
+				PersistentStorage: &storage.PersistentStorage{
+					Gcs: &storage.Gcs{},
+					S3:  &storage.S3{},
 				},
-				S3: &storage.S3{
-					Enabled:              false,
-					Bucket:               "my-s3-bucket",
-					PathStyleAccess:      &wrappers.BoolValue{Value: true},
-					ServerSideEncryption: storage.S3ServerSideEncryption_AES256,
+			},
+			&config.Front50{
+				Spinnaker: &config.Front50_Spinnaker{
+					Gcs: &storage.Gcs{},
+					S3:  &storage.S3{},
 				},
 			},
 		},
-		&config.Front50{
-			Spinnaker: &config.Front50_Spinnaker{
-				Gcs: &storage.Gcs{
-					Enabled:  true,
-					JsonPath: "/var/secrets/my-gcs-key.json",
-					Project:  "my-project",
-					Bucket:   "my-gcs-bucket",
+		{
+			"GCS and S3 storage configured",
+			&config.Hal{
+				PersistentStorage: &storage.PersistentStorage{
+					Gcs: &storage.Gcs{
+						Enabled:  true,
+						JsonPath: "/var/secrets/my-gcs-key.json",
+						Project:  "my-project",
+						Bucket:   "my-gcs-bucket",
+					},
+					S3: &storage.S3{
+						Enabled:              false,
+						Bucket:               "my-s3-bucket",
+						PathStyleAccess:      &wrappers.BoolValue{Value: true},
+						ServerSideEncryption: storage.S3ServerSideEncryption_AES256,
+					},
 				},
-				S3: &storage.S3{
-					Enabled:              false,
-					Bucket:               "my-s3-bucket",
-					PathStyleAccess:      &wrappers.BoolValue{Value: true},
-					ServerSideEncryption: storage.S3ServerSideEncryption_AES256,
+			},
+			&config.Front50{
+				Spinnaker: &config.Front50_Spinnaker{
+					Gcs: &storage.Gcs{
+						Enabled:  true,
+						JsonPath: "/var/secrets/my-gcs-key.json",
+						Project:  "my-project",
+						Bucket:   "my-gcs-bucket",
+					},
+					S3: &storage.S3{
+						Enabled:              false,
+						Bucket:               "my-s3-bucket",
+						PathStyleAccess:      &wrappers.BoolValue{Value: true},
+						ServerSideEncryption: storage.S3ServerSideEncryption_AES256,
+					},
 				},
 			},
 		},
@@ -100,12 +99,5 @@ var halToFront50Tests = []struct {
 }
 
 func TestHalToFront50(t *testing.T) {
-	for _, tt := range halToFront50Tests {
-		t.Run(tt.n, func(t *testing.T) {
-			got := convert.HalToFront50(tt.h)
-			if !proto.Equal(got, tt.want) {
-				t.Errorf("Expected hal config to generate %v, got %v", tt.want, got)
-			}
-		})
-	}
+	runConfigTest(t, front50Tests)
 }
