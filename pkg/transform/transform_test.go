@@ -144,8 +144,8 @@ func TestHalToServiceYAML(t *testing.T) {
 				t.Fatal(err)
 			}
 			if !bytes.Equal(got, want) {
-				diff := diff.Diff(string(got), string(want))
-				t.Errorf("Generated %s differs from expected:\n%s", tt.file, diff)
+				d := diff.Diff(string(got), string(want))
+				t.Errorf("Generated %s differs from expected:\n%s", tt.file, d)
 			}
 		})
 	}

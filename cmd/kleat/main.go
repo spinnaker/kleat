@@ -25,7 +25,7 @@ import (
 
 func main() {
 	if len(os.Args) != 3 {
-		fmt.Fprintf(os.Stderr, "arguments must be <halPath> <dir>\n")
+		_, _ = fmt.Fprint(os.Stderr, "arguments must be <halPath> <dir>\n")
 		os.Exit(1)
 	}
 

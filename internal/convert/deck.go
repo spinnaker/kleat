@@ -65,7 +65,7 @@ func getDeckCanaryConfig(h *config.Hal) *config.Deck_Canary {
 }
 
 // TODO: Actually get changelog config
-func getDeckChangelogConfig(h *config.Hal) *config.Deck_Changelog {
+func getDeckChangelogConfig(_ *config.Hal) *config.Deck_Changelog {
 	return nil
 	//return &config.Deck_Changelog{
 	//	FileName: "",
