@@ -13,6 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// Package validate supports validating a *config.Hal and reporting any
+// validation failures.
 package validate
 
 import (
@@ -22,19 +25,20 @@ import (
 	"github.com/spinnaker/kleat/api/client/config"
 )
 
-type ValidationFailure struct {
+type validationFailure struct {
 	msg string
 }
 
-type HalConfigValidator func(*config.Hal) []ValidationFailure
+type halConfigValidator func(*config.Hal) []validationFailure
 
-func getValidators() []HalConfigValidator {
-	return []HalConfigValidator{
+func getValidators() []halConfigValidator {
+	return []halConfigValidator{
 		validateKindsAndOmitKinds,
 	}
 }
 
-func ValidateHalConfig(h *config.Hal) error {
+// HalConfig validates the supplied *config.Hal, returning any errors encountered.
+func HalConfig(h *config.Hal) error {
 	messages := getValidationMessages(h, getValidators())
 	if len(messages) > 0 {
 		msg := strings.Join(messages, "\n")
@@ -43,7 +47,7 @@ func ValidateHalConfig(h *config.Hal) error {
 	return nil
 }
 
-func getValidationMessages(h *config.Hal, fa []HalConfigValidator) []string {
+func getValidationMessages(h *config.Hal, fa []halConfigValidator) []string {
 	var messages []string
 	for _, f := range fa {
 		rs := f(h)
@@ -54,8 +58,8 @@ func getValidationMessages(h *config.Hal, fa []HalConfigValidator) []string {
 	return messages
 }
 
-func validateKindsAndOmitKinds(h *config.Hal) []ValidationFailure {
-	var messages []ValidationFailure
+func validateKindsAndOmitKinds(h *config.Hal) []validationFailure {
+	var messages []validationFailure
 	for _, a := range h.GetProviders().GetKubernetes().GetAccounts() {
 		if !(len(a.GetKinds()) == 0) && !(len(a.GetOmitKinds()) == 0) {
 			messages = append(messages, fatalResult("Cannot specify both kinds and omitKinds."))
@@ -64,8 +68,8 @@ func validateKindsAndOmitKinds(h *config.Hal) []ValidationFailure {
 	return messages
 }
 
-func fatalResult(msg string) ValidationFailure {
-	return ValidationFailure{
+func fatalResult(msg string) validationFailure {
+	return validationFailure{
 		msg: msg,
 	}
 }

@@ -26,8 +26,8 @@ import (
 
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/protoyaml"
+	"github.com/spinnaker/kleat/internal/validate"
 	"github.com/spinnaker/kleat/pkg/transform"
-	"github.com/spinnaker/kleat/pkg/validate"
 )
 
 // ParseHalConfig reads the YAML file at halPath parses it into a *config.Hal.
@@ -44,7 +44,7 @@ func ParseHalConfig(halPath string) (*config.Hal, error) {
 		return nil, err
 	}
 
-	if err := validate.ValidateHalConfig(hal); err != nil {
+	if err := validate.HalConfig(hal); err != nil {
 		return nil, err
 	}
 

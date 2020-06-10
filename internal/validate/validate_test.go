@@ -20,12 +20,12 @@ import (
 
 	"github.com/spinnaker/kleat/api/client/cloudprovider"
 	"github.com/spinnaker/kleat/api/client/config"
-	"github.com/spinnaker/kleat/pkg/validate"
+	"github.com/spinnaker/kleat/internal/validate"
 )
 
 func TestEmptyHalConfig(t *testing.T) {
 	h := &config.Hal{}
-	err := validate.ValidateHalConfig(h)
+	err := validate.HalConfig(h)
 	if err != nil {
 		t.Errorf("Expected no validation failures, got %s", err)
 	}
@@ -35,7 +35,7 @@ func TestEmptyProviders(t *testing.T) {
 	h := &config.Hal{
 		Providers: &cloudprovider.Providers{},
 	}
-	err := validate.ValidateHalConfig(h)
+	err := validate.HalConfig(h)
 	if err != nil {
 		t.Errorf("Expected no validation failures, got %s", err)
 	}
@@ -47,7 +47,7 @@ func TestEmptyKubernetes(t *testing.T) {
 			Kubernetes: &cloudprovider.Kubernetes{},
 		},
 	}
-	err := validate.ValidateHalConfig(h)
+	err := validate.HalConfig(h)
 	if err != nil {
 		t.Errorf("Expected no validation failures, got %s", err)
 	}
@@ -62,7 +62,7 @@ func TestNoKubernetesAccounts(t *testing.T) {
 			},
 		},
 	}
-	err := validate.ValidateHalConfig(h)
+	err := validate.HalConfig(h)
 	if err != nil {
 		t.Errorf("Expected no validation failures, got %s", err)
 	}
@@ -81,7 +81,7 @@ func TestKuberntesAccountWithNoOmitKinds(t *testing.T) {
 			},
 		},
 	}
-	err := validate.ValidateHalConfig(h)
+	err := validate.HalConfig(h)
 	if err != nil {
 		t.Errorf("Expected no validation failures, got %s", err)
 	}
@@ -101,7 +101,7 @@ func TestKuberntesAccountWithEmptyOmitKinds(t *testing.T) {
 			},
 		},
 	}
-	err := validate.ValidateHalConfig(h)
+	err := validate.HalConfig(h)
 	if err != nil {
 		t.Errorf("Expected no validation failures, got %s", err)
 	}
@@ -121,7 +121,7 @@ func TestInvalidKubernetesAccount(t *testing.T) {
 			},
 		},
 	}
-	err := validate.ValidateHalConfig(h)
+	err := validate.HalConfig(h)
 	if err == nil {
 		t.Error("Expected a validation failure, got none")
 	}
