@@ -13,6 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// Package validate supports validating a *config.Hal and reporting any
+// validation failures.
 package validate
 
 import (
@@ -34,6 +37,7 @@ func getValidators() []halConfigValidator {
 	}
 }
 
+// HalConfig validates the supplied *config.Hal, returning any errors encountered.
 func HalConfig(h *config.Hal) error {
 	messages := getValidationMessages(h, getValidators())
 	if len(messages) > 0 {

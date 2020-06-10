@@ -13,6 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// Package transform supports transforming between various formats of Spinnaker
+// configuration.
 package transform
 
 import (
@@ -22,6 +25,8 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
+// HalToServiceConfigs returns the microservice configurations corresponding
+// to a supplied *config.Hal.
 func HalToServiceConfigs(h *config.Hal) *config.Services {
 	return &config.Services{
 		Clouddriver: convert.HalToClouddriver(h),
@@ -38,6 +43,8 @@ func HalToServiceConfigs(h *config.Hal) *config.Services {
 	}
 }
 
+// GenerateConfigFiles generates the config files corresponding to a supplied
+// *config.Services.
 func GenerateConfigFiles(s *config.Services) (*config.ConfigFiles, error) {
 	var files = []struct {
 		fileName   string
