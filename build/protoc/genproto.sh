@@ -1,9 +1,12 @@
 #!/bin/sh
 set -e
 
+PROTOC_FLAGS="--experimental_allow_proto3_optional"
+
 gen_proto() {
   output_dir=$1
   find /proto -name *.proto | sort | xargs protoc \
+    $PROTOC_FLAGS \
     --proto_path=/proto \
     --go_out=paths=source_relative:$1/go \
     --doc_out=$1/doc \
