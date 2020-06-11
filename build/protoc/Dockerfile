@@ -8,10 +8,10 @@ RUN curl -L https://github.com/protocolbuffers/protobuf-go/releases/download/$PR
 
 FROM golang:1.14.4-buster as protoc-gen-doc
 WORKDIR /
-ARG PROTOC_GEN_DOC_TAG=v1.3.2
+ARG PROTOC_GEN_DOC_TAG=v1.3.2-proto3optional.1
 RUN git init protoc-gen-doc \
  && cd protoc-gen-doc \
- && git remote add origin https://github.com/pseudomuto/protoc-gen-doc \
+ && git remote add origin https://github.com/ezimanyi/protoc-gen-doc \
  && git fetch --no-tags --prune --depth=1 origin $PROTOC_GEN_DOC_TAG \
  && git checkout FETCH_HEAD \
  && go install ./cmd/protoc-gen-doc
