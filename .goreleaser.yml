@@ -1,6 +1,2 @@
-before:
-  hooks:
-    - go mod tidy
-
 builds:
 - main: ./cmd/kleat/main.go
