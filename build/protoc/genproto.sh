@@ -3,7 +3,11 @@ set -e
 
 gen_proto() {
   output_dir=$1
-  find /proto -name *.proto | sort | xargs protoc --proto_path=/proto --go_out=paths=source_relative:$1/go --doc_out=$1/doc --doc_opt=markdown,docs.md
+  find /proto -name *.proto | sort | xargs protoc \
+    --proto_path=/proto \
+    --go_out=paths=source_relative:$1/go \
+    --doc_out=$1/doc \
+    --doc_opt=markdown,docs.md
 }
 
 update_proto() {
