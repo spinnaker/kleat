@@ -1,2 +1,3 @@
 builds:
-- main: ./cmd/kleat/main.go
+- ldflags:
+    - -s -w -X cmd.version={{.Version}} -X cmd.commit={{.Commit}} -X cmd.date={{.Date}}
