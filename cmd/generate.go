@@ -14,26 +14,30 @@
  * limitations under the License.
  */
 
-package main
+package cmd
 
 import (
-	"fmt"
-	"os"
-
 	"github.com/spinnaker/kleat/internal/fileio"
+
+	"github.com/spf13/cobra"
 )
 
-func main() {
-	if len(os.Args) != 3 {
-		_, _ = fmt.Fprint(os.Stderr, "arguments must be <halPath> <dir>\n")
-		os.Exit(1)
-	}
+var generateCmd = &cobra.Command{
+	Use:   "generate",
+	Short: "Generate Spinnaker microservice config files",
+	Long: `Given a path to your top-level Spinnaker config (halconfig) and an
+output directory, writes each generated Spinnaker microservice config file to
+the output directory.
 
-	hal := os.Args[1]
-	dir := os.Args[2]
-	if err := writeServiceConfigs(hal, dir); err != nil {
-		panic(err)
-	}
+Example usage:
+
+kleat /path/to/halconfig /path/to/output`,
+	Args: cobra.ExactArgs(2),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		hal := args[0]
+		dir := args[1]
+		return writeServiceConfigs(hal, dir)
+	},
 }
 
 func writeServiceConfigs(halPath string, dir string) error {
@@ -43,4 +47,8 @@ func writeServiceConfigs(halPath string, dir string) error {
 	}
 
 	return fileio.WriteConfigs(h, dir)
+}
+
+func init() {
+	rootCmd.AddCommand(generateCmd)
 }
