@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package transform_test
 
 import (
@@ -22,10 +23,10 @@ import (
 	"testing"
 
 	"github.com/kylelemons/godebug/diff"
+	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/convert"
 	"github.com/spinnaker/kleat/internal/fileio"
-
-	"github.com/spinnaker/kleat/api/client/config"
+	"github.com/spinnaker/kleat/internal/prototest"
 	"github.com/spinnaker/kleat/internal/protoyaml"
 	"github.com/spinnaker/kleat/pkg/transform"
 	"google.golang.org/protobuf/proto"
@@ -42,22 +43,103 @@ func TestHalToServiceConfigs(t *testing.T) {
 	gotS := transform.HalToServiceConfigs(h)
 	wantS := &config.Services{
 		Clouddriver: convert.HalToClouddriver(h),
-		Echo:        convert.HalToEcho(h),
-		Front50:     convert.HalToFront50(h),
-		Orca:        convert.HalToOrca(h),
-		Gate:        convert.HalToGate(h),
-		Fiat:        convert.HalToFiat(h),
-		Kayenta:     convert.HalToKayenta(h),
-		Rosco:       convert.HalToRosco(h),
 		Deck:        convert.HalToDeck(h),
 		DeckEnv:     convert.HalToDeckEnv(h),
+		Echo:        convert.HalToEcho(h),
+		Fiat:        convert.HalToFiat(h),
+		Front50:     convert.HalToFront50(h),
+		Gate:        convert.HalToGate(h),
 		Igor:        convert.HalToIgor(h),
+		Kayenta:     convert.HalToKayenta(h),
+		Orca:        convert.HalToOrca(h),
+		Rosco:       convert.HalToRosco(h),
 	}
 
 	if !proto.Equal(gotS, wantS) {
 		t.Errorf("Expected HalToServiceConfigs to generate map of service configs, got %v", gotS)
 	}
 }
+
+func TestHalToServiceIntegration(t *testing.T) {
+	hal, err := fileio.ParseHalConfig(filepath.Join(dataDir, "halconfig.yml"))
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	services := transform.HalToServiceConfigs(hal)
+
+	var halToServiceTests = []struct {
+		file string
+		got  proto.Message
+	}{
+		{
+			"clouddriver.yml",
+			services.GetClouddriver(),
+		},
+		{
+			"deck.yml",
+			services.GetDeck(),
+		},
+		{
+			"deck-env.yml",
+			services.GetDeckEnv(),
+		},
+		{
+			"echo.yml",
+			services.GetEcho(),
+		},
+		{
+			"fiat.yml",
+			services.GetFiat(),
+		},
+		{
+			"front50.yml",
+			services.GetFront50(),
+		},
+		{
+			"gate.yml",
+			services.GetGate(),
+		},
+		{
+			"igor.yml",
+			services.GetIgor(),
+		},
+		{
+			"kayenta.yml",
+			services.GetKayenta(),
+		},
+		{
+			"orca.yml",
+			services.GetOrca(),
+		},
+		{
+			"rosco.yml",
+			services.GetRosco(),
+		},
+	}
+
+	for _, tt := range halToServiceTests {
+		t.Run(tt.file, func(t *testing.T) {
+			data, err := ioutil.ReadFile(filepath.Join(dataDir, tt.file))
+			if err != nil {
+				t.Fatal(err)
+			}
+
+			// Clone tt.got so that we unmarshal into a message of the same type;
+			// the unmarshalling will overwrite any data in want.
+			want := proto.Clone(tt.got)
+			err = protoyaml.UnmarshalStrict(data, want)
+			if err != nil {
+				t.Fatal(err)
+			}
+
+			if equal, d := prototest.Equal(tt.got, want); !equal {
+				t.Errorf("Incorrect service config generated:\n%s", d)
+			}
+		})
+	}
+}
+
 
 func TestHalToServiceYAML(t *testing.T) {
 	hal, err := fileio.ParseHalConfig(filepath.Join(dataDir, "halconfig.yml"))
