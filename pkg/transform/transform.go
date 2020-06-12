@@ -102,7 +102,7 @@ func GenerateConfigFiles(s *config.Services) (*config.ConfigFiles, error) {
 			serializer.SettingsJs,
 		},
 		{
-			"deck-env.yml",
+			"deck.env",
 			s.GetDeckEnv(),
 			serializer.EnvFile,
 		},
