@@ -1,3 +1,3 @@
-DECK_CERT=/var/secrets/spinnaker.crt
-DECK_KEY=/var/secrets/spinnaker.key.pem
-PASSPHRASE=my-cert-password
+DECK_CERT: /var/secrets/spinnaker.crt
+DECK_KEY: /var/secrets/spinnaker.key.pem
+PASSPHRASE: my-cert-password

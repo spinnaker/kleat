@@ -1,16 +1,16 @@
-webhook:
-  trust:
-    enabled: true
-    trustStore: /var/secrets/webhook-keystore.jks
-    trustStorePassword: abcdefg
-pipelineTemplates:
-  enabled: true
 default:
   bake:
     account: my-aws-account
+pipelineTemplates:
+  enabled: true
 services:
   kayenta:
     enabled: true
 tasks:
   executionWindow:
     timezone: America/Chicago
+webhook:
+  trust:
+    enabled: true
+    trustStore: /var/secrets/webhook-keystore.jks
+    trustStorePassword: abcdefg

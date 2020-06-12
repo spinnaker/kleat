@@ -1,73 +1,73 @@
-server:
-  ssl:
+google:
+  iap:
+    audience: projects/0/apps/0
     enabled: true
-    keyAlias: spinnaker
-    keyStore: /var/secrets/keystore.jks
-    keyStoreType: jks
-    keyStorePassword: my-keystore-password
-    trustStore: /var/secrets/truststore.jks
-    trustStoreType: jks
-    trustStorePassword: my-truststore-password
-    clientAuth: WANT
+    iapVerifyKeyUrl: https://my-url.test/
+    issuerId: my-issuer-id
+    jwtHeader: X-JWT-HEADER
+integrations:
+  gremlin:
+    enabled: true
+ldap:
+  enabled: true
+  groupSearchBase: groups
+  managerPassword: my-manager-password
+  url: ldaps://ldap.my-organization.test:636/dc=my-organization,dc=com
+  userDnPattern: uid={0},ou=users
+  userSearchBase: users
+  userSearchFilter: (d={0})
+saml:
+  enabled: true
+  keyStore: /var/secrets/keystore.jks
+  keyStoreAliasName: my-key
+  keyStorePassword: my-keystore-password
+  metadataUrl: /var/secrets/metadata
+  redirectBasePath: /
+  redirectHostname: spinnaker.test:8084
+  redirectProtocol: https
+  userAttributeMapping:
+    email: user-email
 security:
   basic:
     enabled: true
     user:
-      username: my-username
       password: my-password
+      username: my-username
   oauth2:
-    enabled: true
     client:
+      accessTokenUri: https://www.googleapis.com/oauth2/v4/token
       clientId: my-client
       clientSecret: my-secret
-      accessTokenUri: https://www.googleapis.com/oauth2/v4/token
-      userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
       scope: profile email
-    userInfoRequirements:
-      foo: bar
-      baz: qux
+      userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+    enabled: true
+    provider: GOOGLE
     resource:
       userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
     userInfoMapping:
       email: email
       firstName: given_name
       lastName: family_name
-    provider: GOOGLE
-saml:
-  enabled: true
-  metadataUrl: /var/secrets/metadata
-  keyStore: /var/secrets/keystore.jks
-  keyStorePassword: my-keystore-password
-  keyStoreAliasName: my-key
-  redirectProtocol: https
-  redirectHostname: spinnaker.test:8084
-  redirectBasePath: /
-  userAttributeMapping:
-    email: user-email
-ldap:
-  enabled: true
-  url: ldaps://ldap.my-organization.test:636/dc=my-organization,dc=com
-  userDnPattern: uid={0},ou=users
-  userSearchBase: users
-  groupSearchBase: groups
-  userSearchFilter: (d={0})
-  managerPassword: my-manager-password
-x509:
-  enabled: true
-  roleOid: 1.2.840.10070.8.1
-  subjectPrincipalRegex: user.*
-google:
-  iap:
+    userInfoRequirements:
+      baz: qux
+      foo: bar
+server:
+  ssl:
+    clientAuth: WANT
     enabled: true
-    jwtHeader: X-JWT-HEADER
-    issuerId: my-issuer-id
-    audience: projects/0/apps/0
-    iapVerifyKeyUrl: https://my-url.test/
+    keyAlias: spinnaker
+    keyStore: /var/secrets/keystore.jks
+    keyStorePassword: my-keystore-password
+    keyStoreType: jks
+    trustStore: /var/secrets/truststore.jks
+    trustStorePassword: my-truststore-password
+    trustStoreType: jks
 services:
   deck:
     baseUrl: https://spinnaker.test:9000
   kayenta:
     enabled: true
-integrations:
-  gremlin:
-    enabled: true
+x509:
+  enabled: true
+  roleOid: 1.2.840.10070.8.1
+  subjectPrincipalRegex: user.*

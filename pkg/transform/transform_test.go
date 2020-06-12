@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package transform_test
 
 import (
@@ -22,9 +23,10 @@ import (
 	"testing"
 
 	"github.com/kylelemons/godebug/diff"
-	"github.com/spinnaker/kleat/internal/convert"
-
 	"github.com/spinnaker/kleat/api/client/config"
+	"github.com/spinnaker/kleat/internal/convert"
+	"github.com/spinnaker/kleat/internal/fileio"
+	"github.com/spinnaker/kleat/internal/prototest"
 	"github.com/spinnaker/kleat/internal/protoyaml"
 	"github.com/spinnaker/kleat/pkg/transform"
 	"google.golang.org/protobuf/proto"
@@ -33,28 +35,24 @@ import (
 const dataDir = "../../testdata"
 
 func TestHalToServiceConfigs(t *testing.T) {
-	data, err := ioutil.ReadFile(filepath.Join(dataDir, "halconfig.yml"))
+	h, err := fileio.ParseHalConfig(filepath.Join(dataDir, "halconfig.yml"))
 	if err != nil {
-		t.Fatal(err)
-	}
-	h := &config.Hal{}
-	if err := protoyaml.Unmarshal(data, h); err != nil {
 		t.Fatal(err)
 	}
 
 	gotS := transform.HalToServiceConfigs(h)
 	wantS := &config.Services{
 		Clouddriver: convert.HalToClouddriver(h),
-		Echo:        convert.HalToEcho(h),
-		Front50:     convert.HalToFront50(h),
-		Orca:        convert.HalToOrca(h),
-		Gate:        convert.HalToGate(h),
-		Fiat:        convert.HalToFiat(h),
-		Kayenta:     convert.HalToKayenta(h),
-		Rosco:       convert.HalToRosco(h),
 		Deck:        convert.HalToDeck(h),
 		DeckEnv:     convert.HalToDeckEnv(h),
+		Echo:        convert.HalToEcho(h),
+		Fiat:        convert.HalToFiat(h),
+		Front50:     convert.HalToFront50(h),
+		Gate:        convert.HalToGate(h),
 		Igor:        convert.HalToIgor(h),
+		Kayenta:     convert.HalToKayenta(h),
+		Orca:        convert.HalToOrca(h),
+		Rosco:       convert.HalToRosco(h),
 	}
 
 	if !proto.Equal(gotS, wantS) {
@@ -62,104 +60,135 @@ func TestHalToServiceConfigs(t *testing.T) {
 	}
 }
 
-func TestHalToServiceYAML(t *testing.T) {
-	data, err := ioutil.ReadFile(filepath.Join(dataDir, "halconfig.yml"))
+func TestHalToServiceIntegration(t *testing.T) {
+	hal, err := fileio.ParseHalConfig(filepath.Join(dataDir, "halconfig.yml"))
 	if err != nil {
-		t.Fatal(err)
-	}
-
-	hal := &config.Hal{}
-	if err := protoyaml.Unmarshal(data, hal); err != nil {
 		t.Fatal(err)
 	}
 
 	services := transform.HalToServiceConfigs(hal)
 
 	var halToServiceTests = []struct {
-		file      string
-		gotConfig proto.Message
+		file string
+		got  proto.Message
 	}{
 		{
 			"clouddriver.yml",
 			services.GetClouddriver(),
 		},
 		{
+			"deck.yml",
+			services.GetDeck(),
+		},
+		{
+			"deck-env.yml",
+			services.GetDeckEnv(),
+		},
+		{
 			"echo.yml",
 			services.GetEcho(),
-		},
-		{
-			"front50.yml",
-			services.GetFront50(),
-		},
-		{
-			"orca.yml",
-			services.GetOrca(),
-		},
-		{
-			"gate.yml",
-			services.GetGate(),
 		},
 		{
 			"fiat.yml",
 			services.GetFiat(),
 		},
 		{
-			"kayenta.yml",
-			services.GetKayenta(),
+			"front50.yml",
+			services.GetFront50(),
 		},
 		{
-			"rosco.yml",
-			services.GetRosco(),
-		},
-		{
-			"deck.yml",
-			services.GetDeck(),
+			"gate.yml",
+			services.GetGate(),
 		},
 		{
 			"igor.yml",
 			services.GetIgor(),
 		},
+		{
+			"kayenta.yml",
+			services.GetKayenta(),
+		},
+		{
+			"orca.yml",
+			services.GetOrca(),
+		},
+		{
+			"rosco.yml",
+			services.GetRosco(),
+		},
 	}
 
 	for _, tt := range halToServiceTests {
 		t.Run(tt.file, func(t *testing.T) {
-			got, err := protoyaml.Marshal(tt.gotConfig)
-			if err != nil {
-				t.Fatal(err)
-			}
-
 			data, err := ioutil.ReadFile(filepath.Join(dataDir, tt.file))
 			if err != nil {
 				t.Fatal(err)
 			}
 
-			// Note that we're re-using tt.gotConfig here and will unmarshal the expected
-			// YAML into it; this is acceptable as we have already converted tt.gotConfig to
-			// YAML and have the YAML representation stored in got.
-			// (We can't just create a new pointer as we don't have access to the concrete
-			// type from within this function, so we'll re-use gotConfig rather than require
-			// the test to pass in an empty config of the concrete type.)
-			want, err := canonicalYaml(data, tt.gotConfig)
+			// Clone tt.got so that we unmarshal into a message of the same type;
+			// the unmarshalling will overwrite any data in want.
+			want := proto.Clone(tt.got)
+			err = protoyaml.UnmarshalStrict(data, want)
 			if err != nil {
 				t.Fatal(err)
 			}
-			if !bytes.Equal(got, want) {
-				d := diff.Diff(string(got), string(want))
-				t.Errorf("Generated %s differs from expected:\n%s", tt.file, d)
+
+			if equal, d := prototest.Equal(tt.got, want); !equal {
+				t.Errorf("Incorrect service config generated:\n%s", d)
 			}
 		})
 	}
 }
 
-// canonicalYaml converts the YAML representation of a proto.Message into its
-// canonical form (ie, the form produced by serializing the object it represents)
-// by unmarshaling then marshaling the provided YAML.
-// The motivation is that the tests want to compare the generated YAML to
-// expected YAML, but we don't want to be sensitive to key order in the provided
-// YAML.
-func canonicalYaml(data []byte, m proto.Message) ([]byte, error) {
-	if err := protoyaml.UnmarshalStrict(data, m); err != nil {
-		return nil, err
+func TestHalToServiceYAML(t *testing.T) {
+	hal, err := fileio.ParseHalConfig(filepath.Join(dataDir, "halconfig.yml"))
+	if err != nil {
+		t.Fatal(err)
 	}
-	return protoyaml.Marshal(m)
+
+	services := transform.HalToServiceConfigs(hal)
+	configs, err := transform.GenerateConfigFiles(services)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	files := []string{
+		"clouddriver.yml",
+		"echo.yml",
+		"fiat.yml",
+		"front50.yml",
+		"gate.yml",
+		"igor.yml",
+		"kayenta.yml",
+		"orca.yml",
+		"rosco.yml",
+	}
+
+	for _, file := range files {
+		t.Run(file, func(t *testing.T) {
+			gotConfig := getConfig(configs, file)
+			if err != nil {
+				t.Fatal(err)
+			}
+
+			wantConfig, err := ioutil.ReadFile(filepath.Join(dataDir, file))
+			if err != nil {
+				t.Fatal(err)
+			}
+
+			if !bytes.Equal(gotConfig, wantConfig) {
+				d := diff.Diff(string(gotConfig), string(wantConfig))
+				t.Errorf("Generated %s differs from expected:\n%s", file, d)
+			}
+		})
+	}
+}
+
+func getConfig(c *config.ConfigFiles, name string) []byte {
+	for _, file := range c.GetConfigFile() {
+		if file.GetName() == name {
+			return file.GetContents()
+		}
+	}
+	return nil
 }

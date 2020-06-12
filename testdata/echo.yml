@@ -1,18 +1,3 @@
-slack:
-  enabled: true
-  botName: my-bot
-  token: my-secret-token
-  baseUrl: https://slack.test/
-  forceUseIncomingWebhook: true
-twilio:
-  enabled: true
-  account: my-twilio-account
-  baseUrl: https://api.twilio.com/
-  from: +1212-555-0100
-  token: my-twilio-token
-githubStatus:
-  enabled: true
-  token: my-github-token
 artifacts:
   bitbucket:
     accounts:
@@ -85,31 +70,46 @@ artifacts:
   templates:
   - name: my-template
     templatePath: /var/secrets/my-template
+gcb:
+  accounts:
+  - jsonKey: /var/secrets/google
+    name: my-gcb-account
+    project: my-google-project
+  enabled: true
+githubStatus:
+  enabled: true
+  token: my-github-token
 pubsub:
   enabled: true
   google:
     enabled: true
-    subscriptions:
-    - name: subscription-test
-      project: my-project
-      subscriptionName: my-subscription
-      jsonPath: /var/secrets/my-subscriber-token
-      ackDeadlineSeconds: 10
-      messageFormat: GCR
     publishers:
-    - name: publish-test
+    - content: NOTIFICATIONS
+      jsonPath: /var/secrets/my-publisher-token
+      name: publish-test
       project: my-project
       topicName: my-topic
-      jsonPath: /var/secrets/my-publisher-token
-      content: NOTIFICATIONS
-stats:
-  enabled: false
+    subscriptions:
+    - ackDeadlineSeconds: 10
+      jsonPath: /var/secrets/my-subscriber-token
+      messageFormat: GCR
+      name: subscription-test
+      project: my-project
+      subscriptionName: my-subscription
 scheduler:
   cron:
     timezone: America/Chicago
-gcb:
+slack:
+  baseUrl: https://slack.test/
+  botName: my-bot
   enabled: true
-  accounts:
-    - name: my-gcb-account
-      project: my-google-project
-      jsonKey: /var/secrets/google
+  forceUseIncomingWebhook: true
+  token: my-secret-token
+stats:
+  enabled: false
+twilio:
+  account: my-twilio-account
+  baseUrl: https://api.twilio.com/
+  enabled: true
+  from: +1212-555-0100
+  token: my-twilio-token
