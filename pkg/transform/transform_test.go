@@ -23,6 +23,7 @@ import (
 
 	"github.com/kylelemons/godebug/diff"
 	"github.com/spinnaker/kleat/internal/convert"
+	"github.com/spinnaker/kleat/internal/fileio"
 
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/protoyaml"
@@ -33,12 +34,8 @@ import (
 const dataDir = "../../testdata"
 
 func TestHalToServiceConfigs(t *testing.T) {
-	data, err := ioutil.ReadFile(filepath.Join(dataDir, "halconfig.yml"))
+	h, err := fileio.ParseHalConfig(filepath.Join(dataDir, "halconfig.yml"))
 	if err != nil {
-		t.Fatal(err)
-	}
-	h := &config.Hal{}
-	if err := protoyaml.Unmarshal(data, h); err != nil {
 		t.Fatal(err)
 	}
 
@@ -63,13 +60,8 @@ func TestHalToServiceConfigs(t *testing.T) {
 }
 
 func TestHalToServiceYAML(t *testing.T) {
-	data, err := ioutil.ReadFile(filepath.Join(dataDir, "halconfig.yml"))
+	hal, err := fileio.ParseHalConfig(filepath.Join(dataDir, "halconfig.yml"))
 	if err != nil {
-		t.Fatal(err)
-	}
-
-	hal := &config.Hal{}
-	if err := protoyaml.Unmarshal(data, hal); err != nil {
 		t.Fatal(err)
 	}
 
