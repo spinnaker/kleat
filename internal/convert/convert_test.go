@@ -49,4 +49,3 @@ func runConfigTest(t *testing.T, test configTest) {
 		})
 	}
 }
-

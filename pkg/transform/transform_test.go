@@ -140,7 +140,6 @@ func TestHalToServiceIntegration(t *testing.T) {
 	}
 }
 
-
 func TestHalToServiceYAML(t *testing.T) {
 	hal, err := fileio.ParseHalConfig(filepath.Join(dataDir, "halconfig.yml"))
 	if err != nil {
