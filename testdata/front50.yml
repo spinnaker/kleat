@@ -4,10 +4,10 @@ spinnaker:
     storageAccountName: my-azs-account-name
     storageContainerName: spinnaker
   gcs:
-    enabled: true
-    project: my-gcp-project
     bucket: my-spinnaker-pipelines
     bucketLocation: us
+    enabled: true
+    project: my-gcp-project
   oracle:
     bucketName: my-bucket
     fingerprint: 74:63:08:82:95:75:e1:7c:33:31:bb:cb:00:c0:89:8b

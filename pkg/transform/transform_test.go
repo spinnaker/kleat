@@ -148,92 +148,48 @@ func TestHalToServiceYAML(t *testing.T) {
 	}
 
 	services := transform.HalToServiceConfigs(hal)
-
-	var halToServiceTests = []struct {
-		file      string
-		gotConfig proto.Message
-	}{
-		{
-			"clouddriver.yml",
-			services.GetClouddriver(),
-		},
-		{
-			"echo.yml",
-			services.GetEcho(),
-		},
-		{
-			"front50.yml",
-			services.GetFront50(),
-		},
-		{
-			"orca.yml",
-			services.GetOrca(),
-		},
-		{
-			"gate.yml",
-			services.GetGate(),
-		},
-		{
-			"fiat.yml",
-			services.GetFiat(),
-		},
-		{
-			"kayenta.yml",
-			services.GetKayenta(),
-		},
-		{
-			"rosco.yml",
-			services.GetRosco(),
-		},
-		{
-			"deck.yml",
-			services.GetDeck(),
-		},
-		{
-			"igor.yml",
-			services.GetIgor(),
-		},
+	configs, err := transform.GenerateConfigFiles(services)
+	if err != nil {
+		t.Fatal(err)
 	}
 
-	for _, tt := range halToServiceTests {
-		t.Run(tt.file, func(t *testing.T) {
-			got, err := protoyaml.Marshal(tt.gotConfig)
+	files := []string{
+		"clouddriver.yml",
+		"echo.yml",
+		"fiat.yml",
+		"front50.yml",
+		"gate.yml",
+		"igor.yml",
+		"kayenta.yml",
+		"orca.yml",
+		"rosco.yml",
+	}
+
+	for _, file := range files {
+		t.Run(file, func(t *testing.T) {
+			gotConfig := getConfig(configs, file)
 			if err != nil {
 				t.Fatal(err)
 			}
 
-			data, err := ioutil.ReadFile(filepath.Join(dataDir, tt.file))
+			wantConfig, err := ioutil.ReadFile(filepath.Join(dataDir, file))
 			if err != nil {
 				t.Fatal(err)
 			}
 
-			// Note that we're re-using tt.gotConfig here and will unmarshal the expected
-			// YAML into it; this is acceptable as we have already converted tt.gotConfig to
-			// YAML and have the YAML representation stored in got.
-			// (We can't just create a new pointer as we don't have access to the concrete
-			// type from within this function, so we'll re-use gotConfig rather than require
-			// the test to pass in an empty config of the concrete type.)
-			want, err := canonicalYaml(data, tt.gotConfig)
-			if err != nil {
-				t.Fatal(err)
-			}
-			if !bytes.Equal(got, want) {
-				d := diff.Diff(string(got), string(want))
-				t.Errorf("Generated %s differs from expected:\n%s", tt.file, d)
+			if !bytes.Equal(gotConfig, wantConfig) {
+				d := diff.Diff(string(gotConfig), string(wantConfig))
+				t.Errorf("Generated %s differs from expected:\n%s", file, d)
 			}
 		})
 	}
 }
 
-// canonicalYaml converts the YAML representation of a proto.Message into its
-// canonical form (ie, the form produced by serializing the object it represents)
-// by unmarshaling then marshaling the provided YAML.
-// The motivation is that the tests want to compare the generated YAML to
-// expected YAML, but we don't want to be sensitive to key order in the provided
-// YAML.
-func canonicalYaml(data []byte, m proto.Message) ([]byte, error) {
-	if err := protoyaml.UnmarshalStrict(data, m); err != nil {
-		return nil, err
+func getConfig(c *config.ConfigFiles, name string) []byte {
+	for _, file := range c.GetConfigFile() {
+		if file.GetName() == name {
+			return file.GetContents()
+		}
 	}
-	return protoyaml.Marshal(m)
+	return nil
 }

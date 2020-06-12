@@ -1,62 +1,62 @@
 kayenta:
   aws:
-    enabled: true
     accounts:
-      - name: my-aws-account
-        bucket: my-bucket
-        region: my-region
-        endpoint: https://my-minio-server
-        accessKeyId: my-key
-        supportedTypes:
-          - CONFIGURATION_STORE
-          - OBJECT_STORE
+    - accessKeyId: my-key
+      bucket: my-bucket
+      endpoint: https://my-minio-server
+      name: my-aws-account
+      region: my-region
+      supportedTypes:
+      - CONFIGURATION_STORE
+      - OBJECT_STORE
+    enabled: true
   datadog:
-    enabled: true
     accounts:
-      - name: my-datadog-account
-        endpoint:
-          baseUrl: https://my-datadog-server
-        apiKey: abcd
-        applicationKey: efgh
+    - apiKey: abcd
+      applicationKey: efgh
+      endpoint:
+        baseUrl: https://my-datadog-server
+      name: my-datadog-account
+    enabled: true
   gcs:
     enabled: true
   google:
-    enabled: true
     accounts:
-    - name: my-google-canary-account
+    - bucket: kayenta
       jsonPath: /var/secrets/google.json
-      bucket: kayenta
+      name: my-google-canary-account
       project: my-google-project
       supportedTypes:
       - METRICS_STORE
       - CONFIGURATION_STORE
       - OBJECT_STORE
+    enabled: true
   newrelic:
-    enabled: true
     accounts:
-      - name: my-newrelic-account
-        endpoint:
-          baseUrl: https://my-newrelic-server
-        apiKey: my-api-key
-        applicationKey: my-app-key
+    - apiKey: my-api-key
+      applicationKey: my-app-key
+      endpoint:
+        baseUrl: https://my-newrelic-server
+      name: my-newrelic-account
+    enabled: true
   prometheus:
-    enabled: true
     accounts:
-      - name: my-prom-account
-        endpoint:
-          baseUrl: https://my-prom-server
-        username: maggie
-        usernamePasswordFile: /var/secrets/prometheus
+    - endpoint:
+        baseUrl: https://my-prom-server
+      name: my-prom-account
+      username: maggie
+      usernamePasswordFile: /var/secrets/prometheus
+    enabled: true
+  s3:
+    enabled: true
   signalfx:
-    enabled: true
     accounts:
-    - name: my-signalfx-account
-      accessToken: abc
+    - accessToken: abc
+      defaultLocationKey: my-location-key
+      defaultScopeKey: my-scope-key
       endpoint:
         baseUrl: https://my-datadog-server
-      defaultScopeKey: my-scope-key
-      defaultLocationKey: my-location-key
-  s3:
+      name: my-signalfx-account
     enabled: true
   stackdriver:
     enabled: true
