@@ -91,3 +91,14 @@ be used as input to Kleat.
   acceptable to remove all values for which the microservice's deafult value is
   acceptable. For example, if you do not use the Google App Engine provider, you
   can remove the `Providers.AppengineProvider` block from your halconfig.
+
+### Installation
+
+Download the appropriate binary from the
+[releases page](https://github.com/spinnaker/kleat/releases/latest).
+
+### Usage
+
+- `kleat generate /path/to/halconfig /path/to/output/directory`
+- `kleat help`
+- `kleat version`
