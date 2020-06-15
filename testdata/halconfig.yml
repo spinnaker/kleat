@@ -495,6 +495,7 @@ canary:
         - METRICS_STORE
         - CONFIGURATION_STORE
         - OBJECT_STORE
+        rootFolder: ""
       gcsEnabled: true
       stackdriverEnabled: true
       metadataCachingIntervalMS: 30000
@@ -534,6 +535,7 @@ canary:
         supportedTypes:
         - CONFIGURATION_STORE
         - OBJECT_STORE
+        rootFolder: my-root-folder
       s3Enabled: true
     newrelic:
       enabled: true
