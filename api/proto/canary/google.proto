@@ -48,7 +48,7 @@ message GoogleAccount {
 
   // The root folder in the chosen bucket in which to store all of the canary
   // service's persistent data in. Defaults to `kayenta`.
-  string rootFolder = 5;
+  optional string rootFolder = 5;
 
   // (Required) The Google Cloud Platform project the canary service will use to
   // consume GCS and Stackdriver.

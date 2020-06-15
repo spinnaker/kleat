@@ -6,6 +6,7 @@ kayenta:
       endpoint: https://my-minio-server
       name: my-aws-account
       region: my-region
+      rootFolder: my-root-folder
       supportedTypes:
       - CONFIGURATION_STORE
       - OBJECT_STORE
@@ -26,6 +27,7 @@ kayenta:
       jsonPath: /var/secrets/google.json
       name: my-google-canary-account
       project: my-google-project
+      rootFolder: ""
       supportedTypes:
       - METRICS_STORE
       - CONFIGURATION_STORE
