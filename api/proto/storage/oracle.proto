@@ -3,10 +3,12 @@ package proto.storage;
 
 option go_package = "github.com/spinnaker/kleat/api/client/storage";
 
+import "google/protobuf/wrappers.proto";
+
 // Configuration for an Oracle persistent store.
 message Oracle {
     // Whether this persistent store is enabled.
-    bool enabled = 1;
+    google.protobuf.BoolValue enabled = 1;
 
     // The bucket name to store persistent state object in.
     string bucketName = 2;

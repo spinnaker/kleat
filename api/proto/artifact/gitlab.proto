@@ -3,10 +3,12 @@ package proto.artifact;
 
 option go_package = "github.com/spinnaker/kleat/api/client/artifact";
 
+import "google/protobuf/wrappers.proto";
+
 // Configuration for the GitLab artifact provider.
 message GitLab {
     // Whether the GitLab artifact provider is enabled.
-    bool enabled = 1;
+    google.protobuf.BoolValue enabled = 1;
 
     // The list of configured GitLab accounts.
     repeated GitLabAccount accounts = 2;

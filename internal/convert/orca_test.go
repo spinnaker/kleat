@@ -21,6 +21,7 @@ import (
 
 	"github.com/spinnaker/kleat/api/client/canary"
 	"github.com/spinnaker/kleat/internal/convert"
+	"github.com/spinnaker/kleat/internal/wrappers"
 
 	"github.com/spinnaker/kleat/api/client"
 	"github.com/spinnaker/kleat/api/client/cloudprovider"
@@ -42,7 +43,7 @@ var orcaTests = configTest{
 			&config.Hal{
 				Providers: &cloudprovider.Providers{
 					Aws: &cloudprovider.Aws{
-						Enabled:        false,
+						Enabled:        wrappers.False(),
 						PrimaryAccount: "my-account",
 					},
 				},
@@ -54,7 +55,7 @@ var orcaTests = configTest{
 			&config.Hal{
 				Providers: &cloudprovider.Providers{
 					Aws: &cloudprovider.Aws{
-						Enabled:        true,
+						Enabled:        wrappers.True(),
 						PrimaryAccount: "my-account",
 					},
 				},
@@ -72,17 +73,21 @@ var orcaTests = configTest{
 			// than return an empty config.
 			"Pipeline templates disabled",
 			&config.Hal{
-				Features: &client.Features{PipelineTemplates: false},
+				Features: &client.Features{PipelineTemplates: wrappers.False()},
 			},
-			&config.Orca{},
+			&config.Orca{
+				PipelineTemplates: &config.Orca_PipelineTemplates{
+					Enabled: wrappers.False(),
+				},
+			},
 		},
 		{
 			"Pipeline templates enabled",
 			&config.Hal{
-				Features: &client.Features{PipelineTemplates: true},
+				Features: &client.Features{PipelineTemplates: wrappers.True()},
 			},
 			&config.Orca{
-				PipelineTemplates: &config.Orca_PipelineTemplates{Enabled: true},
+				PipelineTemplates: &config.Orca_PipelineTemplates{Enabled: wrappers.True()},
 			},
 		},
 		{
@@ -90,7 +95,7 @@ var orcaTests = configTest{
 			&config.Hal{
 				Webhook: &security.WebhookConfig{
 					Trust: &security.TrustStore{
-						Enabled:            true,
+						Enabled:            wrappers.True(),
 						TrustStore:         "/var/secrets/store.jks",
 						TrustStorePassword: "passw0rd",
 					},
@@ -99,7 +104,7 @@ var orcaTests = configTest{
 			&config.Orca{
 				Webhook: &security.WebhookConfig{
 					Trust: &security.TrustStore{
-						Enabled:            true,
+						Enabled:            wrappers.True(),
 						TrustStore:         "/var/secrets/store.jks",
 						TrustStorePassword: "passw0rd",
 					},
@@ -110,13 +115,13 @@ var orcaTests = configTest{
 			"Canary enabled",
 			&config.Hal{
 				Canary: &canary.Canary{
-					Enabled: true,
+					Enabled: wrappers.True(),
 				},
 			},
 			&config.Orca{
 				Services: &config.Orca_Services{
 					Kayenta: &config.ServiceSettings{
-						Enabled: true,
+						Enabled: wrappers.True(),
 					},
 				},
 			},

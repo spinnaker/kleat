@@ -3,10 +3,12 @@ package proto.security.authn;
 
 option go_package = "github.com/spinnaker/kleat/api/client/security/authn";
 
+import "google/protobuf/wrappers.proto";
+
 // Configuration of how users authenticate against Spinnaker.
 message Authentication {
   // Whether to enabled authentication.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // OAuth 2.0 configuration.
   OAuth2 oauth2 = 2;
@@ -30,7 +32,7 @@ message Authentication {
 // Configuration for authentication via OAuth 2.0.
 message OAuth2 {
   // Whether the authentication method is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // Configuration for your OAuth 2.0 client.
   OAuth2Client client = 2;
@@ -97,7 +99,7 @@ message OAuth2Client {
 
   // Whether the current URI in the request should be preferred over the pre-established
   // redirect URI.
-  bool useCurrentUri = 8;
+  google.protobuf.BoolValue useCurrentUri = 8;
 
   // Methods to transmit authentication tokens to an OAuth 2.0 provider.
   enum AuthenticationScheme {
@@ -147,7 +149,7 @@ message OAuth2UserInfoMapping {
 // -serviceAddressUrl. This is likely the address of Gate's load balancer.
 message Saml {
   // Whether the authentication method is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // The path to a local file containing identity provider's metadata XML file; can
   // be either a local file or a URI.
@@ -213,7 +215,7 @@ message Saml {
 // connection is successful, you're considered authenticated.
 message Ldap {
   // Whether the authentication method is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // ldap:// or ldaps:// url of the LDAP server.
   string url = 2;
@@ -257,7 +259,7 @@ message Ldap {
 // with corresponding group information for the user. This can be configured via -roleOid.
 message X509 {
   // Whether the authentication method is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // The OID that encodes roles that the user specified in the x509 certificate
   // belongs to.
@@ -277,7 +279,7 @@ message X509 {
 // the audience field retrieved from the IAP console.
 message Iap {
   // Whether the authentication method is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // The HTTP request header that contains the JWT token.
   string jwtHeader = 2;
@@ -296,7 +298,7 @@ message Iap {
 // Configuration for basic username/password authentication
 message Basic {
   // Whether the authentication method is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // The username and password used to log in via basic authentication.
   UsernamePassword user = 2;

@@ -3,12 +3,14 @@ package proto.cloudprovider;
 
 option go_package = "github.com/spinnaker/kleat/api/client/cloudprovider";
 
+import "google/protobuf/wrappers.proto";
+
 import "permissions.proto";
 
 // Configuration for the Oracle provider.
 message Oracle {
   // Whether the provider is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // The list of configured accounts.
   repeated OracleAccount accounts = 2;

@@ -3,11 +3,13 @@ package proto.canary;
 
 option go_package = "github.com/spinnaker/kleat/api/client/canary";
 
+import "google/protobuf/wrappers.proto";
+
 // Configuration for the GCS canary integration. If enabled, you must
 // also configure at least one canary.GoogleAccount with a list of
 // supportedTypes that includes canary.SupportedType.CONFIGURATION_STORE and/or
 // canary.SupportedType.OBJECT_STORE.
 message Gcs {
   // Whether the integration is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 }

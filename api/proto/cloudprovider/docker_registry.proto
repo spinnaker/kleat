@@ -3,12 +3,14 @@ package proto.cloudprovider;
 
 option go_package = "github.com/spinnaker/kleat/api/client/cloudprovider";
 
+import "google/protobuf/wrappers.proto";
+
 import "permissions.proto";
 
 // Configuration for the Docker Registry provider.
 message DockerRegistry {
     // Whether the provider is enabled.
-    bool enabled = 1;
+    google.protobuf.BoolValue enabled = 1;
 
     // The list of configured accounts.
     repeated DockerRegistryAccount accounts = 2;
@@ -50,7 +52,7 @@ message DockerRegistryAccount {
 
     // If `true`, Spinnaker will treat the Docker registry as insecure and not
     // validate the SSL certificate. Defaults to `false`.
-    bool insecureRegistry = 8;
+    google.protobuf.BoolValue insecureRegistry = 8;
 
     // Pagination size for the Docker `repository _catalog` endpoint. Defaults
     // to `100`.
@@ -85,12 +87,12 @@ message DockerRegistryAccount {
     // If `true`, Spinnaker will sort tags by creation date. Defaults to
     // `false`. Not recommended for use with large registries; sorting
     // performance scales poorly due to limitations of the Docker V2 API.
-    bool sortTagsByDate = 16;
+    google.protobuf.BoolValue sortTagsByDate = 16;
 
     // If `true`, Spinnaker will track digest changes. This is not recommended
     // because it greatly increases queries to the registry, and most
     // registries are flaky. Defaults to `false`.
-    bool trackDigests = 17;
+    google.protobuf.BoolValue trackDigests = 17;
 
     // The username associated with this Docker registry.
     string username = 18;

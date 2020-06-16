@@ -3,10 +3,12 @@ package proto.artifact;
 
 option go_package = "github.com/spinnaker/kleat/api/client/artifact";
 
+import "google/protobuf/wrappers.proto";
+
 // Configuration for the Oracle artifact provider.
 message Oracle {
     // Whether the Oracle artifact provider is enabled.
-    bool enabled = 1;
+    google.protobuf.BoolValue enabled = 1;
 
     // The list of configured Oracle artifact accounts.
     repeated OracleAccount accounts = 2;

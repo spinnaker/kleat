@@ -3,12 +3,14 @@ package proto.cloudprovider;
 
 option go_package = "github.com/spinnaker/kleat/api/client/cloudprovider";
 
+import "google/protobuf/wrappers.proto";
+
 import "permissions.proto";
 
 // Configuration for the AWS provider.
 message Aws {
     // Whether the provider is enabled.
-    bool enabled = 1;
+    google.protobuf.BoolValue enabled = 1;
 
     // The list of configured accounts.
     repeated AwsAccount accounts = 2;
@@ -111,7 +113,7 @@ message AwsBakeryDefaults {
 
     // If using a non-default VPC, public IP addresses are not provided by
     // default. If this is enabled, your new instance will get a Public IP.
-    bool awsAssociatePublicIpAddress = 5;
+    google.protobuf.BoolValue awsAssociatePublicIpAddress = 5;
 
     // The default type of virtualization for the AMI you are building. This
     // option must match the supported virtualization type of
@@ -241,6 +243,6 @@ message AwsFeatures {
     message CloudFormation {
 
         // Whether AWS CloudFormation is enabled.
-        bool enabled = 1;
+        google.protobuf.BoolValue enabled = 1;
     }
 }

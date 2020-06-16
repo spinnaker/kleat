@@ -460,7 +460,7 @@ Configuration for the Bitbucket artifact provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the Bitbucket artifact provider is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the Bitbucket artifact provider is enabled. |
 | accounts | [BitbucketAccount](#proto.artifact.BitbucketAccount) | repeated | The list of configured Bitbucket accounts. |
 
 
@@ -510,7 +510,7 @@ Configuration for the Google Cloud Storage (GCS) artifact provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the GCS artifact provider is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the GCS artifact provider is enabled. |
 | accounts | [GcsAccount](#proto.artifact.GcsAccount) | repeated | The list of configured GCS accounts. |
 
 
@@ -558,7 +558,7 @@ Configuration for the GitHub artifact provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the GitHub artifact provider is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the GitHub artifact provider is enabled. |
 | accounts | [GitHubAccount](#proto.artifact.GitHubAccount) | repeated | The list of configured GitHub accounts. |
 
 
@@ -612,7 +612,7 @@ Configuration for the GitLab artifact provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the GitLab artifact provider is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the GitLab artifact provider is enabled. |
 | accounts | [GitLabAccount](#proto.artifact.GitLabAccount) | repeated | The list of configured GitLab accounts. |
 
 
@@ -662,7 +662,7 @@ Configuration for the Git repo artifact provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the Git repo artifact provider is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the Git repo artifact provider is enabled. |
 | accounts | [GitRepoAccount](#proto.artifact.GitRepoAccount) | repeated | The list of configured Git Repo accounts. |
 
 
@@ -691,7 +691,7 @@ Git hosting service. Either `username` and `password`,
 | sshPrivateKeyFilePath | [string](#string) |  | The path to an SSH private key to be used when connecting with the Git repo over SSH. |
 | sshPrivateKeyPassphrase | [string](#string) |  | The passphrase to an SSH private key to be used when connecting with the Git repo over SSH. |
 | sshKnownHostsFilePath | [string](#string) |  | The path to a `known_hosts` file to be used when connecting with a Git repository over SSH. |
-| sshTrustUnknownHosts | [bool](#bool) |  | If `true`, Spinnaker can connect with a Git repository over SSH without verifying the server&#39;s IP address against a `known_hosts` file. |
+| sshTrustUnknownHosts | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | If `true`, Spinnaker can connect with a Git repository over SSH without verifying the server&#39;s IP address against a `known_hosts` file. |
 
 
 
@@ -722,7 +722,7 @@ Configuration for the Helm artifact provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the Helm artifact provider is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the Helm artifact provider is enabled. |
 | accounts | [HelmAccount](#proto.artifact.HelmAccount) | repeated | The list of configured Helm accounts. |
 
 
@@ -774,7 +774,7 @@ Configuration for the HTTP artifact provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the HTTP artifact provider is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the HTTP artifact provider is enabled. |
 | accounts | [HttpAccount](#proto.artifact.HttpAccount) | repeated | The list of configured HTTP accounts. |
 
 
@@ -825,7 +825,7 @@ Configuration for the Maven artifact provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the Maven artifact provider is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the Maven artifact provider is enabled. |
 | accounts | [MavenAccount](#proto.artifact.MavenAccount) | repeated | The list of configured Maven accounts. |
 
 
@@ -873,7 +873,7 @@ Configuration for the Oracle artifact provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the Oracle artifact provider is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the Oracle artifact provider is enabled. |
 | accounts | [OracleAccount](#proto.artifact.OracleAccount) | repeated | The list of configured Oracle artifact accounts. |
 
 
@@ -927,7 +927,7 @@ Configuration for the S3 artifact provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the S3 artifact provider is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the S3 artifact provider is enabled. |
 | accounts | [S3Account](#proto.artifact.S3Account) | repeated | The list of configured S3 artifact accounts. |
 
 
@@ -1013,9 +1013,9 @@ Configuration for the AWS canary integration.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the integration is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the integration is enabled. |
 | accounts | [AwsAccount](#proto.canary.AwsAccount) | repeated | The list of configured accounts. |
-| s3Enabled | [bool](#bool) |  | Whether to enable S3 as a persistent store. |
+| s3Enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether to enable S3 as a persistent store. |
 
 
 
@@ -1068,12 +1068,12 @@ Configuration for Spinnaker&#39;s canary service.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the canary service is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the canary service is enabled. |
 | serviceIntegrations | [Canary.ServiceIntegrations](#proto.canary.Canary.ServiceIntegrations) |  | Canary service integrations. You must configure at least one account of each canary.SupportedType (METRICS_STORE, CONFIGURATION_STORE, OBJECT_STORE) in order to use Spinnaker&#39;s canary service. |
 | defaultMetricsAccount | [string](#string) |  | Name of the metrics account to use by default. |
 | defaultMetricsStore | [string](#string) |  | Name of the metrics store to use by default (e.g., `prometheus`, `datadog`). |
-| showAllConfigsEnabled | [bool](#bool) |  | Whether or not to show all canary configs in Deck, or just those scoped to the current application. |
-| templatesEnabled | [bool](#bool) |  | Whether or not to enable custom filter templates for canary configs in Deck. |
+| showAllConfigsEnabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether or not to show all canary configs in Deck, or just those scoped to the current application. |
+| templatesEnabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether or not to enable custom filter templates for canary configs in Deck. |
 | defaultJudge | [string](#string) |  | The default canary judge. Defaults to `NetflixACAJudge-v1.0`, which is currently the only open-source judge available by default. |
 | storageAccountName | [string](#string) |  | Name of storage account to use by default. |
 
@@ -1126,7 +1126,7 @@ Configuration for the Datadog canary integration.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the integration is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the integration is enabled. |
 | accounts | [DatadogAccount](#proto.canary.DatadogAccount) | repeated | The list of configured accounts. |
 
 
@@ -1194,7 +1194,7 @@ canary.SupportedType.OBJECT_STORE.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the integration is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the integration is enabled. |
 
 
 
@@ -1225,10 +1225,10 @@ Configuration for the Google canary integration.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the integration is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the integration is enabled. |
 | accounts | [GoogleAccount](#proto.canary.GoogleAccount) | repeated | The list of configured accounts. |
-| gcsEnabled | [bool](#bool) |  | Whether GCS is enabled as a persistent store. |
-| stackdriverEnabled | [bool](#bool) |  | Whether Stackdriver is enabled as a metrics source. |
+| gcsEnabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether GCS is enabled as a persistent store. |
+| stackdriverEnabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Stackdriver is enabled as a metrics source. |
 | metadataCachingIntervalMS | [int32](#int32) |  | Number of milliseconds to wait in between caching the names of available Stackdriver metric types (used when building canary configs). Defaults to 60000. |
 
 
@@ -1281,7 +1281,7 @@ Configuration for the New Relic canary integration.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the integration is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the integration is enabled. |
 | accounts | [NewRelicAccount](#proto.canary.NewRelicAccount) | repeated | The list of configured accounts. |
 
 
@@ -1346,7 +1346,7 @@ Configuration for the Prometheus canary integration.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the integration is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the integration is enabled. |
 | accounts | [PrometheusAccount](#proto.canary.PrometheusAccount) | repeated | The list of configured accounts. |
 | metadataCachingIntervalMS | [int32](#int32) |  | Number of milliseconds to wait in between caching the names of available metric types (used when building canary configs). Defaults to 60000. |
 
@@ -1416,7 +1416,7 @@ canary.SupportedType.OBJECT_STORE.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the integration is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the integration is enabled. |
 
 
 
@@ -1447,7 +1447,7 @@ Configuration for the SignalFx canary integration.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the integration is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the integration is enabled. |
 | accounts | [SignalFxAccount](#proto.canary.SignalFxAccount) | repeated | The list of configured accounts. |
 
 
@@ -1515,7 +1515,7 @@ supportedTypes that includes canary.SupportedType.METRICS_STORE.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the integration is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the integration is enabled. |
 | metadataCachingIntervalMS | [int32](#int32) |  | Number of milliseconds to wait in between caching the names of available Stackdriver metric types (used when building canary configs). Defaults to 60000. |
 
 
@@ -1612,7 +1612,7 @@ Configuration for AWS CodeBuild.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether AWS CodeBuild is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether AWS CodeBuild is enabled. |
 | accounts | [CodeBuildAccount](#proto.ci.CodeBuildAccount) | repeated | The list of configured AWS CodeBuild accounts. |
 | accessKeyId | [string](#string) |  | Your AWS Access Key ID. If not provided, Spinnaker will try to find AWS credentials as described at http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default |
 | secretAccessKey | [string](#string) |  | Your AWS Secret Key. |
@@ -1664,7 +1664,7 @@ Configuration for Concourse.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether Concourse is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Concourse is enabled. |
 | masters | [ConcourseAccount](#proto.ci.ConcourseAccount) | repeated | The list of configured Concourse accounts. |
 
 
@@ -1715,7 +1715,7 @@ Configuration for the Google Cloud Build Provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the Google Cloud Build provider is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the Google Cloud Build provider is enabled. |
 | accounts | [GoogleCloudBuildAccount](#proto.ci.GoogleCloudBuildAccount) | repeated | The list of configured Google Cloud Build accounts. |
 
 
@@ -1766,7 +1766,7 @@ Configuration for Jenkins.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether Jenkins is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Jenkins is enabled. |
 | masters | [JenkinsAccount](#proto.ci.JenkinsAccount) | repeated | The list of configured Jenkins accounts. |
 
 
@@ -1818,7 +1818,7 @@ Configuration for Travis.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether Travis is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Travis is enabled. |
 | masters | [TravisAccount](#proto.ci.TravisAccount) | repeated | The list of configured Travis accounts. |
 
 
@@ -1869,7 +1869,7 @@ Configuration for Wercker.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether Wercker is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Wercker is enabled. |
 | masters | [WerckerAccount](#proto.ci.WerckerAccount) | repeated | The list of configured Wercker accounts. |
 
 
@@ -1920,7 +1920,7 @@ Configuration for the Google App Engine (GAE) provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the provider is enabled. |
 | accounts | [AppengineAccount](#proto.cloudprovider.AppengineAccount) | repeated | The list of configured accounts. |
 | primaryAccount | [string](#string) |  | The name of the primary account. |
 
@@ -1954,7 +1954,7 @@ Configuration for an App Engine account.
 | sshKnownHostsFilePath | [string](#string) |  | The path to a `known_hosts` file to be used when connecting with a remote git repository over SSH. |
 | sshPrivateKeyFilePath | [string](#string) |  | The path to an SSH private key to be used when connecting with a remote git repository over SSH. If set, `sshPrivateKeyPassphrase` must also be set. |
 | sshPrivateKeyPassphrase | [string](#string) |  | The passphrase to an SSH private key to be used when connecting with a remote git repository over SSH. If set, `sshPrivateKeyFilePath` must also be set. |
-| sshTrustUnknownHosts | [bool](#bool) |  | Enabling this flag will allow Spinnaker to connect with a remote git repository over SSH without verifying the server&#39;s IP address against a `known_hosts` file. Defaults to false. |
+| sshTrustUnknownHosts | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enabling this flag will allow Spinnaker to connect with a remote git repository over SSH without verifying the server&#39;s IP address against a `known_hosts` file. Defaults to false. |
 | versions | [string](#string) | repeated | A list of regular expressions. Any version matching one of these regexes will be indexed by Spinnaker (unless the version also matches a regex in `omitVersions`). |
 | name | [string](#string) |  | The name of the account. |
 
@@ -2000,7 +2000,7 @@ Configuration for the AWS provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the provider is enabled. |
 | accounts | [AwsAccount](#proto.cloudprovider.AwsAccount) | repeated | The list of configured accounts. |
 | primaryAccount | [string](#string) |  | The name of the primary account. |
 | accessKeyId | [string](#string) |  | Your AWS Access Key ID. Note that if you are baking AMIs with Rosco, you may also need to set `AwsBakeryDefaults.awsAccessKey`. |
@@ -2051,7 +2051,7 @@ Configuration for Spinnaker&#39;s image bakery.
 | awsSecretKey | [string](#string) |  | The secret key used to communicate with AWS. |
 | awsSubnetId | [string](#string) |  | If using VPC, the default ID of the subnet, such as `subnet-12345def`, where Packer will launch the EC2 instance. This field is required if you are using a non-default VPC. |
 | awsVpcId | [string](#string) |  | If launching into a VPC subnet, Packer needs the VPC ID in order to create a temporary security group within the VPC. Requires `subnet_id` to be set. If this default value is left blank, Packer will try to get the VPC ID from `awsSubnetId`. |
-| awsAssociatePublicIpAddress | [bool](#bool) |  | If using a non-default VPC, public IP addresses are not provided by default. If this is enabled, your new instance will get a Public IP. |
+| awsAssociatePublicIpAddress | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | If using a non-default VPC, public IP addresses are not provided by default. If this is enabled, your new instance will get a Public IP. |
 | defaultVirtualizationType | [string](#string) |  | The default type of virtualization for the AMI you are building. This option must match the supported virtualization type of `AwsVirtualizationSettings.sourceAmi`. Acceptable values: `pv`, `hvm`. |
 | baseImages | [AwsBaseImageSettings](#proto.cloudprovider.AwsBaseImageSettings) | repeated | List of configured base images. |
 | templateFile | [string](#string) |  | This is the name of the packer template that will be used to bake images from this base image. The template file must be found in this list https://github.com/spinnaker/rosco/tree/master/rosco-web/config/packer, or supplied as described here: https://spinnaker.io/setup/bakery/. |
@@ -2119,7 +2119,7 @@ Configuration for AWS CloudFormation.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether AWS CloudFormation is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether AWS CloudFormation is enabled. |
 
 
 
@@ -2207,7 +2207,7 @@ Configuration for the Azure provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the provider is enabled. |
 | accounts | [AzureAccount](#proto.cloudprovider.AzureAccount) | repeated | The list of configured accounts. |
 | primaryAccount | [string](#string) |  | The name of the primary account. |
 | bakeryDefaults | [AzureBakeryDefaults](#proto.cloudprovider.AzureBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
@@ -2239,7 +2239,7 @@ Configuration for an Azure account.
 | regions | [string](#string) | repeated | The Azure regions this Spinnaker account will manage. |
 | subscriptionId | [string](#string) |  | (Required) The `subscriptionId` to which your service principal is assigned. |
 | tenantId | [string](#string) |  | (Required) The `tenantId` to which your service principal is assigned. |
-| useSshPublicKey | [bool](#bool) |  | If true, the SSH public key is used to provision the linux VM. If false, the password is used instead. |
+| useSshPublicKey | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | If true, the SSH public key is used to provision the linux VM. If false, the password is used instead. |
 
 
 
@@ -2322,7 +2322,7 @@ Configuration for the Cloud Foundry provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the provider is enabled. |
 | accounts | [CloudFoundryAccount](#proto.cloudprovider.CloudFoundryAccount) | repeated | The list of configured accounts. |
 | primaryAccount | [string](#string) |  | The name of the primary account. |
 
@@ -2345,7 +2345,7 @@ Configuration for a Spinnaker Cloud Foundry account.
 | environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
 | metricsUri | [string](#string) |  | HTTP(S) URL of the metrics application for the Cloud Foundry Foundation (e.g., `https://metrics.sys.somesystem.com`). |
 | password | [string](#string) |  | (Required) Password for the account to use for this Cloud Foundry Foundation. |
-| skipSslValidation | [bool](#bool) |  | (Default: `false`) Skip SSL server certificate validation of the API endpoint. |
+| skipSslValidation | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | (Default: `false`) Skip SSL server certificate validation of the API endpoint. |
 | user | [string](#string) |  | (Required) User name for the account to use for this Cloud Foundry Foundation. |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
 | requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
@@ -2379,7 +2379,7 @@ Configuration for the DC/OS (Distributed Cloud Operating System) provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the provider is enabled. |
 | accounts | [DcosAccount](#proto.cloudprovider.DcosAccount) | repeated | The list of configured accounts. |
 | primaryAccount | [string](#string) |  | The name of the primary account. |
 | clusters | [DcosCluster](#proto.cloudprovider.DcosCluster) | repeated | The list of configured clusters. |
@@ -2454,7 +2454,7 @@ Configuration for a DC/OS cluster.
 | caCertFile | [string](#string) |  | Root certificate file to trust for connections to the cluster. |
 | dcosUrl | [string](#string) |  | (Required) URL of the endpoint for the DC/OS cluster&#39;s admin router. |
 | loadBalancer | [DcosClusterLoadBalancer](#proto.cloudprovider.DcosClusterLoadBalancer) |  | Configuration for a DC/OS load balancer. |
-| insecureSkipTlsVerify | [bool](#bool) |  | If `true`, disables verification of certificates from the cluster (insecure). |
+| insecureSkipTlsVerify | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | If `true`, disables verification of certificates from the cluster (insecure). |
 
 
 
@@ -2501,7 +2501,7 @@ Configuration for the Docker Registry provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the provider is enabled. |
 | accounts | [DockerRegistryAccount](#proto.cloudprovider.DockerRegistryAccount) | repeated | The list of configured accounts. |
 | primaryAccount | [string](#string) |  | The name of the primary account. |
 
@@ -2525,7 +2525,7 @@ A credential able to authenticate against a set of Docker repositories.
 | clientTimeoutMillis | [int32](#int32) |  | Timeout in milliseconds for provided repositories. Defaults to `60,000`. |
 | email | [string](#string) |  | The email associated with your Docker registry. Often this only needs to be well-formed, rather than be a real address. |
 | environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
-| insecureRegistry | [bool](#bool) |  | If `true`, Spinnaker will treat the Docker registry as insecure and not validate the SSL certificate. Defaults to `false`. |
+| insecureRegistry | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | If `true`, Spinnaker will treat the Docker registry as insecure and not validate the SSL certificate. Defaults to `false`. |
 | paginateSize | [int32](#int32) |  | Pagination size for the Docker `repository _catalog` endpoint. Defaults to `100`. |
 | password | [string](#string) |  | The Docker registry password. Only one of `password`, `passwordCommand`, and `passwordFile` should be specified. |
 | passwordCommand | [string](#string) |  | Command to retrieve Docker token/password. The command must be available in the environment. Only one of `password`, `passwordCommand`, and `passwordFile` should be specified. |
@@ -2533,8 +2533,8 @@ A credential able to authenticate against a set of Docker repositories.
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
 | requiredGroupMemberships | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
 | repositories | [string](#string) | repeated | An optional list of repositories from which to cache images. If not provided, Spinnaker will attempt to read accessible repositories from the `registries _catalog` endpoint. |
-| sortTagsByDate | [bool](#bool) |  | If `true`, Spinnaker will sort tags by creation date. Defaults to `false`. Not recommended for use with large registries; sorting performance scales poorly due to limitations of the Docker V2 API. |
-| trackDigests | [bool](#bool) |  | If `true`, Spinnaker will track digest changes. This is not recommended because it greatly increases queries to the registry, and most registries are flaky. Defaults to `false`. |
+| sortTagsByDate | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | If `true`, Spinnaker will sort tags by creation date. Defaults to `false`. Not recommended for use with large registries; sorting performance scales poorly due to limitations of the Docker V2 API. |
+| trackDigests | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | If `true`, Spinnaker will track digest changes. This is not recommended because it greatly increases queries to the registry, and most registries are flaky. Defaults to `false`. |
 | username | [string](#string) |  | The username associated with this Docker registry. |
 
 
@@ -2566,7 +2566,7 @@ Configuration for the ECS provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the provider is enabled. |
 | accounts | [EcsAccount](#proto.cloudprovider.EcsAccount) | repeated | The list of configured accounts. |
 | primaryAccount | [string](#string) |  | The name of the primary account. |
 
@@ -2618,7 +2618,7 @@ Configuration for Consul.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether Consul is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Consul is enabled. |
 | agentEndpoint | [string](#string) |  | Reachable Consul node endpoint connected to the Consul cluster. Defaults to localhost. |
 | agentPort | [int32](#int32) |  | Port consul is running on for every agent. Defaults to 8500. |
 | datacenters | [string](#string) | repeated | List of data centers to cache and keep updated. Defaults to all. |
@@ -2640,7 +2640,7 @@ Configuration for Spinnaker&#39;s image bakery.
 | baseImages | [GoogleBaseImageSettings](#proto.cloudprovider.GoogleBaseImageSettings) | repeated | List of configured base images. |
 | zone | [string](#string) |  | The default zone in which to bake an image. |
 | network | [string](#string) |  | The Google Compute network ID or URL to use for the launched instance. Defaults to default. |
-| useInternalIp | [bool](#bool) |  | If true, use the instance&#39;s internal IP instead of its external IP during baking. |
+| useInternalIp | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | If true, use the instance&#39;s internal IP instead of its external IP during baking. |
 | networkProjectId | [string](#string) |  | The default project ID for the network and subnet to use for the VM baking your image. |
 
 
@@ -2660,7 +2660,7 @@ Base image configuration.
 | shortDescription | [string](#string) |  | A short description to help human operators identify the image. |
 | detailedDescription | [string](#string) |  | A long description to help human operators identify the image. |
 | packageType | [string](#string) |  | This is used to help Spinnaker&#39;s bakery download the build artifacts you supply it with. For example, specifying deb indicates that your artifacts will need to be fetched from a debian repository. |
-| imageFamily | [bool](#bool) |  | If set to true, Deck will annotate the popup tooltip to indicate that the selected option represents an image family. |
+| imageFamily | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | If set to true, Deck will annotate the popup tooltip to indicate that the selected option represents an image family. |
 
 
 
@@ -2691,7 +2691,7 @@ Configuration for the Google Compute Engine (GCE) provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the provider is enabled. |
 | accounts | [GoogleComputeEngineAccount](#proto.cloudprovider.GoogleComputeEngineAccount) | repeated | The list of configured accounts. |
 | primaryAccount | [string](#string) |  | The name of the primary account. |
 | bakeryDefaults | [GoogleBakeryDefaults](#proto.cloudprovider.GoogleBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
@@ -2715,7 +2715,7 @@ credential that can authenticate against a GCP project.
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
 | project | [string](#string) |  | The GCP project this Spinnaker account will manage. |
 | jsonPath | [string](#string) |  | The path to a JSON service account that Spinnaker will use as credentials. This is only needed if Spinnaker is not deployed on a Google Compute Engine VM, or needs permissions not afforded to the VM it is running on. See https://cloud.google.com/compute/docs/access/service-accounts for more information. |
-| alphaListed | [bool](#bool) |  | Enable this flag if your GCP project has access to alpha features and you want Spinnaker to take advantage of them. |
+| alphaListed | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable this flag if your GCP project has access to alpha features and you want Spinnaker to take advantage of them. |
 | imageProjects | [string](#string) | repeated | A list of GCP projects from which Spinnaker will be able to cache and deploy images. When this is omitted, it defaults to the current project. Each project must have granted the IAM role compute.imageUser to the service account associated with the JSON key used by this account, as well as to the Google APIs service account automatically created for the project being managed (should look similar to 12345678912@cloudservices.gserviceaccount.com). See https://cloud.google.com/compute/docs/images/sharing-images-across-projects for more information about sharing images across GCP projects. |
 | consul | [Consul](#proto.cloudprovider.Consul) |  | Configuration for Consul. |
 | regions | [string](#string) | repeated | A list of regions for caching and mutating calls. This overwrites any default regions set on the provider. |
@@ -2766,7 +2766,7 @@ Configuration for the Huawei Cloud provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the provider is enabled. |
 | accounts | [HuaweiCloudAccount](#proto.cloudprovider.HuaweiCloudAccount) | repeated | The list of configured accounts. |
 | primaryAccount | [string](#string) |  | The name of the primary account. |
 | bakeryDefaults | [HuaweiCloudBakeryDefaults](#proto.cloudprovider.HuaweiCloudBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
@@ -2791,7 +2791,7 @@ Configuration for a Huawei Cloud account.
 | authUrl | [string](#string) |  | (Required) The auth URL of the cloud. |
 | domainName | [string](#string) |  | (Required) The domain name of the cloud. |
 | environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
-| insecure | [bool](#bool) |  | If `true`, disables certificate validation on SSL connections. Needed if certificates are self-signed. Defaults to `false`. |
+| insecure | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | If `true`, disables certificate validation on SSL connections. Needed if certificates are self-signed. Defaults to `false`. |
 | password | [string](#string) |  | (Required) The password used to access the cloud. |
 | projectName | [string](#string) |  | (Required) The name of the project within the cloud. |
 | regions | [string](#string) | repeated | (Required) The region(s) of the cloud. |
@@ -2817,7 +2817,7 @@ Configuration for Spinnaker&#39;s image bakery.
 | password | [string](#string) |  | (Required) The default password with which images will be baked. |
 | projectName | [string](#string) |  | The name of the default project in which images will be baked. |
 | domainName | [string](#string) |  | (Required) The default domain name in which images will be baked. |
-| insecure | [bool](#bool) |  | The security setting for connecting to the Huawei Cloud account. Defaults to `false`. |
+| insecure | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | The security setting for connecting to the Huawei Cloud account. Defaults to `false`. |
 | vpcId | [string](#string) |  | (Required) The VPC in which images will be baked. |
 | subnetId | [string](#string) |  | (Required) The subnet in which images will be baked. |
 | securityGroup | [string](#string) |  | (Required) The default security group in which images will be baked. |
@@ -2906,7 +2906,7 @@ Configuration for the Kubernetes provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the provider is enabled. |
 | accounts | [KubernetesAccount](#proto.cloudprovider.KubernetesAccount) | repeated | The list of configured accounts. |
 | primaryAccount | [string](#string) |  | The name of the primary account. |
 
@@ -2989,8 +2989,8 @@ need to explicitly register each CRD.
 | kubernetesKind | [string](#string) |  | The Kubernetes kind of the custom resource. |
 | spinnakerKind | [string](#string) |  | The Spinnaker kind to which you would like the custom resource to map. |
 | deployPriority | [string](#string) |  | An integer representing the deployment priority of this resource. Resources with lower values are deployed before resources with higher values. |
-| versioned | [bool](#bool) |  | Whether Spinnaker should manage versioning this resource. |
-| namespaced | [bool](#bool) |  | Whether the resource is namespaced. |
+| versioned | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Spinnaker should manage versioning this resource. |
+| namespaced | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the resource is namespaced. |
 
 
 
@@ -3021,7 +3021,7 @@ Configuration for the Oracle provider.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the provider is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the provider is enabled. |
 | accounts | [OracleAccount](#proto.cloudprovider.OracleAccount) | repeated | The list of configured accounts. |
 | primaryAccount | [string](#string) |  | The name of the primary account. |
 | bakeryDefaults | [OracleBakeryDefaults](#proto.cloudprovider.OracleBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
@@ -3282,7 +3282,7 @@ Wrapper for serialized config files for Spinnaker microservices.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | gateUrl | [string](#string) |  | The endpoint at which Deck communicates with Gate. |
-| authEnabled | [bool](#bool) |  | Whether authn is enabled. |
+| authEnabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether authn is enabled. |
 | authEndpoint | [string](#string) |  | The Gate authn endpoint. |
 | bakeryDetailUrl | [string](#string) |  | Baking details URL used in Bake stage execution details. |
 | canary | [Deck.Canary](#proto.config.Deck.Canary) |  | Configuration for the canary UI. |
@@ -3307,12 +3307,12 @@ Configuration for the canary UI.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | defaultJudge | [string](#string) |  | The default canary judge. Defaults to `NetflixACAJudge-v1.0`, which is currently the only open-source judge available by default. |
-| featureDisabled | [bool](#bool) |  | Whether the canary UI is disabled. |
+| featureDisabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the canary UI is disabled. |
 | metricsAccountName | [string](#string) |  | Name of the canary metrics account to use by default. |
 | metricStore | [string](#string) |  | Name of the metrics store to use by default (e.g., `prometheus`, `datadog`). |
-| showAllConfigs | [bool](#bool) |  | Whether or not to show all canary configs in Deck, or just those scoped to the current application. |
+| showAllConfigs | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether or not to show all canary configs in Deck, or just those scoped to the current application. |
 | storageAccountName | [string](#string) |  | Name of storage account to use by default. |
-| templatesEnabled | [bool](#bool) |  | Whether or not to enable custom filter templates for canary configs in Deck. |
+| templatesEnabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether or not to enable custom filter templates for canary configs in Deck. |
 
 
 
@@ -3348,11 +3348,11 @@ Configuration for UI-related feature flags.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| pipelineTemplates | [bool](#bool) |  | Enable pipeline template support. Read more at https://github.com/spinnaker/dcd-spec. |
-| canary | [bool](#bool) |  | Enable canary UI support. |
-| chaosMonkey | [bool](#bool) |  | Enable Chaos Monkey support. For this to work, you&#39;ll need a running Chaos Monkey deployment. See https://github.com/Netflix/chaosmonkey/wiki. |
-| fiatEnabled | [bool](#bool) |  | Whether authz is enabled. |
-| managedPipelineTemplatesV2UI | [bool](#bool) |  | Enable managed pipeline templates v2 UI support. |
+| pipelineTemplates | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable pipeline template support. Read more at https://github.com/spinnaker/dcd-spec. |
+| canary | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable canary UI support. |
+| chaosMonkey | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable Chaos Monkey support. For this to work, you&#39;ll need a running Chaos Monkey deployment. See https://github.com/Netflix/chaosmonkey/wiki. |
+| fiatEnabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether authz is enabled. |
+| managedPipelineTemplatesV2UI | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable managed pipeline templates v2 UI support. |
 
 
 
@@ -3952,7 +3952,7 @@ Configuration for Gremlin fault-injection support.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether Gremlin is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Gremlin is enabled. |
 
 
 
@@ -4112,7 +4112,7 @@ Configuration for the Igor microservice.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  |  |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  |  |
 
 
 
@@ -4181,7 +4181,7 @@ Configuration for the Kayenta microservice.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  |  |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  |  |
 | accounts | [proto.canary.AwsAccount](#proto.canary.AwsAccount) | repeated |  |
 
 
@@ -4197,7 +4197,7 @@ Configuration for the Kayenta microservice.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  |  |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  |  |
 | accounts | [proto.canary.GoogleAccount](#proto.canary.GoogleAccount) | repeated |  |
 
 
@@ -4278,7 +4278,7 @@ Configuration for pipeline templates.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether pipeline templates are enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether pipeline templates are enabled. |
 
 
 
@@ -4389,7 +4389,7 @@ Configuration for a particular microservice.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the microservice is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the microservice is enabled. |
 | baseUrl | [string](#string) |  | The base URL for the microservice. In general, this should be the externally-resolvable URL for services that are exposed externally (ie, deck and gate). |
 
 
@@ -4462,11 +4462,11 @@ Feature flags
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| pipelineTemplates | [bool](#bool) |  | Enable pipeline template support. Read more at https://github.com/spinnaker/dcd-spec. |
-| mineCanary | [bool](#bool) |  | Enable canary support. For this to work, you&#39;ll need a canary judge configured. |
-| chaos | [bool](#bool) |  | Enable Chaos Monkey support. For this to work, you&#39;ll need a running Chaos Monkey deployment. See https://github.com/Netflix/chaosmonkey/wiki. |
-| managedPipelineTemplatesV2UI | [bool](#bool) |  | Enable managed pipeline templates v2 UI support. |
-| gremlin | [bool](#bool) |  | Enable Gremlin fault-injection support. |
+| pipelineTemplates | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable pipeline template support. Read more at https://github.com/spinnaker/dcd-spec. |
+| mineCanary | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable canary support. For this to work, you&#39;ll need a canary judge configured. |
+| chaos | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable Chaos Monkey support. For this to work, you&#39;ll need a running Chaos Monkey deployment. See https://github.com/Netflix/chaosmonkey/wiki. |
+| managedPipelineTemplatesV2UI | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable managed pipeline templates v2 UI support. |
+| gremlin | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable Gremlin fault-injection support. |
 
 
 
@@ -4497,7 +4497,7 @@ Configuration for BearyChat notifications.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether BearyChat notifications are enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether BearyChat notifications are enabled. |
 
 
 
@@ -4528,7 +4528,7 @@ Configuration for Email notifications.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether Email notifications are enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Email notifications are enabled. |
 
 
 
@@ -4559,7 +4559,7 @@ Configuration for Github status notifications.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether GitHub status notifications are enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether GitHub status notifications are enabled. |
 | token | [string](#string) |  | Your GitHub account token. |
 
 
@@ -4591,7 +4591,7 @@ Configuration for Google Chat notifications.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether Google Chat notifications are enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Google Chat notifications are enabled. |
 
 
 
@@ -4659,7 +4659,7 @@ Configuration for Pub/Sub notifications.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether Pub/Sub notifications are enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Pub/Sub notifications are enabled. |
 
 
 
@@ -4690,11 +4690,11 @@ Configuration for Slack notifications.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether Slack notifications are enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Slack notifications are enabled. |
 | botName | [string](#string) |  | The name of your Slack bot. |
 | token | [string](#string) |  | Your Slack bot token. |
 | baseUrl | [string](#string) |  | Slack endpoint. Optional, can only be set if using a compatible API. |
-| forceUseIncomingWebhook | [bool](#bool) |  | Force usage of incoming webhooks endpoint for Slack. Optional, only set if using a compatible API. |
+| forceUseIncomingWebhook | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Force usage of incoming webhooks endpoint for Slack. Optional, only set if using a compatible API. |
 
 
 
@@ -4725,7 +4725,7 @@ Configuration for Twilio notifications.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether Twilio notifications are enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Twilio notifications are enabled. |
 | account | [string](#string) |  | Your Twilio account SID. |
 | token | [string](#string) |  | Your Twilio auth token. |
 | baseUrl | [string](#string) |  | The endpoint of the Twilio API. Optional, only set if overriding the default. |
@@ -4793,7 +4793,7 @@ Configuration for Google Cloud Pub/Sub integration.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether Google Cloud Pub/Sub is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Google Cloud Pub/Sub is enabled. |
 | subscriptions | [GoogleSubscriber](#proto.pubsub.GoogleSubscriber) | repeated | The list of configured subscriptions. |
 | publishers | [GooglePublisher](#proto.pubsub.GooglePublisher) | repeated | The list of configured publishers. |
 
@@ -4880,7 +4880,7 @@ Configuration for Pub/Sub integration.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether Pub/Sub is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Pub/Sub is enabled. |
 | google | [Google](#proto.pubsub.Google) |  | Configuration for the Google Cloud Pub/Sub integration. |
 
 
@@ -4912,7 +4912,7 @@ Artifactory repository integration.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the Artifactory integration is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the Artifactory integration is enabled. |
 | searches | [Artifactory.Search](#proto.repository.Artifactory.Search) | repeated | Artifactory service search configuration. |
 
 
@@ -4996,7 +4996,7 @@ Configuration of how users authenticate against Spinnaker.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether to enabled authentication. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether to enabled authentication. |
 | oauth2 | [OAuth2](#proto.security.authn.OAuth2) |  | OAuth 2.0 configuration. |
 | saml | [Saml](#proto.security.authn.Saml) |  | SAML configuration. |
 | ldap | [Ldap](#proto.security.authn.Ldap) |  | LDAP configuration. |
@@ -5017,7 +5017,7 @@ Configuration for basic username/password authentication
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the authentication method is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the authentication method is enabled. |
 | user | [UsernamePassword](#proto.security.authn.UsernamePassword) |  | The username and password used to log in via basic authentication. |
 
 
@@ -5039,7 +5039,7 @@ the audience field retrieved from the IAP console.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the authentication method is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the authentication method is enabled. |
 | jwtHeader | [string](#string) |  | The HTTP request header that contains the JWT token. |
 | issuerId | [string](#string) |  | The Issuer from the ID token payload. |
 | audience | [string](#string) |  | The Audience from the ID token payload. You can retrieve this field from the IAP console: https://cloud.google.com/iap/docs/signed-headers-howto#verify_the_id_token_header. |
@@ -5063,7 +5063,7 @@ connection is successful, you&#39;re considered authenticated.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the authentication method is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the authentication method is enabled. |
 | url | [string](#string) |  | ldap:// or ldaps:// url of the LDAP server. |
 | userDnPattern | [string](#string) |  | The pattern for finding a user&#39;s DN using simple pattern matching. For example, if your LDAP server has the URL ldap://mysite.com/dc=spinnaker,dc=org, and you have the pattern &#39;uid={0},ou=members&#39;, &#39;me&#39; will map to a DN uid=me,ou=members,dc=spinnaker,dc=org. If no match is found, will try to find the user using user-search-filter, if set. |
 | userSearchBase | [string](#string) |  | The part of the directory tree under which user searches should be performed. If user-search-base isn&#39;t supplied, the search will be performed from the root. |
@@ -5085,7 +5085,7 @@ Configuration for authentication via OAuth 2.0.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the authentication method is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the authentication method is enabled. |
 | client | [OAuth2Client](#proto.security.authn.OAuth2Client) |  | Configuration for your OAuth 2.0 client. |
 | userInfoRequirements | [OAuth2.UserInfoRequirementsEntry](#proto.security.authn.OAuth2.UserInfoRequirementsEntry) | repeated | The map of requirements the userInfo request must have. This is used to restrict user login to specific domains or having a specific attribute. |
 | resource | [OAuth2Resource](#proto.security.authn.OAuth2Resource) |  | Configuration for OAuth 2.0 resources. |
@@ -5128,7 +5128,7 @@ Configuration for an OAuth 2.0 client.
 | clientAuthenticationScheme | [OAuth2Client.AuthenticationScheme](#proto.security.authn.OAuth2Client.AuthenticationScheme) |  | The method used to transmit authentication credentials to your OAuth 2.0 provider. |
 | scope | [string](#string) |  | The scope to request when obtaining an access token from your OAuth 2.0 provider. |
 | preEstablishedRedirectUri | [string](#string) |  | The externally accessible URL for Gate. For use with load balancers that do any kind of address manipulation for Gate traffic, such as an SSL terminating load balancer. |
-| useCurrentUri | [bool](#bool) |  | Whether the current URI in the request should be preferred over the pre-established redirect URI. |
+| useCurrentUri | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the current URI in the request should be preferred over the pre-established redirect URI. |
 
 
 
@@ -5184,7 +5184,7 @@ control flow (through the user&#39;s browser) back to Gate by way of the
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the authentication method is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the authentication method is enabled. |
 | metadataUrl | [string](#string) |  | The path to a local file containing identity provider&#39;s metadata XML file; can be either a local file or a URI. |
 | issuerId | [string](#string) |  | The identity of the Spinnaker application registered with the SAML provider. |
 | keyStore | [string](#string) |  | Path to the keystore that contains this server&#39;s private key. This key is used to cryptographically sign SAML AuthNRequest objects. |
@@ -5247,7 +5247,7 @@ with corresponding group information for the user. This can be configured via -r
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether the authentication method is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the authentication method is enabled. |
 | roleOid | [string](#string) |  | The OID that encodes roles that the user specified in the x509 certificate belongs to. |
 | subjectPrincipalRegex | [string](#string) |  | The regex used to parse the subject principal name embedded in the x509 certificate if necessary. |
 
@@ -5309,7 +5309,7 @@ Configuration for what resources users of Spinnaker can read and modify.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether Spinnaker&#39;s role-based authorization is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Spinnaker&#39;s role-based authorization is enabled. |
 | groupMembership | [GroupMembership](#proto.security.authz.GroupMembership) |  | Configuration role providers that map users to groups. |
 
 
@@ -5498,7 +5498,7 @@ Configuration for SSL termination by the API server.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether SSL is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether SSL is enabled. |
 | keyAlias | [string](#string) |  | Name of your keystore entry as generated with your keytool. |
 | keyStore | [string](#string) |  | Path to the keystore holding your security certificates. |
 | keyStoreType | [string](#string) |  | The type of your keystore. Examples include JKS, and PKCS12. |
@@ -5537,7 +5537,7 @@ Configuration for SSL termination by the UI gateway.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether SSL is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether SSL is enabled. |
 | sslCertificateFile | [string](#string) |  | Path to your .crt file. |
 | sslCertificateKeyFile | [string](#string) |  | Path to your .key file. |
 | sslCACertificateFile | [string](#string) |  | Path to the .crt file for the CA that issued your SSL certificate. This is only needed for local git deployments that serve the UI using webpack dev server. |
@@ -5585,7 +5585,7 @@ Configuration for a custom trust store.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether this custom trust store is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether this custom trust store is enabled. |
 | trustStore | [string](#string) |  | The path to a key store in JKS format containing certification authorities that should be trusted. |
 | trustStorePassword | [string](#string) |  | The password for the supplied trustStore. |
 
@@ -5664,7 +5664,7 @@ Configuration for an Azure Storage persistent store.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether this persistent store is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether this persistent store is enabled. |
 | storageAccountName | [string](#string) |  | The name of an Azure Storage Account. |
 | storageAccountKey | [string](#string) |  | The key to access the Azure Storage Account. |
 | storageContainerName | [string](#string) |  | The container name in the chosen storage account to place Spinnaker&#39;s persistent data. Defaults to &#39;spinnaker&#39; if unspecified. |
@@ -5698,7 +5698,7 @@ Configuration for a Google Cloud Storage persistent store
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether this persistent store is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether this persistent store is enabled. |
 | jsonPath | [string](#string) |  | A path to a JSON service account with permission to read and write to the bucket to be used as a backing store. |
 | project | [string](#string) |  | The Google Cloud Platform project you are using to host the GCS bucket as a backing store. |
 | bucket | [string](#string) |  | The name of a storage bucket that your specified account has access to. |
@@ -5734,7 +5734,7 @@ Configuration for an Oracle persistent store.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether this persistent store is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether this persistent store is enabled. |
 | bucketName | [string](#string) |  | The bucket name to store persistent state object in. |
 | namespace | [string](#string) |  | The namespace the bucket and objects should be created in. |
 | region | [string](#string) |  | An Oracle region (e.g., us-phoenix-1). |
@@ -5807,7 +5807,7 @@ Configuration for an Amazon S3 persistent store.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Whether this persistent store is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether this persistent store is enabled. |
 | bucket | [string](#string) |  | The name of a storage bucket that your specified account has access to. |
 | rootFolder | [string](#string) |  | The root folder in the chosen bucket to place all of Spinnaker&#39;s persistent data in. |
 | region | [string](#string) |  | This is only required if the bucket you specify doesn&#39;t exist yet. In that case, the bucket will be created in that region. See http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region. |

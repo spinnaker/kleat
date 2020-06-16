@@ -3,8 +3,10 @@ package proto.notification;
 
 option go_package = "github.com/spinnaker/kleat/api/client/notification";
 
+import "google/protobuf/wrappers.proto";
+
 // Configuration for BearyChat notifications.
 message BearyChat {
   // Whether BearyChat notifications are enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 }

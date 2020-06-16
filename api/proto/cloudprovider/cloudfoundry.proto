@@ -3,12 +3,14 @@ package proto.cloudprovider;
 
 option go_package = "github.com/spinnaker/kleat/api/client/cloudprovider";
 
+import "google/protobuf/wrappers.proto";
+
 import "permissions.proto";
 
 // Configuration for the Cloud Foundry provider.
 message CloudFoundry {
     // Whether the provider is enabled.
-    bool enabled = 1;
+    google.protobuf.BoolValue enabled = 1;
 
     // The list of configured accounts.
     repeated CloudFoundryAccount accounts = 2;
@@ -44,7 +46,7 @@ message CloudFoundryAccount {
 
     // (Default: `false`) Skip SSL server certificate validation of the API
     // endpoint.
-    bool skipSslValidation = 7;
+    google.protobuf.BoolValue skipSslValidation = 7;
 
     // (Required) User name for the account to use for this Cloud Foundry
     // Foundation.

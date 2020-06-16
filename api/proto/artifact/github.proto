@@ -3,10 +3,12 @@ package proto.artifact;
 
 option go_package = "github.com/spinnaker/kleat/api/client/artifact";
 
+import "google/protobuf/wrappers.proto";
+
 // Configuration for the GitHub artifact provider.
 message GitHub {
     // Whether the GitHub artifact provider is enabled.
-    bool enabled = 1;
+    google.protobuf.BoolValue enabled = 1;
 
     // The list of configured GitHub accounts.
     repeated GitHubAccount accounts = 2;

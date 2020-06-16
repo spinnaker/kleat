@@ -21,6 +21,7 @@ import (
 	"github.com/spinnaker/kleat/api/client/cloudprovider"
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/validate"
+	"github.com/spinnaker/kleat/internal/wrappers"
 )
 
 func TestEmptyHalConfig(t *testing.T) {
@@ -57,7 +58,7 @@ func TestNoKubernetesAccounts(t *testing.T) {
 	h := &config.Hal{
 		Providers: &cloudprovider.Providers{
 			Kubernetes: &cloudprovider.Kubernetes{
-				Enabled:  false,
+				Enabled:  wrappers.False(),
 				Accounts: []*cloudprovider.KubernetesAccount{},
 			},
 		},

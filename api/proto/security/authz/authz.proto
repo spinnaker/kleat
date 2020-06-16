@@ -3,10 +3,12 @@ package proto.security.authz;
 
 option go_package = "github.com/spinnaker/kleat/api/client/security/authz";
 
+import "google/protobuf/wrappers.proto";
+
 // Configuration for what resources users of Spinnaker can read and modify.
 message Authorization {
   // Whether Spinnaker's role-based authorization is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // Configuration role providers that map users to groups.
   GroupMembership groupMembership = 2;

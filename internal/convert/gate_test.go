@@ -21,6 +21,7 @@ import (
 
 	"github.com/spinnaker/kleat/api/client"
 	"github.com/spinnaker/kleat/internal/convert"
+	"github.com/spinnaker/kleat/internal/wrappers"
 
 	"github.com/spinnaker/kleat/api/client/canary"
 
@@ -44,7 +45,7 @@ var gateTests = configTest{
 				Security: &security.Security{
 					ApiSecurity: &security.ApiSecurity{
 						Ssl: &security.ApiSsl{
-							Enabled:      true,
+							Enabled:      wrappers.True(),
 							KeyAlias:     "alias",
 							KeyStore:     "/var/secrets/keystore.jks",
 							KeyStoreType: "jks",
@@ -56,7 +57,7 @@ var gateTests = configTest{
 			&config.Gate{
 				Server: &config.ServerConfig{
 					Ssl: &security.ApiSsl{
-						Enabled:      true,
+						Enabled:      wrappers.True(),
 						KeyAlias:     "alias",
 						KeyStore:     "/var/secrets/keystore.jks",
 						KeyStoreType: "jks",
@@ -86,7 +87,7 @@ var gateTests = configTest{
 				Security: &security.Security{
 					Authn: &authn.Authentication{
 						Basic: &authn.Basic{
-							Enabled: true,
+							Enabled: wrappers.True(),
 							User: &authn.UsernamePassword{
 								Username: "user",
 								Password: "passw0rd",
@@ -98,7 +99,7 @@ var gateTests = configTest{
 			&config.Gate{
 				Security: &config.SpringSecurity{
 					Basic: &authn.Basic{
-						Enabled: true,
+						Enabled: wrappers.True(),
 						User: &authn.UsernamePassword{
 							Username: "user",
 							Password: "passw0rd",
@@ -113,7 +114,7 @@ var gateTests = configTest{
 				Security: &security.Security{
 					Authn: &authn.Authentication{
 						Oauth2: &authn.OAuth2{
-							Enabled: true,
+							Enabled: wrappers.True(),
 							Client: &authn.OAuth2Client{
 								ClientId:     "my-client",
 								ClientSecret: "my-secret",
@@ -126,7 +127,7 @@ var gateTests = configTest{
 			&config.Gate{
 				Security: &config.SpringSecurity{
 					Oauth2: &authn.OAuth2{
-						Enabled: true,
+						Enabled: wrappers.True(),
 						Client: &authn.OAuth2Client{
 							ClientId:     "my-client",
 							ClientSecret: "my-secret",
@@ -146,7 +147,7 @@ var gateTests = configTest{
 				Security: &security.Security{
 					Authn: &authn.Authentication{
 						Oauth2: &authn.OAuth2{
-							Enabled: false,
+							Enabled: wrappers.False(),
 							Client: &authn.OAuth2Client{
 								ClientId:     "my-client",
 								ClientSecret: "my-secret",
@@ -164,7 +165,7 @@ var gateTests = configTest{
 				Security: &security.Security{
 					Authn: &authn.Authentication{
 						Saml: &authn.Saml{
-							Enabled:     true,
+							Enabled:     wrappers.True(),
 							MetadataUrl: "https://my-saml-provider.test/",
 						},
 					},
@@ -172,7 +173,7 @@ var gateTests = configTest{
 			},
 			&config.Gate{
 				Saml: &authn.Saml{
-					Enabled:     true,
+					Enabled:     wrappers.True(),
 					MetadataUrl: "https://my-saml-provider.test/",
 				},
 			},
@@ -183,7 +184,7 @@ var gateTests = configTest{
 				Security: &security.Security{
 					Authn: &authn.Authentication{
 						Ldap: &authn.Ldap{
-							Enabled: true,
+							Enabled: wrappers.True(),
 							Url:     "https://my-ldap-provider.test",
 						},
 					},
@@ -191,7 +192,7 @@ var gateTests = configTest{
 			},
 			&config.Gate{
 				Ldap: &authn.Ldap{
-					Enabled: true,
+					Enabled: wrappers.True(),
 					Url:     "https://my-ldap-provider.test",
 				},
 			},
@@ -202,7 +203,7 @@ var gateTests = configTest{
 				Security: &security.Security{
 					Authn: &authn.Authentication{
 						X509: &authn.X509{
-							Enabled: true,
+							Enabled: wrappers.True(),
 							RoleOid: "abc",
 						},
 					},
@@ -210,7 +211,7 @@ var gateTests = configTest{
 			},
 			&config.Gate{
 				X509: &authn.X509{
-					Enabled: true,
+					Enabled: wrappers.True(),
 					RoleOid: "abc",
 				},
 			},
@@ -221,7 +222,7 @@ var gateTests = configTest{
 				Security: &security.Security{
 					Authn: &authn.Authentication{
 						Iap: &authn.Iap{
-							Enabled:   true,
+							Enabled:   wrappers.True(),
 							JwtHeader: "my-header",
 							IssuerId:  "abc",
 						},
@@ -231,7 +232,7 @@ var gateTests = configTest{
 			&config.Gate{
 				Google: &config.Gate_GoogleConfig{
 					Iap: &authn.Iap{
-						Enabled:   true,
+						Enabled:   wrappers.True(),
 						JwtHeader: "my-header",
 						IssuerId:  "abc",
 					},
@@ -242,13 +243,13 @@ var gateTests = configTest{
 			"Canary enabled",
 			&config.Hal{
 				Canary: &canary.Canary{
-					Enabled: true,
+					Enabled: wrappers.True(),
 				},
 			},
 			&config.Gate{
 				Services: &config.Gate_Services{
 					Kayenta: &config.ServiceSettings{
-						Enabled: true,
+						Enabled: wrappers.True(),
 					},
 				},
 			},
@@ -273,11 +274,11 @@ var gateTests = configTest{
 		{
 			"Gremlin enabled",
 			&config.Hal{
-				Features: &client.Features{Gremlin: true},
+				Features: &client.Features{Gremlin: wrappers.True()},
 			},
 			&config.Gate{
 				Integrations: &config.Gate_Integrations{
-					Gremlin: &config.Gate_Integrations_Gremlin{Enabled: true},
+					Gremlin: &config.Gate_Integrations_Gremlin{Enabled: wrappers.True()},
 				},
 			},
 		},

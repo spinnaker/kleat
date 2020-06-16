@@ -3,6 +3,8 @@ package proto.config;
 
 option go_package = "github.com/spinnaker/kleat/api/client/config";
 
+import "google/protobuf/wrappers.proto";
+
 import "artifact/template.proto";
 import "repository/artifactory.proto";
 import "ci/codebuild.proto";
@@ -25,7 +27,7 @@ message Igor {
   ci.Wercker wercker = 9;
 
   message DockerRegistry {
-    bool enabled = 1;
+    google.protobuf.BoolValue enabled = 1;
   }
 
   message Artifacts {

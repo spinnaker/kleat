@@ -3,21 +3,23 @@ package proto;
 
 option go_package = "github.com/spinnaker/kleat/api/client";
 
+import "google/protobuf/wrappers.proto";
+
 // Feature flags
 message Features {
   // Enable pipeline template support. Read more at https://github.com/spinnaker/dcd-spec.
-  bool pipelineTemplates = 1;
+  google.protobuf.BoolValue pipelineTemplates = 1;
 
   // Enable canary support. For this to work, you'll need a canary judge configured.
-  bool mineCanary = 2;
+  google.protobuf.BoolValue mineCanary = 2;
 
   // Enable Chaos Monkey support. For this to work, you'll need a running Chaos
   // Monkey deployment. See https://github.com/Netflix/chaosmonkey/wiki.
-  bool chaos = 3;
+  google.protobuf.BoolValue chaos = 3;
 
   // Enable managed pipeline templates v2 UI support.
-  bool managedPipelineTemplatesV2UI = 4;
+  google.protobuf.BoolValue managedPipelineTemplatesV2UI = 4;
 
   // Enable Gremlin fault-injection support.
-  bool gremlin = 5;
+  google.protobuf.BoolValue gremlin = 5;
 }

@@ -3,10 +3,12 @@ package proto.security;
 
 option go_package = "github.com/spinnaker/kleat/api/client/security";
 
+import "google/protobuf/wrappers.proto";
+
 // Configuration for a custom trust store.
 message TrustStore {
   // Whether this custom trust store is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // The path to a key store in JKS format containing certification authorities
   // that should be trusted.

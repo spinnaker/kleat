@@ -3,10 +3,12 @@ package proto.repository;
 
 option go_package = "github.com/spinnaker/kleat/api/client/repository";
 
+import "google/protobuf/wrappers.proto";
+
 // Artifactory repository integration.
 message Artifactory {
   // Whether the Artifactory integration is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // Artifactory service search configuration.
   repeated Search searches = 2;

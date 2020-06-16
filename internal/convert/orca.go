@@ -30,7 +30,7 @@ func HalToOrca(h *config.Hal) *config.Orca {
 }
 
 func getDefaults(h *config.Hal) *config.Orca_Defaults {
-	if !h.GetProviders().GetAws().GetEnabled() {
+	if !h.GetProviders().GetAws().GetEnabled().GetValue() {
 		return nil
 	}
 	return &config.Orca_Defaults{
@@ -41,16 +41,14 @@ func getDefaults(h *config.Hal) *config.Orca_Defaults {
 }
 
 func getPipelineTemplates(h *config.Hal) *config.Orca_PipelineTemplates {
-	// TODO: Consider whether this should actually be a BoolWrapper so that we
-	// can distinguish an explicitly set 'false' from an unset value
-	if !h.GetFeatures().GetPipelineTemplates() {
+	if h.GetFeatures().GetPipelineTemplates() == nil {
 		return nil
 	}
 	return &config.Orca_PipelineTemplates{Enabled: h.GetFeatures().GetPipelineTemplates()}
 }
 
 func getOrcaServices(h *config.Hal) *config.Orca_Services {
-	if h.GetCanary().GetEnabled() {
+	if h.GetCanary().GetEnabled().GetValue() {
 		return &config.Orca_Services{
 			Kayenta: &config.ServiceSettings{
 				Enabled: h.GetCanary().GetEnabled(),

@@ -3,10 +3,12 @@ package proto.canary;
 
 option go_package = "github.com/spinnaker/kleat/api/client/canary";
 
+import "google/protobuf/wrappers.proto";
+
 // Configuration for the New Relic canary integration.
 message NewRelic {
   // Whether the integration is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // The list of configured accounts.
   repeated NewRelicAccount accounts = 2;

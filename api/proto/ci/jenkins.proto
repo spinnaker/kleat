@@ -10,7 +10,7 @@ import "permissions.proto";
 // Configuration for Jenkins.
 message Jenkins {
   // Whether Jenkins is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // The list of configured Jenkins accounts.
   repeated JenkinsAccount masters = 2;

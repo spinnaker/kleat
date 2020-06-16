@@ -3,18 +3,20 @@ package proto.canary;
 
 option go_package = "github.com/spinnaker/kleat/api/client/canary";
 
+import "google/protobuf/wrappers.proto";
+
 import "canary/supported_type.proto";
 
 // Configuration for the AWS canary integration.
 message Aws {
   // Whether the integration is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // The list of configured accounts.
   repeated AwsAccount accounts = 2;
 
   // Whether to enable S3 as a persistent store.
-  bool s3Enabled = 3;
+  google.protobuf.BoolValue s3Enabled = 3;
 }
 
 // Configuration for an AWS account.

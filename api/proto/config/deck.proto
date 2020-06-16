@@ -3,6 +3,8 @@ package proto.config;
 
 option go_package = "github.com/spinnaker/kleat/api/client/config";
 
+import "google/protobuf/wrappers.proto";
+
 import "notification/bearychat.proto";
 import "notification/email.proto";
 import "notification/google_chat.proto";
@@ -16,7 +18,7 @@ message Deck {
   string gateUrl = 1;
 
   // Whether authn is enabled.
-  bool authEnabled = 2;
+  google.protobuf.BoolValue authEnabled = 2;
 
   // The Gate authn endpoint.
   string authEndpoint = 3;
@@ -49,20 +51,20 @@ message Deck {
   message Features {
     // Enable pipeline template support. Read more at
     // https://github.com/spinnaker/dcd-spec.
-    bool pipelineTemplates = 1;
+    google.protobuf.BoolValue pipelineTemplates = 1;
 
     // Enable canary UI support.
-    bool canary = 2;
+    google.protobuf.BoolValue canary = 2;
 
     // Enable Chaos Monkey support. For this to work, you'll need a running Chaos
     // Monkey deployment. See https://github.com/Netflix/chaosmonkey/wiki.
-    bool chaosMonkey = 3;
+    google.protobuf.BoolValue chaosMonkey = 3;
 
     // Whether authz is enabled.
-    bool fiatEnabled = 4;
+    google.protobuf.BoolValue fiatEnabled = 4;
 
     // Enable managed pipeline templates v2 UI support.
-    bool managedPipelineTemplatesV2UI = 5;
+    google.protobuf.BoolValue managedPipelineTemplatesV2UI = 5;
   }
 
   // Configuration for the canary UI.
@@ -72,7 +74,7 @@ message Deck {
     string defaultJudge = 1;
 
     // Whether the canary UI is disabled.
-    bool featureDisabled = 2;
+    google.protobuf.BoolValue featureDisabled = 2;
 
     // Name of the canary metrics account to use by default.
     string metricsAccountName = 3;
@@ -82,14 +84,14 @@ message Deck {
 
     // Whether or not to show all canary configs in Deck, or just those scoped
     // to the current application.
-    bool showAllConfigs = 5;
+    google.protobuf.BoolValue showAllConfigs = 5;
 
     // Name of storage account to use by default.
     string storageAccountName = 6;
 
     // Whether or not to enable custom filter templates for canary configs in
     // Deck.
-    bool templatesEnabled = 7;
+    google.protobuf.BoolValue templatesEnabled = 7;
   }
 
   // Configuration for surfacing the Spinnaker changelog in Deck.

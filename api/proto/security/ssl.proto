@@ -3,6 +3,8 @@ package proto.security;
 
 option go_package = "github.com/spinnaker/kleat/api/client/security";
 
+import "google/protobuf/wrappers.proto";
+
 // Configuration for the API server's addressable URL and CORS policies.
 message ApiSecurity {
   // If you have authentication enabled, are accessing Spinnaker remotely, and
@@ -32,7 +34,7 @@ message UiSecurity {
 // Configuration for SSL termination by the API server.
 message ApiSsl {
   // Whether SSL is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // Name of your keystore entry as generated with your keytool.
   string keyAlias = 2;
@@ -63,7 +65,7 @@ message ApiSsl {
 // Configuration for SSL termination by the UI gateway.
 message UiSsl {
   // Whether SSL is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // Path to your .crt file.
   string sslCertificateFile = 2;
