@@ -34,7 +34,7 @@ message AwsAccount {
 
   // The root folder in the chosen bucket in which to store all of the canary
   // service's persistent data. Defaults to `kayenta`.
-  optional string rootFolder = 4;
+  google.protobuf.StringValue rootFolder = 4;
 
   // The profile name to use when resolving AWS credentials. Typically found in
   // `~/.aws/credentials`. Defaults to `default`.
