@@ -69,7 +69,7 @@ be used as input to Kleat.
 - Kleat requires you to explicitly specify a primaryAccount for each enabled
   cloud provider for which you expect Deck to receive a statically configured
   default account and/or region. (Halyard will fall back to the first configured
-  account if no primaryAccount is configured.)  
+  account if no primaryAccount is configured.)
 
 ## Optional changes
 
@@ -78,8 +78,8 @@ be used as input to Kleat.
   acceptable to remove all values for which the microservice's deafult value is
   acceptable. For example, if you do not use the Google App Engine provider, you
   can remove the `Providers.AppengineProvider` block from your halconfig.
-- Halyard supplies a default `providerVersion` of `v1` for each provider account.
-  You can safely remove this field.
+- Halyard supplies a default `providerVersion` of `v1` for each provider
+  account. You can safely remove this field.
 
 ## Unsupported Halyard functionality
 
@@ -90,35 +90,39 @@ files, there are several `hal` commands with no `kleat` analog.
 ### Backing up your hal config
 
 - `hal backup`, `hal deploy diff`, `hal deploy rollback`: Instead, version your
-config in source control.
+  config in source control.
 
 ### Customizing your Spinnaker microservice deployments
 
 When using kleat, you can remove the `deploymentEnvironment` block of your hal
 config. Kleat only handles Spinnaker application configuration and is intended
-for use with the Spinnaker [kustomization-base](https://github.com/spinnaker/kustomization-base)
-and [spinnaker-config](https://github.com/spinnaker/spinnaker-config) projects.
-To customize components of your Spinnaker microservice Kubernetes resource YAML
+for use with the Spinnaker
+[kustomization-base](https://github.com/spinnaker/kustomization-base) and
+[spinnaker-config](https://github.com/spinnaker/spinnaker-config) projects. To
+customize components of your Spinnaker microservice Kubernetes resource YAML
 (e.g., custom liveness probes), update your kustomization to include overlays
 for any non-default resource properties.
 
 - `hal config deploy component-sizing`: Instead, specify non-default component
-sizing parameters (e.g., replicas, container CPU requests and limits) in your
-Kustomization.
-- `hal config deploy ha`: The Spinnaker [kustomization-base](https://github.com/spinnaker/kustomization-base)
-includes sharded Clouddriver and Echo ("HA") by default. To deploy a non-sharded
-Clouddriver and Echo instead, update your kustomization. 
+  sizing parameters (e.g., replicas, container CPU requests and limits) in your
+  Kustomization.
+- `hal config deploy ha`: The Spinnaker
+  [kustomization-base](https://github.com/spinnaker/kustomization-base) includes
+  sharded Clouddriver and Echo ("HA") by default. To deploy a non-sharded
+  Clouddriver and Echo instead, update your kustomization.
 - `hal config deploy edit`: Since Kleat will not be deploying Spinnaker, all
-aspects of the deployment (cluster, namespace, image variant) must be handled
-downstream in your kustomization or in the context in which you run
-`kubectl apply`.
+  aspects of the deployment (cluster, namespace, image variant) must be handled
+  downstream in your kustomization or in the context in which you run
+  `kubectl apply`.
 
 ### Documenting supported Spinnaker versions
 
-- `hal version latest`, `hal version list`: Instead, use the [documentation](https://www.spinnaker.io/community/releases/versions/)
-for information about supported Spinnaker versions.
+- `hal version latest`, `hal version list`: Instead, use the
+  [documentation](https://www.spinnaker.io/community/releases/versions/) for
+  information about supported Spinnaker versions.
 
 ### Installing spin CLI
 
-- `hal spin install`: Instead, follow these [instructions](https://www.spinnaker.io/setup/spin/#install-and-configure-spin-cli)
-to install spin CLI.
+- `hal spin install`: Instead, follow these
+  [instructions](https://www.spinnaker.io/setup/spin/#install-and-configure-spin-cli)
+  to install spin CLI.
