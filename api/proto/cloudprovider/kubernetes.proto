@@ -83,6 +83,51 @@ message KubernetesAccount {
     // (Deprecated): List of required Fiat permission groups. Configure
     // `permissions` instead.
     repeated string requiredGroupMemberships = 15;
+
+    // When true, clouddriver will query manifest status during pipeline executions
+    // using live data rather than the cache. This eliminates all time spent in the
+    // "force cache refresh" task in pipelines, greatly reducing execution time.
+    // Defaults to false.
+    google.protobuf.BoolValue liveManifestCalls = 16;
+
+    // When true, Spinnaker attempt to authenticate against Kubernetes using a
+    // Kubernetes service account. This only works when Halyard & Spinnaker are
+    // deployed in Kubernetes. Read more about service accounts here:
+    // https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/.
+    // Defaults to false.
+    google.protobuf.BoolValue serviceAccount = 17;
+
+    // The raw contents of your kubeconfig file. Ignored if kubeconfigFile is set.
+    string kubeconfigContents = 18;
+
+    // The path to the kubectl executable. This should be omitted unless you
+    // want to override the default kubectl exectuable.
+    string kubectlPath = 19;
+
+    // If set, all calls to kubectl will time out after the specified number of
+    // seconds.
+    int32 kubectlRequestTimeoutSeconds = 22;
+
+    // Whether to check whether the account has permission to read configured
+    // kinds before caching them. Kinds that the account does not have permission
+    // to read will be omitted from caching.
+    // This field defaults to true, and it is recommended to leave it at the
+    // default. If this field is set to false, any kubernetes objects that
+    // are unreadable by the account will break caching for all objects.
+    google.protobuf.BoolValue checkPermissionsOnStartup = 23;
+
+    // When using OAuth to authenticate with your cluster, the name of the
+    // service account to use.
+    string oAuthServiceAccount = 24;
+
+    // If true, only cache Kubernetes objects that have been deployed by
+    // Spinnaker, and ignore any other objects that exist in the cluster.
+    // Defaults to false.
+    google.protobuf.BoolValue onlySpinnakerManaged = 27;
+
+    // If true, enable detailed logging for all communications with the
+    // kubernetes cluster for this account. Defaults to false.
+    google.protobuf.BoolValue debug = 28;
 }
 
 // Configuration for a CRD to be managed by Spinnaker. If Spinnaker does not
@@ -104,7 +149,7 @@ message KubernetesCustomResource {
     // Whether Spinnaker should manage versioning this resource.
     google.protobuf.BoolValue versioned = 4;
 
-    // Whether the resource is namespaced.
+    // Whether the resource is namespaced. Defaults to true.
     google.protobuf.BoolValue namespaced = 5;
 }
 

@@ -2938,6 +2938,15 @@ credential that can authenticate against your Kubernetes cluster.
 | kubeconfigFile | [string](#string) |  | The path to your kubeconfig file. By default, it will be under the Spinnaker user&#39;s home directory in the typical .kube/config location. |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
 | requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
+| liveManifestCalls | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | When true, clouddriver will query manifest status during pipeline executions using live data rather than the cache. This eliminates all time spent in the &#34;force cache refresh&#34; task in pipelines, greatly reducing execution time. Defaults to false. |
+| serviceAccount | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | When true, Spinnaker attempt to authenticate against Kubernetes using a Kubernetes service account. This only works when Halyard &amp; Spinnaker are deployed in Kubernetes. Read more about service accounts here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/. Defaults to false. |
+| kubeconfigContents | [string](#string) |  | The raw contents of your kubeconfig file. Ignored if kubeconfigFile is set. |
+| kubectlPath | [string](#string) |  | The path to the kubectl executable. This should be omitted unless you want to override the default kubectl exectuable. |
+| kubectlRequestTimeoutSeconds | [int32](#int32) |  | If set, all calls to kubectl will time out after the specified number of seconds. |
+| checkPermissionsOnStartup | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether to check whether the account has permission to read configured kinds before caching them. Kinds that the account does not have permission to read will be omitted from caching. This field defaults to true, and it is recommended to leave it at the default. If this field is set to false, any kubernetes objects that are unreadable by the account will break caching for all objects. |
+| oAuthServiceAccount | [string](#string) |  | When using OAuth to authenticate with your cluster, the name of the service account to use. |
+| onlySpinnakerManaged | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | If true, only cache Kubernetes objects that have been deployed by Spinnaker, and ignore any other objects that exist in the cluster. Defaults to false. |
+| debug | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | If true, enable detailed logging for all communications with the kubernetes cluster for this account. Defaults to false. |
 
 
 
@@ -2990,7 +2999,7 @@ need to explicitly register each CRD.
 | spinnakerKind | [string](#string) |  | The Spinnaker kind to which you would like the custom resource to map. |
 | deployPriority | [string](#string) |  | An integer representing the deployment priority of this resource. Resources with lower values are deployed before resources with higher values. |
 | versioned | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Spinnaker should manage versioning this resource. |
-| namespaced | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the resource is namespaced. |
+| namespaced | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the resource is namespaced. Defaults to true. |
 
 
 
