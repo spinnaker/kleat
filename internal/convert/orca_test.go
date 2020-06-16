@@ -75,7 +75,11 @@ var orcaTests = configTest{
 			&config.Hal{
 				Features: &client.Features{PipelineTemplates: wrappers.False()},
 			},
-			&config.Orca{},
+			&config.Orca{
+				PipelineTemplates: &config.Orca_PipelineTemplates{
+					Enabled: wrappers.False(),
+				},
+			},
 		},
 		{
 			"Pipeline templates enabled",
