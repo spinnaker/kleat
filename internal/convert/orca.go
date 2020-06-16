@@ -41,9 +41,7 @@ func getDefaults(h *config.Hal) *config.Orca_Defaults {
 }
 
 func getPipelineTemplates(h *config.Hal) *config.Orca_PipelineTemplates {
-	// TODO: Consider whether this should actually be a BoolWrapper so that we
-	// can distinguish an explicitly set 'wrappers.False()' from an unset value
-	if !h.GetFeatures().GetPipelineTemplates().GetValue() {
+	if h.GetFeatures().GetPipelineTemplates() == nil {
 		return nil
 	}
 	return &config.Orca_PipelineTemplates{Enabled: h.GetFeatures().GetPipelineTemplates()}
