@@ -352,7 +352,6 @@
     - [UsernamePassword](#proto.security.authn.UsernamePassword)
     - [X509](#proto.security.authn.X509)
   
-    - [OAuth2.OAuth2Provider](#proto.security.authn.OAuth2.OAuth2Provider)
     - [OAuth2Client.AuthenticationScheme](#proto.security.authn.OAuth2Client.AuthenticationScheme)
   
 - [security/authz/authz.proto](#security/authz/authz.proto)
@@ -5099,7 +5098,6 @@ Configuration for authentication via OAuth 2.0.
 | userInfoRequirements | [OAuth2.UserInfoRequirementsEntry](#proto.security.authn.OAuth2.UserInfoRequirementsEntry) | repeated | The map of requirements the userInfo request must have. This is used to restrict user login to specific domains or having a specific attribute. |
 | resource | [OAuth2Resource](#proto.security.authn.OAuth2Resource) |  | Configuration for OAuth 2.0 resources. |
 | userInfoMapping | [OAuth2UserInfoMapping](#proto.security.authn.OAuth2UserInfoMapping) |  | Mapping of user attributes to fields returned by your OAuth 2.0 provider. This field controls how the fields returned from the OAuth 2.0 provider&#39;s user info endpoint are translated into a Spinnaker user. |
-| provider | [OAuth2.OAuth2Provider](#proto.security.authn.OAuth2.OAuth2Provider) |  | The OAuth 2.0 provider handling authentication. |
 
 
 
@@ -5265,21 +5263,6 @@ with corresponding group information for the user. This can be configured via -r
 
 
  
-
-
-<a name="proto.security.authn.OAuth2.OAuth2Provider"></a>
-
-### OAuth2.OAuth2Provider
-Supported OAuth 2.0 providers.
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| OTHER | 0 | Other OAuth 2.0 provider. |
-| AZURE | 1 | Azure OAuth 2.0 provider. |
-| GITHUB | 2 | Github OAuth 2.0 provider. |
-| ORACLE | 3 | Oracle OAuth 2.0 provider. |
-| GOOGLE | 4 | Google OAuth 2.0 provider. |
-
 
 
 <a name="proto.security.authn.OAuth2Client.AuthenticationScheme"></a>

@@ -55,6 +55,8 @@ be used as input to Kleat.
   `roleProviderType` under each configurable role provider. This field can be
   removed as it was only used internally by Halyard and does not affect the
   generated config.
+- In the `security.authn.oauth2` block, there is a field `provider`. This field
+  can be removed as it was only used internally by Halyard.
 - The `[provider].bakeryDefaults.images` field in the `halconfig` allows a user
   to specify the images that will be available to use as base images. Halyard
   would merge any images specified here with the default images defined in the

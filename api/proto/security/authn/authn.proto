@@ -48,27 +48,6 @@ message OAuth2 {
   // This field controls how the fields returned from the OAuth 2.0 provider's user
   // info endpoint are translated into a Spinnaker user.
   OAuth2UserInfoMapping userInfoMapping = 5;
-
-  // The OAuth 2.0 provider handling authentication.
-  OAuth2Provider provider = 6;
-
-  // Supported OAuth 2.0 providers.
-  enum OAuth2Provider {
-    // Other OAuth 2.0 provider.
-    OTHER = 0;
-
-    // Azure OAuth 2.0 provider.
-    AZURE = 1;
-
-    // Github OAuth 2.0 provider.
-    GITHUB = 2;
-
-    // Oracle OAuth 2.0 provider.
-    ORACLE = 3;
-
-    // Google OAuth 2.0 provider.
-    GOOGLE = 4;
-  }
 }
 
 // Configuration for an OAuth 2.0 client.
