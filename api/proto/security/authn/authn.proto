@@ -82,17 +82,20 @@ message OAuth2Client {
 
   // Methods to transmit authentication tokens to an OAuth 2.0 provider.
   enum AuthenticationScheme {
+    // Unspecified. Do not directly use, instead omit the field.
+    unspecified = 0;
+
     // Token is sent in the request header.
-    header = 0;
+    header = 1;
 
     // Token is sent as a query parameter.
-    query = 1;
+    query = 2;
 
     // Token is sent in the form body.
-    form = 2;
+    form = 3;
 
     // Token is not sent at all.
-    none = 3;
+    none = 4;
   }
 }
 

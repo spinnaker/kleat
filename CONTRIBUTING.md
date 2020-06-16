@@ -94,6 +94,16 @@ that has been omitted from the config and a field that has has been explicitly
 set to its default value. The output config will include the field even when it
 has been set to its default value (`""`, `0`, `false`).
 
+In the case of `enum` fields, the absence of a value is treated the same as the
+value assigned to constant `0` (which is required and must be the first value in
+the enum). In particular, this means that an enum set to its zero value will not
+be included in serialization.
+
+In order to distinguish enum fields that are unset from those set to their
+default value, a value `UNSPECIFIED` can be added as the first enum constant. In
+this way, configs that don't specify the value will be deserialized to
+`UNSPECIFIED` and will omit the field on re-serialization.
+
 #### General rules
 
 The general rule is that `string` and `int32` fields should rarely be wrapped,
@@ -105,3 +115,7 @@ On the other hand, it generally is meaningful to distinguish between omitting a
 something to `false` is meaningful and distinct from not setting it at all (even
 if the consuming code currently defaults the field to `false`). For this reason,
 all `bool` fields should be wrapped as `BoolValue`.
+
+Likewise, it is generally meaningful to distinguish an unset enum field from one
+that has been set. Thus `enum`s should always have `UNSPECIFIED = 0` as their
+first value.
