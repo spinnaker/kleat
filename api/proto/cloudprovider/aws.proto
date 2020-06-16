@@ -121,7 +121,6 @@ message AwsBakeryDefaults {
     // Acceptable values: `pv`, `hvm`.
     string defaultVirtualizationType = 6;
 
-
     // List of configured base images.
     repeated AwsBaseImageSettings baseImages = 7;
 
@@ -130,7 +129,6 @@ message AwsBakeryDefaults {
     // https://github.com/spinnaker/rosco/tree/master/rosco-web/config/packer,
     // or supplied as described here: https://spinnaker.io/setup/bakery/.
     string templateFile = 8;
-
 }
 
 // Configuration for a base image for the AWS provider's bakery.

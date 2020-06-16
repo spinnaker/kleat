@@ -125,5 +125,4 @@ message AzureBaseImage {
     // https://github.com/spinnaker/rosco/tree/master/rosco-web/config/packer,
     // or supplied as described here: https://spinnaker.io/setup/bakery/.
     string templateFile = 8;
-
 }

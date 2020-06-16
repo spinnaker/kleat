@@ -1033,7 +1033,7 @@ Configuration for an AWS account.
 | name | [string](#string) |  | The name of the account. |
 | bucket | [string](#string) |  | The name of a storage bucket that this account has access to. If you specify a globally unique bucket name that doesn&#39;t exist yet, Kayenta will create that bucket for you. |
 | region | [string](#string) |  | The AWS region to use. |
-| rootFolder | [string](#string) | optional | The root folder in the chosen bucket in which to store all of the canary service&#39;s persistent data. Defaults to `kayenta`. |
+| rootFolder | [google.protobuf.StringValue](#google.protobuf.StringValue) |  | The root folder in the chosen bucket in which to store all of the canary service&#39;s persistent data. Defaults to `kayenta`. |
 | profileName | [string](#string) |  | The profile name to use when resolving AWS credentials. Typically found in `~/.aws/credentials`. Defaults to `default`. |
 | endpoint | [string](#string) |  | The endpoint used to reach the service implementing the AWS API. Typical use is with Minio. |
 | accessKeyId | [string](#string) |  | The default access key used to communicate with AWS. |
@@ -1247,8 +1247,8 @@ Configuration for a Google account.
 | name | [string](#string) |  | The name of the account. |
 | jsonPath | [string](#string) |  | The path to a JSON service account that Spinnaker will use as credentials. This is only needed if Spinnaker is not deployed on a Google Compute Engine VM, or needs permissions not afforded to the VM it is running on. See https://cloud.google.com/compute/docs/access/service-accounts for more information. |
 | bucket | [string](#string) |  | The name of a storage bucket that this account has access to. If you specify a globally unique bucket name that doesn&#39;t exist yet, Kayenta will create that bucket for you. |
-| bucketLocation | [string](#string) |  | This is only required if the bucket you specify doesn’t exist yet. In that case, the bucket will be created in that location. See https://cloud.google.com/storage/docs/managing-buckets#manage-class-location. |
-| rootFolder | [string](#string) | optional | The root folder in the chosen bucket in which to store all of the canary service&#39;s persistent data in. Defaults to `kayenta`. |
+| bucketLocation | [string](#string) |  | This is only required if the bucket you specify doesn&#39;t exist yet. In that case, the bucket will be created in that location. See https://cloud.google.com/storage/docs/managing-buckets#manage-class-location. |
+| rootFolder | [google.protobuf.StringValue](#google.protobuf.StringValue) |  | The root folder in the chosen bucket in which to store all of the canary service&#39;s persistent data in. Defaults to `kayenta`. |
 | project | [string](#string) |  | (Required) The Google Cloud Platform project the canary service will use to consume GCS and Stackdriver. |
 | supportedTypes | [SupportedType](#proto.canary.SupportedType) | repeated | If enabling Stackdriver, include METRICS_STORE in this list. If enabling GCS, include CONFIGURATION_STORE and/or OBJECT_STORE in this list. |
 
@@ -2938,6 +2938,15 @@ credential that can authenticate against your Kubernetes cluster.
 | kubeconfigFile | [string](#string) |  | The path to your kubeconfig file. By default, it will be under the Spinnaker user&#39;s home directory in the typical .kube/config location. |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
 | requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
+| liveManifestCalls | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | When true, clouddriver will query manifest status during pipeline executions using live data rather than the cache. This eliminates all time spent in the &#34;force cache refresh&#34; task in pipelines, greatly reducing execution time. Defaults to false. |
+| serviceAccount | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | When true, Spinnaker attempt to authenticate against Kubernetes using a Kubernetes service account. This only works when Halyard &amp; Spinnaker are deployed in Kubernetes. Read more about service accounts here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/. Defaults to false. |
+| kubeconfigContents | [string](#string) |  | The raw contents of your kubeconfig file. Ignored if kubeconfigFile is set. |
+| kubectlPath | [string](#string) |  | The path to the kubectl executable. This should be omitted unless you want to override the default kubectl exectuable. |
+| kubectlRequestTimeoutSeconds | [int32](#int32) |  | If set, all calls to kubectl will time out after the specified number of seconds. |
+| checkPermissionsOnStartup | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether to check whether the account has permission to read configured kinds before caching them. Kinds that the account does not have permission to read will be omitted from caching. This field defaults to true, and it is recommended to leave it at the default. If this field is set to false, any Kubernetes objects that are unreadable by the account will break caching for all objects. |
+| oAuthServiceAccount | [string](#string) |  | When using OAuth to authenticate with your cluster, the name of the service account to use. |
+| onlySpinnakerManaged | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | If true, only cache Kubernetes objects that have been deployed by Spinnaker, and ignore any other objects that exist in the cluster. Defaults to false. |
+| debug | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | If true, enable detailed logging for all communications with the Kubernetes cluster for this account. Defaults to false. |
 
 
 
@@ -2990,7 +2999,7 @@ need to explicitly register each CRD.
 | spinnakerKind | [string](#string) |  | The Spinnaker kind to which you would like the custom resource to map. |
 | deployPriority | [string](#string) |  | An integer representing the deployment priority of this resource. Resources with lower values are deployed before resources with higher values. |
 | versioned | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Spinnaker should manage versioning this resource. |
-| namespaced | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the resource is namespaced. |
+| namespaced | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the resource is namespaced. Defaults to true. |
 
 
 
@@ -5702,7 +5711,7 @@ Configuration for a Google Cloud Storage persistent store
 | jsonPath | [string](#string) |  | A path to a JSON service account with permission to read and write to the bucket to be used as a backing store. |
 | project | [string](#string) |  | The Google Cloud Platform project you are using to host the GCS bucket as a backing store. |
 | bucket | [string](#string) |  | The name of a storage bucket that your specified account has access to. |
-| rootFolder | [string](#string) |  | The root folder in the chosen bucket to place all of Spinnaker&#39;s persistent data in. |
+| rootFolder | [google.protobuf.StringValue](#google.protobuf.StringValue) |  | The root folder in the chosen bucket to place all of Spinnaker&#39;s persistent data in. |
 | bucketLocation | [string](#string) |  | This is only required if the bucket you specify does not exist yet. |
 
 
@@ -5809,7 +5818,7 @@ Configuration for an Amazon S3 persistent store.
 | ----- | ---- | ----- | ----------- |
 | enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether this persistent store is enabled. |
 | bucket | [string](#string) |  | The name of a storage bucket that your specified account has access to. |
-| rootFolder | [string](#string) |  | The root folder in the chosen bucket to place all of Spinnaker&#39;s persistent data in. |
+| rootFolder | [google.protobuf.StringValue](#google.protobuf.StringValue) |  | The root folder in the chosen bucket to place all of Spinnaker&#39;s persistent data in. |
 | region | [string](#string) |  | This is only required if the bucket you specify doesn&#39;t exist yet. In that case, the bucket will be created in that region. See http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region. |
 | pathStyleAccess | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | When true, use path-style to access bucket; when false, use virtual hosted-style to access bucket. See https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html#VirtualHostingExamples. |
 | endpoint | [string](#string) |  | An alternate endpoint that your S3-compatible storage can be found at. This is intended for self-hosted storage services with S3-compatible APIs, e.g. Minio. |
