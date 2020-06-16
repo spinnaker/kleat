@@ -16,7 +16,6 @@ providers:
       - kube-system
       - docs-site-v1
       kubeconfigFile: /var/secrets/k8s-kubeconfig
-      checkPermissionsOnStartup: true
     primaryAccount: k8s
   appengine:
     enabled: true

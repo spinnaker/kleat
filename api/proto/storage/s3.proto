@@ -15,7 +15,7 @@ message S3 {
 
   // The root folder in the chosen bucket to place all of Spinnaker's persistent
   // data in.
-  string rootFolder = 3;
+  google.protobuf.StringValue rootFolder = 3;
 
   // This is only required if the bucket you specify doesn't exist yet. In that
   // case, the bucket will be created in that region.

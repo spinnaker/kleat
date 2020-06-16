@@ -1247,7 +1247,7 @@ Configuration for a Google account.
 | name | [string](#string) |  | The name of the account. |
 | jsonPath | [string](#string) |  | The path to a JSON service account that Spinnaker will use as credentials. This is only needed if Spinnaker is not deployed on a Google Compute Engine VM, or needs permissions not afforded to the VM it is running on. See https://cloud.google.com/compute/docs/access/service-accounts for more information. |
 | bucket | [string](#string) |  | The name of a storage bucket that this account has access to. If you specify a globally unique bucket name that doesn&#39;t exist yet, Kayenta will create that bucket for you. |
-| bucketLocation | [string](#string) |  | This is only required if the bucket you specify doesn’t exist yet. In that case, the bucket will be created in that location. See https://cloud.google.com/storage/docs/managing-buckets#manage-class-location. |
+| bucketLocation | [string](#string) |  | This is only required if the bucket you specify doesn&#39;t exist yet. In that case, the bucket will be created in that location. See https://cloud.google.com/storage/docs/managing-buckets#manage-class-location. |
 | rootFolder | [string](#string) | optional | The root folder in the chosen bucket in which to store all of the canary service&#39;s persistent data in. Defaults to `kayenta`. |
 | project | [string](#string) |  | (Required) The Google Cloud Platform project the canary service will use to consume GCS and Stackdriver. |
 | supportedTypes | [SupportedType](#proto.canary.SupportedType) | repeated | If enabling Stackdriver, include METRICS_STORE in this list. If enabling GCS, include CONFIGURATION_STORE and/or OBJECT_STORE in this list. |
@@ -5711,7 +5711,7 @@ Configuration for a Google Cloud Storage persistent store
 | jsonPath | [string](#string) |  | A path to a JSON service account with permission to read and write to the bucket to be used as a backing store. |
 | project | [string](#string) |  | The Google Cloud Platform project you are using to host the GCS bucket as a backing store. |
 | bucket | [string](#string) |  | The name of a storage bucket that your specified account has access to. |
-| rootFolder | [string](#string) |  | The root folder in the chosen bucket to place all of Spinnaker&#39;s persistent data in. |
+| rootFolder | [google.protobuf.StringValue](#google.protobuf.StringValue) |  | The root folder in the chosen bucket to place all of Spinnaker&#39;s persistent data in. |
 | bucketLocation | [string](#string) |  | This is only required if the bucket you specify does not exist yet. |
 
 
@@ -5818,7 +5818,7 @@ Configuration for an Amazon S3 persistent store.
 | ----- | ---- | ----- | ----------- |
 | enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether this persistent store is enabled. |
 | bucket | [string](#string) |  | The name of a storage bucket that your specified account has access to. |
-| rootFolder | [string](#string) |  | The root folder in the chosen bucket to place all of Spinnaker&#39;s persistent data in. |
+| rootFolder | [google.protobuf.StringValue](#google.protobuf.StringValue) |  | The root folder in the chosen bucket to place all of Spinnaker&#39;s persistent data in. |
 | region | [string](#string) |  | This is only required if the bucket you specify doesn&#39;t exist yet. In that case, the bucket will be created in that region. See http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region. |
 | pathStyleAccess | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | When true, use path-style to access bucket; when false, use virtual hosted-style to access bucket. See https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html#VirtualHostingExamples. |
 | endpoint | [string](#string) |  | An alternate endpoint that your S3-compatible storage can be found at. This is intended for self-hosted storage services with S3-compatible APIs, e.g. Minio. |

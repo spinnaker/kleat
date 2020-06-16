@@ -130,7 +130,7 @@ type GoogleAccount struct {
 	// specify a globally unique bucket name that doesn't exist yet, Kayenta will
 	// create that bucket for you.
 	Bucket string `protobuf:"bytes,3,opt,name=bucket,proto3" json:"bucket,omitempty"`
-	// This is only required if the bucket you specify doesn’t exist yet. In that
+	// This is only required if the bucket you specify doesn't exist yet. In that
 	// case, the bucket will be created in that location. See
 	// https://cloud.google.com/storage/docs/managing-buckets#manage-class-location.
 	BucketLocation string `protobuf:"bytes,4,opt,name=bucketLocation,proto3" json:"bucketLocation,omitempty"`

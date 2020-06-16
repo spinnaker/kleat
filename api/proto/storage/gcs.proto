@@ -20,7 +20,7 @@ message Gcs {
     string bucket = 4;
 
     // The root folder in the chosen bucket to place all of Spinnaker's persistent data in.
-    string rootFolder = 5;
+    google.protobuf.StringValue rootFolder = 5;
 
     // This is only required if the bucket you specify does not exist yet.
     string bucketLocation = 6;

@@ -43,7 +43,7 @@ message GoogleAccount {
   // create that bucket for you.
   string bucket = 3;
 
-  // This is only required if the bucket you specify doesn’t exist yet. In that
+  // This is only required if the bucket you specify doesn't exist yet. In that
   // case, the bucket will be created in that location. See
   // https://cloud.google.com/storage/docs/managing-buckets#manage-class-location.
   string bucketLocation = 4;
