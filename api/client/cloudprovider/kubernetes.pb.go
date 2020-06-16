@@ -172,7 +172,7 @@ type KubernetesAccount struct {
 	// kinds before caching them. Kinds that the account does not have permission
 	// to read will be omitted from caching.
 	// This field defaults to true, and it is recommended to leave it at the
-	// default. If this field is set to false, any kubernetes objects that
+	// default. If this field is set to false, any Kubernetes objects that
 	// are unreadable by the account will break caching for all objects.
 	CheckPermissionsOnStartup *wrappers.BoolValue `protobuf:"bytes,23,opt,name=checkPermissionsOnStartup,proto3" json:"checkPermissionsOnStartup,omitempty"`
 	// When using OAuth to authenticate with your cluster, the name of the
@@ -183,7 +183,7 @@ type KubernetesAccount struct {
 	// Defaults to false.
 	OnlySpinnakerManaged *wrappers.BoolValue `protobuf:"bytes,27,opt,name=onlySpinnakerManaged,proto3" json:"onlySpinnakerManaged,omitempty"`
 	// If true, enable detailed logging for all communications with the
-	// kubernetes cluster for this account. Defaults to false.
+	// Kubernetes cluster for this account. Defaults to false.
 	Debug *wrappers.BoolValue `protobuf:"bytes,28,opt,name=debug,proto3" json:"debug,omitempty"`
 }
 

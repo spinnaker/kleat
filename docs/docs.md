@@ -2943,10 +2943,10 @@ credential that can authenticate against your Kubernetes cluster.
 | kubeconfigContents | [string](#string) |  | The raw contents of your kubeconfig file. Ignored if kubeconfigFile is set. |
 | kubectlPath | [string](#string) |  | The path to the kubectl executable. This should be omitted unless you want to override the default kubectl exectuable. |
 | kubectlRequestTimeoutSeconds | [int32](#int32) |  | If set, all calls to kubectl will time out after the specified number of seconds. |
-| checkPermissionsOnStartup | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether to check whether the account has permission to read configured kinds before caching them. Kinds that the account does not have permission to read will be omitted from caching. This field defaults to true, and it is recommended to leave it at the default. If this field is set to false, any kubernetes objects that are unreadable by the account will break caching for all objects. |
+| checkPermissionsOnStartup | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether to check whether the account has permission to read configured kinds before caching them. Kinds that the account does not have permission to read will be omitted from caching. This field defaults to true, and it is recommended to leave it at the default. If this field is set to false, any Kubernetes objects that are unreadable by the account will break caching for all objects. |
 | oAuthServiceAccount | [string](#string) |  | When using OAuth to authenticate with your cluster, the name of the service account to use. |
 | onlySpinnakerManaged | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | If true, only cache Kubernetes objects that have been deployed by Spinnaker, and ignore any other objects that exist in the cluster. Defaults to false. |
-| debug | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | If true, enable detailed logging for all communications with the kubernetes cluster for this account. Defaults to false. |
+| debug | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | If true, enable detailed logging for all communications with the Kubernetes cluster for this account. Defaults to false. |
 
 
 
