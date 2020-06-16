@@ -3,12 +3,14 @@ package proto.cloudprovider;
 
 option go_package = "github.com/spinnaker/kleat/api/client/cloudprovider";
 
+import "google/protobuf/wrappers.proto";
+
 import "permissions.proto";
 
 // Configuration for the Google Compute Engine (GCE) provider.
 message GoogleComputeEngine {
     // Whether the provider is enabled.
-    bool enabled = 1;
+    google.protobuf.BoolValue enabled = 1;
 
     // The list of configured accounts.
     repeated GoogleComputeEngineAccount accounts = 2;
@@ -46,7 +48,7 @@ message GoogleComputeEngineAccount {
 
     // Enable this flag if your GCP project has access to alpha features and
     // you want Spinnaker to take advantage of them.
-    bool alphaListed = 7;
+    google.protobuf.BoolValue alphaListed = 7;
 
     // A list of GCP projects from which Spinnaker will be able to cache and
     // deploy images. When this is omitted, it defaults to the current
@@ -95,7 +97,7 @@ message GoogleBakeryDefaults {
 
     // If true, use the instance's internal IP instead of its external IP
     // during baking.
-    bool useInternalIp = 5;
+    google.protobuf.BoolValue useInternalIp = 5;
 
     // The default project ID for the network and subnet to use for the VM
     // baking your image.
@@ -133,7 +135,7 @@ message GoogleBaseImage {
 
     // If set to true, Deck will annotate the popup tooltip to
     // indicate that the selected option represents an image family.
-    bool imageFamily = 5;
+    google.protobuf.BoolValue imageFamily = 5;
 }
 
 // Image source configuration.
@@ -151,7 +153,7 @@ message VirtualizationSettings {
 // Configuration for Consul.
 message Consul {
     // Whether Consul is enabled.
-    bool enabled = 1;
+    google.protobuf.BoolValue enabled = 1;
 
     // Reachable Consul node endpoint connected to the Consul cluster.
     // Defaults to localhost.

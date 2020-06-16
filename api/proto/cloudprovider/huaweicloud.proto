@@ -3,12 +3,14 @@ package proto.cloudprovider;
 
 option go_package = "github.com/spinnaker/kleat/api/client/cloudprovider";
 
+import "google/protobuf/wrappers.proto";
+
 import "permissions.proto";
 
 // Configuration for the Huawei Cloud provider.
 message HuaweiCloud {
   // Whether the provider is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // The list of configured accounts.
   repeated HuaweiCloudAccount accounts = 2;
@@ -47,7 +49,7 @@ message HuaweiCloudAccount {
 
   // If `true`, disables certificate validation on SSL connections. Needed if
   // certificates are self-signed. Defaults to `false`.
-  bool insecure = 8;
+  google.protobuf.BoolValue insecure = 8;
 
   // (Required) The password used to access the cloud.
   string password = 9;
@@ -90,7 +92,7 @@ message HuaweiCloudBakeryDefaults {
 
   // The security setting for connecting to the Huawei Cloud account. Defaults
   // to `false`.
-  bool insecure = 8;
+  google.protobuf.BoolValue insecure = 8;
 
   // (Required) The VPC in which images will be baked.
   string vpcId = 9;

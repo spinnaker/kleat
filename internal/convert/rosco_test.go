@@ -22,6 +22,7 @@ import (
 	"github.com/spinnaker/kleat/api/client/cloudprovider"
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/convert"
+	"github.com/spinnaker/kleat/internal/wrappers"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -56,7 +57,7 @@ var roscoTests = configTest{
 			&config.Hal{
 				Providers: &cloudprovider.Providers{
 					Kubernetes: &cloudprovider.Kubernetes{
-						Enabled: true,
+						Enabled: wrappers.True(),
 						Accounts: []*cloudprovider.KubernetesAccount{
 							{
 								Name:           "my-account",
@@ -75,7 +76,7 @@ var roscoTests = configTest{
 			&config.Hal{
 				Providers: &cloudprovider.Providers{
 					Aws: &cloudprovider.Aws{
-						Enabled: true,
+						Enabled: wrappers.True(),
 						Accounts: []*cloudprovider.AwsAccount{
 							{
 								Name: "my-account",
@@ -84,7 +85,7 @@ var roscoTests = configTest{
 						BakeryDefaults: &cloudprovider.AwsBakeryDefaults{
 							AwsAccessKey:                "my-key",
 							AwsSecretKey:                "my-secret-key",
-							AwsAssociatePublicIpAddress: false,
+							AwsAssociatePublicIpAddress: wrappers.False(),
 							BaseImages: []*cloudprovider.AwsBaseImageSettings{
 								{
 									BaseImage: &cloudprovider.AwsBaseImage{
@@ -105,7 +106,7 @@ var roscoTests = configTest{
 			},
 			&config.Rosco{
 				Aws: &cloudprovider.Aws{
-					Enabled: true,
+					Enabled: wrappers.True(),
 					Accounts: []*cloudprovider.AwsAccount{
 						{
 							Name: "my-account",
@@ -114,7 +115,7 @@ var roscoTests = configTest{
 					BakeryDefaults: &cloudprovider.AwsBakeryDefaults{
 						AwsAccessKey:                "my-key",
 						AwsSecretKey:                "my-secret-key",
-						AwsAssociatePublicIpAddress: false,
+						AwsAssociatePublicIpAddress: wrappers.False(),
 						BaseImages: []*cloudprovider.AwsBaseImageSettings{
 							{
 								BaseImage: &cloudprovider.AwsBaseImage{

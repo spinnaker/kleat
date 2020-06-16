@@ -3,10 +3,12 @@ package proto.artifact;
 
 option go_package = "github.com/spinnaker/kleat/api/client/artifact";
 
+import "google/protobuf/wrappers.proto";
+
 // Configuration for the S3 artifact provider.
 message S3 {
     // Whether the S3 artifact provider is enabled.
-    bool enabled = 1;
+    google.protobuf.BoolValue enabled = 1;
 
     // The list of configured S3 artifact accounts.
     repeated S3Account accounts = 2;

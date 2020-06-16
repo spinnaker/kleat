@@ -3,8 +3,10 @@ package proto.notification;
 
 option go_package = "github.com/spinnaker/kleat/api/client/notification";
 
+import "google/protobuf/wrappers.proto";
+
 // Configuration for Pub/Sub notifications.
 message PubSub {
   // Whether Pub/Sub notifications are enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 }

@@ -3,10 +3,12 @@ package proto.ci;
 
 option go_package = "github.com/spinnaker/kleat/api/client/ci";
 
+import "google/protobuf/wrappers.proto";
+
 // Configuration for AWS CodeBuild.
 message CodeBuild {
   // Whether AWS CodeBuild is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // The list of configured AWS CodeBuild accounts.
   repeated CodeBuildAccount accounts = 2;

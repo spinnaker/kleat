@@ -3,12 +3,14 @@ package proto.ci;
 
 option go_package = "github.com/spinnaker/kleat/api/client/ci";
 
+import "google/protobuf/wrappers.proto";
+
 import "permissions.proto";
 
 // Configuration for Concourse.
 message Concourse {
   // Whether Concourse is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // The list of configured Concourse accounts.
   repeated ConcourseAccount masters = 2;

@@ -23,7 +23,7 @@ import (
 
 // HalToKayenta generates the kayanta config for the supplied config.Hal h.
 func HalToKayenta(h *config.Hal) *config.Kayenta {
-	if !h.GetCanary().GetEnabled() {
+	if !h.GetCanary().GetEnabled().GetValue() {
 		return &config.Kayenta{}
 	}
 

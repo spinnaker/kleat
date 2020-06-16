@@ -3,6 +3,8 @@ package proto.config;
 
 option go_package = "github.com/spinnaker/kleat/api/client/config";
 
+import "google/protobuf/wrappers.proto";
+
 import "security/trust_store.proto";
 import "config/service_enabled.proto";
 
@@ -22,7 +24,7 @@ message Orca {
   // Configuration for pipeline templates.
   message PipelineTemplates {
     // Whether pipeline templates are enabled.
-    bool enabled = 1;
+    google.protobuf.BoolValue enabled = 1;
   }
 
   // Defaults applicable to the orca microservice.

@@ -3,10 +3,12 @@ package proto.artifact;
 
 option go_package = "github.com/spinnaker/kleat/api/client/artifact";
 
+import "google/protobuf/wrappers.proto";
+
 // Configuration for the Git repo artifact provider.
 message GitRepo {
     // Whether the Git repo artifact provider is enabled.
-    bool enabled = 1;
+    google.protobuf.BoolValue enabled = 1;
 
     // The list of configured Git Repo accounts.
     repeated GitRepoAccount accounts = 2;
@@ -51,5 +53,5 @@ message GitRepoAccount {
 
     // If `true`, Spinnaker can connect with a Git repository over SSH without
     // verifying the server's IP address against a `known_hosts` file.
-    bool sshTrustUnknownHosts = 10;
+    google.protobuf.BoolValue sshTrustUnknownHosts = 10;
 }

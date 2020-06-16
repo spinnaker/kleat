@@ -3,6 +3,8 @@ package proto.canary;
 
 option go_package = "github.com/spinnaker/kleat/api/client/canary";
 
+import "google/protobuf/wrappers.proto";
+
 import "canary/aws.proto";
 import "canary/datadog.proto";
 import "canary/google.proto";
@@ -13,7 +15,7 @@ import "canary/signalfx.proto";
 // Configuration for Spinnaker's canary service.
 message Canary {
   // Whether the canary service is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // Canary service integrations. You must configure at least one account of
   // each canary.SupportedType (METRICS_STORE, CONFIGURATION_STORE,
@@ -28,10 +30,10 @@ message Canary {
 
   // Whether or not to show all canary configs in Deck, or just those scoped to
   // the current application.
-  bool showAllConfigsEnabled = 5;
+  google.protobuf.BoolValue showAllConfigsEnabled = 5;
 
   // Whether or not to enable custom filter templates for canary configs in Deck.
-  bool templatesEnabled = 6;
+  google.protobuf.BoolValue templatesEnabled = 6;
 
   // The default canary judge. Defaults to `NetflixACAJudge-v1.0`, which is
   // currently the only open-source judge available by default.

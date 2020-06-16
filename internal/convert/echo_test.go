@@ -19,13 +19,13 @@ package convert_test
 import (
 	"testing"
 
-	"github.com/golang/protobuf/ptypes/wrappers"
 	"github.com/spinnaker/kleat/api/client"
 	"github.com/spinnaker/kleat/api/client/ci"
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/api/client/notification"
 	"github.com/spinnaker/kleat/api/client/pubsub"
 	"github.com/spinnaker/kleat/internal/convert"
+	"github.com/spinnaker/kleat/internal/wrappers"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -49,7 +49,7 @@ var echoTests = configTest{
 			&config.Hal{
 				Notifications: &notification.Notifications{
 					Slack: &notification.Slack{
-						Enabled: true,
+						Enabled: wrappers.True(),
 						BotName: "my-bot",
 						Token:   "my-token",
 						BaseUrl: "https://slack.test/",
@@ -58,7 +58,7 @@ var echoTests = configTest{
 			},
 			&config.Echo{
 				Slack: &notification.Slack{
-					Enabled: true,
+					Enabled: wrappers.True(),
 					BotName: "my-bot",
 					Token:   "my-token",
 					BaseUrl: "https://slack.test/",
@@ -157,7 +157,7 @@ var echoTests = configTest{
 			&config.Hal{
 				Ci: &ci.Ci{
 					Gcb: &ci.GoogleCloudBuild{
-						Enabled: true,
+						Enabled: wrappers.True(),
 						Accounts: []*ci.GoogleCloudBuildAccount{
 							{
 								Name:             "my-account",
@@ -170,7 +170,7 @@ var echoTests = configTest{
 			},
 			&config.Echo{
 				Gcb: &ci.GoogleCloudBuild{
-					Enabled: true,
+					Enabled: wrappers.True(),
 					Accounts: []*ci.GoogleCloudBuildAccount{
 						{
 							Name:             "my-account",
@@ -193,19 +193,19 @@ var echoTests = configTest{
 		{
 			"Stats enabled",
 			&config.Hal{
-				Stats: &client.Stats{Enabled: &wrappers.BoolValue{Value: true}},
+				Stats: &client.Stats{Enabled: wrappers.True()},
 			},
 			&config.Echo{
-				Stats: &client.Stats{Enabled: &wrappers.BoolValue{Value: true}},
+				Stats: &client.Stats{Enabled: wrappers.True()},
 			},
 		},
 		{
 			"Stats disabled",
 			&config.Hal{
-				Stats: &client.Stats{Enabled: &wrappers.BoolValue{Value: false}},
+				Stats: &client.Stats{Enabled: wrappers.False()},
 			},
 			&config.Echo{
-				Stats: &client.Stats{Enabled: &wrappers.BoolValue{Value: false}},
+				Stats: &client.Stats{Enabled: wrappers.False()},
 			},
 		},
 		{

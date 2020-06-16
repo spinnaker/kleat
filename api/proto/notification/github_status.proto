@@ -3,10 +3,12 @@ package proto.notification;
 
 option go_package = "github.com/spinnaker/kleat/api/client/notification";
 
+import "google/protobuf/wrappers.proto";
+
 // Configuration for Github status notifications.
 message GithubStatus {
   // Whether GitHub status notifications are enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // Your GitHub account token.
   string token = 2;

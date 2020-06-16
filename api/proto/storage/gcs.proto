@@ -3,10 +3,12 @@ package proto.storage;
 
 option go_package = "github.com/spinnaker/kleat/api/client/storage";
 
+import "google/protobuf/wrappers.proto";
+
 // Configuration for a Google Cloud Storage persistent store
 message Gcs {
     // Whether this persistent store is enabled.
-    bool enabled = 1;
+    google.protobuf.BoolValue enabled = 1;
 
     // A path to a JSON service account with permission to read and write to the bucket to be used as a backing store.
     string jsonPath = 2;

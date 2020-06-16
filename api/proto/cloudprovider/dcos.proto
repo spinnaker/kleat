@@ -3,12 +3,14 @@ package proto.cloudprovider;
 
 option go_package = "github.com/spinnaker/kleat/api/client/cloudprovider";
 
+import "google/protobuf/wrappers.proto";
+
 import "permissions.proto";
 
 // Configuration for the DC/OS (Distributed Cloud Operating System) provider.
 message Dcos {
     // Whether the provider is enabled.
-    bool enabled = 1;
+    google.protobuf.BoolValue enabled = 1;
 
     // The list of configured accounts.
     repeated DcosAccount accounts = 2;
@@ -76,7 +78,7 @@ message DcosCluster {
 
     // If `true`, disables verification of certificates from the cluster
     // (insecure).
-    bool insecureSkipTlsVerify = 5;
+    google.protobuf.BoolValue insecureSkipTlsVerify = 5;
 }
 
 // Configuration for a DC/OS load balancer.

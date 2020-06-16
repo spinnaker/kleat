@@ -3,10 +3,12 @@ package proto.pubsub;
 
 option go_package = "github.com/spinnaker/kleat/api/client/pubsub";
 
+import "google/protobuf/wrappers.proto";
+
 // Configuration for Google Cloud Pub/Sub integration.
 message Google {
   // Whether Google Cloud Pub/Sub is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // The list of configured subscriptions.
   repeated GoogleSubscriber subscriptions = 2;

@@ -23,6 +23,7 @@ import (
 	"github.com/spinnaker/kleat/api/client/security"
 	"github.com/spinnaker/kleat/api/client/security/authz"
 	"github.com/spinnaker/kleat/internal/convert"
+	"github.com/spinnaker/kleat/internal/wrappers"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -39,7 +40,7 @@ var fiatTests = configTest{
 			&config.Hal{
 				Security: &security.Security{
 					Authz: &authz.Authorization{
-						Enabled: true,
+						Enabled: wrappers.True(),
 						GroupMembership: &authz.GroupMembership{
 							Service: authz.GroupMembership_GITHUB,
 							Github: &authz.GithubRoleProvider{
@@ -55,7 +56,7 @@ var fiatTests = configTest{
 			},
 			&config.Fiat{
 				Auth: &authz.Authorization{
-					Enabled: true,
+					Enabled: wrappers.True(),
 					GroupMembership: &authz.GroupMembership{
 						Service: authz.GroupMembership_GITHUB,
 						Github: &authz.GithubRoleProvider{

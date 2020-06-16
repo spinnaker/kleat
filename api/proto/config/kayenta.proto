@@ -3,6 +3,8 @@ package proto.config;
 
 option go_package = "github.com/spinnaker/kleat/api/client/config";
 
+import "google/protobuf/wrappers.proto";
+
 import "canary/aws.proto";
 import "canary/datadog.proto";
 import "canary/google.proto";
@@ -29,12 +31,12 @@ message Kayenta {
     canary.NewRelic newrelic = 9;
 
     message Google {
-      bool enabled = 1;
+      google.protobuf.BoolValue enabled = 1;
       repeated canary.GoogleAccount accounts = 2;
     }
 
     message Aws {
-      bool enabled = 1;
+      google.protobuf.BoolValue enabled = 1;
       repeated canary.AwsAccount accounts = 3;
     }
   }

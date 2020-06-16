@@ -21,6 +21,7 @@ import (
 
 	"github.com/spinnaker/kleat/api/client/cloudprovider"
 	"github.com/spinnaker/kleat/api/client/config"
+	"github.com/spinnaker/kleat/internal/wrappers"
 )
 
 // HalToDeck generates the deck config for the supplied config.Hal h.
@@ -46,7 +47,7 @@ func getGateURL(h *config.Hal) string {
 		return override
 	}
 	scheme := "http"
-	if h.GetSecurity().GetApiSecurity().GetSsl().GetEnabled() {
+	if h.GetSecurity().GetApiSecurity().GetSsl().GetEnabled().GetValue() {
 		scheme = "https"
 	}
 	return fmt.Sprintf("%s://localhost:8084", scheme)
@@ -55,7 +56,7 @@ func getGateURL(h *config.Hal) string {
 func getDeckCanaryConfig(h *config.Hal) *config.Deck_Canary {
 	return &config.Deck_Canary{
 		DefaultJudge:       h.GetCanary().GetDefaultJudge(),
-		FeatureDisabled:    !h.GetCanary().GetEnabled(),
+		FeatureDisabled:    wrappers.Bool(!h.GetCanary().GetEnabled().GetValue()),
 		MetricsAccountName: h.GetCanary().GetDefaultMetricsAccount(),
 		MetricStore:        h.GetCanary().GetDefaultMetricsStore(),
 		ShowAllConfigs:     h.GetCanary().GetShowAllConfigsEnabled(),
@@ -101,7 +102,7 @@ func getDeckNotificationsConfig(h *config.Hal) *config.Deck_Notifications {
 func getDeckProvidersConfig(h *config.Hal) *config.Deck_Providers {
 	providers := &config.Deck_Providers{}
 
-	if h.GetProviders().GetAppengine().GetEnabled() {
+	if h.GetProviders().GetAppengine().GetEnabled().GetValue() {
 		providers.Appengine = &config.Deck_Providers_Appengine{
 			Defaults: &config.Deck_Providers_Appengine_Defaults{
 				Account: h.GetProviders().GetAppengine().GetPrimaryAccount(),
@@ -109,7 +110,7 @@ func getDeckProvidersConfig(h *config.Hal) *config.Deck_Providers {
 		}
 	}
 
-	if h.GetProviders().GetAws().GetEnabled() {
+	if h.GetProviders().GetAws().GetEnabled().GetValue() {
 		defaultAccountName := h.GetProviders().GetAws().GetPrimaryAccount()
 		var defaultAccount *cloudprovider.AwsAccount
 		for _, a := range h.GetProviders().GetAws().GetAccounts() {
@@ -131,7 +132,7 @@ func getDeckProvidersConfig(h *config.Hal) *config.Deck_Providers {
 		}
 	}
 
-	if h.GetProviders().GetAzure().GetEnabled() {
+	if h.GetProviders().GetAzure().GetEnabled().GetValue() {
 		defaultAccountName := h.GetProviders().GetAzure().GetPrimaryAccount()
 		var defaultAccount *cloudprovider.AzureAccount
 		for _, a := range h.GetProviders().GetAzure().GetAccounts() {
@@ -153,7 +154,7 @@ func getDeckProvidersConfig(h *config.Hal) *config.Deck_Providers {
 		}
 	}
 
-	if h.GetProviders().GetCloudfoundry().GetEnabled() {
+	if h.GetProviders().GetCloudfoundry().GetEnabled().GetValue() {
 		providers.Cloudfoundry = &config.Deck_Providers_Cloudfoundry{
 			Defaults: &config.Deck_Providers_Cloudfoundry_Defaults{
 				Account: h.GetProviders().GetCloudfoundry().GetPrimaryAccount(),
@@ -161,7 +162,7 @@ func getDeckProvidersConfig(h *config.Hal) *config.Deck_Providers {
 		}
 	}
 
-	if h.GetProviders().GetDcos().GetEnabled() {
+	if h.GetProviders().GetDcos().GetEnabled().GetValue() {
 		providers.Dcos = &config.Deck_Providers_Dcos{
 			Defaults: &config.Deck_Providers_Dcos_Defaults{
 				Account: h.GetProviders().GetDcos().GetPrimaryAccount(),
@@ -169,7 +170,7 @@ func getDeckProvidersConfig(h *config.Hal) *config.Deck_Providers {
 		}
 	}
 
-	if h.GetProviders().GetEcs().GetEnabled() {
+	if h.GetProviders().GetEcs().GetEnabled().GetValue() {
 		providers.Ecs = &config.Deck_Providers_Ecs{
 			Defaults: &config.Deck_Providers_Ecs_Defaults{
 				Account: h.GetProviders().GetEcs().GetPrimaryAccount(),
@@ -177,7 +178,7 @@ func getDeckProvidersConfig(h *config.Hal) *config.Deck_Providers {
 		}
 	}
 
-	if h.GetProviders().GetGoogle().GetEnabled() {
+	if h.GetProviders().GetGoogle().GetEnabled().GetValue() {
 		defaultAccountName := h.GetProviders().GetGoogle().GetPrimaryAccount()
 		var defaultAccount *cloudprovider.GoogleComputeEngineAccount
 		for _, a := range h.GetProviders().GetGoogle().GetAccounts() {
@@ -199,7 +200,7 @@ func getDeckProvidersConfig(h *config.Hal) *config.Deck_Providers {
 		}
 	}
 
-	if h.GetProviders().GetHuaweicloud().GetEnabled() {
+	if h.GetProviders().GetHuaweicloud().GetEnabled().GetValue() {
 		defaultAccountName := h.GetProviders().GetHuaweicloud().GetPrimaryAccount()
 		var defaultAccount *cloudprovider.HuaweiCloudAccount
 		for _, a := range h.GetProviders().GetHuaweicloud().GetAccounts() {

@@ -3,10 +3,12 @@ package proto.artifact;
 
 option go_package = "github.com/spinnaker/kleat/api/client/artifact";
 
+import "google/protobuf/wrappers.proto";
+
 // Configuration for the Bitbucket artifact provider.
 message Bitbucket {
     // Whether the Bitbucket artifact provider is enabled.
-    bool enabled = 1;
+    google.protobuf.BoolValue enabled = 1;
 
     // The list of configured Bitbucket accounts.
     repeated BitbucketAccount accounts = 2;

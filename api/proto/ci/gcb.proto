@@ -3,12 +3,14 @@ package proto.ci;
 
 option go_package = "github.com/spinnaker/kleat/api/client/ci";
 
+import "google/protobuf/wrappers.proto";
+
 import "permissions.proto";
 
 // Configuration for the Google Cloud Build Provider.
 message GoogleCloudBuild {
   // Whether the Google Cloud Build provider is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // The list of configured Google Cloud Build accounts.
   repeated GoogleCloudBuildAccount accounts = 2;

@@ -61,7 +61,7 @@ func getOauth2Config(h *config.Hal) *authn.OAuth2 {
 	// config anytime oauth2 != nil. This requires changing the logic in gate
 	// to properly check the enabled flag.
 	// (In that case we can probably just inline and remove this function.)
-	if oauth2 := h.GetSecurity().GetAuthn().GetOauth2(); oauth2.GetEnabled() {
+	if oauth2 := h.GetSecurity().GetAuthn().GetOauth2(); oauth2.GetEnabled().GetValue() {
 		return oauth2
 	}
 	return nil
@@ -93,7 +93,7 @@ func getGateServices(h *config.Hal) *config.Gate_Services {
 }
 
 func getKayentaConfig(h *config.Hal) *config.ServiceSettings {
-	if h.GetCanary().GetEnabled() {
+	if h.GetCanary().GetEnabled().GetValue() {
 		return &config.ServiceSettings{
 			Enabled: h.GetCanary().GetEnabled(),
 		}
@@ -111,7 +111,7 @@ func getDeckConfig(h *config.Hal) *config.ServiceSettings {
 }
 
 func getGateIntegrations(h *config.Hal) *config.Gate_Integrations {
-	if h.GetFeatures().GetGremlin() {
+	if h.GetFeatures().GetGremlin().GetValue() {
 		return &config.Gate_Integrations{
 			Gremlin: &config.Gate_Integrations_Gremlin{
 				Enabled: h.GetFeatures().GetGremlin(),

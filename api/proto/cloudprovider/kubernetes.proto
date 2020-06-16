@@ -3,12 +3,14 @@ package proto.cloudprovider;
 
 option go_package = "github.com/spinnaker/kleat/api/client/cloudprovider";
 
+import "google/protobuf/wrappers.proto";
+
 import "permissions.proto";
 
 // Configuration for the Kubernetes provider.
 message Kubernetes {
     // Whether the provider is enabled.
-    bool enabled = 1;
+    google.protobuf.BoolValue enabled = 1;
 
     // The list of configured accounts.
     repeated KubernetesAccount accounts = 2;
@@ -100,10 +102,10 @@ message KubernetesCustomResource {
     string deployPriority = 3;
 
     // Whether Spinnaker should manage versioning this resource.
-    bool versioned = 4;
+    google.protobuf.BoolValue versioned = 4;
 
     // Whether the resource is namespaced.
-    bool namespaced = 5;
+    google.protobuf.BoolValue namespaced = 5;
 }
 
 // Configuration for a kind-specific caching policy.

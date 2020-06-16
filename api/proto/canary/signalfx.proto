@@ -3,10 +3,12 @@ package proto.canary;
 
 option go_package = "github.com/spinnaker/kleat/api/client/canary";
 
+import "google/protobuf/wrappers.proto";
+
 // Configuration for the SignalFx canary integration.
 message SignalFx {
   // Whether the integration is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // The list of configured accounts.
   repeated SignalFxAccount accounts = 2;

@@ -155,11 +155,14 @@ dockerRegistry:
     cacheThreads: 1
     clientTimeoutMillis: 60000
     email: fake.email@spinnaker.io
+    insecureRegistry: false
     name: my-gcr-registry
     paginateSize: 100
     passwordFile: /var/secrets/gcr-account.json
     repositories:
     - my-repo
+    sortTagsByDate: false
+    trackDigests: false
     username: _json_key
   enabled: true
   primaryAccount: my-gcr-registry

@@ -22,6 +22,7 @@ import (
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/api/client/security"
 	"github.com/spinnaker/kleat/internal/convert"
+	"github.com/spinnaker/kleat/internal/wrappers"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -39,7 +40,7 @@ var deckEnvTests = configTest{
 				Security: &security.Security{
 					UiSecurity: &security.UiSecurity{
 						Ssl: &security.UiSsl{
-							Enabled:                  false,
+							Enabled:                  wrappers.False(),
 							SslCertificateFile:       "/var/secrets/cert.crt",
 							SslCertificateKeyFile:    "/var/secrets/cert.key",
 							SslCertificatePassphrase: "passw0rd",
@@ -55,7 +56,7 @@ var deckEnvTests = configTest{
 				Security: &security.Security{
 					UiSecurity: &security.UiSecurity{
 						Ssl: &security.UiSsl{
-							Enabled:                  true,
+							Enabled:                  wrappers.True(),
 							SslCertificateFile:       "/var/secrets/cert.crt",
 							SslCertificateKeyFile:    "/var/secrets/cert.key",
 							SslCertificatePassphrase: "passw0rd",

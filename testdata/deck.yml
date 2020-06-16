@@ -2,6 +2,7 @@ authEnabled: true
 authEndpoint: https://spinnaker.test:8084/auth/user
 bakeryDetailUrl: https://spinnaker.test:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}
 canary:
+  featureDisabled: false
   metricStore: stackdriver
   metricsAccountName: my-google-canary-account
   showAllConfigs: true

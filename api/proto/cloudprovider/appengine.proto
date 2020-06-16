@@ -3,12 +3,14 @@ package proto.cloudprovider;
 
 option go_package = "github.com/spinnaker/kleat/api/client/cloudprovider";
 
+import "google/protobuf/wrappers.proto";
+
 import "permissions.proto";
 
 // Configuration for the Google App Engine (GAE) provider.
 message Appengine {
     // Whether the provider is enabled.
-    bool enabled = 1;
+    google.protobuf.BoolValue enabled = 1;
 
     // The list of configured accounts.
     repeated AppengineAccount accounts = 2;
@@ -97,7 +99,7 @@ message AppengineAccount {
     // Enabling this flag will allow Spinnaker to connect with a remote git
     // repository over SSH without verifying the server's IP address against
     // a `known_hosts` file. Defaults to false.
-    bool sshTrustUnknownHosts = 18;
+    google.protobuf.BoolValue sshTrustUnknownHosts = 18;
 
     // A list of regular expressions. Any version matching one of these
     // regexes will be indexed by Spinnaker (unless the version also matches

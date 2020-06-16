@@ -3,12 +3,14 @@ package proto.ci;
 
 option go_package = "github.com/spinnaker/kleat/api/client/ci";
 
+import "google/protobuf/wrappers.proto";
+
 import "permissions.proto";
 
 // Configuration for Wercker.
 message Wercker {
   // Whether Wercker is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // The list of configured Wercker accounts.
   repeated WerckerAccount masters = 2;

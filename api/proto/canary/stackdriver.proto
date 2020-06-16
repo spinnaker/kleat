@@ -3,12 +3,14 @@ package proto.canary;
 
 option go_package = "github.com/spinnaker/kleat/api/client/canary";
 
+import "google/protobuf/wrappers.proto";
+
 // Configuration for the Stackdriver canary integration. If enabled, you must
 // also configure at least one canary.GoogleAccount with a list of
 // supportedTypes that includes canary.SupportedType.METRICS_STORE.
 message Stackdriver {
   // Whether the integration is enabled.
-  bool enabled = 1;
+  google.protobuf.BoolValue enabled = 1;
 
   // Number of milliseconds to wait in between caching the names of available
   // Stackdriver metric types (used when building canary configs). Defaults to

@@ -23,6 +23,7 @@ import (
 	"github.com/spinnaker/kleat/api/client/cloudprovider"
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/convert"
+	"github.com/spinnaker/kleat/internal/wrappers"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -57,7 +58,7 @@ var clouddriverTests = configTest{
 			&config.Hal{
 				Providers: &cloudprovider.Providers{
 					Kubernetes: &cloudprovider.Kubernetes{
-						Enabled: true,
+						Enabled: wrappers.True(),
 						Accounts: []*cloudprovider.KubernetesAccount{
 							{
 								Name:           "my-account",
@@ -71,7 +72,7 @@ var clouddriverTests = configTest{
 			},
 			&config.Clouddriver{
 				Kubernetes: &cloudprovider.Kubernetes{
-					Enabled: true,
+					Enabled: wrappers.True(),
 					Accounts: []*cloudprovider.KubernetesAccount{
 						{
 							Name:           "my-account",
@@ -110,7 +111,7 @@ var clouddriverTests = configTest{
 			&config.Hal{
 				Artifacts: &artifact.Artifacts{
 					Gcs: &artifact.Gcs{
-						Enabled: true,
+						Enabled: wrappers.True(),
 						Accounts: []*artifact.GcsAccount{
 							{
 								Name:     "my-account",
@@ -123,7 +124,7 @@ var clouddriverTests = configTest{
 			&config.Clouddriver{
 				Artifacts: &artifact.Artifacts{
 					Gcs: &artifact.Gcs{
-						Enabled: true,
+						Enabled: wrappers.True(),
 						Accounts: []*artifact.GcsAccount{
 							{
 								Name:     "my-account",

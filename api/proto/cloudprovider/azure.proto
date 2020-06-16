@@ -3,12 +3,14 @@ package proto.cloudprovider;
 
 option go_package = "github.com/spinnaker/kleat/api/client/cloudprovider";
 
+import "google/protobuf/wrappers.proto";
+
 import "permissions.proto";
 
 // Configuration for the Azure provider.
 message Azure {
     // Whether the provider is enabled.
-    bool enabled = 1;
+    google.protobuf.BoolValue enabled = 1;
 
     // The list of configured accounts.
     repeated AzureAccount accounts = 2;
@@ -72,7 +74,7 @@ message AzureAccount {
 
     // If true, the  SSH public key is used to provision the linux VM.
     // If false, the password is used instead.
-    bool useSshPublicKey = 15;
+    google.protobuf.BoolValue useSshPublicKey = 15;
 }
 
 // Configuration for Spinnaker's image bakery.
