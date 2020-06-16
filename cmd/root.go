@@ -35,6 +35,7 @@ experience. Please check out the README at https://github.com/spinnaker/kleat
 for more details.`,
 }
 
+// Execute runs the kleat binary.
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)
