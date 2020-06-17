@@ -111,8 +111,11 @@ aws:
         virtualizationType: pv
     defaultVirtualizationType: pv
     templateFile: file
+  defaultKeyPairTemplate: '{{name}}-keypair'
   defaultRegions:
   - name: us-west-2
+  defaults:
+    iamRole: BaseIAMRole
   enabled: true
   primaryAccount: my-aws-account
 cloudfoundry:

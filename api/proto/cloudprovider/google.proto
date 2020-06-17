@@ -30,7 +30,7 @@ message GoogleComputeEngineAccount {
 
     // (Deprecated): List of required Fiat permission groups. Configure
     // `permissions` instead.
-    repeated string requiredGroupMemberships = 3;
+    repeated string requiredGroupMembership = 3;
 
     // Fiat permissions configuration.
     Permissions permissions = 4;

@@ -77,7 +77,7 @@ message DockerRegistryAccount {
 
     // (Deprecated) List of required Fiat permission groups. Configure
     // `permissions` instead.
-    repeated string requiredGroupMemberships = 14;
+    repeated string requiredGroupMembership = 14;
 
     // An optional list of repositories from which to cache images. If not
     // provided, Spinnaker will attempt to read accessible repositories from the

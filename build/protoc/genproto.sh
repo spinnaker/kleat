@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-PROTOC_FLAGS="--experimental_allow_proto3_optional"
+PROTOC_FLAGS=""
 
 gen_proto() {
   output_dir=$1

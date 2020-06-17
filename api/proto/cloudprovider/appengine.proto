@@ -75,7 +75,7 @@ message AppengineAccount {
 
     // (Deprecated): List of required Fiat permission groups. Configure
     // `permissions` instead.
-    repeated string requiredGroupMemberships = 13;
+    repeated string requiredGroupMembership = 13;
 
     // A list of regular expressions. Any service matching one of these
     // regexes will be indexed by Spinnaker (unless the service also

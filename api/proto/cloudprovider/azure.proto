@@ -60,7 +60,7 @@ message AzureAccount {
 
     // (Deprecated): List of required Fiat permission groups. Configure
     // `permissions` instead.
-    repeated string requiredGroupMemberships = 11;
+    repeated string requiredGroupMembership = 11;
 
     // The Azure regions this Spinnaker account will manage.
     repeated string regions = 12;

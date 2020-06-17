@@ -132,6 +132,7 @@
     - [AwsBakeryDefaults](#proto.cloudprovider.AwsBakeryDefaults)
     - [AwsBaseImage](#proto.cloudprovider.AwsBaseImage)
     - [AwsBaseImageSettings](#proto.cloudprovider.AwsBaseImageSettings)
+    - [AwsDefaults](#proto.cloudprovider.AwsDefaults)
     - [AwsFeatures](#proto.cloudprovider.AwsFeatures)
     - [AwsFeatures.CloudFormation](#proto.cloudprovider.AwsFeatures.CloudFormation)
     - [AwsLifecycleHook](#proto.cloudprovider.AwsLifecycleHook)
@@ -1970,7 +1971,7 @@ Configuration for an App Engine account.
 | omitVersions | [string](#string) | repeated | A list of regular expressions. Any version matching one of these regexes will be ignored by Spinnaker. |
 | project | [string](#string) |  | The Google Cloud Platform project this Spinnaker account will manage. |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
-| requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
+| requiredGroupMembership | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
 | services | [string](#string) | repeated | A list of regular expressions. Any service matching one of these regexes will be indexed by Spinnaker (unless the service also matches a regex in `omitServices`). |
 | sshKnownHostsFilePath | [string](#string) |  | The path to a `known_hosts` file to be used when connecting with a remote git repository over SSH. |
 | sshPrivateKeyFilePath | [string](#string) |  | The path to an SSH private key to be used when connecting with a remote git repository over SSH. If set, `sshPrivateKeyPassphrase` must also be set. |
@@ -2030,6 +2031,8 @@ Configuration for the AWS provider.
 | defaultRegions | [AwsRegion](#proto.cloudprovider.AwsRegion) | repeated | List of default regions. |
 | features | [AwsFeatures](#proto.cloudprovider.AwsFeatures) |  | Configuration for AWS-specific features. |
 | bakeryDefaults | [AwsBakeryDefaults](#proto.cloudprovider.AwsBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
+| defaultKeyPairTemplate | [string](#string) |  | A template for generating the name of the AWS key-pair from the name of the account; only used for accounts where defaultKeyPair is not specified. |
+| defaults | [AwsDefaults](#proto.cloudprovider.AwsDefaults) |  | Default values for AWS deployments. |
 
 
 
@@ -2051,7 +2054,7 @@ Configuration for an AWS account.
 | edda | [string](#string) |  | The endpoint at which Edda is reachable. Edda is not a hard dependency of Spinnaker, but is helpful for reducing the request volume against AWS. See https://github.com/Netflix/edda for more information. |
 | environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
-| requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
+| requiredGroupMembership | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
 | lifecycleHooks | [AwsLifecycleHook](#proto.cloudprovider.AwsLifecycleHook) | repeated | List of configured AWS lifecycle hooks. |
 | regions | [AwsRegion](#proto.cloudprovider.AwsRegion) | repeated | List of configured AWS regions. |
 | name | [string](#string) |  | The name of the account. |
@@ -2112,6 +2115,21 @@ Configuration for a base image for the AWS provider&#39;s bakery.
 | ----- | ---- | ----- | ----------- |
 | baseImage | [AwsBaseImage](#proto.cloudprovider.AwsBaseImage) |  | Base image configuration. |
 | virtualizationSettings | [AwsVirtualizationSettings](#proto.cloudprovider.AwsVirtualizationSettings) |  | Base image virtualization settings. |
+
+
+
+
+
+
+<a name="proto.cloudprovider.AwsDefaults"></a>
+
+### AwsDefaults
+Configuration for defaults for AWS deployments.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| iamRole | [string](#string) |  | The default IAM role to use for deployments, when not otherwise specified. |
 
 
 
@@ -2257,7 +2275,7 @@ Configuration for an Azure account.
 | packerResourceGroup | [string](#string) |  | The resource group to use if baking images with Packer. |
 | packerStorageAccount | [string](#string) |  | The storage account to use if baking images with Packer. |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
-| requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
+| requiredGroupMembership | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
 | regions | [string](#string) | repeated | The Azure regions this Spinnaker account will manage. |
 | subscriptionId | [string](#string) |  | (Required) The `subscriptionId` to which your service principal is assigned. |
 | tenantId | [string](#string) |  | (Required) The `tenantId` to which your service principal is assigned. |
@@ -2370,7 +2388,7 @@ Configuration for a Spinnaker Cloud Foundry account.
 | skipSslValidation | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | (Default: `false`) Skip SSL server certificate validation of the API endpoint. |
 | user | [string](#string) |  | (Required) User name for the account to use for this Cloud Foundry Foundation. |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
-| requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
+| requiredGroupMembership | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
 
 
 
@@ -2424,7 +2442,7 @@ Credentials to authenticate against one or more DC/OS clusters.
 | environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
 | dockerRegistries | [DcosAccountDockerRegistry](#proto.cloudprovider.DcosAccountDockerRegistry) | repeated | (Required) The list of Docker registries to use with this DC/OS account. |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
-| requiredGroupMemberships | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
+| requiredGroupMembership | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
 
 
 
@@ -2553,7 +2571,7 @@ A credential able to authenticate against a set of Docker repositories.
 | passwordCommand | [string](#string) |  | Command to retrieve Docker token/password. The command must be available in the environment. Only one of `password`, `passwordCommand`, and `passwordFile` should be specified. |
 | passwordFile | [string](#string) |  | The path to a file containing your Docker password in plaintext (not a Docker `config.json` file). Only one of `password`, `passwordCommand`, and `passwordFile` should be specified. |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
-| requiredGroupMemberships | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
+| requiredGroupMembership | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
 | repositories | [string](#string) | repeated | An optional list of repositories from which to cache images. If not provided, Spinnaker will attempt to read accessible repositories from the `registries _catalog` endpoint. |
 | sortTagsByDate | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | If `true`, Spinnaker will sort tags by creation date. Defaults to `false`. Not recommended for use with large registries; sorting performance scales poorly due to limitations of the Docker V2 API. |
 | trackDigests | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | If `true`, Spinnaker will track digest changes. This is not recommended because it greatly increases queries to the registry, and most registries are flaky. Defaults to `false`. |
@@ -2609,7 +2627,7 @@ Configuration for an ECS account.
 | environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
 | awsAccount | [string](#string) |  | (Required) Provide the name of the AWS account associated with this ECS account. See https://github.com/spinnaker/clouddriver/blob/master/clouddriver-ecs/README.md for more information. |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
-| requiredGroupMemberships | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
+| requiredGroupMembership | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
 
 
 
@@ -2733,7 +2751,7 @@ credential that can authenticate against a GCP project.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The name of the account. |
-| requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
+| requiredGroupMembership | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
 | project | [string](#string) |  | The GCP project this Spinnaker account will manage. |
 | jsonPath | [string](#string) |  | The path to a JSON service account that Spinnaker will use as credentials. This is only needed if Spinnaker is not deployed on a Google Compute Engine VM, or needs permissions not afforded to the VM it is running on. See https://cloud.google.com/compute/docs/access/service-accounts for more information. |
@@ -2808,7 +2826,7 @@ Configuration for a Huawei Cloud account.
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The name of the account. |
 | accountType | [string](#string) |  | The type of account. |
-| requiredGroupMemberships | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
+| requiredGroupMembership | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
 | authUrl | [string](#string) |  | (Required) The auth URL of the cloud. |
 | domainName | [string](#string) |  | (Required) The domain name of the cloud. |
@@ -2959,7 +2977,7 @@ credential that can authenticate against your Kubernetes cluster.
 | oAuthScopes | [string](#string) | repeated | The list of OAuth scopes used by kubectl to fetch an OAuth token. |
 | kubeconfigFile | [string](#string) |  | The path to your kubeconfig file. By default, it will be under the Spinnaker user&#39;s home directory in the typical .kube/config location. |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
-| requiredGroupMemberships | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
+| requiredGroupMembership | [string](#string) | repeated | (Deprecated): List of required Fiat permission groups. Configure `permissions` instead. |
 | liveManifestCalls | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | When true, clouddriver will query manifest status during pipeline executions using live data rather than the cache. This eliminates all time spent in the &#34;force cache refresh&#34; task in pipelines, greatly reducing execution time. Defaults to false. |
 | serviceAccount | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | When true, Spinnaker attempt to authenticate against Kubernetes using a Kubernetes service account. This only works when Halyard &amp; Spinnaker are deployed in Kubernetes. Read more about service accounts here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/. Defaults to false. |
 | kubeconfigContents | [string](#string) |  | The raw contents of your kubeconfig file. Ignored if kubeconfigFile is set. |
@@ -3072,7 +3090,7 @@ Infrastructure (OCI) user.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The name of the account. |
-| requiredGroupMemberships | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
+| requiredGroupMembership | [string](#string) | repeated | (Deprecated) List of required Fiat permission groups. Configure `permissions` instead. |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
 | compartmentId | [string](#string) |  | (Required) The OCID of the Oracle Compartment to use. |
 | environment | [string](#string) |  | The environment name for the account. Many accounts can share the same environment (e.g., dev, test, prod). |
@@ -6002,6 +6020,7 @@ Configuration for an Oracle persistent store.
 | sshPrivateKeyFilePath | [string](#string) |  | Path to the private key in PEM format. |
 | privateKeyPassphrase | [string](#string) |  | Passphrase used for the private key, if it is encrypted. |
 | tenancyId | [string](#string) |  | The OCID of the Oracle Tenancy to use. |
+| compartmentId | [string](#string) |  | The OCID of the Oracle Compartment to use. |
 
 
 

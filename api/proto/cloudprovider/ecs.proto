@@ -39,5 +39,5 @@ message EcsAccount {
 
   // (Deprecated) List of required Fiat permission groups. Configure
   // `permissions` instead.
-  repeated string requiredGroupMemberships = 5;
+  repeated string requiredGroupMembership = 5;
 }

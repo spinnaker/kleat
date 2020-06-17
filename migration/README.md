@@ -21,6 +21,8 @@ be used as input to Kleat.
   persistent store type is enabled. Kleat does not recognize this field and
   instead requires that the flag `enabled: true` be set on the persistent store
   that should be used.
+- Using `redis` as a persistent store for `front50` is no longer supported. All
+  other uses of `redis` continue to be supported.
 - Halyard specified `canary.serviceIntegrations` as a list, with each
   integration specifying its type under a `name` key. Kleat requires
   `canary.serviceIntegrations` to be specified as a map with each type as a key.
@@ -38,7 +40,7 @@ be used as input to Kleat.
     `metadataRemote` was specified, and instead set `metadataUrl` to this value.
     A path should be prefixed with `file://` (though currently Gate will add
     this prefix if it is missing for a local file).
-  - Halyard requires the `redirectUrl` to be configured as a full URL (ex:
+  - Halyard requires the `serviceAddress` to be configured as a full URL (ex:
     `https://gate.org.com:8084/mypath`). Kleat will require that the redirect
     host name, path, and protocol be separately configured. Users will need to
     remove the `redirectUrl` field and instead specify the following fields:
@@ -72,6 +74,9 @@ be used as input to Kleat.
   cloud provider for which you expect Deck to receive a statically configured
   default account and/or region. (Halyard will fall back to the first configured
   account if no primaryAccount is configured.)
+- The `security.enabled` field is no longer used by `kleat`; the
+  `security.authn.enabled` and `security.authz.enabled` fields individually
+  control whether authentication and authorization are enabled, respectively.
 
 ## Optional changes
 
