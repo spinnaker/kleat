@@ -190,13 +190,13 @@ metricStores:
     app_key: def
     enabled: true
     tags:
-      - key:val
+    - key:val
   newrelic:
     enabled: true
     host: https://my-newrelic-host
     insert_key: abc
     tags:
-      - key:val
+    - key:val
   period: 120
   prometheus:
     enabled: true
@@ -206,7 +206,6 @@ metricStores:
     enabled: true
     project: my-project
     zone: my-zone
-name: default
 notifications:
   bearychat:
     enabled: true
@@ -251,8 +250,6 @@ persistentStorage:
     sshPrivateKeyFilePath: /var/secrets/oracle-key
     tenancyId: my-tenancy-id
     userId: my-user-id
-  persistentStoreType: gcs
-  redis: {}
   s3:
     accessKeyId: my-access-key-id
     bucket: my-bucket
@@ -442,7 +439,6 @@ providers:
   kubernetes:
     accounts:
     - cacheThreads: 1
-      configureImagePullSecrets: true
       context: spinnaker
       kubeconfigFile: /var/secrets/k8s-kubeconfig
       name: k8s
@@ -451,7 +447,6 @@ providers:
       - kube-public
       - kube-system
       - docs-site-v1
-      providerVersion: V2
     enabled: true
     primaryAccount: k8s
   oracle:
@@ -569,7 +564,6 @@ security:
       redirectBasePath: /
       redirectHostname: spinnaker.test:8084
       redirectProtocol: https
-      serviceAddress: https://spinnaker.test:8084
       userAttributeMapping:
         email: user-email
     x509:
@@ -596,7 +590,6 @@ security:
         userSearchBase: users
         userSearchFilter: (d={0})
       service: FILE
-  enabled: true
   uiSecurity:
     overrideBaseUrl: https://spinnaker.test:9000
     ssl:
