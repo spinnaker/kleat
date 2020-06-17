@@ -1,0 +1,17 @@
+syntax = "proto3";
+package proto.metricstores;
+
+option go_package = "github.com/spinnaker/kleat/api/client/metricstores";
+
+import "google/protobuf/wrappers.proto";
+
+// Configuration for the Prometheus metric store.
+message Prometheus {
+  // Whether the Prometheus metric store is enabled.
+  google.protobuf.BoolValue enabled = 1;
+
+  // The endpoint to which the monitoring Daemon should push metrics. If you
+  // have configured Prometheus to automatically discover all your Spinnaker
+  // services and pull metrics from them, this is not required.
+  string push_gateway = 2;
+}

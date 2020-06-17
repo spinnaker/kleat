@@ -51,6 +51,7 @@ func TestHalToServiceConfigs(t *testing.T) {
 		Gate:        convert.HalToGate(h),
 		Igor:        convert.HalToIgor(h),
 		Kayenta:     convert.HalToKayenta(h),
+		Monitoring:  convert.HalToMonitoring(h),
 		Orca:        convert.HalToOrca(h),
 		Rosco:       convert.HalToRosco(h),
 	}
@@ -107,6 +108,10 @@ func TestHalToServiceIntegration(t *testing.T) {
 		{
 			"kayenta.yml",
 			services.GetKayenta(),
+		},
+		{
+			"spinnaker-monitoring.yml",
+			services.GetMonitoring(),
 		},
 		{
 			"orca.yml",

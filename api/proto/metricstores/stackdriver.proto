@@ -1,0 +1,22 @@
+syntax = "proto3";
+package proto.metricstores;
+
+option go_package = "github.com/spinnaker/kleat/api/client/metricstores";
+
+import "google/protobuf/wrappers.proto";
+
+// Configuration for the Stackdriver metric store.
+message Stackdriver {
+  // Whether the Datadog metric store is enabled.
+  google.protobuf.BoolValue enabled = 1;
+
+  // Path to a Google JSON service account that has permission to publish
+  // metrics.
+  string credentials_path = 2;
+
+  // The project to which Spinnaker's metrics should be published.
+  string project = 3;
+
+  // The zone with which Spinnaker's metrics should be associated.
+  string zone = 4;
+}

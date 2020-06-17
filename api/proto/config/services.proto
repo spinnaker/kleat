@@ -14,6 +14,7 @@ import "config/igor.proto";
 import "config/kayenta.proto";
 import "config/orca.proto";
 import "config/rosco.proto";
+import "config/monitoring.proto";
 
 // Configuration for Spinnaker's microservices.
 message Services {
@@ -28,4 +29,5 @@ message Services {
   Deck deck = 9;
   DeckEnv deckEnv = 10;
   Igor igor = 11;
+  Monitoring monitoring = 12;
 }

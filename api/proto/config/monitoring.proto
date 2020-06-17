@@ -1,0 +1,49 @@
+syntax = "proto3";
+package proto.config;
+
+option go_package = "github.com/spinnaker/kleat/api/client/config";
+
+import "metricstores/datadog.proto";
+import "metricstores/newrelic.proto";
+import "metricstores/prometheus.proto";
+import "metricstores/stackdriver.proto";
+
+// Configuration for the spinnaker-monitoring microservice.
+// The monitoring protos use snake_case for backwards compatibility with
+// Halyard-generated hal configs and the spinnaker-monitoring microservice.
+// All new protos should be added using camelCase for consistency with the
+// rest of the hal config.
+message Monitoring {
+  // Configuration for the Datadog metric store.
+  metricstores.Datadog datadog = 1;
+
+  // Configuration for the New Relic metric store.
+  metricstores.Newrelic newrelic = 2;
+
+  // Configuration for the Prometheus metric store.
+  metricstores.Prometheus prometheus = 3;
+
+  // Configuration for the Stackdriver metric store.
+  metricstores.Stackdriver stackdriver = 4;
+
+  // Configuration for monitoring period and enabled metric stores.
+  Monitor monitor = 5;
+
+  // Configuration for monitoring period and enabled metric stores.
+  message Monitor {
+    // Polling period for the monitoring daemon (seconds). Defaults to 30.
+    int32 period = 1;
+
+    // List of enabled metric stores.
+    repeated MetricStoreType metric_store = 2;
+  }
+}
+
+// Configurable metric store types.
+enum MetricStoreType {
+  unspecified = 0;
+  datadog = 1;
+  newrelic = 2;
+  prometheus = 3;
+  stackdriver = 4;
+}

@@ -272,6 +272,12 @@
     - [Kayenta.ServiceIntegrations.Aws](#proto.config.Kayenta.ServiceIntegrations.Aws)
     - [Kayenta.ServiceIntegrations.Google](#proto.config.Kayenta.ServiceIntegrations.Google)
   
+- [config/monitoring.proto](#config/monitoring.proto)
+    - [Monitoring](#proto.config.Monitoring)
+    - [Monitoring.Monitor](#proto.config.Monitoring.Monitor)
+  
+    - [MetricStoreType](#proto.config.MetricStoreType)
+  
 - [config/orca.proto](#config/orca.proto)
     - [Orca](#proto.config.Orca)
     - [Orca.Defaults](#proto.config.Orca.Defaults)
@@ -292,6 +298,21 @@
   
 - [features.proto](#features.proto)
     - [Features](#proto.Features)
+  
+- [metricstores/datadog.proto](#metricstores/datadog.proto)
+    - [Datadog](#proto.metricstores.Datadog)
+  
+- [metricstores/metricstores.proto](#metricstores/metricstores.proto)
+    - [MetricStores](#proto.metricstores.MetricStores)
+  
+- [metricstores/newrelic.proto](#metricstores/newrelic.proto)
+    - [Newrelic](#proto.metricstores.Newrelic)
+  
+- [metricstores/prometheus.proto](#metricstores/prometheus.proto)
+    - [Prometheus](#proto.metricstores.Prometheus)
+  
+- [metricstores/stackdriver.proto](#metricstores/stackdriver.proto)
+    - [Stackdriver](#proto.metricstores.Stackdriver)
   
 - [notification/bearychat.proto](#notification/bearychat.proto)
     - [BearyChat](#proto.notification.BearyChat)
@@ -4054,6 +4075,7 @@ Configuration for a Spinnaker installation.
 | timezone | [string](#string) |  | The timezone in which your Spinnaker instance runs. This affects what the UI will display as well as how CRON triggers are run. |
 | version | [string](#string) |  | Top-level Spinnaker version. |
 | repository | [proto.repository.Repository](#proto.repository.Repository) |  |  |
+| metricStores | [proto.metricstores.MetricStores](#proto.metricstores.MetricStores) |  | Configuration for the Spinnaker monitoring daemon metric stores. |
 
 
 
@@ -4215,6 +4237,76 @@ Configuration for the Kayenta microservice.
 
 
  
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="config/monitoring.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## config/monitoring.proto
+
+
+
+<a name="proto.config.Monitoring"></a>
+
+### Monitoring
+Configuration for the spinnaker-monitoring microservice.
+The monitoring protos use snake_case for backwards compatibility with
+Halyard-generated hal configs and the spinnaker-monitoring microservice.
+All new protos should be added using camelCase for consistency with the
+rest of the hal config.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| datadog | [proto.metricstores.Datadog](#proto.metricstores.Datadog) |  | Configuration for the Datadog metric store. |
+| newrelic | [proto.metricstores.Newrelic](#proto.metricstores.Newrelic) |  | Configuration for the New Relic metric store. |
+| prometheus | [proto.metricstores.Prometheus](#proto.metricstores.Prometheus) |  | Configuration for the Prometheus metric store. |
+| stackdriver | [proto.metricstores.Stackdriver](#proto.metricstores.Stackdriver) |  | Configuration for the Stackdriver metric store. |
+| monitor | [Monitoring.Monitor](#proto.config.Monitoring.Monitor) |  | Configuration for monitoring period and enabled metric stores. |
+
+
+
+
+
+
+<a name="proto.config.Monitoring.Monitor"></a>
+
+### Monitoring.Monitor
+Configuration for monitoring period and enabled metric stores.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| period | [int32](#int32) |  | Polling period for the monitoring daemon (seconds). Defaults to 30. |
+| metric_store | [MetricStoreType](#proto.config.MetricStoreType) | repeated | List of enabled metric stores. |
+
+
+
+
+
+ 
+
+
+<a name="proto.config.MetricStoreType"></a>
+
+### MetricStoreType
+Configurable metric store types.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| unspecified | 0 |  |
+| datadog | 1 |  |
+| newrelic | 2 |  |
+| prometheus | 3 |  |
+| stackdriver | 4 |  |
+
 
  
 
@@ -4442,6 +4534,7 @@ Configuration for Spinnaker&#39;s microservices.
 | deck | [Deck](#proto.config.Deck) |  |  |
 | deckEnv | [DeckEnv](#proto.config.DeckEnv) |  |  |
 | igor | [Igor](#proto.config.Igor) |  |  |
+| monitoring | [Monitoring](#proto.config.Monitoring) |  |  |
 
 
 
@@ -4477,6 +4570,175 @@ Feature flags
 | chaos | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable Chaos Monkey support. For this to work, you&#39;ll need a running Chaos Monkey deployment. See https://github.com/Netflix/chaosmonkey/wiki. |
 | managedPipelineTemplatesV2UI | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable managed pipeline templates v2 UI support. |
 | gremlin | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable Gremlin fault-injection support. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="metricstores/datadog.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## metricstores/datadog.proto
+
+
+
+<a name="proto.metricstores.Datadog"></a>
+
+### Datadog
+Configuration for the Datadog metric store.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the Datadog metric store is enabled. |
+| api_key | [string](#string) |  | Datadog API key. |
+| app_key | [string](#string) |  | Datadog app key. Only required if you want Spinnaker to push pre-configured Spinnaker dashboards to your Datadog account. |
+| tags | [string](#string) | repeated | Datadog custom tags. Delimit the key-value pair with colons (e.g., `app:test`). |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="metricstores/metricstores.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## metricstores/metricstores.proto
+
+
+
+<a name="proto.metricstores.MetricStores"></a>
+
+### MetricStores
+Configuration for the Spinnaker monitoring daemon metric stores.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| datadog | [Datadog](#proto.metricstores.Datadog) |  | Configuration for the Datadog metric store. |
+| newrelic | [Newrelic](#proto.metricstores.Newrelic) |  | Configuration for the Newrelic metric store. |
+| prometheus | [Prometheus](#proto.metricstores.Prometheus) |  | Configuration for the Prometheus metric store. |
+| stackdriver | [Stackdriver](#proto.metricstores.Stackdriver) |  | Configuration for the Stackdriver metric store. |
+| period | [int32](#int32) |  | Polling period for the monitoring daemon (seconds). Defaults to 30. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="metricstores/newrelic.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## metricstores/newrelic.proto
+
+
+
+<a name="proto.metricstores.Newrelic"></a>
+
+### Newrelic
+Configuration for the New Relic metric store.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the New Relic metric store is enabled. |
+| insert_key | [string](#string) |  | Your New Relic Insights insert key. |
+| host | [string](#string) |  | The URL to post metric data to. In almost all cases, this is set correctly by default and should not be used. |
+| tags | [string](#string) | repeated | New Relic custom tags. Delimit the key-value pair with colons (e.g., `app:test`). |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="metricstores/prometheus.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## metricstores/prometheus.proto
+
+
+
+<a name="proto.metricstores.Prometheus"></a>
+
+### Prometheus
+Configuration for the Prometheus metric store.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the Prometheus metric store is enabled. |
+| push_gateway | [string](#string) |  | The endpoint to which the monitoring Daemon should push metrics. If you have configured Prometheus to automatically discover all your Spinnaker services and pull metrics from them, this is not required. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="metricstores/stackdriver.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## metricstores/stackdriver.proto
+
+
+
+<a name="proto.metricstores.Stackdriver"></a>
+
+### Stackdriver
+Configuration for the Stackdriver metric store.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the Datadog metric store is enabled. |
+| credentials_path | [string](#string) |  | Path to a Google JSON service account that has permission to publish metrics. |
+| project | [string](#string) |  | The project to which Spinnaker&#39;s metrics should be published. |
+| zone | [string](#string) |  | The zone with which Spinnaker&#39;s metrics should be associated. |
 
 
 

@@ -1,0 +1,27 @@
+syntax = "proto3";
+package proto.metricstores;
+
+option go_package = "github.com/spinnaker/kleat/api/client/metricstores";
+
+import "metricstores/datadog.proto";
+import "metricstores/newrelic.proto";
+import "metricstores/prometheus.proto";
+import "metricstores/stackdriver.proto";
+
+// Configuration for the Spinnaker monitoring daemon metric stores.
+message MetricStores {
+  // Configuration for the Datadog metric store.
+  Datadog datadog = 1;
+
+  // Configuration for the Newrelic metric store.
+  Newrelic newrelic = 2;
+
+  // Configuration for the Prometheus metric store.
+  Prometheus prometheus = 3;
+
+  // Configuration for the Stackdriver metric store.
+  Stackdriver stackdriver = 4;
+
+  // Polling period for the monitoring daemon (seconds). Defaults to 30.
+  int32 period = 5;
+}
