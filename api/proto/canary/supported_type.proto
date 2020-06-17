@@ -4,7 +4,9 @@ package proto.canary;
 option go_package = "github.com/spinnaker/kleat/api/client/canary";
 
 enum SupportedType {
-  METRICS_STORE = 0;
-  CONFIGURATION_STORE = 1;
-  OBJECT_STORE = 2;
+  // Unspecified. Do not directly use, instead omit the field.
+  UNSPECIFIED = 0;
+  METRICS_STORE = 1;
+  CONFIGURATION_STORE = 2;
+  OBJECT_STORE = 3;
 }

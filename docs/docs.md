@@ -352,7 +352,6 @@
     - [UsernamePassword](#proto.security.authn.UsernamePassword)
     - [X509](#proto.security.authn.X509)
   
-    - [OAuth2.OAuth2Provider](#proto.security.authn.OAuth2.OAuth2Provider)
     - [OAuth2Client.AuthenticationScheme](#proto.security.authn.OAuth2Client.AuthenticationScheme)
   
 - [security/authz/authz.proto](#security/authz/authz.proto)
@@ -1548,9 +1547,10 @@ supportedTypes that includes canary.SupportedType.METRICS_STORE.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| METRICS_STORE | 0 |  |
-| CONFIGURATION_STORE | 1 |  |
-| OBJECT_STORE | 2 |  |
+| UNSPECIFIED | 0 | Unspecified. Do not directly use, instead omit the field. |
+| METRICS_STORE | 1 |  |
+| CONFIGURATION_STORE | 2 |  |
+| OBJECT_STORE | 3 |  |
 
 
  
@@ -1972,9 +1972,10 @@ Represents a release track of the gcloud tool.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| STABLE | 0 | Standard release track; runs commands via `gcloud...` |
-| BETA | 1 | Alpha release track; runs commands via `gcloud beta...` |
-| ALPHA | 2 | Alpha release track; runs commands via `gcloud alpha...` |
+| UNSPECIFIED | 0 | Unspecified. Do not directly use, instead omit the field. |
+| STABLE | 1 | Standard release track; runs commands via `gcloud...` |
+| BETA | 2 | Alpha release track; runs commands via `gcloud beta...` |
+| ALPHA | 3 | Alpha release track; runs commands via `gcloud alpha...` |
 
 
  
@@ -4860,10 +4861,11 @@ Represents the format of an incoming pub/sub message.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| CUSTOM | 0 |  |
-| GCB | 1 |  |
-| GCS | 2 |  |
-| GCR | 3 |  |
+| UNSPECIFIED | 0 | Unspecified. Do not directly use, instead omit the field. |
+| CUSTOM | 1 |  |
+| GCB | 2 |  |
+| GCS | 3 |  |
+| GCR | 4 |  |
 
 
  
@@ -5099,7 +5101,6 @@ Configuration for authentication via OAuth 2.0.
 | userInfoRequirements | [OAuth2.UserInfoRequirementsEntry](#proto.security.authn.OAuth2.UserInfoRequirementsEntry) | repeated | The map of requirements the userInfo request must have. This is used to restrict user login to specific domains or having a specific attribute. |
 | resource | [OAuth2Resource](#proto.security.authn.OAuth2Resource) |  | Configuration for OAuth 2.0 resources. |
 | userInfoMapping | [OAuth2UserInfoMapping](#proto.security.authn.OAuth2UserInfoMapping) |  | Mapping of user attributes to fields returned by your OAuth 2.0 provider. This field controls how the fields returned from the OAuth 2.0 provider&#39;s user info endpoint are translated into a Spinnaker user. |
-| provider | [OAuth2.OAuth2Provider](#proto.security.authn.OAuth2.OAuth2Provider) |  | The OAuth 2.0 provider handling authentication. |
 
 
 
@@ -5267,21 +5268,6 @@ with corresponding group information for the user. This can be configured via -r
  
 
 
-<a name="proto.security.authn.OAuth2.OAuth2Provider"></a>
-
-### OAuth2.OAuth2Provider
-Supported OAuth 2.0 providers.
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| OTHER | 0 | Other OAuth 2.0 provider. |
-| AZURE | 1 | Azure OAuth 2.0 provider. |
-| GITHUB | 2 | Github OAuth 2.0 provider. |
-| ORACLE | 3 | Oracle OAuth 2.0 provider. |
-| GOOGLE | 4 | Google OAuth 2.0 provider. |
-
-
-
 <a name="proto.security.authn.OAuth2Client.AuthenticationScheme"></a>
 
 ### OAuth2Client.AuthenticationScheme
@@ -5289,10 +5275,11 @@ Methods to transmit authentication tokens to an OAuth 2.0 provider.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| header | 0 | Token is sent in the request header. |
-| query | 1 | Token is sent as a query parameter. |
-| form | 2 | Token is sent in the form body. |
-| none | 3 | Token is not sent at all. |
+| unspecified | 0 | Unspecified. Do not directly use, instead omit the field. |
+| header | 1 | Token is sent in the request header. |
+| query | 2 | Token is sent as a query parameter. |
+| form | 3 | Token is sent in the form body. |
+| none | 4 | Token is not sent at all. |
 
 
  
@@ -5426,7 +5413,7 @@ Configuration for which role provider to use for authorization decisions.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| EXTERNAL | 0 | External role provider. |
+| UNSPECIFIED | 0 | Unspecified. Do not directly use, instead omit the field. |
 | FILE | 1 | File-based role provider. |
 | GOOGLE | 2 | Google role provider. |
 | GITHUB | 3 | GitHub role provider. |
@@ -5566,9 +5553,10 @@ Setting for client authentication.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| NONE | 0 | No client authentication. |
-| WANT | 1 | Client authentication is optional. |
-| NEED | 2 | Client authentication is required. |
+| UNSPECIFIED | 0 | Unspecified. Do not directly use, instead omit the field. |
+| NONE | 1 | No client authentication. |
+| WANT | 2 | Client authentication is optional. |
+| NEED | 3 | Client authentication is required. |
 
 
  
@@ -5841,8 +5829,9 @@ the &#39;x-amz-server-side-encryption&#39; header.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| AES256 | 0 | Amazon S3-managed encryption keys, equivalent to a header value of &#39;AES256&#39;. |
-| AWSKMS | 1 | AWS KMS-managed encryption keys, equivalent to a header value of &#39;aws:kms&#39;. |
+| UNSPECIFIED | 0 | Unspecified. Do not directly use, instead omit the field. |
+| AES256 | 1 | Amazon S3-managed encryption keys, equivalent to a header value of &#39;AES256&#39;. |
+| AWSKMS | 2 | AWS KMS-managed encryption keys, equivalent to a header value of &#39;aws:kms&#39;. |
 
 
  

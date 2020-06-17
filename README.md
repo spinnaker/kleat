@@ -7,9 +7,9 @@ replace Halyard. Please see the
 [RFC](https://github.com/spinnaker/governance/blob/master/rfc/halyard-lite.md)
 for an overview of what this tool will do.
 
-It is currently under active development, but is ready for early adopters
-to try in development clusters! Please share any feedback in the #kleat
-channel in [Spinnaker slack](join.spinnaker.io).
+It is currently under active development, but is ready for early adopters to try
+in development clusters! Please share any feedback in the #kleat channel in
+[Spinnaker slack](join.spinnaker.io).
 
 ### Migrating from Halyard
 

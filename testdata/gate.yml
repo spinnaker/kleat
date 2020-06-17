@@ -41,7 +41,6 @@ security:
       scope: profile email
       userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
     enabled: true
-    provider: GOOGLE
     resource:
       userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
     userInfoMapping:

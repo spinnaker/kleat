@@ -45,8 +45,10 @@ message S3 {
 // Configuration for S3 server-side encryption; values correspond to values of
 // the 'x-amz-server-side-encryption' header.
 enum S3ServerSideEncryption {
+  // Unspecified. Do not directly use, instead omit the field.
+  UNSPECIFIED = 0;
   // Amazon S3-managed encryption keys, equivalent to a header value of 'AES256'.
-  AES256 = 0;
+  AES256 = 1;
   // AWS KMS-managed encryption keys, equivalent to a header value of 'aws:kms'.
-  AWSKMS = 1;
+  AWSKMS = 2;
 }

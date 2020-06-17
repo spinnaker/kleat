@@ -72,8 +72,10 @@ message GooglePublisher {
 
 // Represents the format of an incoming pub/sub message.
 enum MessageFormat {
-  CUSTOM = 0;
-  GCB = 1;
-  GCS = 2;
-  GCR = 3;
+  // Unspecified. Do not directly use, instead omit the field.
+  UNSPECIFIED = 0;
+  CUSTOM = 1;
+  GCB = 2;
+  GCS = 3;
+  GCR = 4;
 }

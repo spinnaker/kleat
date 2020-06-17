@@ -1,595 +1,594 @@
-name: default
-version: master-latest-unvalidated
-timezone: America/Chicago
-providers:
-  kubernetes:
-    enabled: true
-    accounts:
-    - name: k8s
-      providerVersion: V2
-      context: spinnaker
-      configureImagePullSecrets: true
-      cacheThreads: 1
-      omitNamespaces:
-      - default
-      - kube-public
-      - kube-system
-      - docs-site-v1
-      kubeconfigFile: /var/secrets/k8s-kubeconfig
-    primaryAccount: k8s
-  appengine:
-    enabled: true
-    accounts:
-      - name: my-appengine-account
-        project: spinnaker-maggie
-        jsonPath: /var/secrets/appengine-account.json
-        sshTrustUnknownHosts: true
-    primaryAccount: my-appengine-account
-  google:
-    enabled: true
-    accounts:
-      - name: my-gce-account
-        project: spinnaker-maggie
-        jsonPath: /var/secrets/gce-account.json
-        alphaListed: true
-        consul:
-          enabled: true
-          agentEndpoint: localhost
-          agentPort: 8500
-          datacenters: []
-        regions:
-          - us-east1-b
-    primaryAccount: my-gce-account
-    bakeryDefaults:
-      templateFile: gce.json
-      baseImages:
-        - baseImage:
-            id: my-image-id
-            shortDescription: my short description
-            detailedDescription: my detailed description
-            imageFamily: true
-          virtualizationSettings:
-            sourceImage: my-source-image
-            sourceImageFamily: my-source-image-family
-      zone: us-central1-f
-      network: default
-      networkProjectId: my-network-project-id
-      useInternalIp: true
-  aws:
-    enabled: true
-    accounts:
-      - name: my-aws-account
-        environment: env
-        defaultKeyPair: keyPair
-        edda: edda
-        discovery: discovery
-        accountId: id
-        regions:
-          - name: myregion
-        assumeRole: role
-        lifecycleHooks:
-          - defaultResult: ABANDON
-            heartbeatTimeout: 12
-            lifecycleTransition: autoscaling:EC2_INSTANCE_TERMINATING
-            notificationTargetARN: arn:aws:sns:{{region}}:{{accountId}}:term-targ
-            roleARN: arn:aws:iam::{{accountId}}:role-arn
-    primaryAccount: my-aws-account
-    bakeryDefaults:
-      templateFile: file
-      baseImages:
-      - baseImage:
-          id: my-image-id
-          shortDescription: my short description
-          detailedDescription: my detailed description
-        virtualizationSettings:
-          sourceAmi: my-source-ami
-          virtualizationType: pv
-      awsAccessKey: key
-      awsSecretKey: keysecret
-      awsSubnetId: subnetid
-      awsVpcId: vpcid
-      awsAssociatePublicIpAddress: true
-      defaultVirtualizationType: pv
-    defaultKeyPairTemplate: '{{name}}-keypair'
-    defaultRegions:
-      - name: us-west-2
-    defaults:
-      iamRole: BaseIAMRole
-  cloudfoundry:
-    enabled: true
-    accounts:
-      - name: my-cf-account
-        environment: dev
-        requiredGroupMembership: []
-        permissions: {}
-        password: pw
-        user: username
-        skipSslValidation: true
-        api: api.sys.somesystem.com
-        appsManagerUri: https://apps.sys.somesystem.com
-        metricsUri: https://metrics.sys.somesystem.com
-    primaryAccount: my-cf-account
-  dcos:
-    enabled: true
-    accounts:
-      - name: my-dcos-account
-        environment: dev
-        dockerRegistries:
-          - accountName: my-gcr-registry
-        clusters:
-          - name: my-dcos-cluster
-            uid: my-id
-            serviceKeyFile: /var/secrets/my-dcos-service-key
-    primaryAccount: my-dcos-account
-    clusters:
-      - name: my-dcos-cluster
-        dcosUrl: my-url
-        caCertFile: /var/secrets/my-ca-cert-file
-        insecureSkipTlsVerify: true
-        loadBalancer:
-          image: image
-          serviceAccountSecret: secret
-  dockerRegistry:
-    enabled: true
-    accounts:
-    - name: my-gcr-registry
-      address: https://gcr.io
-      username: _json_key
-      email: fake.email@spinnaker.io
-      cacheIntervalSeconds: 30
-      clientTimeoutMillis: 60000
-      cacheThreads: 1
-      paginateSize: 100
-      sortTagsByDate: false
-      trackDigests: false
-      insecureRegistry: false
-      repositories:
-      - my-repo
-      passwordFile: /var/secrets/gcr-account.json
-    primaryAccount: my-gcr-registry
-  ecs:
-    enabled: true
-    accounts:
-    - name: my-ecs-account
-      environment: dev
-      awsAccount: my-aws-account
-    primaryAccount: my-ecs-account
-  huaweicloud:
-    enabled: true
-    accounts:
-    - name: my-huawei-account
-      environment: dev
-      accountType: dev
-      authUrl: myurl
-      username: username
-      password: pw
-      projectName: project
-      domainName: my-domain-name
-      insecure: true
-      regions:
-      - us-east1
-    primaryAccount: my-huawei-account
-    bakeryDefaults:
-      templateFile: file
-      baseImages:
-      - baseImage:
-          id: myimage
-          shortDescription: short
-          packageType: deb
-          templateFile: file
-        virtualizationSettings:
-        - region: us-east1
-          instanceType: instancetype
-          sourceImageId: id
-          sshUserName: username
-          eipType: eiptype
-      authUrl: url
-      username: username
-      password: pw
-      projectName: project
-      domainName: domain-name
-      insecure: true
-      vpcId: vpcid
-      subnetId: id
-      securityGroup: group
-      eipBandwidthSize: 10
-  oracle:
-    enabled: true
-    accounts:
-    - name: my-oracle-account
-      environment: dev
-      compartmentId: compartment-id
-      userId: user-id
-      fingerprint: fingerprint
-      sshPrivateKeyFilePath: /var/secrets/oracle_ssh_key_file
-      privateKeyPassphrase: pw
-      tenancyId: tenancy-id
-      region: us-east1
-    primaryAccount: my-oracle-account
-    bakeryDefaults:
-      templateFile: /var/secrets/oracle_template_file
-      baseImages:
-      - baseImage:
-          id: my-base-image
-          shortDescription: blah
-          detailedDescription: blahblahblah
-          packageType: deb
-          templateFile: /var/secrets/oracle_template_file
-        virtualizationSettings:
-          baseImageId: base-image-id
-          sshUserName: username
-      availabilityDomain: domain
-      subnetId: id
-      instanceShape: shape
-persistentStorage:
-  persistentStoreType: gcs
-  azs:
-    storageAccountName: my-azs-account-name
-    storageAccountKey: bXktYXpzLWFjY291bnQta2V5Cg==
-    storageContainerName: spinnaker
-  gcs:
-    enabled: true
-    project: my-gcp-project
-    bucket: my-spinnaker-pipelines
-    bucketLocation: us
-  redis: {}
-  s3:
-    bucket: my-bucket
-    rootFolder: my-root-folder
-    region: my-region
-    pathStyleAccess: true
-    endpoint: my-endpoint
-    accessKeyId: my-access-key-id
-    serverSideEncryption: AES256
-    secretAccessKey: my-secret-access-key
-  oracle:
-    bucketName: my-bucket
-    namespace: my-namespace
-    compartmentId: compartment
-    region: us-phoenix-1
-    userId: my-user-id
-    fingerprint: 74:63:08:82:95:75:e1:7c:33:31:bb:cb:00:c0:89:8b
-    sshPrivateKeyFilePath: /var/secrets/oracle-key
-    privateKeyPassphrase: my-secret
-    tenancyId: my-tenancy-id
 artifacts:
   bitbucket:
-    enabled: true
     accounts:
-      - name: my-bitbucket-account
-        username: my-bitbucket-username
-        password: my-bitbucket-password
-        usernamePasswordFile: /var/secrets/bitbucket
+    - name: my-bitbucket-account
+      password: my-bitbucket-password
+      username: my-bitbucket-username
+      usernamePasswordFile: /var/secrets/bitbucket
+    enabled: true
   gcs:
-    enabled: true
     accounts:
-      - name: my-gcs-account
-        jsonPath: /var/secrets/gcs
+    - jsonPath: /var/secrets/gcs
+      name: my-gcs-account
+    enabled: true
   github:
-    enabled: true
     accounts:
-      - name: my-github-artifact-account
-        tokenFile: /var/secrets/github
-      - name: my-github-artifact-account-2
-        username: my-username
-        password: my-password
+    - name: my-github-artifact-account
+      tokenFile: /var/secrets/github
+    - name: my-github-artifact-account-2
+      password: my-password
+      username: my-username
+    enabled: true
   gitlab:
-    enabled: true
     accounts:
-      - name: my-gitlab-artifact-account
-        tokenFile: /var/secrets/gitlab
+    - name: my-gitlab-artifact-account
+      tokenFile: /var/secrets/gitlab
+    enabled: true
   gitrepo:
-    enabled: true
     accounts:
-      - name: my-git-repo-account
-        sshPrivateKeyFilePath: /var/secrets/git_repo_private_key
-        sshPrivateKeyPassphrase: my-passphrase
-        sshKnownHostsFilePath: /var/secrets/known_hosts
+    - name: my-git-repo-account
+      sshKnownHostsFilePath: /var/secrets/known_hosts
+      sshPrivateKeyFilePath: /var/secrets/git_repo_private_key
+      sshPrivateKeyPassphrase: my-passphrase
+    enabled: true
   helm:
-    enabled: true
     accounts:
-      - name: my-helm-account
-        repository: http://my-repository.com
-        usernamePasswordFile: /var/secrets/helm
+    - name: my-helm-account
+      repository: http://my-repository.com
+      usernamePasswordFile: /var/secrets/helm
+    enabled: true
   http:
-    enabled: true
     accounts:
-      - name: my-http-account
-        usernamePasswordFile: /var/secrets/http
+    - name: my-http-account
+      usernamePasswordFile: /var/secrets/http
+    enabled: true
   maven:
-    enabled: true
     accounts:
-      - name: my-maven-account
-        repositoryUrl: http://some.host.com/repository/path
+    - name: my-maven-account
+      repositoryUrl: http://some.host.com/repository/path
+    enabled: true
   oracle:
-    enabled: true
     accounts:
-      - name: my-oracle-artifact-account
-        namespace: my-namespace
-        region: my-region
-        userId: my-user-id
-        fingerprint: my-fingerprint
-        sshPrivateKeyFilePath: /var/secrets/oracle
-        privateKeyPassphrase: my-passphrase
-        tenancyId: my-tenancy-id
+    - fingerprint: my-fingerprint
+      name: my-oracle-artifact-account
+      namespace: my-namespace
+      privateKeyPassphrase: my-passphrase
+      region: my-region
+      sshPrivateKeyFilePath: /var/secrets/oracle
+      tenancyId: my-tenancy-id
+      userId: my-user-id
+    enabled: true
   s3:
-    enabled: true
     accounts:
-      - name: my-s3-account
-        apiEndpoint: my-s3-endpoint
-        apiRegion: my-s3-region
-        region: my-region
-        awsAccessKeyId: my-key-id
-        awsSecretAccessKey: my-key
+    - apiEndpoint: my-s3-endpoint
+      apiRegion: my-s3-region
+      awsAccessKeyId: my-key-id
+      awsSecretAccessKey: my-key
+      name: my-s3-account
+      region: my-region
+    enabled: true
   templates:
-    - name: my-template
-      templatePath: /var/secrets/my-template
-notifications:
-  slack:
-    enabled: true
-    botName: my-bot
-    token: my-secret-token
-    baseUrl: https://slack.test/
-    forceUseIncomingWebhook: true
-  twilio:
-    enabled: true
-    account: my-twilio-account
-    baseUrl: https://api.twilio.com/
-    from: +1212-555-0100
-    token: my-twilio-token
-  githubStatus:
-    enabled: true
-    token: my-github-token
-  bearychat:
-    enabled: true
-  email:
-    enabled: true
-  pubsub:
-    enabled: true
-  googlechat:
-    enabled: true
-pubsub:
+  - name: my-template
+    templatePath: /var/secrets/my-template
+canary:
+  defaultMetricsAccount: my-google-canary-account
+  defaultMetricsStore: stackdriver
   enabled: true
-  google:
+  serviceIntegrations:
+    aws:
+      accounts:
+      - accessKeyId: my-key
+        bucket: my-bucket
+        endpoint: https://my-minio-server
+        name: my-aws-account
+        region: my-region
+        rootFolder: my-root-folder
+        supportedTypes:
+        - CONFIGURATION_STORE
+        - OBJECT_STORE
+      enabled: true
+      s3Enabled: true
+    datadog:
+      accounts:
+      - apiKey: abcd
+        applicationKey: efgh
+        endpoint:
+          baseUrl: https://my-datadog-server
+        name: my-datadog-account
+      enabled: true
+    google:
+      accounts:
+      - bucket: kayenta
+        jsonPath: /var/secrets/google.json
+        name: my-google-canary-account
+        project: my-google-project
+        rootFolder: ""
+        supportedTypes:
+        - METRICS_STORE
+        - CONFIGURATION_STORE
+        - OBJECT_STORE
+      enabled: true
+      gcsEnabled: true
+      metadataCachingIntervalMS: 30000
+      stackdriverEnabled: true
+    newrelic:
+      accounts:
+      - apiKey: my-api-key
+        applicationKey: my-app-key
+        endpoint:
+          baseUrl: https://my-newrelic-server
+        name: my-newrelic-account
+      enabled: true
+    prometheus:
+      accounts:
+      - endpoint:
+          baseUrl: https://my-prom-server
+        name: my-prom-account
+        username: maggie
+        usernamePasswordFile: /var/secrets/prometheus
+      enabled: true
+    signalfx:
+      accounts:
+      - accessToken: abc
+        defaultLocationKey: my-location-key
+        defaultScopeKey: my-scope-key
+        endpoint:
+          baseUrl: https://my-datadog-server
+        name: my-signalfx-account
+      enabled: true
+  showAllConfigsEnabled: true
+  storageAccountName: my-google-canary-account
+  templatesEnabled: true
+ci:
+  codebuild:
+    accounts:
+    - accountId: my-id
+      name: my-codebuild-account
     enabled: true
-    subscriptions:
-    - name: subscription-test
-      project: my-project
-      subscriptionName: my-subscription
-      jsonPath: /var/secrets/my-subscriber-token
-      ackDeadlineSeconds: 10
-      messageFormat: GCR
-    publishers:
-    - name: publish-test
-      project: my-project
-      topicName: my-topic
-      jsonPath: /var/secrets/my-publisher-token
-      content: NOTIFICATIONS
-stats:
-  enabled: false
-webhook:
-  trust:
+    secretAccessKey: my-key
+  concourse:
     enabled: true
-    trustStore: /var/secrets/webhook-keystore.jks
-    trustStorePassword: abcdefg
+    masters:
+    - name: my-concourse-account
+      password: password
+      url: https://my-concourse
+      username: username
+  gcb:
+    accounts:
+    - jsonKey: /var/secrets/google
+      name: my-gcb-account
+      project: my-google-project
+    enabled: true
+  jenkins:
+    enabled: true
+    masters:
+    - address: https://my-jenkins
+      name: my-jenkins-account
+      password: password
+      username: username
+  travis:
+    enabled: true
+    masters:
+    - address: https://my-travis
+      name: my-travis-account
+  wercker:
+    enabled: true
+    masters:
+    - address: https://my-wercker
+      name: my-wercker-account
+      token: token
+      user: user
 features:
   chaos: true
   gremlin: true
   managedPipelineTemplatesV2UI: true
   mineCanary: true
   pipelineTemplates: true
+name: default
+notifications:
+  bearychat:
+    enabled: true
+  email:
+    enabled: true
+  githubStatus:
+    enabled: true
+    token: my-github-token
+  googlechat:
+    enabled: true
+  pubsub:
+    enabled: true
+  slack:
+    baseUrl: https://slack.test/
+    botName: my-bot
+    enabled: true
+    forceUseIncomingWebhook: true
+    token: my-secret-token
+  twilio:
+    account: my-twilio-account
+    baseUrl: https://api.twilio.com/
+    enabled: true
+    from: +1212-555-0100
+    token: my-twilio-token
+persistentStorage:
+  azs:
+    storageAccountKey: bXktYXpzLWFjY291bnQta2V5Cg==
+    storageAccountName: my-azs-account-name
+    storageContainerName: spinnaker
+  gcs:
+    bucket: my-spinnaker-pipelines
+    bucketLocation: us
+    enabled: true
+    project: my-gcp-project
+  oracle:
+    bucketName: my-bucket
+    compartmentId: compartment
+    fingerprint: 74:63:08:82:95:75:e1:7c:33:31:bb:cb:00:c0:89:8b
+    namespace: my-namespace
+    privateKeyPassphrase: my-secret
+    region: us-phoenix-1
+    sshPrivateKeyFilePath: /var/secrets/oracle-key
+    tenancyId: my-tenancy-id
+    userId: my-user-id
+  persistentStoreType: gcs
+  redis: {}
+  s3:
+    accessKeyId: my-access-key-id
+    bucket: my-bucket
+    endpoint: my-endpoint
+    pathStyleAccess: true
+    region: my-region
+    rootFolder: my-root-folder
+    secretAccessKey: my-secret-access-key
+    serverSideEncryption: AES256
+providers:
+  appengine:
+    accounts:
+    - jsonPath: /var/secrets/appengine-account.json
+      name: my-appengine-account
+      project: spinnaker-maggie
+      sshTrustUnknownHosts: true
+    enabled: true
+    primaryAccount: my-appengine-account
+  aws:
+    accounts:
+    - accountId: id
+      assumeRole: role
+      defaultKeyPair: keyPair
+      discovery: discovery
+      edda: edda
+      environment: env
+      lifecycleHooks:
+      - defaultResult: ABANDON
+        heartbeatTimeout: 12
+        lifecycleTransition: autoscaling:EC2_INSTANCE_TERMINATING
+        notificationTargetARN: arn:aws:sns:{{region}}:{{accountId}}:term-targ
+        roleARN: arn:aws:iam::{{accountId}}:role-arn
+      name: my-aws-account
+      regions:
+      - name: myregion
+    bakeryDefaults:
+      awsAccessKey: key
+      awsAssociatePublicIpAddress: true
+      awsSecretKey: keysecret
+      awsSubnetId: subnetid
+      awsVpcId: vpcid
+      baseImages:
+      - baseImage:
+          detailedDescription: my detailed description
+          id: my-image-id
+          shortDescription: my short description
+        virtualizationSettings:
+          sourceAmi: my-source-ami
+          virtualizationType: pv
+      defaultVirtualizationType: pv
+      templateFile: file
+    defaultKeyPairTemplate: '{{name}}-keypair'
+    defaultRegions:
+    - name: us-west-2
+    defaults:
+      iamRole: BaseIAMRole
+    enabled: true
+    primaryAccount: my-aws-account
+  cloudfoundry:
+    accounts:
+    - api: api.sys.somesystem.com
+      appsManagerUri: https://apps.sys.somesystem.com
+      environment: dev
+      metricsUri: https://metrics.sys.somesystem.com
+      name: my-cf-account
+      password: pw
+      permissions: {}
+      requiredGroupMembership: []
+      skipSslValidation: true
+      user: username
+    enabled: true
+    primaryAccount: my-cf-account
+  dcos:
+    accounts:
+    - clusters:
+      - name: my-dcos-cluster
+        serviceKeyFile: /var/secrets/my-dcos-service-key
+        uid: my-id
+      dockerRegistries:
+      - accountName: my-gcr-registry
+      environment: dev
+      name: my-dcos-account
+    clusters:
+    - caCertFile: /var/secrets/my-ca-cert-file
+      dcosUrl: my-url
+      insecureSkipTlsVerify: true
+      loadBalancer:
+        image: image
+        serviceAccountSecret: secret
+      name: my-dcos-cluster
+    enabled: true
+    primaryAccount: my-dcos-account
+  dockerRegistry:
+    accounts:
+    - address: https://gcr.io
+      cacheIntervalSeconds: 30
+      cacheThreads: 1
+      clientTimeoutMillis: 60000
+      email: fake.email@spinnaker.io
+      insecureRegistry: false
+      name: my-gcr-registry
+      paginateSize: 100
+      passwordFile: /var/secrets/gcr-account.json
+      repositories:
+      - my-repo
+      sortTagsByDate: false
+      trackDigests: false
+      username: _json_key
+    enabled: true
+    primaryAccount: my-gcr-registry
+  ecs:
+    accounts:
+    - awsAccount: my-aws-account
+      environment: dev
+      name: my-ecs-account
+    enabled: true
+    primaryAccount: my-ecs-account
+  google:
+    accounts:
+    - alphaListed: true
+      consul:
+        agentEndpoint: localhost
+        agentPort: 8500
+        datacenters: []
+        enabled: true
+      jsonPath: /var/secrets/gce-account.json
+      name: my-gce-account
+      project: spinnaker-maggie
+      regions:
+      - us-east1-b
+    bakeryDefaults:
+      baseImages:
+      - baseImage:
+          detailedDescription: my detailed description
+          id: my-image-id
+          imageFamily: true
+          shortDescription: my short description
+        virtualizationSettings:
+          sourceImage: my-source-image
+          sourceImageFamily: my-source-image-family
+      network: default
+      networkProjectId: my-network-project-id
+      templateFile: gce.json
+      useInternalIp: true
+      zone: us-central1-f
+    enabled: true
+    primaryAccount: my-gce-account
+  huaweicloud:
+    accounts:
+    - accountType: dev
+      authUrl: myurl
+      domainName: my-domain-name
+      environment: dev
+      insecure: true
+      name: my-huawei-account
+      password: pw
+      projectName: project
+      regions:
+      - us-east1
+      username: username
+    bakeryDefaults:
+      authUrl: url
+      baseImages:
+      - baseImage:
+          id: myimage
+          packageType: deb
+          shortDescription: short
+          templateFile: file
+        virtualizationSettings:
+        - eipType: eiptype
+          instanceType: instancetype
+          region: us-east1
+          sourceImageId: id
+          sshUserName: username
+      domainName: domain-name
+      eipBandwidthSize: 10
+      insecure: true
+      password: pw
+      projectName: project
+      securityGroup: group
+      subnetId: id
+      templateFile: file
+      username: username
+      vpcId: vpcid
+    enabled: true
+    primaryAccount: my-huawei-account
+  kubernetes:
+    accounts:
+    - cacheThreads: 1
+      configureImagePullSecrets: true
+      context: spinnaker
+      kubeconfigFile: /var/secrets/k8s-kubeconfig
+      name: k8s
+      omitNamespaces:
+      - default
+      - kube-public
+      - kube-system
+      - docs-site-v1
+      providerVersion: V2
+    enabled: true
+    primaryAccount: k8s
+  oracle:
+    accounts:
+    - compartmentId: compartment-id
+      environment: dev
+      fingerprint: fingerprint
+      name: my-oracle-account
+      privateKeyPassphrase: pw
+      region: us-east1
+      sshPrivateKeyFilePath: /var/secrets/oracle_ssh_key_file
+      tenancyId: tenancy-id
+      userId: user-id
+    bakeryDefaults:
+      availabilityDomain: domain
+      baseImages:
+      - baseImage:
+          detailedDescription: blahblahblah
+          id: my-base-image
+          packageType: deb
+          shortDescription: blah
+          templateFile: /var/secrets/oracle_template_file
+        virtualizationSettings:
+          baseImageId: base-image-id
+          sshUserName: username
+      instanceShape: shape
+      subnetId: id
+      templateFile: /var/secrets/oracle_template_file
+    enabled: true
+    primaryAccount: my-oracle-account
+pubsub:
+  enabled: true
+  google:
+    enabled: true
+    publishers:
+    - content: NOTIFICATIONS
+      jsonPath: /var/secrets/my-publisher-token
+      name: publish-test
+      project: my-project
+      topicName: my-topic
+    subscriptions:
+    - ackDeadlineSeconds: 10
+      jsonPath: /var/secrets/my-subscriber-token
+      messageFormat: GCR
+      name: subscription-test
+      project: my-project
+      subscriptionName: my-subscription
+repository:
+  artifactory:
+    enabled: true
+    searches:
+    - baseUrl: https://my-artifactory
+      groupId: abc
+      name: my-search
+      password: my-artifactory-pw
+      repo: my-repo
+      username: my-artifactory-un
 security:
   apiSecurity:
+    overrideBaseUrl: https://spinnaker.test:8084
     ssl:
+      clientAuth: WANT
       enabled: true
       keyAlias: spinnaker
       keyStore: /var/secrets/keystore.jks
-      keyStoreType: jks
       keyStorePassword: my-keystore-password
+      keyStoreType: jks
       trustStore: /var/secrets/truststore.jks
-      trustStoreType: jks
       trustStorePassword: my-truststore-password
-      clientAuth: WANT
-    overrideBaseUrl: https://spinnaker.test:8084
-  uiSecurity:
-    ssl:
-      enabled: true
-      sslCertificateFile: /var/secrets/spinnaker.crt
-      sslCertificateKeyFile: /var/secrets/spinnaker.key.pem
-      sslCACertificateFile: /var/secrets/ca.crt
-      sslCertificatePassphrase: my-cert-password
-    overrideBaseUrl: https://spinnaker.test:9000
+      trustStoreType: jks
   authn:
-    oauth2:
+    basic:
       enabled: true
+      user:
+        password: my-password
+        username: my-username
+    enabled: true
+    iap:
+      audience: projects/0/apps/0
+      enabled: true
+      iapVerifyKeyUrl: https://my-url.test/
+      issuerId: my-issuer-id
+      jwtHeader: X-JWT-HEADER
+    ldap:
+      enabled: true
+      groupSearchBase: groups
+      managerPassword: my-manager-password
+      url: ldaps://ldap.my-organization.test:636/dc=my-organization,dc=com
+      userDnPattern: uid={0},ou=users
+      userSearchBase: users
+      userSearchFilter: (d={0})
+    oauth2:
       client:
+        accessTokenUri: https://www.googleapis.com/oauth2/v4/token
         clientId: my-client
         clientSecret: my-secret
-        accessTokenUri: https://www.googleapis.com/oauth2/v4/token
-        userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
         scope: profile email
-      userInfoRequirements:
-        foo: bar
-        baz: qux
+        userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      enabled: true
       resource:
         userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
       userInfoMapping:
         email: email
         firstName: given_name
         lastName: family_name
-      provider: GOOGLE
+      userInfoRequirements:
+        baz: qux
+        foo: bar
     saml:
       enabled: true
-      metadataUrl: /var/secrets/metadata
       keyStore: /var/secrets/keystore.jks
-      keyStorePassword: my-keystore-password
       keyStoreAliasName: my-key
-      serviceAddress: https://spinnaker.test:8084
-      redirectProtocol: https
-      redirectHostname: spinnaker.test:8084
+      keyStorePassword: my-keystore-password
+      metadataUrl: /var/secrets/metadata
       redirectBasePath: /
+      redirectHostname: spinnaker.test:8084
+      redirectProtocol: https
+      serviceAddress: https://spinnaker.test:8084
       userAttributeMapping:
         email: user-email
-    ldap:
-      enabled: true
-      url: ldaps://ldap.my-organization.test:636/dc=my-organization,dc=com
-      userDnPattern: uid={0},ou=users
-      userSearchBase: users
-      userSearchFilter: (d={0})
-      managerPassword: my-manager-password
-      groupSearchBase: groups
     x509:
       enabled: true
       roleOid: 1.2.840.10070.8.1
       subjectPrincipalRegex: user.*
-    iap:
-      enabled: true
-      jwtHeader: X-JWT-HEADER
-      issuerId: my-issuer-id
-      audience: projects/0/apps/0
-      iapVerifyKeyUrl: https://my-url.test/
-    basic:
-      enabled: true
-      user:
-        username: my-username
-        password: my-password
-    enabled: true
   authz:
+    enabled: true
     groupMembership:
-      service: FILE
-      google:
-        credentialPath: /var/secrets/credentials.json
-        adminUsername: my-admin-username
-        domain: myorg.test
+      file:
+        path: /var/secrets/authz-file.yml
       github:
         accessToken: my-token
         organization: my-org
-      file:
-        path: /var/secrets/authz-file.yml
+      google:
+        adminUsername: my-admin-username
+        credentialPath: /var/secrets/credentials.json
+        domain: myorg.test
       ldap:
-        url: ldaps://ldap.my-organization.com:636/dc=my-organization,dc=com
+        groupSearchBase: groups
         managerPassword: my-manager-password
+        url: ldaps://ldap.my-organization.com:636/dc=my-organization,dc=com
         userDnPattern: uid={0},ou=users
         userSearchBase: users
-        groupSearchBase: groups
         userSearchFilter: (d={0})
-    enabled: true
+      service: FILE
   enabled: true
-canary:
-  enabled: true
-  defaultMetricsAccount: my-google-canary-account
-  defaultMetricsStore: stackdriver
-  showAllConfigsEnabled: true
-  storageAccountName: my-google-canary-account
-  templatesEnabled: true
-  serviceIntegrations:
-    google:
+  uiSecurity:
+    overrideBaseUrl: https://spinnaker.test:9000
+    ssl:
       enabled: true
-      accounts:
-      - name: my-google-canary-account
-        jsonPath: /var/secrets/google.json
-        bucket: kayenta
-        project: my-google-project
-        supportedTypes:
-        - METRICS_STORE
-        - CONFIGURATION_STORE
-        - OBJECT_STORE
-        rootFolder: ""
-      gcsEnabled: true
-      stackdriverEnabled: true
-      metadataCachingIntervalMS: 30000
-    prometheus:
-      enabled: true
-      accounts:
-      - name: my-prom-account
-        endpoint:
-          baseUrl: https://my-prom-server
-        username: maggie
-        usernamePasswordFile: /var/secrets/prometheus
-    datadog:
-      enabled: true
-      accounts:
-      - name: my-datadog-account
-        endpoint:
-          baseUrl: https://my-datadog-server
-        apiKey: abcd
-        applicationKey: efgh
-    signalfx:
-      enabled: true
-      accounts:
-      - name: my-signalfx-account
-        accessToken: abc
-        endpoint:
-          baseUrl: https://my-datadog-server
-        defaultScopeKey: my-scope-key
-        defaultLocationKey: my-location-key
-    aws:
-      enabled: true
-      accounts:
-      - name: my-aws-account
-        bucket: my-bucket
-        region: my-region
-        endpoint: https://my-minio-server
-        accessKeyId: my-key
-        supportedTypes:
-        - CONFIGURATION_STORE
-        - OBJECT_STORE
-        rootFolder: my-root-folder
-      s3Enabled: true
-    newrelic:
-      enabled: true
-      accounts:
-      - name: my-newrelic-account
-        endpoint:
-          baseUrl: https://my-newrelic-server
-        apiKey: my-api-key
-        applicationKey: my-app-key
-repository:
-  artifactory:
+      sslCACertificateFile: /var/secrets/ca.crt
+      sslCertificateFile: /var/secrets/spinnaker.crt
+      sslCertificateKeyFile: /var/secrets/spinnaker.key.pem
+      sslCertificatePassphrase: my-cert-password
+stats:
+  enabled: false
+timezone: America/Chicago
+version: master-latest-unvalidated
+webhook:
+  trust:
     enabled: true
-    searches:
-    - name: my-search
-      baseUrl: https://my-artifactory
-      repo: my-repo
-      groupId: abc
-      username: my-artifactory-un
-      password: my-artifactory-pw
-ci:
-  travis:
-    enabled: true
-    masters:
-    - name: my-travis-account
-      address: https://my-travis
-  gcb:
-    enabled: true
-    accounts:
-    - name: my-gcb-account
-      project: my-google-project
-      jsonKey: /var/secrets/google
-  jenkins:
-    enabled: true
-    masters:
-    - name: my-jenkins-account
-      username: username
-      password: password
-      address: https://my-jenkins
-  codebuild:
-    enabled: true
-    secretAccessKey: my-key
-    accounts:
-    - name: my-codebuild-account
-      accountId: my-id
-  concourse:
-    enabled: true
-    masters:
-    - name: my-concourse-account
-      username: username
-      password: password
-      url: https://my-concourse
-  wercker:
-    enabled: true
-    masters:
-    - name: my-wercker-account
-      address: https://my-wercker
-      user: user
-      token: token
+    trustStore: /var/secrets/webhook-keystore.jks
+    trustStorePassword: abcdefg

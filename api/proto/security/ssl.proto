@@ -84,12 +84,15 @@ message UiSsl {
 
 // Setting for client authentication.
 enum ClientAuth {
+  // Unspecified. Do not directly use, instead omit the field.
+  UNSPECIFIED = 0;
+
   // No client authentication.
-  NONE = 0;
+  NONE = 1;
 
   // Client authentication is optional.
-  WANT = 1;
+  WANT = 2;
 
   // Client authentication is required.
-  NEED = 2;
+  NEED = 3;
 }

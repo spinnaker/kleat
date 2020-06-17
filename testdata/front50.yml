@@ -25,3 +25,4 @@ spinnaker:
     region: my-region
     rootFolder: my-root-folder
     secretAccessKey: my-secret-access-key
+    serverSideEncryption: AES256
