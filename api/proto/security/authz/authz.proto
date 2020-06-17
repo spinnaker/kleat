@@ -35,8 +35,8 @@ message GroupMembership {
 
   // Configuration for which role provider to use for authorization decisions.
   enum RoleProviderType {
-    // External role provider.
-    EXTERNAL = 0;
+    // Unspecified. Do not directly use, instead omit the field.
+    UNSPECIFIED = 0;
 
     // File-based role provider.
     FILE = 1;

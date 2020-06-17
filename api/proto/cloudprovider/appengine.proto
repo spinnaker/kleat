@@ -112,10 +112,12 @@ message AppengineAccount {
 
 // Represents a release track of the gcloud tool.
 enum GcloudReleaseTrack {
+    // Unspecified. Do not directly use, instead omit the field.
+    UNSPECIFIED = 0;
     // Standard release track; runs commands via `gcloud...`
-    STABLE = 0;
+    STABLE = 1;
     // Alpha release track; runs commands via `gcloud beta...`
-    BETA = 1;
+    BETA = 2;
     // Alpha release track; runs commands via `gcloud alpha...`
-    ALPHA = 2;
+    ALPHA = 3;
 }
