@@ -1,15 +1,20 @@
+// Package wrappers provides functions for working with wrapper messages
+// in the google.protobuf package.
 package wrappers
 
-import "github.com/golang/protobuf/ptypes/wrappers"
+import "google.golang.org/protobuf/types/known/wrapperspb"
 
-func True() *wrappers.BoolValue {
+// True returns a wrapper BoolValue containing the value true.
+func True() *wrapperspb.BoolValue {
 	return Bool(true)
 }
 
-func False() *wrappers.BoolValue {
+// False returns a wrapper BoolValue containing the value false.
+func False() *wrapperspb.BoolValue {
 	return Bool(false)
 }
 
-func Bool(value bool) *wrappers.BoolValue {
-	return &wrappers.BoolValue{Value: value}
+// Bool returns a wrapper BoolValue containing the specified value.
+func Bool(value bool) *wrapperspb.BoolValue {
+	return &wrapperspb.BoolValue{Value: value}
 }

@@ -2,6 +2,8 @@ run:
   skip-dirs:
     - api/client
   modules-download-mode: readonly
+issues:
+  exclude-use-default: false
 linters:
   enable:
     - gofmt
