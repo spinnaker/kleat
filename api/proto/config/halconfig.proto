@@ -15,6 +15,7 @@ import "stats.proto";
 import "storage/persistent_storage.proto";
 import "canary/canary.proto";
 import "repository/repository.proto";
+import "metricstores/metricstores.proto";
 
 // Configuration for a Spinnaker installation.
 message Hal {
@@ -38,4 +39,7 @@ message Hal {
   string version = 13;
 
   repository.Repository repository = 14;
+
+  // Configuration for the Spinnaker monitoring daemon metric stores.
+  metricstores.MetricStores metricStores = 15;
 }

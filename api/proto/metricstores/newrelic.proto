@@ -1,0 +1,23 @@
+syntax = "proto3";
+package proto.metricstores;
+
+option go_package = "github.com/spinnaker/kleat/api/client/metricstores";
+
+import "google/protobuf/wrappers.proto";
+
+// Configuration for the New Relic metric store.
+message Newrelic {
+  // Whether the New Relic metric store is enabled.
+  google.protobuf.BoolValue enabled = 1;
+
+  // Your New Relic Insights insert key.
+  string insert_key = 2;
+
+  // The URL to post metric data to. In almost all cases, this is set correctly
+  // by default and should not be used.
+  string host = 3;
+
+  // New Relic custom tags. Delimit the key-value pair with colons
+  // (e.g., `app:test`).
+  repeated string tags = 4;
+}

@@ -82,6 +82,9 @@ be used as input to Kleat.
   can remove the `Providers.AppengineProvider` block from your halconfig.
 - Halyard supplies a default `providerVersion` of `v1` for each provider
   account. You can safely remove this field.
+- Halyard set `metricStores.enabled` to true if one or more monitoring metric
+  stores was enabled. This field is not read by spinnaker-monitoring and is safe
+  to remove.
 
 ## Unsupported Halyard functionality
 

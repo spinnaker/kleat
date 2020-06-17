@@ -184,6 +184,28 @@ features:
   managedPipelineTemplatesV2UI: true
   mineCanary: true
   pipelineTemplates: true
+metricStores:
+  datadog:
+    api_key: abc
+    app_key: def
+    enabled: true
+    tags:
+      - key:val
+  newrelic:
+    enabled: true
+    host: https://my-newrelic-host
+    insert_key: abc
+    tags:
+      - key:val
+  period: 120
+  prometheus:
+    enabled: true
+    push_gateway: https://my-prom-gateway
+  stackdriver:
+    credentials_path: /var/secrets/google
+    enabled: true
+    project: my-project
+    zone: my-zone
 name: default
 notifications:
   bearychat:

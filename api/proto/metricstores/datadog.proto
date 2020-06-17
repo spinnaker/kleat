@@ -1,0 +1,23 @@
+syntax = "proto3";
+package proto.metricstores;
+
+option go_package = "github.com/spinnaker/kleat/api/client/metricstores";
+
+import "google/protobuf/wrappers.proto";
+
+// Configuration for the Datadog metric store.
+message Datadog {
+  // Whether the Datadog metric store is enabled.
+  google.protobuf.BoolValue enabled = 1;
+
+  // Datadog API key.
+  string api_key = 2;
+
+  // Datadog app key. Only required if you want Spinnaker to push pre-configured
+  // Spinnaker dashboards to your Datadog account.
+  string app_key = 3;
+
+  // Datadog custom tags. Delimit the key-value pair with colons
+  // (e.g., `app:test`).
+  repeated string tags = 4;
+}
