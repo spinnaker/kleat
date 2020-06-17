@@ -33,4 +33,7 @@ message Oracle {
 
     // The OCID of the Oracle Tenancy to use.
     string tenancyId = 9;
+
+    // The OCID of the Oracle Compartment to use.
+    string compartmentId = 10;
 }

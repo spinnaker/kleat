@@ -34,6 +34,19 @@ message Aws {
 
     // Configuration for Spinnaker's image bakery.
     AwsBakeryDefaults bakeryDefaults = 8;
+
+    // A template for generating the name of the AWS key-pair from the name of
+    // the account; only used for accounts where defaultKeyPair is not specified.
+    string defaultKeyPairTemplate = 9;
+
+    // Default values for AWS deployments.
+    AwsDefaults defaults = 10;
+}
+
+// Configuration for defaults for AWS deployments.
+message AwsDefaults {
+    // The default IAM role to use for deployments, when not otherwise specified.
+    string iamRole = 1;
 }
 
 // Configuration for an AWS account.

@@ -132,6 +132,7 @@
     - [AwsBakeryDefaults](#proto.cloudprovider.AwsBakeryDefaults)
     - [AwsBaseImage](#proto.cloudprovider.AwsBaseImage)
     - [AwsBaseImageSettings](#proto.cloudprovider.AwsBaseImageSettings)
+    - [AwsDefaults](#proto.cloudprovider.AwsDefaults)
     - [AwsFeatures](#proto.cloudprovider.AwsFeatures)
     - [AwsFeatures.CloudFormation](#proto.cloudprovider.AwsFeatures.CloudFormation)
     - [AwsLifecycleHook](#proto.cloudprovider.AwsLifecycleHook)
@@ -2030,6 +2031,8 @@ Configuration for the AWS provider.
 | defaultRegions | [AwsRegion](#proto.cloudprovider.AwsRegion) | repeated | List of default regions. |
 | features | [AwsFeatures](#proto.cloudprovider.AwsFeatures) |  | Configuration for AWS-specific features. |
 | bakeryDefaults | [AwsBakeryDefaults](#proto.cloudprovider.AwsBakeryDefaults) |  | Configuration for Spinnaker&#39;s image bakery. |
+| defaultKeyPairTemplate | [string](#string) |  | A template for generating the name of the AWS key-pair from the name of the account; only used for accounts where defaultKeyPair is not specified. |
+| defaults | [AwsDefaults](#proto.cloudprovider.AwsDefaults) |  | Default values for AWS deployments. |
 
 
 
@@ -2112,6 +2115,21 @@ Configuration for a base image for the AWS provider&#39;s bakery.
 | ----- | ---- | ----- | ----------- |
 | baseImage | [AwsBaseImage](#proto.cloudprovider.AwsBaseImage) |  | Base image configuration. |
 | virtualizationSettings | [AwsVirtualizationSettings](#proto.cloudprovider.AwsVirtualizationSettings) |  | Base image virtualization settings. |
+
+
+
+
+
+
+<a name="proto.cloudprovider.AwsDefaults"></a>
+
+### AwsDefaults
+Configuration for defaults for AWS deployments.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| iamRole | [string](#string) |  | The default IAM role to use for deployments, when not otherwise specified. |
 
 
 
@@ -6002,6 +6020,7 @@ Configuration for an Oracle persistent store.
 | sshPrivateKeyFilePath | [string](#string) |  | Path to the private key in PEM format. |
 | privateKeyPassphrase | [string](#string) |  | Passphrase used for the private key, if it is encrypted. |
 | tenancyId | [string](#string) |  | The OCID of the Oracle Tenancy to use. |
+| compartmentId | [string](#string) |  | The OCID of the Oracle Compartment to use. |
 
 
 

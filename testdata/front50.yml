@@ -10,6 +10,7 @@ spinnaker:
     project: my-gcp-project
   oracle:
     bucketName: my-bucket
+    compartmentId: compartment
     fingerprint: 74:63:08:82:95:75:e1:7c:33:31:bb:cb:00:c0:89:8b
     namespace: my-namespace
     privateKeyPassphrase: my-secret
