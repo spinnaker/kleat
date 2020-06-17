@@ -57,5 +57,5 @@ message CloudFoundryAccount {
 
     // (Deprecated): List of required Fiat permission groups. Configure
     // `permissions` instead.
-    repeated string requiredGroupMemberships = 10;
+    repeated string requiredGroupMembership = 10;
 }

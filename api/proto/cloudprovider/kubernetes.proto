@@ -82,7 +82,7 @@ message KubernetesAccount {
 
     // (Deprecated): List of required Fiat permission groups. Configure
     // `permissions` instead.
-    repeated string requiredGroupMemberships = 15;
+    repeated string requiredGroupMembership = 15;
 
     // When true, clouddriver will query manifest status during pipeline executions
     // using live data rather than the cache. This eliminates all time spent in the

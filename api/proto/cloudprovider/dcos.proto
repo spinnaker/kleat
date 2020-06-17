@@ -42,7 +42,7 @@ message DcosAccount {
 
     // (Deprecated) List of required Fiat permission groups. Configure
     // `permissions` instead.
-    repeated string requiredGroupMemberships = 6;
+    repeated string requiredGroupMembership = 6;
 }
 
 // Configuration for a DC/OS cluster associated with a `DcosAccount`.

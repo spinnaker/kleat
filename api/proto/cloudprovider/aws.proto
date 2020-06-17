@@ -87,7 +87,7 @@ message AwsAccount {
 
     // (Deprecated): List of required Fiat permission groups. Configure
     // `permissions` instead.
-    repeated string requiredGroupMemberships = 8;
+    repeated string requiredGroupMembership = 8;
 
     // List of configured AWS lifecycle hooks.
     repeated AwsLifecycleHook lifecycleHooks = 9;
