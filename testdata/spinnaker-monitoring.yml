@@ -1,27 +1,27 @@
 datadog:
-  enabled: true
   api_key: abc
   app_key: def
+  enabled: true
   tags:
-    - key:val
+  - key:val
+monitor:
+  metric_store:
+  - datadog
+  - newrelic
+  - prometheus
+  - stackdriver
+  period: 120
+newrelic:
+  enabled: true
+  host: https://my-newrelic-host
+  insert_key: abc
+  tags:
+  - key:val
 prometheus:
   enabled: true
   push_gateway: https://my-prom-gateway
 stackdriver:
+  credentials_path: /var/secrets/google
   enabled: true
   project: my-project
   zone: my-zone
-  credentials_path: /var/secrets/google
-newrelic:
-  enabled: true
-  insert_key: abc
-  host: https://my-newrelic-host
-  tags:
-    - key:val
-monitor:
-  period: 120
-  metric_store:
-    - datadog
-    - newrelic
-    - prometheus
-    - stackdriver

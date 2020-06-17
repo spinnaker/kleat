@@ -167,6 +167,7 @@ func TestHalToServiceYAML(t *testing.T) {
 		"kayenta.yml",
 		"orca.yml",
 		"rosco.yml",
+		"spinnaker-monitoring.yml",
 	}
 
 	for _, file := range files {

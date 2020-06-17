@@ -35,7 +35,7 @@ message Monitoring {
     int32 period = 1;
 
     // List of enabled metric stores.
-    repeated MetricStoreType metric_store = 2;
+    repeated MetricStoreType metricStore  = 2 [json_name="metric_store"];
   }
 }
 

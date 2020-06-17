@@ -11,7 +11,7 @@ message Newrelic {
   google.protobuf.BoolValue enabled = 1;
 
   // Your New Relic Insights insert key.
-  string insert_key = 2;
+  string insertKey = 2 [json_name="insert_key"];
 
   // The URL to post metric data to. In almost all cases, this is set correctly
   // by default and should not be used.

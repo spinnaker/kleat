@@ -13,5 +13,5 @@ message Prometheus {
   // The endpoint to which the monitoring Daemon should push metrics. If you
   // have configured Prometheus to automatically discover all your Spinnaker
   // services and pull metrics from them, this is not required.
-  string push_gateway = 2;
+  string pushGateway = 2 [json_name="push_gateway"];
 }
