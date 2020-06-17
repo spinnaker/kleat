@@ -4285,7 +4285,7 @@ Configuration for monitoring period and enabled metric stores.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | period | [int32](#int32) |  | Polling period for the monitoring daemon (seconds). Defaults to 30. |
-| metric_store | [MetricStoreType](#proto.config.MetricStoreType) | repeated | List of enabled metric stores. |
+| metricStore | [MetricStoreType](#proto.config.MetricStoreType) | repeated | List of enabled metric stores. |
 
 
 
@@ -4601,8 +4601,8 @@ Configuration for the Datadog metric store.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the Datadog metric store is enabled. |
-| api_key | [string](#string) |  | Datadog API key. |
-| app_key | [string](#string) |  | Datadog app key. Only required if you want Spinnaker to push pre-configured Spinnaker dashboards to your Datadog account. |
+| apiKey | [string](#string) |  | Datadog API key. |
+| appKey | [string](#string) |  | Datadog app key. Only required if you want Spinnaker to push pre-configured Spinnaker dashboards to your Datadog account. |
 | tags | [string](#string) | repeated | Datadog custom tags. Delimit the key-value pair with colons (e.g., `app:test`). |
 
 
@@ -4670,7 +4670,7 @@ Configuration for the New Relic metric store.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the New Relic metric store is enabled. |
-| insert_key | [string](#string) |  | Your New Relic Insights insert key. |
+| insertKey | [string](#string) |  | Your New Relic Insights insert key. |
 | host | [string](#string) |  | The URL to post metric data to. In almost all cases, this is set correctly by default and should not be used. |
 | tags | [string](#string) | repeated | New Relic custom tags. Delimit the key-value pair with colons (e.g., `app:test`). |
 
@@ -4704,7 +4704,7 @@ Configuration for the Prometheus metric store.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the Prometheus metric store is enabled. |
-| push_gateway | [string](#string) |  | The endpoint to which the monitoring Daemon should push metrics. If you have configured Prometheus to automatically discover all your Spinnaker services and pull metrics from them, this is not required. |
+| pushGateway | [string](#string) |  | The endpoint to which the monitoring Daemon should push metrics. If you have configured Prometheus to automatically discover all your Spinnaker services and pull metrics from them, this is not required. |
 
 
 
@@ -4736,7 +4736,7 @@ Configuration for the Stackdriver metric store.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the Datadog metric store is enabled. |
-| credentials_path | [string](#string) |  | Path to a Google JSON service account that has permission to publish metrics. |
+| credentialsPath | [string](#string) |  | Path to a Google JSON service account that has permission to publish metrics. |
 | project | [string](#string) |  | The project to which Spinnaker&#39;s metrics should be published. |
 | zone | [string](#string) |  | The zone with which Spinnaker&#39;s metrics should be associated. |
 

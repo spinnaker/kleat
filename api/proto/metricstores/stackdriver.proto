@@ -12,7 +12,7 @@ message Stackdriver {
 
   // Path to a Google JSON service account that has permission to publish
   // metrics.
-  string credentials_path = 2;
+  string credentialsPath = 2 [json_name="credentials_path"];
 
   // The project to which Spinnaker's metrics should be published.
   string project = 3;
