@@ -29,7 +29,7 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var defaultStats *client.Stats = nil
+var defaultStats = &config.Echo_Stats{}
 
 var echoTests = configTest{
 	generator: func(h *config.Hal) proto.Message { return convert.HalToEcho(h) },
@@ -194,9 +194,7 @@ var echoTests = configTest{
 			&config.Hal{
 				Stats: &client.Stats{},
 			},
-			&config.Echo{
-				Stats: &client.Stats{},
-			},
+			&config.Echo{Stats: defaultStats},
 		},
 		{
 			"Stats enabled",
@@ -204,7 +202,7 @@ var echoTests = configTest{
 				Stats: &client.Stats{Enabled: wrappers.True()},
 			},
 			&config.Echo{
-				Stats: &client.Stats{Enabled: wrappers.True()},
+				Stats: &config.Echo_Stats{Enabled: wrappers.True()},
 			},
 		},
 		{
@@ -213,7 +211,7 @@ var echoTests = configTest{
 				Stats: &client.Stats{Enabled: wrappers.False()},
 			},
 			&config.Echo{
-				Stats: &client.Stats{Enabled: wrappers.False()},
+				Stats: &config.Echo_Stats{Enabled: wrappers.False()},
 			},
 		},
 		{

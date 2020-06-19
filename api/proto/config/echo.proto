@@ -3,13 +3,14 @@ package proto.config;
 
 option go_package = "github.com/spinnaker/kleat/api/client/config";
 
+import "google/protobuf/wrappers.proto";
+
 import "artifact/artifacts.proto";
 import "ci/gcb.proto";
 import "notification/github_status.proto";
 import "notification/slack.proto";
 import "notification/twilio.proto";
 import "pubsub/pubsub.proto";
-import "stats.proto";
 
 // Configuration for the echo microservice.
 message Echo {
@@ -33,5 +34,11 @@ message Echo {
             // Default timezone. Defaults to `America/Los_Angeles`.
             string timezone = 1;
         }
+    }
+
+    // Configuration for optional collection of usage metrics.
+    message Stats {
+        // Whether to send usage metrics. Defaults to true.
+        google.protobuf.BoolValue enabled = 1;
     }
 }

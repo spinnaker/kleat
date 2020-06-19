@@ -27,7 +27,7 @@ func HalToEcho(h *config.Hal) *config.Echo {
 		Artifacts:    h.GetArtifacts(),
 		Pubsub:       h.GetPubsub(),
 		Gcb:          h.GetCi().GetGcb(),
-		Stats:        h.GetStats(),
+		Stats:        getEchoStats(h),
 		Scheduler:    getEchoScheduler(h),
 	}
 }
@@ -40,5 +40,11 @@ func getEchoScheduler(h *config.Hal) *config.Echo_Scheduler {
 		Cron: &config.Echo_Scheduler_Cron{
 			Timezone: h.GetTimezone(),
 		},
+	}
+}
+
+func getEchoStats(h *config.Hal) *config.Echo_Stats {
+	return &config.Echo_Stats{
+		Enabled: h.GetStats().GetEnabled(),
 	}
 }

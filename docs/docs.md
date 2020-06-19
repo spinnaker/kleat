@@ -241,6 +241,7 @@
     - [Echo](#proto.config.Echo)
     - [Echo.Scheduler](#proto.config.Echo.Scheduler)
     - [Echo.Scheduler.Cron](#proto.config.Echo.Scheduler.Cron)
+    - [Echo.Stats](#proto.config.Echo.Stats)
   
 - [config/fiat.proto](#config/fiat.proto)
     - [Fiat](#proto.config.Fiat)
@@ -3791,7 +3792,7 @@ Configuration for the echo microservice.
 | artifacts | [proto.artifact.Artifacts](#proto.artifact.Artifacts) |  |  |
 | pubsub | [proto.pubsub.Pubsub](#proto.pubsub.Pubsub) |  |  |
 | gcb | [proto.ci.GoogleCloudBuild](#proto.ci.GoogleCloudBuild) |  |  |
-| stats | [proto.Stats](#proto.Stats) |  |  |
+| stats | [Echo.Stats](#proto.config.Echo.Stats) |  |  |
 | scheduler | [Echo.Scheduler](#proto.config.Echo.Scheduler) |  |  |
 
 
@@ -3823,6 +3824,21 @@ Cron configuration.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | timezone | [string](#string) |  | Default timezone. Defaults to `America/Los_Angeles`. |
+
+
+
+
+
+
+<a name="proto.config.Echo.Stats"></a>
+
+### Echo.Stats
+Configuration for optional collection of usage metrics.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether to send usage metrics. Defaults to true. |
 
 
 
