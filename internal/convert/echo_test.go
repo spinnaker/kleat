@@ -31,7 +31,7 @@ import (
 
 // deploymentMethod is the deployment method that will be auto-populated by kleat
 // regardless of what is present in the input config.
-var deploymentMethod *client.DeploymentMethod = nil
+var deploymentMethod = &client.DeploymentMethod{Type: "kleat", Version: "unknown"}
 
 // defaultStats is a wrapper around deploymentMethod, and represents the stats config
 // that should be generated when the stats are not explicitly configured in the input
@@ -225,6 +225,46 @@ var echoTests = configTest{
 				Stats: &config.Echo_Stats{
 					Enabled:          wrappers.False(),
 					DeploymentMethod: deploymentMethod,
+				},
+			},
+		},
+		{
+			"Stats spinnaker version",
+			&config.Hal{
+				Version: "1.20.4",
+			},
+			&config.Echo{
+				Stats: &config.Echo_Stats{
+					DeploymentMethod: deploymentMethod,
+					SpinnakerVersion: "1.20.4",
+				},
+			},
+		},
+		{
+			"Stats instance id",
+			&config.Hal{
+				Stats: &client.Stats{
+					InstanceId: "01EB4ZQP5ZH3FP6FC9ZB9X5ECW",
+				},
+			},
+			&config.Echo{
+				Stats: &config.Echo_Stats{
+					DeploymentMethod: deploymentMethod,
+					InstanceId:       "01EB4ZQP5ZH3FP6FC9ZB9X5ECW",
+				},
+			},
+		},
+		{
+			"Stats endpoint",
+			&config.Hal{
+				Stats: &client.Stats{
+					Endpoint: "https://stats.mydomain.test/",
+				},
+			},
+			&config.Echo{
+				Stats: &config.Echo_Stats{
+					DeploymentMethod: deploymentMethod,
+					Endpoint:         "https://stats.mydomain.test/",
 				},
 			},
 		},
