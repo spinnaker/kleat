@@ -29,20 +29,22 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
+var defaultStats *client.Stats = nil
+
 var echoTests = configTest{
 	generator: func(h *config.Hal) proto.Message { return convert.HalToEcho(h) },
 	tests: []testCase{
 		{
 			"Empty hal config",
 			&config.Hal{},
-			&config.Echo{},
+			&config.Echo{Stats: defaultStats},
 		},
 		{
 			"Empty notifications",
 			&config.Hal{
 				Notifications: &notification.Notifications{},
 			},
-			&config.Echo{},
+			&config.Echo{Stats: defaultStats},
 		},
 		{
 			"Slack notification",
@@ -63,6 +65,7 @@ var echoTests = configTest{
 					Token:   "my-token",
 					BaseUrl: "https://slack.test/",
 				},
+				Stats: defaultStats,
 			},
 		},
 		{
@@ -72,6 +75,7 @@ var echoTests = configTest{
 			},
 			&config.Echo{
 				Pubsub: &pubsub.Pubsub{},
+				Stats:  defaultStats,
 			},
 		},
 		{
@@ -85,6 +89,7 @@ var echoTests = configTest{
 				Pubsub: &pubsub.Pubsub{
 					Google: &pubsub.Google{},
 				},
+				Stats: defaultStats,
 			},
 		},
 		{
@@ -132,6 +137,7 @@ var echoTests = configTest{
 						},
 					},
 				},
+				Stats: defaultStats,
 			},
 		},
 		{
@@ -139,7 +145,7 @@ var echoTests = configTest{
 			&config.Hal{
 				Ci: &ci.Ci{},
 			},
-			&config.Echo{},
+			&config.Echo{Stats: defaultStats},
 		},
 		{
 			"Empty GCB account",
@@ -149,7 +155,8 @@ var echoTests = configTest{
 				},
 			},
 			&config.Echo{
-				Gcb: &ci.GoogleCloudBuild{},
+				Gcb:   &ci.GoogleCloudBuild{},
+				Stats: defaultStats,
 			},
 		},
 		{
@@ -179,6 +186,7 @@ var echoTests = configTest{
 						},
 					},
 				},
+				Stats: defaultStats,
 			},
 		},
 		{
@@ -219,6 +227,7 @@ var echoTests = configTest{
 						Timezone: "America/Chicago",
 					},
 				},
+				Stats: defaultStats,
 			},
 		},
 	},
