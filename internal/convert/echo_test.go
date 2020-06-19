@@ -29,7 +29,15 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var defaultStats = &config.Echo_Stats{}
+// deploymentMethod is the deployment method that will be auto-populated by kleat
+// regardless of what is present in the input config.
+var deploymentMethod *client.DeploymentMethod = nil
+
+// defaultStats is a wrapper around deploymentMethod, and represents the stats config
+// that should be generated when the stats are not explicitly configured in the input
+var defaultStats = &config.Echo_Stats{
+	DeploymentMethod: deploymentMethod,
+}
 
 var echoTests = configTest{
 	generator: func(h *config.Hal) proto.Message { return convert.HalToEcho(h) },
@@ -202,7 +210,10 @@ var echoTests = configTest{
 				Stats: &client.Stats{Enabled: wrappers.True()},
 			},
 			&config.Echo{
-				Stats: &config.Echo_Stats{Enabled: wrappers.True()},
+				Stats: &config.Echo_Stats{
+					Enabled:          wrappers.True(),
+					DeploymentMethod: deploymentMethod,
+				},
 			},
 		},
 		{
@@ -211,7 +222,10 @@ var echoTests = configTest{
 				Stats: &client.Stats{Enabled: wrappers.False()},
 			},
 			&config.Echo{
-				Stats: &config.Echo_Stats{Enabled: wrappers.False()},
+				Stats: &config.Echo_Stats{
+					Enabled:          wrappers.False(),
+					DeploymentMethod: deploymentMethod,
+				},
 			},
 		},
 		{

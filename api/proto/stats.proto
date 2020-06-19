@@ -7,6 +7,22 @@ import "google/protobuf/wrappers.proto";
 
 // Configuration for optional collection of usage metrics.
 message Stats {
-  // Whether to send usage metrics.
+  // Whether to send usage metrics. Defaults to true.
   google.protobuf.BoolValue enabled = 1;
+
+  // A unique ID representing this deployment of Spinnaker.
+  string instanceId = 2;
+
+  // The endpoint to which usage metrics are sent. This should generally be left
+  // empty, in which case metrics are sent to the default endpoint.
+  string endpoint = 3;
+}
+
+// Information about how Spinnaker is configured and deployed.
+message DeploymentMethod {
+  // The tool used to configure Spinnaker (in this case, kleat).
+  string type = 1;
+
+  // The kleat version.
+  string version = 2;
 }

@@ -403,6 +403,7 @@
     - [WebhookConfig](#proto.security.WebhookConfig)
   
 - [stats.proto](#stats.proto)
+    - [DeploymentMethod](#proto.DeploymentMethod)
     - [Stats](#proto.Stats)
   
 - [storage/azs.proto](#storage/azs.proto)
@@ -3839,6 +3840,10 @@ Configuration for optional collection of usage metrics.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether to send usage metrics. Defaults to true. |
+| instanceId | [string](#string) |  | A unique ID representing this deployment of Spinnaker. |
+| spinnakerVersion | [string](#string) |  | The version of Spinnaker being deployed. |
+| endpoint | [string](#string) |  | The endpoint to which usage metrics are sent. This should generally be left empty, in which case metrics are sent to the default endpoint. |
+| deploymentMethod | [proto.DeploymentMethod](#proto.DeploymentMethod) |  | Information about how Spinnaker is configured and deployed. |
 
 
 
@@ -5918,6 +5923,22 @@ Configuration for webhooks.
 
 
 
+<a name="proto.DeploymentMethod"></a>
+
+### DeploymentMethod
+Information about how Spinnaker is configured and deployed.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| type | [string](#string) |  | The tool used to configure Spinnaker (in this case, kleat). |
+| version | [string](#string) |  | The kleat version. |
+
+
+
+
+
+
 <a name="proto.Stats"></a>
 
 ### Stats
@@ -5926,7 +5947,9 @@ Configuration for optional collection of usage metrics.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether to send usage metrics. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether to send usage metrics. Defaults to true. |
+| instanceId | [string](#string) |  | A unique ID representing this deployment of Spinnaker. |
+| endpoint | [string](#string) |  | The endpoint to which usage metrics are sent. This should generally be left empty, in which case metrics are sent to the default endpoint. |
 
 
 
