@@ -106,7 +106,11 @@ slack:
   forceUseIncomingWebhook: true
   token: my-secret-token
 stats:
+  deploymentMethod:
+    type: kleat
+    version: unknown
   enabled: false
+  spinnakerVersion: master-latest-unvalidated
 twilio:
   account: my-twilio-account
   baseUrl: https://api.twilio.com/

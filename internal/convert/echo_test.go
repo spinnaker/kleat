@@ -29,20 +29,30 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
+// deploymentMethod is the deployment method that will be auto-populated by kleat
+// regardless of what is present in the input config.
+var deploymentMethod = &client.DeploymentMethod{Type: "kleat", Version: "unknown"}
+
+// defaultStats is a wrapper around deploymentMethod, and represents the stats config
+// that should be generated when the stats are not explicitly configured in the input
+var defaultStats = &config.Echo_Stats{
+	DeploymentMethod: deploymentMethod,
+}
+
 var echoTests = configTest{
 	generator: func(h *config.Hal) proto.Message { return convert.HalToEcho(h) },
 	tests: []testCase{
 		{
 			"Empty hal config",
 			&config.Hal{},
-			&config.Echo{},
+			&config.Echo{Stats: defaultStats},
 		},
 		{
 			"Empty notifications",
 			&config.Hal{
 				Notifications: &notification.Notifications{},
 			},
-			&config.Echo{},
+			&config.Echo{Stats: defaultStats},
 		},
 		{
 			"Slack notification",
@@ -63,6 +73,7 @@ var echoTests = configTest{
 					Token:   "my-token",
 					BaseUrl: "https://slack.test/",
 				},
+				Stats: defaultStats,
 			},
 		},
 		{
@@ -72,6 +83,7 @@ var echoTests = configTest{
 			},
 			&config.Echo{
 				Pubsub: &pubsub.Pubsub{},
+				Stats:  defaultStats,
 			},
 		},
 		{
@@ -85,6 +97,7 @@ var echoTests = configTest{
 				Pubsub: &pubsub.Pubsub{
 					Google: &pubsub.Google{},
 				},
+				Stats: defaultStats,
 			},
 		},
 		{
@@ -132,6 +145,7 @@ var echoTests = configTest{
 						},
 					},
 				},
+				Stats: defaultStats,
 			},
 		},
 		{
@@ -139,7 +153,7 @@ var echoTests = configTest{
 			&config.Hal{
 				Ci: &ci.Ci{},
 			},
-			&config.Echo{},
+			&config.Echo{Stats: defaultStats},
 		},
 		{
 			"Empty GCB account",
@@ -149,7 +163,8 @@ var echoTests = configTest{
 				},
 			},
 			&config.Echo{
-				Gcb: &ci.GoogleCloudBuild{},
+				Gcb:   &ci.GoogleCloudBuild{},
+				Stats: defaultStats,
 			},
 		},
 		{
@@ -179,6 +194,7 @@ var echoTests = configTest{
 						},
 					},
 				},
+				Stats: defaultStats,
 			},
 		},
 		{
@@ -186,9 +202,7 @@ var echoTests = configTest{
 			&config.Hal{
 				Stats: &client.Stats{},
 			},
-			&config.Echo{
-				Stats: &client.Stats{},
-			},
+			&config.Echo{Stats: defaultStats},
 		},
 		{
 			"Stats enabled",
@@ -196,7 +210,10 @@ var echoTests = configTest{
 				Stats: &client.Stats{Enabled: wrappers.True()},
 			},
 			&config.Echo{
-				Stats: &client.Stats{Enabled: wrappers.True()},
+				Stats: &config.Echo_Stats{
+					Enabled:          wrappers.True(),
+					DeploymentMethod: deploymentMethod,
+				},
 			},
 		},
 		{
@@ -205,7 +222,50 @@ var echoTests = configTest{
 				Stats: &client.Stats{Enabled: wrappers.False()},
 			},
 			&config.Echo{
-				Stats: &client.Stats{Enabled: wrappers.False()},
+				Stats: &config.Echo_Stats{
+					Enabled:          wrappers.False(),
+					DeploymentMethod: deploymentMethod,
+				},
+			},
+		},
+		{
+			"Stats spinnaker version",
+			&config.Hal{
+				Version: "1.20.4",
+			},
+			&config.Echo{
+				Stats: &config.Echo_Stats{
+					DeploymentMethod: deploymentMethod,
+					SpinnakerVersion: "1.20.4",
+				},
+			},
+		},
+		{
+			"Stats instance id",
+			&config.Hal{
+				Stats: &client.Stats{
+					InstanceId: "01EB4ZQP5ZH3FP6FC9ZB9X5ECW",
+				},
+			},
+			&config.Echo{
+				Stats: &config.Echo_Stats{
+					DeploymentMethod: deploymentMethod,
+					InstanceId:       "01EB4ZQP5ZH3FP6FC9ZB9X5ECW",
+				},
+			},
+		},
+		{
+			"Stats endpoint",
+			&config.Hal{
+				Stats: &client.Stats{
+					Endpoint: "https://stats.mydomain.test/",
+				},
+			},
+			&config.Echo{
+				Stats: &config.Echo_Stats{
+					DeploymentMethod: deploymentMethod,
+					Endpoint:         "https://stats.mydomain.test/",
+				},
 			},
 		},
 		{
@@ -219,6 +279,7 @@ var echoTests = configTest{
 						Timezone: "America/Chicago",
 					},
 				},
+				Stats: defaultStats,
 			},
 		},
 	},

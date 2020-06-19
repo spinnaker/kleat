@@ -241,6 +241,7 @@
     - [Echo](#proto.config.Echo)
     - [Echo.Scheduler](#proto.config.Echo.Scheduler)
     - [Echo.Scheduler.Cron](#proto.config.Echo.Scheduler.Cron)
+    - [Echo.Stats](#proto.config.Echo.Stats)
   
 - [config/fiat.proto](#config/fiat.proto)
     - [Fiat](#proto.config.Fiat)
@@ -402,6 +403,7 @@
     - [WebhookConfig](#proto.security.WebhookConfig)
   
 - [stats.proto](#stats.proto)
+    - [DeploymentMethod](#proto.DeploymentMethod)
     - [Stats](#proto.Stats)
   
 - [storage/azs.proto](#storage/azs.proto)
@@ -3791,7 +3793,7 @@ Configuration for the echo microservice.
 | artifacts | [proto.artifact.Artifacts](#proto.artifact.Artifacts) |  |  |
 | pubsub | [proto.pubsub.Pubsub](#proto.pubsub.Pubsub) |  |  |
 | gcb | [proto.ci.GoogleCloudBuild](#proto.ci.GoogleCloudBuild) |  |  |
-| stats | [proto.Stats](#proto.Stats) |  |  |
+| stats | [Echo.Stats](#proto.config.Echo.Stats) |  |  |
 | scheduler | [Echo.Scheduler](#proto.config.Echo.Scheduler) |  |  |
 
 
@@ -3823,6 +3825,25 @@ Cron configuration.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | timezone | [string](#string) |  | Default timezone. Defaults to `America/Los_Angeles`. |
+
+
+
+
+
+
+<a name="proto.config.Echo.Stats"></a>
+
+### Echo.Stats
+Configuration for optional collection of usage metrics.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether to send usage metrics. Defaults to true. |
+| instanceId | [string](#string) |  | A unique ID representing this deployment of Spinnaker. |
+| spinnakerVersion | [string](#string) |  | The version of Spinnaker being deployed. |
+| endpoint | [string](#string) |  | The endpoint to which usage metrics are sent. This should generally be left empty, in which case metrics are sent to the default endpoint. |
+| deploymentMethod | [proto.DeploymentMethod](#proto.DeploymentMethod) |  | Information about how Spinnaker is configured and deployed. |
 
 
 
@@ -5902,6 +5923,22 @@ Configuration for webhooks.
 
 
 
+<a name="proto.DeploymentMethod"></a>
+
+### DeploymentMethod
+Information about how Spinnaker is configured and deployed.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| type | [string](#string) |  | The tool used to configure Spinnaker (in this case, kleat). |
+| version | [string](#string) |  | The kleat version. |
+
+
+
+
+
+
 <a name="proto.Stats"></a>
 
 ### Stats
@@ -5910,7 +5947,9 @@ Configuration for optional collection of usage metrics.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether to send usage metrics. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether to send usage metrics. Defaults to true. |
+| instanceId | [string](#string) |  | A unique ID representing this deployment of Spinnaker. |
+| endpoint | [string](#string) |  | The endpoint to which usage metrics are sent. This should generally be left empty, in which case metrics are sent to the default endpoint. |
 
 
 

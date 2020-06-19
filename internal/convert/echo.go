@@ -16,7 +16,10 @@
 
 package convert
 
-import "github.com/spinnaker/kleat/api/client/config"
+import (
+	"github.com/spinnaker/kleat/api/client"
+	"github.com/spinnaker/kleat/api/client/config"
+)
 
 // HalToEcho generates the echo config for the supplied config.Hal h.
 func HalToEcho(h *config.Hal) *config.Echo {
@@ -27,7 +30,7 @@ func HalToEcho(h *config.Hal) *config.Echo {
 		Artifacts:    h.GetArtifacts(),
 		Pubsub:       h.GetPubsub(),
 		Gcb:          h.GetCi().GetGcb(),
-		Stats:        h.GetStats(),
+		Stats:        getEchoStats(h),
 		Scheduler:    getEchoScheduler(h),
 	}
 }
@@ -41,4 +44,20 @@ func getEchoScheduler(h *config.Hal) *config.Echo_Scheduler {
 			Timezone: h.GetTimezone(),
 		},
 	}
+}
+
+func getEchoStats(h *config.Hal) *config.Echo_Stats {
+	return &config.Echo_Stats{
+		Enabled:          h.GetStats().GetEnabled(),
+		InstanceId:       h.GetStats().GetInstanceId(),
+		Endpoint:         h.GetStats().GetEndpoint(),
+		DeploymentMethod: getDeploymentMethod(),
+		SpinnakerVersion: h.GetVersion(),
+	}
+}
+
+func getDeploymentMethod() *client.DeploymentMethod {
+	// TODO(ezimanyi): Make the version flag accessible outside the package so
+	// we can read it here.
+	return &client.DeploymentMethod{Type: "kleat", Version: "unknown"}
 }

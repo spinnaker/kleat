@@ -3,6 +3,8 @@ package proto.config;
 
 option go_package = "github.com/spinnaker/kleat/api/client/config";
 
+import "google/protobuf/wrappers.proto";
+
 import "artifact/artifacts.proto";
 import "ci/gcb.proto";
 import "notification/github_status.proto";
@@ -33,5 +35,24 @@ message Echo {
             // Default timezone. Defaults to `America/Los_Angeles`.
             string timezone = 1;
         }
+    }
+
+    // Configuration for optional collection of usage metrics.
+    message Stats {
+        // Whether to send usage metrics. Defaults to true.
+        google.protobuf.BoolValue enabled = 1;
+
+        // A unique ID representing this deployment of Spinnaker.
+        string instanceId = 2;
+
+        // The version of Spinnaker being deployed.
+        string spinnakerVersion = 3;
+
+        // The endpoint to which usage metrics are sent. This should generally be left
+        // empty, in which case metrics are sent to the default endpoint.
+        string endpoint = 4;
+
+        // Information about how Spinnaker is configured and deployed.
+        DeploymentMethod deploymentMethod = 5;
     }
 }
