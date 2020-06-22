@@ -19,6 +19,7 @@ package convert
 import (
 	"github.com/spinnaker/kleat/api/client"
 	"github.com/spinnaker/kleat/api/client/config"
+	"github.com/spinnaker/kleat/pkg/version"
 )
 
 // HalToEcho generates the echo config for the supplied config.Hal h.
@@ -57,7 +58,5 @@ func getEchoStats(h *config.Hal) *config.Echo_Stats {
 }
 
 func getDeploymentMethod() *client.DeploymentMethod {
-	// TODO(ezimanyi): Make the version flag accessible outside the package so
-	// we can read it here.
-	return &client.DeploymentMethod{Type: "kleat", Version: "unknown"}
+	return &client.DeploymentMethod{Type: "kleat", Version: version.Version}
 }

@@ -1,6 +1,6 @@
 builds:
 - ldflags:
-    - -s -w -X github.com/spinnaker/kleat/cmd.version={{.Version}} -X github.com/spinnaker/kleat/cmd.commit={{.Commit}} -X github.com/spinnaker/kleat/cmd.date={{.Date}}
+    - -s -w -X github.com/spinnaker/kleat/pkg/version.Version={{.Version}} -X github.com/spinnaker/kleat/pkg/version.Commit={{.Commit}} -X github.com/spinnaker/kleat/pkg/version.Date={{.Date}}
   # By default, will build each specified $GOOS for the default $GOARCH options of 386 and amd64.
   # If necessary in the future, can specify non-default $GOARCH options under `goarch` key per
   # https://goreleaser.com/customization/build/.

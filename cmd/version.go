@@ -18,14 +18,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-)
-
-// Dynamically inserted at build time by goreleaser. See `ldflags` in
-// .goreleaser.yml.
-var (
-	version = "unknown"
-	commit  = "unknown"
-	date    = "unknown"
+	"github.com/spinnaker/kleat/pkg/version"
 )
 
 var versionCmd = &cobra.Command{
@@ -33,7 +26,7 @@ var versionCmd = &cobra.Command{
 	Short: "Print kleat version",
 	Long:  "Print the version, commit, and release date of your kleat",
 	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Printf("Kleat has version %s built from %s on %s\n", version, commit, date)
+		cmd.Printf("Kleat has version %s built from %s on %s\n", version.Version, version.Commit, version.Date)
 	},
 }
 
