@@ -21,7 +21,7 @@ import (
 
 	"github.com/spinnaker/kleat/api/client/cloudprovider"
 	"github.com/spinnaker/kleat/api/client/config"
-	"github.com/spinnaker/kleat/internal/wrappers"
+	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 // HalToDeck generates the deck config for the supplied config.Hal h.
@@ -56,7 +56,7 @@ func getGateURL(h *config.Hal) string {
 func getDeckCanaryConfig(h *config.Hal) *config.Deck_Canary {
 	return &config.Deck_Canary{
 		DefaultJudge:       h.GetCanary().GetDefaultJudge(),
-		FeatureDisabled:    wrappers.Bool(!h.GetCanary().GetEnabled().GetValue()),
+		FeatureDisabled:    wrapperspb.Bool(!h.GetCanary().GetEnabled().GetValue()),
 		MetricsAccountName: h.GetCanary().GetDefaultMetricsAccount(),
 		MetricStore:        h.GetCanary().GetDefaultMetricsStore(),
 		ShowAllConfigs:     h.GetCanary().GetShowAllConfigsEnabled(),

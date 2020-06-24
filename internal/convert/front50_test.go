@@ -22,8 +22,8 @@ import (
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/api/client/storage"
 	"github.com/spinnaker/kleat/internal/convert"
-	"github.com/spinnaker/kleat/internal/wrappers"
 	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 var front50Tests = configTest{
@@ -65,15 +65,15 @@ var front50Tests = configTest{
 			&config.Hal{
 				PersistentStorage: &storage.PersistentStorage{
 					Gcs: &storage.Gcs{
-						Enabled:  wrappers.True(),
+						Enabled:  wrapperspb.Bool(true),
 						JsonPath: "/var/secrets/my-gcs-key.json",
 						Project:  "my-project",
 						Bucket:   "my-gcs-bucket",
 					},
 					S3: &storage.S3{
-						Enabled:              wrappers.False(),
+						Enabled:              wrapperspb.Bool(false),
 						Bucket:               "my-s3-bucket",
-						PathStyleAccess:      wrappers.True(),
+						PathStyleAccess:      wrapperspb.Bool(true),
 						ServerSideEncryption: storage.S3ServerSideEncryption_AES256,
 					},
 				},
@@ -81,15 +81,15 @@ var front50Tests = configTest{
 			&config.Front50{
 				Spinnaker: &config.Front50_Spinnaker{
 					Gcs: &storage.Gcs{
-						Enabled:  wrappers.True(),
+						Enabled:  wrapperspb.Bool(true),
 						JsonPath: "/var/secrets/my-gcs-key.json",
 						Project:  "my-project",
 						Bucket:   "my-gcs-bucket",
 					},
 					S3: &storage.S3{
-						Enabled:              wrappers.False(),
+						Enabled:              wrapperspb.Bool(false),
 						Bucket:               "my-s3-bucket",
-						PathStyleAccess:      wrappers.True(),
+						PathStyleAccess:      wrapperspb.Bool(true),
 						ServerSideEncryption: storage.S3ServerSideEncryption_AES256,
 					},
 				},

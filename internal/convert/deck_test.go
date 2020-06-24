@@ -22,8 +22,8 @@ import (
 	"github.com/spinnaker/kleat/api/client/cloudprovider"
 	"github.com/spinnaker/kleat/api/client/notification"
 	"github.com/spinnaker/kleat/internal/convert"
-	"github.com/spinnaker/kleat/internal/wrappers"
 	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/wrapperspb"
 
 	"github.com/spinnaker/kleat/api/client"
 
@@ -47,7 +47,7 @@ var deckTests = configTest{
 				AuthEndpoint:    "http://localhost:8084/auth/user",
 				BakeryDetailUrl: "http://localhost:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
 				Canary: &config.Deck_Canary{
-					FeatureDisabled: wrappers.True(),
+					FeatureDisabled: wrapperspb.Bool(true),
 				},
 				Feature:       &config.Deck_Features{},
 				Notifications: &config.Deck_Notifications{},
@@ -60,7 +60,7 @@ var deckTests = configTest{
 				Security: &security.Security{
 					ApiSecurity: &security.ApiSecurity{
 						Ssl: &security.ApiSsl{
-							Enabled: wrappers.True(),
+							Enabled: wrapperspb.Bool(true),
 						},
 					},
 				},
@@ -70,7 +70,7 @@ var deckTests = configTest{
 				AuthEndpoint:    "https://localhost:8084/auth/user",
 				BakeryDetailUrl: "https://localhost:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
 				Canary: &config.Deck_Canary{
-					FeatureDisabled: wrappers.True(),
+					FeatureDisabled: wrapperspb.Bool(true),
 				},
 				Feature:       &config.Deck_Features{},
 				Notifications: &config.Deck_Notifications{},
@@ -81,16 +81,16 @@ var deckTests = configTest{
 			"Authn enabled",
 			&config.Hal{
 				Security: &security.Security{
-					Authn: &authn.Authentication{Enabled: wrappers.True()},
+					Authn: &authn.Authentication{Enabled: wrapperspb.Bool(true)},
 				},
 			},
 			&config.Deck{
-				AuthEnabled:     wrappers.True(),
+				AuthEnabled:     wrapperspb.Bool(true),
 				GateUrl:         "http://localhost:8084",
 				AuthEndpoint:    "http://localhost:8084/auth/user",
 				BakeryDetailUrl: "http://localhost:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
 				Canary: &config.Deck_Canary{
-					FeatureDisabled: wrappers.True(),
+					FeatureDisabled: wrapperspb.Bool(true),
 				},
 				Feature:       &config.Deck_Features{},
 				Notifications: &config.Deck_Notifications{},
@@ -101,11 +101,11 @@ var deckTests = configTest{
 			"Canary configured",
 			&config.Hal{
 				Canary: &canary.Canary{
-					Enabled:               wrappers.True(),
+					Enabled:               wrapperspb.Bool(true),
 					DefaultMetricsAccount: "my-metrics-account",
 					DefaultMetricsStore:   "datadog",
-					ShowAllConfigsEnabled: wrappers.True(),
-					TemplatesEnabled:      wrappers.True(),
+					ShowAllConfigsEnabled: wrapperspb.Bool(true),
+					TemplatesEnabled:      wrapperspb.Bool(true),
 					StorageAccountName:    "my-storage-account",
 				},
 			},
@@ -114,12 +114,12 @@ var deckTests = configTest{
 				AuthEndpoint:    "http://localhost:8084/auth/user",
 				BakeryDetailUrl: "http://localhost:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
 				Canary: &config.Deck_Canary{
-					FeatureDisabled:    wrappers.False(),
+					FeatureDisabled:    wrapperspb.Bool(false),
 					MetricsAccountName: "my-metrics-account",
 					MetricStore:        "datadog",
-					ShowAllConfigs:     wrappers.True(),
+					ShowAllConfigs:     wrapperspb.Bool(true),
 					StorageAccountName: "my-storage-account",
-					TemplatesEnabled:   wrappers.True(),
+					TemplatesEnabled:   wrapperspb.Bool(true),
 				},
 				Feature:       &config.Deck_Features{},
 				Notifications: &config.Deck_Notifications{},
@@ -137,7 +137,7 @@ var deckTests = configTest{
 				AuthEndpoint:    "http://localhost:8084/auth/user",
 				BakeryDetailUrl: "http://localhost:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
 				Canary: &config.Deck_Canary{
-					FeatureDisabled: wrappers.True(),
+					FeatureDisabled: wrapperspb.Bool(true),
 				},
 				Feature:       &config.Deck_Features{},
 				Notifications: &config.Deck_Notifications{},
@@ -148,10 +148,10 @@ var deckTests = configTest{
 			"Features configured",
 			&config.Hal{
 				Features: &client.Features{
-					PipelineTemplates:            wrappers.True(),
-					MineCanary:                   wrappers.True(),
-					Chaos:                        wrappers.True(),
-					ManagedPipelineTemplatesV2UI: wrappers.True(),
+					PipelineTemplates:            wrapperspb.Bool(true),
+					MineCanary:                   wrapperspb.Bool(true),
+					Chaos:                        wrapperspb.Bool(true),
+					ManagedPipelineTemplatesV2UI: wrapperspb.Bool(true),
 				},
 			},
 			&config.Deck{
@@ -160,16 +160,16 @@ var deckTests = configTest{
 				BakeryDetailUrl: "http://localhost:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
 				// TODO: this test demonstrates less-than-ideal result of having
 				// multiple canary flags that users must enable: both canary.enabled
-				// and features.mineCanary must be set to wrappers.True() in order for the
+				// and features.mineCanary must be set to wrapperspb.Bool(true) in order for the
 				// canary UI and Kayenta to work properly.
 				Canary: &config.Deck_Canary{
-					FeatureDisabled: wrappers.True(),
+					FeatureDisabled: wrapperspb.Bool(true),
 				},
 				Feature: &config.Deck_Features{
-					PipelineTemplates:            wrappers.True(),
-					ManagedPipelineTemplatesV2UI: wrappers.True(),
-					ChaosMonkey:                  wrappers.True(),
-					Canary:                       wrappers.True(),
+					PipelineTemplates:            wrapperspb.Bool(true),
+					ManagedPipelineTemplatesV2UI: wrapperspb.Bool(true),
+					ChaosMonkey:                  wrapperspb.Bool(true),
+					Canary:                       wrapperspb.Bool(true),
 				},
 				Notifications: &config.Deck_Notifications{},
 				Providers:     &config.Deck_Providers{},
@@ -180,7 +180,7 @@ var deckTests = configTest{
 			&config.Hal{
 				Notifications: &notification.Notifications{
 					Twilio: &notification.Twilio{
-						Enabled: wrappers.True(),
+						Enabled: wrapperspb.Bool(true),
 					},
 				},
 			},
@@ -189,12 +189,12 @@ var deckTests = configTest{
 				AuthEndpoint:    "http://localhost:8084/auth/user",
 				BakeryDetailUrl: "http://localhost:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
 				Canary: &config.Deck_Canary{
-					FeatureDisabled: wrappers.True(),
+					FeatureDisabled: wrapperspb.Bool(true),
 				},
 				Feature: &config.Deck_Features{},
 				Notifications: &config.Deck_Notifications{
 					Sms: &notification.Twilio{
-						Enabled: wrappers.True(),
+						Enabled: wrapperspb.Bool(true),
 					},
 				},
 				Providers: &config.Deck_Providers{},
@@ -205,7 +205,7 @@ var deckTests = configTest{
 			&config.Hal{
 				Providers: &cloudprovider.Providers{
 					Google: &cloudprovider.GoogleComputeEngine{
-						Enabled: wrappers.True(),
+						Enabled: wrapperspb.Bool(true),
 						Accounts: []*cloudprovider.GoogleComputeEngineAccount{
 							{
 								Name:    "my-gce-account",
@@ -221,7 +221,7 @@ var deckTests = configTest{
 				AuthEndpoint:    "http://localhost:8084/auth/user",
 				BakeryDetailUrl: "http://localhost:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
 				Canary: &config.Deck_Canary{
-					FeatureDisabled: wrappers.True(),
+					FeatureDisabled: wrapperspb.Bool(true),
 				},
 				Feature:       &config.Deck_Features{},
 				Notifications: &config.Deck_Notifications{},
@@ -249,7 +249,7 @@ var deckTests = configTest{
 				AuthEndpoint:    "https://spinnaker.test:8084/auth/user",
 				BakeryDetailUrl: "https://spinnaker.test:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
 				Canary: &config.Deck_Canary{
-					FeatureDisabled: wrappers.True(),
+					FeatureDisabled: wrapperspb.Bool(true),
 				},
 				Feature:       &config.Deck_Features{},
 				Notifications: &config.Deck_Notifications{},

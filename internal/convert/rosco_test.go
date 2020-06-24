@@ -22,8 +22,8 @@ import (
 	"github.com/spinnaker/kleat/api/client/cloudprovider"
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/convert"
-	"github.com/spinnaker/kleat/internal/wrappers"
 	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 var roscoTests = configTest{
@@ -57,7 +57,7 @@ var roscoTests = configTest{
 			&config.Hal{
 				Providers: &cloudprovider.Providers{
 					Kubernetes: &cloudprovider.Kubernetes{
-						Enabled: wrappers.True(),
+						Enabled: wrapperspb.Bool(true),
 						Accounts: []*cloudprovider.KubernetesAccount{
 							{
 								Name:           "my-account",
@@ -76,7 +76,7 @@ var roscoTests = configTest{
 			&config.Hal{
 				Providers: &cloudprovider.Providers{
 					Aws: &cloudprovider.Aws{
-						Enabled: wrappers.True(),
+						Enabled: wrapperspb.Bool(true),
 						Accounts: []*cloudprovider.AwsAccount{
 							{
 								Name: "my-account",
@@ -85,7 +85,7 @@ var roscoTests = configTest{
 						BakeryDefaults: &cloudprovider.AwsBakeryDefaults{
 							AwsAccessKey:                "my-key",
 							AwsSecretKey:                "my-secret-key",
-							AwsAssociatePublicIpAddress: wrappers.False(),
+							AwsAssociatePublicIpAddress: wrapperspb.Bool(false),
 							BaseImages: []*cloudprovider.AwsBaseImageSettings{
 								{
 									BaseImage: &cloudprovider.AwsBaseImage{
@@ -106,7 +106,7 @@ var roscoTests = configTest{
 			},
 			&config.Rosco{
 				Aws: &cloudprovider.Aws{
-					Enabled: wrappers.True(),
+					Enabled: wrapperspb.Bool(true),
 					Accounts: []*cloudprovider.AwsAccount{
 						{
 							Name: "my-account",
@@ -115,7 +115,7 @@ var roscoTests = configTest{
 					BakeryDefaults: &cloudprovider.AwsBakeryDefaults{
 						AwsAccessKey:                "my-key",
 						AwsSecretKey:                "my-secret-key",
-						AwsAssociatePublicIpAddress: wrappers.False(),
+						AwsAssociatePublicIpAddress: wrapperspb.Bool(false),
 						BaseImages: []*cloudprovider.AwsBaseImageSettings{
 							{
 								BaseImage: &cloudprovider.AwsBaseImage{

@@ -19,7 +19,7 @@ package convert_test
 import (
 	"testing"
 
-	"github.com/spinnaker/kleat/internal/wrappers"
+	"google.golang.org/protobuf/types/known/wrapperspb"
 
 	"github.com/spinnaker/kleat/internal/convert"
 
@@ -44,7 +44,7 @@ var monitoringTests = configTest{
 			&config.Hal{
 				MetricStores: &metricstores.MetricStores{
 					Datadog: &metricstores.Datadog{
-						Enabled: wrappers.True(),
+						Enabled: wrapperspb.Bool(true),
 						ApiKey:  "my-api-key",
 						AppKey:  "my-app-keh",
 						Tags:    []string{"a:b", "c:d"},
@@ -53,7 +53,7 @@ var monitoringTests = configTest{
 			},
 			&config.Monitoring{
 				Datadog: &metricstores.Datadog{
-					Enabled: wrappers.True(),
+					Enabled: wrapperspb.Bool(true),
 					ApiKey:  "my-api-key",
 					AppKey:  "my-app-keh",
 					Tags:    []string{"a:b", "c:d"},
@@ -70,7 +70,7 @@ var monitoringTests = configTest{
 			&config.Hal{
 				MetricStores: &metricstores.MetricStores{
 					Newrelic: &metricstores.Newrelic{
-						Enabled:   wrappers.True(),
+						Enabled:   wrapperspb.Bool(true),
 						InsertKey: "my-key",
 						Host:      "https://my-newrelic-host",
 						Tags:      []string{"a:b", "c:d"},
@@ -79,7 +79,7 @@ var monitoringTests = configTest{
 			},
 			&config.Monitoring{
 				Newrelic: &metricstores.Newrelic{
-					Enabled:   wrappers.True(),
+					Enabled:   wrapperspb.Bool(true),
 					InsertKey: "my-key",
 					Host:      "https://my-newrelic-host",
 					Tags:      []string{"a:b", "c:d"},
@@ -96,14 +96,14 @@ var monitoringTests = configTest{
 			&config.Hal{
 				MetricStores: &metricstores.MetricStores{
 					Prometheus: &metricstores.Prometheus{
-						Enabled:     wrappers.True(),
+						Enabled:     wrapperspb.Bool(true),
 						PushGateway: "https://my-prometheus-gateway",
 					},
 				},
 			},
 			&config.Monitoring{
 				Prometheus: &metricstores.Prometheus{
-					Enabled:     wrappers.True(),
+					Enabled:     wrapperspb.Bool(true),
 					PushGateway: "https://my-prometheus-gateway",
 				},
 				Monitor: &config.Monitoring_Monitor{
@@ -118,7 +118,7 @@ var monitoringTests = configTest{
 			&config.Hal{
 				MetricStores: &metricstores.MetricStores{
 					Stackdriver: &metricstores.Stackdriver{
-						Enabled:         wrappers.True(),
+						Enabled:         wrapperspb.Bool(true),
 						CredentialsPath: "/var/secrets/google",
 						Project:         "my-project",
 						Zone:            "my-region",
@@ -127,7 +127,7 @@ var monitoringTests = configTest{
 			},
 			&config.Monitoring{
 				Stackdriver: &metricstores.Stackdriver{
-					Enabled:         wrappers.True(),
+					Enabled:         wrapperspb.Bool(true),
 					CredentialsPath: "/var/secrets/google",
 					Project:         "my-project",
 					Zone:            "my-region",
