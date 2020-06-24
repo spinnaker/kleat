@@ -21,7 +21,7 @@ import (
 
 	"github.com/spinnaker/kleat/api/client/canary"
 	"github.com/spinnaker/kleat/internal/convert"
-	"github.com/spinnaker/kleat/internal/wrappers"
+	"google.golang.org/protobuf/types/known/wrapperspb"
 
 	"github.com/spinnaker/kleat/api/client/config"
 	"google.golang.org/protobuf/proto"
@@ -39,7 +39,7 @@ var kayentaTests = configTest{
 			"Canary disabled",
 			&config.Hal{
 				Canary: &canary.Canary{
-					Enabled: wrappers.False(),
+					Enabled: wrapperspb.Bool(false),
 				},
 			},
 			&config.Kayenta{},
@@ -48,10 +48,10 @@ var kayentaTests = configTest{
 			"Stackdriver enabled",
 			&config.Hal{
 				Canary: &canary.Canary{
-					Enabled: wrappers.True(),
+					Enabled: wrapperspb.Bool(true),
 					ServiceIntegrations: &canary.Canary_ServiceIntegrations{
 						Google: &canary.Google{
-							Enabled: wrappers.True(),
+							Enabled: wrapperspb.Bool(true),
 							Accounts: []*canary.GoogleAccount{
 								{
 									Name:    "my-google-account",
@@ -61,8 +61,8 @@ var kayentaTests = configTest{
 									},
 								},
 							},
-							GcsEnabled:                wrappers.False(),
-							StackdriverEnabled:        wrappers.True(),
+							GcsEnabled:                wrapperspb.Bool(false),
+							StackdriverEnabled:        wrapperspb.Bool(true),
 							MetadataCachingIntervalMS: 1000,
 						},
 					},
@@ -71,7 +71,7 @@ var kayentaTests = configTest{
 			&config.Kayenta{
 				Kayenta: &config.Kayenta_ServiceIntegrations{
 					Google: &config.Kayenta_ServiceIntegrations_Google{
-						Enabled: wrappers.True(),
+						Enabled: wrapperspb.Bool(true),
 						Accounts: []*canary.GoogleAccount{
 							{
 								Name:    "my-google-account",
@@ -83,11 +83,11 @@ var kayentaTests = configTest{
 						},
 					},
 					Stackdriver: &canary.Stackdriver{
-						Enabled:                   wrappers.True(),
+						Enabled:                   wrapperspb.Bool(true),
 						MetadataCachingIntervalMS: 1000,
 					},
 					Gcs: &canary.Gcs{
-						Enabled: wrappers.False(),
+						Enabled: wrapperspb.Bool(false),
 					},
 				},
 			},
@@ -96,10 +96,10 @@ var kayentaTests = configTest{
 			"GCS enabled",
 			&config.Hal{
 				Canary: &canary.Canary{
-					Enabled: wrappers.True(),
+					Enabled: wrapperspb.Bool(true),
 					ServiceIntegrations: &canary.Canary_ServiceIntegrations{
 						Google: &canary.Google{
-							Enabled: wrappers.True(),
+							Enabled: wrapperspb.Bool(true),
 							Accounts: []*canary.GoogleAccount{
 								{
 									Name:    "my-google-account",
@@ -110,8 +110,8 @@ var kayentaTests = configTest{
 									},
 								},
 							},
-							GcsEnabled:         wrappers.True(),
-							StackdriverEnabled: wrappers.False(),
+							GcsEnabled:         wrapperspb.Bool(true),
+							StackdriverEnabled: wrapperspb.Bool(false),
 						},
 					},
 				},
@@ -119,7 +119,7 @@ var kayentaTests = configTest{
 			&config.Kayenta{
 				Kayenta: &config.Kayenta_ServiceIntegrations{
 					Google: &config.Kayenta_ServiceIntegrations_Google{
-						Enabled: wrappers.True(),
+						Enabled: wrapperspb.Bool(true),
 						Accounts: []*canary.GoogleAccount{
 							{
 								Name:    "my-google-account",
@@ -132,10 +132,10 @@ var kayentaTests = configTest{
 						},
 					},
 					Stackdriver: &canary.Stackdriver{
-						Enabled: wrappers.False(),
+						Enabled: wrapperspb.Bool(false),
 					},
 					Gcs: &canary.Gcs{
-						Enabled: wrappers.True(),
+						Enabled: wrapperspb.Bool(true),
 					},
 				},
 			},
@@ -144,10 +144,10 @@ var kayentaTests = configTest{
 			"Prometheus enabled",
 			&config.Hal{
 				Canary: &canary.Canary{
-					Enabled: wrappers.True(),
+					Enabled: wrapperspb.Bool(true),
 					ServiceIntegrations: &canary.Canary_ServiceIntegrations{
 						Prometheus: &canary.Prometheus{
-							Enabled: wrappers.True(),
+							Enabled: wrapperspb.Bool(true),
 							Accounts: []*canary.PrometheusAccount{
 								{
 									Name: "my-prometheus-account",
@@ -165,7 +165,7 @@ var kayentaTests = configTest{
 			&config.Kayenta{
 				Kayenta: &config.Kayenta_ServiceIntegrations{
 					Prometheus: &canary.Prometheus{
-						Enabled: wrappers.True(),
+						Enabled: wrapperspb.Bool(true),
 						Accounts: []*canary.PrometheusAccount{
 							{
 								Name: "my-prometheus-account",
@@ -184,10 +184,10 @@ var kayentaTests = configTest{
 			"Datadog enabled",
 			&config.Hal{
 				Canary: &canary.Canary{
-					Enabled: wrappers.True(),
+					Enabled: wrapperspb.Bool(true),
 					ServiceIntegrations: &canary.Canary_ServiceIntegrations{
 						Datadog: &canary.Datadog{
-							Enabled: wrappers.True(),
+							Enabled: wrapperspb.Bool(true),
 							Accounts: []*canary.DatadogAccount{
 								{
 									Name: "my-datadog-account",
@@ -205,7 +205,7 @@ var kayentaTests = configTest{
 			&config.Kayenta{
 				Kayenta: &config.Kayenta_ServiceIntegrations{
 					Datadog: &canary.Datadog{
-						Enabled: wrappers.True(),
+						Enabled: wrapperspb.Bool(true),
 						Accounts: []*canary.DatadogAccount{
 							{
 								Name: "my-datadog-account",
@@ -224,10 +224,10 @@ var kayentaTests = configTest{
 			"S3 enabled",
 			&config.Hal{
 				Canary: &canary.Canary{
-					Enabled: wrappers.True(),
+					Enabled: wrapperspb.Bool(true),
 					ServiceIntegrations: &canary.Canary_ServiceIntegrations{
 						Aws: &canary.Aws{
-							Enabled: wrappers.True(),
+							Enabled: wrapperspb.Bool(true),
 							Accounts: []*canary.AwsAccount{
 								{
 									Name: "my-aws-account",
@@ -237,7 +237,7 @@ var kayentaTests = configTest{
 									},
 								},
 							},
-							S3Enabled: wrappers.True(),
+							S3Enabled: wrapperspb.Bool(true),
 						},
 					},
 				},
@@ -245,7 +245,7 @@ var kayentaTests = configTest{
 			&config.Kayenta{
 				Kayenta: &config.Kayenta_ServiceIntegrations{
 					Aws: &config.Kayenta_ServiceIntegrations_Aws{
-						Enabled: wrappers.True(),
+						Enabled: wrapperspb.Bool(true),
 						Accounts: []*canary.AwsAccount{
 							{
 								Name: "my-aws-account",
@@ -257,7 +257,7 @@ var kayentaTests = configTest{
 						},
 					},
 					S3: &canary.S3{
-						Enabled: wrappers.True(),
+						Enabled: wrapperspb.Bool(true),
 					},
 				},
 			},
@@ -266,10 +266,10 @@ var kayentaTests = configTest{
 			"SignalFx enabled",
 			&config.Hal{
 				Canary: &canary.Canary{
-					Enabled: wrappers.True(),
+					Enabled: wrapperspb.Bool(true),
 					ServiceIntegrations: &canary.Canary_ServiceIntegrations{
 						Signalfx: &canary.SignalFx{
-							Enabled: wrappers.True(),
+							Enabled: wrapperspb.Bool(true),
 							Accounts: []*canary.SignalFxAccount{
 								{
 									Name: "my-signalfx-account",
@@ -286,7 +286,7 @@ var kayentaTests = configTest{
 			&config.Kayenta{
 				Kayenta: &config.Kayenta_ServiceIntegrations{
 					Signalfx: &canary.SignalFx{
-						Enabled: wrappers.True(),
+						Enabled: wrapperspb.Bool(true),
 						Accounts: []*canary.SignalFxAccount{
 							{
 								Name: "my-signalfx-account",
@@ -304,10 +304,10 @@ var kayentaTests = configTest{
 			"New Relic enabled",
 			&config.Hal{
 				Canary: &canary.Canary{
-					Enabled: wrappers.True(),
+					Enabled: wrapperspb.Bool(true),
 					ServiceIntegrations: &canary.Canary_ServiceIntegrations{
 						Newrelic: &canary.NewRelic{
-							Enabled: wrappers.True(),
+							Enabled: wrapperspb.Bool(true),
 							Accounts: []*canary.NewRelicAccount{
 								{
 									Name: "my-newrelic-account",
@@ -323,7 +323,7 @@ var kayentaTests = configTest{
 			&config.Kayenta{
 				Kayenta: &config.Kayenta_ServiceIntegrations{
 					Newrelic: &canary.NewRelic{
-						Enabled: wrappers.True(),
+						Enabled: wrapperspb.Bool(true),
 						Accounts: []*canary.NewRelicAccount{
 							{
 								Name: "my-newrelic-account",

@@ -21,7 +21,7 @@ import (
 	"github.com/spinnaker/kleat/api/client/cloudprovider"
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/validate"
-	"github.com/spinnaker/kleat/internal/wrappers"
+	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func TestEmptyHalConfig(t *testing.T) {
@@ -58,7 +58,7 @@ func TestNoKubernetesAccounts(t *testing.T) {
 	h := &config.Hal{
 		Providers: &cloudprovider.Providers{
 			Kubernetes: &cloudprovider.Kubernetes{
-				Enabled:  wrappers.False(),
+				Enabled:  wrapperspb.Bool(false),
 				Accounts: []*cloudprovider.KubernetesAccount{},
 			},
 		},

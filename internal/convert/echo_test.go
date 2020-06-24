@@ -25,8 +25,8 @@ import (
 	"github.com/spinnaker/kleat/api/client/notification"
 	"github.com/spinnaker/kleat/api/client/pubsub"
 	"github.com/spinnaker/kleat/internal/convert"
-	"github.com/spinnaker/kleat/internal/wrappers"
 	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 // deploymentMethod is the deployment method that will be auto-populated by kleat
@@ -59,7 +59,7 @@ var echoTests = configTest{
 			&config.Hal{
 				Notifications: &notification.Notifications{
 					Slack: &notification.Slack{
-						Enabled: wrappers.True(),
+						Enabled: wrapperspb.Bool(true),
 						BotName: "my-bot",
 						Token:   "my-token",
 						BaseUrl: "https://slack.test/",
@@ -68,7 +68,7 @@ var echoTests = configTest{
 			},
 			&config.Echo{
 				Slack: &notification.Slack{
-					Enabled: wrappers.True(),
+					Enabled: wrapperspb.Bool(true),
 					BotName: "my-bot",
 					Token:   "my-token",
 					BaseUrl: "https://slack.test/",
@@ -172,7 +172,7 @@ var echoTests = configTest{
 			&config.Hal{
 				Ci: &ci.Ci{
 					Gcb: &ci.GoogleCloudBuild{
-						Enabled: wrappers.True(),
+						Enabled: wrapperspb.Bool(true),
 						Accounts: []*ci.GoogleCloudBuildAccount{
 							{
 								Name:             "my-account",
@@ -185,7 +185,7 @@ var echoTests = configTest{
 			},
 			&config.Echo{
 				Gcb: &ci.GoogleCloudBuild{
-					Enabled: wrappers.True(),
+					Enabled: wrapperspb.Bool(true),
 					Accounts: []*ci.GoogleCloudBuildAccount{
 						{
 							Name:             "my-account",
@@ -207,11 +207,11 @@ var echoTests = configTest{
 		{
 			"Stats enabled",
 			&config.Hal{
-				Stats: &client.Stats{Enabled: wrappers.True()},
+				Stats: &client.Stats{Enabled: wrapperspb.Bool(true)},
 			},
 			&config.Echo{
 				Stats: &config.Echo_Stats{
-					Enabled:          wrappers.True(),
+					Enabled:          wrapperspb.Bool(true),
 					DeploymentMethod: deploymentMethod,
 				},
 			},
@@ -219,11 +219,11 @@ var echoTests = configTest{
 		{
 			"Stats disabled",
 			&config.Hal{
-				Stats: &client.Stats{Enabled: wrappers.False()},
+				Stats: &client.Stats{Enabled: wrapperspb.Bool(false)},
 			},
 			&config.Echo{
 				Stats: &config.Echo_Stats{
-					Enabled:          wrappers.False(),
+					Enabled:          wrapperspb.Bool(false),
 					DeploymentMethod: deploymentMethod,
 				},
 			},

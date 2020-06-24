@@ -21,7 +21,7 @@ import (
 
 	"github.com/spinnaker/kleat/api/client/ci"
 	"github.com/spinnaker/kleat/internal/convert"
-	"github.com/spinnaker/kleat/internal/wrappers"
+	"google.golang.org/protobuf/types/known/wrapperspb"
 
 	"github.com/spinnaker/kleat/api/client/repository"
 
@@ -46,13 +46,13 @@ var igorTests = configTest{
 			&config.Hal{
 				Providers: &cloudprovider.Providers{
 					DockerRegistry: &cloudprovider.DockerRegistry{
-						Enabled: wrappers.True(),
+						Enabled: wrapperspb.Bool(true),
 					},
 				},
 			},
 			&config.Igor{
 				DockerRegistry: &config.Igor_DockerRegistry{
-					Enabled: wrappers.True(),
+					Enabled: wrapperspb.Bool(true),
 				},
 			},
 		},
@@ -84,7 +84,7 @@ var igorTests = configTest{
 			&config.Hal{
 				Repository: &repository.Repository{
 					Artifactory: &repository.Artifactory{
-						Enabled: wrappers.True(),
+						Enabled: wrapperspb.Bool(true),
 						Searches: []*repository.Artifactory_Search{
 							{
 								Name:     "my-search",
@@ -100,7 +100,7 @@ var igorTests = configTest{
 			},
 			&config.Igor{
 				Artifactory: &repository.Artifactory{
-					Enabled: wrappers.True(),
+					Enabled: wrapperspb.Bool(true),
 					Searches: []*repository.Artifactory_Search{
 						{
 							Name:     "my-search",
@@ -119,7 +119,7 @@ var igorTests = configTest{
 			&config.Hal{
 				Ci: &ci.Ci{
 					Travis: &ci.Travis{
-						Enabled: wrappers.True(),
+						Enabled: wrapperspb.Bool(true),
 						Masters: []*ci.TravisAccount{
 							{
 								Name: "my-travis-account",
@@ -127,7 +127,7 @@ var igorTests = configTest{
 						},
 					},
 					Gcb: &ci.GoogleCloudBuild{
-						Enabled: wrappers.True(),
+						Enabled: wrapperspb.Bool(true),
 						Accounts: []*ci.GoogleCloudBuildAccount{
 							{
 								Name: "my-gcb-account",
@@ -138,7 +138,7 @@ var igorTests = configTest{
 			},
 			&config.Igor{
 				Travis: &ci.Travis{
-					Enabled: wrappers.True(),
+					Enabled: wrapperspb.Bool(true),
 					Masters: []*ci.TravisAccount{
 						{
 							Name: "my-travis-account",
@@ -146,7 +146,7 @@ var igorTests = configTest{
 					},
 				},
 				Gcb: &ci.GoogleCloudBuild{
-					Enabled: wrappers.True(),
+					Enabled: wrapperspb.Bool(true),
 					Accounts: []*ci.GoogleCloudBuildAccount{
 						{
 							Name: "my-gcb-account",
