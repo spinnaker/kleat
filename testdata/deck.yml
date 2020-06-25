@@ -64,5 +64,6 @@ providers:
     defaults:
       account: my-huawei-account
       region: us-east1
+  kubernetes: {}
 defaultTimeZone: America/Chicago
 version: master-latest-unvalidated

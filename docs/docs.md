@@ -231,6 +231,7 @@
     - [Deck.Providers.Gce.Defaults](#proto.config.Deck.Providers.Gce.Defaults)
     - [Deck.Providers.HuaweiCloud](#proto.config.Deck.Providers.HuaweiCloud)
     - [Deck.Providers.HuaweiCloud.Defaults](#proto.config.Deck.Providers.HuaweiCloud.Defaults)
+    - [Deck.Providers.Kubernetes](#proto.config.Deck.Providers.Kubernetes)
     - [Deck.Providers.TencentCloud](#proto.config.Deck.Providers.TencentCloud)
     - [Deck.Providers.TencentCloud.Defaults](#proto.config.Deck.Providers.TencentCloud.Defaults)
   
@@ -3450,6 +3451,7 @@ UI-specific provider default settings.
 | gce | [Deck.Providers.Gce](#proto.config.Deck.Providers.Gce) |  | GCE provider defaults. |
 | huaweicloud | [Deck.Providers.HuaweiCloud](#proto.config.Deck.Providers.HuaweiCloud) |  | Huawei Cloud provider defaults. |
 | tencentcloud | [Deck.Providers.TencentCloud](#proto.config.Deck.Providers.TencentCloud) |  | Tencent Cloud provider defaults. |
+| kubernetes | [Deck.Providers.Kubernetes](#proto.config.Deck.Providers.Kubernetes) |  |  |
 
 
 
@@ -3694,6 +3696,18 @@ UI-specific provider default settings.
 | ----- | ---- | ----- | ----------- |
 | account | [string](#string) |  |  |
 | region | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Kubernetes"></a>
+
+### Deck.Providers.Kubernetes
+The Kubernetes provider has no statically-configured defaults,
+but Deck currently registers each cloud provider based on the existence
+of an entry in the `providers` block.
 
 
 
