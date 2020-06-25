@@ -161,6 +161,8 @@ message Deck {
     // Tencent Cloud provider defaults.
     TencentCloud tencentcloud = 9;
 
+    Kubernetes kubernetes = 10;
+
     message Appengine {
       Defaults defaults = 1;
       message Defaults {
@@ -230,5 +232,10 @@ message Deck {
         string region = 2;
       }
     }
+
+    // The Kubernetes provider has no statically-configured defaults,
+    // but Deck currently registers each cloud provider based on the existence
+    // of an entry in the `providers` block.
+    message Kubernetes {}
   }
 }

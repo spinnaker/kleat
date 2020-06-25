@@ -236,6 +236,29 @@ var deckTests = configTest{
 			},
 		},
 		{
+			"Enabled provider without defaults",
+			&config.Hal{
+				Providers: &cloudprovider.Providers{
+					Kubernetes: &cloudprovider.Kubernetes{
+						Enabled: wrapperspb.Bool(true),
+					},
+				},
+			},
+			&config.Deck{
+				GateUrl:         "http://localhost:8084",
+				AuthEndpoint:    "http://localhost:8084/auth/user",
+				BakeryDetailUrl: "http://localhost:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
+				Canary: &config.Deck_Canary{
+					FeatureDisabled: wrapperspb.Bool(true),
+				},
+				Feature:       &config.Deck_Features{},
+				Notifications: &config.Deck_Notifications{},
+				Providers: &config.Deck_Providers{
+					Kubernetes: &config.Deck_Providers_Kubernetes{},
+				},
+			},
+		},
+		{
 			"Override gate URL",
 			&config.Hal{
 				Security: &security.Security{
