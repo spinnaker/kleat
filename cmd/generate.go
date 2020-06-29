@@ -23,7 +23,7 @@ import (
 )
 
 var generateCmd = &cobra.Command{
-	Use:   "generate",
+	Use:   "generate /path/to/halconfig /path/to/output",
 	Short: "Generate Spinnaker microservice config files",
 	Long: `Given a path to your top-level Spinnaker config (halconfig) and an
 output directory, writes each generated Spinnaker microservice config file to
@@ -31,7 +31,7 @@ the output directory.
 
 Example usage:
 
-kleat /path/to/halconfig /path/to/output`,
+kleat generate /path/to/halconfig /path/to/output`,
 	Args: cobra.ExactArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		hal := args[0]
