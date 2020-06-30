@@ -1866,6 +1866,7 @@ Configuration for a Travis account.
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. A user must have at least one of the READ roles in order to view this build account or use it as a trigger source. A user must have at least one of the WRITE roles in order to run jobs on this build account. |
 | numberOfJobs | [string](#string) |  | Defines how many jobs the Travis integration should retrieve per polling cycle. Defaults to 100. |
 | buildResultLimit | [string](#string) |  | Defines how many builds Igor should return when querying for builds for a specific repo. This affects for instance how many builds will be displayed in the drop down when starting a manual execution of a pipeline. If set too high, the Travis API might return an error for jobs that writes a lot of logs, which is why the default setting is a bit conservative. Defaults to 10. |
+| filteredRepositories | [string](#string) | repeated | Defines the list of repositories that will be scraped. Useful if the organization has a lot of repositories and you wish to speed things up by scanning only a subset. |
 
 
 
