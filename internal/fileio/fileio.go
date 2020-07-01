@@ -36,16 +36,16 @@ import (
 func ParseHalConfig(halPath string) (*config.Hal, error) {
 	data, err := ioutil.ReadFile(halPath)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("unable to read %q error: %v", halPath, err)
 	}
 
 	hal := &config.Hal{}
 	if err := protoyaml.Unmarshal(data, hal); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("unable to unmarshal %q: %v", halPath, err)
 	}
 
 	if err := validate.HalConfig(hal); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("unable to validate %q: %v", halPath, err)
 	}
 
 	return hal, nil
@@ -75,7 +75,9 @@ func WriteConfigs(hal *config.Hal, dir string) error {
 
 func ensureDirectory(d string) error {
 	stat, err := os.Stat(d)
-	if err != nil {
+	if os.IsNotExist(err) {
+		return os.MkdirAll(d, 0755)
+	} else if err != nil {
 		return err
 	}
 	if !stat.IsDir() {
