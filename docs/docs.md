@@ -377,6 +377,7 @@
     - [X509](#proto.security.authn.X509)
   
     - [OAuth2Client.AuthenticationScheme](#proto.security.authn.OAuth2Client.AuthenticationScheme)
+    - [Saml.SignatureDigest](#proto.security.authn.Saml.SignatureDigest)
   
 - [security/authz/authz.proto](#security/authz/authz.proto)
     - [Authorization](#proto.security.authz.Authorization)
@@ -5522,6 +5523,7 @@ control flow (through the user&#39;s browser) back to Gate by way of the
 | redirectBasePath | [string](#string) |  | The base path on the gate server to which redirects will be sent. Defaults to &#39;/&#39; if absent. |
 | redirectProtocol | [string](#string) |  | The protocol to use to when redirecting back to the Gate server. Defaults to &#39;https&#39; if absent. |
 | userAttributeMapping | [Saml.UserAttributes](#proto.security.authn.Saml.UserAttributes) |  | Configuration for fields returned from your SAML provider. |
+| signatureDigest | [Saml.SignatureDigest](#proto.security.authn.Saml.SignatureDigest) |  | Digest algorithm to sign SAML messages (optional). |
 
 
 
@@ -5598,6 +5600,22 @@ Methods to transmit authentication tokens to an OAuth 2.0 provider.
 | query | 2 | Token is sent as a query parameter. |
 | form | 3 | Token is sent in the form body. |
 | none | 4 | Token is not sent at all. |
+
+
+
+<a name="proto.security.authn.Saml.SignatureDigest"></a>
+
+### Saml.SignatureDigest
+Digest algorithms to sign SAML messages.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| SHA1 | 0 | Digest algorithm SHA1 (default). |
+| SHA256 | 1 | Digest algorithm SHA256. |
+| SHA384 | 2 | Digest algorithm SHA384. |
+| SHA512 | 3 | Digest algorithm SHA512. |
+| RIPEMD160 | 4 | Digest algorithm RIPEMD160. |
+| MD5 | 5 | Digest algorithm MD5 (not recommended). |
 
 
  
