@@ -193,23 +193,26 @@ message Saml {
 
   // Digest algorithms to sign SAML messages.
   enum SignatureDigest {
+    // Unspecified. Do not directly use, instead omit the field.
+    UNSPECIFIED = 0;
+
     // Digest algorithm SHA1 (default).
-    SHA1 = 0;
+    SHA1 = 1;
 
     // Digest algorithm SHA256.
-    SHA256 = 1;
+    SHA256 = 2;
 
     // Digest algorithm SHA384.
-    SHA384 = 2;
+    SHA384 = 3;
 
     // Digest algorithm SHA512.
-    SHA512 = 3;
+    SHA512 = 4;
 
     // Digest algorithm RIPEMD160.
-    RIPEMD160 = 4;
+    RIPEMD160 = 5;
 
     // Digest algorithm MD5 (not recommended).
-    MD5 = 5;
+    MD5 = 6;
   }
 }
 
