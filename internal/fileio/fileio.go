@@ -36,7 +36,7 @@ import (
 func ParseHalConfig(halPath string) (*config.Hal, error) {
 	data, err := ioutil.ReadFile(halPath)
 	if err != nil {
-		return nil, fmt.Errorf("unable to read %q error: %v", halPath, err)
+		return nil, fmt.Errorf("unable to read %q. Error: %v", halPath, err)
 	}
 
 	hal := &config.Hal{}
