@@ -377,6 +377,7 @@
     - [X509](#proto.security.authn.X509)
   
     - [OAuth2Client.AuthenticationScheme](#proto.security.authn.OAuth2Client.AuthenticationScheme)
+    - [Saml.SignatureDigest](#proto.security.authn.Saml.SignatureDigest)
   
 - [security/authz/authz.proto](#security/authz/authz.proto)
     - [Authorization](#proto.security.authz.Authorization)
@@ -1866,6 +1867,7 @@ Configuration for a Travis account.
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. A user must have at least one of the READ roles in order to view this build account or use it as a trigger source. A user must have at least one of the WRITE roles in order to run jobs on this build account. |
 | numberOfJobs | [string](#string) |  | Defines how many jobs the Travis integration should retrieve per polling cycle. Defaults to 100. |
 | buildResultLimit | [string](#string) |  | Defines how many builds Igor should return when querying for builds for a specific repo. This affects for instance how many builds will be displayed in the drop down when starting a manual execution of a pipeline. If set too high, the Travis API might return an error for jobs that writes a lot of logs, which is why the default setting is a bit conservative. Defaults to 10. |
+| filteredRepositories | [string](#string) | repeated | Defines the list of repositories that will be scraped. Useful if the organization has a lot of repositories and you wish to speed things up by scanning only a subset. |
 
 
 
@@ -5521,6 +5523,7 @@ control flow (through the user&#39;s browser) back to Gate by way of the
 | redirectBasePath | [string](#string) |  | The base path on the gate server to which redirects will be sent. Defaults to &#39;/&#39; if absent. |
 | redirectProtocol | [string](#string) |  | The protocol to use to when redirecting back to the Gate server. Defaults to &#39;https&#39; if absent. |
 | userAttributeMapping | [Saml.UserAttributes](#proto.security.authn.Saml.UserAttributes) |  | Configuration for fields returned from your SAML provider. |
+| signatureDigest | [Saml.SignatureDigest](#proto.security.authn.Saml.SignatureDigest) |  | Digest algorithm to sign SAML messages (optional). |
 
 
 
@@ -5597,6 +5600,23 @@ Methods to transmit authentication tokens to an OAuth 2.0 provider.
 | query | 2 | Token is sent as a query parameter. |
 | form | 3 | Token is sent in the form body. |
 | none | 4 | Token is not sent at all. |
+
+
+
+<a name="proto.security.authn.Saml.SignatureDigest"></a>
+
+### Saml.SignatureDigest
+Digest algorithms to sign SAML messages.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| UNSPECIFIED | 0 | Unspecified. Do not directly use, instead omit the field. |
+| SHA1 | 1 | Digest algorithm SHA1 (default). |
+| SHA256 | 2 | Digest algorithm SHA256. |
+| SHA384 | 3 | Digest algorithm SHA384. |
+| SHA512 | 4 | Digest algorithm SHA512. |
+| RIPEMD160 | 5 | Digest algorithm RIPEMD160. |
+| MD5 | 6 | Digest algorithm MD5 (not recommended). |
 
 
  

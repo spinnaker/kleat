@@ -170,6 +170,8 @@ ci:
     enabled: true
     masters:
     - address: https://my-travis
+      filteredRepositories:
+      - my-travis-repo
       name: my-travis-account
   wercker:
     enabled: true

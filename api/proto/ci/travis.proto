@@ -46,4 +46,9 @@ message TravisAccount {
   // high, the Travis API might return an error for jobs that writes a lot of logs,
   // which is why the default setting is a bit conservative. Defaults to 10.
   string buildResultLimit = 8;
+
+  // Defines the list of repositories that will be scraped. Useful if the
+  // organization has a lot of repositories and you wish to speed things up by
+  // scanning only a subset.
+  repeated string filteredRepositories = 9;
 }

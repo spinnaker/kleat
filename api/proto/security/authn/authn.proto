@@ -167,6 +167,9 @@ message Saml {
   // Configuration for fields returned from your SAML provider.
   UserAttributes userAttributeMapping = 10;
 
+  // Digest algorithm to sign SAML messages (optional).
+  SignatureDigest signatureDigest = 11;
+
   // Configuration for fields returned from your SAML provider.
   message UserAttributes {
     // First name.
@@ -186,6 +189,30 @@ message Saml {
 
     // Email.
     string email = 6;
+  }
+
+  // Digest algorithms to sign SAML messages.
+  enum SignatureDigest {
+    // Unspecified. Do not directly use, instead omit the field.
+    UNSPECIFIED = 0;
+
+    // Digest algorithm SHA1 (default).
+    SHA1 = 1;
+
+    // Digest algorithm SHA256.
+    SHA256 = 2;
+
+    // Digest algorithm SHA384.
+    SHA384 = 3;
+
+    // Digest algorithm SHA512.
+    SHA512 = 4;
+
+    // Digest algorithm RIPEMD160.
+    RIPEMD160 = 5;
+
+    // Digest algorithm MD5 (not recommended).
+    MD5 = 6;
   }
 }
 
