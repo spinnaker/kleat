@@ -5610,12 +5610,13 @@ Digest algorithms to sign SAML messages.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| SHA1 | 0 | Digest algorithm SHA1 (default). |
-| SHA256 | 1 | Digest algorithm SHA256. |
-| SHA384 | 2 | Digest algorithm SHA384. |
-| SHA512 | 3 | Digest algorithm SHA512. |
-| RIPEMD160 | 4 | Digest algorithm RIPEMD160. |
-| MD5 | 5 | Digest algorithm MD5 (not recommended). |
+| UNSPECIFIED | 0 | Unspecified. Do not directly use, instead omit the field. |
+| SHA1 | 1 | Digest algorithm SHA1 (default). |
+| SHA256 | 2 | Digest algorithm SHA256. |
+| SHA384 | 3 | Digest algorithm SHA384. |
+| SHA512 | 4 | Digest algorithm SHA512. |
+| RIPEMD160 | 5 | Digest algorithm RIPEMD160. |
+| MD5 | 6 | Digest algorithm MD5 (not recommended). |
 
 
  
