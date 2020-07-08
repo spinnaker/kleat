@@ -21,6 +21,5 @@ COPY --from=protoc /bin/protoc /usr/local/bin/protoc
 COPY --from=protoc /include/google /usr/local/include/google
 COPY --from=protoc-gen-go /protoc-gen-go /usr/local/bin/protoc-gen-go
 COPY --from=protoc-gen-doc /protoc-gen-doc /usr/local/bin/protoc-gen-doc
-RUN mkdir -p /output /staging/go /staging/doc
 COPY genproto.sh .
 ENTRYPOINT ["./genproto.sh"]
