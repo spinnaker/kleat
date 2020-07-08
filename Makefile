@@ -3,6 +3,7 @@ protobuilder:
 
 proto_command = docker run \
   --rm \
+  --user $(shell id -u):$(shell id -g) \
   --mount type=bind,source=$(abspath api/proto/),target=/mnt/proto,readonly \
   --mount type=bind,source=$(abspath api/client/),target=/mnt/output/go \
   --mount type=bind,source=$(abspath docs),target=/mnt/output/doc \

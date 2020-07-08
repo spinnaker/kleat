@@ -34,4 +34,6 @@ COPY --chown=root:root --from=protoc-gen-go /home/curl/protoc-gen-go /usr/local/
 COPY --chown=root:root --from=protoc-gen-doc /home/curl/protoc-gen-doc /usr/local/bin/protoc-gen-doc
 COPY --chown=root:root genproto.sh /usr/local/bin/genproto.sh
 RUN chmod 755 /usr/local/bin/genproto.sh
+RUN adduser --disabled-password --gecos '' protoc
+USER protoc
 ENTRYPOINT ["/usr/local/bin/genproto.sh"]
