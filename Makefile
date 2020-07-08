@@ -3,9 +3,9 @@ protobuilder:
 
 proto_command = docker run \
   --rm \
-  -v $(abspath api/proto/):/proto \
-  -v $(abspath api/client):/output/go \
-  -v $(abspath docs):/output/doc \
+  --mount type=bind,source=$(abspath api/proto/),target=/proto,readonly \
+  --mount type=bind,source=$(abspath api/client/),target=/output/go \
+  --mount type=bind,source=$(abspath docs),target=/output/doc \
   kleat-protobuilder:latest
 
 proto: protobuilder
