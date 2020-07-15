@@ -147,6 +147,10 @@ type DockerRegistryAccount struct {
 	// An optional list of repositories from which to cache images. If not
 	// provided, Spinnaker will attempt to read accessible repositories from the
 	// `registries _catalog` endpoint.
+	// In the case of registries that support nested paths, like GCR, you can
+	// target nested paths by including them sans their registry domain.
+	// For example:
+	// `gcr.io/my-project/path/to/image` => `my-project/path/to/image`
 	Repositories []string `protobuf:"bytes,15,rep,name=repositories,proto3" json:"repositories,omitempty"`
 	// If `true`, Spinnaker will sort tags by creation date. Defaults to
 	// `false`. Not recommended for use with large registries; sorting
