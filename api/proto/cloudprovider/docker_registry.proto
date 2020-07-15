@@ -84,7 +84,7 @@ message DockerRegistryAccount {
     // `registries _catalog` endpoint.
     // In the case of registries that support nested paths, like GCR, you can
     // target nested paths by including them sans their registry domain.
-    // For example: 
+    // For example:
     // `gcr.io/my-project/path/to/image` => `my-project/path/to/image`
     repeated string repositories = 15;
 
