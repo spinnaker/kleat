@@ -84,23 +84,20 @@ func (x *Bitbucket) GetAccounts() []*BitbucketAccount {
 	return nil
 }
 
-// Configuration for a Bitbucket artifact account.
+// Configuration for a Bitbucket artifact account. For each account, set both `username` and `password`, or set `usernamePasswordFile`.
 type BitbucketAccount struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// The name of the account.
+	// The name of the account, which must be unique among configured Bitbucket accounts.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// The username of the account. Either `username` and `password` should be
-	// set, or `usernamePasswordFile` should be set.
+	// The username of the account.
 	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
-	// The password of the account. Either `username` and `password` should be
-	// set, or `usernamePasswordFile` should be set.
+	// The password of the account.
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The path to a file containing the username and password of the account
-	// in the format `${username}:${password}`. Either `username` and
-	// `password` should be set, or `usernamePasswordFile` should be set.
+	// in the format `${username}:${password}`.
 	UsernamePasswordFile string `protobuf:"bytes,4,opt,name=usernamePasswordFile,proto3" json:"usernamePasswordFile,omitempty"`
 }
 

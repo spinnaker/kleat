@@ -496,15 +496,15 @@ Configuration for the Bitbucket artifact provider.
 <a name="proto.artifact.BitbucketAccount"></a>
 
 ### BitbucketAccount
-Configuration for a Bitbucket artifact account.
+Configuration for a Bitbucket artifact account. For each account, set both `username` and `password`, or set `usernamePasswordFile`.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The name of the account. |
-| username | [string](#string) |  | The username of the account. Either `username` and `password` should be set, or `usernamePasswordFile` should be set. |
-| password | [string](#string) |  | The password of the account. Either `username` and `password` should be set, or `usernamePasswordFile` should be set. |
-| usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password of the account in the format `${username}:${password}`. Either `username` and `password` should be set, or `usernamePasswordFile` should be set. |
+| name | [string](#string) |  | The name of the account, which must be unique among configured Bitbucket accounts. |
+| username | [string](#string) |  | The username of the account. |
+| password | [string](#string) |  | The password of the account. |
+| usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password of the account in the format `${username}:${password}`. |
 
 
 
