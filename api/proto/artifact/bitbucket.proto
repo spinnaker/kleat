@@ -14,21 +14,18 @@ message Bitbucket {
     repeated BitbucketAccount accounts = 2;
 }
 
-// Configuration for a Bitbucket artifact account.
+// Configuration for a Bitbucket artifact account. For each account, set both `username` and `password`, or set `usernamePasswordFile`.
 message BitbucketAccount {
-    // The name of the account.
+    // The name of the account, which must be unique among configured Bitbucket accounts.
     string name = 1;
 
-    // The username of the account. Either `username` and `password` should be
-    // set, or `usernamePasswordFile` should be set.
+    // The username of the account. 
     string username = 2;
 
-    // The password of the account. Either `username` and `password` should be
-    // set, or `usernamePasswordFile` should be set.
+    // The password of the account. 
     string password = 3;
 
     // The path to a file containing the username and password of the account
-    // in the format `${username}:${password}`. Either `username` and
-    // `password` should be set, or `usernamePasswordFile` should be set.
+    // in the format `${username}:${password}`. 
     string usernamePasswordFile = 4;
 }
