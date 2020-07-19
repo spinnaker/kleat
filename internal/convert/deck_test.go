@@ -19,21 +19,17 @@ package convert_test
 import (
 	"testing"
 
-	"github.com/spinnaker/kleat/api/client/cloudprovider"
-	"github.com/spinnaker/kleat/api/client/notification"
-	"github.com/spinnaker/kleat/internal/convert"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 
 	"github.com/spinnaker/kleat/api/client"
-
 	"github.com/spinnaker/kleat/api/client/canary"
-
-	"github.com/spinnaker/kleat/api/client/security/authn"
-
-	"github.com/spinnaker/kleat/api/client/security"
-
+	"github.com/spinnaker/kleat/api/client/cloudprovider"
 	"github.com/spinnaker/kleat/api/client/config"
+	"github.com/spinnaker/kleat/api/client/notification"
+	"github.com/spinnaker/kleat/api/client/security"
+	"github.com/spinnaker/kleat/api/client/security/authn"
+	"github.com/spinnaker/kleat/internal/convert"
 )
 
 var deckTests = configTest{

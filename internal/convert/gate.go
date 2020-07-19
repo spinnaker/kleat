@@ -17,9 +17,10 @@
 package convert
 
 import (
+	"google.golang.org/protobuf/proto"
+
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/api/client/security/authn"
-	"google.golang.org/protobuf/proto"
 )
 
 // HalToGate generates the gate config for the supplied config.Hal h.

@@ -19,9 +19,10 @@ package convert_test
 import (
 	"testing"
 
+	"google.golang.org/protobuf/proto"
+
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/prototest"
-	"google.golang.org/protobuf/proto"
 )
 
 // testCase represents a test case for config generation, indicating
