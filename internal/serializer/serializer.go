@@ -22,10 +22,11 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/spinnaker/kleat/internal/protoyaml"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/reflect/protoreflect"
+
+	"github.com/spinnaker/kleat/internal/protoyaml"
 )
 
 // Serializer is an interface that wraps a method to serialize a proto.Message

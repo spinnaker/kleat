@@ -18,10 +18,11 @@ package validate_test
 import (
 	"testing"
 
+	"google.golang.org/protobuf/types/known/wrapperspb"
+
 	"github.com/spinnaker/kleat/api/client/cloudprovider"
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/validate"
-	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func TestEmptyHalConfig(t *testing.T) {

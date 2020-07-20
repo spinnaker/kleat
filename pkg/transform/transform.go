@@ -19,10 +19,11 @@
 package transform
 
 import (
+	"google.golang.org/protobuf/proto"
+
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/convert"
 	"github.com/spinnaker/kleat/internal/serializer"
-	"google.golang.org/protobuf/proto"
 )
 
 // HalToServiceConfigs returns the microservice configurations corresponding
