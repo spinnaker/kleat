@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-// Package fileio supports reading reading and writing config files to the
+// Package fileio supports reading and writing config files to the
 // filesystem.
 package fileio
 
