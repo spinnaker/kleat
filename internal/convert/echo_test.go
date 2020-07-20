@@ -19,14 +19,15 @@ package convert_test
 import (
 	"testing"
 
+	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/wrapperspb"
+
 	"github.com/spinnaker/kleat/api/client"
 	"github.com/spinnaker/kleat/api/client/ci"
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/api/client/notification"
 	"github.com/spinnaker/kleat/api/client/pubsub"
 	"github.com/spinnaker/kleat/internal/convert"
-	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 // deploymentMethod is the deployment method that will be auto-populated by kleat

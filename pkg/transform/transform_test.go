@@ -23,13 +23,14 @@ import (
 	"testing"
 
 	"github.com/kylelemons/godebug/diff"
+	"google.golang.org/protobuf/proto"
+
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/convert"
 	"github.com/spinnaker/kleat/internal/fileio"
 	"github.com/spinnaker/kleat/internal/prototest"
 	"github.com/spinnaker/kleat/internal/protoyaml"
 	"github.com/spinnaker/kleat/pkg/transform"
-	"google.golang.org/protobuf/proto"
 )
 
 const dataDir = "../../testdata"

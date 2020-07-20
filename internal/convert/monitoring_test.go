@@ -19,14 +19,12 @@ package convert_test
 import (
 	"testing"
 
+	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/wrapperspb"
-
-	"github.com/spinnaker/kleat/internal/convert"
 
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/api/client/metricstores"
-
-	"google.golang.org/protobuf/proto"
+	"github.com/spinnaker/kleat/internal/convert"
 )
 
 var monitoringTests = configTest{

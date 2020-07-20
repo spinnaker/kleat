@@ -19,12 +19,13 @@ package convert_test
 import (
 	"testing"
 
+	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/wrapperspb"
+
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/api/client/security"
 	"github.com/spinnaker/kleat/api/client/security/authz"
 	"github.com/spinnaker/kleat/internal/convert"
-	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 var fiatTests = configTest{
