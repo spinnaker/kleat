@@ -10,5 +10,6 @@ linters:
     - goimports
     - golint
     - govet
-goimports:
-  local-prefixes: github.com/spinnaker/kleat
+linters-settings:
+  goimports:
+    local-prefixes: github.com/spinnaker/kleat
