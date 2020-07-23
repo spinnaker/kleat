@@ -14,8 +14,8 @@ message Helm {
     repeated HelmAccount accounts = 2;
 }
 
-// Configuration for a Helm artifact account. Either `username` and `password`
-// or `usernamePasswordFile` should be specified as means of authentication.
+// Configuration for a Helm artifact account. For authentication, specify
+// either `username` and `password` or `usernamePasswordFile`.
 message HelmAccount {
     // The name of the account.
     string name = 1;
@@ -23,13 +23,14 @@ message HelmAccount {
     // The Helm chart repository URL.
     string repository = 2;
 
-    // A username for Helm chart repository basic auth.
+    // A username for Helm chart repository basic authentication.
     string username = 3;
 
-    // A password for Helm chart repository basic auth.
+    // A password for Helm chart repository basic authentication.
     string password = 4;
 
     // The path to a file containing the username and password for Helm chart
-    // repository basic auth. Must be in the format `${username}:${password}`.
+    // repository basic authentication. Must be in the format
+    // `${username}:${password}`.
     string usernamePasswordFile = 5;
 }

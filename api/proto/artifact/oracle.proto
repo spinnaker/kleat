@@ -22,13 +22,13 @@ message OracleAccount {
     // The fingerprint of the public key.
     string fingerprint = 2;
 
-    // The namespace in which the bucket and objects should be created.
+    // The namespace in which the bucket and objects will be created.
     string namespace = 3;
 
     // The passphrase used for the private key, if it is encrypted.
     string privateKeyPassphrase = 4;
 
-    // An Oracle region (e.g., `us-phoenix-1`).
+    // An Oracle region (for example, `us-phoenix-1`).
     string region = 5;
 
     // Path to the private key in PEM format.
