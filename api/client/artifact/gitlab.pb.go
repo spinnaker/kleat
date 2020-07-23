@@ -84,8 +84,8 @@ func (x *GitLab) GetAccounts() []*GitLabAccount {
 	return nil
 }
 
-// Configuration for a GitLab artifact account. Either `token` or
-// `tokenFile` should be specified as means of authentication.
+// Configuration for a GitLab artifact account. For authentication, specify
+// either `token` or `tokenFile`.
 type GitLabAccount struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

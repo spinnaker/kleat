@@ -84,11 +84,16 @@ func (x *GitRepo) GetAccounts() []*GitRepoAccount {
 	return nil
 }
 
-// Configuration for a Git repo artifact account. An account maps to a
-// credential that is able to authenticate against a Git repository hosted by a
-// Git hosting service. Either `username` and `password`,
-// `usernamePasswordFile`, `token`, `tokenFile`, or `sshPrivateKeyFilePath` and
-// `sshPrivateKeyPassphrase` must be set.
+// Configuration for a Git repo artifact account.
+// An account configured here maps to a credential that can authenticate
+// against a Git repository hosted by a Git hosting service.
+//
+// For authentication, set one of the following:
+// * `username` and `password`
+// * `usernamePasswordFile`
+// * `token`
+// * `tokenFile`
+// * `sshPrivateKeyFilePath` and `sshPrivateKeyPassphrase`
 type GitRepoAccount struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -103,18 +108,18 @@ type GitRepoAccount struct {
 	// The path to a file containing the username and password of the account
 	// in the format `${username}:${password}`.
 	UsernamePasswordFile string `protobuf:"bytes,4,opt,name=usernamePasswordFile,proto3" json:"usernamePasswordFile,omitempty"`
-	// The Git repo access token.
+	// The access token for the repository.
 	Token string `protobuf:"bytes,5,opt,name=token,proto3" json:"token,omitempty"`
-	// The path to a file containing the Git repo access token.
+	// The path to a file containing the repository access token.
 	TokenFile string `protobuf:"bytes,6,opt,name=tokenFile,proto3" json:"tokenFile,omitempty"`
-	// The path to an SSH private key to be used when connecting with the Git
-	// repo over SSH.
+	// The path to an SSH private key to be used when connecting with the
+	// repository over SSH.
 	SshPrivateKeyFilePath string `protobuf:"bytes,7,opt,name=sshPrivateKeyFilePath,proto3" json:"sshPrivateKeyFilePath,omitempty"`
 	// The passphrase to an SSH private key to be used when connecting with
-	// the Git repo over SSH.
+	// the repository over SSH.
 	SshPrivateKeyPassphrase string `protobuf:"bytes,8,opt,name=sshPrivateKeyPassphrase,proto3" json:"sshPrivateKeyPassphrase,omitempty"`
 	// The path to a `known_hosts` file to be used when connecting with a
-	// Git repository over SSH.
+	// repository over SSH.
 	SshKnownHostsFilePath string `protobuf:"bytes,9,opt,name=sshKnownHostsFilePath,proto3" json:"sshKnownHostsFilePath,omitempty"`
 	// If `true`, Spinnaker can connect with a Git repository over SSH without
 	// verifying the server's IP address against a `known_hosts` file.

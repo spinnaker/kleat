@@ -14,8 +14,8 @@ message GitLab {
     repeated GitLabAccount accounts = 2;
 }
 
-// Configuration for a GitLab artifact account. Either `token` or
-// `tokenFile` should be specified as means of authentication.
+// Configuration for a GitLab artifact account. For authentication, specify
+// either `token` or `tokenFile`.
 message GitLabAccount {
     // The name of the account.
     string name = 1;

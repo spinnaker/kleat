@@ -14,9 +14,13 @@ message GitHub {
     repeated GitHubAccount accounts = 2;
 }
 
-// Configuration for a GitHub artifact account. Either `username` and
-// `password`, `usernamePasswordFile`, `token`, or `tokenFile` should be
-// specified as means of authentication.
+// Configuration for a GitHub artifact account. For each account, set one of
+// the following:
+//
+// * `username` and `password`
+// * `usernamePasswordFile`
+// * `token`
+// * `tokenFile`.
 message GitHubAccount {
     // The name of the account.
     string name = 1;
@@ -27,7 +31,7 @@ message GitHubAccount {
     // The GitHub account password.
     string password = 3;
 
-    // The path to a file containing the username and password of the account
+    // The path to a file containing the username and password for the account
     // in the format `${username}:${password}`.
     string usernamePasswordFile = 4;
 

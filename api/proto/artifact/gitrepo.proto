@@ -14,11 +14,16 @@ message GitRepo {
     repeated GitRepoAccount accounts = 2;
 }
 
-// Configuration for a Git repo artifact account. An account maps to a
-// credential that is able to authenticate against a Git repository hosted by a
-// Git hosting service. Either `username` and `password`,
-// `usernamePasswordFile`, `token`, `tokenFile`, or `sshPrivateKeyFilePath` and
-// `sshPrivateKeyPassphrase` must be set.
+// Configuration for a Git repo artifact account. 
+// An account configured here maps to a credential that can authenticate 
+// against a Git repository hosted by a Git hosting service. 
+//
+// For authentication, set one of the following:
+// * `username` and `password`
+// * `usernamePasswordFile`
+// * `token`
+// * `tokenFile`
+// * `sshPrivateKeyFilePath` and `sshPrivateKeyPassphrase`
 message GitRepoAccount {
     // The name of the account.
     string name = 1;
@@ -33,22 +38,22 @@ message GitRepoAccount {
     // in the format `${username}:${password}`.
     string usernamePasswordFile = 4;
 
-    // The Git repo access token.
+    // The access token for the repository.
     string token = 5;
 
-    // The path to a file containing the Git repo access token.
+    // The path to a file containing the repository access token.
     string tokenFile = 6;
 
-    // The path to an SSH private key to be used when connecting with the Git
-    // repo over SSH.
+    // The path to an SSH private key to be used when connecting with the
+    // repository over SSH.
     string sshPrivateKeyFilePath = 7;
 
     // The passphrase to an SSH private key to be used when connecting with
-    // the Git repo over SSH.
+    // the repository over SSH.
     string sshPrivateKeyPassphrase = 8;
 
     // The path to a `known_hosts` file to be used when connecting with a
-    // Git repository over SSH.
+    // repository over SSH.
     string sshKnownHostsFilePath = 9;
 
     // If `true`, Spinnaker can connect with a Git repository over SSH without

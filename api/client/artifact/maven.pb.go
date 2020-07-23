@@ -92,7 +92,7 @@ type MavenAccount struct {
 
 	// The name of the account.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// (Required) Full URI for the Maven repository (e.g.,
+	// (Required) The full URI for the Maven repository (for example,
 	// `http://some.host.com/repository/path`).
 	RepositoryUrl string `protobuf:"bytes,2,opt,name=repositoryUrl,proto3" json:"repositoryUrl,omitempty"`
 }

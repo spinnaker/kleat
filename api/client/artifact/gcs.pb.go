@@ -26,15 +26,15 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-// Configuration for the Google Cloud Storage (GCS) artifact provider.
+// Configuration for the Google Cloud Storage artifact provider.
 type Gcs struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Whether the GCS artifact provider is enabled.
+	// Whether the Google Cloud Storage artifact provider is enabled.
 	Enabled *wrappers.BoolValue `protobuf:"bytes,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	// The list of configured GCS accounts.
+	// The list of configured Cloud Storage accounts.
 	Accounts []*GcsAccount `protobuf:"bytes,2,rep,name=accounts,proto3" json:"accounts,omitempty"`
 }
 
@@ -84,7 +84,7 @@ func (x *Gcs) GetAccounts() []*GcsAccount {
 	return nil
 }
 
-// Configuration for a GCS artifact account.
+// Configuration for a Google Cloud Storage artifact account.
 type GcsAccount struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -92,9 +92,8 @@ type GcsAccount struct {
 
 	// The name of the account.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// The path to a JSON key for a GCP service account with which to
-	// authenticate. The service account must have the `roles/storage.admin`
-	// role enabled.
+	// The path to a JSON key to authenticate a Google Cloud service account.
+	// The service account must have the `roles/storage.admin` role enabled.
 	JsonPath string `protobuf:"bytes,2,opt,name=jsonPath,proto3" json:"jsonPath,omitempty"`
 }
 

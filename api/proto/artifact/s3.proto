@@ -19,14 +19,16 @@ message S3Account {
     // The name of the account.
     string name = 1;
 
-    // The S3 API endpoint. Only required when using an S3 clone such as Minio.
+    // The S3 API endpoint. This is only required when using an S3 clone such
+    // as Minio.
     string apiEndpoint = 2;
 
-    // The S3 API region. Only required when using an S3 clone such as Minio.
+    // The S3 API region. This is only required when using an S3 clone such as
+    // Minio.
     string apiRegion = 3;
 
-    // The AWS Access Key ID. If not provided, Spinnaker will try to find AWS
-    // credentials as described at
+    // The AWS Access Key ID. If this isn't provided, Spinnaker tries to find 
+    // AWS credentials, as described at
     // http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default.
     string awsAccessKeyId = 4;
 

@@ -84,9 +84,13 @@ func (x *GitHub) GetAccounts() []*GitHubAccount {
 	return nil
 }
 
-// Configuration for a GitHub artifact account. Either `username` and
-// `password`, `usernamePasswordFile`, `token`, or `tokenFile` should be
-// specified as means of authentication.
+// Configuration for a GitHub artifact account. For each account, set one of
+// the following:
+//
+// * `username` and `password`
+// * `usernamePasswordFile`
+// * `token`
+// * `tokenFile`.
 type GitHubAccount struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -98,7 +102,7 @@ type GitHubAccount struct {
 	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
 	// The GitHub account password.
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-	// The path to a file containing the username and password of the account
+	// The path to a file containing the username and password for the account
 	// in the format `${username}:${password}`.
 	UsernamePasswordFile string `protobuf:"bytes,4,opt,name=usernamePasswordFile,proto3" json:"usernamePasswordFile,omitempty"`
 	// The GitHub access token.

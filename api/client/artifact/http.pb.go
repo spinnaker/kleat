@@ -84,8 +84,8 @@ func (x *Http) GetAccounts() []*HttpAccount {
 	return nil
 }
 
-// Configuration for an HTTP artifact account. Either `username` and `password`
-// or `usernamePasswordFile` should be specified as means of authentication.
+// Configuration for an HTTP artifact account. For authentication, specify
+// either `username` and `password` or `usernamePasswordFile`.
 type HttpAccount struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -93,12 +93,13 @@ type HttpAccount struct {
 
 	// The name of the account.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// A username for HTTP basic auth.
+	// A username for HTTP basic authentication.
 	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
-	// A password for HTTP basic auth.
+	// A password for HTTP basic authentication.
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// The path to a file containing the username and password for HTTP basic
-	// auth. Must be in the format `${username}:${password}`.
+	// authentication. Contents of the file must be in the format
+	// `${username}:${password}`.
 	UsernamePasswordFile string `protobuf:"bytes,4,opt,name=usernamePasswordFile,proto3" json:"usernamePasswordFile,omitempty"`
 }
 

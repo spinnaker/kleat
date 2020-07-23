@@ -19,7 +19,7 @@ message MavenAccount {
     // The name of the account.
     string name = 1;
 
-    // (Required) Full URI for the Maven repository (e.g.,
+    // (Required) The full URI for the Maven repository (for example,
     // `http://some.host.com/repository/path`).
     string repositoryUrl = 2;
 }
