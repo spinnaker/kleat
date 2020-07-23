@@ -28,6 +28,6 @@ message HttpAccount {
 
     // The path to a file containing the username and password for HTTP basic
     // authentication. Contents of the file must be in the format
-    `${username}:${password}`.
+    // `${username}:${password}`.
     string usernamePasswordFile = 4;
 }
