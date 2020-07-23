@@ -530,13 +530,13 @@ Configuration for a Bitbucket artifact account. For each account, set both `user
 <a name="proto.artifact.Gcs"></a>
 
 ### Gcs
-Configuration for the Google Cloud Storage (GCS) artifact provider.
+Configuration for the Google Cloud Storage artifact provider.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the GCS artifact provider is enabled. |
-| accounts | [GcsAccount](#proto.artifact.GcsAccount) | repeated | The list of configured GCS accounts. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the Google Cloud Storage artifact provider is enabled. |
+| accounts | [GcsAccount](#proto.artifact.GcsAccount) | repeated | The list of configured Cloud Storage accounts. |
 
 
 
@@ -546,13 +546,13 @@ Configuration for the Google Cloud Storage (GCS) artifact provider.
 <a name="proto.artifact.GcsAccount"></a>
 
 ### GcsAccount
-Configuration for a GCS artifact account.
+Configuration for a Google Cloud Storage artifact account.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The name of the account. |
-| jsonPath | [string](#string) |  | The path to a JSON key for a GCP service account with which to authenticate. The service account must have the `roles/storage.admin` role enabled. |
+| jsonPath | [string](#string) |  | The path to a JSON key to authenticate a Google Cloud service account. The service account must have the `roles/storage.admin` role enabled. |
 
 
 
@@ -594,9 +594,13 @@ Configuration for the GitHub artifact provider.
 <a name="proto.artifact.GitHubAccount"></a>
 
 ### GitHubAccount
-Configuration for a GitHub artifact account. Either `username` and
-`password`, `usernamePasswordFile`, `token`, or `tokenFile` should be
-specified as means of authentication.
+Configuration for a GitHub artifact account. For each account, set one of
+the following:
+
+* `username` and `password`
+* `usernamePasswordFile`
+* `token`
+* `tokenFile`.
 
 
 | Field | Type | Label | Description |
@@ -604,7 +608,7 @@ specified as means of authentication.
 | name | [string](#string) |  | The name of the account. |
 | username | [string](#string) |  | The GitHub account username. |
 | password | [string](#string) |  | The GitHub account password. |
-| usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password of the account in the format `${username}:${password}`. |
+| usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password for the account in the format `${username}:${password}`. |
 | token | [string](#string) |  | The GitHub access token. |
 | tokenFile | [string](#string) |  | The path to a file containing the GitHub access token. |
 
@@ -648,8 +652,8 @@ Configuration for the GitLab artifact provider.
 <a name="proto.artifact.GitLabAccount"></a>
 
 ### GitLabAccount
-Configuration for a GitLab artifact account. Either `token` or
-`tokenFile` should be specified as means of authentication.
+Configuration for a GitLab artifact account. For authentication, specify
+either `token` or `tokenFile`.
 
 
 | Field | Type | Label | Description |
@@ -698,11 +702,16 @@ Configuration for the Git repo artifact provider.
 <a name="proto.artifact.GitRepoAccount"></a>
 
 ### GitRepoAccount
-Configuration for a Git repo artifact account. An account maps to a
-credential that is able to authenticate against a Git repository hosted by a
-Git hosting service. Either `username` and `password`,
-`usernamePasswordFile`, `token`, `tokenFile`, or `sshPrivateKeyFilePath` and
-`sshPrivateKeyPassphrase` must be set.
+Configuration for a Git repo artifact account. 
+An account configured here maps to a credential that can authenticate 
+against a Git repository hosted by a Git hosting service. 
+
+For authentication, set one of the following:
+* `username` and `password`
+* `usernamePasswordFile`
+* `token`
+* `tokenFile`
+* `sshPrivateKeyFilePath` and `sshPrivateKeyPassphrase`
 
 
 | Field | Type | Label | Description |
@@ -711,11 +720,11 @@ Git hosting service. Either `username` and `password`,
 | username | [string](#string) |  | The username of the account. |
 | password | [string](#string) |  | The password of the account. |
 | usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password of the account in the format `${username}:${password}`. |
-| token | [string](#string) |  | The Git repo access token. |
-| tokenFile | [string](#string) |  | The path to a file containing the Git repo access token. |
-| sshPrivateKeyFilePath | [string](#string) |  | The path to an SSH private key to be used when connecting with the Git repo over SSH. |
-| sshPrivateKeyPassphrase | [string](#string) |  | The passphrase to an SSH private key to be used when connecting with the Git repo over SSH. |
-| sshKnownHostsFilePath | [string](#string) |  | The path to a `known_hosts` file to be used when connecting with a Git repository over SSH. |
+| token | [string](#string) |  | The access token for the repository. |
+| tokenFile | [string](#string) |  | The path to a file containing the repository access token. |
+| sshPrivateKeyFilePath | [string](#string) |  | The path to an SSH private key to be used when connecting with the repository over SSH. |
+| sshPrivateKeyPassphrase | [string](#string) |  | The passphrase to an SSH private key to be used when connecting with the repository over SSH. |
+| sshKnownHostsFilePath | [string](#string) |  | The path to a `known_hosts` file to be used when connecting with a repository over SSH. |
 | sshTrustUnknownHosts | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | If `true`, Spinnaker can connect with a Git repository over SSH without verifying the server&#39;s IP address against a `known_hosts` file. |
 
 
@@ -758,17 +767,17 @@ Configuration for the Helm artifact provider.
 <a name="proto.artifact.HelmAccount"></a>
 
 ### HelmAccount
-Configuration for a Helm artifact account. Either `username` and `password`
-or `usernamePasswordFile` should be specified as means of authentication.
+Configuration for a Helm artifact account. For authentication, specify
+either `username` and `password` or `usernamePasswordFile`.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The name of the account. |
 | repository | [string](#string) |  | The Helm chart repository URL. |
-| username | [string](#string) |  | A username for Helm chart repository basic auth. |
-| password | [string](#string) |  | A password for Helm chart repository basic auth. |
-| usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password for Helm chart repository basic auth. Must be in the format `${username}:${password}`. |
+| username | [string](#string) |  | A username for Helm chart repository basic authentication. |
+| password | [string](#string) |  | A password for Helm chart repository basic authentication. |
+| usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password for Helm chart repository basic authentication. Must be in the format `${username}:${password}`. |
 
 
 
@@ -810,16 +819,16 @@ Configuration for the HTTP artifact provider.
 <a name="proto.artifact.HttpAccount"></a>
 
 ### HttpAccount
-Configuration for an HTTP artifact account. Either `username` and `password`
-or `usernamePasswordFile` should be specified as means of authentication.
+Configuration for an HTTP artifact account. For authentication, specify 
+either `username` and `password` or `usernamePasswordFile`.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The name of the account. |
-| username | [string](#string) |  | A username for HTTP basic auth. |
-| password | [string](#string) |  | A password for HTTP basic auth. |
-| usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password for HTTP basic auth. Must be in the format `${username}:${password}`. |
+| username | [string](#string) |  | A username for HTTP basic authentication. |
+| password | [string](#string) |  | A password for HTTP basic authentication. |
+| usernamePasswordFile | [string](#string) |  | The path to a file containing the username and password for HTTP basic authentication. Contents of the file must be in the format `${username}:${password}`. |
 
 
 
@@ -867,7 +876,7 @@ Configuration for a Maven artifact account.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The name of the account. |
-| repositoryUrl | [string](#string) |  | (Required) Full URI for the Maven repository (e.g., `http://some.host.com/repository/path`). |
+| repositoryUrl | [string](#string) |  | (Required) The full URI for the Maven repository (for example, `http://some.host.com/repository/path`). |
 
 
 
@@ -916,9 +925,9 @@ Configuration for an Oracle artifact account.
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The name of the account. |
 | fingerprint | [string](#string) |  | The fingerprint of the public key. |
-| namespace | [string](#string) |  | The namespace in which the bucket and objects should be created. |
+| namespace | [string](#string) |  | The namespace in which the bucket and objects will be created. |
 | privateKeyPassphrase | [string](#string) |  | The passphrase used for the private key, if it is encrypted. |
-| region | [string](#string) |  | An Oracle region (e.g., `us-phoenix-1`). |
+| region | [string](#string) |  | An Oracle region (for example, `us-phoenix-1`). |
 | sshPrivateKeyFilePath | [string](#string) |  | Path to the private key in PEM format. |
 | tenancyId | [string](#string) |  | The OCID of the Oracle Tenancy to use. |
 | userId | [string](#string) |  | The OCID of the Oracle User with which to authenticate. |
@@ -969,9 +978,9 @@ Configuration for an S3 artifact account.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The name of the account. |
-| apiEndpoint | [string](#string) |  | The S3 API endpoint. Only required when using an S3 clone such as Minio. |
-| apiRegion | [string](#string) |  | The S3 API region. Only required when using an S3 clone such as Minio. |
-| awsAccessKeyId | [string](#string) |  | The AWS Access Key ID. If not provided, Spinnaker will try to find AWS credentials as described at http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default. |
+| apiEndpoint | [string](#string) |  | The S3 API endpoint. This is only required when using an S3 clone such as Minio. |
+| apiRegion | [string](#string) |  | The S3 API region. This is only required when using an S3 clone such as Minio. |
+| awsAccessKeyId | [string](#string) |  | The AWS Access Key ID. If this isn&#39;t provided, Spinnaker tries to find AWS credentials, as described at http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default. |
 | awsSecretAccessKey | [string](#string) |  | The AWS Secret Key. |
 | region | [string](#string) |  | The S3 region. |
 

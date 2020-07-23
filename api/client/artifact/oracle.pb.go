@@ -94,11 +94,11 @@ type OracleAccount struct {
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// The fingerprint of the public key.
 	Fingerprint string `protobuf:"bytes,2,opt,name=fingerprint,proto3" json:"fingerprint,omitempty"`
-	// The namespace in which the bucket and objects should be created.
+	// The namespace in which the bucket and objects will be created.
 	Namespace string `protobuf:"bytes,3,opt,name=namespace,proto3" json:"namespace,omitempty"`
 	// The passphrase used for the private key, if it is encrypted.
 	PrivateKeyPassphrase string `protobuf:"bytes,4,opt,name=privateKeyPassphrase,proto3" json:"privateKeyPassphrase,omitempty"`
-	// An Oracle region (e.g., `us-phoenix-1`).
+	// An Oracle region (for example, `us-phoenix-1`).
 	Region string `protobuf:"bytes,5,opt,name=region,proto3" json:"region,omitempty"`
 	// Path to the private key in PEM format.
 	SshPrivateKeyFilePath string `protobuf:"bytes,6,opt,name=sshPrivateKeyFilePath,proto3" json:"sshPrivateKeyFilePath,omitempty"`

@@ -92,12 +92,14 @@ type S3Account struct {
 
 	// The name of the account.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// The S3 API endpoint. Only required when using an S3 clone such as Minio.
+	// The S3 API endpoint. This is only required when using an S3 clone such
+	// as Minio.
 	ApiEndpoint string `protobuf:"bytes,2,opt,name=apiEndpoint,proto3" json:"apiEndpoint,omitempty"`
-	// The S3 API region. Only required when using an S3 clone such as Minio.
+	// The S3 API region. This is only required when using an S3 clone such as
+	// Minio.
 	ApiRegion string `protobuf:"bytes,3,opt,name=apiRegion,proto3" json:"apiRegion,omitempty"`
-	// The AWS Access Key ID. If not provided, Spinnaker will try to find AWS
-	// credentials as described at
+	// The AWS Access Key ID. If this isn't provided, Spinnaker tries to find
+	// AWS credentials, as described at
 	// http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default.
 	AwsAccessKeyId string `protobuf:"bytes,4,opt,name=awsAccessKeyId,proto3" json:"awsAccessKeyId,omitempty"`
 	// The AWS Secret Key.
