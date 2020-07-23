@@ -7,7 +7,7 @@ import "google/protobuf/wrappers.proto";
 
 // Configuration for the Google Cloud Storage artifact provider.
 message Gcs {
-    // Whether the Cloud Storage artifact provider is enabled.
+    // Whether the Google Cloud Storage artifact provider is enabled.
     google.protobuf.BoolValue enabled = 1;
 
     // The list of configured Cloud Storage accounts.
