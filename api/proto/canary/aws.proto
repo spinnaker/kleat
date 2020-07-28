@@ -9,7 +9,7 @@ import "canary/supported_type.proto";
 
 // Configuration for the AWS canary integration.
 message Aws {
-  // Whether the integration is enabled.
+  // Whether the AWS canary integration is enabled.
   google.protobuf.BoolValue enabled = 1;
 
   // The list of configured accounts.
@@ -19,14 +19,14 @@ message Aws {
   google.protobuf.BoolValue s3Enabled = 3;
 }
 
-// Configuration for an AWS account.
+// Configuration for an AWS canary account.
 message AwsAccount {
   // The name of the account.
   string name = 1;
 
   // The name of a storage bucket that this account has access to. If you
-  // specify a globally unique bucket name that doesn't exist yet, Kayenta will
-  // create that bucket for you.
+  // specify a globally unique bucket name that doesn't exist yet, Kayenta
+  // creates that bucket for you.
   string bucket = 2;
 
   // The AWS region to use.
@@ -40,14 +40,17 @@ message AwsAccount {
   // `~/.aws/credentials`. Defaults to `default`.
   string profileName = 5;
 
-  // The endpoint used to reach the service implementing the AWS API. Typical
-  // use is with Minio.
+  // The endpoint used to reach the service implementing the S3 API. Typically
+  // you would use this with an S3 clone, like Minio.
   string endpoint = 6;
 
   // The default access key used to communicate with AWS.
   string accessKeyId = 7;
 
-  // If enabling S3, include CONFIGURATION_STORE and/or OBJECT_STORE in this
-  // list.
+  // Use METRICS_STORE for AWS monitoring.
+  // If you enable S3, use CONFIGURATION_STORE and OBJECT_STORE. 
+  // 
+  // All three can be a list of `supportedTypes` in the same account, or each
+  // in a separate account.
   repeated SupportedType  supportedTypes = 8;
 }

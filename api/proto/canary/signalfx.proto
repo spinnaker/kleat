@@ -7,7 +7,7 @@ import "google/protobuf/wrappers.proto";
 
 // Configuration for the SignalFx canary integration.
 message SignalFx {
-  // Whether the integration is enabled.
+  // Whether the SignalFx canary integration is enabled.
   google.protobuf.BoolValue enabled = 1;
 
   // The list of configured accounts.
@@ -24,13 +24,13 @@ message SignalFxAccount {
   // The SignalFx server endpoint.
   Endpoint endpoint = 3;
 
-  // Scope key is used to distinguish between base and canary deployments. If
-  // omitted, every request must supply the `_scope_key` param in extended scope
-  // params.
+  // The scope key, which is used to distinguish between base and canary
+  // deployments. If omitted, each request must supply the `_scope_key` param
+  // in extended scope params.
   string defaultScopeKey = 4;
 
-  // Location key is used to filter by deployment region. If omitted, requests
-  // must supply the `_location_key` if it is needed.
+  // The location key, which is used to filter by deployment region. If
+  // omitted, each request must supply the `_location_key` if it is needed.
   string defaultLocationKey = 5;
 
   // The SignalFx server endpoint.

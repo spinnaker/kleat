@@ -7,7 +7,7 @@ import "google/protobuf/wrappers.proto";
 
 // Configuration for the New Relic canary integration.
 message NewRelic {
-  // Whether the integration is enabled.
+  // Whether the New Relic canary integration is enabled.
   google.protobuf.BoolValue enabled = 1;
 
   // The list of configured accounts.

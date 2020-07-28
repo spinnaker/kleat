@@ -7,18 +7,20 @@ import "google/protobuf/wrappers.proto";
 
 // Configuration for the Prometheus canary integration.
 message Prometheus {
-  // Whether the integration is enabled.
+  // Whether the Prometheus canary integration is enabled.
   google.protobuf.BoolValue enabled = 1;
 
   // The list of configured accounts.
   repeated PrometheusAccount accounts = 2;
 
-  // Number of milliseconds to wait in between caching the names of available
+  // Number of milliseconds to wait between caching the names of available
   // metric types (used when building canary configs). Defaults to 60000.
   int32 metadataCachingIntervalMS = 3;
 }
 
 // Configuration for a Prometheus account.
+// For authentication, you must provide either `usernamePasswordFile` or
+// `username` and `password`
 message PrometheusAccount {
   // The name of the account.
   string name = 1;
@@ -26,17 +28,14 @@ message PrometheusAccount {
   // Configuration for the Prometheus server endpoint.
   Endpoint endpoint = 2;
 
-  // A basic auth username. Either `usernamePasswordFile` or
-  // `username` and `password` is required.
+  // A basic-auth username. 
   string username = 3;
 
-  // A basic auth password. Either `usernamePasswordFile` or
-  // `username` and `password` is required.
+  // A basic-auth password. 
   string password = 4;
 
-  // The path to a file containing the basic auth username and password
-  // in the format `${username}:${password}`. Either `usernamePasswordFile` or
-  // `username` and `password` is required.
+  // The path to a file containing the basic-auth username and password
+  // in the format `${username}:${password}`.
   string usernamePasswordFile = 5;
 
   // Configuration for the Prometheus server endpoint.
