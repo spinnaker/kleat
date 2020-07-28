@@ -34,20 +34,20 @@ type Canary struct {
 
 	// Whether the canary service is enabled.
 	Enabled *wrappers.BoolValue `protobuf:"bytes,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	// Canary service integrations. You must configure at least one account of
-	// each canary.SupportedType (METRICS_STORE, CONFIGURATION_STORE,
-	// OBJECT_STORE) in order to use Spinnaker's canary service.
+	// Canary service integrations. To use Spinnaker's automated canary service,
+	// you must configure at least one account for each `canary.SupportedType`
+	// (`METRICS_STORE`, `CONFIGURATION_STORE`, `OBJECT_STORE`).
 	ServiceIntegrations *Canary_ServiceIntegrations `protobuf:"bytes,2,opt,name=serviceIntegrations,proto3" json:"serviceIntegrations,omitempty"`
 	// Name of the metrics account to use by default.
 	DefaultMetricsAccount string `protobuf:"bytes,3,opt,name=defaultMetricsAccount,proto3" json:"defaultMetricsAccount,omitempty"`
-	// Name of the metrics store to use by default (e.g., `prometheus`, `datadog`).
+	// Name of the metrics store to use by default (for example, `prometheus`, `datadog`).
 	DefaultMetricsStore string `protobuf:"bytes,4,opt,name=defaultMetricsStore,proto3" json:"defaultMetricsStore,omitempty"`
-	// Whether or not to show all canary configs in Deck, or just those scoped to
+	// Whether to show _all_ canary configs in Deck, or just those scoped to
 	// the current application.
 	ShowAllConfigsEnabled *wrappers.BoolValue `protobuf:"bytes,5,opt,name=showAllConfigsEnabled,proto3" json:"showAllConfigsEnabled,omitempty"`
-	// Whether or not to enable custom filter templates for canary configs in Deck.
+	// Whether to enable custom filter templates for canary configs in Deck.
 	TemplatesEnabled *wrappers.BoolValue `protobuf:"bytes,6,opt,name=templatesEnabled,proto3" json:"templatesEnabled,omitempty"`
-	// The default canary judge. Defaults to `NetflixACAJudge-v1.0`, which is
+	// The default canary judge. Defaults`NetflixACAJudge-v1.0`, is
 	// currently the only open-source judge available by default.
 	DefaultJudge string `protobuf:"bytes,7,opt,name=defaultJudge,proto3" json:"defaultJudge,omitempty"`
 	// Name of storage account to use by default.

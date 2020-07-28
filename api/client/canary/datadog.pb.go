@@ -32,9 +32,9 @@ type Datadog struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Whether the integration is enabled.
+	// Whether the Datadog canary service integration is enabled.
 	Enabled *wrappers.BoolValue `protobuf:"bytes,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	// The list of configured accounts.
+	// The list of configured Datadog accounts.
 	Accounts []*DatadogAccount `protobuf:"bytes,2,rep,name=accounts,proto3" json:"accounts,omitempty"`
 }
 

@@ -26,19 +26,19 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-// Configuration for the Stackdriver canary integration. If enabled, you must
-// also configure at least one canary.GoogleAccount with a list of
-// supportedTypes that includes canary.SupportedType.METRICS_STORE.
+// Configuration for the Google Cloud Monitoring canary integration. If
+// enabled, you must also configure at least one `canary.GoogleAccount` with a
+// list of `supportedTypes` that includes `canary.SupportedType.METRICS_STORE`.
 type Stackdriver struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Whether the integration is enabled.
+	// Whether the Cloud Monitoring integration is enabled.
 	Enabled *wrappers.BoolValue `protobuf:"bytes,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	// Number of milliseconds to wait in between caching the names of available
-	// Stackdriver metric types (used when building canary configs). Defaults to
-	// 60000.
+	// Number of milliseconds to wait between caching the names of available
+	// Cloud Monitoring metric types (used when building canary configs).
+	// Defaults to 60000.
 	MetadataCachingIntervalMS int32 `protobuf:"varint,2,opt,name=metadataCachingIntervalMS,proto3" json:"metadataCachingIntervalMS,omitempty"`
 }
 

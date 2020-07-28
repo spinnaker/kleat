@@ -32,7 +32,7 @@ type NewRelic struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Whether the integration is enabled.
+	// Whether the New Relic canary integration is enabled.
 	Enabled *wrappers.BoolValue `protobuf:"bytes,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// The list of configured accounts.
 	Accounts []*NewRelicAccount `protobuf:"bytes,2,rep,name=accounts,proto3" json:"accounts,omitempty"`

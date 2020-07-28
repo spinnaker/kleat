@@ -32,7 +32,7 @@ type SignalFx struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Whether the integration is enabled.
+	// Whether the SignalFx canary integration is enabled.
 	Enabled *wrappers.BoolValue `protobuf:"bytes,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// The list of configured accounts.
 	Accounts []*SignalFxAccount `protobuf:"bytes,2,rep,name=accounts,proto3" json:"accounts,omitempty"`
@@ -95,12 +95,12 @@ type SignalFxAccount struct {
 	AccessToken string `protobuf:"bytes,2,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
 	// The SignalFx server endpoint.
 	Endpoint *SignalFxAccount_Endpoint `protobuf:"bytes,3,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
-	// Scope key is used to distinguish between base and canary deployments. If
-	// omitted, every request must supply the `_scope_key` param in extended scope
-	// params.
+	// The scope key, which is used to distinguish between base and canary
+	// deployments. If omitted, each request must supply the `_scope_key` param
+	// in extended scope params.
 	DefaultScopeKey string `protobuf:"bytes,4,opt,name=defaultScopeKey,proto3" json:"defaultScopeKey,omitempty"`
-	// Location key is used to filter by deployment region. If omitted, requests
-	// must supply the `_location_key` if it is needed.
+	// The location key, which is used to filter by deployment region. If
+	// omitted, each request must supply the `_location_key` if it is needed.
 	DefaultLocationKey string `protobuf:"bytes,5,opt,name=defaultLocationKey,proto3" json:"defaultLocationKey,omitempty"`
 }
 
