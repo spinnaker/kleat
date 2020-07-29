@@ -35,7 +35,7 @@ message Canary {
   // Whether to enable custom filter templates for canary configs in Deck.
   google.protobuf.BoolValue templatesEnabled = 6;
 
-  // The default canary judge. Defaults`NetflixACAJudge-v1.0`, is
+  // The default canary judge. `NetflixACAJudge-v1.0`, is
   // currently the only open-source judge available by default.
   string defaultJudge = 7;
 
