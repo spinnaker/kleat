@@ -9,7 +9,7 @@ import "canary/supported_type.proto";
 
 // Configuration for the Google canary integration.
 message Google {
-  // Whether the Google canary integration is enabled.
+  // Whether Google is enabled as a metrics store provider.
   google.protobuf.BoolValue enabled = 1;
 
   // The list of configured accounts.
@@ -56,7 +56,7 @@ message GoogleAccount {
   google.protobuf.StringValue rootFolder = 5;
 
   // (Required) The Google Cloud Platform project the canary service will use to
-  // consume telemetry.
+  // consume Cloud Storage and Cloud Monitoring data.
   string project = 6;
 
   // For Google Cloud Monitoring (formerly Stackdriver) use METRICS_STORE.

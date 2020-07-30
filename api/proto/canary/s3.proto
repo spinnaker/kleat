@@ -10,6 +10,8 @@ import "google/protobuf/wrappers.proto";
 // `supportedTypes` that includes `canary.SupportedType.CONFIGURATION_STORE`
 // and/or `canary.SupportedType.OBJECT_STORE`.
 message S3 {
-  // Whether the S3 canary integration is enabled.
+
+  // Whether S3 is enabled as a backing store to support Spinnaker's automated
+  // canary analysis features.
   google.protobuf.BoolValue enabled = 1;
 }

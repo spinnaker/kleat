@@ -12,14 +12,17 @@ import "canary/newrelic.proto";
 import "canary/prometheus.proto";
 import "canary/signalfx.proto";
 
-// Configuration for Spinnaker's canary service.
+// Configuration for Spinnaker's automated canary analysis features. See also
+// the
+// [sample Kayenta configuration](https://github.com/spinnaker/kayenta/blob/master/kayenta-web/config/kayenta.yml).
 message Canary {
   // Whether the canary service is enabled.
   google.protobuf.BoolValue enabled = 1;
 
-  // Canary service integrations. To use Spinnaker's automated canary service,
-  // you must configure at least one account for each `canary.SupportedType`
-  // (`METRICS_STORE`, `CONFIGURATION_STORE`, `OBJECT_STORE`).
+  // Canary service integrations. To enable Spinnaker's Automated Canary
+  // Analysis (ACA) features, you must configure at least one account for each
+  // `canary.SupportedType` (`METRICS_STORE`, `CONFIGURATION_STORE`,
+  // `OBJECT_STORE`).
   ServiceIntegrations serviceIntegrations = 2;
 
   // Name of the metrics account to use by default.
@@ -35,7 +38,7 @@ message Canary {
   // Whether to enable custom filter templates for canary configs in Deck.
   google.protobuf.BoolValue templatesEnabled = 6;
 
-  // The default canary judge. `NetflixACAJudge-v1.0`, is
+  // The default canary judge. `NetflixACAJudge-v1.0` is
   // currently the only open-source judge available by default.
   string defaultJudge = 7;
 

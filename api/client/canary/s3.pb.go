@@ -35,7 +35,8 @@ type S3 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Whether the S3 canary integration is enabled.
+	// Whether S3 is enabled as a backing store to support Spinnaker's automated
+	// canary analysis features.
 	Enabled *wrappers.BoolValue `protobuf:"bytes,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 }
 

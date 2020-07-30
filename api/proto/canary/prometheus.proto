@@ -7,7 +7,7 @@ import "google/protobuf/wrappers.proto";
 
 // Configuration for the Prometheus canary integration.
 message Prometheus {
-  // Whether the Prometheus canary integration is enabled.
+  // Whether Prometheus is enabled as a metric store provider.
   google.protobuf.BoolValue enabled = 1;
 
   // The list of configured accounts.

@@ -9,7 +9,8 @@ import "canary/supported_type.proto";
 
 // Configuration for the AWS canary integration.
 message Aws {
-  // Whether the AWS canary integration is enabled.
+  // Enables/disables Kayenta integration for AWS. If enabled, Kayenta can
+  // store canary configuration and archived results in an S3 bucket.
   google.protobuf.BoolValue enabled = 1;
 
   // The list of configured accounts.
@@ -19,7 +20,7 @@ message Aws {
   google.protobuf.BoolValue s3Enabled = 3;
 }
 
-// Configuration for an AWS canary account.
+// Configuration for the AWS account to be used .
 message AwsAccount {
   // The name of the account.
   string name = 1;
@@ -47,10 +48,7 @@ message AwsAccount {
   // The default access key used to communicate with AWS.
   string accessKeyId = 7;
 
-  // Use METRICS_STORE for AWS monitoring.
-  // If you enable S3, use CONFIGURATION_STORE and OBJECT_STORE. 
-  // 
-  // All three can be a list of `supportedTypes` in the same account, or each
-  // in a separate account.
+  // If you're enabling S3, include CONFIGURATION_STORE and/or OBJECT_STORE in
+  // this list.
   repeated SupportedType  supportedTypes = 8;
 }

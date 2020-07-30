@@ -11,6 +11,7 @@ import "google/protobuf/wrappers.proto";
 // `canary.SupportedType.CONFIGURATION_STORE` or 
 // `canary.SupportedType.OBJECT_STORE` or both.
 message Gcs {
-  // Whether the integration is enabled.
+  // Whether Google Cloud Storage is enabled as a backing store to support
+  // Spinnaker's automated canary analysis features.
   google.protobuf.BoolValue enabled = 1;
 }

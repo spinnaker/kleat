@@ -32,7 +32,8 @@ type Aws struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Whether the AWS canary integration is enabled.
+	// Enables/disables Kayenta integration for AWS. If enabled, Kayenta can
+	// store canary configuration and archived results in an S3 bucket.
 	Enabled *wrappers.BoolValue `protobuf:"bytes,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// The list of configured accounts.
 	Accounts []*AwsAccount `protobuf:"bytes,2,rep,name=accounts,proto3" json:"accounts,omitempty"`
@@ -93,7 +94,7 @@ func (x *Aws) GetS3Enabled() *wrappers.BoolValue {
 	return nil
 }
 
-// Configuration for an AWS canary account.
+// Configuration for the AWS account to be used .
 type AwsAccount struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -118,11 +119,8 @@ type AwsAccount struct {
 	Endpoint string `protobuf:"bytes,6,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
 	// The default access key used to communicate with AWS.
 	AccessKeyId string `protobuf:"bytes,7,opt,name=accessKeyId,proto3" json:"accessKeyId,omitempty"`
-	// Use METRICS_STORE for AWS monitoring.
-	// If you enable S3, use CONFIGURATION_STORE and OBJECT_STORE.
-	//
-	// All three can be a list of `supportedTypes` in the same account, or each
-	// in a separate account.
+	// If you're enabling S3, include CONFIGURATION_STORE and/or OBJECT_STORE in
+	// this list.
 	SupportedTypes []SupportedType `protobuf:"varint,8,rep,packed,name=supportedTypes,proto3,enum=proto.canary.SupportedType" json:"supportedTypes,omitempty"`
 }
 

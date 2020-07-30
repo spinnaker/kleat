@@ -1047,7 +1047,7 @@ Configuration for the AWS canary integration.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the AWS canary integration is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enables/disables Kayenta integration for AWS. If enabled, Kayenta can store canary configuration and archived results in an S3 bucket. |
 | accounts | [AwsAccount](#proto.canary.AwsAccount) | repeated | The list of configured accounts. |
 | s3Enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether to enable S3 as a persistent store. |
 
@@ -1059,7 +1059,7 @@ Configuration for the AWS canary integration.
 <a name="proto.canary.AwsAccount"></a>
 
 ### AwsAccount
-Configuration for an AWS canary account.
+Configuration for the AWS account to be used .
 
 
 | Field | Type | Label | Description |
@@ -1071,9 +1071,7 @@ Configuration for an AWS canary account.
 | profileName | [string](#string) |  | The profile name to use when resolving AWS credentials. Typically found in `~/.aws/credentials`. Defaults to `default`. |
 | endpoint | [string](#string) |  | The endpoint used to reach the service implementing the S3 API. Typically you would use this with an S3 clone, like Minio. |
 | accessKeyId | [string](#string) |  | The default access key used to communicate with AWS. |
-| supportedTypes | [SupportedType](#proto.canary.SupportedType) | repeated | Use METRICS_STORE for AWS monitoring. If you enable S3, use CONFIGURATION_STORE and OBJECT_STORE. 
-
-All three can be a list of `supportedTypes` in the same account, or each in a separate account. |
+| supportedTypes | [SupportedType](#proto.canary.SupportedType) | repeated | If you&#39;re enabling S3, include CONFIGURATION_STORE and/or OBJECT_STORE in this list. |
 
 
 
@@ -1099,18 +1097,20 @@ All three can be a list of `supportedTypes` in the same account, or each in a se
 <a name="proto.canary.Canary"></a>
 
 ### Canary
-Configuration for Spinnaker&#39;s canary service.
+Configuration for Spinnaker&#39;s automated canary analysis features. See also
+the
+[sample Kayenta configuration](https://github.com/spinnaker/kayenta/blob/master/kayenta-web/config/kayenta.yml).
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the canary service is enabled. |
-| serviceIntegrations | [Canary.ServiceIntegrations](#proto.canary.Canary.ServiceIntegrations) |  | Canary service integrations. To use Spinnaker&#39;s automated canary service, you must configure at least one account for each `canary.SupportedType` (`METRICS_STORE`, `CONFIGURATION_STORE`, `OBJECT_STORE`). |
+| serviceIntegrations | [Canary.ServiceIntegrations](#proto.canary.Canary.ServiceIntegrations) |  | Canary service integrations. To enable Spinnaker&#39;s Automated Canary Analysis (ACA) features, you must configure at least one account for each `canary.SupportedType` (`METRICS_STORE`, `CONFIGURATION_STORE`, `OBJECT_STORE`). |
 | defaultMetricsAccount | [string](#string) |  | Name of the metrics account to use by default. |
 | defaultMetricsStore | [string](#string) |  | Name of the metrics store to use by default (for example, `prometheus`, `datadog`). |
 | showAllConfigsEnabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether to show _all_ canary configs in Deck, or just those scoped to the current application. |
 | templatesEnabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether to enable custom filter templates for canary configs in Deck. |
-| defaultJudge | [string](#string) |  | The default canary judge. Defaults`NetflixACAJudge-v1.0`, is currently the only open-source judge available by default. |
+| defaultJudge | [string](#string) |  | The default canary judge. `NetflixACAJudge-v1.0` is currently the only open-source judge available by default. |
 | storageAccountName | [string](#string) |  | Name of storage account to use by default. |
 
 
@@ -1162,7 +1162,7 @@ Configuration for the Datadog canary integration.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the Datadog canary service integration is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Datadog is enabled as a metric store provider. |
 | accounts | [DatadogAccount](#proto.canary.DatadogAccount) | repeated | The list of configured Datadog accounts. |
 
 
@@ -1231,7 +1231,7 @@ list of `supportedTypes` that includes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the integration is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Google Cloud Storage is enabled as a backing store to support Spinnaker&#39;s automated canary analysis features. |
 
 
 
@@ -1262,7 +1262,7 @@ Configuration for the Google canary integration.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the Google canary integration is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Google is enabled as a metrics store provider. |
 | accounts | [GoogleAccount](#proto.canary.GoogleAccount) | repeated | The list of configured accounts. |
 | gcsEnabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Google Cloud Storage is enabled as a persistent store. |
 | stackdriverEnabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Google Cloud Monitoring (formerly Stackdriver) is enabled as a metrics source. |
@@ -1288,7 +1288,7 @@ You need this only if Spinnaker is not deployed on a Google Compute Engine VM, o
 | bucket | [string](#string) |  | The name of a Cloud Storage bucket that this account has access to. If you specify a globally unique bucket name that doesn&#39;t exist yet, Kayenta creates that bucket for you. |
 | bucketLocation | [string](#string) |  | Where to create the new bucket. This is only required if the bucket you specify doesn&#39;t exist yet. See https://cloud.google.com/storage/docs/managing-buckets#manage-class-location. |
 | rootFolder | [google.protobuf.StringValue](#google.protobuf.StringValue) |  | The root-level folder, in the specified bucket, in which to store all the canary service&#39;s persistent data. Defaults to `kayenta`. |
-| project | [string](#string) |  | (Required) The Google Cloud Platform project the canary service will use to consume telemetry. |
+| project | [string](#string) |  | (Required) The Google Cloud Platform project the canary service will use to consume Cloud Storage and Cloud Monitoring data. |
 | supportedTypes | [SupportedType](#proto.canary.SupportedType) | repeated | For Google Cloud Monitoring (formerly Stackdriver) use METRICS_STORE. For Google Cloud Storage, use CONFIGURATION_STORE and OBJECT_STORE. All three can be a list of `supportedTypes` in the same account, or each in a separate account. |
 
 
@@ -1320,7 +1320,7 @@ Configuration for the New Relic canary integration.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the New Relic canary integration is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether New Relic is enabled as a metric store provider. |
 | accounts | [NewRelicAccount](#proto.canary.NewRelicAccount) | repeated | The list of configured accounts. |
 
 
@@ -1385,7 +1385,7 @@ Configuration for the Prometheus canary integration.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the Prometheus canary integration is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Prometheus is enabled as a metric store provider. |
 | accounts | [PrometheusAccount](#proto.canary.PrometheusAccount) | repeated | The list of configured accounts. |
 | metadataCachingIntervalMS | [int32](#int32) |  | Number of milliseconds to wait between caching the names of available metric types (used when building canary configs). Defaults to 60000. |
 
@@ -1457,7 +1457,7 @@ and/or `canary.SupportedType.OBJECT_STORE`.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the S3 canary integration is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether S3 is enabled as a backing store to support Spinnaker&#39;s automated canary analysis features. |
 
 
 
@@ -1488,7 +1488,7 @@ Configuration for the SignalFx canary integration.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the SignalFx canary integration is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether SignalFx is enabled as a metric store provider. |
 | accounts | [SignalFxAccount](#proto.canary.SignalFxAccount) | repeated | The list of configured accounts. |
 
 

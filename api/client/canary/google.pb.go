@@ -32,7 +32,7 @@ type Google struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Whether the Google canary integration is enabled.
+	// Whether Google is enabled as a metrics store provider.
 	Enabled *wrappers.BoolValue `protobuf:"bytes,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// The list of configured accounts.
 	Accounts []*GoogleAccount `protobuf:"bytes,2,rep,name=accounts,proto3" json:"accounts,omitempty"`
@@ -141,7 +141,7 @@ type GoogleAccount struct {
 	// the canary service's persistent data. Defaults to `kayenta`.
 	RootFolder *wrappers.StringValue `protobuf:"bytes,5,opt,name=rootFolder,proto3" json:"rootFolder,omitempty"`
 	// (Required) The Google Cloud Platform project the canary service will use to
-	// consume telemetry.
+	// consume Cloud Storage and Cloud Monitoring data.
 	Project string `protobuf:"bytes,6,opt,name=project,proto3" json:"project,omitempty"`
 	// For Google Cloud Monitoring (formerly Stackdriver) use METRICS_STORE.
 	// For Google Cloud Storage, use CONFIGURATION_STORE and
