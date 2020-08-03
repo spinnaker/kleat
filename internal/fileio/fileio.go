@@ -24,6 +24,8 @@ import (
 	"os"
 	"path/filepath"
 
+	"sigs.k8s.io/yaml"
+
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/internal/protoyaml"
 	"github.com/spinnaker/kleat/internal/validate"
@@ -39,13 +41,37 @@ func ParseHalConfig(halPath string) (*config.Hal, error) {
 		return nil, fmt.Errorf("unable to read %q. Error: %v", halPath, err)
 	}
 
+	return ParseHalConfigData(data)
+}
+
+// ParseHalConfigs reads the YAML files at halPaths parses it into a *config.Hal.
+// The config.Hal is validated; if there are any errors, they will be returned
+// in error and *config.Hal will be nil.
+func ParseHalConfigs(paths []string) (*config.Hal, error) {
+	merged, err := mergeConfigs(paths)
+	if err != nil {
+		return nil, err
+	}
+
+	data, err := yaml.Marshal(merged)
+	if err != nil {
+		return nil, err
+	}
+
+	return ParseHalConfigData(data)
+}
+
+// ParseHalConfigData parses YAML data into a *config.Hal.
+// The config.Hal is validated; if there are any errors, they will be returned
+// in error and *config.Hal will be nil.
+func ParseHalConfigData(data []byte) (*config.Hal, error) {
 	hal := &config.Hal{}
 	if err := protoyaml.Unmarshal(data, hal); err != nil {
-		return nil, fmt.Errorf("unable to unmarshal %q: %v", halPath, err)
+		return nil, fmt.Errorf("unable to unmarshal: %v", err)
 	}
 
 	if err := validate.HalConfig(hal); err != nil {
-		return nil, fmt.Errorf("unable to validate %q: %v", halPath, err)
+		return nil, fmt.Errorf("unable to validate: %v", err)
 	}
 
 	return hal, nil
@@ -84,4 +110,44 @@ func ensureDirectory(d string) error {
 		return fmt.Errorf("%s is not a directory", d)
 	}
 	return nil
+}
+
+func mergeConfigs(paths []string) (map[string]interface{}, error) {
+	base := map[string]interface{}{}
+
+	for _, halPath := range paths {
+		currentMap := map[string]interface{}{}
+
+		data, err := ioutil.ReadFile(halPath)
+		if err != nil {
+			return nil, fmt.Errorf("unable to read %q: %w", halPath, err)
+		}
+
+		if err := yaml.Unmarshal(data, &currentMap); err != nil {
+			return nil, fmt.Errorf("unable to parse %q: %w", halPath, err)
+		}
+
+		base = mergeMaps(base, currentMap)
+	}
+
+	return base, nil
+}
+
+func mergeMaps(a, b map[string]interface{}) map[string]interface{} {
+	out := make(map[string]interface{}, len(a))
+	for k, v := range a {
+		out[k] = v
+	}
+	for k, v := range b {
+		if v, ok := v.(map[string]interface{}); ok {
+			if bv, ok := out[k]; ok {
+				if bv, ok := bv.(map[string]interface{}); ok {
+					out[k] = mergeMaps(bv, v)
+					continue
+				}
+			}
+		}
+		out[k] = v
+	}
+	return out
 }

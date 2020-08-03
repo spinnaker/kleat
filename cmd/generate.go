@@ -32,16 +32,16 @@ the output directory.
 Example usage:
 
 kleat generate /path/to/halconfig /path/to/output`,
-	Args: cobra.ExactArgs(2),
+	Args: cobra.MinimumNArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		hal := args[0]
-		dir := args[1]
-		return writeServiceConfigs(hal, dir)
+		hals := args[:len(args)-1]
+		dir := args[len(args)-1]
+		return writeServiceConfigs(hals, dir)
 	},
 }
 
-func writeServiceConfigs(halPath string, dir string) error {
-	h, err := fileio.ParseHalConfig(halPath)
+func writeServiceConfigs(halPaths []string, dir string) error {
+	h, err := fileio.ParseHalConfigs(halPaths)
 	if err != nil {
 		return err
 	}
