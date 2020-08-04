@@ -68,7 +68,6 @@ func getDeckCanaryConfig(h *config.Hal) *config.Deck_Canary {
 func getDeckFeaturesConfig(h *config.Hal) *config.Deck_Features {
 	return &config.Deck_Features{
 		PipelineTemplates:            h.GetFeatures().GetPipelineTemplates(),
-		Canary:                       h.GetFeatures().GetMineCanary(),
 		ChaosMonkey:                  h.GetFeatures().GetChaos(),
 		FiatEnabled:                  h.GetSecurity().GetAuthz().GetEnabled(),
 		ManagedPipelineTemplatesV2UI: h.GetFeatures().GetManagedPipelineTemplatesV2UI(),

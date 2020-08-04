@@ -184,7 +184,6 @@ features:
   chaos: true
   gremlin: true
   managedPipelineTemplatesV2UI: true
-  mineCanary: true
   pipelineTemplates: true
 metricStores:
   datadog:
