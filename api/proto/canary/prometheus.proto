@@ -20,7 +20,7 @@ message Prometheus {
 
 // Configuration for a Prometheus account.
 // For authentication, you must provide either `usernamePasswordFile` or
-// `username` and `password`
+// `username` and `password`.
 message PrometheusAccount {
   // The name of the account.
   string name = 1;

@@ -96,7 +96,7 @@ func (x *Prometheus) GetMetadataCachingIntervalMS() int32 {
 
 // Configuration for a Prometheus account.
 // For authentication, you must provide either `usernamePasswordFile` or
-// `username` and `password`
+// `username` and `password`.
 type PrometheusAccount struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

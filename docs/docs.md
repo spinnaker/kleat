@@ -1399,7 +1399,7 @@ Configuration for the Prometheus canary integration.
 ### PrometheusAccount
 Configuration for a Prometheus account.
 For authentication, you must provide either `usernamePasswordFile` or
-`username` and `password`
+`username` and `password`.
 
 
 | Field | Type | Label | Description |
