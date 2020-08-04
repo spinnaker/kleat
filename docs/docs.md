@@ -1549,9 +1549,10 @@ The SignalFx server endpoint.
 <a name="proto.canary.Stackdriver"></a>
 
 ### Stackdriver
-Configuration for the Google Cloud Monitoring canary integration. If
-enabled, you must also configure at least one `canary.GoogleAccount` with a
-list of `supportedTypes` that includes `canary.SupportedType.METRICS_STORE`.
+Configuration for the Google Cloud Monitoring (formerly Stackdriver) canary
+integration. If enabled, you must also configure at least one
+`canary.GoogleAccount` with a list of `supportedTypes` that includes
+`canary.SupportedType.METRICS_STORE`.
 
 
 | Field | Type | Label | Description |
