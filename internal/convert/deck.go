@@ -34,7 +34,6 @@ func HalToDeck(h *config.Hal) *config.Deck {
 		AuthEndpoint:    gateURL + "/auth/user",
 		BakeryDetailUrl: gateURL + "/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
 		Canary:          getDeckCanaryConfig(h),
-		Changelog:       getDeckChangelogConfig(h),
 		DefaultTimeZone: h.GetTimezone(),
 		Feature:         getDeckFeaturesConfig(h),
 		Notifications:   getDeckNotificationsConfig(h),
@@ -64,15 +63,6 @@ func getDeckCanaryConfig(h *config.Hal) *config.Deck_Canary {
 		StorageAccountName: h.GetCanary().GetStorageAccountName(),
 		TemplatesEnabled:   h.GetCanary().GetTemplatesEnabled(),
 	}
-}
-
-// TODO: Actually get changelog config
-func getDeckChangelogConfig(_ *config.Hal) *config.Deck_Changelog {
-	return nil
-	//return &config.Deck_Changelog{
-	//	FileName: "",
-	//	GistId:   "",
-	//}
 }
 
 func getDeckFeaturesConfig(h *config.Hal) *config.Deck_Features {

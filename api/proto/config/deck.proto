@@ -14,6 +14,9 @@ import "notification/slack.proto";
 import "notification/twilio.proto";
 
 message Deck {
+  reserved 6;
+  reserved "changelog";
+
   // The endpoint at which Deck communicates with Gate.
   string gateUrl = 1;
 
@@ -28,9 +31,6 @@ message Deck {
 
   // Configuration for the canary UI.
   Canary canary = 5;
-
-  // Configuration for surfacing the Spinnaker changelog in Deck.
-  Changelog changelog = 6;
 
   // Configuration for notifications providers.
   Notifications notifications = 7;
@@ -92,20 +92,6 @@ message Deck {
     // Whether or not to enable custom filter templates for canary configs in
     // Deck.
     google.protobuf.BoolValue templatesEnabled = 7;
-  }
-
-  // Configuration for surfacing the Spinnaker changelog in Deck.
-  // TODO: can we do one of the following?
-  // 1. Change the component in Deck to fall back to just displaying
-  // a link to the spinnaker.io versions page, bookmarked to correct version?
-  // 2. Somehow derive the gist ID from the top-level version
-  // without reaching out to the internet?
-  message Changelog {
-    // The Spinnaker changelog gist file name.
-    string fileName = 1;
-
-    // The Spinnaker changelog gist ID.
-    string gistId = 2;
   }
 
   // Configuration for notifications providers.
