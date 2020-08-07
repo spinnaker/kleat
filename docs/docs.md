@@ -211,7 +211,6 @@
 - [config/deck.proto](#config/deck.proto)
     - [Deck](#proto.config.Deck)
     - [Deck.Canary](#proto.config.Deck.Canary)
-    - [Deck.Changelog](#proto.config.Deck.Changelog)
     - [Deck.Features](#proto.config.Deck.Features)
     - [Deck.Notifications](#proto.config.Deck.Notifications)
     - [Deck.Providers](#proto.config.Deck.Providers)
@@ -3359,7 +3358,6 @@ Wrapper for serialized config files for Spinnaker microservices.
 | authEndpoint | [string](#string) |  | The Gate authn endpoint. |
 | bakeryDetailUrl | [string](#string) |  | Baking details URL used in Bake stage execution details. |
 | canary | [Deck.Canary](#proto.config.Deck.Canary) |  | Configuration for the canary UI. |
-| changelog | [Deck.Changelog](#proto.config.Deck.Changelog) |  | Configuration for surfacing the Spinnaker changelog in Deck. |
 | notifications | [Deck.Notifications](#proto.config.Deck.Notifications) |  | Configuration for notifications providers. |
 | providers | [Deck.Providers](#proto.config.Deck.Providers) |  | Configuration for cloud provider defaults. |
 | version | [string](#string) |  | Spinnaker version. |
@@ -3386,27 +3384,6 @@ Configuration for the canary UI.
 | showAllConfigs | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether or not to show all canary configs in Deck, or just those scoped to the current application. |
 | storageAccountName | [string](#string) |  | Name of storage account to use by default. |
 | templatesEnabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether or not to enable custom filter templates for canary configs in Deck. |
-
-
-
-
-
-
-<a name="proto.config.Deck.Changelog"></a>
-
-### Deck.Changelog
-Configuration for surfacing the Spinnaker changelog in Deck.
-TODO: can we do one of the following?
-1. Change the component in Deck to fall back to just displaying
-a link to the spinnaker.io versions page, bookmarked to correct version?
-2. Somehow derive the gist ID from the top-level version
-without reaching out to the internet?
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| fileName | [string](#string) |  | The Spinnaker changelog gist file name. |
-| gistId | [string](#string) |  | The Spinnaker changelog gist ID. |
 
 
 
