@@ -14,9 +14,6 @@ import "notification/slack.proto";
 import "notification/twilio.proto";
 
 message Deck {
-  reserved 6;
-  reserved "changelog";
-
   // The endpoint at which Deck communicates with Gate.
   string gateUrl = 1;
 
@@ -33,19 +30,19 @@ message Deck {
   Canary canary = 5;
 
   // Configuration for notifications providers.
-  Notifications notifications = 7;
+  Notifications notifications = 6;
 
   // Configuration for cloud provider defaults.
-  Providers providers = 8;
+  Providers providers = 7;
 
   // Spinnaker version.
-  string version = 9;
+  string version = 8;
 
   // Default time zone in which to display timestamps in the UI.
-  string defaultTimeZone = 10;
+  string defaultTimeZone = 9;
 
   // Configuration for UI-related feature flags.
-  Features feature = 11;
+  Features feature = 10;
 
   // Configuration for UI-related feature flags.
   message Features {
