@@ -50,18 +50,15 @@ message Deck {
     // https://github.com/spinnaker/dcd-spec.
     google.protobuf.BoolValue pipelineTemplates = 1;
 
-    // Enable canary UI support.
-    google.protobuf.BoolValue canary = 2;
-
     // Enable Chaos Monkey support. For this to work, you'll need a running Chaos
     // Monkey deployment. See https://github.com/Netflix/chaosmonkey/wiki.
-    google.protobuf.BoolValue chaosMonkey = 3;
+    google.protobuf.BoolValue chaosMonkey = 2;
 
     // Whether authz is enabled.
-    google.protobuf.BoolValue fiatEnabled = 4;
+    google.protobuf.BoolValue fiatEnabled = 3;
 
     // Enable managed pipeline templates v2 UI support.
-    google.protobuf.BoolValue managedPipelineTemplatesV2UI = 5;
+    google.protobuf.BoolValue managedPipelineTemplatesV2UI = 4;
   }
 
   // Configuration for the canary UI.
