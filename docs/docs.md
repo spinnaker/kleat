@@ -3399,7 +3399,6 @@ Configuration for UI-related feature flags.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | pipelineTemplates | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable pipeline template support. Read more at https://github.com/spinnaker/dcd-spec. |
-| canary | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable canary UI support. |
 | chaosMonkey | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable Chaos Monkey support. For this to work, you&#39;ll need a running Chaos Monkey deployment. See https://github.com/Netflix/chaosmonkey/wiki. |
 | fiatEnabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether authz is enabled. |
 | managedPipelineTemplatesV2UI | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable managed pipeline templates v2 UI support. |
@@ -4617,7 +4616,6 @@ Feature flags
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | pipelineTemplates | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable pipeline template support. Read more at https://github.com/spinnaker/dcd-spec. |
-| mineCanary | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable canary support. For this to work, you&#39;ll need a canary judge configured. |
 | chaos | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable Chaos Monkey support. For this to work, you&#39;ll need a running Chaos Monkey deployment. See https://github.com/Netflix/chaosmonkey/wiki. |
 | managedPipelineTemplatesV2UI | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable managed pipeline templates v2 UI support. |
 | gremlin | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable Gremlin fault-injection support. |
