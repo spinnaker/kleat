@@ -32,11 +32,11 @@ type Prometheus struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Whether the integration is enabled.
+	// Whether Prometheus is enabled as a metric store provider.
 	Enabled *wrappers.BoolValue `protobuf:"bytes,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// The list of configured accounts.
 	Accounts []*PrometheusAccount `protobuf:"bytes,2,rep,name=accounts,proto3" json:"accounts,omitempty"`
-	// Number of milliseconds to wait in between caching the names of available
+	// Number of milliseconds to wait between caching the names of available
 	// metric types (used when building canary configs). Defaults to 60000.
 	MetadataCachingIntervalMS int32 `protobuf:"varint,3,opt,name=metadataCachingIntervalMS,proto3" json:"metadataCachingIntervalMS,omitempty"`
 }
@@ -95,6 +95,8 @@ func (x *Prometheus) GetMetadataCachingIntervalMS() int32 {
 }
 
 // Configuration for a Prometheus account.
+// For authentication, you must provide either `usernamePasswordFile` or
+// `username` and `password`.
 type PrometheusAccount struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -104,15 +106,12 @@ type PrometheusAccount struct {
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Configuration for the Prometheus server endpoint.
 	Endpoint *PrometheusAccount_Endpoint `protobuf:"bytes,2,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
-	// A basic auth username. Either `usernamePasswordFile` or
-	// `username` and `password` is required.
+	// A basic-auth username.
 	Username string `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
-	// A basic auth password. Either `usernamePasswordFile` or
-	// `username` and `password` is required.
+	// A basic-auth password.
 	Password string `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
-	// The path to a file containing the basic auth username and password
-	// in the format `${username}:${password}`. Either `usernamePasswordFile` or
-	// `username` and `password` is required.
+	// The path to a file containing the basic-auth username and password
+	// in the format `${username}:${password}`.
 	UsernamePasswordFile string `protobuf:"bytes,5,opt,name=usernamePasswordFile,proto3" json:"usernamePasswordFile,omitempty"`
 }
 

@@ -7,10 +7,10 @@ import "google/protobuf/wrappers.proto";
 
 // Configuration for the Datadog canary integration.
 message Datadog {
-  // Whether the integration is enabled.
+  // Whether Datadog is enabled as a metric store provider.
   google.protobuf.BoolValue enabled = 1;
 
-  // The list of configured accounts.
+  // The list of configured Datadog accounts.
   repeated DatadogAccount accounts = 2;
 }
 

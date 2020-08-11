@@ -27,15 +27,16 @@ const (
 const _ = proto.ProtoPackageIsVersion4
 
 // Configuration for the S3 canary integration. If enabled, you must
-// also configure at least one canary.AwsAccount with a list of
-// supportedTypes that includes canary.SupportedType.CONFIGURATION_STORE and/or
-// canary.SupportedType.OBJECT_STORE.
+// also configure at least one `canary.AwsAccount` with a list of
+// `supportedTypes` that includes `canary.SupportedType.CONFIGURATION_STORE`
+// and/or `canary.SupportedType.OBJECT_STORE`.
 type S3 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Whether the integration is enabled.
+	// Whether S3 is enabled as a backing store to support Spinnaker's automated
+	// canary analysis features.
 	Enabled *wrappers.BoolValue `protobuf:"bytes,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 }
 

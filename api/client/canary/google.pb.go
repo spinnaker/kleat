@@ -32,17 +32,17 @@ type Google struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Whether the integration is enabled.
+	// Whether Google is enabled as a metrics store provider.
 	Enabled *wrappers.BoolValue `protobuf:"bytes,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// The list of configured accounts.
 	Accounts []*GoogleAccount `protobuf:"bytes,2,rep,name=accounts,proto3" json:"accounts,omitempty"`
-	// Whether GCS is enabled as a persistent store.
+	// Whether Google Cloud Storage is enabled as a persistent store.
 	GcsEnabled *wrappers.BoolValue `protobuf:"bytes,3,opt,name=gcsEnabled,proto3" json:"gcsEnabled,omitempty"`
-	// Whether Stackdriver is enabled as a metrics source.
+	// Whether Google Cloud Monitoring (formerly Stackdriver) is enabled as a metrics source.
 	StackdriverEnabled *wrappers.BoolValue `protobuf:"bytes,4,opt,name=stackdriverEnabled,proto3" json:"stackdriverEnabled,omitempty"`
-	// Number of milliseconds to wait in between caching the names of available
-	// Stackdriver metric types (used when building canary configs). Defaults to
-	// 60000.
+	// Number of milliseconds to wait between caching the names of available
+	// Cloud Monitoring metric types (used when building canary configs). Defaults to
+	// `60000`.
 	MetadataCachingIntervalMS int32 `protobuf:"varint,5,opt,name=metadataCachingIntervalMS,proto3" json:"metadataCachingIntervalMS,omitempty"`
 }
 
@@ -121,28 +121,32 @@ type GoogleAccount struct {
 
 	// The name of the account.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// The path to a JSON service account that Spinnaker will use as credentials.
-	// This is only needed if Spinnaker is not deployed on a Google Compute Engine
-	// VM, or needs permissions not afforded to the VM it is running on. See
-	// https://cloud.google.com/compute/docs/access/service-accounts for more information.
+	// The path to a JSON file containing the service account key that Spinnaker
+	// will use to authenticate.
+	//
+	// You need this only if Spinnaker is not deployed on a Google Compute Engine
+	// VM, or if the account needs permissions not afforded to the VM it is
+	// running on.
+	// See https://cloud.google.com/compute/docs/access/service-accounts for more information.
 	JsonPath string `protobuf:"bytes,2,opt,name=jsonPath,proto3" json:"jsonPath,omitempty"`
-	// The name of a storage bucket that this account has access to. If you
-	// specify a globally unique bucket name that doesn't exist yet, Kayenta will
-	// create that bucket for you.
+	// The name of a Cloud Storage bucket that this account has access to. If you
+	// specify a globally unique bucket name that doesn't exist yet, Kayenta
+	// creates that bucket for you.
 	Bucket string `protobuf:"bytes,3,opt,name=bucket,proto3" json:"bucket,omitempty"`
-	// This is only required if the bucket you specify doesn't exist yet. In that
-	// case, the bucket will be created in that location. See
+	// Where to create the new bucket. This is only required if the bucket you
+	// specify doesn't exist yet. See
 	// https://cloud.google.com/storage/docs/managing-buckets#manage-class-location.
 	BucketLocation string `protobuf:"bytes,4,opt,name=bucketLocation,proto3" json:"bucketLocation,omitempty"`
-	// The root folder in the chosen bucket in which to store all of the canary
-	// service's persistent data in. Defaults to `kayenta`.
+	// The root-level folder, in the specified bucket, in which to store all
+	// the canary service's persistent data. Defaults to `kayenta`.
 	RootFolder *wrappers.StringValue `protobuf:"bytes,5,opt,name=rootFolder,proto3" json:"rootFolder,omitempty"`
 	// (Required) The Google Cloud Platform project the canary service will use to
-	// consume GCS and Stackdriver.
+	// consume Cloud Storage and Cloud Monitoring data.
 	Project string `protobuf:"bytes,6,opt,name=project,proto3" json:"project,omitempty"`
-	// If enabling Stackdriver, include METRICS_STORE in this list.
-	// If enabling GCS, include CONFIGURATION_STORE and/or OBJECT_STORE in this
-	// list.
+	// For Google Cloud Monitoring (formerly Stackdriver) use METRICS_STORE.
+	// For Google Cloud Storage, use CONFIGURATION_STORE and
+	// OBJECT_STORE. All three can be a list of `supportedTypes` in the same
+	// account, or each in a separate account.
 	SupportedTypes []SupportedType `protobuf:"varint,7,rep,packed,name=supportedTypes,proto3,enum=proto.canary.SupportedType" json:"supportedTypes,omitempty"`
 }
 

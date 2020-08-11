@@ -5,15 +5,16 @@ option go_package = "github.com/spinnaker/kleat/api/client/canary";
 
 import "google/protobuf/wrappers.proto";
 
-// Configuration for the Stackdriver canary integration. If enabled, you must
-// also configure at least one canary.GoogleAccount with a list of
-// supportedTypes that includes canary.SupportedType.METRICS_STORE.
+// Configuration for the Google Cloud Monitoring (formerly Stackdriver) canary
+// integration. If enabled, you must also configure at least one
+// `canary.GoogleAccount` with a list of `supportedTypes` that includes
+// `canary.SupportedType.METRICS_STORE`.
 message Stackdriver {
-  // Whether the integration is enabled.
+  // Whether the Cloud Monitoring integration is enabled.
   google.protobuf.BoolValue enabled = 1;
 
-  // Number of milliseconds to wait in between caching the names of available
-  // Stackdriver metric types (used when building canary configs). Defaults to
-  // 60000.
+  // Number of milliseconds to wait between caching the names of available
+  // Cloud Monitoring metric types (used when building canary configs).
+  // Defaults to 60000.
   int32 metadataCachingIntervalMS = 2;
 }

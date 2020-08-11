@@ -9,7 +9,6 @@ canary:
   storageAccountName: my-google-canary-account
   templatesEnabled: true
 feature:
-  canary: true
   chaosMonkey: true
   fiatEnabled: true
   managedPipelineTemplatesV2UI: true

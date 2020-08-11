@@ -29,23 +29,20 @@ message Deck {
   // Configuration for the canary UI.
   Canary canary = 5;
 
-  // Configuration for surfacing the Spinnaker changelog in Deck.
-  Changelog changelog = 6;
-
   // Configuration for notifications providers.
-  Notifications notifications = 7;
+  Notifications notifications = 6;
 
   // Configuration for cloud provider defaults.
-  Providers providers = 8;
+  Providers providers = 7;
 
   // Spinnaker version.
-  string version = 9;
+  string version = 8;
 
   // Default time zone in which to display timestamps in the UI.
-  string defaultTimeZone = 10;
+  string defaultTimeZone = 9;
 
   // Configuration for UI-related feature flags.
-  Features feature = 11;
+  Features feature = 10;
 
   // Configuration for UI-related feature flags.
   message Features {
@@ -53,18 +50,15 @@ message Deck {
     // https://github.com/spinnaker/dcd-spec.
     google.protobuf.BoolValue pipelineTemplates = 1;
 
-    // Enable canary UI support.
-    google.protobuf.BoolValue canary = 2;
-
     // Enable Chaos Monkey support. For this to work, you'll need a running Chaos
     // Monkey deployment. See https://github.com/Netflix/chaosmonkey/wiki.
-    google.protobuf.BoolValue chaosMonkey = 3;
+    google.protobuf.BoolValue chaosMonkey = 2;
 
     // Whether authz is enabled.
-    google.protobuf.BoolValue fiatEnabled = 4;
+    google.protobuf.BoolValue fiatEnabled = 3;
 
     // Enable managed pipeline templates v2 UI support.
-    google.protobuf.BoolValue managedPipelineTemplatesV2UI = 5;
+    google.protobuf.BoolValue managedPipelineTemplatesV2UI = 4;
   }
 
   // Configuration for the canary UI.
@@ -92,20 +86,6 @@ message Deck {
     // Whether or not to enable custom filter templates for canary configs in
     // Deck.
     google.protobuf.BoolValue templatesEnabled = 7;
-  }
-
-  // Configuration for surfacing the Spinnaker changelog in Deck.
-  // TODO: can we do one of the following?
-  // 1. Change the component in Deck to fall back to just displaying
-  // a link to the spinnaker.io versions page, bookmarked to correct version?
-  // 2. Somehow derive the gist ID from the top-level version
-  // without reaching out to the internet?
-  message Changelog {
-    // The Spinnaker changelog gist file name.
-    string fileName = 1;
-
-    // The Spinnaker changelog gist ID.
-    string gistId = 2;
   }
 
   // Configuration for notifications providers.

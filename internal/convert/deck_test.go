@@ -145,7 +145,6 @@ var deckTests = configTest{
 			&config.Hal{
 				Features: &client.Features{
 					PipelineTemplates:            wrapperspb.Bool(true),
-					MineCanary:                   wrapperspb.Bool(true),
 					Chaos:                        wrapperspb.Bool(true),
 					ManagedPipelineTemplatesV2UI: wrapperspb.Bool(true),
 				},
@@ -154,10 +153,6 @@ var deckTests = configTest{
 				GateUrl:         "http://localhost:8084",
 				AuthEndpoint:    "http://localhost:8084/auth/user",
 				BakeryDetailUrl: "http://localhost:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
-				// TODO: this test demonstrates less-than-ideal result of having
-				// multiple canary flags that users must enable: both canary.enabled
-				// and features.mineCanary must be set to wrapperspb.Bool(true) in order for the
-				// canary UI and Kayenta to work properly.
 				Canary: &config.Deck_Canary{
 					FeatureDisabled: wrapperspb.Bool(true),
 				},
@@ -165,7 +160,6 @@ var deckTests = configTest{
 					PipelineTemplates:            wrapperspb.Bool(true),
 					ManagedPipelineTemplatesV2UI: wrapperspb.Bool(true),
 					ChaosMonkey:                  wrapperspb.Bool(true),
-					Canary:                       wrapperspb.Bool(true),
 				},
 				Notifications: &config.Deck_Notifications{},
 				Providers:     &config.Deck_Providers{},
