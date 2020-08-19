@@ -11,6 +11,11 @@ It is currently under active development, but is ready for early adopters to try
 in development clusters! Please share any feedback in the #kleat channel in
 [Spinnaker slack](join.spinnaker.io).
 
+Please see
+[spinnaker/kustomization-base](https://github.com/spinnaker/kustomization-base)
+for step-by-step instructions on how to install Spinnaker to a Kubernetes
+cluster using `kleat` and `kustomize`.
+
 ### Migrating from Halyard
 
 Please see the [migration README](/migration/README.md) for details on migrating
