@@ -26,7 +26,7 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-// Configuration to use AWS CodeBuild with Spinnnaker, for continuous integration g.
+// Configuration to use AWS CodeBuild with Spinnnaker, for continuous integration.
 type CodeBuild struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

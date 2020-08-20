@@ -104,8 +104,8 @@ type TravisAccount struct {
 	// A user must have at least one of the WRITE roles in order to run jobs on
 	// this build account.
 	Permissions *client.Permissions `protobuf:"bytes,6,opt,name=permissions,proto3" json:"permissions,omitempty"`
-	// The maximum number of jobs the Travis integration can retrieve per polling
-	// cycle. Defaults to `100`.
+	// The maximum number of jobs the Travis integration will retrieve per
+	// polling cycle. Defaults to `100`.
 	NumberOfJobs string `protobuf:"bytes,7,opt,name=numberOfJobs,proto3" json:"numberOfJobs,omitempty"`
 	// The maximum number of builds Igor returns when querying for builds for a
 	// specific repo. This determines, for example, how many builds are displayed

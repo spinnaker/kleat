@@ -1642,7 +1642,7 @@ Configuration to integrate Spinnaker with your continuous integration system.
 <a name="proto.ci.CodeBuild"></a>
 
 ### CodeBuild
-Configuration to use AWS CodeBuild with Spinnnaker, for continuous integration g.
+Configuration to use AWS CodeBuild with Spinnnaker, for continuous integration.
 
 
 | Field | Type | Label | Description |
@@ -1874,7 +1874,7 @@ Configuration for a Travis account.
 | baseUrl | [string](#string) |  | (Required) The base URL at which to reach the Travis UI (https://travis-ci.org). |
 | githubToken | [string](#string) |  | The GitHub token with which to authenticate against Travis. |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. A user must have at least one of the READ roles in order to view this build account or use it as a trigger source. A user must have at least one of the WRITE roles in order to run jobs on this build account. |
-| numberOfJobs | [string](#string) |  | The maximum number of jobs the Travis integration can retrieve per polling cycle. Defaults to `100`. |
+| numberOfJobs | [string](#string) |  | The maximum number of jobs the Travis integration will retrieve per polling cycle. Defaults to `100`. |
 | buildResultLimit | [string](#string) |  | The maximum number of builds Igor returns when querying for builds for a specific repo. This determines, for example, how many builds are displayed in the drop-down when a user starts a manual pipeline execution. If you set this too high, the Travis API might return an error for jobs that write many logs, so the default setting is only `10`. |
 | filteredRepositories | [string](#string) | repeated | The list of repositories that will be scraped. This is useful if your organization uses many repositories and you want to speed things up by scanning only a subset. |
 
