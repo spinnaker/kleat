@@ -32,7 +32,8 @@ type Aws struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Whether the integration is enabled.
+	// Enables/disables Kayenta integration for AWS. If enabled, Kayenta can
+	// store canary configuration and archived results in an S3 bucket.
 	Enabled *wrappers.BoolValue `protobuf:"bytes,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// The list of configured accounts.
 	Accounts []*AwsAccount `protobuf:"bytes,2,rep,name=accounts,proto3" json:"accounts,omitempty"`
@@ -93,7 +94,7 @@ func (x *Aws) GetS3Enabled() *wrappers.BoolValue {
 	return nil
 }
 
-// Configuration for an AWS account.
+// Configuration for the AWS account to be used .
 type AwsAccount struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -102,8 +103,8 @@ type AwsAccount struct {
 	// The name of the account.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// The name of a storage bucket that this account has access to. If you
-	// specify a globally unique bucket name that doesn't exist yet, Kayenta will
-	// create that bucket for you.
+	// specify a globally unique bucket name that doesn't exist yet, Kayenta
+	// creates that bucket for you.
 	Bucket string `protobuf:"bytes,2,opt,name=bucket,proto3" json:"bucket,omitempty"`
 	// The AWS region to use.
 	Region string `protobuf:"bytes,3,opt,name=region,proto3" json:"region,omitempty"`
@@ -113,13 +114,13 @@ type AwsAccount struct {
 	// The profile name to use when resolving AWS credentials. Typically found in
 	// `~/.aws/credentials`. Defaults to `default`.
 	ProfileName string `protobuf:"bytes,5,opt,name=profileName,proto3" json:"profileName,omitempty"`
-	// The endpoint used to reach the service implementing the AWS API. Typical
-	// use is with Minio.
+	// The endpoint used to reach the service implementing the S3 API. Typically
+	// you would use this with an S3 clone, like Minio.
 	Endpoint string `protobuf:"bytes,6,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
 	// The default access key used to communicate with AWS.
 	AccessKeyId string `protobuf:"bytes,7,opt,name=accessKeyId,proto3" json:"accessKeyId,omitempty"`
-	// If enabling S3, include CONFIGURATION_STORE and/or OBJECT_STORE in this
-	// list.
+	// If you're enabling S3, include CONFIGURATION_STORE and/or OBJECT_STORE in
+	// this list.
 	SupportedTypes []SupportedType `protobuf:"varint,8,rep,packed,name=supportedTypes,proto3,enum=proto.canary.SupportedType" json:"supportedTypes,omitempty"`
 }
 

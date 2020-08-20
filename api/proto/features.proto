@@ -10,16 +10,13 @@ message Features {
   // Enable pipeline template support. Read more at https://github.com/spinnaker/dcd-spec.
   google.protobuf.BoolValue pipelineTemplates = 1;
 
-  // Enable canary support. For this to work, you'll need a canary judge configured.
-  google.protobuf.BoolValue mineCanary = 2;
-
   // Enable Chaos Monkey support. For this to work, you'll need a running Chaos
   // Monkey deployment. See https://github.com/Netflix/chaosmonkey/wiki.
-  google.protobuf.BoolValue chaos = 3;
+  google.protobuf.BoolValue chaos = 2;
 
   // Enable managed pipeline templates v2 UI support.
-  google.protobuf.BoolValue managedPipelineTemplatesV2UI = 4;
+  google.protobuf.BoolValue managedPipelineTemplatesV2UI = 3;
 
   // Enable Gremlin fault-injection support.
-  google.protobuf.BoolValue gremlin = 5;
+  google.protobuf.BoolValue gremlin = 4;
 }
