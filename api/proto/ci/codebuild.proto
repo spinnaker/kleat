@@ -5,7 +5,7 @@ option go_package = "github.com/spinnaker/kleat/api/client/ci";
 
 import "google/protobuf/wrappers.proto";
 
-// Configuration to use AWS CodeBuild with Spinnnaker, for continuous integration g.
+// Configuration to use AWS CodeBuild with Spinnnaker, for continuous integration.
 message CodeBuild {
   // Whether AWS CodeBuild is enabled as a CI provider.
   google.protobuf.BoolValue enabled = 1;
