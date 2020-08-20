@@ -7,7 +7,7 @@ import "google/protobuf/wrappers.proto";
 
 import "permissions.proto";
 
-// Configuration for Jenkins.
+// Configuration to use Jenkins with Spinnaker, for continuous integration.
 message Jenkins {
   // Whether Jenkins is enabled.
   google.protobuf.BoolValue enabled = 1;
@@ -27,7 +27,7 @@ message JenkinsAccount {
   // (Required) The password of the Jenkins user to authenticate as.
   string password = 3;
 
-  // (Required) The address at which the Jenkins server is reachable.
+  // (Required) The URL at which the Jenkins server is reachable.
   string address = 4;
 
   // Whether or not to negotiate CSRF tokens when calling Jenkins.

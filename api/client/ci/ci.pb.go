@@ -25,7 +25,7 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-// Configuration for integration with continuous integration systems.
+// Configuration to integrate Spinnaker with your continuous integration system.
 type Ci struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

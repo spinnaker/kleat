@@ -7,32 +7,34 @@ import "google/protobuf/wrappers.proto";
 
 import "permissions.proto";
 
-// Configuration for the Google Cloud Build Provider.
+// Configuration to use Google Cloud Build with Spinnaker, for continuous integration.
 message GoogleCloudBuild {
-  // Whether the Google Cloud Build provider is enabled.
+  // Whether Cloud Build is enabled as a CI provider.
   google.protobuf.BoolValue enabled = 1;
 
-  // The list of configured Google Cloud Build accounts.
+  // The list of configured Cloud Build accounts.
   repeated GoogleCloudBuildAccount accounts = 2;
 }
 
-// Configuration for a Google Cloud Build account.
+// Configuration for a Cloud Build account.
 message GoogleCloudBuildAccount {
   // The name of the account.
   string name = 1;
 
-  // The name of the Google Cloud Platform project in which to trigger and monitor builds.
+  // The name of the Google Cloud project in which to trigger and monitor builds.
   string project = 2;
 
   // The name of the Pub/Sub subscription on which to listen for build changes.
   string subscriptionName = 3;
 
-  // The path to a JSON service account that Spinnaker will use as
-  // credentials. This is only needed if Spinnaker is not deployed on a
-  // Google Compute Engine VM, or needs permissions not afforded to the VM
-  // it is running on.
+  // The path to a JSON service account that Spinnaker will use for
+  // credentials. You need this only if Spinnaker is not deployed on a
+  // Compute Engine VM, or if Spinnaker needs permissions not afforded to
+  // the VM.
   string jsonKey = 4;
 
-  // Fiat permissions configuration.
+  // Fiat permissions configuration. A user must have at least a READ role to
+  // view this build account or use it as a trigger source. A user must have at
+  // least one of the WRITE roles in order to run builds.
   Permissions permissions = 5;
 }

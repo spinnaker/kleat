@@ -7,7 +7,7 @@ import "google/protobuf/wrappers.proto";
 
 import "permissions.proto";
 
-// Configuration for Travis.
+// Configuration to use Travis CI with Spinnaker, for continuous integration.
 message Travis {
   // Whether Travis is enabled.
   google.protobuf.BoolValue enabled = 1;
@@ -21,10 +21,10 @@ message TravisAccount {
   // The name of the account.
   string name = 1;
 
-  // (Required) The address of the Travis API (https://api.travis-ci.org).
+  // (Required) The URL at which to reach the Travis API (https://api.travis-ci.org).
   string address = 2;
 
-  // (Required) The base URL to the Travis UI (https://travis-ci.org).
+  // (Required) The base URL at which to reach the Travis UI (https://travis-ci.org).
   string baseUrl = 3;
 
   // The GitHub token with which to authenticate against Travis.
@@ -36,19 +36,19 @@ message TravisAccount {
   // this build account.
   Permissions permissions = 6;
 
-  // Defines how many jobs the Travis integration should retrieve per polling
-  // cycle. Defaults to 100.
+  // The maximum number of jobs the Travis integration will retrieve per
+  // polling cycle. Defaults to `100`.
   string numberOfJobs = 7;
 
-  // Defines how many builds Igor should return when querying for builds for a
-  // specific repo. This affects for instance how many builds will be displayed
-  // in the drop down when starting a manual execution of a pipeline. If set too
-  // high, the Travis API might return an error for jobs that writes a lot of logs,
-  // which is why the default setting is a bit conservative. Defaults to 10.
+  // The maximum number of builds Igor returns when querying for builds for a
+  // specific repo. This determines, for example, how many builds are displayed
+  // in the drop-down when a user starts a manual pipeline execution. If you
+  // set this too high, the Travis API might return an error for jobs that
+  // write many logs, so the default setting is only `10`.
   string buildResultLimit = 8;
 
-  // Defines the list of repositories that will be scraped. Useful if the
-  // organization has a lot of repositories and you wish to speed things up by
+  // The list of repositories that will be scraped. This is useful if your
+  // organization uses many repositories and you want to speed things up by
   // scanning only a subset.
   repeated string filteredRepositories = 9;
 }

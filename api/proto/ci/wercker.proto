@@ -7,7 +7,7 @@ import "google/protobuf/wrappers.proto";
 
 import "permissions.proto";
 
-// Configuration for Wercker.
+// Configuration to use Werker with Spinnaker, for continuous integration.
 message Wercker {
   // Whether Wercker is enabled.
   google.protobuf.BoolValue enabled = 1;
@@ -21,7 +21,7 @@ message WerckerAccount {
   // The name of the account.
   string name = 1;
 
-  // (Required) The address at which your Wercker instance is reachable.
+  // (Required) The address at which to reach your Wercker instance.
   string address = 2;
 
   // The personal token of the Wercker user to authenticate as.
