@@ -27,7 +27,7 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-// Configuration for Jenkins.
+// Configuration to use Jenkins with Spinnaker, for continuous integration.
 type Jenkins struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -97,7 +97,7 @@ type JenkinsAccount struct {
 	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
 	// (Required) The password of the Jenkins user to authenticate as.
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-	// (Required) The address at which the Jenkins server is reachable.
+	// (Required) The URL at which the Jenkins server is reachable.
 	Address string `protobuf:"bytes,4,opt,name=address,proto3" json:"address,omitempty"`
 	// Whether or not to negotiate CSRF tokens when calling Jenkins.
 	Csrf *wrappers.BoolValue `protobuf:"bytes,5,opt,name=csrf,proto3" json:"csrf,omitempty"`

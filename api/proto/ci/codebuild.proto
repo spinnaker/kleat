@@ -5,16 +5,16 @@ option go_package = "github.com/spinnaker/kleat/api/client/ci";
 
 import "google/protobuf/wrappers.proto";
 
-// Configuration for AWS CodeBuild.
+// Configuration to use AWS CodeBuild with Spinnnaker, for continuous integration g.
 message CodeBuild {
-  // Whether AWS CodeBuild is enabled.
+  // Whether AWS CodeBuild is enabled as a CI provider.
   google.protobuf.BoolValue enabled = 1;
 
   // The list of configured AWS CodeBuild accounts.
   repeated CodeBuildAccount accounts = 2;
 
-  // Your AWS Access Key ID. If not provided, Spinnaker will try to find AWS
-  // credentials as described at
+  // Your AWS Access Key ID. If not provided, Spinnaker tries to find AWS
+  // credentials, as described at
   // http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default
   string accessKeyId = 3;
 
@@ -30,7 +30,7 @@ message CodeBuildAccount {
   // The AWS account ID that will be used to trigger CodeBuild builds.
   string accountId = 2;
 
-  // If set, Spinnaker will configure a credentials provider that uses the AWS
+  // If set, Spinnaker configures a credentials provider that uses the AWS
   // Security Token Service to assume the specified role.
   string assumeRole = 3;
 

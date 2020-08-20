@@ -27,15 +27,15 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-// Configuration for the Google Cloud Build Provider.
+// Configuration to use Google Cloud Build with Spinnaker, for continuous integration.
 type GoogleCloudBuild struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Whether the Google Cloud Build provider is enabled.
+	// Whether Cloud Build is enabled as a CI provider.
 	Enabled *wrappers.BoolValue `protobuf:"bytes,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	// The list of configured Google Cloud Build accounts.
+	// The list of configured Cloud Build accounts.
 	Accounts []*GoogleCloudBuildAccount `protobuf:"bytes,2,rep,name=accounts,proto3" json:"accounts,omitempty"`
 }
 
@@ -85,7 +85,7 @@ func (x *GoogleCloudBuild) GetAccounts() []*GoogleCloudBuildAccount {
 	return nil
 }
 
-// Configuration for a Google Cloud Build account.
+// Configuration for a Cloud Build account.
 type GoogleCloudBuildAccount struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -93,16 +93,18 @@ type GoogleCloudBuildAccount struct {
 
 	// The name of the account.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// The name of the Google Cloud Platform project in which to trigger and monitor builds.
+	// The name of the Google Cloud project in which to trigger and monitor builds.
 	Project string `protobuf:"bytes,2,opt,name=project,proto3" json:"project,omitempty"`
 	// The name of the Pub/Sub subscription on which to listen for build changes.
 	SubscriptionName string `protobuf:"bytes,3,opt,name=subscriptionName,proto3" json:"subscriptionName,omitempty"`
-	// The path to a JSON service account that Spinnaker will use as
-	// credentials. This is only needed if Spinnaker is not deployed on a
-	// Google Compute Engine VM, or needs permissions not afforded to the VM
-	// it is running on.
+	// The path to a JSON service account that Spinnaker will use for
+	// credentials. You need this only if Spinnaker is not deployed on a
+	// Compute Engine VM, or if Spinnaker needs permissions not afforded to
+	// the VM.
 	JsonKey string `protobuf:"bytes,4,opt,name=jsonKey,proto3" json:"jsonKey,omitempty"`
-	// Fiat permissions configuration.
+	// Fiat permissions configuration. A user must have at least a READ role to
+	// view this build account or use it as a trigger source. A user must have at
+	// least one of the WRITE roles in order to run builds.
 	Permissions *client.Permissions `protobuf:"bytes,5,opt,name=permissions,proto3" json:"permissions,omitempty"`
 }
 

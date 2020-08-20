@@ -1606,7 +1606,7 @@ supportedTypes that includes canary.SupportedType.METRICS_STORE.
 <a name="proto.ci.Ci"></a>
 
 ### Ci
-Configuration for integration with continuous integration systems.
+Configuration to integrate Spinnaker with your continuous integration system.
 
 
 | Field | Type | Label | Description |
@@ -1642,14 +1642,14 @@ Configuration for integration with continuous integration systems.
 <a name="proto.ci.CodeBuild"></a>
 
 ### CodeBuild
-Configuration for AWS CodeBuild.
+Configuration to use AWS CodeBuild with Spinnnaker, for continuous integration g.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether AWS CodeBuild is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether AWS CodeBuild is enabled as a CI provider. |
 | accounts | [CodeBuildAccount](#proto.ci.CodeBuildAccount) | repeated | The list of configured AWS CodeBuild accounts. |
-| accessKeyId | [string](#string) |  | Your AWS Access Key ID. If not provided, Spinnaker will try to find AWS credentials as described at http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default |
+| accessKeyId | [string](#string) |  | Your AWS Access Key ID. If not provided, Spinnaker tries to find AWS credentials, as described at http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default |
 | secretAccessKey | [string](#string) |  | Your AWS Secret Key. |
 
 
@@ -1667,7 +1667,7 @@ Configuration for an AWS CodeBuild account.
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The name of the account. |
 | accountId | [string](#string) |  | The AWS account ID that will be used to trigger CodeBuild builds. |
-| assumeRole | [string](#string) |  | If set, Spinnaker will configure a credentials provider that uses the AWS Security Token Service to assume the specified role. |
+| assumeRole | [string](#string) |  | If set, Spinnaker configures a credentials provider that uses the AWS Security Token Service to assume the specified role. |
 | region | [string](#string) |  | (Required) The AWS region in which your CodeBuild projects live. |
 
 
@@ -1694,12 +1694,12 @@ Configuration for an AWS CodeBuild account.
 <a name="proto.ci.Concourse"></a>
 
 ### Concourse
-Configuration for Concourse.
+Configuration to use Concourse with Spinnaker, for continuous integration.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Concourse is enabled. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Concourse is enabled as a CI provider. |
 | masters | [ConcourseAccount](#proto.ci.ConcourseAccount) | repeated | The list of configured Concourse accounts. |
 
 
@@ -1719,7 +1719,7 @@ Configuration for a Concourse account.
 | username | [string](#string) |  | (Required) The username of the Concourse user to authenticate as. |
 | password | [string](#string) |  | (Required) The password of the Concourse user to authenticate as. |
 | url | [string](#string) |  | (Required) The URL at which your Concourse search is reachable. |
-| permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. A user must have at least one of the READ roles in order to view this build account or use it as a trigger source. A user must have at least one of the WRITE roles in order to run jobs on this build account. |
+| permissions | [proto.Permissions](#proto.Permissions) |  | Configuration for Fiat permissions. A user must have at least one of the READ roles in order to view this build account or use it as a trigger source. A user must have at least one of the WRITE roles in order to run jobs on this build account. |
 
 
 
@@ -1745,13 +1745,13 @@ Configuration for a Concourse account.
 <a name="proto.ci.GoogleCloudBuild"></a>
 
 ### GoogleCloudBuild
-Configuration for the Google Cloud Build Provider.
+Configuration to use Google Cloud Build with Spinnaker, for continuous integration.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether the Google Cloud Build provider is enabled. |
-| accounts | [GoogleCloudBuildAccount](#proto.ci.GoogleCloudBuildAccount) | repeated | The list of configured Google Cloud Build accounts. |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Cloud Build is enabled as a CI provider. |
+| accounts | [GoogleCloudBuildAccount](#proto.ci.GoogleCloudBuildAccount) | repeated | The list of configured Cloud Build accounts. |
 
 
 
@@ -1761,16 +1761,16 @@ Configuration for the Google Cloud Build Provider.
 <a name="proto.ci.GoogleCloudBuildAccount"></a>
 
 ### GoogleCloudBuildAccount
-Configuration for a Google Cloud Build account.
+Configuration for a Cloud Build account.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The name of the account. |
-| project | [string](#string) |  | The name of the Google Cloud Platform project in which to trigger and monitor builds. |
+| project | [string](#string) |  | The name of the Google Cloud project in which to trigger and monitor builds. |
 | subscriptionName | [string](#string) |  | The name of the Pub/Sub subscription on which to listen for build changes. |
-| jsonKey | [string](#string) |  | The path to a JSON service account that Spinnaker will use as credentials. This is only needed if Spinnaker is not deployed on a Google Compute Engine VM, or needs permissions not afforded to the VM it is running on. |
-| permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. |
+| jsonKey | [string](#string) |  | The path to a JSON service account that Spinnaker will use for credentials. You need this only if Spinnaker is not deployed on a Compute Engine VM, or if Spinnaker needs permissions not afforded to the VM. |
+| permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. A user must have at least a READ role to view this build account or use it as a trigger source. A user must have at least one of the WRITE roles in order to run builds. |
 
 
 
@@ -1796,7 +1796,7 @@ Configuration for a Google Cloud Build account.
 <a name="proto.ci.Jenkins"></a>
 
 ### Jenkins
-Configuration for Jenkins.
+Configuration to use Jenkins with Spinnaker, for continuous integration.
 
 
 | Field | Type | Label | Description |
@@ -1820,7 +1820,7 @@ Configuration for a Jenkins account.
 | name | [string](#string) |  | The name of the account. |
 | username | [string](#string) |  | (Required) The username of the Jenkins user to authenticate as. |
 | password | [string](#string) |  | (Required) The password of the Jenkins user to authenticate as. |
-| address | [string](#string) |  | (Required) The address at which the Jenkins server is reachable. |
+| address | [string](#string) |  | (Required) The URL at which the Jenkins server is reachable. |
 | csrf | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether or not to negotiate CSRF tokens when calling Jenkins. |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. A user must have at least one of the READ roles in order to view this build account or use it as a trigger source. A user must have at least one of the WRITE roles in order to run jobs on this build account. |
 
@@ -1848,7 +1848,7 @@ Configuration for a Jenkins account.
 <a name="proto.ci.Travis"></a>
 
 ### Travis
-Configuration for Travis.
+Configuration to use Travis CI with Spinnaker, for continuous integration.
 
 
 | Field | Type | Label | Description |
@@ -1870,13 +1870,13 @@ Configuration for a Travis account.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The name of the account. |
-| address | [string](#string) |  | (Required) The address of the Travis API (https://api.travis-ci.org). |
-| baseUrl | [string](#string) |  | (Required) The base URL to the Travis UI (https://travis-ci.org). |
+| address | [string](#string) |  | (Required) The URL at which to reach the Travis API (https://api.travis-ci.org). |
+| baseUrl | [string](#string) |  | (Required) The base URL at which to reach the Travis UI (https://travis-ci.org). |
 | githubToken | [string](#string) |  | The GitHub token with which to authenticate against Travis. |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. A user must have at least one of the READ roles in order to view this build account or use it as a trigger source. A user must have at least one of the WRITE roles in order to run jobs on this build account. |
-| numberOfJobs | [string](#string) |  | Defines how many jobs the Travis integration should retrieve per polling cycle. Defaults to 100. |
-| buildResultLimit | [string](#string) |  | Defines how many builds Igor should return when querying for builds for a specific repo. This affects for instance how many builds will be displayed in the drop down when starting a manual execution of a pipeline. If set too high, the Travis API might return an error for jobs that writes a lot of logs, which is why the default setting is a bit conservative. Defaults to 10. |
-| filteredRepositories | [string](#string) | repeated | Defines the list of repositories that will be scraped. Useful if the organization has a lot of repositories and you wish to speed things up by scanning only a subset. |
+| numberOfJobs | [string](#string) |  | The maximum number of jobs the Travis integration can retrieve per polling cycle. Defaults to `100`. |
+| buildResultLimit | [string](#string) |  | The maximum number of builds Igor returns when querying for builds for a specific repo. This determines, for example, how many builds are displayed in the drop-down when a user starts a manual pipeline execution. If you set this too high, the Travis API might return an error for jobs that write many logs, so the default setting is only `10`. |
+| filteredRepositories | [string](#string) | repeated | The list of repositories that will be scraped. This is useful if your organization uses many repositories and you want to speed things up by scanning only a subset. |
 
 
 
@@ -1902,7 +1902,7 @@ Configuration for a Travis account.
 <a name="proto.ci.Wercker"></a>
 
 ### Wercker
-Configuration for Wercker.
+Configuration to use Werker with Spinnaker, for continuous integration.
 
 
 | Field | Type | Label | Description |
@@ -1924,7 +1924,7 @@ Configuration for a Wercker account.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The name of the account. |
-| address | [string](#string) |  | (Required) The address at which your Wercker instance is reachable. |
+| address | [string](#string) |  | (Required) The address at which to reach your Wercker instance. |
 | token | [string](#string) |  | The personal token of the Wercker user to authenticate as. |
 | user | [string](#string) |  | The username of the Wercker user to authenticate as. |
 | permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. A user must have at least one of the READ roles in order to view this build account or use it as a trigger source. A user must have at least one of the WRITE roles in order to run jobs on this build account. |

@@ -27,13 +27,13 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-// Configuration for Concourse.
+// Configuration to use Concourse with Spinnaker, for continuous integration.
 type Concourse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Whether Concourse is enabled.
+	// Whether Concourse is enabled as a CI provider.
 	Enabled *wrappers.BoolValue `protobuf:"bytes,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// The list of configured Concourse accounts.
 	Masters []*ConcourseAccount `protobuf:"bytes,2,rep,name=masters,proto3" json:"masters,omitempty"`
@@ -99,7 +99,7 @@ type ConcourseAccount struct {
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	// (Required) The URL at which your Concourse search is reachable.
 	Url string `protobuf:"bytes,4,opt,name=url,proto3" json:"url,omitempty"`
-	// Fiat permissions configuration. A user must have at least one of the READ
+	// Configuration for Fiat permissions. A user must have at least one of the READ
 	// roles in order to view this build account or use it as a trigger source.
 	// A user must have at least one of the WRITE roles in order to run jobs on
 	// this build account.

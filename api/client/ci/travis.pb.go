@@ -27,7 +27,7 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-// Configuration for Travis.
+// Configuration to use Travis CI with Spinnaker, for continuous integration.
 type Travis struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -93,9 +93,9 @@ type TravisAccount struct {
 
 	// The name of the account.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// (Required) The address of the Travis API (https://api.travis-ci.org).
+	// (Required) The URL at which to reach the Travis API (https://api.travis-ci.org).
 	Address string `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
-	// (Required) The base URL to the Travis UI (https://travis-ci.org).
+	// (Required) The base URL at which to reach the Travis UI (https://travis-ci.org).
 	BaseUrl string `protobuf:"bytes,3,opt,name=baseUrl,proto3" json:"baseUrl,omitempty"`
 	// The GitHub token with which to authenticate against Travis.
 	GithubToken string `protobuf:"bytes,4,opt,name=githubToken,proto3" json:"githubToken,omitempty"`
@@ -104,17 +104,17 @@ type TravisAccount struct {
 	// A user must have at least one of the WRITE roles in order to run jobs on
 	// this build account.
 	Permissions *client.Permissions `protobuf:"bytes,6,opt,name=permissions,proto3" json:"permissions,omitempty"`
-	// Defines how many jobs the Travis integration should retrieve per polling
-	// cycle. Defaults to 100.
+	// The maximum number of jobs the Travis integration can retrieve per polling
+	// cycle. Defaults to `100`.
 	NumberOfJobs string `protobuf:"bytes,7,opt,name=numberOfJobs,proto3" json:"numberOfJobs,omitempty"`
-	// Defines how many builds Igor should return when querying for builds for a
-	// specific repo. This affects for instance how many builds will be displayed
-	// in the drop down when starting a manual execution of a pipeline. If set too
-	// high, the Travis API might return an error for jobs that writes a lot of logs,
-	// which is why the default setting is a bit conservative. Defaults to 10.
+	// The maximum number of builds Igor returns when querying for builds for a
+	// specific repo. This determines, for example, how many builds are displayed
+	// in the drop-down when a user starts a manual pipeline execution. If you
+	// set this too high, the Travis API might return an error for jobs that
+	// write many logs, so the default setting is only `10`.
 	BuildResultLimit string `protobuf:"bytes,8,opt,name=buildResultLimit,proto3" json:"buildResultLimit,omitempty"`
-	// Defines the list of repositories that will be scraped. Useful if the
-	// organization has a lot of repositories and you wish to speed things up by
+	// The list of repositories that will be scraped. This is useful if your
+	// organization uses many repositories and you want to speed things up by
 	// scanning only a subset.
 	FilteredRepositories []string `protobuf:"bytes,9,rep,name=filteredRepositories,proto3" json:"filteredRepositories,omitempty"`
 }

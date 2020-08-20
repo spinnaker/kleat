@@ -27,7 +27,7 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-// Configuration for Wercker.
+// Configuration to use Werker with Spinnaker, for continuous integration.
 type Wercker struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -93,7 +93,7 @@ type WerckerAccount struct {
 
 	// The name of the account.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// (Required) The address at which your Wercker instance is reachable.
+	// (Required) The address at which to reach your Wercker instance.
 	Address string `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
 	// The personal token of the Wercker user to authenticate as.
 	Token string `protobuf:"bytes,3,opt,name=token,proto3" json:"token,omitempty"`

@@ -10,7 +10,7 @@ import "ci/jenkins.proto";
 import "ci/travis.proto";
 import "ci/wercker.proto";
 
-// Configuration for integration with continuous integration systems.
+// Configuration to integrate Spinnaker with your continuous integration system.
 message Ci {
   ci.GoogleCloudBuild gcb = 1;
   ci.CodeBuild codebuild = 2;

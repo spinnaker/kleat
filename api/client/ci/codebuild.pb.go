@@ -26,18 +26,18 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-// Configuration for AWS CodeBuild.
+// Configuration to use AWS CodeBuild with Spinnnaker, for continuous integration g.
 type CodeBuild struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Whether AWS CodeBuild is enabled.
+	// Whether AWS CodeBuild is enabled as a CI provider.
 	Enabled *wrappers.BoolValue `protobuf:"bytes,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// The list of configured AWS CodeBuild accounts.
 	Accounts []*CodeBuildAccount `protobuf:"bytes,2,rep,name=accounts,proto3" json:"accounts,omitempty"`
-	// Your AWS Access Key ID. If not provided, Spinnaker will try to find AWS
-	// credentials as described at
+	// Your AWS Access Key ID. If not provided, Spinnaker tries to find AWS
+	// credentials, as described at
 	// http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default
 	AccessKeyId string `protobuf:"bytes,3,opt,name=accessKeyId,proto3" json:"accessKeyId,omitempty"`
 	// Your AWS Secret Key.
@@ -114,7 +114,7 @@ type CodeBuildAccount struct {
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// The AWS account ID that will be used to trigger CodeBuild builds.
 	AccountId string `protobuf:"bytes,2,opt,name=accountId,proto3" json:"accountId,omitempty"`
-	// If set, Spinnaker will configure a credentials provider that uses the AWS
+	// If set, Spinnaker configures a credentials provider that uses the AWS
 	// Security Token Service to assume the specified role.
 	AssumeRole string `protobuf:"bytes,3,opt,name=assumeRole,proto3" json:"assumeRole,omitempty"`
 	//  (Required) The AWS region in which your CodeBuild projects live.
