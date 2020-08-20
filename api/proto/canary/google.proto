@@ -34,7 +34,7 @@ message GoogleAccount {
 
   // The path to a JSON file containing the service account key that Spinnaker
   // will use to authenticate.
-  // 
+  //  
   // You need this only if Spinnaker is not deployed on a Google Compute Engine
   // VM, or if the account needs permissions not afforded to the VM it is
   // running on.

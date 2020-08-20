@@ -1281,9 +1281,7 @@ Configuration for a Google account.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The name of the account. |
-| jsonPath | [string](#string) |  | The path to a JSON file containing the service account key that Spinnaker will use to authenticate.
-
-You need this only if Spinnaker is not deployed on a Google Compute Engine VM, or if the account needs permissions not afforded to the VM it is running on. See https://cloud.google.com/compute/docs/access/service-accounts for more information. |
+| jsonPath | [string](#string) |  | The path to a JSON file containing the service account key that Spinnaker will use to authenticate. You need this only if Spinnaker is not deployed on a Google Compute Engine VM, or if the account needs permissions not afforded to the VM it is running on. See https://cloud.google.com/compute/docs/access/service-accounts for more information. |
 | bucket | [string](#string) |  | The name of a Cloud Storage bucket that this account has access to. If you specify a globally unique bucket name that doesn&#39;t exist yet, Kayenta creates that bucket for you. |
 | bucketLocation | [string](#string) |  | Where to create the new bucket. This is only required if the bucket you specify doesn&#39;t exist yet. See https://cloud.google.com/storage/docs/managing-buckets#manage-class-location. |
 | rootFolder | [google.protobuf.StringValue](#google.protobuf.StringValue) |  | The root-level folder, in the specified bucket, in which to store all the canary service&#39;s persistent data. Defaults to `kayenta`. |
