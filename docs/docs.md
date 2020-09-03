@@ -231,6 +231,7 @@
     - [Deck.Providers.HuaweiCloud](#proto.config.Deck.Providers.HuaweiCloud)
     - [Deck.Providers.HuaweiCloud.Defaults](#proto.config.Deck.Providers.HuaweiCloud.Defaults)
     - [Deck.Providers.Kubernetes](#proto.config.Deck.Providers.Kubernetes)
+    - [Deck.Providers.Kubernetes.Defaults](#proto.config.Deck.Providers.Kubernetes.Defaults)
     - [Deck.Providers.TencentCloud](#proto.config.Deck.Providers.TencentCloud)
     - [Deck.Providers.TencentCloud.Defaults](#proto.config.Deck.Providers.TencentCloud.Defaults)
   
@@ -3701,6 +3702,21 @@ UI-specific provider default settings.
 The Kubernetes provider has no statically-configured defaults,
 but Deck currently registers each cloud provider based on the existence
 of an entry in the `providers` block.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| defaults | [Deck.Providers.Kubernetes.Defaults](#proto.config.Deck.Providers.Kubernetes.Defaults) |  |  |
+
+
+
+
+
+
+<a name="proto.config.Deck.Providers.Kubernetes.Defaults"></a>
+
+### Deck.Providers.Kubernetes.Defaults
+
 
 
 

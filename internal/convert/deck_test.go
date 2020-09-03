@@ -244,7 +244,7 @@ var deckTests = configTest{
 				Feature:       &config.Deck_Features{},
 				Notifications: &config.Deck_Notifications{},
 				Providers: &config.Deck_Providers{
-					Kubernetes: &config.Deck_Providers_Kubernetes{},
+					Kubernetes: &config.Deck_Providers_Kubernetes{Defaults: &config.Deck_Providers_Kubernetes_Defaults{}},
 				},
 			},
 		},

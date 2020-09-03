@@ -216,6 +216,9 @@ message Deck {
     // The Kubernetes provider has no statically-configured defaults,
     // but Deck currently registers each cloud provider based on the existence
     // of an entry in the `providers` block.
-    message Kubernetes {}
+    message Kubernetes {
+      Defaults defaults = 1;
+      message Defaults {};
+    }
   }
 }

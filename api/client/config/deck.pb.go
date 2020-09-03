@@ -1004,6 +1004,8 @@ type Deck_Providers_Kubernetes struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	Defaults *Deck_Providers_Kubernetes_Defaults `protobuf:"bytes,1,opt,name=defaults,proto3" json:"defaults,omitempty"`
 }
 
 func (x *Deck_Providers_Kubernetes) Reset() {
@@ -1036,6 +1038,13 @@ func (x *Deck_Providers_Kubernetes) ProtoReflect() protoreflect.Message {
 // Deprecated: Use Deck_Providers_Kubernetes.ProtoReflect.Descriptor instead.
 func (*Deck_Providers_Kubernetes) Descriptor() ([]byte, []int) {
 	return file_config_deck_proto_rawDescGZIP(), []int{0, 3, 9}
+}
+
+func (x *Deck_Providers_Kubernetes) GetDefaults() *Deck_Providers_Kubernetes_Defaults {
+	if x != nil {
+		return x.Defaults
+	}
+	return nil
 }
 
 type Deck_Providers_Appengine_Defaults struct {
@@ -1501,6 +1510,44 @@ func (x *Deck_Providers_TencentCloud_Defaults) GetRegion() string {
 	return ""
 }
 
+type Deck_Providers_Kubernetes_Defaults struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *Deck_Providers_Kubernetes_Defaults) Reset() {
+	*x = Deck_Providers_Kubernetes_Defaults{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_config_deck_proto_msgTypes[24]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Deck_Providers_Kubernetes_Defaults) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Deck_Providers_Kubernetes_Defaults) ProtoMessage() {}
+
+func (x *Deck_Providers_Kubernetes_Defaults) ProtoReflect() protoreflect.Message {
+	mi := &file_config_deck_proto_msgTypes[24]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Deck_Providers_Kubernetes_Defaults.ProtoReflect.Descriptor instead.
+func (*Deck_Providers_Kubernetes_Defaults) Descriptor() ([]byte, []int) {
+	return file_config_deck_proto_rawDescGZIP(), []int{0, 3, 9, 0}
+}
+
 var File_config_deck_proto protoreflect.FileDescriptor
 
 var file_config_deck_proto_rawDesc = []byte{
@@ -1520,7 +1567,7 @@ var file_config_deck_proto_rawDesc = []byte{
 	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x18, 0x6e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61,
 	0x74, 0x69, 0x6f, 0x6e, 0x2f, 0x73, 0x6c, 0x61, 0x63, 0x6b, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
 	0x1a, 0x19, 0x6e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2f, 0x74,
-	0x77, 0x69, 0x6c, 0x69, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xa7, 0x1b, 0x0a, 0x04,
+	0x77, 0x69, 0x6c, 0x69, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x81, 0x1c, 0x0a, 0x04,
 	0x44, 0x65, 0x63, 0x6b, 0x12, 0x18, 0x0a, 0x07, 0x67, 0x61, 0x74, 0x65, 0x55, 0x72, 0x6c, 0x18,
 	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x67, 0x61, 0x74, 0x65, 0x55, 0x72, 0x6c, 0x12, 0x3c,
 	0x0a, 0x0b, 0x61, 0x75, 0x74, 0x68, 0x45, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x02, 0x20,
@@ -1619,7 +1666,7 @@ var file_config_deck_proto_rawDesc = []byte{
 	0x2e, 0x53, 0x6c, 0x61, 0x63, 0x6b, 0x52, 0x05, 0x73, 0x6c, 0x61, 0x63, 0x6b, 0x12, 0x2c, 0x0a,
 	0x03, 0x73, 0x6d, 0x73, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x70, 0x72, 0x6f,
 	0x74, 0x6f, 0x2e, 0x6e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e,
-	0x54, 0x77, 0x69, 0x6c, 0x69, 0x6f, 0x52, 0x03, 0x73, 0x6d, 0x73, 0x1a, 0xf7, 0x0e, 0x0a, 0x09,
+	0x54, 0x77, 0x69, 0x6c, 0x69, 0x6f, 0x52, 0x03, 0x73, 0x6d, 0x73, 0x1a, 0xd1, 0x0f, 0x0a, 0x09,
 	0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x73, 0x12, 0x44, 0x0a, 0x09, 0x61, 0x70, 0x70,
 	0x65, 0x6e, 0x67, 0x69, 0x6e, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x70,
 	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x2e, 0x44, 0x65, 0x63, 0x6b,
@@ -1738,11 +1785,17 @@ var file_config_deck_proto_rawDesc = []byte{
 	0x61, 0x75, 0x6c, 0x74, 0x73, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74,
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12,
 	0x16, 0x0a, 0x06, 0x72, 0x65, 0x67, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x06, 0x72, 0x65, 0x67, 0x69, 0x6f, 0x6e, 0x1a, 0x0c, 0x0a, 0x0a, 0x4b, 0x75, 0x62, 0x65, 0x72,
-	0x6e, 0x65, 0x74, 0x65, 0x73, 0x42, 0x2e, 0x5a, 0x2c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
-	0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x69, 0x6e, 0x6e, 0x61, 0x6b, 0x65, 0x72, 0x2f, 0x6b, 0x6c,
-	0x65, 0x61, 0x74, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2f, 0x63,
-	0x6f, 0x6e, 0x66, 0x69, 0x67, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x06, 0x72, 0x65, 0x67, 0x69, 0x6f, 0x6e, 0x1a, 0x66, 0x0a, 0x0a, 0x4b, 0x75, 0x62, 0x65, 0x72,
+	0x6e, 0x65, 0x74, 0x65, 0x73, 0x12, 0x4c, 0x0a, 0x08, 0x64, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74,
+	0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x30, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e,
+	0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x2e, 0x44, 0x65, 0x63, 0x6b, 0x2e, 0x50, 0x72, 0x6f, 0x76,
+	0x69, 0x64, 0x65, 0x72, 0x73, 0x2e, 0x4b, 0x75, 0x62, 0x65, 0x72, 0x6e, 0x65, 0x74, 0x65, 0x73,
+	0x2e, 0x44, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74, 0x73, 0x52, 0x08, 0x64, 0x65, 0x66, 0x61, 0x75,
+	0x6c, 0x74, 0x73, 0x1a, 0x0a, 0x0a, 0x08, 0x44, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74, 0x73, 0x42,
+	0x2e, 0x5a, 0x2c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70,
+	0x69, 0x6e, 0x6e, 0x61, 0x6b, 0x65, 0x72, 0x2f, 0x6b, 0x6c, 0x65, 0x61, 0x74, 0x2f, 0x61, 0x70,
+	0x69, 0x2f, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2f, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1757,7 +1810,7 @@ func file_config_deck_proto_rawDescGZIP() []byte {
 	return file_config_deck_proto_rawDescData
 }
 
-var file_config_deck_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_config_deck_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
 var file_config_deck_proto_goTypes = []interface{}{
 	(*Deck)(nil),                                 // 0: proto.config.Deck
 	(*Deck_Features)(nil),                        // 1: proto.config.Deck.Features
@@ -1783,35 +1836,36 @@ var file_config_deck_proto_goTypes = []interface{}{
 	(*Deck_Providers_Gce_Defaults)(nil),          // 21: proto.config.Deck.Providers.Gce.Defaults
 	(*Deck_Providers_HuaweiCloud_Defaults)(nil),  // 22: proto.config.Deck.Providers.HuaweiCloud.Defaults
 	(*Deck_Providers_TencentCloud_Defaults)(nil), // 23: proto.config.Deck.Providers.TencentCloud.Defaults
-	(*wrappers.BoolValue)(nil),                   // 24: google.protobuf.BoolValue
-	(*notification.BearyChat)(nil),               // 25: proto.notification.BearyChat
-	(*notification.Email)(nil),                   // 26: proto.notification.Email
-	(*notification.GithubStatus)(nil),            // 27: proto.notification.GithubStatus
-	(*notification.GoogleChat)(nil),              // 28: proto.notification.GoogleChat
-	(*notification.PubSub)(nil),                  // 29: proto.notification.PubSub
-	(*notification.Slack)(nil),                   // 30: proto.notification.Slack
-	(*notification.Twilio)(nil),                  // 31: proto.notification.Twilio
+	(*Deck_Providers_Kubernetes_Defaults)(nil),   // 24: proto.config.Deck.Providers.Kubernetes.Defaults
+	(*wrappers.BoolValue)(nil),                   // 25: google.protobuf.BoolValue
+	(*notification.BearyChat)(nil),               // 26: proto.notification.BearyChat
+	(*notification.Email)(nil),                   // 27: proto.notification.Email
+	(*notification.GithubStatus)(nil),            // 28: proto.notification.GithubStatus
+	(*notification.GoogleChat)(nil),              // 29: proto.notification.GoogleChat
+	(*notification.PubSub)(nil),                  // 30: proto.notification.PubSub
+	(*notification.Slack)(nil),                   // 31: proto.notification.Slack
+	(*notification.Twilio)(nil),                  // 32: proto.notification.Twilio
 }
 var file_config_deck_proto_depIdxs = []int32{
-	24, // 0: proto.config.Deck.authEnabled:type_name -> google.protobuf.BoolValue
+	25, // 0: proto.config.Deck.authEnabled:type_name -> google.protobuf.BoolValue
 	2,  // 1: proto.config.Deck.canary:type_name -> proto.config.Deck.Canary
 	3,  // 2: proto.config.Deck.notifications:type_name -> proto.config.Deck.Notifications
 	4,  // 3: proto.config.Deck.providers:type_name -> proto.config.Deck.Providers
 	1,  // 4: proto.config.Deck.feature:type_name -> proto.config.Deck.Features
-	24, // 5: proto.config.Deck.Features.pipelineTemplates:type_name -> google.protobuf.BoolValue
-	24, // 6: proto.config.Deck.Features.chaosMonkey:type_name -> google.protobuf.BoolValue
-	24, // 7: proto.config.Deck.Features.fiatEnabled:type_name -> google.protobuf.BoolValue
-	24, // 8: proto.config.Deck.Features.managedPipelineTemplatesV2UI:type_name -> google.protobuf.BoolValue
-	24, // 9: proto.config.Deck.Canary.featureDisabled:type_name -> google.protobuf.BoolValue
-	24, // 10: proto.config.Deck.Canary.showAllConfigs:type_name -> google.protobuf.BoolValue
-	24, // 11: proto.config.Deck.Canary.templatesEnabled:type_name -> google.protobuf.BoolValue
-	25, // 12: proto.config.Deck.Notifications.bearychat:type_name -> proto.notification.BearyChat
-	26, // 13: proto.config.Deck.Notifications.email:type_name -> proto.notification.Email
-	27, // 14: proto.config.Deck.Notifications.githubStatus:type_name -> proto.notification.GithubStatus
-	28, // 15: proto.config.Deck.Notifications.googleChat:type_name -> proto.notification.GoogleChat
-	29, // 16: proto.config.Deck.Notifications.pubsub:type_name -> proto.notification.PubSub
-	30, // 17: proto.config.Deck.Notifications.slack:type_name -> proto.notification.Slack
-	31, // 18: proto.config.Deck.Notifications.sms:type_name -> proto.notification.Twilio
+	25, // 5: proto.config.Deck.Features.pipelineTemplates:type_name -> google.protobuf.BoolValue
+	25, // 6: proto.config.Deck.Features.chaosMonkey:type_name -> google.protobuf.BoolValue
+	25, // 7: proto.config.Deck.Features.fiatEnabled:type_name -> google.protobuf.BoolValue
+	25, // 8: proto.config.Deck.Features.managedPipelineTemplatesV2UI:type_name -> google.protobuf.BoolValue
+	25, // 9: proto.config.Deck.Canary.featureDisabled:type_name -> google.protobuf.BoolValue
+	25, // 10: proto.config.Deck.Canary.showAllConfigs:type_name -> google.protobuf.BoolValue
+	25, // 11: proto.config.Deck.Canary.templatesEnabled:type_name -> google.protobuf.BoolValue
+	26, // 12: proto.config.Deck.Notifications.bearychat:type_name -> proto.notification.BearyChat
+	27, // 13: proto.config.Deck.Notifications.email:type_name -> proto.notification.Email
+	28, // 14: proto.config.Deck.Notifications.githubStatus:type_name -> proto.notification.GithubStatus
+	29, // 15: proto.config.Deck.Notifications.googleChat:type_name -> proto.notification.GoogleChat
+	30, // 16: proto.config.Deck.Notifications.pubsub:type_name -> proto.notification.PubSub
+	31, // 17: proto.config.Deck.Notifications.slack:type_name -> proto.notification.Slack
+	32, // 18: proto.config.Deck.Notifications.sms:type_name -> proto.notification.Twilio
 	5,  // 19: proto.config.Deck.Providers.appengine:type_name -> proto.config.Deck.Providers.Appengine
 	6,  // 20: proto.config.Deck.Providers.aws:type_name -> proto.config.Deck.Providers.Aws
 	7,  // 21: proto.config.Deck.Providers.azure:type_name -> proto.config.Deck.Providers.Azure
@@ -1831,11 +1885,12 @@ var file_config_deck_proto_depIdxs = []int32{
 	21, // 35: proto.config.Deck.Providers.Gce.defaults:type_name -> proto.config.Deck.Providers.Gce.Defaults
 	22, // 36: proto.config.Deck.Providers.HuaweiCloud.defaults:type_name -> proto.config.Deck.Providers.HuaweiCloud.Defaults
 	23, // 37: proto.config.Deck.Providers.TencentCloud.defaults:type_name -> proto.config.Deck.Providers.TencentCloud.Defaults
-	38, // [38:38] is the sub-list for method output_type
-	38, // [38:38] is the sub-list for method input_type
-	38, // [38:38] is the sub-list for extension type_name
-	38, // [38:38] is the sub-list for extension extendee
-	0,  // [0:38] is the sub-list for field type_name
+	24, // 38: proto.config.Deck.Providers.Kubernetes.defaults:type_name -> proto.config.Deck.Providers.Kubernetes.Defaults
+	39, // [39:39] is the sub-list for method output_type
+	39, // [39:39] is the sub-list for method input_type
+	39, // [39:39] is the sub-list for extension type_name
+	39, // [39:39] is the sub-list for extension extendee
+	0,  // [0:39] is the sub-list for field type_name
 }
 
 func init() { file_config_deck_proto_init() }
@@ -2132,6 +2187,18 @@ func file_config_deck_proto_init() {
 				return nil
 			}
 		}
+		file_config_deck_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Deck_Providers_Kubernetes_Defaults); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -2139,7 +2206,7 @@ func file_config_deck_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_config_deck_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   24,
+			NumMessages:   25,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -213,7 +213,9 @@ func getDeckProvidersConfig(h *config.Hal) *config.Deck_Providers {
 	}
 
 	if h.GetProviders().GetKubernetes().GetEnabled().GetValue() {
-		providers.Kubernetes = &config.Deck_Providers_Kubernetes{}
+		providers.Kubernetes = &config.Deck_Providers_Kubernetes{
+			Defaults: &config.Deck_Providers_Kubernetes_Defaults{},
+		}
 	}
 
 	return providers
