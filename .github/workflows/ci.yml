@@ -28,6 +28,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Ensure code formatting and style is consistent
-        uses: golangci/golangci-lint-action@v1
+        uses: golangci/golangci-lint-action@v2
         with:
           version: v1.31
