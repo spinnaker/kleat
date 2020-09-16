@@ -1,6 +1,6 @@
 module github.com/spinnaker/kleat
 
-go 1.14
+go 1.15
 
 require (
 	github.com/golang/protobuf v1.4.2
