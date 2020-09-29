@@ -1,0 +1,13 @@
+keel:
+  plugins:
+    ec2:
+      enabled: false
+    k8s:
+      enabled: true
+sql:
+  connectionPools:
+    default:
+      jdbcUrl: jdbc:mysql://localhost:3306/keel
+      password: password
+      user: user
+  enabled: true

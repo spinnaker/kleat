@@ -7,6 +7,7 @@ import "storage/azs.proto";
 import "storage/gcs.proto";
 import "storage/oracle.proto";
 import "storage/s3.proto";
+import "google/protobuf/wrappers.proto";
 
 // Configuration for the front50 microservice.
 message Front50 {
@@ -17,5 +18,11 @@ message Front50 {
     storage.Azs azs = 2;
     storage.Oracle oracle = 3;
     storage.S3 s3 = 4;
+    Delivery delivery = 5;
+  }
+
+  // Configuration for enabling ManagedDelivery
+  message Delivery {
+    google.protobuf.BoolValue enabled = 1;
   }
 }

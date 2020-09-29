@@ -99,6 +99,9 @@ pubsub:
 scheduler:
   cron:
     timezone: America/Chicago
+services:
+  keel:
+    enabled: true
 slack:
   baseUrl: https://slack.test/
   botName: my-bot

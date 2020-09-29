@@ -3,6 +3,8 @@ spinnaker:
     storageAccountKey: bXktYXpzLWFjY291bnQta2V5Cg==
     storageAccountName: my-azs-account-name
     storageContainerName: spinnaker
+  delivery:
+    enabled: true
   gcs:
     bucket: my-spinnaker-pipelines
     bucketLocation: us

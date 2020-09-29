@@ -55,6 +55,7 @@ func TestHalToServiceConfigs(t *testing.T) {
 		Monitoring:  convert.HalToMonitoring(h),
 		Orca:        convert.HalToOrca(h),
 		Rosco:       convert.HalToRosco(h),
+		Keel:        convert.HalToKeel(h),
 	}
 
 	if !proto.Equal(gotS, wantS) {
@@ -122,6 +123,10 @@ func TestHalToServiceIntegration(t *testing.T) {
 			"rosco.yml",
 			services.GetRosco(),
 		},
+		{
+			"keel.yml",
+			services.GetKeel(),
+		},
 	}
 
 	for _, tt := range halToServiceTests {
@@ -168,6 +173,7 @@ func TestHalToServiceYAML(t *testing.T) {
 		"kayenta.yml",
 		"orca.yml",
 		"rosco.yml",
+		"keel.yml",
 		"spinnaker-monitoring.yml",
 	}
 

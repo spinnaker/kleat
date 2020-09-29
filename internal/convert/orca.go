@@ -16,7 +16,10 @@
 
 package convert
 
-import "github.com/spinnaker/kleat/api/client/config"
+import (
+	"github.com/spinnaker/kleat/api/client/config"
+	"google.golang.org/protobuf/types/known/wrapperspb"
+)
 
 // HalToOrca generates the orca config for the supplied config.Hal h.
 func HalToOrca(h *config.Hal) *config.Orca {
@@ -25,6 +28,7 @@ func HalToOrca(h *config.Hal) *config.Orca {
 		PipelineTemplates: getPipelineTemplates(h),
 		Webhook:           h.GetWebhook(),
 		Services:          getOrcaServices(h),
+		Keel:              getKeelService(h),
 		Tasks:             getOrcaTasks(h),
 	}
 }
@@ -55,6 +59,19 @@ func getOrcaServices(h *config.Hal) *config.Orca_Services {
 			},
 		}
 	}
+
+	return nil
+}
+
+//TODO(nimak): see why service discovery cannot be used here
+func getKeelService(h *config.Hal) *config.ServiceSettings {
+	if h.GetManagedDelivery().GetEnabled().GetValue() {
+		return &config.ServiceSettings{
+			Enabled: wrapperspb.Bool(true),
+			BaseUrl: "${services.keel.baseUrl}",
+		}
+	}
+
 	return nil
 }
 

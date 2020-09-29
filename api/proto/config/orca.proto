@@ -15,6 +15,7 @@ message Orca {
   Defaults default = 3;
   Services services = 4;
   Tasks tasks = 5;
+  ServiceSettings keel = 6;
 
   // Configuration for the status of non-core services.
   message Services {

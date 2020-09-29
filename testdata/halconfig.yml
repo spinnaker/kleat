@@ -260,6 +260,13 @@ persistentStorage:
     rootFolder: my-root-folder
     secretAccessKey: my-secret-access-key
     serverSideEncryption: AES256
+  sql:
+    enabled: true
+    connectionPools:
+      default:
+        jdbcUrl: jdbc:mysql://localhost:3306/keel
+        user: user
+        password: password
 providers:
   appengine:
     accounts:
@@ -609,3 +616,11 @@ webhook:
     enabled: true
     trustStore: /var/secrets/webhook-keystore.jks
     trustStorePassword: abcdefg
+managedDelivery:
+  enabled: true
+  keel:
+    plugins:
+      ec2:
+        enabled: false
+      k8s:
+        enabled: true

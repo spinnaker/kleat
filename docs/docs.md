@@ -212,6 +212,7 @@
     - [Deck](#proto.config.Deck)
     - [Deck.Canary](#proto.config.Deck.Canary)
     - [Deck.Features](#proto.config.Deck.Features)
+    - [Deck.ManagedDelivery](#proto.config.Deck.ManagedDelivery)
     - [Deck.Notifications](#proto.config.Deck.Notifications)
     - [Deck.Providers](#proto.config.Deck.Providers)
     - [Deck.Providers.Appengine](#proto.config.Deck.Providers.Appengine)
@@ -241,6 +242,7 @@
     - [Echo](#proto.config.Echo)
     - [Echo.Scheduler](#proto.config.Echo.Scheduler)
     - [Echo.Scheduler.Cron](#proto.config.Echo.Scheduler.Cron)
+    - [Echo.Services](#proto.config.Echo.Services)
     - [Echo.Stats](#proto.config.Echo.Stats)
   
 - [config/fiat.proto](#config/fiat.proto)
@@ -248,6 +250,7 @@
   
 - [config/front50.proto](#config/front50.proto)
     - [Front50](#proto.config.Front50)
+    - [Front50.Delivery](#proto.config.Front50.Delivery)
     - [Front50.Spinnaker](#proto.config.Front50.Spinnaker)
   
 - [config/gate.proto](#config/gate.proto)
@@ -273,6 +276,24 @@
     - [Kayenta.ServiceIntegrations](#proto.config.Kayenta.ServiceIntegrations)
     - [Kayenta.ServiceIntegrations.Aws](#proto.config.Kayenta.ServiceIntegrations.Aws)
     - [Kayenta.ServiceIntegrations.Google](#proto.config.Kayenta.ServiceIntegrations.Google)
+  
+- [config/managed_delivery.proto](#config/managed_delivery.proto)
+    - [Eureka](#proto.config.Eureka)
+    - [Keel](#proto.config.Keel)
+    - [KeelConfig](#proto.config.KeelConfig)
+    - [KeelConfig.ArtifactRefresh](#proto.config.KeelConfig.ArtifactRefresh)
+    - [KeelConfig.Constraints](#proto.config.KeelConfig.Constraints)
+    - [KeelConfig.Constraints.InteractiveNotifications](#proto.config.KeelConfig.Constraints.InteractiveNotifications)
+    - [KeelConfig.Constraints.ManualJudgement](#proto.config.KeelConfig.Constraints.ManualJudgement)
+    - [KeelConfig.Plugins](#proto.config.KeelConfig.Plugins)
+    - [KeelConfig.Plugins.Bakery](#proto.config.KeelConfig.Plugins.Bakery)
+    - [KeelConfig.Plugins.Bakery.BaseImage](#proto.config.KeelConfig.Plugins.Bakery.BaseImage)
+    - [KeelConfig.Plugins.DeliveryConfig](#proto.config.KeelConfig.Plugins.DeliveryConfig)
+    - [KeelConfig.Plugins.EC2](#proto.config.KeelConfig.Plugins.EC2)
+    - [KeelConfig.Plugins.Kubernetes](#proto.config.KeelConfig.Plugins.Kubernetes)
+    - [KeelConfig.Plugins.Titus](#proto.config.KeelConfig.Plugins.Titus)
+    - [KeelConfig.ResourceCheck](#proto.config.KeelConfig.ResourceCheck)
+    - [ManagedDelivery](#proto.config.ManagedDelivery)
   
 - [config/monitoring.proto](#config/monitoring.proto)
     - [Monitoring](#proto.config.Monitoring)
@@ -3378,6 +3399,7 @@ Wrapper for serialized config files for Spinnaker microservices.
 | version | [string](#string) |  | Spinnaker version. |
 | defaultTimeZone | [string](#string) |  | Default time zone in which to display timestamps in the UI. |
 | feature | [Deck.Features](#proto.config.Deck.Features) |  | Configuration for UI-related feature flags. |
+| managedDelivery | [Deck.ManagedDelivery](#proto.config.Deck.ManagedDelivery) |  | Configuration for ManagedDelivery |
 
 
 
@@ -3417,6 +3439,23 @@ Configuration for UI-related feature flags.
 | chaosMonkey | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable Chaos Monkey support. For this to work, you&#39;ll need a running Chaos Monkey deployment. See https://github.com/Netflix/chaosmonkey/wiki. |
 | fiatEnabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether authz is enabled. |
 | managedPipelineTemplatesV2UI | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable managed pipeline templates v2 UI support. |
+| managedDelivery | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable managed delivery in the UI |
+| managedResources | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable managed resources in the UI |
+
+
+
+
+
+
+<a name="proto.config.Deck.ManagedDelivery"></a>
+
+### Deck.ManagedDelivery
+Configuration for ManagedDelivery
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| manifestBasePath | [string](#string) |  | Path to where to read managed delivery config from |
 
 
 
@@ -3822,6 +3861,7 @@ Configuration for the echo microservice.
 | stats | [Echo.Stats](#proto.config.Echo.Stats) |  |  |
 | scheduler | [Echo.Scheduler](#proto.config.Echo.Scheduler) |  |  |
 | microsoftteams | [proto.notification.MicrosoftTeams](#proto.notification.MicrosoftTeams) |  |  |
+| services | [Echo.Services](#proto.config.Echo.Services) |  | Configuration for the status of non-core services. |
 
 
 
@@ -3852,6 +3892,21 @@ Cron configuration.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | timezone | [string](#string) |  | Default timezone. Defaults to `America/Los_Angeles`. |
+
+
+
+
+
+
+<a name="proto.config.Echo.Services"></a>
+
+### Echo.Services
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| keel | [ServiceSettings](#proto.config.ServiceSettings) |  |  |
 
 
 
@@ -3939,6 +3994,21 @@ Configuration for the front50 microservice.
 
 
 
+<a name="proto.config.Front50.Delivery"></a>
+
+### Front50.Delivery
+Configuration for enabling ManagedDelivery
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  |  |
+
+
+
+
+
+
 <a name="proto.config.Front50.Spinnaker"></a>
 
 ### Front50.Spinnaker
@@ -3951,6 +4021,7 @@ Configuration for the front50 microservice.
 | azs | [proto.storage.Azs](#proto.storage.Azs) |  |  |
 | oracle | [proto.storage.Oracle](#proto.storage.Oracle) |  |  |
 | s3 | [proto.storage.S3](#proto.storage.S3) |  |  |
+| delivery | [Front50.Delivery](#proto.config.Front50.Delivery) |  |  |
 
 
 
@@ -4143,6 +4214,7 @@ Configuration for a Spinnaker installation.
 | repository | [proto.repository.Repository](#proto.repository.Repository) |  |  |
 | metricStores | [proto.metricstores.MetricStores](#proto.metricstores.MetricStores) |  | Configuration for the Spinnaker monitoring daemon metric stores. |
 | spinnaker | [proto.spinnaker.Spinnaker](#proto.spinnaker.Spinnaker) |  |  |
+| managedDelivery | [ManagedDelivery](#proto.config.ManagedDelivery) |  | Configuration for ManagedDelivery&#39;s Keel component |
 
 
 
@@ -4313,6 +4385,277 @@ Configuration for the Kayenta microservice.
 
 
 
+<a name="config/managed_delivery.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## config/managed_delivery.proto
+
+
+
+<a name="proto.config.Eureka"></a>
+
+### Eureka
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether this persistent store is enabled. |
+
+
+
+
+
+
+<a name="proto.config.Keel"></a>
+
+### Keel
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| keel | [KeelConfig](#proto.config.KeelConfig) |  | Keel specific configuration |
+| eureka | [Eureka](#proto.config.Eureka) |  | Service discovery done through Eureka |
+| sql | [proto.storage.SQL](#proto.storage.SQL) |  | Datastore used for keeping Keel data |
+
+
+
+
+
+
+<a name="proto.config.KeelConfig"></a>
+
+### KeelConfig
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| plugins | [KeelConfig.Plugins](#proto.config.KeelConfig.Plugins) |  | Managed Delivery plugins to be enabled |
+| resourceCheck | [KeelConfig.ResourceCheck](#proto.config.KeelConfig.ResourceCheck) |  | duration string format (eg. 10s) |
+| artifactRefresh | [KeelConfig.ArtifactRefresh](#proto.config.KeelConfig.ArtifactRefresh) |  | in ISO 8601 format |
+| constraints | [KeelConfig.Constraints](#proto.config.KeelConfig.Constraints) |  | constraints pertinent to actions to be done to the pipeline |
+
+
+
+
+
+
+<a name="proto.config.KeelConfig.ArtifactRefresh"></a>
+
+### KeelConfig.ArtifactRefresh
+Frequency of refreshing keel artifacts
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| frequency | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="proto.config.KeelConfig.Constraints"></a>
+
+### KeelConfig.Constraints
+Constraints on sending system information
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| manualJudgement | [KeelConfig.Constraints.ManualJudgement](#proto.config.KeelConfig.Constraints.ManualJudgement) |  |  |
+
+
+
+
+
+
+<a name="proto.config.KeelConfig.Constraints.InteractiveNotifications"></a>
+
+### KeelConfig.Constraints.InteractiveNotifications
+Enable notification
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  |  |
+
+
+
+
+
+
+<a name="proto.config.KeelConfig.Constraints.ManualJudgement"></a>
+
+### KeelConfig.Constraints.ManualJudgement
+ManualJudgement notification configuration
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| interactiveNotifactions | [KeelConfig.Constraints.InteractiveNotifications](#proto.config.KeelConfig.Constraints.InteractiveNotifications) |  | Notification where manual judgement is required |
+
+
+
+
+
+
+<a name="proto.config.KeelConfig.Plugins"></a>
+
+### KeelConfig.Plugins
+ManagedDelivery plugins
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| bakery | [KeelConfig.Plugins.Bakery](#proto.config.KeelConfig.Plugins.Bakery) |  |  |
+| deliveryConfig | [KeelConfig.Plugins.DeliveryConfig](#proto.config.KeelConfig.Plugins.DeliveryConfig) |  |  |
+| ec2 | [KeelConfig.Plugins.EC2](#proto.config.KeelConfig.Plugins.EC2) |  |  |
+| k8s | [KeelConfig.Plugins.Kubernetes](#proto.config.KeelConfig.Plugins.Kubernetes) |  |  |
+| titus | [KeelConfig.Plugins.Titus](#proto.config.KeelConfig.Plugins.Titus) |  |  |
+
+
+
+
+
+
+<a name="proto.config.KeelConfig.Plugins.Bakery"></a>
+
+### KeelConfig.Plugins.Bakery
+Bakery plugin
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  |  |
+| baseImages | [KeelConfig.Plugins.Bakery.BaseImage](#proto.config.KeelConfig.Plugins.Bakery.BaseImage) | repeated |  |
+
+
+
+
+
+
+<a name="proto.config.KeelConfig.Plugins.Bakery.BaseImage"></a>
+
+### KeelConfig.Plugins.Bakery.BaseImage
+BaseImage information
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| candidate | [string](#string) |  |  |
+| unstable | [string](#string) |  |  |
+| relase | [string](#string) |  |  |
+| previous | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="proto.config.KeelConfig.Plugins.DeliveryConfig"></a>
+
+### KeelConfig.Plugins.DeliveryConfig
+Enable delivery configuration
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  |  |
+
+
+
+
+
+
+<a name="proto.config.KeelConfig.Plugins.EC2"></a>
+
+### KeelConfig.Plugins.EC2
+EC2 plugin
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  |  |
+
+
+
+
+
+
+<a name="proto.config.KeelConfig.Plugins.Kubernetes"></a>
+
+### KeelConfig.Plugins.Kubernetes
+Kubernetes plugin
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  |  |
+
+
+
+
+
+
+<a name="proto.config.KeelConfig.Plugins.Titus"></a>
+
+### KeelConfig.Plugins.Titus
+Titus plugin
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  |  |
+
+
+
+
+
+
+<a name="proto.config.KeelConfig.ResourceCheck"></a>
+
+### KeelConfig.ResourceCheck
+Frequency of checking keel resources
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| minAgeDuration | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="proto.config.ManagedDelivery"></a>
+
+### ManagedDelivery
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether ManagedDelivery is enabled. |
+| eureka | [Eureka](#proto.config.Eureka) |  | Service discovery done through Eureka |
+| keel | [KeelConfig](#proto.config.KeelConfig) |  | Keel specific configuration |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
 <a name="config/monitoring.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -4403,6 +4746,7 @@ Configuration for the Orca microservice.
 | default | [Orca.Defaults](#proto.config.Orca.Defaults) |  |  |
 | services | [Orca.Services](#proto.config.Orca.Services) |  |  |
 | tasks | [Orca.Tasks](#proto.config.Orca.Tasks) |  |  |
+| keel | [ServiceSettings](#proto.config.ServiceSettings) |  |  |
 
 
 
@@ -4602,6 +4946,7 @@ Configuration for Spinnaker&#39;s microservices.
 | deckEnv | [DeckEnv](#proto.config.DeckEnv) |  |  |
 | igor | [Igor](#proto.config.Igor) |  |  |
 | monitoring | [Monitoring](#proto.config.Monitoring) |  |  |
+| keel | [Keel](#proto.config.Keel) |  |  |
 
 
 
@@ -6282,6 +6627,7 @@ Configuration of Spinnaker&#39;s persistent storage.
 | azs | [Azs](#proto.storage.Azs) |  |  |
 | oracle | [Oracle](#proto.storage.Oracle) |  |  |
 | s3 | [S3](#proto.storage.S3) |  |  |
+| sql | [SQL](#proto.storage.SQL) |  |  |
 
 
 

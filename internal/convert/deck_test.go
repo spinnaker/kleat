@@ -269,6 +269,31 @@ var deckTests = configTest{
 				Providers:     &config.Deck_Providers{},
 			},
 		},
+		{
+			"Enable ManagedDelivery",
+			&config.Hal{
+				ManagedDelivery: &config.ManagedDelivery{
+					Enabled: wrapperspb.Bool(true),
+				},
+			},
+			&config.Deck{
+				GateUrl:         "http://localhost:8084",
+				AuthEndpoint:    "http://localhost:8084/auth/user",
+				BakeryDetailUrl: "http://localhost:8084/bakery/logs/{{context.region}}/{{context.status.resourceId}}",
+				Canary: &config.Deck_Canary{
+					FeatureDisabled: wrapperspb.Bool(true),
+				},
+				ManagedDelivery: &config.Deck_ManagedDelivery{
+					ManifestBasePath: ".spinnaker",
+				},
+				Feature: &config.Deck_Features{
+					ManagedDelivery:  wrapperspb.Bool(true),
+					ManagedResources: wrapperspb.Bool(true),
+				},
+				Notifications: &config.Deck_Notifications{},
+				Providers:     &config.Deck_Providers{},
+			},
+		},
 	},
 }
 

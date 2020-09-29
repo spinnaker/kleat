@@ -39,6 +39,7 @@ func HalToDeck(h *config.Hal) *config.Deck {
 		Notifications:   getDeckNotificationsConfig(h),
 		Providers:       getDeckProvidersConfig(h),
 		Version:         h.GetVersion(),
+		ManagedDelivery: getManagedDelivery(h),
 	}
 }
 
@@ -51,6 +52,16 @@ func getGateURL(h *config.Hal) string {
 		scheme = "https"
 	}
 	return fmt.Sprintf("%s://localhost:8084", scheme)
+}
+
+func getManagedDelivery(h *config.Hal) *config.Deck_ManagedDelivery {
+	if !h.GetManagedDelivery().GetEnabled().GetValue() {
+		return nil
+	}
+
+	return &config.Deck_ManagedDelivery{
+		ManifestBasePath: ".spinnaker",
+	}
 }
 
 func getDeckCanaryConfig(h *config.Hal) *config.Deck_Canary {
@@ -71,6 +82,9 @@ func getDeckFeaturesConfig(h *config.Hal) *config.Deck_Features {
 		ChaosMonkey:                  h.GetFeatures().GetChaos(),
 		FiatEnabled:                  h.GetSecurity().GetAuthz().GetEnabled(),
 		ManagedPipelineTemplatesV2UI: h.GetFeatures().GetManagedPipelineTemplatesV2UI(),
+
+		ManagedDelivery:  h.GetManagedDelivery().GetEnabled(),
+		ManagedResources: h.GetManagedDelivery().GetEnabled(),
 	}
 }
 

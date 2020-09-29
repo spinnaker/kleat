@@ -1,0 +1,113 @@
+syntax = "proto3";
+package proto.config;
+
+option go_package = "github.com/spinnaker/kleat/api/client/config";
+
+import "google/protobuf/wrappers.proto";
+import "storage/sql.proto";
+
+message ManagedDelivery {
+  // Whether ManagedDelivery is enabled.
+    google.protobuf.BoolValue enabled = 1;
+    // Service discovery done through Eureka
+    Eureka eureka = 2;
+    // Keel specific configuration
+    KeelConfig keel = 3;
+
+}
+
+message Keel {
+    // Keel specific configuration
+    KeelConfig keel = 1;
+
+    // Service discovery done through Eureka
+    Eureka eureka = 2;
+
+    // Datastore used for keeping Keel data
+    storage.SQL sql = 3;
+}
+
+message Eureka {
+    // Whether this persistent store is enabled.
+    google.protobuf.BoolValue enabled = 1;
+}
+
+message KeelConfig {
+    // Managed Delivery plugins to be enabled
+    Plugins plugins = 1;
+    // duration string format (eg. 10s)
+    ResourceCheck resourceCheck = 2;
+    // in ISO 8601 format
+    ArtifactRefresh artifactRefresh = 3 [json_name = "artifact-refresh"];
+    // constraints pertinent to actions to be done to the pipeline
+    Constraints constraints = 4;
+
+    // Frequency of checking keel resources
+    message ResourceCheck {
+        string minAgeDuration = 1;
+    }
+
+    // Constraints on sending system information
+    message Constraints {
+        ManualJudgement manualJudgement = 1 [json_name = "manual-judgement"];
+
+        // ManualJudgement notification configuration
+        message ManualJudgement {
+            // Notification where manual judgement is required
+            InteractiveNotifications interactiveNotifactions = 1 [json_name = "interactive-notifications"];
+        }
+
+        // Enable notification
+        message InteractiveNotifications {
+            google.protobuf.BoolValue enabled = 1;
+        }
+    }
+
+    // Frequency of refreshing keel artifacts
+    message ArtifactRefresh {
+        string frequency = 1;
+    }
+
+    // ManagedDelivery plugins
+    message Plugins {
+      Bakery bakery = 1;
+      DeliveryConfig deliveryConfig = 2;
+      EC2 ec2 = 3;
+      Kubernetes k8s = 4;
+      Titus titus = 5;
+
+      // Bakery plugin
+      message Bakery {
+        google.protobuf.BoolValue enabled = 1;
+        repeated BaseImage baseImages = 2;
+
+        // BaseImage information
+        message BaseImage {
+          string candidate = 1;
+          string unstable = 2;
+          string relase = 3;
+          string previous = 4;
+        }
+      }
+
+      // Enable delivery configuration
+      message DeliveryConfig {
+        google.protobuf.BoolValue enabled = 1;
+      }
+
+      // EC2 plugin
+      message EC2 {
+        google.protobuf.BoolValue enabled = 1;
+      }
+
+      // Kubernetes plugin
+      message Kubernetes {
+        google.protobuf.BoolValue enabled = 1;
+      }
+
+      // Titus plugin
+      message Titus {
+        google.protobuf.BoolValue enabled = 1;
+      }
+    }
+}

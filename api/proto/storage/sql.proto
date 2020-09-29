@@ -28,7 +28,7 @@ message SQL {
       string jdbcUrl = 3;
       // Database connection timeout in milliseconds
       int32 connectionTimeout = 4;
-      // maxLifetime controls the maximum lifetime of a connection in 
+      // maxLifetime controls the maximum lifetime of a connection in
       // the pool in milliseconds.
       int32 maxLifetime = 5;
       // Maximum number of connections stored in the connection pool

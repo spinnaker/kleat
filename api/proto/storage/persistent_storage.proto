@@ -7,6 +7,7 @@ import "storage/azs.proto";
 import "storage/gcs.proto";
 import "storage/oracle.proto";
 import "storage/s3.proto";
+import "storage/sql.proto";
 
 // Configuration of Spinnaker's persistent storage.
 message PersistentStorage {
@@ -14,4 +15,5 @@ message PersistentStorage {
     Azs azs = 2;
     Oracle oracle = 3;
     S3 s3 = 4;
+    SQL sql = 5;
 }

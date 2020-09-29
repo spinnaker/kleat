@@ -17,6 +17,7 @@ import "canary/canary.proto";
 import "repository/repository.proto";
 import "metricstores/metricstores.proto";
 import "spinnaker/extensibility.proto";
+import "config/managed_delivery.proto";
 
 // Configuration for a Spinnaker installation.
 message Hal {
@@ -45,4 +46,6 @@ message Hal {
   metricstores.MetricStores metricStores = 15;
 
   spinnaker.Spinnaker spinnaker = 16;
+  // Configuration for ManagedDelivery's Keel component
+  ManagedDelivery managedDelivery = 17;
 }

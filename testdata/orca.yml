@@ -1,6 +1,9 @@
 default:
   bake:
     account: my-aws-account
+keel:
+  baseUrl: ${services.keel.baseUrl}
+  enabled: true
 pipelineTemplates:
   enabled: true
 services:

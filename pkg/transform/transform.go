@@ -42,6 +42,7 @@ func HalToServiceConfigs(h *config.Hal) *config.Services {
 		DeckEnv:     convert.HalToDeckEnv(h),
 		Igor:        convert.HalToIgor(h),
 		Monitoring:  convert.HalToMonitoring(h),
+		Keel:        convert.HalToKeel(h),
 	}
 }
 
@@ -111,6 +112,11 @@ func GenerateConfigFiles(s *config.Services) (*config.ConfigFiles, error) {
 		{
 			"spinnaker-monitoring.yml",
 			s.GetMonitoring(),
+			serializer.Yaml,
+		},
+		{
+			"keel.yml",
+			s.GetKeel(),
 			serializer.Yaml,
 		},
 	}
