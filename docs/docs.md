@@ -424,6 +424,11 @@
   
     - [S3ServerSideEncryption](#proto.storage.S3ServerSideEncryption)
   
+- [storage/sql.proto](#storage/sql.proto)
+    - [SQL](#proto.storage.SQL)
+    - [SQL.ConnectionPool](#proto.storage.SQL.ConnectionPool)
+    - [SQL.ConnectionPools](#proto.storage.SQL.ConnectionPools)
+  
 - [Scalar Value Types](#scalar-value-types)
 
 
@@ -6179,6 +6184,73 @@ the &#39;x-amz-server-side-encryption&#39; header.
 | AES256 | 1 | Amazon S3-managed encryption keys, equivalent to a header value of &#39;AES256&#39;. |
 | AWSKMS | 2 | AWS KMS-managed encryption keys, equivalent to a header value of &#39;aws:kms&#39;. |
 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="storage/sql.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## storage/sql.proto
+
+
+
+<a name="proto.storage.SQL"></a>
+
+### SQL
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether this persistent store is enabled. |
+| connectionPools | [SQL.ConnectionPools](#proto.storage.SQL.ConnectionPools) |  | Default database connection pool. |
+
+
+
+
+
+
+<a name="proto.storage.SQL.ConnectionPool"></a>
+
+### SQL.ConnectionPool
+ConnectionPool confifugration for the SQL server
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user | [string](#string) |  | Database username |
+| password | [string](#string) |  | Database password |
+| jdbcUrl | [string](#string) |  | Database connection string. This needs to include server port and database name as well |
+| connectionTimeout | [int32](#int32) |  | Database connection timeout in milliseconds |
+| maxLifetime | [int32](#int32) |  | maxLifetime controls the maximum lifetime of a connection in the pool in milliseconds. |
+| maxPoolSize | [int32](#int32) |  | Maximum number of connections stored in the connection pool |
+
+
+
+
+
+
+<a name="proto.storage.SQL.ConnectionPools"></a>
+
+### SQL.ConnectionPools
+The default connection pool
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| default | [SQL.ConnectionPool](#proto.storage.SQL.ConnectionPool) |  |  |
+
+
+
+
+
+ 
 
  
 
