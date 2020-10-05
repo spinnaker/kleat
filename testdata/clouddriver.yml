@@ -95,6 +95,7 @@ aws:
     name: my-aws-account
     regions:
     - name: myregion
+    externalId: externalid
   bakeryDefaults:
     awsAccessKey: key
     awsAssociatePublicIpAddress: true

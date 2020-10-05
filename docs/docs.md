@@ -2084,6 +2084,7 @@ Configuration for an AWS account.
 | lifecycleHooks | [AwsLifecycleHook](#proto.cloudprovider.AwsLifecycleHook) | repeated | List of configured AWS lifecycle hooks. |
 | regions | [AwsRegion](#proto.cloudprovider.AwsRegion) | repeated | List of configured AWS regions. |
 | name | [string](#string) |  | The name of the account. |
+| externalId | [string](#string) |  | Optional parameter used to identify and control access to AWS resources. Set this to the same value as the ExternalID parameter in the trust policy for the role you want to assume. |
 
 
 
