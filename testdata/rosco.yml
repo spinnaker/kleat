@@ -6,6 +6,7 @@ aws:
     discovery: discovery
     edda: edda
     environment: env
+    externalId: externalid
     lifecycleHooks:
     - defaultResult: ABANDON
       heartbeatTimeout: 12
