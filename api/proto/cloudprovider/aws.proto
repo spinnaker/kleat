@@ -98,8 +98,8 @@ message AwsAccount {
     // The name of the account.
     string name = 13;
 
-	  // Optional parameter used to identify and control access to AWS resources.
-	  // Set this to the same value as the ExternalID parameter in the trust policy for the role you want to assume.
+    // Optional parameter used to identify and control access to AWS resources.
+    // Set this to the same value as the ExternalID parameter in the trust policy for the role you want to assume.
     string externalId = 14;
 }
 
