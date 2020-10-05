@@ -277,6 +277,7 @@ providers:
       discovery: discovery
       edda: edda
       environment: env
+      externalId: externalid
       lifecycleHooks:
       - defaultResult: ABANDON
         heartbeatTimeout: 12
@@ -286,7 +287,6 @@ providers:
       name: my-aws-account
       regions:
       - name: myregion
-      externalId: externalid
     bakeryDefaults:
       awsAccessKey: key
       awsAssociatePublicIpAddress: true
