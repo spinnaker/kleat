@@ -19,11 +19,12 @@ package convert_test
 import (
 	"testing"
 
+	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/wrapperspb"
+
 	"github.com/spinnaker/kleat/api/client/config"
 	"github.com/spinnaker/kleat/api/client/storage"
 	"github.com/spinnaker/kleat/internal/convert"
-	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 var keelTests = configTest{

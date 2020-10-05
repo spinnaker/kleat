@@ -17,8 +17,9 @@
 package convert
 
 import (
-	"github.com/spinnaker/kleat/api/client/config"
 	"google.golang.org/protobuf/types/known/wrapperspb"
+
+	"github.com/spinnaker/kleat/api/client/config"
 )
 
 // HalToOrca generates the orca config for the supplied config.Hal h.
