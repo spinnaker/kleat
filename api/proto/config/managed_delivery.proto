@@ -13,7 +13,6 @@ message ManagedDelivery {
     Eureka eureka = 2;
     // Keel specific configuration
     KeelConfig keel = 3;
-
 }
 
 message Keel {
@@ -35,11 +34,11 @@ message Eureka {
 message KeelConfig {
     // Managed Delivery plugins to be enabled
     Plugins plugins = 1;
-    // duration string format (eg. 10s)
+    // Frequency of checking keel resources in duration string format (eg. 10s)
     ResourceCheck resourceCheck = 2;
-    // in ISO 8601 format
-    ArtifactRefresh artifactRefresh = 3 [json_name = "artifact-refresh"];
-    // constraints pertinent to actions to be done to the pipeline
+    // Frequency of refreshing keel artifacts in ISO 8601 format
+    ArtifactRefresh artifactRefresh = 3;
+    // Constraints pertinent to actions to be done to the pipeline
     Constraints constraints = 4;
 
     // Frequency of checking keel resources
@@ -49,12 +48,12 @@ message KeelConfig {
 
     // Constraints on sending system information
     message Constraints {
-        ManualJudgement manualJudgement = 1 [json_name = "manual-judgement"];
+        ManualJudgement manualJudgement = 1;
 
         // ManualJudgement notification configuration
         message ManualJudgement {
             // Notification where manual judgement is required
-            InteractiveNotifications interactiveNotifactions = 1 [json_name = "interactive-notifications"];
+            InteractiveNotifications interactiveNotifactions = 1;
         }
 
         // Enable notification

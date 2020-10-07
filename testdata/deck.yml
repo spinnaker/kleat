@@ -16,8 +16,6 @@ feature:
   managedPipelineTemplatesV2UI: true
   pipelineTemplates: true
 gateUrl: https://spinnaker.test:8084
-managedDelivery:
-  manifestBasePath: .spinnaker
 notifications:
   githubStatus:
     enabled: true

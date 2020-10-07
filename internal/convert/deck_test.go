@@ -283,9 +283,6 @@ var deckTests = configTest{
 				Canary: &config.Deck_Canary{
 					FeatureDisabled: wrapperspb.Bool(true),
 				},
-				ManagedDelivery: &config.Deck_ManagedDelivery{
-					ManifestBasePath: ".spinnaker",
-				},
 				Feature: &config.Deck_Features{
 					ManagedDelivery:  wrapperspb.Bool(true),
 					ManagedResources: wrapperspb.Bool(true),

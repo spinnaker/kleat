@@ -212,7 +212,6 @@
     - [Deck](#proto.config.Deck)
     - [Deck.Canary](#proto.config.Deck.Canary)
     - [Deck.Features](#proto.config.Deck.Features)
-    - [Deck.ManagedDelivery](#proto.config.Deck.ManagedDelivery)
     - [Deck.Notifications](#proto.config.Deck.Notifications)
     - [Deck.Providers](#proto.config.Deck.Providers)
     - [Deck.Providers.Appengine](#proto.config.Deck.Providers.Appengine)
@@ -3399,7 +3398,6 @@ Wrapper for serialized config files for Spinnaker microservices.
 | version | [string](#string) |  | Spinnaker version. |
 | defaultTimeZone | [string](#string) |  | Default time zone in which to display timestamps in the UI. |
 | feature | [Deck.Features](#proto.config.Deck.Features) |  | Configuration for UI-related feature flags. |
-| managedDelivery | [Deck.ManagedDelivery](#proto.config.Deck.ManagedDelivery) |  | Configuration for ManagedDelivery |
 
 
 
@@ -3441,21 +3439,6 @@ Configuration for UI-related feature flags.
 | managedPipelineTemplatesV2UI | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable managed pipeline templates v2 UI support. |
 | managedDelivery | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable managed delivery in the UI |
 | managedResources | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Enable managed resources in the UI |
-
-
-
-
-
-
-<a name="proto.config.Deck.ManagedDelivery"></a>
-
-### Deck.ManagedDelivery
-Configuration for ManagedDelivery
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| manifestBasePath | [string](#string) |  | Path to where to read managed delivery config from |
 
 
 
@@ -4433,9 +4416,9 @@ Configuration for the Kayenta microservice.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | plugins | [KeelConfig.Plugins](#proto.config.KeelConfig.Plugins) |  | Managed Delivery plugins to be enabled |
-| resourceCheck | [KeelConfig.ResourceCheck](#proto.config.KeelConfig.ResourceCheck) |  | duration string format (eg. 10s) |
-| artifactRefresh | [KeelConfig.ArtifactRefresh](#proto.config.KeelConfig.ArtifactRefresh) |  | in ISO 8601 format |
-| constraints | [KeelConfig.Constraints](#proto.config.KeelConfig.Constraints) |  | constraints pertinent to actions to be done to the pipeline |
+| resourceCheck | [KeelConfig.ResourceCheck](#proto.config.KeelConfig.ResourceCheck) |  | Frequency of checking keel resources in duration string format (eg. 10s) |
+| artifactRefresh | [KeelConfig.ArtifactRefresh](#proto.config.KeelConfig.ArtifactRefresh) |  | Frequency of refreshing keel artifacts in ISO 8601 format |
+| constraints | [KeelConfig.Constraints](#proto.config.KeelConfig.Constraints) |  | Constraints pertinent to actions to be done to the pipeline |
 
 
 
