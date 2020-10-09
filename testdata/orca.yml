@@ -1,13 +1,12 @@
 default:
   bake:
     account: my-aws-account
-keel:
-  baseUrl: ${services.keel.baseUrl}
-  enabled: true
 pipelineTemplates:
   enabled: true
 services:
   kayenta:
+    enabled: true
+  keel:
     enabled: true
 tasks:
   executionWindow:

@@ -134,12 +134,15 @@ var keelTests = configTest{
 				PersistentStorage: &storage.PersistentStorage{
 					Sql: &storage.SQL{
 						Enabled: wrapperspb.Bool(true),
-						ConnectionPools: &storage.SQL_ConnectionPools{
-							Default: &storage.SQL_ConnectionPool{
-								User:     "username",
-								Password: "password",
-								JdbcUrl:  "jdbc:mysql://somehost:3306/db",
-							},
+						Default: &storage.ConnectionPool{
+							User:     "defaultuser",
+							Password: "defaultpass",
+							JdbcUrl:  "jdbc:mysql://somehost:3306/defaultdb",
+						},
+						Migration: &storage.ConnectionPool{
+							User:     "migrationuser",
+							Password: "migrationpass",
+							JdbcUrl:  "jdbc:mysql://somehost:3306/migrationdb",
 						},
 					},
 				},
@@ -148,14 +151,19 @@ var keelTests = configTest{
 				},
 			},
 			&config.Keel{
-				Sql: &storage.SQL{
+				Sql: &config.Keel_SQL{
 					Enabled: wrapperspb.Bool(true),
-					ConnectionPools: &storage.SQL_ConnectionPools{
-						Default: &storage.SQL_ConnectionPool{
-							User:     "username",
-							Password: "password",
-							JdbcUrl:  "jdbc:mysql://somehost:3306/db",
+					ConnectionPools: &storage.ConnectionPools{
+						Default: &storage.ConnectionPool{
+							User:     "defaultuser",
+							Password: "defaultpass",
+							JdbcUrl:  "jdbc:mysql://somehost:3306/defaultdb",
 						},
+					},
+					Migration: &storage.ConnectionPool{
+						User:     "migrationuser",
+						Password: "migrationpass",
+						JdbcUrl:  "jdbc:mysql://somehost:3306/migrationdb",
 					},
 				},
 			},

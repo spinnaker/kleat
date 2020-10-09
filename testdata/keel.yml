@@ -7,7 +7,11 @@ keel:
 sql:
   connectionPools:
     default:
-      jdbcUrl: jdbc:mysql://localhost:3306/keel
-      password: password
-      user: user
+      jdbcUrl: jdbc:mysql://localhost:3306/defaultdb
+      password: defaultpass
+      user: defaultuser
   enabled: true
+  migration:
+    jdbcUrl: jdbc:mysql://localhost:3306/migrationdb
+    password: migrationpass
+    user: migrationuser

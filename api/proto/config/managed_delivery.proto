@@ -23,7 +23,19 @@ message Keel {
     Eureka eureka = 2;
 
     // Datastore used for keeping Keel data
-    storage.SQL sql = 3;
+    SQL sql = 3;
+
+    // Datastore configuration to be used with keel
+    message SQL {
+      // Whether this persistent store is enabled.
+      google.protobuf.BoolValue enabled = 1;
+
+      // connection pools configuration for the primary database
+      storage.ConnectionPools connectionPools = 2;
+
+      // connection pools configuration for the migration database
+      storage.ConnectionPool  migration = 3;
+    }
 }
 
 message Eureka {

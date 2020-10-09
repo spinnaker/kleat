@@ -262,11 +262,14 @@ persistentStorage:
     serverSideEncryption: AES256
   sql:
     enabled: true
-    connectionPools:
-      default:
-        jdbcUrl: jdbc:mysql://localhost:3306/keel
-        user: user
-        password: password
+    default:
+      jdbcUrl: jdbc:mysql://localhost:3306/defaultdb
+      user: defaultuser
+      password: defaultpass
+    migration:
+      jdbcUrl: jdbc:mysql://localhost:3306/migrationdb
+      user: migrationuser
+      password: migrationpass
 providers:
   appengine:
     accounts:

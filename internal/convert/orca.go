@@ -17,8 +17,6 @@
 package convert
 
 import (
-	"google.golang.org/protobuf/types/known/wrapperspb"
-
 	"github.com/spinnaker/kleat/api/client/config"
 )
 
@@ -29,7 +27,6 @@ func HalToOrca(h *config.Hal) *config.Orca {
 		PipelineTemplates: getPipelineTemplates(h),
 		Webhook:           h.GetWebhook(),
 		Services:          getOrcaServices(h),
-		Keel:              getKeelService(h),
 		Tasks:             getOrcaTasks(h),
 	}
 }
@@ -53,27 +50,26 @@ func getPipelineTemplates(h *config.Hal) *config.Orca_PipelineTemplates {
 }
 
 func getOrcaServices(h *config.Hal) *config.Orca_Services {
+
+	if !h.GetCanary().GetEnabled().GetValue() &&
+		!h.GetManagedDelivery().GetEnabled().GetValue() {
+		return nil
+	}
+
+	cfg := &config.Orca_Services{}
 	if h.GetCanary().GetEnabled().GetValue() {
-		return &config.Orca_Services{
-			Kayenta: &config.ServiceSettings{
-				Enabled: h.GetCanary().GetEnabled(),
-			},
+		cfg.Kayenta = &config.ServiceSettings{
+			Enabled: h.GetCanary().GetEnabled(),
 		}
 	}
 
-	return nil
-}
-
-//TODO(nimak): see why service discovery cannot be used here
-func getKeelService(h *config.Hal) *config.ServiceSettings {
 	if h.GetManagedDelivery().GetEnabled().GetValue() {
-		return &config.ServiceSettings{
-			Enabled: wrapperspb.Bool(true),
-			BaseUrl: "${services.keel.baseUrl}",
+		cfg.Keel = &config.ServiceSettings{
+			Enabled: h.GetManagedDelivery().GetEnabled(),
 		}
 	}
 
-	return nil
+	return cfg
 }
 
 func getOrcaTasks(h *config.Hal) *config.Orca_Tasks {

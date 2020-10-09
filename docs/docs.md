@@ -279,6 +279,7 @@
 - [config/managed_delivery.proto](#config/managed_delivery.proto)
     - [Eureka](#proto.config.Eureka)
     - [Keel](#proto.config.Keel)
+    - [Keel.SQL](#proto.config.Keel.SQL)
     - [KeelConfig](#proto.config.KeelConfig)
     - [KeelConfig.ArtifactRefresh](#proto.config.KeelConfig.ArtifactRefresh)
     - [KeelConfig.Constraints](#proto.config.KeelConfig.Constraints)
@@ -456,9 +457,9 @@
     - [S3ServerSideEncryption](#proto.storage.S3ServerSideEncryption)
   
 - [storage/sql.proto](#storage/sql.proto)
+    - [ConnectionPool](#proto.storage.ConnectionPool)
+    - [ConnectionPools](#proto.storage.ConnectionPools)
     - [SQL](#proto.storage.SQL)
-    - [SQL.ConnectionPool](#proto.storage.SQL.ConnectionPool)
-    - [SQL.ConnectionPools](#proto.storage.SQL.ConnectionPools)
   
 - [Scalar Value Types](#scalar-value-types)
 
@@ -3884,12 +3885,12 @@ Cron configuration.
 <a name="proto.config.Echo.Services"></a>
 
 ### Echo.Services
-
+Configuration for the status of non-core services.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| keel | [ServiceSettings](#proto.config.ServiceSettings) |  |  |
+| keel | [ServiceSettings](#proto.config.ServiceSettings) |  | Enabling keel for the echo service |
 
 
 
@@ -4400,7 +4401,24 @@ Configuration for the Kayenta microservice.
 | ----- | ---- | ----- | ----------- |
 | keel | [KeelConfig](#proto.config.KeelConfig) |  | Keel specific configuration |
 | eureka | [Eureka](#proto.config.Eureka) |  | Service discovery done through Eureka |
-| sql | [proto.storage.SQL](#proto.storage.SQL) |  | Datastore used for keeping Keel data |
+| sql | [Keel.SQL](#proto.config.Keel.SQL) |  | Datastore used for keeping Keel data |
+
+
+
+
+
+
+<a name="proto.config.Keel.SQL"></a>
+
+### Keel.SQL
+Datastore configuration to be used with keel
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether this persistent store is enabled. |
+| connectionPools | [proto.storage.ConnectionPools](#proto.storage.ConnectionPools) |  | connection pools configuration for the primary database |
+| migration | [proto.storage.ConnectionPool](#proto.storage.ConnectionPool) |  | connection pools configuration for the migration database |
 
 
 
@@ -4729,7 +4747,6 @@ Configuration for the Orca microservice.
 | default | [Orca.Defaults](#proto.config.Orca.Defaults) |  |  |
 | services | [Orca.Services](#proto.config.Orca.Services) |  |  |
 | tasks | [Orca.Tasks](#proto.config.Orca.Tasks) |  |  |
-| keel | [ServiceSettings](#proto.config.ServiceSettings) |  |  |
 
 
 
@@ -4789,7 +4806,8 @@ Configuration for the status of non-core services.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| kayenta | [ServiceSettings](#proto.config.ServiceSettings) |  |  |
+| kayenta | [ServiceSettings](#proto.config.ServiceSettings) |  | Enabling Kayenta for the orca service |
+| keel | [ServiceSettings](#proto.config.ServiceSettings) |  | Enabling Keel for the orca service |
 
 
 
@@ -6686,25 +6704,9 @@ the &#39;x-amz-server-side-encryption&#39; header.
 
 
 
-<a name="proto.storage.SQL"></a>
+<a name="proto.storage.ConnectionPool"></a>
 
-### SQL
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether this persistent store is enabled. |
-| connectionPools | [SQL.ConnectionPools](#proto.storage.SQL.ConnectionPools) |  | Default database connection pool. |
-
-
-
-
-
-
-<a name="proto.storage.SQL.ConnectionPool"></a>
-
-### SQL.ConnectionPool
+### ConnectionPool
 ConnectionPool confifugration for the SQL server
 
 
@@ -6722,15 +6724,32 @@ ConnectionPool confifugration for the SQL server
 
 
 
-<a name="proto.storage.SQL.ConnectionPools"></a>
+<a name="proto.storage.ConnectionPools"></a>
 
-### SQL.ConnectionPools
-The default connection pool
+### ConnectionPools
+Default connection pool to Keel&#39;s datastore
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| default | [SQL.ConnectionPool](#proto.storage.SQL.ConnectionPool) |  |  |
+| default | [ConnectionPool](#proto.storage.ConnectionPool) |  |  |
+
+
+
+
+
+
+<a name="proto.storage.SQL"></a>
+
+### SQL
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether this persistent store is enabled. |
+| default | [ConnectionPool](#proto.storage.ConnectionPool) |  | Default database connection pool. |
+| migration | [ConnectionPool](#proto.storage.ConnectionPool) |  | Migration database connection pool. |
 
 
 

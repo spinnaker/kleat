@@ -10,29 +10,31 @@ message SQL {
   google.protobuf.BoolValue enabled = 1;
 
   // Default database connection pool.
-  ConnectionPools connectionPools = 2;
+  ConnectionPool default = 2;
 
-  // The default connection pool
-  message ConnectionPools {
-      ConnectionPool default = 1;
-  }
-
-  // ConnectionPool confifugration for the SQL server
-  message ConnectionPool {
-      // Database username
-      string user = 1;
-      // Database password
-      string password = 2;
-      // Database connection string. This needs to include server port
-      // and database name as well
-      string jdbcUrl = 3;
-      // Database connection timeout in milliseconds
-      int32 connectionTimeout = 4;
-      // maxLifetime controls the maximum lifetime of a connection in
-      // the pool in milliseconds.
-      int32 maxLifetime = 5;
-      // Maximum number of connections stored in the connection pool
-      int32 maxPoolSize = 6;
-  }
+  // Migration database connection pool.
+  ConnectionPool migration = 3;
 }
 
+// Default connection pool to Keel's datastore
+message ConnectionPools {
+    ConnectionPool default = 1;
+}
+
+// ConnectionPool confifugration for the SQL server
+message ConnectionPool {
+    // Database username
+    string user = 1;
+    // Database password
+    string password = 2;
+    // Database connection string. This needs to include server port
+    // and database name as well
+    string jdbcUrl = 3;
+    // Database connection timeout in milliseconds
+    int32 connectionTimeout = 4;
+    // maxLifetime controls the maximum lifetime of a connection in
+    // the pool in milliseconds.
+    int32 maxLifetime = 5;
+    // Maximum number of connections stored in the connection pool
+    int32 maxPoolSize = 6;
+}

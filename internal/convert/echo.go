@@ -38,18 +38,6 @@ func HalToEcho(h *config.Hal) *config.Echo {
 	}
 }
 
-func getEchoServices(h *config.Hal) *config.Echo_Services {
-	if !h.GetManagedDelivery().GetEnabled().GetValue() {
-		return nil
-	}
-
-	return &config.Echo_Services{
-		Keel: &config.ServiceSettings{
-			Enabled: h.GetManagedDelivery().GetEnabled(),
-		},
-	}
-}
-
 func getEchoScheduler(h *config.Hal) *config.Echo_Scheduler {
 	if h.GetTimezone() == "" {
 		return nil
@@ -69,6 +57,22 @@ func getEchoStats(h *config.Hal) *config.Echo_Stats {
 		DeploymentMethod: getDeploymentMethod(),
 		SpinnakerVersion: h.GetVersion(),
 	}
+}
+
+func getEchoServices(h *config.Hal) *config.Echo_Services {
+
+	if !h.GetManagedDelivery().GetEnabled().GetValue() {
+		return nil
+	}
+
+	cfg := &config.Echo_Services{}
+	if h.GetManagedDelivery().GetEnabled().GetValue() {
+		cfg.Keel = &config.ServiceSettings{
+			Enabled: h.GetManagedDelivery().GetEnabled(),
+		}
+	}
+
+	return cfg
 }
 
 func getDeploymentMethod() *client.DeploymentMethod {
