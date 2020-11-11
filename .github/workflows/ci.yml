@@ -30,4 +30,4 @@ jobs:
       - name: Ensure code formatting and style is consistent
         uses: golangci/golangci-lint-action@v2
         with:
-          version: v1.31
+          version: v1.32
