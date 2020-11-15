@@ -328,6 +328,9 @@
 - [notification/google_chat.proto](#notification/google_chat.proto)
     - [GoogleChat](#proto.notification.GoogleChat)
   
+- [notification/microsoft_teams.proto](#notification/microsoft_teams.proto)
+    - [MicrosoftTeams](#proto.notification.MicrosoftTeams)
+  
 - [notification/notifications.proto](#notification/notifications.proto)
     - [Notifications](#proto.notification.Notifications)
   
@@ -4932,6 +4935,37 @@ Configuration for Google Chat notifications.
 
 
 
+<a name="notification/microsoft_teams.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## notification/microsoft_teams.proto
+
+
+
+<a name="proto.notification.MicrosoftTeams"></a>
+
+### MicrosoftTeams
+Configuration for Microsoft Teams notifications.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Microsoft Teams notifications are enabled. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
 <a name="notification/notifications.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -4954,6 +4988,7 @@ Configuration for notifications.
 | email | [Email](#proto.notification.Email) |  |  |
 | googlechat | [GoogleChat](#proto.notification.GoogleChat) |  |  |
 | pubsub | [PubSub](#proto.notification.PubSub) |  |  |
+| microsoftteams | [MicrosoftTeams](#proto.notification.MicrosoftTeams) |  |  |
 
 
 

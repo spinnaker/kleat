@@ -1,0 +1,12 @@
+syntax = "proto3";
+package proto.notification;
+
+option go_package = "github.com/spinnaker/kleat/api/client/notification";
+
+import "google/protobuf/wrappers.proto";
+
+// Configuration for Microsoft Teams notifications.
+message MicrosoftTeams {
+  // Whether Microsoft Teams notifications are enabled.
+  google.protobuf.BoolValue enabled = 1;
+}

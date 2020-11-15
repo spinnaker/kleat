@@ -10,6 +10,7 @@ import "notification/bearychat.proto";
 import "notification/email.proto";
 import "notification/google_chat.proto";
 import "notification/pubsub.proto";
+import "notification/microsoft_teams.proto";
 
 // Configuration for notifications.
 message Notifications {
@@ -20,4 +21,5 @@ message Notifications {
   Email email = 5;
   GoogleChat googlechat = 6;
   PubSub pubsub = 7;
+  MicrosoftTeams microsoftteams = 8;
 }
