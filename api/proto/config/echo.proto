@@ -8,6 +8,7 @@ import "google/protobuf/wrappers.proto";
 import "artifact/artifacts.proto";
 import "ci/gcb.proto";
 import "notification/github_status.proto";
+import "notification/microsoft_teams.proto";
 import "notification/slack.proto";
 import "notification/twilio.proto";
 import "pubsub/pubsub.proto";
@@ -24,6 +25,8 @@ message Echo {
     ci.GoogleCloudBuild gcb = 6;
     Stats stats = 7;
     Scheduler scheduler = 8;
+
+    notification.MicrosoftTeams microsoftteams = 9;
 
     // Echo scheduler configuration.
     message Scheduler {
