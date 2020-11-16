@@ -25,14 +25,15 @@ import (
 // HalToEcho generates the echo config for the supplied config.Hal h.
 func HalToEcho(h *config.Hal) *config.Echo {
 	return &config.Echo{
-		Slack:        h.GetNotifications().GetSlack(),
-		Twilio:       h.GetNotifications().GetTwilio(),
-		GithubStatus: h.GetNotifications().GetGithubStatus(),
-		Artifacts:    h.GetArtifacts(),
-		Pubsub:       h.GetPubsub(),
-		Gcb:          h.GetCi().GetGcb(),
-		Stats:        getEchoStats(h),
-		Scheduler:    getEchoScheduler(h),
+		Slack:          h.GetNotifications().GetSlack(),
+		Twilio:         h.GetNotifications().GetTwilio(),
+		GithubStatus:   h.GetNotifications().GetGithubStatus(),
+		Artifacts:      h.GetArtifacts(),
+		Pubsub:         h.GetPubsub(),
+		Gcb:            h.GetCi().GetGcb(),
+		Stats:          getEchoStats(h),
+		Scheduler:      getEchoScheduler(h),
+		Microsoftteams: h.GetNotifications().GetMicrosoftteams(),
 	}
 }
 

@@ -3813,6 +3813,7 @@ Configuration for the echo microservice.
 | gcb | [proto.ci.GoogleCloudBuild](#proto.ci.GoogleCloudBuild) |  |  |
 | stats | [Echo.Stats](#proto.config.Echo.Stats) |  |  |
 | scheduler | [Echo.Scheduler](#proto.config.Echo.Scheduler) |  |  |
+| microsoftteams | [proto.notification.MicrosoftTeams](#proto.notification.MicrosoftTeams) |  |  |
 
 
 
