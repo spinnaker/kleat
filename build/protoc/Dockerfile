@@ -17,7 +17,7 @@ RUN curl -L https://github.com/pseudomuto/protoc-gen-doc/releases/download/v$PRO
  && chmod 755 protoc-gen-doc
 
 FROM curl as protoc
-ARG PROTOC_VERSION=3.13.0
+ARG PROTOC_VERSION=3.14.0
 RUN curl -vLo protoc.zip https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-x86_64.zip \
  && unzip protoc.zip \
  # We want all files/folders in bin/ to be executable
