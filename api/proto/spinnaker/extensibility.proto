@@ -1,0 +1,29 @@
+syntax = "proto3";
+package proto.spinnaker;
+
+option go_package = "github.com/spinnaker/kleat/api/client/spinnaker";
+
+import "google/protobuf/wrappers.proto";
+
+// Spinnaker flags
+message Spinnaker {
+  Extensibility extensibility = 1;
+}
+
+// Extensibility flags
+message Extensibility {
+  map<string, Plugin> plugins = 1;
+  map<string, Repository> repositories = 2;
+}
+
+// Spinnaker plugin flags
+message Plugin {
+  google.protobuf.BoolValue enabled = 1;
+  string version = 2;
+}
+
+// Spinnaker plugin repository flags
+message Repository {
+  string id = 1;
+  string url = 2;
+}
