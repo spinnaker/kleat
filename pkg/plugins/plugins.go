@@ -12,8 +12,8 @@ type compatibilitySummary struct {
 }
 
 //ValidatePluginsCompatibility validates the supplied *config.Hal, returning any Incompatible plugin error.
-func ValidatePluginsCompatibility(h *config.Hal) []string {
-	results := getCompatibilityResults(h)
+func ValidatePluginsCompatibility(h *config.Hal, validator validate.PluginCompatibilityValidator) []string {
+	results := getCompatibilityResults(h, validator)
 	var errMsg []string
 	for _, v := range results {
 		if v.verdict == validate.NotCompatible { //summary with Status NotCompatible are treated as error
@@ -25,8 +25,8 @@ func ValidatePluginsCompatibility(h *config.Hal) []string {
 }
 
 //GetCompatibilityIssues validates the supplied *config.Hal, returning any issue found with configured plugin.
-func GetCompatibilityIssues(h *config.Hal) []string {
-	results := getCompatibilityResults(h)
+func GetCompatibilityIssues(h *config.Hal, validator validate.PluginCompatibilityValidator) []string {
+	results := getCompatibilityResults(h, validator)
 	var issues []string
 	for _, v := range results {
 		if v.verdict != validate.Compatible {
@@ -36,8 +36,7 @@ func GetCompatibilityIssues(h *config.Hal) []string {
 	return issues
 }
 
-func getCompatibilityResults(h *config.Hal) []compatibilitySummary {
-	validator := validate.NewAstrolabeValidator()
+func getCompatibilityResults(h *config.Hal, validator validate.PluginCompatibilityValidator) []compatibilitySummary {
 	repos := make([]validate.PluginRepository, 0)
 	var summary []compatibilitySummary
 	for _, v := range h.Spinnaker.Extensibility.Repositories {

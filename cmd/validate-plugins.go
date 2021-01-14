@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"github.com/armory/plugin-tools/pkg/validate"
 	"github.com/spf13/cobra"
 	"github.com/spinnaker/kleat/internal/fileio"
 	"github.com/spinnaker/kleat/pkg/plugins"
@@ -40,7 +41,8 @@ func validateCompatibility(halPath string) ([]string, error) {
 	if err != nil {
 		return nil, err
 	}
-	return plugins.GetCompatibilityIssues(h), nil
+	validator := validate.NewAstrolabeValidator()
+	return plugins.GetCompatibilityIssues(h, validator), nil
 }
 
 func init() {
