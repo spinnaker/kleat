@@ -38,7 +38,7 @@ func TestOnlyIncompatibleMessagesAreReturned(t *testing.T) {
 		t.Fatal(err)
 	}
 	mock := &validatorMock{}
-	errMsg := plugins.ValidatePluginsCompatibility(h, mock)
+	errMsg := plugins.CollectCompatibilityErrors(h, mock)
 	if len(errMsg) != 1 {
 		t.Errorf("A single error message was expected but found %d", len(errMsg))
 	}
@@ -50,8 +50,20 @@ func TestIncompatibleAndUnknownMessagesAreReturned(t *testing.T) {
 		t.Fatal(err)
 	}
 	mock := &validatorMock{}
-	errMsg := plugins.GetCompatibilityIssues(h, mock)
+	errMsg := plugins.CollectCompatibilityIssues(h, mock)
 	if len(errMsg) != 2 {
 		t.Errorf("Two error messages were expected but found %d", len(errMsg))
+	}
+}
+
+func TestAllMessagesAreReturned(t *testing.T) {
+	h, err := fileio.ParseHalConfig(filepath.Join(dataDir, "halconfig_with_plugins.yml"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	mock := &validatorMock{}
+	errMsg := plugins.CollectCompatibilityMessages(h, mock)
+	if len(errMsg) != 3 {
+		t.Errorf("All messages were expected but found %d", len(errMsg))
 	}
 }

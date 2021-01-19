@@ -21,7 +21,7 @@ kleat plugins validate /path/to/halconfig`,
 	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		hal := args[0]
-		issues, err := validateCompatibility(hal)
+		issues, err := getCompatibilityIssues(hal)
 		if err != nil {
 			return err
 		}
@@ -36,13 +36,13 @@ kleat plugins validate /path/to/halconfig`,
 	},
 }
 
-func validateCompatibility(halPath string) ([]string, error) {
+func getCompatibilityIssues(halPath string) ([]string, error) {
 	h, err := fileio.ParseHalConfig(halPath)
 	if err != nil {
 		return nil, err
 	}
 	validator := validate.NewAstrolabeValidator()
-	return plugins.GetCompatibilityIssues(h, validator), nil
+	return plugins.CollectCompatibilityIssues(h, validator), nil
 }
 
 func init() {
