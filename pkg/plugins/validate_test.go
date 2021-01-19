@@ -2,27 +2,30 @@ package plugins_test
 
 import (
 	"fmt"
-	"github.com/armory/plugin-tools/pkg/validate"
-	"github.com/spinnaker/kleat/internal/fileio"
-	"github.com/spinnaker/kleat/pkg/plugins"
+
 	"path/filepath"
 	"testing"
+
+	"github.com/armory/plugin-tools/pkg/validate"
+
+	"github.com/spinnaker/kleat/internal/fileio"
+	"github.com/spinnaker/kleat/pkg/plugins"
 )
 
 const dataDir = "../../testdata"
 
 type validatorMock struct{}
 
-func (v *validatorMock) IsPluginCompatibleWithPlatform(platformVersion string, pluginId string, pluginVersion string, repos []validate.PluginRepository) (validate.Verdict, error) {
-	return v.mockResultByPluginId(pluginId)
+func (v *validatorMock) IsPluginCompatibleWithPlatform(platformVersion string, pluginID string, pluginVersion string, repos []validate.PluginRepository) (validate.Verdict, error) {
+	return v.mockResultByPluginID(pluginID)
 }
 
-func (v *validatorMock) IsPluginCompatibleWithService(serviceName string, serviceVersion string, pluginId string, pluginVersion string, repos []validate.PluginRepository) (validate.Verdict, error) {
-	return v.mockResultByPluginId(pluginId)
+func (v *validatorMock) IsPluginCompatibleWithService(serviceName string, serviceVersion string, pluginID string, pluginVersion string, repos []validate.PluginRepository) (validate.Verdict, error) {
+	return v.mockResultByPluginID(pluginID)
 }
 
-func (v *validatorMock) mockResultByPluginId(pluginId string) (validate.Verdict, error) {
-	switch pluginId {
+func (v *validatorMock) mockResultByPluginID(pluginID string) (validate.Verdict, error) {
+	switch pluginID {
 	case "Test.Compatible":
 		return validate.Compatible, nil
 	case "Test.Incompatible":

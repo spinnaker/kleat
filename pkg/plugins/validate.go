@@ -2,7 +2,9 @@ package plugins
 
 import (
 	"fmt"
+
 	"github.com/armory/plugin-tools/pkg/validate"
+
 	"github.com/spinnaker/kleat/api/client/config"
 )
 
@@ -12,7 +14,7 @@ func CollectCompatibilityErrors(h *config.Hal, validator validate.PluginCompatib
 	repos := make([]validate.PluginRepository, 0)
 	var messages []string
 	for _, v := range h.Spinnaker.Extensibility.Repositories {
-		repos = append(repos, validate.PluginRepository{v.Id, v.Url})
+		repos = append(repos, validate.PluginRepository{Id: v.Id, Url: v.Url})
 	}
 
 	for k, v := range h.Spinnaker.Extensibility.Plugins {
@@ -30,7 +32,7 @@ func CollectCompatibilityIssues(h *config.Hal, validator validate.PluginCompatib
 	repos := make([]validate.PluginRepository, 0)
 	var messages []string
 	for _, v := range h.Spinnaker.Extensibility.Repositories {
-		repos = append(repos, validate.PluginRepository{v.Id, v.Url})
+		repos = append(repos, validate.PluginRepository{Id: v.Id, Url: v.Url})
 	}
 
 	for k, v := range h.Spinnaker.Extensibility.Plugins {
@@ -51,7 +53,7 @@ func CollectCompatibilityMessages(h *config.Hal, validator validate.PluginCompat
 	repos := make([]validate.PluginRepository, 0)
 	var messages []string
 	for _, v := range h.Spinnaker.Extensibility.Repositories {
-		repos = append(repos, validate.PluginRepository{v.Id, v.Url})
+		repos = append(repos, validate.PluginRepository{Id: v.Id, Url: v.Url})
 	}
 
 	for k, v := range h.Spinnaker.Extensibility.Plugins {

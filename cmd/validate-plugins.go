@@ -3,6 +3,7 @@ package cmd
 import (
 	"github.com/armory/plugin-tools/pkg/validate"
 	"github.com/spf13/cobra"
+
 	"github.com/spinnaker/kleat/internal/fileio"
 	"github.com/spinnaker/kleat/pkg/plugins"
 )
