@@ -406,6 +406,14 @@
     - [TrustStore](#proto.security.TrustStore)
     - [WebhookConfig](#proto.security.WebhookConfig)
   
+- [spinnaker/extensibility.proto](#spinnaker/extensibility.proto)
+    - [Extensibility](#proto.spinnaker.Extensibility)
+    - [Extensibility.PluginsEntry](#proto.spinnaker.Extensibility.PluginsEntry)
+    - [Extensibility.RepositoriesEntry](#proto.spinnaker.Extensibility.RepositoriesEntry)
+    - [Plugin](#proto.spinnaker.Plugin)
+    - [Repository](#proto.spinnaker.Repository)
+    - [Spinnaker](#proto.spinnaker.Spinnaker)
+  
 - [stats.proto](#stats.proto)
     - [DeploymentMethod](#proto.DeploymentMethod)
     - [Stats](#proto.Stats)
@@ -4134,6 +4142,7 @@ Configuration for a Spinnaker installation.
 | version | [string](#string) |  | Top-level Spinnaker version. |
 | repository | [proto.repository.Repository](#proto.repository.Repository) |  |  |
 | metricStores | [proto.metricstores.MetricStores](#proto.metricstores.MetricStores) |  | Configuration for the Spinnaker monitoring daemon metric stores. |
+| spinnaker | [proto.spinnaker.Spinnaker](#proto.spinnaker.Spinnaker) |  |  |
 
 
 
@@ -5969,6 +5978,117 @@ Configuration for webhooks.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | trust | [TrustStore](#proto.security.TrustStore) |  | A custom trust store to use for outgoing webhook connections. |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="spinnaker/extensibility.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## spinnaker/extensibility.proto
+
+
+
+<a name="proto.spinnaker.Extensibility"></a>
+
+### Extensibility
+Extensibility flags
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| plugins | [Extensibility.PluginsEntry](#proto.spinnaker.Extensibility.PluginsEntry) | repeated | Map with the spinnaker plugins. |
+| repositories | [Extensibility.RepositoriesEntry](#proto.spinnaker.Extensibility.RepositoriesEntry) | repeated | Map with the plugin repositories. |
+
+
+
+
+
+
+<a name="proto.spinnaker.Extensibility.PluginsEntry"></a>
+
+### Extensibility.PluginsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [Plugin](#proto.spinnaker.Plugin) |  |  |
+
+
+
+
+
+
+<a name="proto.spinnaker.Extensibility.RepositoriesEntry"></a>
+
+### Extensibility.RepositoriesEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [Repository](#proto.spinnaker.Repository) |  |  |
+
+
+
+
+
+
+<a name="proto.spinnaker.Plugin"></a>
+
+### Plugin
+Spinnaker plugin flags
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether plugin is enabled. |
+| version | [string](#string) |  | Plugin version to use. |
+
+
+
+
+
+
+<a name="proto.spinnaker.Repository"></a>
+
+### Repository
+Spinnaker plugin repository flags
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | unique repository name. |
+| url | [string](#string) |  | URL of plugins.json file. |
+
+
+
+
+
+
+<a name="proto.spinnaker.Spinnaker"></a>
+
+### Spinnaker
+Spinnaker flags
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| extensibility | [Extensibility](#proto.spinnaker.Extensibility) |  |  |
 
 
 

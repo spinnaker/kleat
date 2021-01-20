@@ -16,6 +16,7 @@ import "storage/persistent_storage.proto";
 import "canary/canary.proto";
 import "repository/repository.proto";
 import "metricstores/metricstores.proto";
+import "spinnaker/extensibility.proto";
 
 // Configuration for a Spinnaker installation.
 message Hal {
@@ -42,4 +43,6 @@ message Hal {
 
   // Configuration for the Spinnaker monitoring daemon metric stores.
   metricstores.MetricStores metricStores = 15;
+
+  spinnaker.Spinnaker spinnaker = 16;
 }
