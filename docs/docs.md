@@ -6008,8 +6008,8 @@ Extensibility flags
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| plugins | [Extensibility.PluginsEntry](#proto.spinnaker.Extensibility.PluginsEntry) | repeated |  |
-| repositories | [Extensibility.RepositoriesEntry](#proto.spinnaker.Extensibility.RepositoriesEntry) | repeated |  |
+| plugins | [Extensibility.PluginsEntry](#proto.spinnaker.Extensibility.PluginsEntry) | repeated | Map with the spinnaker plugins. |
+| repositories | [Extensibility.RepositoriesEntry](#proto.spinnaker.Extensibility.RepositoriesEntry) | repeated | Map with the plugin repositories. |
 
 
 
@@ -6056,8 +6056,8 @@ Spinnaker plugin flags
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  |  |
-| version | [string](#string) |  |  |
+| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether plugin is enabled. |
+| version | [string](#string) |  | Plugin version to use. |
 
 
 
@@ -6072,8 +6072,8 @@ Spinnaker plugin repository flags
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [string](#string) |  |  |
-| url | [string](#string) |  |  |
+| id | [string](#string) |  | unique repository name. |
+| url | [string](#string) |  | URL of plugins.json file. |
 
 
 
