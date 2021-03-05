@@ -1,6 +1,6 @@
 module github.com/spinnaker/kleat
 
-go 1.15
+go 1.16
 
 require (
 	github.com/armory/plugin-tools v0.0.3
