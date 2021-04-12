@@ -8,10 +8,10 @@ package config
 
 import (
 	proto "github.com/golang/protobuf/proto"
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
 	storage "github.com/spinnaker/kleat/api/client/storage"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 )
@@ -160,7 +160,7 @@ type Front50_Delivery struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Enabled *wrappers.BoolValue `protobuf:"bytes,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Enabled *wrapperspb.BoolValue `protobuf:"bytes,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 }
 
 func (x *Front50_Delivery) Reset() {
@@ -195,7 +195,7 @@ func (*Front50_Delivery) Descriptor() ([]byte, []int) {
 	return file_config_front50_proto_rawDescGZIP(), []int{0, 1}
 }
 
-func (x *Front50_Delivery) GetEnabled() *wrappers.BoolValue {
+func (x *Front50_Delivery) GetEnabled() *wrapperspb.BoolValue {
 	if x != nil {
 		return x.Enabled
 	}
@@ -257,14 +257,14 @@ func file_config_front50_proto_rawDescGZIP() []byte {
 
 var file_config_front50_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_config_front50_proto_goTypes = []interface{}{
-	(*Front50)(nil),            // 0: proto.config.Front50
-	(*Front50_Spinnaker)(nil),  // 1: proto.config.Front50.Spinnaker
-	(*Front50_Delivery)(nil),   // 2: proto.config.Front50.Delivery
-	(*storage.Gcs)(nil),        // 3: proto.storage.Gcs
-	(*storage.Azs)(nil),        // 4: proto.storage.Azs
-	(*storage.Oracle)(nil),     // 5: proto.storage.Oracle
-	(*storage.S3)(nil),         // 6: proto.storage.S3
-	(*wrappers.BoolValue)(nil), // 7: google.protobuf.BoolValue
+	(*Front50)(nil),              // 0: proto.config.Front50
+	(*Front50_Spinnaker)(nil),    // 1: proto.config.Front50.Spinnaker
+	(*Front50_Delivery)(nil),     // 2: proto.config.Front50.Delivery
+	(*storage.Gcs)(nil),          // 3: proto.storage.Gcs
+	(*storage.Azs)(nil),          // 4: proto.storage.Azs
+	(*storage.Oracle)(nil),       // 5: proto.storage.Oracle
+	(*storage.S3)(nil),           // 6: proto.storage.S3
+	(*wrapperspb.BoolValue)(nil), // 7: google.protobuf.BoolValue
 }
 var file_config_front50_proto_depIdxs = []int32{
 	1, // 0: proto.config.Front50.spinnaker:type_name -> proto.config.Front50.Spinnaker

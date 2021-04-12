@@ -7,15 +7,13 @@
 package config
 
 import (
-	reflect "reflect"
-	sync "sync"
-
 	proto "github.com/golang/protobuf/proto"
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
 	notification "github.com/spinnaker/kleat/api/client/notification"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
+	reflect "reflect"
+	sync "sync"
 )
 
 const (
@@ -175,9 +173,9 @@ type Deck_Features struct {
 	// Enable managed pipeline templates v2 UI support.
 	ManagedPipelineTemplatesV2UI *wrapperspb.BoolValue `protobuf:"bytes,4,opt,name=managedPipelineTemplatesV2UI,proto3" json:"managedPipelineTemplatesV2UI,omitempty"`
 	// Enable managed delivery in the UI
-	ManagedDelivery *wrappers.BoolValue `protobuf:"bytes,5,opt,name=managedDelivery,proto3" json:"managedDelivery,omitempty"`
+	ManagedDelivery *wrapperspb.BoolValue `protobuf:"bytes,5,opt,name=managedDelivery,proto3" json:"managedDelivery,omitempty"`
 	// Enable managed resources in the UI
-	ManagedResources *wrappers.BoolValue `protobuf:"bytes,6,opt,name=managedResources,proto3" json:"managedResources,omitempty"`
+	ManagedResources *wrapperspb.BoolValue `protobuf:"bytes,6,opt,name=managedResources,proto3" json:"managedResources,omitempty"`
 }
 
 func (x *Deck_Features) Reset() {
@@ -240,14 +238,14 @@ func (x *Deck_Features) GetManagedPipelineTemplatesV2UI() *wrapperspb.BoolValue 
 	return nil
 }
 
-func (x *Deck_Features) GetManagedDelivery() *wrappers.BoolValue {
+func (x *Deck_Features) GetManagedDelivery() *wrapperspb.BoolValue {
 	if x != nil {
 		return x.ManagedDelivery
 	}
 	return nil
 }
 
-func (x *Deck_Features) GetManagedResources() *wrappers.BoolValue {
+func (x *Deck_Features) GetManagedResources() *wrapperspb.BoolValue {
 	if x != nil {
 		return x.ManagedResources
 	}
@@ -1797,39 +1795,6 @@ var file_config_deck_proto_goTypes = []interface{}{
 	(*Deck_Providers_Aws)(nil),                   // 6: proto.config.Deck.Providers.Aws
 	(*Deck_Providers_Azure)(nil),                 // 7: proto.config.Deck.Providers.Azure
 	(*Deck_Providers_Cloudfoundry)(nil),          // 8: proto.config.Deck.Providers.Cloudfoundry
-<<<<<<< HEAD
-	(*Deck_ManagedDelivery)(nil),                 // 2: proto.config.Deck.ManagedDelivery
-	(*Deck_Canary)(nil),                          // 3: proto.config.Deck.Canary
-	(*Deck_Notifications)(nil),                   // 4: proto.config.Deck.Notifications
-	(*Deck_Providers)(nil),                       // 5: proto.config.Deck.Providers
-	(*Deck_Providers_Appengine)(nil),             // 6: proto.config.Deck.Providers.Appengine
-	(*Deck_Providers_Aws)(nil),                   // 7: proto.config.Deck.Providers.Aws
-	(*Deck_Providers_Azure)(nil),                 // 8: proto.config.Deck.Providers.Azure
-	(*Deck_Providers_Cloudfoundry)(nil),          // 9: proto.config.Deck.Providers.Cloudfoundry
-	(*Deck_Providers_Dcos)(nil),                  // 10: proto.config.Deck.Providers.Dcos
-	(*Deck_Providers_Ecs)(nil),                   // 11: proto.config.Deck.Providers.Ecs
-	(*Deck_Providers_Gce)(nil),                   // 12: proto.config.Deck.Providers.Gce
-	(*Deck_Providers_HuaweiCloud)(nil),           // 13: proto.config.Deck.Providers.HuaweiCloud
-	(*Deck_Providers_TencentCloud)(nil),          // 14: proto.config.Deck.Providers.TencentCloud
-	(*Deck_Providers_Kubernetes)(nil),            // 15: proto.config.Deck.Providers.Kubernetes
-	(*Deck_Providers_Appengine_Defaults)(nil),    // 16: proto.config.Deck.Providers.Appengine.Defaults
-	(*Deck_Providers_Aws_Defaults)(nil),          // 17: proto.config.Deck.Providers.Aws.Defaults
-	(*Deck_Providers_Azure_Defaults)(nil),        // 18: proto.config.Deck.Providers.Azure.Defaults
-	(*Deck_Providers_Cloudfoundry_Defaults)(nil), // 19: proto.config.Deck.Providers.Cloudfoundry.Defaults
-	(*Deck_Providers_Dcos_Defaults)(nil),         // 20: proto.config.Deck.Providers.Dcos.Defaults
-	(*Deck_Providers_Ecs_Defaults)(nil),          // 21: proto.config.Deck.Providers.Ecs.Defaults
-	(*Deck_Providers_Gce_Defaults)(nil),          // 22: proto.config.Deck.Providers.Gce.Defaults
-	(*Deck_Providers_HuaweiCloud_Defaults)(nil),  // 23: proto.config.Deck.Providers.HuaweiCloud.Defaults
-	(*Deck_Providers_TencentCloud_Defaults)(nil), // 24: proto.config.Deck.Providers.TencentCloud.Defaults
-	(*wrappers.BoolValue)(nil),                   // 25: google.protobuf.BoolValue
-	(*notification.BearyChat)(nil),               // 26: proto.notification.BearyChat
-	(*notification.Email)(nil),                   // 27: proto.notification.Email
-	(*notification.GithubStatus)(nil),            // 28: proto.notification.GithubStatus
-	(*notification.GoogleChat)(nil),              // 29: proto.notification.GoogleChat
-	(*notification.PubSub)(nil),                  // 30: proto.notification.PubSub
-	(*notification.Slack)(nil),                   // 31: proto.notification.Slack
-	(*notification.Twilio)(nil),                  // 32: proto.notification.Twilio
-=======
 	(*Deck_Providers_Dcos)(nil),                  // 9: proto.config.Deck.Providers.Dcos
 	(*Deck_Providers_Ecs)(nil),                   // 10: proto.config.Deck.Providers.Ecs
 	(*Deck_Providers_Gce)(nil),                   // 11: proto.config.Deck.Providers.Gce
@@ -1845,7 +1810,7 @@ var file_config_deck_proto_goTypes = []interface{}{
 	(*Deck_Providers_Gce_Defaults)(nil),          // 21: proto.config.Deck.Providers.Gce.Defaults
 	(*Deck_Providers_HuaweiCloud_Defaults)(nil),  // 22: proto.config.Deck.Providers.HuaweiCloud.Defaults
 	(*Deck_Providers_TencentCloud_Defaults)(nil), // 23: proto.config.Deck.Providers.TencentCloud.Defaults
-	(*wrappers.BoolValue)(nil),                   // 24: google.protobuf.BoolValue
+	(*wrapperspb.BoolValue)(nil),                 // 24: google.protobuf.BoolValue
 	(*notification.BearyChat)(nil),               // 25: proto.notification.BearyChat
 	(*notification.Email)(nil),                   // 26: proto.notification.Email
 	(*notification.GithubStatus)(nil),            // 27: proto.notification.GithubStatus
@@ -1853,7 +1818,6 @@ var file_config_deck_proto_goTypes = []interface{}{
 	(*notification.PubSub)(nil),                  // 29: proto.notification.PubSub
 	(*notification.Slack)(nil),                   // 30: proto.notification.Slack
 	(*notification.Twilio)(nil),                  // 31: proto.notification.Twilio
->>>>>>> 4db720a... updates based on feedback
 }
 var file_config_deck_proto_depIdxs = []int32{
 	24, // 0: proto.config.Deck.authEnabled:type_name -> google.protobuf.BoolValue

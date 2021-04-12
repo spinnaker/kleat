@@ -292,17 +292,10 @@ func file_storage_sql_proto_rawDescGZIP() []byte {
 
 var file_storage_sql_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_storage_sql_proto_goTypes = []interface{}{
-<<<<<<< HEAD
 	(*SQL)(nil),                  // 0: proto.storage.SQL
-	(*SQL_ConnectionPools)(nil),  // 1: proto.storage.SQL.ConnectionPools
-	(*SQL_ConnectionPool)(nil),   // 2: proto.storage.SQL.ConnectionPool
+	(*ConnectionPools)(nil),      // 1: proto.storage.ConnectionPools
+	(*ConnectionPool)(nil),       // 2: proto.storage.ConnectionPool
 	(*wrapperspb.BoolValue)(nil), // 3: google.protobuf.BoolValue
-=======
-	(*SQL)(nil),                // 0: proto.storage.SQL
-	(*ConnectionPools)(nil),    // 1: proto.storage.ConnectionPools
-	(*ConnectionPool)(nil),     // 2: proto.storage.ConnectionPool
-	(*wrappers.BoolValue)(nil), // 3: google.protobuf.BoolValue
->>>>>>> 639e219... feat(keel): configure keel based on halconfig setup
 }
 var file_storage_sql_proto_depIdxs = []int32{
 	3, // 0: proto.storage.SQL.enabled:type_name -> google.protobuf.BoolValue
