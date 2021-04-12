@@ -59,6 +59,12 @@ message Deck {
 
     // Enable managed pipeline templates v2 UI support.
     google.protobuf.BoolValue managedPipelineTemplatesV2UI = 4;
+
+    // Enable managed delivery in the UI
+    google.protobuf.BoolValue managedDelivery = 5;
+
+    // Enable managed resources in the UI
+    google.protobuf.BoolValue managedResources = 6;
   }
 
   // Configuration for the canary UI.

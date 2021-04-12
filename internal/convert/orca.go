@@ -16,7 +16,9 @@
 
 package convert
 
-import "github.com/spinnaker/kleat/api/client/config"
+import (
+	"github.com/spinnaker/kleat/api/client/config"
+)
 
 // HalToOrca generates the orca config for the supplied config.Hal h.
 func HalToOrca(h *config.Hal) *config.Orca {
@@ -48,14 +50,26 @@ func getPipelineTemplates(h *config.Hal) *config.Orca_PipelineTemplates {
 }
 
 func getOrcaServices(h *config.Hal) *config.Orca_Services {
+
+	if !h.GetCanary().GetEnabled().GetValue() &&
+		!h.GetManagedDelivery().GetEnabled().GetValue() {
+		return nil
+	}
+
+	cfg := &config.Orca_Services{}
 	if h.GetCanary().GetEnabled().GetValue() {
-		return &config.Orca_Services{
-			Kayenta: &config.ServiceSettings{
-				Enabled: h.GetCanary().GetEnabled(),
-			},
+		cfg.Kayenta = &config.ServiceSettings{
+			Enabled: h.GetCanary().GetEnabled(),
 		}
 	}
-	return nil
+
+	if h.GetManagedDelivery().GetEnabled().GetValue() {
+		cfg.Keel = &config.ServiceSettings{
+			Enabled: h.GetManagedDelivery().GetEnabled(),
+		}
+	}
+
+	return cfg
 }
 
 func getOrcaTasks(h *config.Hal) *config.Orca_Tasks {

@@ -260,6 +260,16 @@ persistentStorage:
     rootFolder: my-root-folder
     secretAccessKey: my-secret-access-key
     serverSideEncryption: AES256
+  sql:
+    enabled: true
+    default:
+      jdbcUrl: jdbc:mysql://localhost:3306/defaultdb
+      user: defaultuser
+      password: defaultpass
+    migration:
+      jdbcUrl: jdbc:mysql://localhost:3306/migrationdb
+      user: migrationuser
+      password: migrationpass
 providers:
   appengine:
     accounts:
@@ -609,3 +619,11 @@ webhook:
     enabled: true
     trustStore: /var/secrets/webhook-keystore.jks
     trustStorePassword: abcdefg
+managedDelivery:
+  enabled: true
+  keel:
+    plugins:
+      ec2:
+        enabled: false
+      k8s:
+        enabled: true

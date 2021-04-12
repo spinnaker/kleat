@@ -34,6 +34,7 @@ func HalToEcho(h *config.Hal) *config.Echo {
 		Stats:          getEchoStats(h),
 		Scheduler:      getEchoScheduler(h),
 		Microsoftteams: h.GetNotifications().GetMicrosoftteams(),
+		Services:       getEchoServices(h),
 	}
 }
 
@@ -56,6 +57,22 @@ func getEchoStats(h *config.Hal) *config.Echo_Stats {
 		DeploymentMethod: getDeploymentMethod(),
 		SpinnakerVersion: h.GetVersion(),
 	}
+}
+
+func getEchoServices(h *config.Hal) *config.Echo_Services {
+
+	if !h.GetManagedDelivery().GetEnabled().GetValue() {
+		return nil
+	}
+
+	cfg := &config.Echo_Services{}
+	if h.GetManagedDelivery().GetEnabled().GetValue() {
+		cfg.Keel = &config.ServiceSettings{
+			Enabled: h.GetManagedDelivery().GetEnabled(),
+		}
+	}
+
+	return cfg
 }
 
 func getDeploymentMethod() *client.DeploymentMethod {

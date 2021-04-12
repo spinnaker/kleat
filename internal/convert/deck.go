@@ -71,6 +71,9 @@ func getDeckFeaturesConfig(h *config.Hal) *config.Deck_Features {
 		ChaosMonkey:                  h.GetFeatures().GetChaos(),
 		FiatEnabled:                  h.GetSecurity().GetAuthz().GetEnabled(),
 		ManagedPipelineTemplatesV2UI: h.GetFeatures().GetManagedPipelineTemplatesV2UI(),
+
+		ManagedDelivery:  h.GetManagedDelivery().GetEnabled(),
+		ManagedResources: h.GetManagedDelivery().GetEnabled(),
 	}
 }
 

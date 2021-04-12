@@ -127,6 +127,21 @@ var orcaTests = configTest{
 			},
 		},
 		{
+			"ManagedDelivery enabled",
+			&config.Hal{
+				ManagedDelivery: &config.ManagedDelivery{
+					Enabled: wrapperspb.Bool(true),
+				},
+			},
+			&config.Orca{
+				Services: &config.Orca_Services{
+					Keel: &config.ServiceSettings{
+						Enabled: wrapperspb.Bool(true),
+					},
+				},
+			},
+		},
+		{
 			"Timezone set",
 			&config.Hal{
 				Timezone: "America/Chicago",

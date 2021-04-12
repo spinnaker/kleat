@@ -96,6 +96,21 @@ var front50Tests = configTest{
 				},
 			},
 		},
+		{
+			"Enable ManagedDelivery",
+			&config.Hal{
+				ManagedDelivery: &config.ManagedDelivery{
+					Enabled: wrapperspb.Bool(true),
+				},
+			},
+			&config.Front50{
+				Spinnaker: &config.Front50_Spinnaker{
+					Delivery: &config.Front50_Delivery{
+						Enabled: wrapperspb.Bool(true),
+					},
+				},
+			},
+		},
 	},
 }
 

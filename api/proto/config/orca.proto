@@ -18,7 +18,11 @@ message Orca {
 
   // Configuration for the status of non-core services.
   message Services {
+    // Enabling Kayenta for the orca service
     ServiceSettings kayenta = 1;
+
+    // Enabling Keel for the orca service
+    ServiceSettings keel = 2;
   }
 
   // Configuration for pipeline templates.

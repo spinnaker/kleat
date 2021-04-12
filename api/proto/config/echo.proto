@@ -6,6 +6,7 @@ option go_package = "github.com/spinnaker/kleat/api/client/config";
 import "google/protobuf/wrappers.proto";
 
 import "artifact/artifacts.proto";
+import "config/service_enabled.proto";
 import "ci/gcb.proto";
 import "notification/github_status.proto";
 import "notification/microsoft_teams.proto";
@@ -27,6 +28,14 @@ message Echo {
     Scheduler scheduler = 8;
 
     notification.MicrosoftTeams microsoftteams = 9;
+    // Configuration for the status of non-core services.
+    Services services = 10;
+
+    // Configuration for the status of non-core services.
+    message Services {
+      // Enabling keel for the echo service
+      ServiceSettings keel = 1;
+    }
 
     // Echo scheduler configuration.
     message Scheduler {

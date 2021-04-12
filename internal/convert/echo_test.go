@@ -270,6 +270,22 @@ var echoTests = configTest{
 			},
 		},
 		{
+			"ManagedDelivery enabled",
+			&config.Hal{
+				ManagedDelivery: &config.ManagedDelivery{
+					Enabled: wrapperspb.Bool(true),
+				},
+			},
+			&config.Echo{
+				Services: &config.Echo_Services{
+					Keel: &config.ServiceSettings{
+						Enabled: wrapperspb.Bool(true),
+					},
+				},
+				Stats: defaultStats,
+			},
+		},
+		{
 			"Timezone set",
 			&config.Hal{
 				Timezone: "America/Chicago",

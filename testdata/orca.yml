@@ -6,6 +6,8 @@ pipelineTemplates:
 services:
   kayenta:
     enabled: true
+  keel:
+    enabled: true
 tasks:
   executionWindow:
     timezone: America/Chicago
