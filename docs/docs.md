@@ -2173,7 +2173,7 @@ Configuration for a base image for the AWS provider&#39;s bakery.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | baseImage | [AwsBaseImage](#proto.cloudprovider.AwsBaseImage) |  | Base image configuration. |
-| virtualizationSettings | [AwsVirtualizationSettings](#proto.cloudprovider.AwsVirtualizationSettings) |  | Base image virtualization settings. |
+| virtualizationSettings | [AwsVirtualizationSettings](#proto.cloudprovider.AwsVirtualizationSettings) | repeated | Base image virtualization settings. |
 
 
 

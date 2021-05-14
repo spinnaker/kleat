@@ -154,7 +154,7 @@ message AwsBaseImageSettings {
     AwsBaseImage baseImage = 1;
 
     // Base image virtualization settings.
-    AwsVirtualizationSettings virtualizationSettings = 2;
+    repeated AwsVirtualizationSettings virtualizationSettings = 2;
 }
 
 // Base image configuration.
