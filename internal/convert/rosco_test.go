@@ -94,7 +94,7 @@ var roscoTests = configTest{
 										ShortDescription: "this is an image",
 									},
 									VirtualizationSettings: []*cloudprovider.AwsVirtualizationSettings{
-										&cloudprovider.AwsVirtualizationSettings{
+										{
 											Region:             "us-east-1",
 											VirtualizationType: "hvm",
 											InstanceType:       "t2-micro",
@@ -126,7 +126,7 @@ var roscoTests = configTest{
 									ShortDescription: "this is an image",
 								},
 								VirtualizationSettings: []*cloudprovider.AwsVirtualizationSettings{
-									&cloudprovider.AwsVirtualizationSettings{
+									{
 										Region:             "us-east-1",
 										VirtualizationType: "hvm",
 										InstanceType:       "t2-micro",
