@@ -309,8 +309,9 @@ providers:
           id: my-image-id
           shortDescription: my short description
         virtualizationSettings:
-          sourceAmi: my-source-ami
-          virtualizationType: pv
+          - region: us-west-2
+            sourceAmi: my-source-ami
+            virtualizationType: pv
       defaultVirtualizationType: pv
       templateFile: file
     defaultKeyPairTemplate: '{{name}}-keypair'
