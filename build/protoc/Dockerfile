@@ -1,4 +1,4 @@
-FROM alpine:3.14.0 as curl
+FROM alpine:3.14.1 as curl
 RUN apk add --no-cache curl unzip
 RUN adduser --disabled-password --gecos '' curl
 USER curl
