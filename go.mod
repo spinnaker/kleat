@@ -9,5 +9,5 @@ require (
 	github.com/kylelemons/godebug v1.1.0
 	github.com/spf13/cobra v1.2.1
 	google.golang.org/protobuf v1.27.1
-	sigs.k8s.io/yaml v1.2.0
+	sigs.k8s.io/yaml v1.3.0
 )
