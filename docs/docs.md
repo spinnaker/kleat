@@ -116,10 +116,6 @@
     - [Travis](#proto.ci.Travis)
     - [TravisAccount](#proto.ci.TravisAccount)
   
-- [ci/wercker.proto](#ci/wercker.proto)
-    - [Wercker](#proto.ci.Wercker)
-    - [WerckerAccount](#proto.ci.WerckerAccount)
-  
 - [cloudprovider/appengine.proto](#cloudprovider/appengine.proto)
     - [Appengine](#proto.cloudprovider.Appengine)
     - [AppengineAccount](#proto.cloudprovider.AppengineAccount)
@@ -1658,7 +1654,6 @@ Configuration to integrate Spinnaker with your continuous integration system.
 | concourse | [Concourse](#proto.ci.Concourse) |  |  |
 | jenkins | [Jenkins](#proto.ci.Jenkins) |  |  |
 | travis | [Travis](#proto.ci.Travis) |  |  |
-| wercker | [Wercker](#proto.ci.Wercker) |  |  |
 
 
 
@@ -1934,42 +1929,13 @@ Configuration for a Travis account.
 
 
 
-<a name="ci/wercker.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## ci/wercker.proto
-
-
-
-<a name="proto.ci.Wercker"></a>
-
-### Wercker
-Configuration to use Werker with Spinnaker, for continuous integration.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [google.protobuf.BoolValue](#google.protobuf.BoolValue) |  | Whether Wercker is enabled. |
-| masters | [WerckerAccount](#proto.ci.WerckerAccount) | repeated | The list of configured Wercker accounts. |
 
 
 
 
 
-
-<a name="proto.ci.WerckerAccount"></a>
-
-### WerckerAccount
-Configuration for a Wercker account.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The name of the account. |
-| address | [string](#string) |  | (Required) The address at which to reach your Wercker instance. |
-| token | [string](#string) |  | The personal token of the Wercker user to authenticate as. |
-| user | [string](#string) |  | The username of the Wercker user to authenticate as. |
-| permissions | [proto.Permissions](#proto.Permissions) |  | Fiat permissions configuration. A user must have at least one of the READ roles in order to view this build account or use it as a trigger source. A user must have at least one of the WRITE roles in order to run jobs on this build account. |
 
 
 
@@ -4237,7 +4203,6 @@ Configuration for the Igor microservice.
 | concourse | [proto.ci.Concourse](#proto.ci.Concourse) |  |  |
 | jenkins | [proto.ci.Jenkins](#proto.ci.Jenkins) |  |  |
 | travis | [proto.ci.Travis](#proto.ci.Travis) |  |  |
-| wercker | [proto.ci.Wercker](#proto.ci.Wercker) |  |  |
 
 
 
