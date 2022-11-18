@@ -12,7 +12,6 @@ import "ci/concourse.proto";
 import "ci/gcb.proto";
 import "ci/jenkins.proto";
 import "ci/travis.proto";
-import "ci/wercker.proto";
 
 // Configuration for the Igor microservice.
 message Igor {
@@ -24,7 +23,6 @@ message Igor {
   ci.Concourse concourse = 6;
   ci.Jenkins jenkins = 7;
   ci.Travis travis = 8;
-  ci.Wercker wercker = 9;
 
   message DockerRegistry {
     google.protobuf.BoolValue enabled = 1;

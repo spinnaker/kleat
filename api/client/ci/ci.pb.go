@@ -36,7 +36,6 @@ type Ci struct {
 	Concourse *Concourse        `protobuf:"bytes,3,opt,name=concourse,proto3" json:"concourse,omitempty"`
 	Jenkins   *Jenkins          `protobuf:"bytes,4,opt,name=jenkins,proto3" json:"jenkins,omitempty"`
 	Travis    *Travis           `protobuf:"bytes,5,opt,name=travis,proto3" json:"travis,omitempty"`
-	Wercker   *Wercker          `protobuf:"bytes,6,opt,name=wercker,proto3" json:"wercker,omitempty"`
 }
 
 func (x *Ci) Reset() {
@@ -106,12 +105,6 @@ func (x *Ci) GetTravis() *Travis {
 	return nil
 }
 
-func (x *Ci) GetWercker() *Wercker {
-	if x != nil {
-		return x.Wercker
-	}
-	return nil
-}
 
 var File_ci_ci_proto protoreflect.FileDescriptor
 
@@ -168,7 +161,6 @@ var file_ci_ci_proto_goTypes = []interface{}{
 	(*Concourse)(nil),        // 3: proto.ci.Concourse
 	(*Jenkins)(nil),          // 4: proto.ci.Jenkins
 	(*Travis)(nil),           // 5: proto.ci.Travis
-	(*Wercker)(nil),          // 6: proto.ci.Wercker
 }
 var file_ci_ci_proto_depIdxs = []int32{
 	1, // 0: proto.ci.Ci.gcb:type_name -> proto.ci.GoogleCloudBuild
@@ -176,7 +168,6 @@ var file_ci_ci_proto_depIdxs = []int32{
 	3, // 2: proto.ci.Ci.concourse:type_name -> proto.ci.Concourse
 	4, // 3: proto.ci.Ci.jenkins:type_name -> proto.ci.Jenkins
 	5, // 4: proto.ci.Ci.travis:type_name -> proto.ci.Travis
-	6, // 5: proto.ci.Ci.wercker:type_name -> proto.ci.Wercker
 	6, // [6:6] is the sub-list for method output_type
 	6, // [6:6] is the sub-list for method input_type
 	6, // [6:6] is the sub-list for extension type_name
@@ -194,7 +185,6 @@ func file_ci_ci_proto_init() {
 	file_ci_gcb_proto_init()
 	file_ci_jenkins_proto_init()
 	file_ci_travis_proto_init()
-	file_ci_wercker_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_ci_ci_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Ci); i {
