@@ -1,3 +1,8 @@
+# Archivved
+This repo is archived in favor of using spinnaker-kustomize to natively configure and deploy spinnaker.
+Please move to [Spinnaker Kustomize](https://github.com/spinnaker/spinnaker/tree/main/spinnaker-kustomize) for 
+current deployment and the docs pages for more information
+
 # kleat
 
 ![Kleat CI](https://github.com/spinnaker/kleat/workflows/Kleat%20CI/badge.svg)
