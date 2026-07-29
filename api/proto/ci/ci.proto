@@ -8,7 +8,6 @@ import "ci/concourse.proto";
 import "ci/gcb.proto";
 import "ci/jenkins.proto";
 import "ci/travis.proto";
-import "ci/wercker.proto";
 
 // Configuration to integrate Spinnaker with your continuous integration system.
 message Ci {
@@ -17,5 +16,4 @@ message Ci {
   ci.Concourse concourse = 3;
   ci.Jenkins jenkins = 4;
   ci.Travis travis = 5;
-  ci.Wercker wercker = 6;
 }

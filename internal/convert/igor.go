@@ -31,7 +31,6 @@ func HalToIgor(h *config.Hal) *config.Igor {
 		Concourse:      h.GetCi().GetConcourse(),
 		Jenkins:        h.GetCi().GetJenkins(),
 		Travis:         h.GetCi().GetTravis(),
-		Wercker:        h.GetCi().GetWercker(),
 	}
 }
 

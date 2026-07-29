@@ -46,10 +46,4 @@ travis:
     filteredRepositories:
     - my-travis-repo
     name: my-travis-account
-wercker:
-  enabled: true
-  masters:
-  - address: https://my-wercker
-    name: my-wercker-account
-    token: token
-    user: user
+

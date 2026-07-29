@@ -43,7 +43,6 @@ type Igor struct {
 	Concourse      *ci.Concourse           `protobuf:"bytes,6,opt,name=concourse,proto3" json:"concourse,omitempty"`
 	Jenkins        *ci.Jenkins             `protobuf:"bytes,7,opt,name=jenkins,proto3" json:"jenkins,omitempty"`
 	Travis         *ci.Travis              `protobuf:"bytes,8,opt,name=travis,proto3" json:"travis,omitempty"`
-	Wercker        *ci.Wercker             `protobuf:"bytes,9,opt,name=wercker,proto3" json:"wercker,omitempty"`
 }
 
 func (x *Igor) Reset() {
@@ -130,13 +129,6 @@ func (x *Igor) GetJenkins() *ci.Jenkins {
 func (x *Igor) GetTravis() *ci.Travis {
 	if x != nil {
 		return x.Travis
-	}
-	return nil
-}
-
-func (x *Igor) GetWercker() *ci.Wercker {
-	if x != nil {
-		return x.Wercker
 	}
 	return nil
 }
@@ -321,7 +313,7 @@ var file_config_igor_proto_goTypes = []interface{}{
 	(*ci.Concourse)(nil),           // 6: proto.ci.Concourse
 	(*ci.Jenkins)(nil),             // 7: proto.ci.Jenkins
 	(*ci.Travis)(nil),              // 8: proto.ci.Travis
-	(*ci.Wercker)(nil),             // 9: proto.ci.Wercker
+
 	(*wrapperspb.BoolValue)(nil),   // 10: google.protobuf.BoolValue
 	(*artifact.Template)(nil),      // 11: proto.artifact.Template
 }
@@ -334,7 +326,6 @@ var file_config_igor_proto_depIdxs = []int32{
 	6,  // 5: proto.config.Igor.concourse:type_name -> proto.ci.Concourse
 	7,  // 6: proto.config.Igor.jenkins:type_name -> proto.ci.Jenkins
 	8,  // 7: proto.config.Igor.travis:type_name -> proto.ci.Travis
-	9,  // 8: proto.config.Igor.wercker:type_name -> proto.ci.Wercker
 	10, // 9: proto.config.Igor.DockerRegistry.enabled:type_name -> google.protobuf.BoolValue
 	11, // 10: proto.config.Igor.Artifacts.templates:type_name -> proto.artifact.Template
 	11, // [11:11] is the sub-list for method output_type
