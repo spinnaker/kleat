@@ -4,7 +4,7 @@ go 1.16
 
 require (
 	github.com/armory/plugin-tools v0.0.3
-	github.com/golang/protobuf v1.5.2
+	github.com/golang/protobuf v1.5.3
 	github.com/google/go-cmp v0.5.7
 	github.com/kr/pretty v0.2.0 // indirect
 	github.com/kylelemons/godebug v1.1.0
